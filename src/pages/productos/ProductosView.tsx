@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Search, Filter, SlidersHorizontal, X, Package, AlertTriangle, Hash, Box, TrendingUp } from 'lucide-react';
 import dataProducts from './data/productos.json';
+import MetricCard from '../../components/MetricCard';
 
 // Interfaz del producto
 interface Product {
@@ -178,41 +179,17 @@ export default function ProductosView() {
 
         {/* Estadísticas */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm mb-1">Total Productos</p>
-                <p className="text-3xl font-bold text-gray-800">{stats.total}</p>
-              </div>
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <Package className="text-blue-600" size={24} />
-              </div>
-            </div>
-          </div>
+          <MetricCard label="Total Productos" value={stats.total} simboloValue="" color="blue">
+            <Package className="text-blue-600" size={24} />
+          </MetricCard>
 
-          <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm mb-1">Stock Bajo</p>
-                <p className="text-3xl font-bold text-red-600">{stats.lowStock}</p>
-              </div>
-              <div className="bg-red-100 p-3 rounded-lg">
-                <AlertTriangle className="text-red-600" size={24} />
-              </div>
-            </div>
-          </div>
+          <MetricCard label="Stock Bajo" value={stats.lowStock} simboloValue="" color="red">
+            <AlertTriangle className="text-red-600" size={24} />
+          </MetricCard>
 
-          <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm mb-1">Valor Inventario</p>
-                <p className="text-3xl font-bold text-green-600">${stats.totalValue.toFixed(2)}</p>
-              </div>
-              <div className="bg-green-100 p-3 rounded-lg">
-                <TrendingUp className="text-green-600" size={24} />
-              </div>
-            </div>
-          </div>
+          <MetricCard label="Valor Inventario" value={stats.totalValue.toFixed(2)} simboloValue="$" color="green">
+            <TrendingUp className="text-green-600" size={24} />
+          </MetricCard>
         </div>
 
         {/* Barra de búsqueda y filtros */}
