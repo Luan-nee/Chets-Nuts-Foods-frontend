@@ -7,6 +7,7 @@ import EstadisticasView from './pages/estadisticas/EstadisticasView.tsx';
 import GuiasRemisionView from './pages/guias-remision/GuiasRemisionView.tsx';
 import ProductosView from './pages/productos/ProductosView.tsx';
 import NavBar from './layouts/NavBar.tsx';
+import ProductEditForm from './pages/productos/ProductEditForm.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -25,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="*" element={<NotFound />} />
 
             {/* ruta para probar componentes */}
-            {/* <Route path="/pruebas" element={} /> */}
+            <Route path="/pruebas" element={<ProductEditForm />} />
           </Routes>
         </main>
 
