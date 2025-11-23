@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "sku": "P000001",
+    "nombre": "Nueces Mixtas Premium",
+    "stock_actual": 0,
+    "stock_minimo": 10,
+    "porcentaje_ganancia": 0.3000,
+    "precio_compra_proveedor": 20.00,
+    "descripcion": "Mezcla premium de nueces seleccionadas, ideal para snacks saludables.",
+    "id_usuario_admin": 1
+  },
+  {
+    "id": 2,
+    "sku": "P000002",
+    "nombre": "Café Colombiano Tostado Oscuro",
+    "stock_actual": 45,
+    "stock_minimo": 15,
+    "porcentaje_ganancia": 0.2500,
+    "precio_compra_proveedor": 15.50,
+    "descripcion": "Grano de café arábiga, tostado oscuro, sabor intenso.",
+    "id_usuario_admin": 2
+  },
+  {
+    "id": 3,
+    "sku": "P000003",
+    "nombre": "Barra de Proteína Sabor Chocolate",
+    "stock_actual": 150,
+    "stock_minimo": 50,
+    "porcentaje_ganancia": 0.4000,
+    "precio_compra_proveedor": 3.75,
+    "descripcion": "Barra alta en proteínas (20g), sin azúcar añadida.",
+    "id_usuario_admin": 1
+  },
+  {
+    "id": 4,
+    "sku": "P000004",
+    "nombre": "Miel de Abeja Orgánica 500ml",
+    "stock_actual": 12,
+    "stock_minimo": 50,
+    "porcentaje_ganancia": 0.3500,
+    "precio_compra_proveedor": 8.90,
+    "descripcion": "Miel pura de abejas, cosechada de forma orgánica y sostenible.",
+    "id_usuario_admin": 3
+  },
+  {
+    "id": 5,
+    "sku": "P000005",
+    "nombre": "Té Verde Matcha Japonés",
+    "stock_actual": 80,
+    "stock_minimo": 25,
+    "porcentaje_ganancia": 0.5000,
+    "precio_compra_proveedor": 12.00,
+    "descripcion": "Polvo de té verde molido, ceremonial, importado de Japón.",
+    "id_usuario_admin": 2
+  }
+]
