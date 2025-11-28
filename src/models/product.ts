@@ -20,7 +20,7 @@ interface PropGetProducts{
   descripcion: string;
 }
 
-interface ProProductUpdate{
+interface PropUpdateProduct{
   nombre: string;
   stock_actual: number;
   stock_minimo: number;
@@ -70,7 +70,7 @@ export class Product {
     };
   }
 
-  // updateProduct(param: ProProductUpdate): PropResponse {
+  // updateProduct(param: PropUpdateProduct): PropResponse {
   //   // Cödigo para actualizar el producto
   //   // ...
     
