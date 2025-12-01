@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <NavBar />
 
         {/* Main Content Area */}
-        <main className="flex-1">
+        <main className="flex-1 overflow-y-auto bg-gray-800 p-6">
           <Routes>
             <Route path="/" element={<EstadisticasView />} />
             <Route path="/estadisticas" element={<EstadisticasView />} />

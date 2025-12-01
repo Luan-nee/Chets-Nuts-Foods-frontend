@@ -1,4 +1,16 @@
-interface PropProduct{
+  interface PropProduct{ // Los datos que voy a recibir de la API
+    id: number;
+    sku: string;
+    nombre: string;
+    stock_actual: number;
+    stock_minimo: number;
+    precio_compra_proveedor: number;
+    porcentaje_ganancia: number;
+    descripcion: string;
+    id_administrador: number;
+  }
+
+interface PropReturn_getProduct{
   id: number;
   sku: string;
   nombre: string;
@@ -10,28 +22,10 @@ interface PropProduct{
   id_administrador: number;
 }
 
-interface PropGetProducts{
-  id: number;
-  sku: string;
-  nombre: string;
-  stock_actual: number;
-  stock_minimo: number;
-  precio_venta: number;
-  descripcion: string;
-}
-
-interface PropUpdateProduct{
-  nombre: string;
-  stock_actual: number;
-  stock_minimo: number;
-  precio_compra_proveedor: number;
-  porcentaje_ganancia: number;
-  descripcion: string;
-}
-
 interface PropResponse{
-  status: string;
+  status: number;
   message: string;
+  info: PropReturn_getProduct[] | PropProduct[];
 }
 
 export class Product {
@@ -57,17 +51,58 @@ export class Product {
     this.id_administrador = param.id_administrador;
   }
 
+  precioVenta(): number {
+    return this.precio_compra_proveedor + (this.precio_compra_proveedor * this.porcentaje_ganancia) / 100;
+  }
+
   // muestras los datos necesarios del producto 
-  getProductInfo(): PropGetProducts {
-    return {
-      id: this.id,
-      sku: this.sku,
-      nombre: this.nombre,
-      stock_actual: this.stock_actual,
-      stock_minimo: this.stock_minimo,
-      precio_venta: Math.round(this.precio_compra_proveedor * (1 + this.porcentaje_ganancia / 100)),
-      descripcion: this.descripcion,
+  static getProduct(): PropResponse {
+  // llamada a la API para obtener los productos
+  // ...
+
+    const products: PropProduct[] = [
+      {
+        id: 1,
+        sku: 'P0001',
+        nombre: 'Producto 1',
+        stock_actual: 100,
+        stock_minimo: 20,
+        precio_compra_proveedor: 50,
+        porcentaje_ganancia: 30,
+        descripcion: 'Descripción del producto 1',
+        id_administrador: 1
+      },
+      {
+        id: 2,
+        sku: 'P0002',
+        nombre: 'Producto 2',
+        stock_actual: 50,
+        stock_minimo: 10,
+        precio_compra_proveedor: 30,
+        porcentaje_ganancia: 25,
+        descripcion: 'Descripción del producto 2',
+        id_administrador: 1
+      },
+      {
+        id: 3,
+        sku: 'P0003',
+        nombre: 'Producto 3',
+        stock_actual: 30,
+        stock_minimo: 5,
+        precio_compra_proveedor: 20,
+        porcentaje_ganancia: 15,
+        descripcion: 'Descripción del producto 3',
+        id_administrador: 1
+      }
+    ];
+
+    let response: PropResponse = {  
+      status: 200,
+      message: 'Productos obtenidos correctamente',
+      info: products
     };
+
+    return response;
   }
 
   // updateProduct(param: PropUpdateProduct): PropResponse {
