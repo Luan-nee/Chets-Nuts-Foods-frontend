@@ -77,7 +77,7 @@ export default function ProductCard ({
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 text-gray-700">
               <Box size={18} />
-              <span className="font-semibold">Stock Disponibleee</span>
+              <span className="font-semibold">Stock Disponible</span>
             </div>
             <span className={`text-2xl font-bold ${stockBajo ? 'text-red-600' : 'text-green-600'}`}>
               {stock_actual}
