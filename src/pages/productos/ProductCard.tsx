@@ -1,33 +1,21 @@
-import { Package, TrendingUp, AlertTriangle, DollarSign, Box } from 'lucide-react';
+import {
+  Package,
+  TrendingUp,
+  AlertTriangle,
+  DollarSign,
+  Box,
+} from "lucide-react";
+import type { PropProduct } from "../../types/Product";
 
-interface Product {
-  id: number;
-  sku: string;
-  nombre: string;
-  stock_actual: number;
-  stock_minimo: number;
-  porcentaje_ganancia: number;
-  precio_compra_proveedor: number;
-  descripcion: string;
-  id_usuario_admin: number;
-}
-
-interface ProductCardProps {
-  id: number;
-  sku: string;
-  nombre: string;
-  stock_actual: number;
-  stock_minimo: number;
-  porcentaje_ganancia: number;
-  precio_compra_proveedor: number;
-  descripcion: string;
-  id_usuario_admin: number;
+interface ProductCardActions {
   getIdProducto: (id: number) => void;
   showEditForm: (isOpen: boolean) => void;
-  selectProduct?: (product: Product) => void | undefined;
+  selectProduct: (product: PropProduct) => void | undefined;
 }
 
-export default function ProductCard ({
+type ProductCardProps = PropProduct & ProductCardActions;
+
+export default function ProductCard({
   id,
   sku,
   nombre,
@@ -37,17 +25,18 @@ export default function ProductCard ({
   precio_compra_proveedor,
   descripcion,
   id_usuario_admin,
-  getIdProducto, 
+  getIdProducto,
   showEditForm,
-  selectProduct
-} : ProductCardProps) {
+  selectProduct,
+}: ProductCardProps) {
   // Calcular precio de venta
-  const precioVenta = precio_compra_proveedor * (1 + porcentaje_ganancia);
-  const gananciaTotal = precioVenta - precio_compra_proveedor;
+  const precioVenta: number =
+    precio_compra_proveedor * (1 + porcentaje_ganancia);
+  const gananciaTotal: number = precioVenta - precio_compra_proveedor;
 
   // Verificar si el stock está bajo
-  const stockBajo = stock_actual <= stock_minimo;
-  const porcentajeStock = (stock_actual / stock_minimo) * 100;
+  const stockBajo: boolean = stock_actual <= stock_minimo;
+  const porcentajeStock: number = (stock_actual / stock_minimo) * 100;
 
   return (
     <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 max-w-sm">
@@ -68,7 +57,9 @@ export default function ProductCard ({
           </div>
           <h3 className="text-2xl font-bold text-gray-800 mb-2">{nombre}</h3>
           {descripcion && (
-            <p className="text-gray-600 text-sm leading-relaxed">{descripcion}</p>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {descripcion}
+            </p>
           )}
         </div>
 
@@ -79,21 +70,25 @@ export default function ProductCard ({
               <Box size={18} />
               <span className="font-semibold">Stock Disponible</span>
             </div>
-            <span className={`text-2xl font-bold ${stockBajo ? 'text-red-600' : 'text-green-600'}`}>
+            <span
+              className={`text-2xl font-bold ${
+                stockBajo ? "text-red-600" : "text-green-600"
+              }`}
+            >
               {stock_actual}
             </span>
           </div>
-          
+
           {/* Barra de progreso de stock */}
           <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
             <div
               className={`h-2 rounded-full transition-all ${
-                stockBajo ? 'bg-red-500' : 'bg-green-500'
+                stockBajo ? "bg-red-500" : "bg-green-500"
               }`}
               style={{ width: `${Math.min(porcentajeStock, 100)}%` }}
             ></div>
           </div>
-          
+
           <div className="flex items-center gap-1 text-xs text-gray-500">
             <Package size={12} />
             <span>Mínimo requerido: {stock_minimo} unidades</span>
@@ -108,7 +103,7 @@ export default function ProductCard ({
               Precio Compra
             </span>
             <span className="text-gray-800 font-semibold">
-              ${precio_compra_proveedor.toFixed(2)}
+              ${precio_compra_proveedor}
             </span>
           </div>
 
@@ -118,14 +113,14 @@ export default function ProductCard ({
               Ganancia
             </span>
             <span className="text-blue-600 font-semibold">
-              {(porcentaje_ganancia * 100).toFixed(2)}%
+              {porcentaje_ganancia * 100}%
             </span>
           </div>
 
           <div className="flex justify-between items-center pt-3 border-t border-gray-200">
             <span className="text-gray-800 font-semibold">Precio Venta</span>
             <span className="text-2xl font-bold text-green-600">
-              ${precioVenta.toFixed(2)}
+              ${precioVenta}
             </span>
           </div>
 
@@ -139,8 +134,22 @@ export default function ProductCard ({
 
         {/* Botones de acción */}
         <div className="flex gap-2">
-          <button 
-            onClick={() => {getIdProducto(id); showEditForm(true); selectProduct && selectProduct({id, sku, nombre, stock_actual, stock_minimo, porcentaje_ganancia, precio_compra_proveedor, descripcion, id_usuario_admin});}}
+          <button
+            onClick={() => {
+              getIdProducto(id);
+              showEditForm(true);
+              selectProduct({
+                id,
+                sku,
+                nombre,
+                stock_actual,
+                stock_minimo,
+                porcentaje_ganancia,
+                precio_compra_proveedor,
+                descripcion,
+                id_usuario_admin,
+              });
+            }}
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
           >
             Editar
@@ -152,4 +161,4 @@ export default function ProductCard ({
       </div>
     </div>
   );
-};
+}
