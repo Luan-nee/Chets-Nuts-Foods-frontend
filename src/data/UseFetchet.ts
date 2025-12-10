@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import type { PropProduct } from "../types/Product";
-import type { PropResponse } from "../types/Response";
+import type { PropResponse, PropData } from "../types/Response";
 
 export default function useFetcher(url: string, customMessage?: string) {
   const [data, setData] = useState<
-    PropProduct[]
+    PropData
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hayError, setHayError] = useState<boolean>(false);
@@ -23,7 +22,7 @@ export default function useFetcher(url: string, customMessage?: string) {
           );
           console.log(message);
           setData(
-            info as PropProduct[]
+            info as PropData
           );
           setHayError(false);
         } else if (status >= 300 && status < 400) {
