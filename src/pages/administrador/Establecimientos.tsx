@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Search, ChevronLeft, ChevronRight, Filter, Plus } from "lucide-react";
 import TableEstablecimientos from "../../features/establecimientos/components/TableEstablecimientos";
 import FormUpdateEst from "../../features/establecimientos/components/FormUpdateEst";
+import FormCreateEst from "../../features/establecimientos/components/FormCreateEst";
 // import TableGre from "../../features/establecimientos/components/TableEstablecimientos";
 // import DetallesGre from "../../features/gre/components/DetallesGre";
 
 export default function Establecimientos() {
   const [showFormEditEst, setShowFormEditEst] = useState<boolean>(false);
+  const [showFormCreateEst, setShowFormCreateEst] = useState<boolean>(false);
   const [selectEstablecimientoId, setSelectEstablecimientoId] = useState<number | null>(null);
 
   return (
@@ -20,7 +22,7 @@ export default function Establecimientos() {
           </div>
 
           <button 
-          // Implementar función para agregar nuevo establecimiento
+          onClick={() => setShowFormCreateEst(true)}
           className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
             <Plus className="w-5 h-5" />
             Nuevo Establecimiento
@@ -87,6 +89,12 @@ export default function Establecimientos() {
       { showFormEditEst && 
         <div className="absolute inset-0 z-50 bg-gray-950">
           <FormUpdateEst showFormEdit={setShowFormEditEst} />
+        </div>
+      }
+
+      { showFormCreateEst && 
+        <div className="absolute inset-0 z-50 bg-gray-950">
+          <FormCreateEst showFormEdit={setShowFormCreateEst} />
         </div>
       }
     </div>
