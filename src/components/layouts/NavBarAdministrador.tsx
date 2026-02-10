@@ -4,7 +4,7 @@ import { Truck, Package, LayoutDashboard, Users, Store, LogOut } from 'lucide-re
 import { useAuth } from '../../context/AuthContext';
 import UserInfo from '../ui/UserInfo';
 
-type LabelType = '/guias' | '/productos' | '/establecimientos' | '/trabajadores' | '/vehiculos';
+type LabelType = '/guias' | '/productos' | '/establecimientos' | '/trabajadores' | '/vehiculos' | '/mapa';
 
 interface MenuItem {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
