@@ -1,0 +1,46 @@
+{
+  "status": "success",
+  "message": "datos de tablecimientos obtenidos exitosamente",
+  "data": [
+    {
+      "idEst": 1,
+      "nombreEst": "Supermercados Plaza Vea - Real Plaza",
+      "direccion": "Av. Paseo de la República 3220",
+      "departamento": "Lima",
+      "provincia": "Lima",
+      "distrito": "San Isidro"
+    },
+    {
+      "idEst": 2,
+      "nombreEst": "Boticas Mi Farma - Sucursal Centro",
+      "direccion": "Calle Calle Mercaderes 124",
+      "departamento": "Arequipa",
+      "provincia": "Arequipa",
+      "distrito": "Arequipa"
+    },
+    {
+      "idEst": 3,
+      "nombreEst": "Restaurante El Provenir",
+      "direccion": "Jr. Pizarro 550",
+      "departamento": "La Libertad",
+      "provincia": "Trujillo",
+      "distrito": "Trujillo"
+    },
+    {
+      "idEst": 4,
+      "nombreEst": "Ferretería El Tornillo de Oro",
+      "direccion": "Av. Centenario 458",
+      "departamento": "Ancash",
+      "provincia": "Huaraz",
+      "distrito": "Independencia"
+    },
+    {
+      "idEst": 5,
+      "nombreEst": "Cafetería Aroma de Selva",
+      "direccion": "Calle Fitzcarrald 231",
+      "departamento": "Loreto",
+      "provincia": "Maynas",
+      "distrito": "Iquitos"
+    }
+  ]
+}
