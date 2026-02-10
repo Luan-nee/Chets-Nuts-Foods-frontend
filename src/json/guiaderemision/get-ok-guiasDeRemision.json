@@ -1,0 +1,81 @@
+{
+  "status": "success",
+  "message": "Guías de Emisión obtenidos exitosamente",
+  "data": [
+    {
+      "id": 1,
+      "numero": "EG07-00000001",
+      "clave": "COD-000001",
+      "fecha_emision": "24 Oct 2025",
+      "hora": "14:20",
+      "destinatario": {
+        "nombre_razonSocial": "Corporación de Alimentos SAC",
+        "tipo_documento": "RUC",
+        "numero_documento": "20541548659"
+      },
+      "punto_de_partida": "Madre De Dios",
+      "punto_de_llegada": "Cusco",
+      "estado": "Entregado"
+    },
+    {
+      "id": 2,
+      "numero": "EG07-00000002",
+      "clave": "COD-000002",
+      "fecha_emision": "25 Oct 2025",
+      "hora": "09:15",
+      "destinatario": {
+        "nombre_razonSocial": "Distribuidora Logística del Sur E.I.R.L.",
+        "tipo_documento": "RUC",
+        "numero_documento": "20123456789"
+      },
+      "punto_de_partida": "Lima",
+      "punto_de_llegada": "Arequipa",
+      "estado": "En Tránsito"
+    },
+    {
+      "id": 3,
+      "numero": "EG07-00000003",
+      "clave": "COD-000003",
+      "fecha_emision": "26 Oct 2025",
+      "hora": "11:45",
+      "destinatario": {
+        "nombre_razonSocial": "Inversiones Agrícolas Puno S.A.",
+        "tipo_documento": "RUC",
+        "numero_documento": "20448899112"
+      },
+      "punto_de_partida": "Puno",
+      "punto_de_llegada": "Juliaca",
+      "estado": "Detenido"
+    },
+    {
+      "id": 4,
+      "numero": "EG07-00000004",
+      "clave": "COD-000004",
+      "fecha_emision": "26 Oct 2025",
+      "hora": "16:30",
+      "destinatario": {
+        "nombre_razonSocial": "Juan Carlos Pérez Quispe",
+        "tipo_documento": "DNI",
+        "numero_documento": "45678912"
+      },
+      "punto_de_partida": "Tacna",
+      "punto_de_llegada": "Moquegua",
+      "estado": "Entregado"
+    },
+    {
+      "id": 5,
+      "numero": "EG07-00000005",
+      "clave": "COD-000005",
+      "fecha_emision": "27 Oct 2025",
+      "hora": "08:00",
+      "destinatario": {
+        "nombre_razonSocial": "Constructora del Norte S.A.C.",
+        "tipo_documento": "RUC",
+        "numero_documento": "20601234567"
+      },
+      "punto_de_partida": "Piura",
+      "punto_de_llegada": "Chiclayo",
+      "estado": "Cancelado"
+    }
+  ]
+}
