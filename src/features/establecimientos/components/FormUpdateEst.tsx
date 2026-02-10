@@ -2,11 +2,11 @@ import { useState } from 'react';
 import type { EstablecimientoUpdate, tipoEst } from '../../../types/establecimiento.type';
 import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
+import { useFetchEmpleados } from '../../empleados/hooks/useFetchEmpleados';
 
 interface EstablishmentFormProps {
   showFormEdit: (p: boolean) => void;
 }
-
 
 const tipoEstablecimiento: { label: string; value: tipoEst }[] = [
   {
@@ -32,6 +32,8 @@ const tipoEstablecimiento: { label: string; value: tipoEst }[] = [
 ]
 
 function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
+  const { data: empleados, isLoading, isError, fetchData: recargarEmpleados } = useFetchEmpleados();
+
   const [formData, setFormData] = useState<EstablecimientoUpdate>({
     idResponsable: 0,
     nombreEst: '',
@@ -49,8 +51,6 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
-
-  // <div className="relative flex-1 flex flex-col">
 
   return (
     <main className="flex-1 p-8 bg-gray-950 overflow-auto">
@@ -104,19 +104,13 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
             </div>
 
             {/* Row 2: Responsable de administrar el establecimiento */}
-            <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  ID del Responsable
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ej. 74828302"
-                  value={formData.idResponsable}
-                  onChange={(e) => handleInputChange('idResponsable', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              <InputSelect
+                name="idResponsable"
+                placeholder="Selecciona un empleado"
+                options={empleados ? empleados.map(emp => ({ value: emp.id.toString(), label: `${emp.nombres} ${emp.apellidos} - ${emp.rol}` })) : []}
+                handleInputChange={handleInputChange}
+              />
             </div>
 
             {/* Row 3: Dirección y estado del establecimiento */}
