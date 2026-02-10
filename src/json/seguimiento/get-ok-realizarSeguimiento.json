@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "message": "Datos del seguimiento obtenido exitosamente",
+  "data": {
+    "productos": 20,
+    "peso_total": 2450,
+    "punto_de_partida": "Puerto Maldonado",
+    "punto_de_llegada": "Cusco",
+    "listo_para_recoger": true,
+    "historial": [
+      {
+        "evento": "Saliendo de Puerto Maldonado",
+        "fecha": "24 oct 2023",
+        "hora": "20:00"
+      },
+      {
+        "evento": "Llegando a mazuco",
+        "fecha": "25 oct 2024",
+        "hora": "03:00"
+      },
+      {
+        "evento": "Ingresando a Cusco",
+        "fecha": "25 oct 2024",
+        "hora": "08:00"
+      },
+      {
+        "evento": "En almacen",
+        "fecha": "25 oct 2024",
+        "hora": "15:00"
+      },
+      {
+        "evento": "Listo para recoger",
+        "fecha": "25 oct 2024",
+        "hora": "17:00"
+      }
+    ]
+  }
+}
