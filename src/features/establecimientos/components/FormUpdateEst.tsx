@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { EstablecimientoUpdate, tipoEst } from '../../../types/establecimiento.type';
+import Loading from '../../../components/ui/Loading';
 import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
 import { useFetchEmpleados } from '../../empleados/hooks/useFetchEmpleados';
@@ -105,12 +106,36 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
 
             {/* Row 2: Responsable de administrar el establecimiento */}
             <div className="grid grid-cols-2 gap-4">
-              <InputSelect
-                name="idResponsable"
-                placeholder="Selecciona un empleado"
-                options={empleados ? empleados.map(emp => ({ value: emp.id.toString(), label: `${emp.nombres} ${emp.apellidos} - ${emp.rol}` })) : []}
-                handleInputChange={handleInputChange}
-              />
+              {
+                isLoading ? (
+                  <div className="col-span-2">
+                    <Loading w={6} h={6} color="blue" />
+                  </div>
+                ) : isError ? (
+                  <div className="col-span-2 text-red-500">
+                    Error al cargar empleados. Intente recargar.
+                  </div>
+                ) : (
+                  <>
+                    <div className="col-span-2 flex flex-row gap-2 text-red-500">
+                      <InputSelect
+                        name="idResponsable"
+                        placeholder="Selecciona un empleado"
+                        options={empleados ? empleados.map(emp => ({ value: emp.id.toString(), label: `${emp.nombres} ${emp.apellidos} - ${emp.rol}` })) : []}
+                        handleInputChange={handleInputChange}
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2 invisible">
+                          Acciones
+                        </label>
+                        <button onClick={recargarEmpleados} className="bg-[#1f6feb] hover:bg-[#1a5edb] text-white font-medium p-2 rounded-lg transition-colors">
+                          Recargar Empleados
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )
+              }
             </div>
 
             {/* Row 3: Dirección y estado del establecimiento */}
