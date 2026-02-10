@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, Package, LayoutDashboard, Users, Store, LogOut } from 'lucide-react';
+import { Truck, Package, LayoutDashboard, Users, Store, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import UserInfo from '../ui/UserInfo';
 
-type LabelType = '/guias' | '/productos' | '/establecimientos' | '/trabajadores' | '/vehiculos' | '/mapa';
+type LabelType = '/guias' | '/productos' | '/establecimientos' | '/trabajadores' | '/vehiculos' | '/configuraciones';
 
 interface MenuItem {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -21,7 +21,8 @@ export default function NavBarAdministrador() {
     { icon: LayoutDashboard, label: 'Productos', anchor: '/productos' },
     { icon: Store, label: 'Establecimientos', anchor: '/establecimientos' },
     { icon: Users, label: 'Trabajadores', anchor: '/trabajadores' },
-    { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' }
+    { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' },
+    { icon: Settings, label: 'Configuraciones', anchor: '/configuraciones' }
   ];
 
   return (
