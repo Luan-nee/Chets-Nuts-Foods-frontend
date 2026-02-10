@@ -3,8 +3,6 @@ import { Search, ChevronLeft, ChevronRight, Filter, Plus } from "lucide-react";
 import TableEstablecimientos from "../../features/establecimientos/components/TableEstablecimientos";
 import FormUpdateEst from "../../features/establecimientos/components/FormUpdateEst";
 import FormCreateEst from "../../features/establecimientos/components/FormCreateEst";
-// import TableGre from "../../features/establecimientos/components/TableEstablecimientos";
-// import DetallesGre from "../../features/gre/components/DetallesGre";
 
 export default function Establecimientos() {
   const [showFormEditEst, setShowFormEditEst] = useState<boolean>(false);

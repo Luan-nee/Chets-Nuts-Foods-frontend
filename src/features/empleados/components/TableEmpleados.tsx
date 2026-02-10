@@ -1,5 +1,5 @@
 // importación de componentes UI
-import { Edit2, Eye, MoreVertical } from 'lucide-react';
+import { Edit2, Eye } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import Loading from '../../../components/ui/Loading';
 // importación de custom hooks

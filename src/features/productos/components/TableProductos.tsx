@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Table from '../../../components/ui/Table';
 import { Edit, Trash2 } from 'lucide-react';
 

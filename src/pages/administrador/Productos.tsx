@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Search, Plus, Bell, HelpCircle, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Plus, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import TableProductos from '../../features/productos/components/TableProductos';
 import FormCreateProducto from '../../features/productos/components/FormCreateProducto';
-import FormUpdateProducto from '../../features/productos/components/FormUpdateProducto';
 
 export default function Productos() {
   const [showFromCreateProducto, setShowFromCreateProducto] = useState<boolean>(false);
@@ -97,17 +96,4 @@ export default function Productos() {
       }
     </div>
   );
-
-  // if (showFromUpdateProducto) {
-  //   setShowFromCreateProducto(false);
-  //   return (
-  //     <FormUpdateProducto setShowFromUpdateProducto={setShowFromUpdateProducto} />
-  //   );
-  // } else {
-  //   setShowFromUpdateProducto(false);
-  //   return (
-  //     <FormCreateProducto setShowFromCreateProducto={setShowFromCreateProducto} />
-  //   );
-  // }
-
 }
