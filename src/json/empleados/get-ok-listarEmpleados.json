@@ -1,0 +1,36 @@
+{
+  "status": "success",
+  "message": "Lista de Empleados obtenidos exitosamente",
+  "data": [
+    {
+      "id": 1,
+      "nombres": "Luan Del Sol",
+      "apellidos": "Huillca Sanchez",
+      "rol": "empleado"
+    },
+    {
+      "id": 2,
+      "nombres": "Ana Ximena",
+      "apellidos": "Paredes Melgar",
+      "rol": "administrador"
+    },
+    {
+      "id": 3,
+      "nombres": "Diego Alonso",
+      "apellidos": "Vargas Machuca",
+      "rol": "empleado"
+    },
+    {
+      "id": 4,
+      "nombres": "Milagros Lucía",
+      "apellidos": "Condori Mamani",
+      "rol": "supervisor"
+    },
+    {
+      "id": 5,
+      "nombres": "Renato André",
+      "apellidos": "Tello Vizcarra",
+      "rol": "empleado"
+    }
+  ]
+}

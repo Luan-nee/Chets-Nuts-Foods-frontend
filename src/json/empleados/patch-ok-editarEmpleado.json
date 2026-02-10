@@ -1,0 +1,7 @@
+{
+  "status": "success",
+  "message": "Los datos del empleado fue modificado exitosamente",
+  "data": {
+    "id": 14
+  }
+}

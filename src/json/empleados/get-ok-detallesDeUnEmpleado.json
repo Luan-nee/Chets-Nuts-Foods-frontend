@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "message": "Datos del empleado obtenido exitosamente",
+  "data": {
+    "id_empleado": 2,
+    "nombres": "Diego Alonso",
+    "apellidos": "Vargas Machuca",
+    "correo": "diego.vargas92@gmail.com",
+    "dni": "12345678",
+    "celular": "987654321",
+    "rol": {
+      "id": 2,
+      "nombre": "trabajador"
+    },
+    "estado": true,
+    "fecha_registro": "05 diciembre 2025",
+    "hora_registro": "14:52",
+    "fecha_actualizacion": "10 enero 2026",
+    "hora_actualizacion": "09:20",
+    "permisos": {}
+  }
+}
