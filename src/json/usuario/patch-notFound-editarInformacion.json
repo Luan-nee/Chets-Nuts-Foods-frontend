@@ -1,0 +1,5 @@
+{
+  "status": "error",
+  "message": "No existe empleado con el ID consultado",
+  "data": null
+}
