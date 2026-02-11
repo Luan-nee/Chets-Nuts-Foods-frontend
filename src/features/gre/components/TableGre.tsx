@@ -1,13 +1,15 @@
 // importación de componentes UI
-import { Eye } from 'lucide-react';
+import { Edit, Eye } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import Loading from '../../../components/ui/Loading';
 // importación de custom hooks
 import { useFetchGuiasRemision } from '../hooks/useFetchGuiasRemision';
 // importación de tipos
 import type { simpleGreType } from '../../../types/gre.type';
+import type { User } from '../../../types/usuario.type';
 
 interface PropTableGre {
+  rolUser: User | null;
   setShowDetallesGre: (p: boolean) => void;
   setSelectGreId: (p: number | null) => void;
 }
@@ -24,7 +26,7 @@ const colorsEstado: ColorsEstadoType = {
   pendiente: 'bg-yellow-500',
 }
 
-export default function TableGre({ setShowDetallesGre, setSelectGreId }: PropTableGre) {
+export default function TableGre({ rolUser, setShowDetallesGre, setSelectGreId }: PropTableGre) {
   const { data: guiasRemision, isLoading, isError, fetchData: recargarGuiasRemision } = useFetchGuiasRemision();
 
   const tableHeader: string[] = [
@@ -70,7 +72,7 @@ export default function TableGre({ setShowDetallesGre, setSelectGreId }: PropTab
       </div>
       <Table tableHeader={tableHeader}>
         {guiasRemision?.map((guia, index) => (
-          <RowTable key={index} guia={guia} index={index} setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} />
+          <RowTable key={index} guia={guia} index={index} setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} rolUser={rolUser} />
         ))}
       </Table>
     </>
@@ -82,9 +84,10 @@ interface PropTable {
   index: number;
   setShowDetallesGre: (p: boolean) => void;
   setSelectGreId: (p: number | null) => void;
+  rolUser: User | null;
 }
 
-function RowTable({guia, index, setShowDetallesGre, setSelectGreId}: PropTable) {
+function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: PropTable) {
   return (
     <tr key={index} className="hover:bg-gray-800/50 transition-colors">
       <td className="px-6 py-4">
@@ -117,9 +120,22 @@ function RowTable({guia, index, setShowDetallesGre, setSelectGreId}: PropTable) 
       </td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-2">
-          <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
-            <Eye className="w-4 h-4 text-gray-400" />
-          </button>
+          {
+            (rolUser?.role === 'administrador') ? (
+              <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
+                <Eye className="w-4 h-4 text-gray-400" />
+              </button>
+            ) : rolUser?.role === 'trabajador' ? (
+              <>
+                <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
+                  <Eye className="w-4 h-4 text-gray-400" />
+                </button>
+                <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Editar">
+                  <Edit className="w-4 h-4 text-gray-400" />
+                </button>
+              </>
+            ) : null
+          }
         </div>
       </td>
     </tr>
