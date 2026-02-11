@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, Plus, Eye, User, LogOut } from 'lucide-react';
+import { Truck, LogOut, Package } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import UserInfo from '../ui/UserInfo';
 
-type LabelType = '/crear-gre' | '/mis-guias' | '/seguimiento' | '/';
+type LabelType = '/guias';
 
 interface MenuItem {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -14,12 +14,10 @@ interface MenuItem {
 
 export default function NavBarTrabajador() {
   const { user, logout } = useAuth();
-  const [active, setActive] = useState<LabelType>('/mis-guias');
+  const [active, setActive] = useState<LabelType>('/guias');
 
   const menuItems: MenuItem[] = [
-    { icon: Plus, label: 'Crear Guía', anchor: '/crear-gre' },
-    { icon: Truck, label: 'Mis Guías', anchor: '/mis-guias' },
-    { icon: Eye, label: 'Seguimiento', anchor: '/seguimiento' },
+    { icon: Package, label: 'Guías de Remisión', anchor: '/guias' },
   ];
 
   return (
