@@ -1,6 +1,7 @@
-import { Truck, User, Package, Book, Check, ArrowLeft, ArrowRight, Send } from 'lucide-react';
+import { Truck, User, Package, Book, Check, ArrowLeft, ArrowRight} from 'lucide-react';
 import { useState } from 'react';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
+import BienesDatosDeCarga from './BienesDatosDeCarga';
 
 type TypeProcedimientoUi = {
   focus: boolean,
@@ -13,7 +14,7 @@ export default function FormCreateGre() {
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
-      { label: 'Destinatario', status: false, icon: <User className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Bienes y Carga', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
       { label: 'Productos', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
@@ -86,6 +87,9 @@ export default function FormCreateGre() {
       {/* contenido procedural */}
       {
         procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario />
+      }
+      {
+        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga />
       }
     </div>
   );
