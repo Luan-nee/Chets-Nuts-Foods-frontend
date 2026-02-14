@@ -1,4 +1,4 @@
-export type UserRole = 'administrador' | 'chofer' | 'trabajador';
+export type UserRole = 'ADMIN' | 'CHOFER' | 'CLIENTE' | 'COLABORADOR';
 
 export type Credenciales = {
   usuario: string;
@@ -7,12 +7,12 @@ export type Credenciales = {
 
 export type ResponseSesion = {
   tokenZ: string;
-  roles: string;
+  rol: UserRole;
   nombreUser: string;
 }
 
 export type User = {
   tokenZ: string;
   nombreUser: string;
-  role: UserRole;
+  rol: UserRole;
 }

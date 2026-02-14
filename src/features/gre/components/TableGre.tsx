@@ -121,11 +121,11 @@ function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: Pr
       <td className="px-6 py-4">
         <div className="flex items-center gap-2">
           {
-            (rolUser?.role === 'administrador') ? (
+            (rolUser?.rol === 'ADMIN') ? (
               <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
                 <Eye className="w-4 h-4 text-gray-400" />
               </button>
-            ) : rolUser?.role === 'trabajador' ? (
+            ) : rolUser?.rol === 'COLABORADOR' ? (
               <>
                 <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
                   <Eye className="w-4 h-4 text-gray-400" />

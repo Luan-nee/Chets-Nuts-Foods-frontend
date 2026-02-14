@@ -58,7 +58,7 @@ export default function NavBarAdministrador() {
       </nav>
 
       <div className="p-3 border-t border-gray-800 space-y-2">
-        <UserInfo nombreUser={user?.nombreUser || ''} role={user?.role || ''} />
+        <UserInfo nombreUser={user?.nombreUser || ''} rol={user?.rol || ''} />
         <button
           onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-red-900 hover:text-red-200 transition-colors"
