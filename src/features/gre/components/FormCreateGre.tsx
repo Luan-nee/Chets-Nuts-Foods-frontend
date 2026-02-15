@@ -1,7 +1,8 @@
-import { Truck, User, Package, Book, Check, ArrowLeft, ArrowRight} from 'lucide-react';
+import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, Car} from 'lucide-react';
 import { useState } from 'react';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './BienesDatosDeCarga';
+import RutaDeTraslado from './RutaDeTraslado';
 
 type TypeProcedimientoUi = {
   focus: boolean,
@@ -15,7 +16,7 @@ export default function FormCreateGre() {
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
       { label: 'Bienes y Carga', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Productos', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Ruta de Traslado', status: false, icon: <Car className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
   );
@@ -90,6 +91,9 @@ export default function FormCreateGre() {
       }
       {
         procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga />
+      }
+      {
+        procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado />
       }
     </div>
   );
