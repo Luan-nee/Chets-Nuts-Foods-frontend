@@ -1,19 +1,12 @@
 import { Edit2, Info, Package, Plus, Scale, Trash2 } from "lucide-react";
+import type { Producto } from "../../../types/producto.type";
 import Table from "../../../components/ui/Table";
 import { useState } from "react";
-interface PropRowTable {
-  index: number;
-  codigo_del_bien: string;
-  codigo_product_sunat: string;
-  descripcion: string;
-  unidad_de_medida: string;
-  cantidad: number;
-}
 
-function RowTable({ index, codigo_del_bien, codigo_product_sunat, descripcion, unidad_de_medida, cantidad }: PropRowTable) {
+function RowTable({ id, codigo_del_bien, codigo_producto_sunat, descripcion_detallada_del_bien, unidad_de_medida_del_bien, cantidad }: Producto) {
   return (
     <tr
-      key={index}
+      key={id}
       className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
     >
       <td className="px-4 py-4">
@@ -23,16 +16,16 @@ function RowTable({ index, codigo_del_bien, codigo_product_sunat, descripcion, u
       </td>
       <td className="px-4 py-4">
         <span className="text-sm text-gray-300">
-          {codigo_product_sunat}
+          {codigo_producto_sunat}
         </span>
       </td>
       <td className="px-4 py-4">
         <span className="text-sm text-gray-300">
-          {descripcion}
+          {descripcion_detallada_del_bien}
         </span>
       </td>
       <td className="px-4 py-4 text-center">
-        <span className="text-sm text-gray-300">{unidad_de_medida}</span>
+        <span className="text-sm text-gray-300">{unidad_de_medida_del_bien}</span>
       </td>
       <td className="px-4 py-4 text-center">
         <span className="text-sm font-medium text-white">
@@ -60,7 +53,7 @@ function RowTable({ index, codigo_del_bien, codigo_product_sunat, descripcion, u
 }
 
 export default function BienesDatosDeCarga() {
-  const [measureUnit, setMeasureUnit] = useState<'KGM' | 'TNE'>('KGM');
+  const [measureUnit, setMeasureUnit] = useState<'KG' | 'T'>('KG');
   const [totalWeight, setTotalWeight] = useState('10');
   const headerTabler: string[] = [
     "Código",
@@ -70,16 +63,32 @@ export default function BienesDatosDeCarga() {
     "Valor Unidad",
     "Acciones"
   ]
-  const [goods, setGoods] = useState<PropRowTable[]>([
-    {
-      index: 0,
-      codigo_del_bien: 'HTA-001',
-      codigo_product_sunat: '27111700',
-      descripcion: 'Caja de herramientas de acero 20 pulgadas',
-      unidad_de_medida: 'NIU',
-      cantidad: 10
-    }
-  ]);
+  const [goods, setGoods] = useState<Producto[]>([
+  {
+    id: 1,
+    codigo_del_bien: 'ILU-205',
+    codigo_producto_sunat: '39111516',
+    descripcion_detallada_del_bien: 'Panel LED circular empotrable 18W - Luz Blanca',
+    unidad_de_medida_del_bien: 'Unidades (NIU)',
+    cantidad: 15
+  },
+  {
+    id: 2,
+    codigo_del_bien: 'HER-882',
+    codigo_producto_sunat: '27111703',
+    descripcion_detallada_del_bien: 'Martillo de uña 16oz mango de fibra de vidrio',
+    unidad_de_medida_del_bien: 'Unidades (NIU)',
+    cantidad: 8
+  },
+  {
+    id: 3,
+    codigo_del_bien: 'TUB-040',
+    codigo_producto_sunat: '40142115',
+    descripcion_detallada_del_bien: 'Tubo PVC SAP presión clase 10 de 1/2 pulgada',
+    unidad_de_medida_del_bien: 'Metros (MTR)',
+    cantidad: 120
+  }
+]);
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">
@@ -107,11 +116,11 @@ export default function BienesDatosDeCarga() {
               {goods.map((good, index) => (
                 <RowTable 
                   key={index}
-                  index={index}
+                  id={good.id}
                   codigo_del_bien={good.codigo_del_bien}
-                  codigo_product_sunat={good.codigo_product_sunat}
-                  descripcion={good.descripcion}
-                  unidad_de_medida={good.unidad_de_medida}
+                  codigo_producto_sunat={good.codigo_producto_sunat}
+                  descripcion_detallada_del_bien={good.descripcion_detallada_del_bien}
+                  unidad_de_medida_del_bien={good.unidad_de_medida_del_bien}
                   cantidad={good.cantidad}
                 />
               ))}
@@ -138,30 +147,30 @@ export default function BienesDatosDeCarga() {
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
-                  onClick={() => setMeasureUnit("KGM")}
+                  onClick={() => setMeasureUnit("KG")}
                   className={`p-4 rounded-lg border transition-colors ${
-                    measureUnit === "KGM"
+                    measureUnit === "KG"
                       ? "bg-[#1f6feb]/10 border-[#1f6feb] text-white"
                       : "bg-[#0d1117] border-[#30363d] text-gray-400 hover:border-[#1f6feb]/50"
                   }`}
                 >
                   <div className="text-center">
                     <p className="font-semibold text-sm mb-1">Kilogramo</p>
-                    <p className="text-xs text-gray-500">KGM</p>
+                    <p className="text-xs text-gray-500">KG</p>
                   </div>
-                </button>
+                </button>   
 
                 <button
-                  onClick={() => setMeasureUnit("TNE")}
+                  onClick={() => setMeasureUnit("T")}
                   className={`p-4 rounded-lg border transition-colors ${
-                    measureUnit === "TNE"
+                    measureUnit === "T"
                       ? "bg-[#1f6feb]/10 border-[#1f6feb] text-white"
                       : "bg-[#0d1117] border-[#30363d] text-gray-400 hover:border-[#1f6feb]/50"
                   }`}
                 >
                   <div className="text-center">
                     <p className="font-semibold text-sm mb-1">Tonelada</p>
-                    <p className="text-xs text-gray-500">TNE</p>
+                    <p className="text-xs text-gray-500">T</p>
                   </div>
                 </button>
               </div>
@@ -174,13 +183,14 @@ export default function BienesDatosDeCarga() {
               </label>
               <div className="relative">
                 <input
-                  type="text"
+                  type="number"
+                  placeholder="0"
                   value={totalWeight}
                   onChange={(e) => setTotalWeight(e.target.value)}
                   className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-3 pr-12 text-white text-2xl font-bold focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                  kg
+                  {measureUnit}
                 </span>
               </div>
               <p className="text-xs text-gray-500 mt-2">
@@ -207,16 +217,10 @@ export default function BienesDatosDeCarga() {
                   <span className="text-white font-medium">{goods.length}</span>{" "}
                   | Peso Bruto:{" "}
                   <span className="text-[#1f6feb] font-bold">
-                    {totalWeight} kg
+                    {totalWeight} {measureUnit}
                   </span>
                 </p>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span className="text-xs font-medium text-green-400 uppercase">
-                Completado
-              </span>
             </div>
           </div>
         </div>
