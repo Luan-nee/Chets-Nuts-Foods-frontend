@@ -3,6 +3,7 @@ import { useState } from 'react';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './BienesDatosDeCarga';
 import RutaDeTraslado from './RutaDeTraslado';
+import ConductorVehiculo from './ConductorVehiculo';
 
 type TypeProcedimientoUi = {
   focus: boolean,
@@ -94,6 +95,9 @@ export default function FormCreateGre() {
       }
       {
         procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado />
+      }
+      {
+        procedimiento.find(p => p.focus)?.label === "Transporte" && <ConductorVehiculo />
       }
     </div>
   );
