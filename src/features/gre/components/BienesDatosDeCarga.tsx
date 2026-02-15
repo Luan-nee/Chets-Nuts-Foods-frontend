@@ -1,4 +1,5 @@
 import { Edit2, Info, Package, Plus, Scale, Trash2 } from "lucide-react";
+import AgregarBien from "./AgregarBien";
 import type { Producto } from "../../../types/producto.type";
 import Table from "../../../components/ui/Table";
 import { useState } from "react";
@@ -55,6 +56,7 @@ function RowTable({ id, codigo_del_bien, codigo_producto_sunat, descripcion_deta
 export default function BienesDatosDeCarga() {
   const [measureUnit, setMeasureUnit] = useState<'KG' | 'T'>('KG');
   const [totalWeight, setTotalWeight] = useState('10');
+  const [showAgregarBien, setShowAgregarBien] = useState<boolean>(false);
   const headerTabler: string[] = [
     "Código",
     "Cod. SUNAT",
@@ -92,17 +94,21 @@ export default function BienesDatosDeCarga() {
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">
+      {showAgregarBien && (
+        <AgregarBien setShowAgregarBien={setShowAgregarBien} />
+      )}
 
       {/* Content */}
       <div className="space-y-6">
         {/* Bienes Transportados */}
-        <section className="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <Package className="w-5 h-5 text-[#1f6feb]" />
               <h2 className="text-lg font-semibold">Bienes Transportados</h2>
             </div>
             <button
+              onClick={() => setShowAgregarBien(true)}
               className="flex items-center gap-2 px-4 py-2 bg-[#1f6feb] hover:bg-[#1a5cd9] rounded-lg transition-colors text-sm"
             >
               <Plus className="w-4 h-4" />
@@ -133,7 +139,7 @@ export default function BienesDatosDeCarga() {
         </section>
 
         {/* Datos de la Carga */}
-        <section className="bg-[#0d1117] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
             <Scale className="w-5 h-5 text-[#1f6feb]" />
             <h2 className="text-lg font-semibold">Datos de la Carga</h2>
