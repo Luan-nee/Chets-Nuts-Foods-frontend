@@ -12,7 +12,7 @@ interface FetchState {
   fetchData: () => Promise<void>;
 }
 
-export const useFetchDetallesGuiaRemision = (id: number): FetchState => {
+export const useFetchDetallesGuiaRemision = (id: number | null): FetchState => {
   const greService = new GreService();
   const [data, setData] = useState<DetailedGreType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,6 +23,11 @@ export const useFetchDetallesGuiaRemision = (id: number): FetchState => {
     try {
       setIsLoading(true);
       setIsError(false);
+
+      if (id === null) {
+        throw new Error("ID de guía de remisión no proporcionado");
+      }
+
       const response = await greService.getDetallesGuiaRemision(id);
       // Manejo de errores basado en el estado y el mensaje de la respuesta
       if (response.status !== "success") {
@@ -40,7 +45,7 @@ export const useFetchDetallesGuiaRemision = (id: number): FetchState => {
 
   useEffect(() => {
     fetchData();
-    console.log("useFetchGuiasRemision: datos de guías de remisión obtenidos");
+    console.log("useFetchDetallesGuiaRemision: datos de detalles de guía de remisión obtenidos");
   }, []);
 
   return { data, isLoading, isError, fetchData};

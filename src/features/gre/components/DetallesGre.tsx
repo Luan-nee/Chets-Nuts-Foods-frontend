@@ -7,6 +7,7 @@ import { useFetchDetallesGuiaRemision } from '../hooks/useFetchDetallesGuiaRemis
 
 interface DetallesGreProps {
   showDetallesGre: (p: boolean) => void;
+  selectedGreId: number | null;
 }
 
 const headerTable: string[] = [
@@ -17,9 +18,9 @@ const headerTable: string[] = [
   'Peso Total'
 ]
 
-export default function DetallesGre({ showDetallesGre }: DetallesGreProps) {
+export default function DetallesGre({ showDetallesGre, selectedGreId }: DetallesGreProps) {
   // usa el hook personalizado para obtener los detalles de la guía de remisión
-  const { data: detallesGre, isLoading, isError } = useFetchDetallesGuiaRemision(1); // Aquí el ID es estático para el ejemplo
+  const { data: detallesGre, isLoading, isError } = useFetchDetallesGuiaRemision(selectedGreId);
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden">

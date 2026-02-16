@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Search, ChevronLeft, ChevronRight, Filter, Plus } from 'lucide-react';
 import TableGre from '../../features/gre/components/TableGre';
 import DetallesGre from '../../features/gre/components/DetallesGre';
@@ -8,11 +8,6 @@ export default function ListaGre() {
   const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);
   const [ showFormCreateGre, setShowFormCreateGre ] = useState<boolean>(false);
   const [ selectGreId, setSelectGreId ] = useState<number | null>(null);
-
-  useEffect(()=>{
-    // Implementar un endpoint para obtener detalles de una guía de remisión electrónica por su ID
-    // ...
-  }, [selectGreId]);
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -88,7 +83,7 @@ export default function ListaGre() {
       </div>
       { showDetallesGre && 
         <div className="absolute inset-0 z-50 bg-gray-950">
-          <DetallesGre showDetallesGre={setShowDetallesGre} />
+          <DetallesGre showDetallesGre={setShowDetallesGre} selectedGreId={selectGreId} />
         </div>
       }
       
