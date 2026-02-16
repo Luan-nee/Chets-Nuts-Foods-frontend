@@ -1,4 +1,4 @@
-import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, Car} from 'lucide-react';
+import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, Car, ChevronLeft} from 'lucide-react';
 import { useState } from 'react';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './BienesDatosDeCarga';
@@ -12,7 +12,11 @@ type TypeProcedimientoUi = {
   icon: React.ReactNode
 }
 
-export default function FormCreateGre() {
+interface FormCreateGreProps {
+  setShowFormCreateGre: (p: boolean) => void;
+}
+
+export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
@@ -57,8 +61,21 @@ export default function FormCreateGre() {
           <h1 className="text-3xl font-bold mb-2">EMISIÓN DE GUÍA DE REMISIÓN</h1>
           <p className="text-gray-400">Siga los pasos para completar la información de transporte.</p>
         </div>
-        
+        {/* Botones */}
         <div className="flex gap-3 mt-8">
+          <button 
+            onClick={() => setShowFormCreateGre(false)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Cancelar
+          </button>
+          <button 
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
+          >
+            <Check className="w-5 h-5" />
+            Emitir GRE
+          </button>
           <button 
             onClick={pushAnterior}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
@@ -66,7 +83,6 @@ export default function FormCreateGre() {
             <ArrowLeft className="w-5 h-5" />
             Anterior
           </button>
-
           <button 
             onClick={pushSiguiente}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"

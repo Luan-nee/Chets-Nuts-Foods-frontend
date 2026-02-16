@@ -89,7 +89,7 @@ export default function ListaGre() {
       
       { showFormCreateGre && 
         <div className="absolute inset-0 z-50 bg-gray-950">
-          <FormCreateGre />
+          <FormCreateGre setShowFormCreateGre={setShowFormCreateGre} />
         </div>
       }
     </div>
