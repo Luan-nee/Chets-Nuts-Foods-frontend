@@ -60,14 +60,6 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
               <ChevronRight className="w-5 h-5 text-gray-400 rotate-180" />
               Regresar
             </button>
-            <button className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors border border-gray-700">
-              <Printer className="w-5 h-5" />
-              Imprimir
-            </button>
-            <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-              <Download className="w-5 h-5" />
-              Descargar PDF
-            </button>
           </div>
         </div>
         
