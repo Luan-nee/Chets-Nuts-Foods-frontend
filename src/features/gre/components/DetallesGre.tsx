@@ -1,5 +1,5 @@
 // importación de componentes IU
-import { Truck, Package, ChevronRight, Printer, Download, Info, MapPin} from 'lucide-react';
+import { Truck, Package, ChevronRight, Info, MapPin} from 'lucide-react';
 import Loading from '../../../components/ui/Loading';
 import Table from '../../../components/ui/Table';
 // importación de custom hooks
