@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, Package, LayoutDashboard, Users, Store, LogOut, Settings } from 'lucide-react';
+import { Truck, Package, Users, Store, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import UserInfo from '../ui/UserInfo';
 
