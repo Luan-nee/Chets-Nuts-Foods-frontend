@@ -4,7 +4,7 @@ import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
 
 interface FormCreateEstProps {
-  showFormEdit: (p: boolean) => void;
+  showFormCreateEst: (p: boolean) => void;
 }
 
 
@@ -31,7 +31,7 @@ const tipoEstablecimiento: { label: string; value: tipoEst }[] = [
   }
 ]
 
-function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
+function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
   const [formData, setFormData] = useState<EstablecimientoUpdate>({
     idResponsable: 0,
     nombreEst: '',
@@ -55,27 +55,25 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
   return (
     <main className="flex-1 p-8 bg-gray-950 overflow-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => showFormEdit(false)}
-            className="p-2 hover:bg-[#161b22] rounded-lg transition-colors"
-          >
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <div>
-            <h1 className="text-3xl font-bold mb-1">Gestión de Establecimiento</h1>
-            <p className="text-gray-400">Completa la información para registrar o editar el local.</p>
-          </div>
+      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
+        <button 
+          onClick={() => showFormCreateEst(false)}
+          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        <div>
+          <h1 className="text-3xl font-bold mb-1">Registra un nuevo establecimiento</h1>
+          <p className="text-gray-400">Completa la información para registrar el nuevo local.</p>
         </div>
       </div>
 
       {/* Form */}
       <div className="space-y-6">
         {/* Información General */}
-        <section className="bg-[#161b22] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Info className="w-5 h-5 text-[#1f6feb]" />
+            <Info className="w-5 h-5 text-blue-500" />
             <h2 className="text-xl font-semibold">Información General</h2>
           </div>
 
@@ -91,7 +89,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                   placeholder="Ej. Almacén Central Norte"
                   value={formData.nombreEst}
                   onChange={(e) => handleInputChange('nombreEst', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                  className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
 
@@ -114,7 +112,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                   placeholder="Ej. 74828302"
                   value={formData.idResponsable}
                   onChange={(e) => handleInputChange('idResponsable', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                  className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
             </div>
@@ -132,7 +130,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                     placeholder="Calle, Av, Jr y número de local..."
                     value={formData.direccion}
                     onChange={(e) => handleInputChange('direccion', e.target.value)}
-                    className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                    className="w-full bg-gray-950 border border-gray-700 rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   />
                 </div>
               </div>
@@ -171,16 +169,16 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                 value={formData.descripcion}
                 onChange={(e) => handleInputChange('descripcion', e.target.value)}
                 rows={4}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors resize-none"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"
               />
             </div>
           </div>
         </section>
 
         {/* Ubicación Geográfica */}
-        <section className="bg-[#161b22] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
-            <svg className="w-5 h-5 text-[#1f6feb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
             <h2 className="text-xl font-semibold">Ubicación Geográfica (Ubigeo)</h2>
@@ -196,7 +194,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                 <select
                   value={formData.departamento}
                   onChange={(e) => handleInputChange('departamento', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
+                  className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer"
                 >
                   <option value="">Seleccione Departamento</option>
                   <option value="lima">Lima</option>
@@ -212,7 +210,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                 <select
                   value={formData.provincia}
                   onChange={(e) => handleInputChange('provincia', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
+                  className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer"
                 >
                   <option value="">Seleccione Provincia</option>
                   <option value="lima">Lima</option>
@@ -227,7 +225,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                 <select
                   value={formData.distrito}
                   onChange={(e) => handleInputChange('distrito', e.target.value)}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
+                  className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none cursor-pointer"
                 >
                   <option value="">Seleccione Distrito</option>
                   <option value="miraflores">Miraflores</option>
@@ -252,7 +250,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                     placeholder="-12.046374"
                     value={formData.latitud}
                     onChange={(e) => handleInputChange('latitud', e.target.value)}
-                    className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                    className="w-full bg-gray-950 border border-gray-700 rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   />
                 </div>
               </div>
@@ -270,7 +268,7 @@ function FormCreateEst({ showFormEdit }: FormCreateEstProps) {
                     placeholder="-77.042793"
                     value={formData.longitud}
                     onChange={(e) => handleInputChange('longitud', e.target.value)}
-                    className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                    className="w-full bg-gray-950 border border-gray-700 rounded-lg pl-12 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   />
                 </div>
               </div>

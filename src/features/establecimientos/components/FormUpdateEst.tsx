@@ -54,29 +54,27 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
   };
 
   return (
-    <main className="flex-1 p-8 bg-gray-950 overflow-auto">
+    <div className="flex-1 p-8 overflow-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={() => showFormEdit(false)}
-            className="p-2 hover:bg-[#161b22] rounded-lg transition-colors"
-          >
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <div>
-            <h1 className="text-3xl font-bold mb-1">Gestión de Establecimiento</h1>
-            <p className="text-gray-400">Completa la información para registrar o editar el local.</p>
-          </div>
+      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
+        <button 
+          onClick={() => showFormEdit(false)}
+          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        <div>
+          <h1 className="text-3xl font-bold mb-1">Actualiza la información del establecimiento</h1>
+          <p className="text-gray-400">Completa la información para registrar o editar el local.</p>
         </div>
       </div>
 
       {/* Form */}
       <div className="space-y-6">
         {/* Información General */}
-        <section className="bg-[#161b22] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Info className="w-5 h-5 text-[#1f6feb]" />
+            <Info className="w-5 h-5 text-blue-500" />
             <h2 className="text-xl font-semibold">Información General</h2>
           </div>
 
@@ -128,7 +126,7 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
                         <label className="block text-sm font-medium text-gray-300 mb-2 invisible">
                           Acciones
                         </label>
-                        <button onClick={recargarEmpleados} className="bg-[#1f6feb] hover:bg-[#1a5edb] text-white font-medium p-2 rounded-lg transition-colors">
+                        <button onClick={recargarEmpleados} className="bg-blue-700 hover:bg-blue-500 text-white font-medium p-2 rounded-lg transition-colors">
                           Recargar Empleados
                         </button>
                       </div>
@@ -197,7 +195,7 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
         </section>
 
         {/* Ubicación Geográfica */}
-        <section className="bg-[#161b22] border border-[#30363d] rounded-lg p-6">
+        <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
             <svg className="w-5 h-5 text-[#1f6feb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -297,7 +295,7 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }
 

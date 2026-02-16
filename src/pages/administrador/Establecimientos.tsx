@@ -92,7 +92,7 @@ export default function Establecimientos() {
 
       { showFormCreateEst && 
         <div className="absolute inset-0 z-50 bg-gray-950">
-          <FormCreateEst showFormEdit={setShowFormCreateEst} />
+          <FormCreateEst showFormCreateEst={setShowFormCreateEst} />
         </div>
       }
     </div>
