@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Search, ChevronLeft, ChevronRight, Filter, Plus } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
 import TableGre from '../../features/gre/components/TableGre';
 import DetallesGre from '../../features/gre/components/DetallesGre';
 import FormCreateGre from '../../features/gre/components/FormCreateGre';
 
 export default function ListaGre() {
-  const { user } = useAuth();
   const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);
   const [ showFormCreateGre, setShowFormCreateGre ] = useState<boolean>(false);
   const [ selectGreId, setSelectGreId ] = useState<number | null>(null);
@@ -65,7 +63,7 @@ export default function ListaGre() {
       {/* Table */}
       <div className="flex-1 overflow-auto px-8 py-6">
         <div className="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
-          <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} rolUser={user} />
+          <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} />
         </div>
 
         {/* Pagination : DESACTIVADO */}
@@ -88,7 +86,6 @@ export default function ListaGre() {
           </div>
         </div> 
       </div>
-
       { showDetallesGre && 
         <div className="absolute inset-0 z-50 bg-gray-950">
           <DetallesGre showDetallesGre={setShowDetallesGre} />
@@ -100,7 +97,6 @@ export default function ListaGre() {
           <FormCreateGre />
         </div>
       }
-
     </div>
   );
 }

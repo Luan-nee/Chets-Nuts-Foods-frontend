@@ -6,11 +6,9 @@ import Loading from '../../../components/ui/Loading';
 import { useFetchGuiasRemision } from '../hooks/useFetchGuiasRemision';
 // importación de tipos
 import type { simpleGreType } from '../../../types/gre.type';
-import type { User } from '../../../types/usuario.type';
 import { useAutorizacion } from '../../../config/useAutorizacion';
 
 interface PropTableGre {
-  rolUser: User | null;
   setShowDetallesGre: (p: boolean) => void;
   setSelectGreId: (p: number | null) => void;
 }
@@ -27,7 +25,7 @@ const colorsEstado: ColorsEstadoType = {
   pendiente: 'bg-yellow-500',
 }
 
-export default function TableGre({ rolUser, setShowDetallesGre, setSelectGreId }: PropTableGre) {
+export default function TableGre({ setShowDetallesGre, setSelectGreId }: PropTableGre) {
   const { data: guiasRemision, isLoading, isError, fetchData: recargarGuiasRemision } = useFetchGuiasRemision();
   const tableHeader: string[] = [
     'Nº Guía',
@@ -72,7 +70,7 @@ export default function TableGre({ rolUser, setShowDetallesGre, setSelectGreId }
       </div>
       <Table tableHeader={tableHeader}>
         {guiasRemision?.map((guia, index) => (
-          <RowTable key={index} guia={guia} index={index} setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} rolUser={rolUser} />
+          <RowTable key={index} guia={guia} index={index} setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} />
         ))}
       </Table>
     </>
@@ -84,10 +82,9 @@ interface PropTable {
   index: number;
   setShowDetallesGre: (p: boolean) => void;
   setSelectGreId: (p: number | null) => void;
-  rolUser: User | null;
 }
 
-function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: PropTable) {
+function RowTable({guia, index, setShowDetallesGre, setSelectGreId}: PropTable) {
   const { tienePermiso } = useAutorizacion();
   return (
     <tr key={index} className="hover:bg-gray-800/50 transition-colors">
@@ -136,22 +133,3 @@ function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: Pr
     </tr>
   );
 }
-
-/*
-{
-            (rolUser?.rol === 'ADMIN') ? (
-              <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
-                <Eye className="w-4 h-4 text-gray-400" />
-              </button>
-            ) : rolUser?.rol === 'COLABORADOR' ? (
-              <>
-                <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
-                  <Eye className="w-4 h-4 text-gray-400" />
-                </button>
-                <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Editar">
-                  <Edit className="w-4 h-4 text-gray-400" />
-                </button>
-              </>
-            ) : null
-          }
-*/
