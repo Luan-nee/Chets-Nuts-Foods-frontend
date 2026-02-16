@@ -7,6 +7,7 @@ import { useFetchGuiasRemision } from '../hooks/useFetchGuiasRemision';
 // importación de tipos
 import type { simpleGreType } from '../../../types/gre.type';
 import type { User } from '../../../types/usuario.type';
+import { useAutorizacion } from '../../../config/useAutorizacion';
 
 interface PropTableGre {
   rolUser: User | null;
@@ -28,7 +29,6 @@ const colorsEstado: ColorsEstadoType = {
 
 export default function TableGre({ rolUser, setShowDetallesGre, setSelectGreId }: PropTableGre) {
   const { data: guiasRemision, isLoading, isError, fetchData: recargarGuiasRemision } = useFetchGuiasRemision();
-
   const tableHeader: string[] = [
     'Nº Guía',
     'Fecha Emisión',
@@ -88,6 +88,7 @@ interface PropTable {
 }
 
 function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: PropTable) {
+  const { tienePermiso } = useAutorizacion();
   return (
     <tr key={index} className="hover:bg-gray-800/50 transition-colors">
       <td className="px-6 py-4">
@@ -120,7 +121,24 @@ function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: Pr
       </td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-2">
-          {
+          {tienePermiso('PUEDE_VER_DETALLES_DE_LA_GUIA_DE_REMISION') && (
+            <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
+              <Eye className="w-4 h-4 text-gray-400" />
+            </button>
+          )}
+          {tienePermiso('PUEDE_EDITAR_GUIA_DE_REMISION') && (
+            <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Editar">
+              <Edit className="w-4 h-4 text-gray-400" />
+            </button>
+          )}
+        </div>
+      </td>
+    </tr>
+  );
+}
+
+/*
+{
             (rolUser?.rol === 'ADMIN') ? (
               <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors" title="Ver" onClick={() => { setShowDetallesGre(true); setSelectGreId(guia.id); }}>
                 <Eye className="w-4 h-4 text-gray-400" />
@@ -136,8 +154,4 @@ function RowTable({guia, index, setShowDetallesGre, setSelectGreId, rolUser}: Pr
               </>
             ) : null
           }
-        </div>
-      </td>
-    </tr>
-  );
-}
+*/
