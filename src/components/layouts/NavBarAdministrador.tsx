@@ -18,7 +18,6 @@ export default function NavBarAdministrador() {
 
   const menuItems: MenuItem[] = [
     { icon: Package, label: 'Guías de Remisión', anchor: '/guias' },
-    { icon: LayoutDashboard, label: 'Productos', anchor: '/productos' },
     { icon: Store, label: 'Establecimientos', anchor: '/establecimientos' },
     { icon: Users, label: 'Trabajadores', anchor: '/trabajadores' },
     { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' },
