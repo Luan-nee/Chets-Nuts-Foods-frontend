@@ -2,10 +2,8 @@ import { Briefcase, Users } from "lucide-react";
 import InputSelect from "../../../components/ui/InputSelect";
 
 const optionsTipoDocumento = [
-  { value: 'dni', label: 'DNI' },
-  { value: 'ruc', label: 'RUC' },
-  { value: 'ce', label: 'CE' },
-  { value: 'pasaporte', label: 'Pasaporte' },
+  { value: 'dni', label: 'DOCUMENTO NACIONAL DE IDENTIDAD' },
+  { value: 'ruc', label: 'REGISTRO ÚNICO DE CONTRIBUYENTES' }
 ]
 
 export default function MtcRemitenteDestinatario() {
@@ -43,8 +41,7 @@ export default function MtcRemitenteDestinatario() {
               </svg>
               <input
                 type="text"
-                placeholder="15010001"
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
           </div>
@@ -53,11 +50,9 @@ export default function MtcRemitenteDestinatario() {
             <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
               Empresa de Transporte
             </label>
-            <input
-              type="text"
-              placeholder="LogiTrans ERP S.A.C."
-              className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-            />
+            <p className="w-full font-bold text-xl py-2 text-white">
+              Chets Nuts Foods S.A.C.
+            </p>
           </div>
         </div>
       </section>
@@ -65,7 +60,7 @@ export default function MtcRemitenteDestinatario() {
       {/* Destinatario */}
       <section className="flex flex-col gap-4 bg-gray-900 border border-gray-700 rounded-lg p-6">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-[#1f6feb]" />
+          <Users className="w-5 h-5 text-blue-500" />
           <h2 className="text-lg font-semibold">REMITENTE</h2>
         </div>
 
@@ -80,8 +75,7 @@ export default function MtcRemitenteDestinatario() {
               </label>
               <input
                 type="text"
-                placeholder="10723306529"
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
           </div>
@@ -94,15 +88,14 @@ export default function MtcRemitenteDestinatario() {
               </label>
               <input
                 type="text"
-                placeholder="Jennifer Elizh Benalida Corimoto"
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-[#1f6feb]" />
+          <Users className="w-5 h-5 text-blue-500" />
           <h2 className="text-lg font-semibold">DESTINATARIO</h2>
         </div>
 
@@ -117,8 +110,7 @@ export default function MtcRemitenteDestinatario() {
               </label>
               <input
                 type="text"
-                placeholder="10723306529"
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
           </div>
@@ -131,8 +123,7 @@ export default function MtcRemitenteDestinatario() {
               </label>
               <input
                 type="text"
-                placeholder="Jennifer Elizh Benalida Corimoto"
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
           </div>

@@ -17,6 +17,7 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
+  const [ formData, setFormData ] = useState({});
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
