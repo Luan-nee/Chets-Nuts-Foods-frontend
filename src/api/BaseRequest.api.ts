@@ -1,7 +1,7 @@
 import type { BodyResponse } from '../types/bodyResponse.type';
 
 export default class BaseRequestApi {
-  public OFFLINE_MODE: boolean = true;
+  public OFFLINE_MODE: boolean = false;
 
   public async request<T>(endpoint: string, options: RequestInit): Promise<BodyResponse<T>> {
     const response = await fetch(endpoint, {

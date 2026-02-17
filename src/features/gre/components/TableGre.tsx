@@ -1,5 +1,5 @@
 // importación de componentes UI
-import { Edit, Eye } from 'lucide-react';
+import { Edit, Eye, Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import Loading from '../../../components/ui/Loading';
 // importación de custom hooks
@@ -10,6 +10,7 @@ import { useAutorizacion } from '../../../config/useAutorizacion';
 
 interface PropTableGre {
   setShowDetallesGre: (p: boolean) => void;
+  setShowFormCreateGre: (p: boolean) => void;
   setSelectGreId: (p: number | null) => void;
 }
 
@@ -25,8 +26,9 @@ const colorsEstado: ColorsEstadoType = {
   pendiente: 'bg-yellow-500',
 }
 
-export default function TableGre({ setShowDetallesGre, setSelectGreId }: PropTableGre) {
+export default function TableGre({ setShowDetallesGre, setShowFormCreateGre, setSelectGreId }: PropTableGre) {
   const { data: guiasRemision, isLoading, isError, fetchData: recargarGuiasRemision } = useFetchGuiasRemision();
+  const { tienePermiso } = useAutorizacion();
   const tableHeader: string[] = [
     'Nº Guía',
     'Fecha Emisión',
@@ -63,10 +65,17 @@ export default function TableGre({ setShowDetallesGre, setSelectGreId }: PropTab
 
   return (
     <>
-      <div className="p-4 flex justify-end">
+      <div className="p-4 flex justify-end gap-4">
         <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={recargarGuiasRemision}>
           Recargar
         </button>
+        { tienePermiso('PUEDE_CREAR_GUIA_DE_REMISION') && (
+          <button onClick={() => setShowFormCreateGre(true)}
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded font-medium transition-colors">
+              <Plus className="w-5 h-5" />
+              Nueva Guía
+          </button>
+        )}
       </div>
       <Table tableHeader={tableHeader}>
         {guiasRemision?.map((guia, index) => (

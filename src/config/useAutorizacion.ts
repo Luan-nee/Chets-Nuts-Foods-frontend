@@ -11,6 +11,7 @@ export function useAutorizacion (): Permisos {
   const PERMISOS: Record<string, UserRole[]> = {
     PUEDE_LISTAR_GUIAS_DE_REMISION: ['ADMIN', 'COLABORADOR'],  
     PUEDE_VER_DETALLES_DE_LA_GUIA_DE_REMISION: ['ADMIN', 'COLABORADOR'],
+    PUEDE_CREAR_GUIA_DE_REMISION: ['COLABORADOR'],
     PUEDE_EDITAR_GUIA_DE_REMISION: ['COLABORADOR'],
   };
 
