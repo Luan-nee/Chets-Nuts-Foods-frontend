@@ -61,3 +61,43 @@ export type DetailedGreType = {
   estado: estadoGre;
   observacion: string;
 };
+
+export type GreFormData = {
+  transportistaid: number;
+  remitente: {
+    tipo_documento: string;
+    numero_documento: string;
+    nombre_razonSocial: string;
+  };
+  destinatario: {
+    tipo_documento: string;
+    numero_documento: string;
+    nombre_razonSocial: string;
+  };
+  bienes_transportados: {
+    codigo_del_bien: string | "S/C";
+    descripcion_detallada_del_bien: string;
+    unidad_de_medida_del_bien: string;
+    cantidad: number;
+  }[];
+  carga: {
+    unidad_medida: "KILOGRAMO" | "TONELADA",
+    peso_bruto_total: number;
+  };
+  
+  transporte: {
+    conductor: {
+      nombres: string;
+      apellidos: string;
+      numero_licencia: string;
+    };
+    empresa_transportista: {
+      nombre_razonSocial: string;
+      tipo_documento: string;
+      numero_documento: string;
+    };
+    vehiculo: VehiculoGre
+  };
+  estado: estadoGre;
+  observacion: string;
+}

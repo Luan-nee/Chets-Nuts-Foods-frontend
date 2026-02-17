@@ -8,7 +8,7 @@ interface InputSelectProps {
 export default function InputSelect({ name, placeholder, options, handleInputChange }: InputSelectProps) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-300 mb-2">
+      <label className="block text-sm font-medium text-gray-300 mb-1.5">
         {name}
       </label>
       <div className="relative">
@@ -16,8 +16,9 @@ export default function InputSelect({ name, placeholder, options, handleInputCha
           name={name}
           aria-placeholder={placeholder}
           onChange={(e) => handleInputChange(name, e.target.value)}
-          className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
+          className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
         >
+          <option value="" disabled selected>{placeholder}</option>
           {
             options.map((option, index) => (
               <option key={index} value={option.value}>{option.label}</option>
