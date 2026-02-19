@@ -1,5 +1,6 @@
-import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, Car, ChevronLeft} from 'lucide-react';
+import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon} from 'lucide-react';
 import { useState } from 'react';
+import type { GreFormData } from '../../../types/gre.type';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './BienesDatosDeCarga';
 import RutaDeTraslado from './RutaDeTraslado';
@@ -17,12 +18,71 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  const [ formData, setFormData ] = useState({});
+  const [ formData, setFormData ] = useState<GreFormData>({
+  transportistaid: 2,
+  remitente: {
+    tipo_documento: "RUC",
+    numero_documento: "20123456789",
+    nombre_razonSocial: "Corporación Logística del Sur S.A.C."
+  },
+  destinatario: {
+    tipo_documento: "RUC",
+    numero_documento: "20987654321",
+    nombre_razonSocial: "Distribuidora de Alimentos Santa Rosa"
+  },
+  pagador_flete: {
+    tipo_documento: "RUC",
+    numero_documento: "20123456789",
+    nombre_razonSocial: "Corporación Logística del Sur S.A.C."
+  },
+  bienes_transportados: [
+    {
+      codigo_del_bien: "PROD-001",
+      descripcion_detallada_del_bien: "Sacos de harina de trigo especial 50kg",
+      unidad_de_medida_del_bien: "Sacos",
+      cantidad: 120
+    },
+    {
+      codigo_del_bien: "S/C",
+      descripcion_detallada_del_bien: "Pallets de madera de retorno",
+      unidad_de_medida_del_bien: "Unidades",
+      cantidad: 10
+    }
+  ],
+  carga: {
+    unidad_medida: "KILOGRAMO",
+    peso_bruto_total: 6500.50
+  },
+  punto_partida: {
+    departamento: "Lima",
+    provincia: "Lima",
+    distrito: "Ate",
+    direccion_detallada: "Av. Industrial 450 - Almacén Central"
+  },
+  punto_llegada: {
+    departamento: "Arequipa",
+    provincia: "Arequipa",
+    distrito: "Cerro Colorado",
+    direccion_detallada: "Calle Prolongación Bolognesi S/N - Sector B"
+  },
+  datos_de_transporte: {
+    placa_vehiculo: "V3X-982",
+    dni_conductor: "45882233",
+    licencia_conductor: "A3C-45882233",
+    fecha_inicio_traslado: "2026-02-25",
+    indicadores_retorno: {
+      retorno_envases_vacios: false,
+      retorno_vehiculo_vacio: true,
+      transporte_subcontratado: false
+    }
+  }
+});
+
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
       { label: 'Bienes y Carga', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Ruta de Traslado', status: false, icon: <Car className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Ruta de Traslado', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
   );

@@ -128,6 +128,41 @@ export default function MtcRemitenteDestinatario() {
             </div>
           </div>
         </div>
+
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-blue-500" />
+          <h2 className="text-lg font-semibold">PAGADOR DEL FLETE</h2>
+        </div>
+
+        {/* Pagador del flete */}
+        <div className="bg-gray-900 border border-gray-700 rounded-lg p-5">
+          {/* Tipo de documento */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <InputSelect name={"TIPO DE DOCUMENTO"} placeholder={"seleccionar el tipo de documento..."} options={optionsTipoDocumento} handleInputChange={handleInputChange} />
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
+                Nro. del documento
+              </label>
+              <input
+                type="text"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+              />
+            </div>
+          </div>
+
+          {/* Razon social o nombre completo */}
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
+                Razon social o nombre completo
+              </label>
+              <input
+                type="text"
+                className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+              />
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
