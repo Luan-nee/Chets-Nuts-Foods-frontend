@@ -74,6 +74,11 @@ export type GreFormData = {
     numero_documento: string;
     nombre_razonSocial: string;
   };
+  pagador_flete: {
+    tipo_documento: string;
+    numero_documento: string;
+    nombre_razonSocial: string;
+  }
   bienes_transportados: {
     codigo_del_bien: string | "S/C";
     descripcion_detallada_del_bien: string;
@@ -84,20 +89,27 @@ export type GreFormData = {
     unidad_medida: "KILOGRAMO" | "TONELADA",
     peso_bruto_total: number;
   };
-  
-  transporte: {
-    conductor: {
-      nombres: string;
-      apellidos: string;
-      numero_licencia: string;
-    };
-    empresa_transportista: {
-      nombre_razonSocial: string;
-      tipo_documento: string;
-      numero_documento: string;
-    };
-    vehiculo: VehiculoGre
-  };
-  estado: estadoGre;
-  observacion: string;
+  punto_partida: {
+    departamento: string,
+    provincia: string,
+    distrito: string,
+    direccion_detallada: string
+  },
+  punto_llegada: {
+    departamento: string,
+    provincia: string,
+    distrito: string,
+    direccion_detallada: string
+  },
+  datos_de_transporte: {
+    placa_vehiculo: string,
+    dni_conductor: string,
+    licencia_conductor: string,
+    fecha_inicio_traslado: string,
+    indicadores_retorno: {
+      retorno_envases_vacios: boolean,
+      retorno_vehiculo_vacio: boolean,
+      transporte_subcontratado: boolean
+    }
+  },
 }
