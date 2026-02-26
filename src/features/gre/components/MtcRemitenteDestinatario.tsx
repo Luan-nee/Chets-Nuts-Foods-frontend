@@ -1,15 +1,20 @@
 import { Briefcase, Users } from "lucide-react";
 import InputSelect from "../../../components/ui/InputSelect";
+import type { GreFormData } from "../../../types/gre.type";
 
 const optionsTipoDocumento = [
   { value: 'dni', label: 'DOCUMENTO NACIONAL DE IDENTIDAD' },
   { value: 'ruc', label: 'REGISTRO ÚNICO DE CONTRIBUYENTES' }
 ]
 
-export default function MtcRemitenteDestinatario() {
-  const handleInputChange = () => {
+interface MtcRemitenteDestinatarioProps {
+  setFormData: (prev: GreFormData) => void;
+}
 
-  }
+export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDestinatarioProps) {
+  const handleInputChange = (field: string, value: string | boolean) => {
+    // setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">

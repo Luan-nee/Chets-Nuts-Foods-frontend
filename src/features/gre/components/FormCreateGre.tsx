@@ -165,7 +165,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
 
       {/* contenido procedural */}
       {
-        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario />
+        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario setFormData={(formData) => setFormData(prev => ({...prev, ...formData}))} />
       }
       {
         procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga />
