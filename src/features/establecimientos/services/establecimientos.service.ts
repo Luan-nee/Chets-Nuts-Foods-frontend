@@ -1,4 +1,4 @@
-import type { Establecimiento } from "../../../types/establecimiento.type.ts";
+import type { Establecimiento } from "../types/establecimiento.type";
 import { EstablecimientoApi } from "../../../api/establecimientos.api.ts";
 
 const establecimientoApi = new EstablecimientoApi();

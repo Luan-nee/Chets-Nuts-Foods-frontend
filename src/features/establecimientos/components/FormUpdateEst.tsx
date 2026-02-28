@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { EstablecimientoUpdate, tipoEst } from '../../../types/establecimiento.type';
+import type { EstablecimientoUpdate, tipoEst } from '../types/establecimiento.type';
 import Loading from '../../../components/ui/Loading';
 import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
