@@ -5,7 +5,7 @@ import Loading from '../../../components/ui/Loading';
 // importación de custom hooks
 import { useFetchGuiasRemision } from '../hooks/useFetchGuiasRemision';
 // importación de tipos
-import type { simpleGreType } from '../../../types/gre.type';
+import type { simpleGreType } from '../types/gre.type';
 import { useAutorizacion } from '../../../config/useAutorizacion';
 
 interface PropTableGre {

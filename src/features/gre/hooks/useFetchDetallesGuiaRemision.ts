@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 // importación de clases como servicios
 import GreService from '../services/gre.service';
 // importación de tipos
-import type { DetailedGreType } from '../../../types/gre.type';
+import type { DetailedGreType } from '../types/gre.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {

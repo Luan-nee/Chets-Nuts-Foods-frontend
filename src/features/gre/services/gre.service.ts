@@ -1,7 +1,7 @@
 // importación de clases
 import GreApi from '../../../api/gre.api';
 // importación de tipos
-import type { simpleGreType, DetailedGreType } from '../../../types/gre.type';
+import type { simpleGreType, DetailedGreType } from '../types/gre.type';
 
 const greApi = new GreApi();
 

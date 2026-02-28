@@ -1,6 +1,6 @@
 import { Briefcase, Users } from "lucide-react";
 import InputSelect from "../../../components/ui/InputSelect";
-import type { GreFormData } from "../../../types/gre.type";
+import type { GreFormData } from "../types/gre.type";
 
 const optionsTipoDocumento = [
   { value: 'dni', label: 'DOCUMENTO NACIONAL DE IDENTIDAD' },

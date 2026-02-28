@@ -1,6 +1,6 @@
 import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon} from 'lucide-react';
 import { useState } from 'react';
-import type { GreFormData } from '../../../types/gre.type';
+import type { GreFormData } from '../types/gre.type';
 import MtcRemitenteDestinatario from './MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './BienesDatosDeCarga';
 import RutaDeTraslado from './RutaDeTraslado';
