@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 // importación de clases como servicios
 import EmpleadoService from '../services/empleado.service';
 // importación de tipos
-import type { empleado } from '../../../types/empleado.type';
+import type { empleado } from '../types/empleado.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {

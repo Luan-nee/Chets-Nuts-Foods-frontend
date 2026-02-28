@@ -5,7 +5,7 @@ import Loading from '../../../components/ui/Loading';
 // importación de custom hooks
 import { useFetchEmpleados } from '../hooks/useFetchEmpleados';
 // importación de tipos
-import type { empleado } from '../../../types/empleado.type';
+import type { empleado } from '../types/empleado.type';
 
 interface PropTableEmpleados {
   setShowDetallesEmpleado: (p: boolean) => void;
