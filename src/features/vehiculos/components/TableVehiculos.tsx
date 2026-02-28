@@ -5,7 +5,7 @@ import Loading from '../../../components/ui/Loading';
 // importación de custom hooks
 import { useFetchVehiculos } from '../hooks/useFetchVehiculos';
 // importación de tipos
-import type { Vehiculo } from '../../../types/vehiculo.type';
+import type { Vehiculo } from '../types/vehiculo.type';
 
 interface PropTableVehiculo {
   setShowFormUpdate: (p: boolean) => void;

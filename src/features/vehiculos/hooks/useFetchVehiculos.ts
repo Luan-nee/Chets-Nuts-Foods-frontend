@@ -1,14 +1,8 @@
-/*
-import { useEffect, useState } from 'react';
-import { VehiculoService } from '../services/vehiculo.service';
-import type { Vehiculo } from '../../../types/vehiculo.type';
-*/
-
 import { useState, useEffect } from 'react';
 // importación de clases como servicios
 import { VehiculoService } from '../services/vehiculo.service';
 // importación de tipos
-import type { Vehiculo } from '../../../types/vehiculo.type';
+import type { Vehiculo } from '../types/vehiculo.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
