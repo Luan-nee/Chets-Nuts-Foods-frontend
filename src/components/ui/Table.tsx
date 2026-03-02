@@ -6,7 +6,7 @@ interface TableProps {
 
 export default function Table({ children, tableHeader }: TableProps) {
   return (
-    <table className="w-full">
+    <table className="w-full bg-gray-900 rounded-lg">
       <thead>
         <tr className="border-b border-gray-800">
           {tableHeader.map((header, index) => (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, ChevronLeft, ChevronRight, Filter, Plus } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import TableGre from '../../features/gre/components/TableGre';
 import DetallesGre from '../../features/gre/components/DetallesGre';
 import FormCreateGre from '../../features/gre/components/FormCreateGre';
@@ -51,7 +51,7 @@ export default function ListaGre() {
 
       {/* Table */}
       <div className="flex-1 overflow-auto px-8 py-6">
-        <div className="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
+        <div className="overflow-hidden">
           <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} setShowFormCreateGre={setShowFormCreateGre} />
         </div>
 
