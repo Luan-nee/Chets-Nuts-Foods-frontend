@@ -77,5 +77,11 @@
       "punto_de_llegada": "Chiclayo",
       "estado": "Cancelado"
     }
-  ]
+  ],
+  "pagination": {
+    "total_data": 150,
+    "total_paginas": 15,
+    "pagina_actual": 1,
+    "datos_por_pagina": 10
+  }
 }

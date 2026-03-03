@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Package, PlusCircle, X } from "lucide-react";
-import InputSelect from "../../../components/ui/InputSelect";
-import type { Producto }  from "../../../types/producto.type";
+import InputSelect from "../../../../components/ui/InputSelect";
+import type { Producto }  from "../../../../types/producto.type";
 
 interface AgregarBienProps {
   setShowAgregarBien: (p: boolean) => void;

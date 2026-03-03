@@ -1,7 +1,7 @@
 import { Edit2, Info, Package, Plus, Scale, Trash2 } from "lucide-react";
 import AgregarBien from "./AgregarBien";
-import type { Producto } from "../../../types/producto.type";
-import Table from "../../../components/ui/Table";
+import type { Producto } from "../../../../types/producto.type";
+import Table from "../../../../components/ui/Table";
 import { useState } from "react";
 
 function RowTable({ codigo_del_bien, descripcion_detallada_del_bien, unidad_de_medida_del_bien, cantidad }: Producto) {
