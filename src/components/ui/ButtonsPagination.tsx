@@ -3,10 +3,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 interface PropPagination {
   total_paginas: number;
   pivote: number;
+  datos_por_pagina: number;
+  total_data: number; 
   fetchData: (pagina: number) => void;
 }
 
-export default function ButtonsPagination ({ total_paginas, pivote, fetchData }: PropPagination) {
+export default function ButtonsPagination ({ total_paginas, pivote, fetchData, datos_por_pagina, total_data }: PropPagination) {
 
   /* El "pivote" es el número de página actual. */
   const clickArrows: (pivote: number, total_paginas: number, tipoArrow: 'left' | 'right') => number = (pivote: number, total_paginas: number, tipoArrow: 'left' | 'right') => {
@@ -34,7 +36,7 @@ export default function ButtonsPagination ({ total_paginas, pivote, fetchData }:
   return (
     <div className="flex items-center justify-between mb-2">
       <p className="text-sm text-gray-400">
-        Mostrando <span className="font-medium text-gray-300">{1}</span> a <span className="font-medium text-gray-300">{10}</span> de <span className="font-medium text-gray-300">{130}</span> resultados
+        Mostrando <span className="font-medium text-gray-300">{1}</span> a <span className="font-medium text-gray-300">{datos_por_pagina}</span> de <span className="font-medium text-gray-300">{total_data}</span> resultados
       </p>
       <div className="flex items-center gap-2">
         <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

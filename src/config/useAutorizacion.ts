@@ -12,7 +12,7 @@ export function useAutorizacion (): Permisos {
     PUEDE_LISTAR_GUIAS_DE_REMISION: ['ADMIN', 'COLABORADOR'],  
     PUEDE_VER_DETALLES_DE_LA_GUIA_DE_REMISION: ['ADMIN', 'COLABORADOR'],
     PUEDE_CREAR_GUIA_DE_REMISION: ['COLABORADOR'],
-    PUEDE_EDITAR_GUIA_DE_REMISION: ['COLABORADOR'],
+    PUEDE_EDITAR_GUIA_DE_REMISION: ['COLABORADOR']
   };
 
   const tienePermiso = (permiso: string): boolean => {

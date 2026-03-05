@@ -2,10 +2,10 @@
 import { Edit, Eye, Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import Loading from '../../../components/ui/Loading';
+import ButtonsPagination from '../../../components/ui/ButtonsPagination';
 // importación de custom hooks
 import { useFetchGuiasRemision } from '../hooks/useFetchGuiasRemision';
 import { useAutorizacion } from '../../../config/useAutorizacion';
-import ButtonsPagination from '../../../components/ui/ButtonsPagination';
 
 interface PropTableGre {
   setShowDetallesGre: (p: boolean) => void;
@@ -51,7 +51,7 @@ export default function TableGre({ setShowDetallesGre, setShowFormCreateGre, set
       <div className="flex justify-center items-center py-10">
         <p className="text-red-500">Error al cargar las guías de remisión.</p>
         {/* agrega un botón para reintentar la carga */}
-        <button className="ml-4 px-4 py-2 bg-red-600 text-white rounded" onClick={() => recargarGuiasRemision(0)}>
+        <button className="ml-4 px-4 py-2 bg-red-600 text-white rounded" onClick={() => recargarGuiasRemision(1)}>
           Reintentar
         </button>
       </div>
@@ -77,7 +77,13 @@ export default function TableGre({ setShowDetallesGre, setShowFormCreateGre, set
         )}
       </div>
 
-      <ButtonsPagination total_paginas={infoPaginacion.total_paginas} pivote={infoPaginacion.pagina_actual} fetchData={setPagina}/>
+      <ButtonsPagination 
+      total_paginas={infoPaginacion.total_paginas} 
+      pivote={infoPaginacion.pagina_actual} 
+      fetchData={setPagina} 
+      datos_por_pagina={infoPaginacion.datos_por_pagina} 
+      total_data={infoPaginacion.total_data} 
+      />
 
       <Table tableHeader={tableHeader}>
         {guiasRemision?.map((guia, index) => (
