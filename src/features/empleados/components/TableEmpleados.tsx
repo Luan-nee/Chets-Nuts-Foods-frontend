@@ -4,6 +4,7 @@ import Table from "../../../components/ui/Table";
 import Loading from "../../../components/ui/Loading";
 // importación de custom hooks
 import { useFetchEmpleados } from "../hooks/useFetchEmpleados";
+import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 
 interface PropTableEmpleados {
   setShowDetallesEmpleado: (p: boolean) => void;
@@ -19,6 +20,8 @@ export default function TableEmpleados({
     isLoading,
     isError,
     fetchData: recargarEmpleados,
+    setPagina,
+    infoPaginacion,
   } = useFetchEmpleados();
 
   const tableHeader: string[] = [
@@ -61,11 +64,19 @@ export default function TableEmpleados({
       <div className="p-4 flex justify-end">
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => recargarEmpleados(1)}
+          onClick={() => recargarEmpleados(infoPaginacion.pagina_actual)}
         >
           Recargar
         </button>
       </div>
+
+      <ButtonsPagination 
+        total_paginas={infoPaginacion.total_paginas} 
+        pivote={infoPaginacion.pagina_actual} 
+        fetchData={setPagina} 
+        datos_por_pagina={infoPaginacion.datos_por_pagina} 
+        total_data={infoPaginacion.total_data} 
+      />
 
       <Table tableHeader={tableHeader}>
         {empleados?.map((empleado, index) => (
