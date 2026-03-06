@@ -50,9 +50,8 @@ export default function ListaGre() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} setShowFormCreateGre={setShowFormCreateGre} />
-      </div>
+      <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} setShowFormCreateGre={setShowFormCreateGre} />
+      
       { showDetallesGre && 
         <div className="absolute inset-0 z-50 bg-gray-950">
           <DetallesGre showDetallesGre={setShowDetallesGre} selectedGreId={selectGreId} />

@@ -1,4 +1,4 @@
-import type { BodyResponse } from '../types/bodyResponse.type';
+import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
 import BaseRequestApi from './BaseRequest.api';
 import { url_base } from '../config/url_base';
 import dataEstablecimientos from '../json/establecimientos/get-ok-listarEstablecimientos.json';
@@ -8,12 +8,12 @@ import dataEstablecimientos from '../json/establecimientos/get-ok-listarEstablec
 export class EstablecimientoApi extends BaseRequestApi {
   private base_url = `${url_base}/establecimientos`;
   
-  public async get<T>(): Promise<BodyResponse<T>> {
+  public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
 
     if (this.OFFLINE_MODE) {
-      return dataEstablecimientos as unknown as BodyResponse<T>;
+      return dataEstablecimientos as unknown as BodyResponseWithPagination<T>;
     } else {
-      return this.request<T>(`${this.base_url}`, {
+      return this.request<BodyResponseWithPagination<T>>(`${this.base_url}?pagina=${pagina}`, {
         method: 'GET',
         headers: {
           'x-mock-response-name': 'ok - listar establecimientos'

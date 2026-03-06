@@ -4,7 +4,7 @@ import { EstablecimientoApi } from "../../../api/establecimientos.api.ts";
 const establecimientoApi = new EstablecimientoApi();
 
 export default class EstablecimientoService  {
-  public async getEstablecimientos() {
-    return establecimientoApi.get<Establecimiento[]>();
+  public async getEstablecimientos(pagina: number) {
+    return establecimientoApi.get<Establecimiento[]>(pagina);
   }
 }

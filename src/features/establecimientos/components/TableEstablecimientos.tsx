@@ -2,9 +2,9 @@ import { Edit } from "lucide-react";
 
 import { useFetchEstablecimientos } from "../hooks/useFetchEstablecimientos";
 // importación de tipos
-import type { Establecimiento } from "../types/establecimiento.type";
 import Loading from "../../../components/ui/Loading";
 import Table from "../../../components/ui/Table";
+import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 
 interface PropTableEstablecimientos {
   setSelectEstablecimientoId: (p: number | null) => void;
@@ -28,6 +28,8 @@ export default function TableEstablecimientos({
     isLoading,
     isError,
     fetchData: recargarEstablecimientos,
+    setPagina,
+    infoPaginacion
   } = useFetchEstablecimientos();
 
   if (isLoading) {
@@ -45,7 +47,7 @@ export default function TableEstablecimientos({
         {/* agrega un botón para reintentar la carga */}
         <button
           className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
-          onClick={recargarEstablecimientos}
+          onClick={() => recargarEstablecimientos(1)}
         >
           Reintentar
         </button>
@@ -58,82 +60,67 @@ export default function TableEstablecimientos({
   }
 
   return (
-    <>
+    <div className="flex-1 overflow-auto px-8 py-6">
       <div className="p-4 flex justify-end">
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={recargarEstablecimientos}
+          onClick={() => recargarEstablecimientos(infoPaginacion.pagina_actual)}
         >
           Recargar
         </button>
       </div>
+
+      <ButtonsPagination 
+        total_paginas={infoPaginacion.total_paginas} 
+        pivote={infoPaginacion.pagina_actual} 
+        fetchData={setPagina} 
+        datos_por_pagina={infoPaginacion.datos_por_pagina} 
+        total_data={infoPaginacion.total_data} 
+      />
+
       <Table tableHeader={tableHeader}>
         {establecimientos?.map((establecimiento, index) => (
-          <RowTable
-            key={index}
-            establecimiento={establecimiento}
-            index={index}
-            setSelectEstablecimientoId={setSelectEstablecimientoId}
-            showFormEdit={showFormEdit}
-          />
+          <tr key={index} className="hover:bg-gray-800/50 transition-colors">
+            <td className="px-6 py-4">
+              <span className="text-blue-400">
+                {establecimiento.nombreEst}
+              </span>
+            </td>
+            <td className="px-6 py-4">
+              <span className="text-white font-medium">
+                {establecimiento.direccion}
+              </span>
+            </td>
+            <td className="px-6 py-4">
+              <span className="text-white">
+                {establecimiento.departamento}
+              </span>
+            </td>
+            <td className="px-6 py-4">
+              <span className="text-white">
+                {establecimiento.provincia}
+              </span>
+            </td>
+            <td className="px-6 py-4">
+              <span className="text-white">
+                {establecimiento.distrito}
+              </span>
+            </td>
+            <td className="px-6 py-4">
+              <button
+                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                title="Editar"
+                onClick={() => {
+                  setSelectEstablecimientoId(establecimiento.idEst);
+                  showFormEdit(true);
+                }}
+              >
+                <Edit className="w-4 h-4 text-gray-400" />
+              </button>
+            </td>
+          </tr>
         ))}
       </Table>
-    </>
-  );
-}
-
-function RowTable({
-  establecimiento,
-  index,
-  setSelectEstablecimientoId,
-  showFormEdit,
-}: {
-  establecimiento: Establecimiento;
-  index: number;
-  setSelectEstablecimientoId: (p: number | null) => void;
-  showFormEdit: (p: boolean) => void;
-}) {
-  return (
-    <tr key={index} className="hover:bg-gray-800/50 transition-colors">
-      <td className="px-6 py-4">
-        <span className="text-blue-400 font-medium">
-          {establecimiento.nombreEst}
-        </span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white font-medium">
-          {establecimiento.direccion}
-        </span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white font-medium">
-          {establecimiento.departamento}
-        </span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white font-medium">
-          {establecimiento.provincia}
-        </span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white font-medium">
-          {establecimiento.distrito}
-        </span>
-      </td>
-      <td className="px-6 py-4">
-        <div className="flex items-center gap-2">
-          <button
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            title="Editar"
-            onClick={() => {
-              setSelectEstablecimientoId(establecimiento.idEst);
-              showFormEdit(true);
-            }}
-          >
-            <Edit className="w-4 h-4 text-gray-400" />
-          </button>
-        </div>
-      </td>
-    </tr>
+    </div>
   );
 }
