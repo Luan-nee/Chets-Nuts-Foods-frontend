@@ -5,7 +5,7 @@ import type { empleado } from '../types/empleado.type';
 
 const empleadoApi = new EmpleadoApi();
 export default class EmpleadoService {
-  public async getEmpleados() {
-    return empleadoApi.get<empleado[]>();
+  public async getEmpleados(pagina: number) {
+    return empleadoApi.get<empleado[]>(pagina);
   }
 }

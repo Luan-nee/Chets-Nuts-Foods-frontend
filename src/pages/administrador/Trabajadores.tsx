@@ -53,33 +53,7 @@ export default function Trabajadores () {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <div className="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden">
-          {/* <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} /> */}
-          <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setSelectEmpleadoId={setSelectEmpleadoId} />
-        </div>
-
-        {/* Pagination : DESACTIVADO */}
-        <div className="flex items-center justify-between mt-6">
-          <p className="text-sm text-gray-400">
-            Mostrando <span className="font-medium text-gray-300">1</span> a <span className="font-medium text-gray-300">10</span> de <span className="font-medium text-gray-300">128</span> resultados
-          </p>
-          <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-              <ChevronLeft className="w-5 h-5 text-gray-400" />
-            </button>
-            <button className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium">1</button>
-            <button className="px-3 py-1.5 hover:bg-gray-800 text-gray-400 rounded-lg text-sm font-medium transition-colors">2</button>
-            <button className="px-3 py-1.5 hover:bg-gray-800 text-gray-400 rounded-lg text-sm font-medium transition-colors">3</button>
-            <span className="px-2 text-gray-500">...</span>
-            <button className="px-3 py-1.5 hover:bg-gray-800 text-gray-400 rounded-lg text-sm font-medium transition-colors">13</button>
-            <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors">
-              <ChevronRight className="w-5 h-5 text-gray-400" />
-            </button>
-          </div>
-        </div> 
-      </div>
-
+      <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setSelectEmpleadoId={setSelectEmpleadoId} />
     </div>
   );
 }
