@@ -4,6 +4,8 @@ import TableResponsable from './TableResponsable';
 import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
 import { useFetchTipoEstablecimiento } from '../hooks/useFetchTipoEstablecimiento';
+import Switch from '../../../components/ui/Switch';
+import Loading from '../../../components/ui/Loading';
 
 interface FormCreateEstProps {
   showFormCreateEst: (p: boolean) => void;
@@ -21,7 +23,7 @@ export default function FormCreateEst({ showFormCreateEst }: FormCreateEstProps)
     provincia: '',
     distrito: '',
     tipoEst: 'fiscal',
-    activo: true,
+    activo: false,
   });
 
   const { data: tipoEstablecimiento, isLoading, isError, fetchData } = useFetchTipoEstablecimiento();
@@ -75,12 +77,41 @@ export default function FormCreateEst({ showFormCreateEst }: FormCreateEstProps)
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Tipo de Establecimiento
                 </label>
-                <InputSelect
-                  inputName="tipoEst"
-                  placeholder="Seleccione el tipo de establecimiento"
-                  options={tipoEstablecimiento ? tipoEstablecimiento.map(te => ({ label: te.tipo, value: te.id })) : []}
-                  handleInputChange={handleInputChange}
-                />
+                {
+                  isLoading ? (
+                    <div className="flex justify-center items-center py-2">
+                      <Loading w={6} h={6} color="blue" />
+                    </div>
+                  ) : isError ? (
+                    <div className="flex justify-center items-center py-2">
+                      <p className="text-red-500">Error al cargar tipos de establecimiento.</p>
+                      {/* agrega un botón para reintentar la carga */}
+                      <button
+                        className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
+                        onClick={fetchData}
+                      >
+                        Reintentar
+                      </button>
+                    </div>
+                  ) : tipoEstablecimiento === null || tipoEstablecimiento.length === 0 ? (
+                    <div>No hay tipos de establecimiento registrados en el sistema.</div>
+                  ) : (
+                    <div className="flex flex-row gap-2">
+                      <button
+                        className="px-4 py-2 bg-blue-600 text-white rounded"
+                        onClick={fetchData}
+                      >
+                        Recargar
+                      </button>
+                      <InputSelect
+                        inputName="tipoEst"
+                        placeholder="Seleccione el tipo de establecimiento"
+                        options={tipoEstablecimiento ? tipoEstablecimiento.map(te => ({ label: te.tipo, value: te.id })) : []}
+                        handleInputChange={handleInputChange}
+                      />
+                    </div>
+                  )
+                }
               </div>
 
             </div>
@@ -115,19 +146,11 @@ export default function FormCreateEst({ showFormCreateEst }: FormCreateEstProps)
                 </label>
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-gray-400">Inactivo</span>
-                  <button
-                    type="button"
-                    onClick={() => handleInputChange('activo', !formData.activo)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      formData.activo ? 'bg-[#1f6feb]' : 'bg-[#30363d]'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        formData.activo ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
+                  <Switch
+                    inputName="activo"
+                    activo={formData.activo}
+                    handleInputChange={handleInputChange}
+                  />
                   <span className="text-sm text-[#1f6feb] font-medium">Activo</span>
                 </div>
               </div>
