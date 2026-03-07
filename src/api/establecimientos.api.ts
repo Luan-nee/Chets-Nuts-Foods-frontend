@@ -9,7 +9,6 @@ export class EstablecimientoApi extends BaseRequestApi {
   private base_url = `${url_base}/establecimientos`;
   
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
-
     if (this.OFFLINE_MODE) {
       return dataEstablecimientos as unknown as BodyResponseWithPagination<T>;
     } else {
@@ -17,6 +16,32 @@ export class EstablecimientoApi extends BaseRequestApi {
         method: 'GET',
         headers: {
           'x-mock-response-name': 'ok - listar establecimientos'
+        }
+      });
+    }
+  }
+  
+  public async getSinPaginacion<T>(): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataEstablecimientos as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/tipos`, {
+        method: 'GET',
+        headers: {
+          'x-mock-response-name': 'ok - listar tipos de establecimientos'
+        }
+      });
+    }
+  }
+
+  public async getResponsablesEstablecimiento<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataEstablecimientos as unknown as BodyResponseWithPagination<T>;
+    } else {
+      return this.request<BodyResponseWithPagination<T>>(`${this.base_url}/responsables?pagina=${pagina}`, {
+        method: 'GET',
+        headers: {
+          'x-mock-response-name': 'ok - listar responsables'
         }
       });
     }

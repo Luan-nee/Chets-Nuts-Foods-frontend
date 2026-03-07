@@ -33,7 +33,7 @@ const tipoEstablecimiento: { label: string; value: tipoEst }[] = [
 ]
 
 function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
-  const { data: empleados, isLoading, isError, fetchData: recargarEmpleados } = useFetchEmpleados();
+  const { data: empleados, isLoading, isError, fetchData: recargarEmpleados, infoPaginacion } = useFetchEmpleados();
 
   const [formData, setFormData] = useState<EstablecimientoUpdate>({
     idResponsable: 0,
@@ -94,12 +94,17 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
                 />
               </div>
 
-              <InputSelect
-                name="Tipo Establecimiento"
-                placeholder="Seleccione una opcion"
-                options={tipoEstablecimiento}
-                handleInputChange={handleInputChange}
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Tipo de Establecimiento
+                </label>
+                <InputSelect
+                  inputName="tipoEst"
+                  placeholder="Seleccione una opcion"
+                  options={tipoEstablecimiento}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
             </div>
 
             {/* Row 2: Responsable de administrar el establecimiento */}
@@ -117,7 +122,7 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
                   <>
                     <div className="col-span-2 flex flex-row gap-2 text-red-500">
                       <InputSelect
-                        name="idResponsable"
+                        inputName="idResponsable"
                         placeholder="Selecciona un empleado"
                         options={empleados ? empleados.map(emp => ({ value: emp.id.toString(), label: `${emp.nombres} ${emp.apellidos} - ${emp.rol}` })) : []}
                         handleInputChange={handleInputChange}
@@ -126,7 +131,7 @@ function EstablishmentForm({ showFormEdit }: EstablishmentFormProps) {
                         <label className="block text-sm font-medium text-gray-300 mb-2 invisible">
                           Acciones
                         </label>
-                        <button onClick={recargarEmpleados} className="bg-blue-700 hover:bg-blue-500 text-white font-medium p-2 rounded-lg transition-colors">
+                        <button onClick={ () => recargarEmpleados(infoPaginacion.pagina_actual)} className="bg-blue-700 hover:bg-blue-500 text-white font-medium p-2 rounded-lg transition-colors">
                           Recargar Empleados
                         </button>
                       </div>

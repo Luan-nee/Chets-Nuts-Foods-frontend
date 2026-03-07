@@ -1,37 +1,15 @@
 import { useState } from 'react';
-import type { EstablecimientoUpdate, tipoEst } from '../types/establecimiento.type';
+import type { EstablecimientoUpdate } from '../types/establecimiento.type';
+import TableResponsable from './TableResponsable';
 import { ArrowLeft, MapPin, Info } from 'lucide-react';
 import InputSelect from '../../../components/ui/InputSelect';
+import { useFetchTipoEstablecimiento } from '../hooks/useFetchTipoEstablecimiento';
 
 interface FormCreateEstProps {
   showFormCreateEst: (p: boolean) => void;
 }
 
-
-const tipoEstablecimiento: { label: string; value: tipoEst }[] = [
-  {
-    label: 'Almacén',
-    value: 'fiscal',
-  },
-  {
-    label: 'Tienda',
-    value: 'anexo',
-  },
-  {
-    label: 'Oficina',
-    value: 'oficina',
-  },
-  {
-    label: 'Fábrica',
-    value: 'almacen',
-  },
-  {
-    label: 'No Registrado',
-    value: 'no_registrado',
-  }
-]
-
-function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
+export default function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
   const [formData, setFormData] = useState<EstablecimientoUpdate>({
     idResponsable: 0,
     nombreEst: '',
@@ -46,11 +24,11 @@ function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
     activo: true,
   });
 
-  const handleInputChange = (field: string, value: string | boolean) => {
+  const { data: tipoEstablecimiento, isLoading, isError, fetchData } = useFetchTipoEstablecimiento();
+
+  const handleInputChange = (field: string, value: string | boolean | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
-
-  // <div className="relative flex-1 flex flex-col">
 
   return (
     <main className="flex-1 p-8 bg-gray-950 overflow-auto">
@@ -93,29 +71,25 @@ function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
                 />
               </div>
 
-              <InputSelect
-                name="Tipo Establecimiento"
-                placeholder="Seleccione una opcion"
-                options={tipoEstablecimiento}
-                handleInputChange={handleInputChange}
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Tipo de Establecimiento
+                </label>
+                <InputSelect
+                  inputName="tipoEst"
+                  placeholder="Seleccione el tipo de establecimiento"
+                  options={tipoEstablecimiento ? tipoEstablecimiento.map(te => ({ label: te.tipo, value: te.id })) : []}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+
             </div>
 
             {/* Row 2: Responsable de administrar el establecimiento */}
-            <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  ID del Responsable
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ej. 74828302"
-                  value={formData.idResponsable}
-                  onChange={(e) => handleInputChange('idResponsable', e.target.value)}
-                  className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
-            </div>
+            <TableResponsable 
+              setIdResponsable={(id) => handleInputChange('idResponsable', id)}
+              selectedId={formData.idResponsable}
+            />
 
             {/* Row 3: Dirección y estado del establecimiento */}
             <div className="grid grid-cols-2 gap-4">
@@ -279,5 +253,3 @@ function FormCreateEst({ showFormCreateEst }: FormCreateEstProps) {
     </main>
   );
 }
-
-export default FormCreateEst;

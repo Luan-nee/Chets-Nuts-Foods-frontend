@@ -36,3 +36,16 @@ export type EstablecimientoUpdate = {
   tipoEst: tipoEst;
   activo: boolean;
 }
+
+export type tipoEstablecimiento = {
+  id: number;
+  tipo: tipoEst;
+}
+
+export type responsableEstablecimiento = {
+  id: number,
+  nombres: string,
+  apellidoPaterno: string,
+  apellidoMaterno: string,
+  dni: string,
+}
