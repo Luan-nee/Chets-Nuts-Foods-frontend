@@ -22,7 +22,7 @@ export default function FormCreateEst({ showFormCreateEst }: FormCreateEstProps)
     departamento: '',
     provincia: '',
     distrito: '',
-    tipoEst: 'fiscal',
+    tipoEst: 0,
     activo: false,
   });
 

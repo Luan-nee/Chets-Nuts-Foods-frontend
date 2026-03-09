@@ -46,4 +46,17 @@ export class EstablecimientoApi extends BaseRequestApi {
       });
     }
   }
+
+  public async getEstablecimientoById<T>(id: number): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataEstablecimientos as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${id}`, {
+        method: 'GET',
+        headers: {
+          'x-mock-response-name': 'ok - obtener información de un establecimiento'
+        }
+      });
+    }
+  }
 }

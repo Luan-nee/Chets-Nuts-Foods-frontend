@@ -19,7 +19,7 @@ export type EstablecimientoCreate = {
   distrito: string;
   provincia: string;
   departamento: string;
-  tipoEst: tipoEst;
+  tipoEst: number;
   activo: boolean;
 }
 
@@ -33,7 +33,7 @@ export type EstablecimientoUpdate = {
   distrito: string;
   provincia: string;
   departamento: string;
-  tipoEst: tipoEst;
+  tipoEst: number;
   activo: boolean;
 }
 

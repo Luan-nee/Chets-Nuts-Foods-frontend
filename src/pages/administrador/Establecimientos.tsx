@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, ChevronLeft, ChevronRight, Filter, Plus } from "lucide-react";
+import { Search, Filter, Plus } from "lucide-react";
 import TableEstablecimientos from "../../features/establecimientos/components/TableEstablecimientos";
 import FormUpdateEst from "../../features/establecimientos/components/FormUpdateEst";
 import FormCreateEst from "../../features/establecimientos/components/FormCreateEst";
@@ -61,7 +61,7 @@ export default function Establecimientos() {
 
       { showFormEditEst && 
         <div className="absolute inset-0 z-50 bg-gray-950">
-          <FormUpdateEst showFormEdit={setShowFormEditEst} />
+          <FormUpdateEst showFormEdit={setShowFormEditEst} idEstablecimiento={selectEstablecimientoId? selectEstablecimientoId : 0} />
         </div>
       }
 
