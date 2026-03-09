@@ -20,4 +20,17 @@ export default class EmpleadoApi extends BaseRequestApi {
       });
     }
   }
+
+  public async getEmpleadoById<T>(idEmpleado: number): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataEmpleados as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
+        method: 'GET',
+        headers: {
+          'x-mock-response-name': 'ok - detalles de un empleado'
+        }
+      });
+    }
+  }
 }

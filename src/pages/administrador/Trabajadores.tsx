@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Filter, Plus, Search } from "lucide-react";
+import { Filter, Plus, Search } from "lucide-react";
+import DetallesEmpleado from "../../features/empleados/components/DetallesEmpleado";
 
 import TableEmpleados from "../../features/empleados/components/TableEmpleados";
 
 export default function Trabajadores () {
-  const [showDetallesEmpleado, setShowDetallesEmpleado] = useState(false);  
+  const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);  
   const [selectEmpleadoId, setSelectEmpleadoId] = useState<number | null>(null);
 
   return (
-    <div className="relative flex-1 flex flex-col overflow-hidden">
+    <div className="relative flex-1 flex flex-col">
       {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
         <div className="flex items-center justify-between">
@@ -54,6 +55,15 @@ export default function Trabajadores () {
 
       {/* Table */}
       <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setSelectEmpleadoId={setSelectEmpleadoId} />
+
+      { showDetallesEmpleado && 
+        <div className="absolute inset-0 z-50 bg-gray-950">
+          <DetallesEmpleado 
+            showDetallesEmpleado={setShowDetallesEmpleado} 
+            idEmpleado={selectEmpleadoId!} 
+          />
+        </div>
+      }
     </div>
   );
 }
