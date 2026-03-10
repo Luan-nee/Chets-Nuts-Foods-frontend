@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Filter, Plus, Search } from "lucide-react";
 import DetallesEmpleado from "../../features/empleados/components/DetallesEmpleado";
+import FormUpdateEmpleado from "../../features/empleados/components/FormUpdateEmpleado";
 
 import TableEmpleados from "../../features/empleados/components/TableEmpleados";
 
 export default function Trabajadores () {
-  const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);  
+  const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);
+  const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
   const [selectEmpleadoId, setSelectEmpleadoId] = useState<number | null>(null);
 
   return (
@@ -54,12 +56,20 @@ export default function Trabajadores () {
       </div>
 
       {/* Table */}
-      <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setSelectEmpleadoId={setSelectEmpleadoId} />
+      <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setShowFormUpdate={setShowFormUpdate} setSelectEmpleadoId={setSelectEmpleadoId} />
 
       { showDetallesEmpleado && 
         <div className="absolute inset-0 z-50 bg-gray-950">
           <DetallesEmpleado 
             showDetallesEmpleado={setShowDetallesEmpleado} 
+            idEmpleado={selectEmpleadoId!} 
+          />
+        </div>
+      }
+      { showFormUpdate && 
+        <div className="absolute inset-0 z-50 bg-gray-950">
+          <FormUpdateEmpleado 
+            setShowFormUpdateEmpleado={setShowFormUpdate} 
             idEmpleado={selectEmpleadoId!} 
           />
         </div>

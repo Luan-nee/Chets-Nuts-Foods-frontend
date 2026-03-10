@@ -25,3 +25,13 @@ export type DetallesEmpleado = {
   hora_actualizacion: string;
 };
 
+export type UpdateEmpleadoData = {
+  nombres: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  correo: string;
+  dni: string;
+  rol: number;
+  restablecerContrasenia: boolean;
+}
+

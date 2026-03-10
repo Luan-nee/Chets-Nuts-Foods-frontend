@@ -3,6 +3,7 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
+import type { UpdateEmpleadoData } from '../features/empleados/types/empleado.type';
 import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
 
 export default class EmpleadoApi extends BaseRequestApi {
@@ -30,6 +31,20 @@ export default class EmpleadoApi extends BaseRequestApi {
         headers: {
           'x-mock-response-name': 'ok - detalles de un empleado'
         }
+      });
+    }
+  }
+
+  public async UpdateEmpleadoById<T>(idEmpleado: number, body: UpdateEmpleadoData): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataEmpleados as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
+        method: 'PATCH',
+        headers: {
+          'x-mock-response-name': 'ok - detalles de un empleado'
+        },
+        body: JSON.stringify(body)
       });
     }
   }

@@ -9,11 +9,13 @@ import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 interface PropTableEmpleados {
   setShowDetallesEmpleado: (p: boolean) => void;
   setSelectEmpleadoId: (p: number | null) => void;
+  setShowFormUpdate: (p: boolean) => void;
 }
 
 export default function TableEmpleados({
   setShowDetallesEmpleado,
   setSelectEmpleadoId,
+  setShowFormUpdate
 }: PropTableEmpleados) {
   const {
     data: empleados,
@@ -117,6 +119,7 @@ export default function TableEmpleados({
                 <button
                   onClick={() => {
                     setSelectEmpleadoId(empleado.id);
+                    setShowFormUpdate(true);
                   }}
                   className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
                   aria-label="Editar empleado"
