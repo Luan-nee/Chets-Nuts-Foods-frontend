@@ -35,3 +35,12 @@ export type UpdateEmpleadoData = {
   restablecerContrasenia: boolean;
 }
 
+export type CreateEmpleadoData = {
+  nombres: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  correo: string;
+  dni: string;
+  rol: number;
+  contrasenia_temporal: string;
+}

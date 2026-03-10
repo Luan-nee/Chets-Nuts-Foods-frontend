@@ -16,3 +16,8 @@ export type User = {
   nombreUser: string;
   rol: UserRole;
 }
+
+export type roles = {
+  id: number;
+  rol: string;
+}
