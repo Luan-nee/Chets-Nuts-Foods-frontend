@@ -3025,7 +3025,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dniuser\": \"12345678\",\r\n    \"contra\": \"nuevaContrasenia\"\r\n}",
+									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dni\": \"12345678\",\r\n    \"contrasenia\": \"nuevaContrasenia\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
