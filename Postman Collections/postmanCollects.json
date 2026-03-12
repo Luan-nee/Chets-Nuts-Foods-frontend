@@ -2027,17 +2027,17 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No existe empleado con el ID asignado\",\r\n    \"data\": null\r\n}\r\n"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El Identificar del empleado no existe en el sistema\",\r\n    \"data\": null\r\n}\r\n"
 								},
 								{
-									"id": "d388bfb5-3d13-4b44-b06a-2742ab5f8dbe",
+									"id": "854b8701-dc19-41f1-8d11-fdd5f1a2aa37",
 									"name": "bad request - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "exito",
+												"value": "ok - detalles de un empleado",
 												"type": "text"
 											}
 										],
@@ -2067,20 +2067,11 @@
 											]
 										}
 									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
+									"_postman_previewlanguage": null,
+									"header": null,
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\n    \"status\": \"warning\",\n    \"message\": \"El ID del empleado debe ser un numero\",\n    \"data\": null\n}"
+									"body": null
 								}
 							]
 						},
