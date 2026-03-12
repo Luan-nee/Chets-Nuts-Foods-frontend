@@ -2193,7 +2193,22 @@
 												}
 											}
 										},
-										"url": "{{url}}/empleados"
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2267,7 +2282,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El boby es incorrecto\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El boby es incorrecto o el identificador del empleado es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "23ffc091-425a-4f86-bf78-2561e70c590d",
@@ -2320,7 +2335,58 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El empleado con el ID consultado no existe\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El empleado con el ID consultado no existe\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "64ea7556-6346-41fd-a0cb-2f52b6ba6d49",
+									"name": "internal server error - deshabilitar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - deshabilitar empleado",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"motivo\": \"Está de vacaciones\" \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
