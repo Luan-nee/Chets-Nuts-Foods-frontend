@@ -2375,6 +2375,8 @@
 											]
 										}
 									},
+									"status": "Internal Server Error",
+									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -2453,7 +2455,22 @@
 												}
 											}
 										},
-										"url": "{{url}}/empleados"
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -2469,6 +2486,52 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del empleado fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "26fefc0d-e472-4216-bcb0-4deaca779d53",
+									"name": "bad request - editar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidoPaterno\": \"actualizar 1\",\r\n    \"apellidoMaterno\": \"actualizar 2\",\r\n    \"correo\": \"nuevoCorreo@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1,\r\n    \"restablecerContrasenia\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						},
