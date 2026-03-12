@@ -2943,11 +2943,62 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Código se seguimiento no existe o es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "effc53bb-2816-483b-9b98-383edc4b611a",
+									"name": "internal server error - realizar seguimiento",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "200 - realizar seguimiento",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seguimiento",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "GR-2023-0045"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
