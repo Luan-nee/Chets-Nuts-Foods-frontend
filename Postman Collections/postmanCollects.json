@@ -3493,11 +3493,54 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El usuario fue eliminado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "1740b113-c879-49ba-a04c-16deeaf7a16e",
+									"name": "internal server error - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"cuentaUsuario",
+												":id_usuario"
+											],
+											"variable": [
+												{
+													"key": "id_usuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
