@@ -3206,7 +3206,7 @@
 							]
 						},
 						{
-							"name": "Iniciar sesion",
+							"name": "iniciar sesion",
 							"id": "f052ec6e-9791-4598-9eb7-ab90313b8080",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -3298,7 +3298,7 @@
 								},
 								{
 									"id": "ffc926d2-fd43-4a3f-a759-635c2d3fcf1f",
-									"name": "internal server error - Iniciar sesion",
+									"name": "internal server error - iniciar sesion",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
@@ -3319,16 +3319,23 @@
 										},
 										"url": "{{url}}/sesion"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
 						{
-							"name": "Cerra sesion",
+							"name": "cerrar sesion",
 							"id": "2b8174de-75bc-48e7-8954-7d581c9bb895",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -3356,7 +3363,7 @@
 							"response": [
 								{
 									"id": "1d9298ed-83d2-446b-813a-8ac77df249e7",
-									"name": "ok - Cerra sesion",
+									"name": "ok - cerrar sesion",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
@@ -3396,7 +3403,43 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 200,\r\n    \"message\": \"sesion cerrada\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"sesion cerrada\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "31ec4226-29de-4c8b-83df-ad4a76efcf05",
+									"name": "internal server error - cerrar sesion",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - Cerra sesion",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/cerrarSesion"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
