@@ -1174,6 +1174,52 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al procesar la consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "613f3775-8f33-43bb-899b-63b8fb694ae4",
+									"name": "not found - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Identificador únido de la guia de remisión no existe o es incorrecto\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -1360,7 +1406,7 @@
 								},
 								{
 									"id": "556f75a5-479c-4f0d-b1c9-e25ec4a9c670",
-									"name": "x - modificar guia de remision",
+									"name": "forbidden - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
 										"header": [],
@@ -1391,8 +1437,8 @@
 											]
 										}
 									},
-									"status": "Not Acceptable",
-									"code": 406,
+									"status": "Forbidden",
+									"code": 403,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -1405,6 +1451,52 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia no puede ser modificado\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "9cb3ff9f-65f7-45f8-bb8d-1fdd9338d73e",
+									"name": "not found - modificar guia de remision",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Identificador únido de la guia de remisión no existe o es incorrecto\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
