@@ -3294,7 +3294,36 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"las credenciales son incorrectas\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Las credenciales son incorrectas\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "ffc926d2-fd43-4a3f-a759-635c2d3fcf1f",
+									"name": "internal server error - Iniciar sesion",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - iniciar sesion",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/sesion"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						},
