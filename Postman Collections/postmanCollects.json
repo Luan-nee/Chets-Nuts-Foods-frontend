@@ -1702,52 +1702,6 @@
 					"name": "Empleados",
 					"item": [
 						{
-							"name": "transportista",
-							"item": [
-								{
-									"name": "listar transportistas",
-									"id": "3e202122-972e-46bf-83fb-d06d33fe7c3b",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/transportistas"
-									},
-									"response": [
-										{
-											"id": "309a8160-72d2-449a-a470-d0aa206187f2",
-											"name": "listar transportistas",
-											"originalRequest": {
-												"method": "GET",
-												"header": []
-											},
-											"_postman_previewlanguage": "json",
-											"header": [
-												{
-													"key": "Content-Type",
-													"value": "application/json",
-													"description": "",
-													"type": "text"
-												}
-											],
-											"cookie": [
-												{
-													"expires": "Invalid Date",
-													"domain": "",
-													"path": ""
-												}
-											],
-											"responseTime": null,
-											"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"lista de transportistas obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidos\": \"García Mendoza\",\r\n            \"dni\": \"45678912\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"María Fernanda\",\r\n            \"apellidos\": \"Rodríguez Silva\",\r\n            \"dni\": \"72345678\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Juan Pablo\",\r\n            \"apellidos\": \"Villalobos Soto\",\r\n            \"dni\": \"10987654\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidos\": \"Palacios Quispe\",\r\n            \"dni\": \"44556677\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Diego Armando\",\r\n            \"apellidos\": \"Torres Rojas\",\r\n            \"dni\": \"33221100\"\r\n        }\r\n    ]\r\n}"
-										}
-									]
-								}
-							],
-							"id": "56f950dd-9f2d-44e3-a1e3-6d7a0626955f"
-						},
-						{
 							"name": "listar empleados",
 							"id": "d91f39e8-8149-4dc1-b2ac-42479d661955",
 							"protocolProfileBehavior": {
@@ -2933,6 +2887,46 @@
 									],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "listar transportistas",
+							"id": "3e202122-972e-46bf-83fb-d06d33fe7c3b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/transportistas"
+							},
+							"response": [
+								{
+									"id": "309a8160-72d2-449a-a470-d0aa206187f2",
+									"name": "listar transportistas",
+									"originalRequest": {
+										"method": "GET",
+										"header": []
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"lista de transportistas obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidos\": \"García Mendoza\",\r\n            \"dni\": \"45678912\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"María Fernanda\",\r\n            \"apellidos\": \"Rodríguez Silva\",\r\n            \"dni\": \"72345678\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Juan Pablo\",\r\n            \"apellidos\": \"Villalobos Soto\",\r\n            \"dni\": \"10987654\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidos\": \"Palacios Quispe\",\r\n            \"dni\": \"44556677\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Diego Armando\",\r\n            \"apellidos\": \"Torres Rojas\",\r\n            \"dni\": \"33221100\"\r\n        }\r\n    ]\r\n}"
 								}
 							]
 						}
