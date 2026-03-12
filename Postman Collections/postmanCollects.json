@@ -2961,11 +2961,18 @@
 										"header": [],
 										"url": "{{url}}/transportistas"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
