@@ -618,7 +618,52 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n  \"status\": \"warning\",\r\n  \"message\": \"No hay Guias de remisión\",\r\n  \"data\": null\r\n}"
+									"body": "{\r\n  \"status\": \"success\",\r\n  \"message\": \"No hay Guias de remisión\",\r\n  \"data\": null\r\n}"
+								},
+								{
+									"id": "2e5a58b4-aec2-4efd-9600-f30b4041e3fc",
+									"name": "internal server error - listar guias de remision",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - guias de remision",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Ocurrió un error en el servidor al momento de listar las guias de remisión\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
