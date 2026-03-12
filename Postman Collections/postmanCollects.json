@@ -2794,101 +2794,6 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Dni o el correo del empleado coincide con los datos de un empleado dentro del sistema y no pueden repetirse\",\r\n    \"data\": null\r\n}"
 								}
 							]
-						},
-						{
-							"name": "listar roles",
-							"id": "9e000ce5-ff24-448c-9377-5bed39204dac",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/empleados/roles"
-							},
-							"response": [
-								{
-									"id": "da8a79e3-c85b-4ba5-affa-18d09a1b25b9",
-									"name": "ok - listar roles",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Listando roles con exito\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"rol\": \"ADMIN\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"rol\": \"CHOFER\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"rol\": \"CLIENTE\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"rol\": \"COLABORADOR\"\r\n        }\r\n    ]\r\n}"
-								},
-								{
-									"id": "dd42815d-3593-4462-be24-9940848cb00b",
-									"name": "no content - listar roles",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay roles registrados en el sistema\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "160e682a-50bc-4b0d-9fb4-0dd17095a145",
-									"name": "internal server error - listar roles",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
-								}
-							]
 						}
 					],
 					"id": "6306b99e-d17e-4665-a82c-0842f4619ab8"
@@ -2963,7 +2868,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 200,\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"unidad_peso\": \"kilogramos\",\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
 								},
 								{
 									"id": "e0029ef0-143f-4d91-a808-4dd9ad94740c",
@@ -3007,7 +2912,42 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 404,\r\n    \"message\": \"el código de seguimiento no existe\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El codigo se seguimiento ingresado no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "1652debb-763a-442e-8c6c-dafbf8c3cf9f",
+									"name": "bad request - realizar seguimiento",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "200 - realizar seguimiento",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seguimiento",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "GR-2023-0045"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						}
@@ -4096,7 +4036,103 @@
 				},
 				{
 					"name": "Roles",
-					"item": [],
+					"item": [
+						{
+							"name": "listar roles",
+							"id": "9e000ce5-ff24-448c-9377-5bed39204dac",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/empleados/roles"
+							},
+							"response": [
+								{
+									"id": "da8a79e3-c85b-4ba5-affa-18d09a1b25b9",
+									"name": "ok - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/empleados/roles"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Listando roles con exito\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"rol\": \"ADMIN\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"rol\": \"CHOFER\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"rol\": \"CLIENTE\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"rol\": \"COLABORADOR\"\r\n        }\r\n    ]\r\n}"
+								},
+								{
+									"id": "dd42815d-3593-4462-be24-9940848cb00b",
+									"name": "no content - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/empleados/roles"
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay roles registrados en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "160e682a-50bc-4b0d-9fb4-0dd17095a145",
+									"name": "internal server error - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/empleados/roles"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
 					"id": "743cbb99-1a89-4934-9672-22908d90a4f1"
 				}
 			],
