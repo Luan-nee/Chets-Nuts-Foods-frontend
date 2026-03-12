@@ -1848,6 +1848,51 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\n    \"status\": \"success\",\n    \"message\": \"No hay empleados registrados\",\n    \"data\": null,\n    \"pagination\": {\n        \"total_data\": 0,\n        \"total_paginas\": 0,\n        \"pagina_actual\": 0,\n        \"datos_por_pagina\": 0\n    }\n}"
+								},
+								{
+									"id": "dea95677-14a3-4e62-bad9-ac250f1c3c9b",
+									"name": "internal server error - listar empleados",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - listar empleados",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/empleados?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n    \"status\": \"error\",\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\n    \"data\": null,\n    \"pagination\": {\n        \"total_data\": 0,\n        \"total_paginas\": 0,\n        \"pagina_actual\": 0,\n        \"datos_por_pagina\": 0\n    }\n}"
 								}
 							]
 						},
