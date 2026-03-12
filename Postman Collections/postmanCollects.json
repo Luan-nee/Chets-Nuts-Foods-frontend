@@ -802,7 +802,53 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El ID ingresado no es válido\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID ingresado no es válido, debe ser un numero entero positivo\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "b82cb9b4-9d9d-4db6-8948-f43fed940717",
+									"name": "internal server error - detalles de una guia de remision",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - detalles de una guia de remision",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/:id_guiaRemision",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												":id_guiaRemision"
+											],
+											"variable": [
+												{
+													"key": "id_guiaRemision",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al momento de obtener la información de un GRE\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
