@@ -2833,79 +2833,6 @@
 					"id": "16ca7b0a-b062-4732-8f94-171b84f670c5"
 				},
 				{
-					"name": "ubicacion",
-					"item": [
-						{
-							"name": "listar departamentos",
-							"id": "5051148b-53c1-4469-b149-a1a20a09be58",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/departamentos"
-							},
-							"response": [
-								{
-									"id": "48be1516-370c-403b-afff-1a3b0bb0d1c0",
-									"name": "listar departamentos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/departamentos"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos de los departamentos obtenidos exitosamente\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar provincias",
-							"id": "e686f3b5-f690-421e-aad4-799d02ed5dff",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/provincias"
-							},
-							"response": []
-						},
-						{
-							"name": "listar distritos",
-							"id": "acc479f8-728e-4e0e-a8e7-702105edc26c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/distritos"
-							},
-							"response": []
-						}
-					],
-					"id": "cf92390e-a480-4b9f-8f35-c529f9570d6d"
-				},
-				{
 					"name": "vehículos",
 					"item": [
 						{
@@ -2967,41 +2894,6 @@
 				}
 			],
 			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
-		},
-		{
-			"name": "USUARIOS",
-			"item": [
-				{
-					"name": "create",
-					"id": "c6625c43-f88f-4658-9033-cabddd7a15ee",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer {{tokenZ}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"DANIA LUZ\",\r\n    \"apellidopaterno\": \"MAMANI\",\r\n    \"apellidomaterno\": \"CONDORI\",\r\n    \"dni\": \"75959264\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{url}}/api/usuarios"
-					},
-					"response": []
-				}
-			],
-			"id": "854b2ad0-e2dd-473a-97c3-3de045a5dbb2",
-			"description": "consultas para los usuarios"
 		}
 	]
 }
