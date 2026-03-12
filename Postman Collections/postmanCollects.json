@@ -2818,11 +2818,26 @@
 										},
 										"url": "{{url}}/empleados"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
-									"cookie": [],
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Dni o el correo del empleado coincide con los datos de un empleado dentro del sistema y no pueden repetirse\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
