@@ -3148,7 +3148,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "41037893-34ed-4c0e-90f9-4e7804a86744",
