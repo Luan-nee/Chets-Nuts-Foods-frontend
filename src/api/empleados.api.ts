@@ -13,7 +13,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponseWithPagination<T>;
     } else {
-      return this.request<BodyResponseWithPagination<T>>(`${this.base_url}?pagina=${pagina}}`, {
+      return this.request<BodyResponseWithPagination<T>>(`${this.base_url}?pagina=${pagina}`, {
         method: 'GET',
         headers: {
           'x-mock-response-name': 'ok - listar empleados'
