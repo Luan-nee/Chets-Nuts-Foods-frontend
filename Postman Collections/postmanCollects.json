@@ -1635,11 +1635,63 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error mientras procesabamos su solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6b0ba66d-bb4e-4557-ad8b-13fa33e0cc33",
+									"name": "eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia de remison no puede ser eliminada en este momento\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
