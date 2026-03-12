@@ -3201,7 +3201,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"No existe empleado con el ID consultado\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id ingresado no existe o es inválido, Revise si la Id pertenece a un empleado que exista en el sistema\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -3440,6 +3440,64 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "eliminar usuario",
+							"id": "c36c7907-509f-48ee-bbc5-4681879c45b9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/cuentaUsuario/:id_usuario",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cuentaUsuario",
+										":id_usuario"
+									],
+									"variable": [
+										{
+											"key": "id_usuario",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "dcd58b23-040d-4719-b5c8-d44b1ca72d2e",
+									"name": "ok - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"cuentaUsuario",
+												":id_usuario"
+											],
+											"variable": [
+												{
+													"key": "id_usuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						}
