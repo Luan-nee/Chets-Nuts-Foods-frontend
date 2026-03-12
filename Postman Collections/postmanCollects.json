@@ -993,7 +993,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
+									"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1122,7 +1122,51 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"La consulta está mal hecha\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5f1212e4-6588-4fe4-8ff9-db4692ebbfba",
+									"name": "internal server error - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - actualizar estado de transporte",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000001"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						}
