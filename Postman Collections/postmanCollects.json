@@ -1529,7 +1529,91 @@
 							"response": [
 								{
 									"id": "a3c22268-aea0-4238-8257-800b0f3659c0",
-									"name": "New Request",
+									"name": "ok - eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"La guía de remisión fue eliminada exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "0c6bd4bb-fb49-4e0b-bd4d-c2164893fd44",
+									"name": "not found - eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El identificador único de la guia es incorrecto o no existe\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fe5a757a-8d16-46f0-aaf0-9c40f76a2255",
+									"name": "internal server error - eliminar guia de remision",
 									"originalRequest": {
 										"method": "DELETE",
 										"header": [],
