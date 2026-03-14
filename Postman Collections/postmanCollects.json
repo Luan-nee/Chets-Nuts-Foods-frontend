@@ -4750,7 +4750,68 @@
 								"header": [],
 								"url": "{{url}}/productos"
 							},
-							"response": []
+							"response": [
+								{
+									"id": "f9d48457-7770-4d81-afb2-ac7da9c95663",
+									"name": "bad request - registrar producto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "e7000c51-f6d2-4452-90df-215560c61b05",
+									"name": "ok - registrar producto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "7c6fc148-32f3-4b16-964d-cbc739c06e30",
+									"name": "registrar producto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
 						},
 						{
 							"name": "listar productos",
@@ -4856,7 +4917,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay productos registrados en el sistema\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay productos registrados en el sistema\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								},
 								{
 									"id": "833404f2-45b3-4f49-927b-303f99c11931",
@@ -4880,11 +4941,20 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								}
 							]
 						},
