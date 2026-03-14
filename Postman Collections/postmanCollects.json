@@ -5084,11 +5084,58 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "a9fbe4fb-77b7-4fa5-bebf-91ee999bca3f",
+									"name": "forbidden - inhabilitar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El producto no puede ser inhabilitado porque actualmente está siendo usado\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -5101,9 +5148,181 @@
 							"request": {
 								"method": "PATCH",
 								"header": [],
-								"url": "{{url}}/productos"
+								"url": {
+									"raw": "{{url}}/productos?idProducto=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"productos"
+									],
+									"query": [
+										{
+											"key": "idProducto",
+											"value": "1"
+										}
+									]
+								}
 							},
-							"response": []
+							"response": [
+								{
+									"id": "904312df-87ad-4b98-9ec4-85a5f4144b04",
+									"name": "ok - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5395f748-54b9-49eb-9e46-37395c624b78",
+									"name": "bad request - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "0fac6428-8f39-430d-976c-40ca97e18e2f",
+									"name": "no content - inhabilitar producto Copy",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6603a6ac-7d90-4936-a03a-dd3e94df0e1d",
+									"name": "forbidden - inhabilitar producto Copy",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El producto no puede ser inhabilitado porque actualmente está siendo usado\",\r\n    \"data\": null\r\n}"
+								}
+							]
 						}
 					],
 					"id": "d83dfe6e-f564-4402-ae58-3713ab591306"
