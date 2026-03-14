@@ -3891,16 +3891,50 @@
 							]
 						},
 						{
-							"name": "New Request",
+							"name": "registrar vehiculo",
 							"id": "a0861e9b-b493-4ae4-a62c-879162e0872f",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"placa\": \"ABC-123\",\r\n    \"marca\": \"Volvo\",\r\n    \"modelo\": \"FH\",\r\n    \"anio\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/vehiculos/registrar"
 							},
-							"response": []
+							"response": [
+								{
+									"id": "d495651d-1848-4e36-8d32-1b3ed068506d",
+									"name": "ok - registrar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"ABC-123\",\r\n    \"marca\": \"Volvo\",\r\n    \"modelo\": \"FH\",\r\n    \"anio\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/vehiculos/registrar"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
