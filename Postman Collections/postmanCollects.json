@@ -5149,12 +5149,13 @@
 								"method": "PATCH",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/productos?idProducto=1",
+									"raw": "{{url}}/productos/modificar?idProducto=1",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"productos"
+										"productos",
+										"modificar"
 									],
 									"query": [
 										{
@@ -5172,15 +5173,15 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/modificar?idProducto=1",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												":idProducto"
+												"modificar"
 											],
-											"variable": [
+											"query": [
 												{
 													"key": "idProducto",
 													"value": "1"
@@ -5207,7 +5208,7 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "5395f748-54b9-49eb-9e46-37395c624b78",
@@ -5216,15 +5217,15 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/modificar?idProducto=1",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												":idProducto"
+												"modificar"
 											],
-											"variable": [
+											"query": [
 												{
 													"key": "idProducto",
 													"value": "1"
@@ -5248,17 +5249,18 @@
 								},
 								{
 									"id": "0fac6428-8f39-430d-976c-40ca97e18e2f",
-									"name": "no content - inhabilitar producto Copy",
+									"name": "no content - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"modificar",
 												":idProducto"
 											],
 											"variable": [
@@ -5286,17 +5288,18 @@
 								},
 								{
 									"id": "6603a6ac-7d90-4936-a03a-dd3e94df0e1d",
-									"name": "forbidden - inhabilitar producto Copy",
+									"name": "forbidden - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"modificar",
 												":idProducto"
 											],
 											"variable": [
