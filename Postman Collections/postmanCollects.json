@@ -4766,17 +4766,32 @@
 							"response": [
 								{
 									"id": "ca55e55f-81c1-4a9d-acab-49715bba9187",
-									"name": "listar productos",
+									"name": "ok - listar productos",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
 										"url": "{{url}}/productos"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
-									"cookie": [],
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de productos obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Castaña entera con cáscara\",\r\n            \"peso\": 5,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\r\n            \"peso\": 500,\r\n            \"unidadPeso\": \"g\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"Harina de castaña\",\r\n            \"peso\": 1,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Aceite de castaña prensado en frío\",\r\n            \"peso\": 250,\r\n            \"unidadPeso\": \"ml\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombre\": \"Castañas tostadas y saladas\",\r\n            \"peso\": 200,\r\n            \"unidadPeso\": \"g\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"nombre\": \"Crema de castañas (marrón glacé)\",\r\n            \"peso\": 350,\r\n            \"unidadPeso\": \"g\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Castañas deshidratadas (pilongas)\",\r\n            \"peso\": 2,\r\n            \"unidadPeso\": \"kg\"\r\n        }\r\n    ]\r\n}"
 								}
 							]
 						},
