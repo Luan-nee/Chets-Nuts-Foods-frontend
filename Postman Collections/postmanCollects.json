@@ -3543,6 +3543,19 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
+						},
+						{
+							"name": "New Request",
+							"id": "91c50a59-ff03-4e4b-88d5-af7693fd9f5d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{url}}/sesion/crearUsuario"
+							},
+							"response": []
 						}
 					],
 					"id": "420643ed-4cc2-44ea-9903-2af49ae9cc8e"
