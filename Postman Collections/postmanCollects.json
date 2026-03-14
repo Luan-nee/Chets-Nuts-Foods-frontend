@@ -4254,6 +4254,124 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
+						},
+						{
+							"name": "inhabilitar vehiculo",
+							"id": "02b5712f-7af6-4653-96c7-86e03614cac2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vehiculos/:id_vehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										":id_vehiculo"
+									],
+									"variable": [
+										{
+											"key": "id_vehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "05c2a6e2-c1d2-48f7-aa15-177bbb19f859",
+									"name": "ok - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El vehículo fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "05c2462e-6b90-46cc-b641-229273954398",
+									"name": "inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
