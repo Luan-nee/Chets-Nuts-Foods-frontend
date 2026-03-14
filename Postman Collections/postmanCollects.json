@@ -3928,11 +3928,18 @@
 										},
 										"url": "{{url}}/vehiculos/registrar"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Vehículo registrado exitosamente\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
