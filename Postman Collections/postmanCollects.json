@@ -3389,11 +3389,121 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El correo, ruc o dni ya existe en el sistema relacionado a otro usuario\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "eliminar usuario",
+							"id": "c36c7907-509f-48ee-bbc5-4681879c45b9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/cuentaUsuario/:id_usuario",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cuentaUsuario",
+										":id_usuario"
+									],
+									"variable": [
+										{
+											"key": "id_usuario",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "dcd58b23-040d-4719-b5c8-d44b1ca72d2e",
+									"name": "ok - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"cuentaUsuario",
+												":id_usuario"
+											],
+											"variable": [
+												{
+													"key": "id_usuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El usuario fue eliminado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "1740b113-c879-49ba-a04c-16deeaf7a16e",
+									"name": "internal server error - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"cuentaUsuario",
+												":id_usuario"
+											],
+											"variable": [
+												{
+													"key": "id_usuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -3634,669 +3744,9 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
-						},
-						{
-							"name": "eliminar usuario",
-							"id": "c36c7907-509f-48ee-bbc5-4681879c45b9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/cuentaUsuario/:id_usuario",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"cuentaUsuario",
-										":id_usuario"
-									],
-									"variable": [
-										{
-											"key": "id_usuario",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"id": "dcd58b23-040d-4719-b5c8-d44b1ca72d2e",
-									"name": "ok - eliminar usuario",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/cuentaUsuario/:id_usuario",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"cuentaUsuario",
-												":id_usuario"
-											],
-											"variable": [
-												{
-													"key": "id_usuario",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El usuario fue eliminado exitosamente\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "1740b113-c879-49ba-a04c-16deeaf7a16e",
-									"name": "internal server error - eliminar usuario",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/cuentaUsuario/:id_usuario",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"cuentaUsuario",
-												":id_usuario"
-											],
-											"variable": [
-												{
-													"key": "id_usuario",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
-								}
-							]
 						}
 					],
 					"id": "420643ed-4cc2-44ea-9903-2af49ae9cc8e"
-				},
-				{
-					"name": "Establecimientos",
-					"item": [
-						{
-							"name": "listar establecimientos",
-							"id": "6a28bdcf-ad70-4c0b-a58b-879ef90b4979",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar establecimientos",
-										"type": "text"
-									}
-								],
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "8087f940-7c09-4c9d-a08a-311dae828eea",
-									"name": "ok - listar establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": []
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos de tablecimientos obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"idEst\": 1,\r\n            \"nombreEst\": \"Supermercados Plaza Vea - Real Plaza\",\r\n            \"direccion\": \"Av. Paseo de la República 3220\",\r\n            \"departamento\": \"Lima\",\r\n            \"provincia\": \"Lima\",\r\n            \"distrito\": \"San Isidro\"\r\n        },\r\n        {\r\n            \"idEst\": 2,\r\n            \"nombreEst\": \"Boticas Mi Farma - Sucursal Centro\",\r\n            \"direccion\": \"Calle Calle Mercaderes 124\",\r\n            \"departamento\": \"Arequipa\",\r\n            \"provincia\": \"Arequipa\",\r\n            \"distrito\": \"Arequipa\"\r\n        },\r\n        {\r\n            \"idEst\": 3,\r\n            \"nombreEst\": \"Restaurante El Provenir\",\r\n            \"direccion\": \"Jr. Pizarro 550\",\r\n            \"departamento\": \"La Libertad\",\r\n            \"provincia\": \"Trujillo\",\r\n            \"distrito\": \"Trujillo\"\r\n        },\r\n        {\r\n            \"idEst\": 4,\r\n            \"nombreEst\": \"Ferretería El Tornillo de Oro\",\r\n            \"direccion\": \"Av. Centenario 458\",\r\n            \"departamento\": \"Ancash\",\r\n            \"provincia\": \"Huaraz\",\r\n            \"distrito\": \"Independencia\"\r\n        },\r\n        {\r\n            \"idEst\": 5,\r\n            \"nombreEst\": \"Cafetería Aroma de Selva\",\r\n            \"direccion\": \"Calle Fitzcarrald 231\",\r\n            \"departamento\": \"Loreto\",\r\n            \"provincia\": \"Maynas\",\r\n            \"distrito\": \"Iquitos\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 100,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 8,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
-								},
-								{
-									"id": "9cec4b97-04be-4b07-9649-c59ff8ebcc69",
-									"name": "not content - listar establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "x-mock-response-name",
-												"value": "ok - listar establecimientos",
-												"type": "text"
-											}
-										],
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"la lista de establecimientos está vacía\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "nuevo establecimiento",
-							"id": "433be6c5-fac6-4178-bc05-fc87dd6e873c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - nuevo establecimiento",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idResponsable\": 101,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "81933de2-3d0d-4626-9cc8-4f87da0cd20c",
-									"name": "ok - nuevo establecimiento",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"establecimiento registrado correctamente\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "9977d89d-b9e6-48b0-aaf0-1bac31afbd1c",
-									"name": "bad request - nuevo establecimiento",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-mock-response-name",
-												"value": "ok - nuevo establecimiento",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"idResponsable\": 101,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"la estructura es incorrecta\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "modificar establecimiento",
-							"id": "d09ac974-c520-4192-a010-28944acac8db",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - modificar establecimiento",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idResponsable\": 22,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "d46480c9-6fbc-4945-9a30-55aa4224fdd7",
-									"name": "ok - modificar establecimiento",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": "{{url}}/establecimientos"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos actualizados correctamente\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar tipos de establecimientos",
-							"id": "006a57d0-d02e-4f05-b740-0f360ff4525c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar tipo establecimientos",
-										"type": "text"
-									}
-								],
-								"url": "{{url}}/establecimientos/tipos"
-							},
-							"response": [
-								{
-									"id": "8efa6b6d-6fcb-4e30-aeb0-28c9d641ee69",
-									"name": "ok - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"tipos de establecimientos obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipo\": \"oficina\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipo\": \"almacen\"\r\n        }\r\n    ]\r\n}"
-								},
-								{
-									"id": "695c6251-50b0-4540-8ee5-4c1805729020",
-									"name": "not content - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"no hay tipos de establecimientos registrados\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "bc5c2558-a6c8-4d2b-bb94-e80ac9db2ae4",
-									"name": "server error - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"error en el servidor\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar responsables",
-							"id": "dfc5cf2e-046a-457c-8ee0-e4654e3fe346",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar responsables",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/establecimientos/responsables?pagina=3",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"establecimientos",
-										"responsables"
-									],
-									"query": [
-										{
-											"key": "pagina",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"id": "e816af13-4733-45d4-93f2-334963384697",
-									"name": "ok - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/responsables"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de responsables obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Luan Del Sol\",\r\n            \"apellidoPaterno\": \"Huillca\",\r\n            \"apellidoMaterno\": \"Sanchez\",\r\n            \"dni\": \"12345678\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidoPaterno\": \"Villacorta\",\r\n            \"apellidoMaterno\": \"Mendoza\",\r\n            \"dni\": \"45781239\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidoPaterno\": \"Fernández\",\r\n            \"apellidoMaterno\": \"Paredes\",\r\n            \"dni\": \"70234511\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Mateo Sebastián\",\r\n            \"apellidoPaterno\": \"Quispe\",\r\n            \"apellidoMaterno\": \"Mamani\",\r\n            \"dni\": \"15896324\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 50,\r\n        \"total_paginas\": 5,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
-								},
-								{
-									"id": "d49e5ed2-f6c2-4d46-8c9f-5f3d464179d2",
-									"name": "no content - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/responsables"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Todos los empleados están ocupados\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
-								},
-								{
-									"id": "c9f23eb7-4f5c-4761-96cc-6c1d57db3651",
-									"name": "internal server error - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/establecimientos/responsables?pagina=3",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"establecimientos",
-												"responsables"
-											],
-											"query": [
-												{
-													"key": "pagina",
-													"value": "3"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
-								}
-							]
-						},
-						{
-							"name": "obtener información de un establecimiento",
-							"id": "02961f6d-0c4c-41a4-b077-fdc1d71f527c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/establecimientos/:id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"establecimientos",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1",
-											"description": "identificador único del establecimiento del cual quieres obtener su información."
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"id": "3fc71d12-5bd6-454c-a62b-fa794ea6fd9b",
-									"name": "ok - obtener información de un establecimiento",
-									"originalRequest": {
-										"method": "GET",
-										"header": []
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Obteniendo información completa del establecimiento\",\r\n    \"data\": {\r\n        \"idResponsable\": 2,\r\n        \"nombreEst\": \"Almacen los chacoteros\",\r\n        \"direccion\": \"Av. El Polo 789\",\r\n        \"descripcion\": \"Almacen que almacena cosas.\",\r\n        \"latitud\": \"-12.1094\",\r\n        \"longitud\": \"-76.9731\",\r\n        \"distrito\": \"Santiago de Surco\",\r\n        \"provincia\": \"Lima\",\r\n        \"departamento\": \"Lima\",\r\n        \"tipoEst\": 2,\r\n        \"activo\": true\r\n    } \r\n}"
-								},
-								{
-									"id": "39c8fc40-41b8-4689-b054-58c73a3776b6",
-									"name": "not found - obtener información de un establecimiento",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/establecimientos/:id",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"establecimientos",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "1",
-													"description": "identificador único del establecimiento del cual quieres obtener su información."
-												}
-											]
-										}
-									},
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\n    \"status\": \"success\",\n    \"message\": \"El ID del establecimiento no está registrados\",\n    \"data\": null\n}"
-								}
-							]
-						}
-					],
-					"id": "16ca7b0a-b062-4732-8f94-171b84f670c5"
 				},
 				{
 					"name": "vehículos",
@@ -4352,6 +3802,40 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de vehículos obtenido correctamente\",\r\n    \"data\": [\r\n        {\r\n            \"idvehempresa\": 1,\r\n            \"placa\": \"ABC-123\",\r\n            \"marca\": \"Volvo\",\r\n            \"modelo\": \"FH\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 32000\r\n        },\r\n        {\r\n            \"idvehempresa\": 2,\r\n            \"placa\": \"XYZ-987\",\r\n            \"marca\": \"Scania\",\r\n            \"modelo\": \"R500\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 30000\r\n        },\r\n        {\r\n            \"idvehempresa\": 3,\r\n            \"placa\": \"DEF-456\",\r\n            \"marca\": \"Mercedes-Benz\",\r\n            \"modelo\": \"Actros\",\r\n            \"anio\": \"2022\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 28000\r\n        },\r\n        {\r\n            \"idvehempresa\": 4,\r\n            \"placa\": \"GHI-789\",\r\n            \"marca\": \"Isuzu\",\r\n            \"modelo\": \"NLR\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"N2\",\r\n            \"capacidadCarga\": 5500\r\n        },\r\n        {\r\n            \"idvehempresa\": 5,\r\n            \"placa\": \"JKL-012\",\r\n            \"marca\": \"Freightliner\",\r\n            \"modelo\": \"Cascadia\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 35000\r\n        },\r\n        {\r\n            \"idvehempresa\": 6,\r\n            \"placa\": \"MNO-345\",\r\n            \"marca\": \"Hino\",\r\n            \"modelo\": \"500\",\r\n            \"anio\": \"2021\",\r\n            \"tipoVehiculo\": \"N3\",\r\n            \"capacidadCarga\": 12000\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
+								},
+								{
+									"id": "1089abaa-aee4-4f3b-82fc-b93c8d6372ba",
+									"name": "listar vehiculos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - listar vehiculos",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vehiculos?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
 						}
