@@ -4098,11 +4098,160 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del vehículo se actualizó exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "16ff6358-0fd9-46bd-be7f-87b30de436df",
+									"name": "bad request - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "cc525c0f-c72f-4171-a33e-4c00c1168099",
+									"name": "forbidden - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La placa de vehículo ya está siendo usado por otro vehículo dentro del sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "2d2ae5d4-1a67-4669-bbaf-3c81832107e4",
+									"name": "internal server error  - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
