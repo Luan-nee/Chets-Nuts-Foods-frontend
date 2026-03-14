@@ -3889,6 +3889,18 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								}
 							]
+						},
+						{
+							"name": "New Request",
+							"id": "a0861e9b-b493-4ae4-a62c-879162e0872f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
