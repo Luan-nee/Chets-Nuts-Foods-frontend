@@ -4763,7 +4763,22 @@
 								"header": [],
 								"url": "{{url}}/productos"
 							},
-							"response": []
+							"response": [
+								{
+									"id": "ca55e55f-81c1-4a9d-acab-49715bba9187",
+									"name": "listar productos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
 						},
 						{
 							"name": "inhabilitar producto",
