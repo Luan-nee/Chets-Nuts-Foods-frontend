@@ -3582,6 +3582,96 @@
 										},
 										"url": "{{url}}/sesion/crearUsuario"
 									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+								},
+								{
+									"id": "ee7a9b72-f728-42bc-9663-bcbb27035626",
+									"name": "bad request - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/sesion/crearUsuario"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "70832564-13d7-40cc-87f0-9d73d8a6f0c2",
+									"name": "internal server error - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/sesion/crearUsuario"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "93729383-ce72-40fa-90ea-5773a9f32a82",
+									"name": "crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/sesion/crearUsuario"
+									},
 									"_postman_previewlanguage": null,
 									"header": null,
 									"cookie": [],
