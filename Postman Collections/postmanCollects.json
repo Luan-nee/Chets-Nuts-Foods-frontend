@@ -4546,6 +4546,15 @@
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": "{{url}}/transportistas"
 							},
 							"response": [
@@ -4726,6 +4735,64 @@
 						}
 					],
 					"id": "743cbb99-1a89-4934-9672-22908d90a4f1"
+				},
+				{
+					"name": "Productos",
+					"item": [
+						{
+							"name": "registrar producto",
+							"id": "8859fc73-d762-47f3-a451-678277e1c903",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{url}}/productos"
+							},
+							"response": []
+						},
+						{
+							"name": "listar productos",
+							"id": "7b70712c-f46e-444a-b5dc-59688dacb520",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/productos"
+							},
+							"response": []
+						},
+						{
+							"name": "inhabilitar producto",
+							"id": "0af7c134-13a5-4d09-bcc1-eefccd07e996",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{url}}/productos"
+							},
+							"response": []
+						},
+						{
+							"name": "modificar producto",
+							"id": "0f95d0fc-8601-450d-82e5-99136ed7a366",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{url}}/productos"
+							},
+							"response": []
+						}
+					],
+					"id": "d83dfe6e-f564-4402-ae58-3713ab591306"
 				}
 			],
 			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
