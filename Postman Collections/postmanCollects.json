@@ -4481,6 +4481,53 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "02a2fb2a-95f6-4cd0-9f4b-9f7bdfef9aae",
+									"name": "forbidden - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El vehículo no puede ser inhabilitado porque actualmente está siendo utilizado\",\r\n    \"data\": null    \r\n}"
 								}
 							]
 						}
