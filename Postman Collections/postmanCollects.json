@@ -3545,7 +3545,7 @@
 							]
 						},
 						{
-							"name": "New Request",
+							"name": "crear usuario",
 							"id": "91c50a59-ff03-4e4b-88d5-af7693fd9f5d",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -3553,9 +3553,42 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": "{{url}}/sesion/crearUsuario"
 							},
-							"response": []
+							"response": [
+								{
+									"id": "cd2e5c9e-f733-4d3c-90fe-e6f4a0263f07",
+									"name": "ok - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/sesion/crearUsuario"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
 						}
 					],
 					"id": "420643ed-4cc2-44ea-9903-2af49ae9cc8e"
