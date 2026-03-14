@@ -4022,6 +4022,82 @@
 										},
 										"url": "{{url}}/vehiculos/registrar"
 									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La placa de vehículo ya está siendo usado por otro vehículo dentro del sistema\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "editar vehiculo",
+							"id": "e055021d-7aff-4f5c-888a-d156b5f417cf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vehiculos/:id_vehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										":id_vehiculo"
+									],
+									"variable": [
+										{
+											"key": "id_vehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "70ef37f8-3662-4489-bf2e-a76fde35213f",
+									"name": "ok - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
 									"_postman_previewlanguage": null,
 									"header": null,
 									"cookie": [],
