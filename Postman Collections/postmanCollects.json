@@ -4314,6 +4314,8 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -4335,7 +4337,7 @@
 								},
 								{
 									"id": "05c2462e-6b90-46cc-b641-229273954398",
-									"name": "inhabilitar vehiculo",
+									"name": "bad request - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [],
@@ -4365,11 +4367,120 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fc106702-60ca-439b-9d3a-3ad04ff4a884",
+									"name": "not found - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehículo no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "a4047035-b01e-4073-a40e-871f19f05ae2",
+									"name": "internal server error - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
