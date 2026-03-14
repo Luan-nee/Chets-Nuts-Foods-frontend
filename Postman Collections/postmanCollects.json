@@ -4963,12 +4963,13 @@
 								"method": "PATCH",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/productos/:idProducto",
+									"raw": "{{url}}/productos/inhabilitar/:idProducto",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"productos",
+										"inhabilitar",
 										":idProducto"
 									],
 									"variable": [
@@ -4987,12 +4988,13 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"inhabilitar",
 												":idProducto"
 											],
 											"variable": [
@@ -5031,12 +5033,13 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"inhabilitar",
 												":idProducto"
 											],
 											"variable": [
@@ -5068,12 +5071,13 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"inhabilitar",
 												":idProducto"
 											],
 											"variable": [
@@ -5106,12 +5110,13 @@
 										"method": "PATCH",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/productos/:idProducto",
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
+												"inhabilitar",
 												":idProducto"
 											],
 											"variable": [
@@ -5148,6 +5153,15 @@
 							"request": {
 								"method": "PATCH",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{url}}/productos/modificar?idProducto=1",
 									"host": [
@@ -5171,17 +5185,33 @@
 									"name": "ok - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
-											"raw": "{{url}}/productos/modificar?idProducto=1",
+											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar"
+												"modificar",
+												":idProducto"
 											],
-											"query": [
+											"variable": [
 												{
 													"key": "idProducto",
 													"value": "1"
@@ -5215,17 +5245,33 @@
 									"name": "bad request - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
-											"raw": "{{url}}/productos/modificar?idProducto=1",
+											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar"
+												"modificar",
+												":idProducto"
 											],
-											"query": [
+											"variable": [
 												{
 													"key": "idProducto",
 													"value": "1"
@@ -5252,7 +5298,22 @@
 									"name": "no content - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
@@ -5291,7 +5352,22 @@
 									"name": "forbidden - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
-										"header": [],
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{url}}/productos/modificar/:idProducto",
 											"host": [
