@@ -3612,6 +3612,8 @@
 										},
 										"url": "{{url}}/sesion/crearUsuario"
 									},
+									"status": "Bad Request",
+									"code": 400,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -3642,6 +3644,7 @@
 										},
 										"url": "{{url}}/sesion/crearUsuario"
 									},
+									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -3657,7 +3660,7 @@
 								},
 								{
 									"id": "93729383-ce72-40fa-90ea-5773a9f32a82",
-									"name": "crear usuario",
+									"name": "forbidden - crear usuario",
 									"originalRequest": {
 										"method": "POST",
 										"header": [],
@@ -3672,11 +3675,20 @@
 										},
 										"url": "{{url}}/sesion/crearUsuario"
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Existe un usuario con el dni, ruc o correo. Intente nuevamente pero usando otros datos\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
