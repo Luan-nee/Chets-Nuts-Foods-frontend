@@ -3480,7 +3480,7 @@
 										}
 									}
 								},
-								"url": "{{url}}/vehiculos/registrar"
+								"url": "{{url}}/vehiculos"
 							},
 							"response": [
 								{
@@ -3498,7 +3498,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/vehiculos/registrar"
+										"url": "{{url}}/vehiculos"
 									},
 									"_postman_previewlanguage": "json",
 									"header": [
@@ -3528,7 +3528,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/vehiculos/registrar"
+										"url": "{{url}}/vehiculos"
 									},
 									"status": "Bad Request",
 									"code": 400,
@@ -3560,7 +3560,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/vehiculos/registrar"
+										"url": "{{url}}/vehiculos"
 									},
 									"status": "Internal Server Error",
 									"code": 500,
@@ -3592,7 +3592,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/vehiculos/registrar"
+										"url": "{{url}}/vehiculos"
 									},
 									"status": "Forbidden",
 									"code": 403,
