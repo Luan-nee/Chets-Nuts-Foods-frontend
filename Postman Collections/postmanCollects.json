@@ -2770,7 +2770,13 @@
 							},
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - crear usuario",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
@@ -2798,7 +2804,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/sesion/crearUsuario"
+										"url": "{{url}}/usuario"
 									},
 									"_postman_previewlanguage": "json",
 									"header": [
@@ -2828,7 +2834,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/sesion/crearUsuario"
+										"url": "{{url}}/usuario"
 									},
 									"status": "Bad Request",
 									"code": 400,
@@ -2860,7 +2866,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/sesion/crearUsuario"
+										"url": "{{url}}/usuario"
 									},
 									"code": 500,
 									"_postman_previewlanguage": "json",
@@ -2891,7 +2897,7 @@
 												}
 											}
 										},
-										"url": "{{url}}/sesion/crearUsuario"
+										"url": "{{url}}/usuario"
 									},
 									"status": "Forbidden",
 									"code": 403,
@@ -2927,7 +2933,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dni\": \"12345678\",\r\n    \"ruc\": \"\",\r\n    \"nuevoCorreo\": \"\",\r\n    \"nuevaContrasenia\": \"nuevaContrasenia\"\r\n}",
+									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dni\": \"12345678\",\r\n    \"ruc\": \"10123456788\",\r\n    \"nuevoCorreo\": \"ejemplo@gmail.com\",\r\n    \"nuevaContrasenia\": \"nuevaContrasenia\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2935,12 +2941,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+									"raw": "{{url}}/usuario/:id_empleado",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"cuentaEmpleado",
+										"usuario",
 										":id_empleado"
 									],
 									"variable": [
@@ -2968,12 +2974,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:id_empleado",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
+												"usuario",
 												":id_empleado"
 											],
 											"variable": [
@@ -3021,12 +3027,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:id_empleado",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
+												"usuario",
 												":id_empleado"
 											],
 											"variable": [
@@ -3074,12 +3080,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:id_empleado",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
+												"usuario",
 												":id_empleado"
 											],
 											"variable": [
@@ -3127,12 +3133,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:id_empleado",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
+												"usuario",
 												":id_empleado"
 											],
 											"variable": [
@@ -3168,19 +3174,25 @@
 							},
 							"request": {
 								"method": "DELETE",
-								"header": [],
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - eliminar usuario",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": "{{url}}/cuentaUsuario/:id_usuario",
+									"raw": "{{url}}/usuario/:idUsuario",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"cuentaUsuario",
-										":id_usuario"
+										"usuario",
+										":idUsuario"
 									],
 									"variable": [
 										{
-											"key": "id_usuario",
+											"key": "idUsuario",
 											"value": "1"
 										}
 									]
