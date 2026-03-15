@@ -9,6 +9,7 @@ import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
 export default class EmpleadoApi extends BaseRequestApi {
   private base_url = `${url_base}/empleados`;
 
+  /* LISTAR EMPLEADOS */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponseWithPagination<T>;
@@ -22,6 +23,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     }
   }
 
+  /* DETALLES DE UN EMPLEADO */
   public async getEmpleadoById<T>(idEmpleado: number): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
@@ -35,6 +37,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     }
   }
 
+  /* EDITAR EMPLEADO */
   public async UpdateEmpleadoById<T>(idEmpleado: number, body: UpdateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
@@ -49,6 +52,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     }
   }
 
+  /* LISTAR ROLES ------------------------------> mover a otra clase */
   public async getRoles<T>(): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
@@ -61,4 +65,7 @@ export default class EmpleadoApi extends BaseRequestApi {
       });
     }
   }
+
+  /* DESHABILITAR EMPLEADO */
+  /* REGISTRAR NUEVO EMPLEADO */
 }

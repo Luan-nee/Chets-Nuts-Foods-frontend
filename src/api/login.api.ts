@@ -3,27 +3,24 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponse } from '../types/bodyResponse.type';
-import type { RegistroUsuario } from '../types/usuario.type';
+import type { Credenciales } from '../types/usuario.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
-export default class Usuario extends BaseRequestApi {
+export default class login extends BaseRequestApi {
   private base_url = `${url_base}/usuario`;
 
-  /* CREAR USUARIO */
-  public async crearUsuario<T>(bodyUsuario: RegistroUsuario): Promise<BodyResponse<T>> {
+  public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataIniciarSesion as unknown as BodyResponse<T>;
     } else {
       return this.request<BodyResponse<T>>(`${this.base_url}`, {
         method: 'POST',
         headers: {
-          'x-mock-response-name': 'ok - crear usuario'
+          'x-mock-response-name': 'ok - iniciar sesion'
         },
-        body: JSON.stringify(bodyUsuario)
+        body: JSON.stringify(credenciales)
       });
     }
+
   }
-  
-  /* EDITAR USUARIO */
-  /* ELIMINAR USUARIO */
 }

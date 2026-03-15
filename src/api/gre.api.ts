@@ -9,6 +9,7 @@ import dataGreDetalle from '../json/guiaderemision/get-ok-detallesDeUnaGuiaDeRem
 export default class GreApi extends BaseRequestApi {
   private base_url = `${url_base}/guiasEmision`;
 
+  /* LISTAR GUIAS DE REMISION */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
     if (this.OFFLINE_MODE) {
       return dataGre as unknown as BodyResponseWithPagination<T>;
@@ -22,6 +23,7 @@ export default class GreApi extends BaseRequestApi {
     }
   }
 
+  /* DETALLES DE UNA GUIA DE REMISION */
   public async getByCodigoSeguimiento<T>(id: number): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataGreDetalle as unknown as BodyResponse<T>;
@@ -34,4 +36,8 @@ export default class GreApi extends BaseRequestApi {
       });
     }
   }
+
+  /* EMITIR GUIA DE REMISION */
+  /* MODIFICAR GUIA DE REMISION */
+  /* ELIMINAR GUIA DE REMISION */
 }

@@ -5,6 +5,17 @@ export type Credenciales = {
   contrasenia: string;
 }
 
+export type RegistroUsuario = {
+  nombres: string,
+  apellidoPaterno: string,
+  apellidoMaterno: string,
+  dni: string,
+  ruc: string,
+  correo: string,
+  contrasenia: string
+}
+
+
 export type ResponseSesion = {
   tokenZ: string;
   rol: UserRole;
