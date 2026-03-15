@@ -2941,17 +2941,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/usuario/:id_empleado",
+									"raw": "{{url}}/usuario/:idUsuario",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"usuario",
-										":id_empleado"
+										":idUsuario"
 									],
 									"variable": [
 										{
-											"key": "id_empleado",
+											"key": "idUsuario",
 											"value": "1"
 										}
 									]
@@ -2974,17 +2974,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/usuario/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"usuario",
-												":id_empleado"
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3027,17 +3027,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/usuario/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"usuario",
-												":id_empleado"
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3080,17 +3080,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/usuario/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"usuario",
-												":id_empleado"
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3133,17 +3133,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/usuario/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"usuario",
-												":id_empleado"
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3206,17 +3206,17 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaUsuario",
-												":id_usuario"
+												"usuario",
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_usuario",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3242,17 +3242,17 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/cuentaUsuario/:id_usuario",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaUsuario",
-												":id_usuario"
+												"usuario",
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_usuario",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -3270,6 +3270,50 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "556af523-f3e8-45b3-a782-f5886d4b95a0",
+									"name": "forbidden - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - eliminar usuario",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/usuario/:idUsuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"usuario",
+												":idUsuario"
+											],
+											"variable": [
+												{
+													"key": "idUsuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No se puede eliminar al empleado porque actualmente se encuentra en uso\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -5423,6 +5467,11 @@
 						}
 					],
 					"id": "152b0413-a246-4e0f-8644-3bc529f1593a"
+				},
+				{
+					"name": "Login",
+					"item": [],
+					"id": "c492856b-b41f-43a7-8095-2be123736adc"
 				}
 			],
 			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
