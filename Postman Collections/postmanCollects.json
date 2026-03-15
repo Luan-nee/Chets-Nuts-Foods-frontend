@@ -1450,7 +1450,8 @@
 							]
 						}
 					],
-					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83"
+					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83",
+					"description": "Tarea:\n\nEliminar la propiedad \"\""
 				},
 				{
 					"name": "Empleados",
