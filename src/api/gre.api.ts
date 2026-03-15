@@ -3,6 +3,7 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
+import type { EmitirGre, ModificarGre } from '../features/gre/types/gre.type';
 import dataGre from '../json/guiaderemision/get-ok-guiasDeRemision.json';
 import dataGreDetalle from '../json/guiaderemision/get-ok-detallesDeUnaGuiaDeRemision.json';
 
@@ -38,6 +39,46 @@ export default class GreApi extends BaseRequestApi {
   }
 
   /* EMITIR GUIA DE REMISION */
+  public async emitirGre<T>(body: EmitirGre): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataGreDetalle as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/emitir`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+    }
+  }
+
   /* MODIFICAR GUIA DE REMISION */
+  public async modificarGre<T>(idGre: number, body: ModificarGre): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataGreDetalle as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/modificar/${idGre}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+    }
+  }
+
   /* ELIMINAR GUIA DE REMISION */
+  public async eliminarGre<T>(idGre: number): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataGreDetalle as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/eliminar/${idGre}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+  }
 }

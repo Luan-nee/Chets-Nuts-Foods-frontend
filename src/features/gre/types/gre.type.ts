@@ -113,3 +113,97 @@ export type GreFormData = {
     }
   },
 }
+
+export type EmitirGre = {
+  numero_registro_MTC: string;
+  remitente: {
+      nombres_razonSocial: string;
+      tipo_documento: string;
+      numero_documento: string;
+  };
+  destinatario: {
+      nombres_razonSocial: string;
+      tipo_documento: string;
+      numero_documento: string;
+  };
+  bienes_transportados: number[];
+  carga: {
+      unidad_medida: string;
+      peso_bruto_total: number;
+  };
+  punto_partida: {
+      departamento: string;
+      provincia: string;
+      distrito: string;
+      direccion_detallada: string;
+  };
+  punto_llegada: {
+      departamento: string;
+      provincia: string;
+      distrito: string;
+      direccion_detallada: string;
+  };
+  datos_de_transporte: {
+      idVehículo: number;
+      idConductor: number;
+      fecha_inicio_traslado: string;
+      indicadores_retorno: {
+          retorno_envases_vacios: boolean;
+          retorno_vehiculo_vacio: boolean;
+          transporte_subcontratado: boolean;
+      };
+  };
+  pagador_flete: {
+      responsable: "remitente" | "subcontratador" | "tercero";
+      tipo_documento: string;
+      numero_documento: string;
+      nombres_razonSocial: string;
+  };
+};
+
+export type ModificarGre = {
+  numero_registro_MTC: string;
+  remitente: {
+      nombres_razonSocial: string;
+      tipo_documento: string;
+      numero_documento: string;
+  };
+  destinatario: {
+      nombres_razonSocial: string;
+      tipo_documento: string;
+      numero_documento: string;
+  };
+  bienes_transportados: number[];
+  carga: {
+      unidad_medida: string;
+      peso_bruto_total: number;
+  };
+  punto_partida: {
+      departamento: string;
+      provincia: string;
+      distrito: string;
+      direccion_detallada: string;
+  };
+  punto_llegada: {
+      departamento: string;
+      provincia: string;
+      distrito: string;
+      direccion_detallada: string;
+  };
+  datos_de_transporte: {
+      idVehículo: number;
+      idConductor: number;
+      fecha_inicio_traslado: string;
+      indicadores_retorno: {
+          retorno_envases_vacios: boolean;
+          retorno_vehiculo_vacio: boolean;
+          transporte_subcontratado: boolean;
+      };
+  };
+  pagador_flete: {
+      responsable: "remitente" | "subcontratador" | "tercero";
+      tipo_documento: string;
+      numero_documento: string;
+      nombres_razonSocial: string;
+  };
+}
