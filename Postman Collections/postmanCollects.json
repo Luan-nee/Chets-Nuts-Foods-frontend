@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "c79a0729-bd6d-49f7-8112-e347677ccf70",
 		"name": "CHETS NUTS FOODS",
+		"description": "### **Guía de Instituciones de Control de Alimentos en Tránsito (Perú)**\n\n| Siglas | Institución | ¿Qué revisa en el vehículo? | Documentos obligatorios a presentar |\n| --- | --- | --- | --- |\n| **SUNAT** | Superintendencia Nacional de Aduanas y de Administración Tributaria | Legalidad de la mercadería, origen de la compra y cumplimiento tributario. | **Guía de Remisión Remitente** (Electrónica), Factura/Boleta y Guía de Remisión Transportista. |\n| **SUTRAN** | Superintendencia de Transporte Terrestre de Personas, Carga y Mercancías | Peso del vehículo (balanza), condiciones técnicas de la unidad y permisos de circulación. | **Tarjeta de Mercancías (MTC)**, Brevete, SOAT vigente y Certificado de Inspección Técnica Vehicular. |\n| **SENASA** | Servicio Nacional de Sanidad Agraria | Alimentos frescos (frutas, verduras, carnes, granos) para prevenir plagas y enfermedades. | **Certificado Fitosanitario** o Zoosanitario de Tránsito Interno (según el producto y zona). |\n| **DIGESA** | Dirección General de Salud Ambiental e Inocuidad Alimentaria | Alimentos industrializados y procesados. Vigilancia de higiene y registros de fabricación. | **Registro Sanitario (RS)** impreso en empaques y Acta de Inspección Sanitaria del vehículo. |\n| **SANIPES** | Organismo Nacional de Sanidad Pesquera | Productos hidrobiológicos (pescado, mariscos). Verifican frescura y cadena de frío. | **Certificado de Procedencia** y Guía de Transporte de Productos Hidrobiológicos. |\n| **PNP** | Policía Nacional del Perú (Unidad de Carreteras) | Identificación general, seguridad vial y apoyo en operativos contra el comercio ilegal. | DNI del conductor, documentos del vehículo y validación de las Guías de Remisión. |\n\n---\n\n### **Puntos clave para la logística alimentaria:**\n\n- **Parihuelas y Limpieza:** Las autoridades sanitarias prohíben que los alimentos toquen el piso directamente.\n    \n- **Guía de Remisión Electrónica:** Es el documento más crítico. Su ausencia es motivo de decomiso inmediato por parte de SUNAT.\n    \n- **Cadena de Frío:** Si transportas perecibles, la unidad debe contar con termómetro visible para acreditar la temperatura adecuada.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -618,7 +619,52 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n  \"status\": \"warning\",\r\n  \"message\": \"No hay Guias de remisión\",\r\n  \"data\": null\r\n}"
+									"body": "{\r\n  \"status\": \"success\",\r\n  \"message\": \"No hay Guias de remisión\",\r\n  \"data\": null,\r\n  \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
+								},
+								{
+									"id": "2e5a58b4-aec2-4efd-9600-f30b4041e3fc",
+									"name": "internal server error - listar guias de remision",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - guias de remision",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Ocurrió un error en el servidor al momento de listar las guias de remisión\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								}
 							]
 						},
@@ -757,7 +803,53 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El ID ingresado no es válido\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID ingresado no es válido, debe ser un numero entero positivo\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "b82cb9b4-9d9d-4db6-8948-f43fed940717",
+									"name": "internal server error - detalles de una guia de remision",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - detalles de una guia de remision",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/:id_guiaRemision",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												":id_guiaRemision"
+											],
+											"variable": [
+												{
+													"key": "id_guiaRemision",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al momento de obtener la información de un GRE\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -772,7 +864,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"numero_registro_MTC\": \"15010001-REG\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"idVehículo\": 1,\r\n        \"idConductor\": 2,\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -850,28 +942,52 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error al registrar una guía de remisión\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5eb506e0-9761-4e6c-9277-d39aeb317688",
+									"name": "internal server error - emitir guía de remisión",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/guiasEmision/crear"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n    \"status\": \"error\",\n    \"message\": \"Sucedió un error en el servidor mientras procesaba la consulta\",\n    \"data\": null\n}"
 								}
 							]
 						},
 						{
-							"name": "actualizar estado de transporte",
-							"id": "7c86dea8-3c6c-4d79-a3b8-4f9c6227bb71",
+							"name": "modificar guia de remision",
+							"id": "b2a68be2-f467-4f81-af2d-ac9cfaa1e836",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - actualizar estado de transporte",
-										"type": "text"
-									}
-								],
+								"method": "PUT",
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
+									"raw": "{\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"idVehículo\": 1,\r\n        \"idConductor\": 2,\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -879,32 +995,33 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+									"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"guiasEmision",
+										"modificar",
 										":codigo_seguimiento"
 									],
 									"variable": [
 										{
 											"key": "codigo_seguimiento",
-											"value": "COD-000001"
+											"value": "COD-000101"
 										}
 									]
 								}
 							},
 							"response": [
 								{
-									"id": "2093d0b1-059c-4ba0-9ddc-c1f09a7b0d6f",
-									"name": "ok - actualizar estado de transporte",
+									"id": "bc55eaa8-ef05-45c2-bbc8-bf5e2045efe3",
+									"name": "ok - modificar guia de remision",
 									"originalRequest": {
-										"method": "POST",
+										"method": "PUT",
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -912,18 +1029,278 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"guiasEmision",
+												"modificar",
 												":codigo_seguimiento"
 											],
 											"variable": [
 												{
 													"key": "codigo_seguimiento",
-													"value": "COD-000001"
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"guia de remisión actualizado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "f746358d-2ee4-47fb-bb73-ab729a05e04c",
+									"name": "bad request - modificar guia de remision",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "7c5513fa-4d11-4f83-9608-b36ecbe5e6e2",
+									"name": "internal server error - modificar guia de remision",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al procesar la consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "556f75a5-479c-4f0d-b1c9-e25ec4a9c670",
+									"name": "forbidden - modificar guia de remision",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia no puede ser modificado\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "9cb3ff9f-65f7-45f8-bb8d-1fdd9338d73e",
+									"name": "not found - modificar guia de remision",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/guiasEmision/modificar/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"modificar",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Identificador únido de la guia de remisión no existe o es incorrecto\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "eliminar guia de remision",
+							"id": "2cb4fe6d-55d4-423e-9189-5ba1b645d979",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"guiasEmision",
+										"eliminar",
+										":id_guia"
+									],
+									"variable": [
+										{
+											"key": "id_guia",
+											"value": "COD-0314241"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "a3c22268-aea0-4238-8257-800b0f3659c0",
+									"name": "ok - eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
 												}
 											]
 										}
@@ -947,48 +1324,34 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Estado de transporte actualizado exitosamente\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"La guía de remisión fue eliminada exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "678cc27c-fb4b-46ec-9291-06de34fc11fc",
-									"name": "bad request - actualizar estado de transporte",
+									"id": "0c6bd4bb-fb49-4e0b-bd4d-c2164893fd44",
+									"name": "not found - eliminar guia de remision",
 									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-mock-response-name",
-												"value": "200 - actualizar estado de transporte",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
+										"method": "DELETE",
+										"header": [],
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"guiasEmision",
-												":codigo_seguimiento"
+												"eliminar",
+												":id_guia"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "COD-000001"
+													"key": "id_guia",
+													"value": "COD-0314241"
 												}
 											]
 										}
 									},
-									"status": "Bad Request",
-									"code": 400,
+									"status": "Not Found",
+									"code": 404,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -1000,62 +1363,99 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"La consulta está mal hecha\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El identificador único de la guia es incorrecto o no existe\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fe5a757a-8d16-46f0-aaf0-9c40f76a2255",
+									"name": "internal server error - eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error mientras procesabamos su solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6b0ba66d-bb4e-4557-ad8b-13fa33e0cc33",
+									"name": "eliminar guia de remision",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/guiasEmision/eliminar/:id_guia",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"guiasEmision",
+												"eliminar",
+												":id_guia"
+											],
+											"variable": [
+												{
+													"key": "id_guia",
+													"value": "COD-0314241"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia de remison no puede ser eliminada en este momento\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
-					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83"
+					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83",
+					"description": "Tarea:\n\nEliminar la propiedad \"observacion\" de cada producto que está relacionado a los detalles de la guía de remisión, debido a que no es necesario registrar dicho dato para cada producto."
 				},
 				{
 					"name": "Empleados",
 					"item": [
-						{
-							"name": "transportista",
-							"item": [
-								{
-									"name": "listar transportistas",
-									"id": "3e202122-972e-46bf-83fb-d06d33fe7c3b",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/transportistas"
-									},
-									"response": [
-										{
-											"id": "309a8160-72d2-449a-a470-d0aa206187f2",
-											"name": "listar transportistas",
-											"originalRequest": {
-												"method": "GET",
-												"header": []
-											},
-											"_postman_previewlanguage": "json",
-											"header": [
-												{
-													"key": "Content-Type",
-													"value": "application/json",
-													"description": "",
-													"type": "text"
-												}
-											],
-											"cookie": [
-												{
-													"expires": "Invalid Date",
-													"domain": "",
-													"path": ""
-												}
-											],
-											"responseTime": null,
-											"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"lista de transportistas obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidos\": \"García Mendoza\",\r\n            \"dni\": \"45678912\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"María Fernanda\",\r\n            \"apellidos\": \"Rodríguez Silva\",\r\n            \"dni\": \"72345678\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Juan Pablo\",\r\n            \"apellidos\": \"Villalobos Soto\",\r\n            \"dni\": \"10987654\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidos\": \"Palacios Quispe\",\r\n            \"dni\": \"44556677\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Diego Armando\",\r\n            \"apellidos\": \"Torres Rojas\",\r\n            \"dni\": \"33221100\"\r\n        }\r\n    ]\r\n}"
-										}
-									]
-								}
-							],
-							"id": "56f950dd-9f2d-44e3-a1e3-6d7a0626955f"
-						},
 						{
 							"name": "listar empleados",
 							"id": "d91f39e8-8149-4dc1-b2ac-42479d661955",
@@ -1157,6 +1557,51 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\n    \"status\": \"success\",\n    \"message\": \"No hay empleados registrados\",\n    \"data\": null,\n    \"pagination\": {\n        \"total_data\": 0,\n        \"total_paginas\": 0,\n        \"pagina_actual\": 0,\n        \"datos_por_pagina\": 0\n    }\n}"
+								},
+								{
+									"id": "dea95677-14a3-4e62-bad9-ac250f1c3c9b",
+									"name": "internal server error - listar empleados",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - listar empleados",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{url}}/empleados?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n    \"status\": \"error\",\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\n    \"data\": null,\n    \"pagination\": {\n        \"total_data\": 0,\n        \"total_paginas\": 0,\n        \"pagina_actual\": 0,\n        \"datos_por_pagina\": 0\n    }\n}"
 								}
 							]
 						},
@@ -1291,17 +1736,17 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No existe empleado con el ID asignado\",\r\n    \"data\": null\r\n}\r\n"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El Identificar del empleado no existe en el sistema\",\r\n    \"data\": null\r\n}\r\n"
 								},
 								{
-									"id": "d388bfb5-3d13-4b44-b06a-2742ab5f8dbe",
+									"id": "854b8701-dc19-41f1-8d11-fdd5f1a2aa37",
 									"name": "bad request - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "exito",
+												"value": "ok - detalles de un empleado",
 												"type": "text"
 											}
 										],
@@ -1344,7 +1789,59 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\n    \"status\": \"warning\",\n    \"message\": \"El ID del empleado debe ser un numero\",\n    \"data\": null\n}"
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El Identificar único es invalido, debe ser un numero entero\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "97b9eebb-f3a1-4133-89cf-b683ac80f29c",
+									"name": "internal server error - detalles de un empleado",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - detalles de un empleado",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta.\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -1365,7 +1862,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"estado\": false,\r\n    \"motivo\": \"Está de vacaciones\" \r\n}",
+									"raw": "{\r\n    \"motivo\": \"Está de vacaciones\" \r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1405,7 +1902,22 @@
 												}
 											}
 										},
-										"url": "{{url}}/empleados"
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1479,7 +1991,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El boby es incorrecto\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El boby es incorrecto o el identificador del empleado es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "23ffc091-425a-4f86-bf78-2561e70c590d",
@@ -1532,7 +2044,60 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El empleado con el ID consultado no existe\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El empleado con el ID consultado no existe\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "64ea7556-6346-41fd-a0cb-2f52b6ba6d49",
+									"name": "internal server error - deshabilitar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - deshabilitar empleado",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"motivo\": \"Está de vacaciones\" \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -1599,7 +2164,22 @@
 												}
 											}
 										},
-										"url": "{{url}}/empleados"
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
 									},
 									"status": "OK",
 									"code": 200,
@@ -1615,6 +2195,165 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del empleado fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "26fefc0d-e472-4216-bcb0-4deaca779d53",
+									"name": "bad request - editar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidoPaterno\": \"actualizar 1\",\r\n    \"apellidoMaterno\": \"actualizar 2\",\r\n    \"correo\": \"nuevoCorreo@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1,\r\n    \"restablecerContrasenia\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Body es incorrecto y/o el Identificador del empleado es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "ab5e4d96-d8e8-4502-967f-6d7776286543",
+									"name": "internal server error - editar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidoPaterno\": \"actualizar 1\",\r\n    \"apellidoMaterno\": \"actualizar 2\",\r\n    \"correo\": \"nuevoCorreo@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1,\r\n    \"restablecerContrasenia\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "e7112c4f-e132-4042-84c5-f7f4ff0dd3b9",
+									"name": "not found - editar empleado",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidoPaterno\": \"actualizar 1\",\r\n    \"apellidoMaterno\": \"actualizar 2\",\r\n    \"correo\": \"nuevoCorreo@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1,\r\n    \"restablecerContrasenia\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/empleados/:id_empleado",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"empleados",
+												":id_empleado"
+											],
+											"variable": [
+												{
+													"key": "id_empleado",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un empleado con ese Identificador\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -1635,7 +2374,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombres\": \"Diego Alonso\",\r\n    \"apellidoMaterno\": \"Vargas\",\r\n    \"apellidoPaterno\": \"Machuca\",\r\n    \"correo\": \"diego.vargas92@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1\r\n}",
+									"raw": "{\r\n    \"nombres\": \"Diego Alonso\",\r\n    \"apellidoMaterno\": \"Vargas\",\r\n    \"apellidoPaterno\": \"Machuca\",\r\n    \"correo\": \"diego.vargas92@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1,\r\n    \"licenciaConducir\": \"\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1682,31 +2421,32 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos el empleado registrado exitosamente\",\r\n    \"data\": {\r\n        \"nombres\": \"Juan Jose\",\r\n        \"apellidoPaterno\": \"Alberto\",\r\n        \"apellidoMaterno\": \"Perez\",\r\n        \"dni\": \"92343212\",\r\n        \"contrasenia\": \"ejemplo123\"\r\n    }\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar roles",
-							"id": "9e000ce5-ff24-448c-9377-5bed39204dac",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/empleados/roles"
-							},
-							"response": [
+								},
 								{
-									"id": "da8a79e3-c85b-4ba5-affa-18d09a1b25b9",
-									"name": "ok - listar roles",
+									"id": "0003676b-8232-4957-b8cc-7b8151bb7735",
+									"name": "bad request - registrar empleado",
 									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"Diego Alonso\",\r\n    \"apellidoMaterno\": \"Vargas\",\r\n    \"apellidoPaterno\": \"Machuca\",\r\n    \"correo\": \"diego.vargas92@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/empleados"
 									},
-									"status": "OK",
-									"code": 200,
+									"status": "Bad Request",
+									"code": 400,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -1724,38 +2464,30 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Listando roles con exito\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"rol\": \"ADMIN\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"rol\": \"CHOFER\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"rol\": \"CLIENTE\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"rol\": \"COLABORADOR\"\r\n        }\r\n    ]\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "dd42815d-3593-4462-be24-9940848cb00b",
-									"name": "no content - listar roles",
+									"id": "f447f994-c959-4280-8480-f4b660585479",
+									"name": "internal server error - registrar empleado",
 									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay roles registrados en el sistema\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "160e682a-50bc-4b0d-9fb4-0dd17095a145",
-									"name": "internal server error - listar roles",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/empleados/roles"
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"Diego Alonso\",\r\n    \"apellidoMaterno\": \"Vargas\",\r\n    \"apellidoPaterno\": \"Machuca\",\r\n    \"correo\": \"diego.vargas92@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/empleados"
 									},
 									"status": "Internal Server Error",
 									"code": 500,
@@ -1768,6 +2500,44 @@
 											"type": "text"
 										}
 									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "274c02a8-0002-4d6f-9b11-e1b1abb5ea69",
+									"name": "conflict - registrar empleado",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"Diego Alonso\",\r\n    \"apellidoMaterno\": \"Vargas\",\r\n    \"apellidoPaterno\": \"Machuca\",\r\n    \"correo\": \"diego.vargas92@gmail.com\",\r\n    \"dni\": \"12345678\",\r\n    \"rol\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/empleados"
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
 									"cookie": [
 										{
 											"expires": "Invalid Date",
@@ -1776,7 +2546,7 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Dni o el correo del empleado coincide con los datos de un empleado dentro del sistema y no pueden repetirse\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
@@ -1853,7 +2623,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 200,\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"unidad_peso\": \"kilogramos\",\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
 								},
 								{
 									"id": "e0029ef0-143f-4d91-a808-4dd9ad94740c",
@@ -1897,7 +2667,93 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 404,\r\n    \"message\": \"el código de seguimiento no existe\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El codigo se seguimiento ingresado no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "1652debb-763a-442e-8c6c-dafbf8c3cf9f",
+									"name": "bad request - realizar seguimiento",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "200 - realizar seguimiento",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seguimiento",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "GR-2023-0045"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Código se seguimiento no existe o es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "effc53bb-2816-483b-9b98-383edc4b611a",
+									"name": "internal server error - realizar seguimiento",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "200 - realizar seguimiento",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"seguimiento",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "GR-2023-0045"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
@@ -1908,7 +2764,161 @@
 					"name": "Usuario",
 					"item": [
 						{
-							"name": "editar informacion",
+							"name": "crear usuario",
+							"id": "91c50a59-ff03-4e4b-88d5-af7693fd9f5d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - crear usuario",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/usuario"
+							},
+							"response": [
+								{
+									"id": "cd2e5c9e-f733-4d3c-90fe-e6f4a0263f07",
+									"name": "ok - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/usuario"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+								},
+								{
+									"id": "ee7a9b72-f728-42bc-9663-bcbb27035626",
+									"name": "bad request - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/usuario"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "70832564-13d7-40cc-87f0-9d73d8a6f0c2",
+									"name": "internal server error - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/usuario"
+									},
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "93729383-ce72-40fa-90ea-5773a9f32a82",
+									"name": "forbidden - crear usuario",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombres\": \"\",\r\n    \"apellidoPaterno\": \"\",\r\n    \"apellidoMaterno\": \"\",\r\n    \"dni\": \"\",\r\n    \"ruc\": \"\",\r\n    \"correo\": \"\",\r\n    \"contrasenia\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/usuario"
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Existe un usuario con el dni, ruc o correo. Intente nuevamente pero usando otros datos\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "editar usuario",
 							"id": "02b56773-167b-4c74-a765-0e4452e85b8a",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -1924,7 +2934,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dniuser\": \"12345678\",\r\n    \"contra\": \"nuevaContrasenia\"\r\n}",
+									"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dni\": \"12345678\",\r\n    \"ruc\": \"10123456788\",\r\n    \"nuevoCorreo\": \"ejemplo@gmail.com\",\r\n    \"nuevaContrasenia\": \"nuevaContrasenia\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1932,17 +2942,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+									"raw": "{{url}}/usuario/:idUsuario",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"cuentaEmpleado",
-										":id_empleado"
+										"usuario",
+										":idUsuario"
 									],
 									"variable": [
 										{
-											"key": "id_empleado",
+											"key": "idUsuario",
 											"value": "1"
 										}
 									]
@@ -1951,7 +2961,7 @@
 							"response": [
 								{
 									"id": "c547e77d-8769-402d-ac86-20cc411527d9",
-									"name": "ok - editar informacion",
+									"name": "ok - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [],
@@ -1965,17 +2975,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
-												":id_empleado"
+												"usuario",
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -1998,7 +3008,7 @@
 								},
 								{
 									"id": "d3478e0f-23ec-4379-8441-31d2c4ef8efa",
-									"name": "bad request - editar informacion",
+									"name": "bad request - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
@@ -2018,17 +3028,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
-												":id_empleado"
+												"usuario",
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -2047,11 +3057,11 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "41037893-34ed-4c0e-90f9-4e7804a86744",
-									"name": "not found - editar informacion",
+									"name": "not found - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
@@ -2071,17 +3081,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/cuentaEmpleado/:id_empleado",
+											"raw": "{{url}}/usuario/:idUsuario",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"cuentaEmpleado",
-												":id_empleado"
+												"usuario",
+												":idUsuario"
 											],
 											"variable": [
 												{
-													"key": "id_empleado",
+													"key": "idUsuario",
 													"value": "1"
 												}
 											]
@@ -2100,155 +3110,48 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"No existe empleado con el ID consultado\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "Iniciar sesion",
-							"id": "f052ec6e-9791-4598-9eb7-ab90313b8080",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - iniciar sesion",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/sesion"
-							},
-							"response": [
-								{
-									"id": "a324797e-482e-42b4-a956-a7910ac9e886",
-									"name": "ok - iniciar sesion",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"contrasenia\": \"admin123\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{url}}/sesion"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id ingresado no existe o es inválido, Revise si la Id pertenece a un empleado que exista en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "c749b10c-8845-4d16-bc13-c78d224714de",
-									"name": "not found - iniciar sesion",
+									"id": "d50c2caa-dfb5-4e98-91db-ade7b16bb00e",
+									"name": "forbidden - editar usuario",
 									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"contrasenia\": \"admin123\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{url}}/sesion"
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"las credenciales son incorrectas\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "Cerra sesion",
-							"id": "2b8174de-75bc-48e7-8954-7d581c9bb895",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - Cerra sesion",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/cerrarSesion"
-							},
-							"response": [
-								{
-									"id": "1d9298ed-83d2-446b-813a-8ac77df249e7",
-									"name": "ok - Cerra sesion",
-									"originalRequest": {
-										"method": "POST",
+										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "not found - iniciar sesion",
+												"value": "200 - editar informacion",
 												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "",
+											"raw": "{\r\n    \"nombres\": \"actualizar nombres\",\r\n    \"apellidomaterno\": \"nuevoApellido\",\r\n    \"apellidopaterno\": \"nuevoApellido\",\r\n    \"dni\": \"12345678\",\r\n    \"ruc\": \"\",\r\n    \"nuevoCorreo\": \"\",\r\n    \"nuevaContrasenia\": \"nuevaContrasenia\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "{{url}}/cerrarSesion"
+										"url": {
+											"raw": "{{url}}/usuario/:idUsuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"usuario",
+												":idUsuario"
+											],
+											"variable": [
+												{
+													"key": "idUsuario",
+													"value": "1"
+												}
+											]
+										}
 									},
-									"status": "OK",
-									"code": 200,
+									"status": "Forbidden",
+									"code": 403,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -2258,652 +3161,165 @@
 											"type": "text"
 										}
 									],
-									"cookie": [
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El correo, ruc o dni ya existe en el sistema relacionado a otro usuario\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "eliminar usuario",
+							"id": "c36c7907-509f-48ee-bbc5-4681879c45b9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - eliminar usuario",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/usuario/:idUsuario",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"usuario",
+										":idUsuario"
+									],
+									"variable": [
 										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
+											"key": "idUsuario",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "dcd58b23-040d-4719-b5c8-d44b1ca72d2e",
+									"name": "ok - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/usuario/:idUsuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"usuario",
+												":idUsuario"
+											],
+											"variable": [
+												{
+													"key": "idUsuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
 										}
 									],
+									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": 200,\r\n    \"message\": \"sesion cerrada\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El usuario fue eliminado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "1740b113-c879-49ba-a04c-16deeaf7a16e",
+									"name": "internal server error - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/usuario/:idUsuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"usuario",
+												":idUsuario"
+											],
+											"variable": [
+												{
+													"key": "idUsuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "556af523-f3e8-45b3-a782-f5886d4b95a0",
+									"name": "forbidden - eliminar usuario",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - eliminar usuario",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/usuario/:idUsuario",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"usuario",
+												":idUsuario"
+											],
+											"variable": [
+												{
+													"key": "idUsuario",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No se puede eliminar al empleado porque actualmente se encuentra en uso\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
 					"id": "420643ed-4cc2-44ea-9903-2af49ae9cc8e"
-				},
-				{
-					"name": "Establecimientos",
-					"item": [
-						{
-							"name": "listar establecimientos",
-							"id": "6a28bdcf-ad70-4c0b-a58b-879ef90b4979",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar establecimientos",
-										"type": "text"
-									}
-								],
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "8087f940-7c09-4c9d-a08a-311dae828eea",
-									"name": "ok - listar establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": []
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos de tablecimientos obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"idEst\": 1,\r\n            \"nombreEst\": \"Supermercados Plaza Vea - Real Plaza\",\r\n            \"direccion\": \"Av. Paseo de la República 3220\",\r\n            \"departamento\": \"Lima\",\r\n            \"provincia\": \"Lima\",\r\n            \"distrito\": \"San Isidro\"\r\n        },\r\n        {\r\n            \"idEst\": 2,\r\n            \"nombreEst\": \"Boticas Mi Farma - Sucursal Centro\",\r\n            \"direccion\": \"Calle Calle Mercaderes 124\",\r\n            \"departamento\": \"Arequipa\",\r\n            \"provincia\": \"Arequipa\",\r\n            \"distrito\": \"Arequipa\"\r\n        },\r\n        {\r\n            \"idEst\": 3,\r\n            \"nombreEst\": \"Restaurante El Provenir\",\r\n            \"direccion\": \"Jr. Pizarro 550\",\r\n            \"departamento\": \"La Libertad\",\r\n            \"provincia\": \"Trujillo\",\r\n            \"distrito\": \"Trujillo\"\r\n        },\r\n        {\r\n            \"idEst\": 4,\r\n            \"nombreEst\": \"Ferretería El Tornillo de Oro\",\r\n            \"direccion\": \"Av. Centenario 458\",\r\n            \"departamento\": \"Ancash\",\r\n            \"provincia\": \"Huaraz\",\r\n            \"distrito\": \"Independencia\"\r\n        },\r\n        {\r\n            \"idEst\": 5,\r\n            \"nombreEst\": \"Cafetería Aroma de Selva\",\r\n            \"direccion\": \"Calle Fitzcarrald 231\",\r\n            \"departamento\": \"Loreto\",\r\n            \"provincia\": \"Maynas\",\r\n            \"distrito\": \"Iquitos\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 100,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 8,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
-								},
-								{
-									"id": "9cec4b97-04be-4b07-9649-c59ff8ebcc69",
-									"name": "not content - listar establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "x-mock-response-name",
-												"value": "ok - listar establecimientos",
-												"type": "text"
-											}
-										],
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"la lista de establecimientos está vacía\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "nuevo establecimiento",
-							"id": "433be6c5-fac6-4178-bc05-fc87dd6e873c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - nuevo establecimiento",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idResponsable\": 101,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "81933de2-3d0d-4626-9cc8-4f87da0cd20c",
-									"name": "ok - nuevo establecimiento",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"establecimiento registrado correctamente\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "9977d89d-b9e6-48b0-aaf0-1bac31afbd1c",
-									"name": "bad request - nuevo establecimiento",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "x-mock-response-name",
-												"value": "ok - nuevo establecimiento",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"idResponsable\": 101,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{url}}/establecimientos"
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"la estructura es incorrecta\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "modificar establecimiento",
-							"id": "d09ac974-c520-4192-a010-28944acac8db",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - modificar establecimiento",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idResponsable\": 22,\r\n    \"nombreEst\": \"Almacen los chacoteros\",\r\n    \"direccion\": \"Av. El Polo 789\",\r\n    \"descripcion\": \"Almacen que almacena cosas.\",\r\n    \"latitud\": \"-12.1094\",\r\n    \"longitud\": \"-76.9731\",\r\n    \"distrito\": \"Santiago de Surco\",\r\n    \"provincia\": \"Lima\",\r\n    \"departamento\": \"Lima\",\r\n    \"tipoEst\": \"fiscal\",\r\n    \"activo\": true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{url}}/establecimientos"
-							},
-							"response": [
-								{
-									"id": "d46480c9-6fbc-4945-9a30-55aa4224fdd7",
-									"name": "ok - modificar establecimiento",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [],
-										"url": "{{url}}/establecimientos"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos actualizados correctamente\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar tipos de establecimientos",
-							"id": "006a57d0-d02e-4f05-b740-0f360ff4525c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar tipo establecimientos",
-										"type": "text"
-									}
-								],
-								"url": "{{url}}/establecimientos/tipos"
-							},
-							"response": [
-								{
-									"id": "8efa6b6d-6fcb-4e30-aeb0-28c9d641ee69",
-									"name": "ok - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"tipos de establecimientos obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipo\": \"oficina\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipo\": \"almacen\"\r\n        }\r\n    ]\r\n}"
-								},
-								{
-									"id": "695c6251-50b0-4540-8ee5-4c1805729020",
-									"name": "not content - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"no hay tipos de establecimientos registrados\",\r\n    \"data\": null\r\n}"
-								},
-								{
-									"id": "bc5c2558-a6c8-4d2b-bb94-e80ac9db2ae4",
-									"name": "server error - listar tipos de establecimientos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/tipos"
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"error en el servidor\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar responsables",
-							"id": "dfc5cf2e-046a-457c-8ee0-e4654e3fe346",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-mock-response-name",
-										"value": "ok - listar responsables",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/establecimientos/responsables?pagina=3",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"establecimientos",
-										"responsables"
-									],
-									"query": [
-										{
-											"key": "pagina",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"id": "e816af13-4733-45d4-93f2-334963384697",
-									"name": "ok - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/responsables"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de responsables obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Luan Del Sol\",\r\n            \"apellidoPaterno\": \"Huillca\",\r\n            \"apellidoMaterno\": \"Sanchez\",\r\n            \"dni\": \"12345678\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidoPaterno\": \"Villacorta\",\r\n            \"apellidoMaterno\": \"Mendoza\",\r\n            \"dni\": \"45781239\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidoPaterno\": \"Fernández\",\r\n            \"apellidoMaterno\": \"Paredes\",\r\n            \"dni\": \"70234511\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Mateo Sebastián\",\r\n            \"apellidoPaterno\": \"Quispe\",\r\n            \"apellidoMaterno\": \"Mamani\",\r\n            \"dni\": \"15896324\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 50,\r\n        \"total_paginas\": 5,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
-								},
-								{
-									"id": "d49e5ed2-f6c2-4d46-8c9f-5f3d464179d2",
-									"name": "no content - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/establecimientos/responsables"
-									},
-									"status": "No Content",
-									"code": 204,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Todos los empleados están ocupados\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
-								},
-								{
-									"id": "c9f23eb7-4f5c-4761-96cc-6c1d57db3651",
-									"name": "internal server error - listar responsables",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/establecimientos/responsables?pagina=3",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"establecimientos",
-												"responsables"
-											],
-											"query": [
-												{
-													"key": "pagina",
-													"value": "3"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
-								}
-							]
-						},
-						{
-							"name": "obtener información de un establecimiento",
-							"id": "02961f6d-0c4c-41a4-b077-fdc1d71f527c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/establecimientos/:id",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"establecimientos",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "1",
-											"description": "identificador único del establecimiento del cual quieres obtener su información."
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"id": "3fc71d12-5bd6-454c-a62b-fa794ea6fd9b",
-									"name": "ok - obtener información de un establecimiento",
-									"originalRequest": {
-										"method": "GET",
-										"header": []
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Obteniendo información completa del establecimiento\",\r\n    \"data\": {\r\n        \"idResponsable\": 2,\r\n        \"nombreEst\": \"Almacen los chacoteros\",\r\n        \"direccion\": \"Av. El Polo 789\",\r\n        \"descripcion\": \"Almacen que almacena cosas.\",\r\n        \"latitud\": \"-12.1094\",\r\n        \"longitud\": \"-76.9731\",\r\n        \"distrito\": \"Santiago de Surco\",\r\n        \"provincia\": \"Lima\",\r\n        \"departamento\": \"Lima\",\r\n        \"tipoEst\": 2,\r\n        \"activo\": true\r\n    } \r\n}"
-								},
-								{
-									"id": "39c8fc40-41b8-4689-b054-58c73a3776b6",
-									"name": "not found - obtener información de un establecimiento",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/establecimientos/:id",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"establecimientos",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "1",
-													"description": "identificador único del establecimiento del cual quieres obtener su información."
-												}
-											]
-										}
-									},
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [],
-									"responseTime": null,
-									"body": "{\n    \"status\": \"success\",\n    \"message\": \"El ID del establecimiento no está registrados\",\n    \"data\": null\n}"
-								}
-							]
-						}
-					],
-					"id": "16ca7b0a-b062-4732-8f94-171b84f670c5"
-				},
-				{
-					"name": "ubicacion",
-					"item": [
-						{
-							"name": "listar departamentos",
-							"id": "5051148b-53c1-4469-b149-a1a20a09be58",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/departamentos"
-							},
-							"response": [
-								{
-									"id": "48be1516-370c-403b-afff-1a3b0bb0d1c0",
-									"name": "listar departamentos",
-									"originalRequest": {
-										"method": "GET",
-										"header": [],
-										"url": "{{url}}/departamentos"
-									},
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json",
-											"description": "",
-											"type": "text"
-										}
-									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
-									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"datos de los departamentos obtenidos exitosamente\",\r\n    \"data\": null\r\n}"
-								}
-							]
-						},
-						{
-							"name": "listar provincias",
-							"id": "e686f3b5-f690-421e-aad4-799d02ed5dff",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/provincias"
-							},
-							"response": []
-						},
-						{
-							"name": "listar distritos",
-							"id": "acc479f8-728e-4e0e-a8e7-702105edc26c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{url}}/distritos"
-							},
-							"response": []
-						}
-					],
-					"id": "cf92390e-a480-4b9f-8f35-c529f9570d6d"
 				},
 				{
 					"name": "vehículos",
@@ -2959,49 +3375,2339 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de vehículos obtenido correctamente\",\r\n    \"data\": [\r\n        {\r\n            \"idvehempresa\": 1,\r\n            \"placa\": \"ABC-123\",\r\n            \"marca\": \"Volvo\",\r\n            \"modelo\": \"FH\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 32000\r\n        },\r\n        {\r\n            \"idvehempresa\": 2,\r\n            \"placa\": \"XYZ-987\",\r\n            \"marca\": \"Scania\",\r\n            \"modelo\": \"R500\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 30000\r\n        },\r\n        {\r\n            \"idvehempresa\": 3,\r\n            \"placa\": \"DEF-456\",\r\n            \"marca\": \"Mercedes-Benz\",\r\n            \"modelo\": \"Actros\",\r\n            \"anio\": \"2022\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 28000\r\n        },\r\n        {\r\n            \"idvehempresa\": 4,\r\n            \"placa\": \"GHI-789\",\r\n            \"marca\": \"Isuzu\",\r\n            \"modelo\": \"NLR\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"N2\",\r\n            \"capacidadCarga\": 5500\r\n        },\r\n        {\r\n            \"idvehempresa\": 5,\r\n            \"placa\": \"JKL-012\",\r\n            \"marca\": \"Freightliner\",\r\n            \"modelo\": \"Cascadia\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 35000\r\n        },\r\n        {\r\n            \"idvehempresa\": 6,\r\n            \"placa\": \"MNO-345\",\r\n            \"marca\": \"Hino\",\r\n            \"modelo\": \"500\",\r\n            \"anio\": \"2021\",\r\n            \"tipoVehiculo\": \"N3\",\r\n            \"capacidadCarga\": 12000\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
+								},
+								{
+									"id": "1089abaa-aee4-4f3b-82fc-b93c8d6372ba",
+									"name": "no content - listar vehiculos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - listar vehiculos",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vehiculos?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No existen vehiculos registrados en el sistema\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
+								},
+								{
+									"id": "c5046a46-7b59-41f3-8396-39d85b74a577",
+									"name": "internal server error - listar vehiculos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - listar vehiculos",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vehiculos?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
+								}
+							]
+						},
+						{
+							"name": "registrar vehiculo",
+							"id": "a0861e9b-b493-4ae4-a62c-879162e0872f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/vehiculos"
+							},
+							"response": [
+								{
+									"id": "d495651d-1848-4e36-8d32-1b3ed068506d",
+									"name": "ok - registrar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"ABC-123\",\r\n    \"marca\": \"Volvo\",\r\n    \"modelo\": \"FH\",\r\n    \"anio\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/vehiculos"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Vehículo registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "e9918d72-8c6a-4bdb-a20e-c48fe6005837",
+									"name": "bad request - registrar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/vehiculos"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La Body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "f3d78ab0-96b2-46fd-a105-26fb3a621d70",
+									"name": "internal server error - registrar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/vehiculos"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al precesar tu consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "d0bca527-1739-482f-87ca-d7a258603785",
+									"name": "forbidden - registrar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/vehiculos"
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La placa de vehículo ya está siendo usado por otro vehículo dentro del sistema\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "editar vehiculo",
+							"id": "e055021d-7aff-4f5c-888a-d156b5f417cf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vehiculos/:id_vehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										":id_vehiculo"
+									],
+									"variable": [
+										{
+											"key": "id_vehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "70ef37f8-3662-4489-bf2e-a76fde35213f",
+									"name": "ok - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del vehículo se actualizaron exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "16ff6358-0fd9-46bd-be7f-87b30de436df",
+									"name": "bad request - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "cc525c0f-c72f-4171-a33e-4c00c1168099",
+									"name": "forbidden - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La placa de vehículo ya está siendo usado por otro vehículo dentro del sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "2d2ae5d4-1a67-4669-bbaf-3c81832107e4",
+									"name": "internal server error  - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5c87b913-ac22-49d1-a6e2-b55b9569ebb9",
+									"name": "not found - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un vehículo con el Id que estas buscando\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "inhabilitar vehiculo",
+							"id": "02b5712f-7af6-4653-96c7-86e03614cac2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										"inhabilitar",
+										":id_vehiculo"
+									],
+									"variable": [
+										{
+											"key": "id_vehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "05c2a6e2-c1d2-48f7-aa15-177bbb19f859",
+									"name": "ok - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El vehículo fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "05c2462e-6b90-46cc-b641-229273954398",
+									"name": "bad request - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fc106702-60ca-439b-9d3a-3ad04ff4a884",
+									"name": "not found - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehículo no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "a4047035-b01e-4073-a40e-871f19f05ae2",
+									"name": "internal server error - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "02a2fb2a-95f6-4cd0-9f4b-9f7bdfef9aae",
+									"name": "forbidden - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El vehículo no puede ser inhabilitado porque actualmente está siendo utilizado\",\r\n    \"data\": null    \r\n}"
 								}
 							]
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
+				},
+				{
+					"name": "Transportistas",
+					"item": [
+						{
+							"name": "listar transportistas",
+							"id": "3e202122-972e-46bf-83fb-d06d33fe7c3b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/transportistas"
+							},
+							"response": [
+								{
+									"id": "309a8160-72d2-449a-a470-d0aa206187f2",
+									"name": "ok - listar transportistas",
+									"originalRequest": {
+										"method": "GET",
+										"header": []
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de transportistas obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidos\": \"García Mendoza\",\r\n            \"dni\": \"45678912\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"María Fernanda\",\r\n            \"apellidos\": \"Rodríguez Silva\",\r\n            \"dni\": \"72345678\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Juan Pablo\",\r\n            \"apellidos\": \"Villalobos Soto\",\r\n            \"dni\": \"10987654\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidos\": \"Palacios Quispe\",\r\n            \"dni\": \"44556677\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Diego Armando\",\r\n            \"apellidos\": \"Torres Rojas\",\r\n            \"dni\": \"33221100\"\r\n        }\r\n    ]\r\n}"
+								},
+								{
+									"id": "c180483b-27f4-4ba1-985a-3d2ef7fdeb02",
+									"name": "no content - listar transportistas",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/transportistas"
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay lista de transportistas registrados en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6509c9d7-ae6e-45f4-96ed-186c8167e1cd",
+									"name": "internal server error - listar transportistas",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/transportistas"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "94b53f5b-7233-439a-9b4e-17c00052bea7"
+				},
+				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "listar roles",
+							"id": "9e000ce5-ff24-448c-9377-5bed39204dac",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/roles"
+							},
+							"response": [
+								{
+									"id": "da8a79e3-c85b-4ba5-affa-18d09a1b25b9",
+									"name": "ok - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/roles"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Listando roles con exito\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"rol\": \"ADMIN\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"rol\": \"CHOFER\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"rol\": \"CLIENTE\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"rol\": \"COLABORADOR\"\r\n        }\r\n    ]\r\n}"
+								},
+								{
+									"id": "dd42815d-3593-4462-be24-9940848cb00b",
+									"name": "no content - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/roles"
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay roles registrados en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "160e682a-50bc-4b0d-9fb4-0dd17095a145",
+									"name": "internal server error - listar roles",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/roles"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "743cbb99-1a89-4934-9672-22908d90a4f1"
+				},
+				{
+					"name": "Productos",
+					"item": [
+						{
+							"name": "registrar producto",
+							"id": "8859fc73-d762-47f3-a451-678277e1c903",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/productos"
+							},
+							"response": [
+								{
+									"id": "e7000c51-f6d2-4452-90df-215560c61b05",
+									"name": "ok - registrar producto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "f9d48457-7770-4d81-afb2-ac7da9c95663",
+									"name": "bad request - registrar producto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"url": "{{url}}/productos"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "listar productos",
+							"id": "7b70712c-f46e-444a-b5dc-59688dacb520",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/productos?pagina=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"productos"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "ca55e55f-81c1-4a9d-acab-49715bba9187",
+									"name": "ok - listar productos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos?pagina=2",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de productos obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Castaña entera con cáscara\",\r\n            \"peso\": 5,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\r\n            \"peso\": 0.5,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"Harina de castaña\",\r\n            \"peso\": 1,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Aceite de castaña prensado en frío\",\r\n            \"peso\": 0.250,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombre\": \"Castañas tostadas y saladas\",\r\n            \"peso\": 0.200,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"nombre\": \"Crema de castañas (marrón glacé)\",\r\n            \"peso\": 0.350,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Castañas deshidratadas (pilongas)\",\r\n            \"peso\": 0.2,\r\n            \"unidadPeso\": \"kg\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 70,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 7\r\n    }\r\n}"
+								},
+								{
+									"id": "c4c6fe3b-2fa1-4307-84d7-3d6adc510d88",
+									"name": "no content - listar productos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos?pagina=2",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay productos registrados en el sistema\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
+								},
+								{
+									"id": "833404f2-45b3-4f49-927b-303f99c11931",
+									"name": "internal server error - listar productos",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos?pagina=2",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
+								}
+							]
+						},
+						{
+							"name": "inhabilitar producto",
+							"id": "0af7c134-13a5-4d09-bcc1-eefccd07e996",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/productos/inhabilitar/:idProducto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"productos",
+										"inhabilitar",
+										":idProducto"
+									],
+									"variable": [
+										{
+											"key": "idProducto",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "8fac8b02-4780-4af4-b6ef-2bfe09140115",
+									"name": "ok - inhabilitar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												"inhabilitar",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "d34338b2-71e0-49f0-8122-c5a368fb8dc0",
+									"name": "bad request - inhabilitar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												"inhabilitar",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "32f7b7fb-edc6-4c2d-a5c4-1b46dccd232d",
+									"name": "no content - inhabilitar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												"inhabilitar",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "a9fbe4fb-77b7-4fa5-bebf-91ee999bca3f",
+									"name": "forbidden - inhabilitar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/inhabilitar/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												"inhabilitar",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El producto no puede ser inhabilitado porque actualmente está siendo usado\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "modificar producto",
+							"id": "0f95d0fc-8601-450d-82e5-99136ed7a366",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/productos/:idProducto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"productos",
+										":idProducto"
+									],
+									"variable": [
+										{
+											"key": "idProducto",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "904312df-87ad-4b98-9ec4-85a5f4144b04",
+									"name": "ok - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5395f748-54b9-49eb-9e46-37395c624b78",
+									"name": "bad request - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "0fac6428-8f39-430d-976c-40ca97e18e2f",
+									"name": "no content - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6603a6ac-7d90-4936-a03a-dd3e94df0e1d",
+									"name": "forbidden - modificar producto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El producto no puede ser inhabilitado porque actualmente está siendo usado\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "d83dfe6e-f564-4402-ae58-3713ab591306"
+				},
+				{
+					"name": "Transporte",
+					"item": [
+						{
+							"name": "actualizar estado de transporte",
+							"id": "7c86dea8-3c6c-4d79-a3b8-4f9c6227bb71",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - actualizar estado de transporte",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/transporte/:codigo_seguimiento",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"transporte",
+										":codigo_seguimiento"
+									],
+									"variable": [
+										{
+											"key": "codigo_seguimiento",
+											"value": "COD-000001"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "2093d0b1-059c-4ba0-9ddc-c1f09a7b0d6f",
+									"name": "ok - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"transporte",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000001"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Estado de transporte actualizado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "678cc27c-fb4b-46ec-9291-06de34fc11fc",
+									"name": "bad request - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "200 - actualizar estado de transporte",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"evento\": \"Saliendo de Puerto Maldonado\",\r\n    \"fecha\": \"24 oct 2024\",\r\n    \"hora\": \"23:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"transporte",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000001"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5f1212e4-6588-4fe4-8ff9-db4692ebbfba",
+									"name": "internal server error - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - actualizar estado de transporte",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"transporte",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000001"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al procesar la consulta\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "613f3775-8f33-43bb-899b-63b8fb694ae4",
+									"name": "not found - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"transportistaid\": 1,\r\n    \"numero_registro_MTC\": \"15010001\",\r\n    \"remitente\": {\r\n        \"nombres_razonSocial\": \"Jennifer Elizh Benailda Corimoto\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"destinatario\": {\r\n        \"nombres_razonSocial\": \"Maria Julia Salazar Choque\",\r\n        \"tipo_documento\": \"RUC\",\r\n        \"numero_documento\": \"10723306529\"\r\n    },\r\n    \"bienes_transportados\": [\r\n        12,23,34,45,121\r\n    ],\r\n    \"carga\": {\r\n        \"unidad_medida\": \"KILOGRAMO\", // kilogramo o tonelada\r\n        \"peso_bruto_total\": 10\r\n    },\r\n    \"punto_partida\": {\r\n        \"departamento\": \"Madre De Dios\",\r\n        \"provincia\": \"Tambopata\",\r\n        \"distrito\": \"Laberinto\",\r\n        \"direccion_detallada\": \"Frente al colegio las piedras\"\r\n    },\r\n    \"punto_llegada\": {\r\n        \"departamento\": \"Cusco\",\r\n        \"provincia\": \"Acomayo\",\r\n        \"distrito\": \"Acopia\",\r\n        \"direccion_detallada\": \"Cerca a la Plaza Vea\"\r\n    },\r\n    \"datos_de_transporte\": {\r\n        \"placa_vehiculo\": \"ABC-123\",\r\n        \"dni_conductor\": \"44556677\",\r\n        \"licencia_conductor\": \"Q44556677\",\r\n        \"fecha_inicio_traslado\": \"2026-01-27\",\r\n        \"indicadores_retorno\": {\r\n            \"retorno_envases_vacios\": false,\r\n            \"retorno_vehiculo_vacio\": false,\r\n            \"transporte_subcontratado\": false\r\n        }\r\n    },\r\n    \"pagador_flete\": {\r\n        \"responsable\": \"remitente\", // remitente, subcontratador, tercero\r\n        \"tipo_documento\": \"ruc\", // ruc, dni, etc...\r\n        \"numero_documento\": \"83340653\",\r\n        \"nombres_razonSocial\": \"Facebook SAC\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"transporte",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000101"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Identificador únido para realizar el seguimiento no existe o es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "eda21162-df68-455c-9e34-e29b445a5453",
+									"name": "forbidden - actualizar estado de transporte",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - actualizar estado de transporte",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"transporte",
+												":codigo_seguimiento"
+											],
+											"variable": [
+												{
+													"key": "codigo_seguimiento",
+													"value": "COD-000001"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No puedes actualizar el estado de un transporte que llegó a su destino\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "152b0413-a246-4e0f-8644-3bc529f1593a"
+				},
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "iniciar sesion",
+							"id": "f052ec6e-9791-4598-9eb7-ab90313b8080",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - iniciar sesion",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/login"
+							},
+							"response": [
+								{
+									"id": "a324797e-482e-42b4-a956-a7910ac9e886",
+									"name": "ok - iniciar sesion",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"contrasenia\": \"admin123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/login"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+								},
+								{
+									"id": "c749b10c-8845-4d16-bc13-c78d224714de",
+									"name": "not found - iniciar sesion",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"contrasenia\": \"admin123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/login"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Las credenciales son incorrectas\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "ffc926d2-fd43-4a3f-a759-635c2d3fcf1f",
+									"name": "internal server error - iniciar sesion",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-mock-response-name",
+												"value": "ok - iniciar sesion",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/login"
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "c492856b-b41f-43a7-8095-2be123736adc"
+				},
+				{
+					"name": "Chofer",
+					"item": [
+						{
+							"name": "agregar datos de chofer",
+							"id": "fa0cdf2f-7128-459c-96be-97efce40723c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/chofer/:idChofer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"chofer",
+										":idChofer"
+									],
+									"variable": [
+										{
+											"key": "idChofer",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "4fdb21ac-7e8a-4047-8c38-b81452b9cd53",
+									"name": "ok - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos se agregaron al chofer exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fd3f58bb-af22-4205-8031-29939387ada0",
+									"name": "bad request - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "327abc6a-0d2b-4cad-865b-d06d99267141",
+									"name": "not found - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del chofer no existe dentro del sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "737d8c70-6191-4ea9-8ccc-a3a35747bf9b",
+									"name": "forbidden - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El chofer ya tiene registrado una licencia en el sistema\",\r\n    \"data\": {\r\n        \"licencia\": \"EJEM0231\"\r\n    }\r\n}"
+								}
+							]
+						}
+					],
+					"id": "769501c7-60a8-4a72-a538-518077fa0a4f"
 				}
 			],
 			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
-		},
-		{
-			"name": "USUARIOS",
-			"item": [
-				{
-					"name": "create",
-					"id": "c6625c43-f88f-4658-9033-cabddd7a15ee",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "bearer {{tokenZ}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"DANIA LUZ\",\r\n    \"apellidopaterno\": \"MAMANI\",\r\n    \"apellidomaterno\": \"CONDORI\",\r\n    \"dni\": \"75959264\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{url}}/api/usuarios"
-					},
-					"response": []
-				}
-			],
-			"id": "854b2ad0-e2dd-473a-97c3-3de045a5dbb2",
-			"description": "consultas para los usuarios"
 		}
 	]
 }
