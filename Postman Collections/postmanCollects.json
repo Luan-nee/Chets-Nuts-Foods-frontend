@@ -5599,6 +5599,106 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "327abc6a-0d2b-4cad-865b-d06d99267141",
+									"name": "not found - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del chofer no existe dentro del sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "737d8c70-6191-4ea9-8ccc-a3a35747bf9b",
+									"name": "agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El chofer ya tiene registrado una licencia en el sistema\",\r\n    \"data\": {\r\n        \"licencia\": \"EJEM0231\"\r\n    }\r\n}"
 								}
 							]
 						}
