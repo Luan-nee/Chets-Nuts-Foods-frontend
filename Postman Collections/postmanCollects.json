@@ -4273,7 +4273,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{url}}/empleados/roles"
+								"url": "{{url}}/roles"
 							},
 							"response": [
 								{
@@ -4282,7 +4282,7 @@
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"url": "{{url}}/empleados/roles"
+										"url": "{{url}}/roles"
 									},
 									"status": "OK",
 									"code": 200,
@@ -4311,7 +4311,7 @@
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"url": "{{url}}/empleados/roles"
+										"url": "{{url}}/roles"
 									},
 									"status": "No Content",
 									"code": 204,
@@ -4334,7 +4334,7 @@
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
-										"url": "{{url}}/empleados/roles"
+										"url": "{{url}}/roles"
 									},
 									"status": "Internal Server Error",
 									"code": 500,
