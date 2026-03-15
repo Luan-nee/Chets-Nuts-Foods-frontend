@@ -5471,7 +5471,7 @@
 					"name": "Chofer",
 					"item": [
 						{
-							"name": "New Request",
+							"name": "agregar datos de chofer",
 							"id": "fa0cdf2f-7128-459c-96be-97efce40723c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -5479,9 +5479,128 @@
 							"request": {
 								"method": "POST",
 								"header": [],
-								"url": "{{url}}/chofer"
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/chofer/:idChofer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"chofer",
+										":idChofer"
+									],
+									"variable": [
+										{
+											"key": "idChofer",
+											"value": "1"
+										}
+									]
+								}
 							},
-							"response": []
+							"response": [
+								{
+									"id": "4fdb21ac-7e8a-4047-8c38-b81452b9cd53",
+									"name": "ok - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos se agregaron al chofer exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "fd3f58bb-af22-4205-8031-29939387ada0",
+									"name": "bad request - agregar datos de chofer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"licenciaConducir\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/chofer/:idChofer",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"chofer",
+												":idChofer"
+											],
+											"variable": [
+												{
+													"key": "idChofer",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								}
+							]
 						}
 					],
 					"id": "769501c7-60a8-4a72-a538-518077fa0a4f"
