@@ -3683,7 +3683,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del vehículo se actualizó exitosamente\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del vehículo se actualizaron exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "16ff6358-0fd9-46bd-be7f-87b30de436df",
@@ -3824,6 +3824,53 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "5c87b913-ac22-49d1-a6e2-b55b9569ebb9",
+									"name": "not found - editar vehiculo",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"\",\r\n    \"tipoVehiculo\": \"\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un vehículo con el Id que estas buscando\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						},
@@ -3846,12 +3893,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/vehiculos/:id_vehiculo",
+									"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"vehiculos",
+										"inhabilitar",
 										":id_vehiculo"
 									],
 									"variable": [
@@ -3870,12 +3918,13 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"vehiculos",
+												"inhabilitar",
 												":id_vehiculo"
 											],
 											"variable": [
@@ -3923,12 +3972,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"vehiculos",
+												"inhabilitar",
 												":id_vehiculo"
 											],
 											"variable": [
@@ -3976,12 +4026,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"vehiculos",
+												"inhabilitar",
 												":id_vehiculo"
 											],
 											"variable": [
@@ -4023,12 +4074,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"vehiculos",
+												"inhabilitar",
 												":id_vehiculo"
 											],
 											"variable": [
@@ -4070,12 +4122,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/vehiculos/:id_vehiculo",
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"vehiculos",
+												"inhabilitar",
 												":id_vehiculo"
 											],
 											"variable": [
