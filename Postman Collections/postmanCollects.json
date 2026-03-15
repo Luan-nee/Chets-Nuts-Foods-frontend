@@ -5466,6 +5466,25 @@
 						}
 					],
 					"id": "c492856b-b41f-43a7-8095-2be123736adc"
+				},
+				{
+					"name": "Chofer",
+					"item": [
+						{
+							"name": "New Request",
+							"id": "fa0cdf2f-7128-459c-96be-97efce40723c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{url}}/chofer"
+							},
+							"response": []
+						}
+					],
+					"id": "769501c7-60a8-4a72-a538-518077fa0a4f"
 				}
 			],
 			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
