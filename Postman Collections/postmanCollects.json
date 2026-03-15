@@ -4788,15 +4788,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/productos/modificar?idProducto=1",
+									"raw": "{{url}}/productos/:idProducto",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"productos",
-										"modificar"
+										":idProducto"
 									],
-									"query": [
+									"variable": [
 										{
 											"key": "idProducto",
 											"value": "1"
@@ -4827,13 +4827,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/productos/modificar/:idProducto",
+											"raw": "{{url}}/productos/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar",
 												":idProducto"
 											],
 											"variable": [
@@ -4887,13 +4886,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/productos/modificar/:idProducto",
+											"raw": "{{url}}/productos/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar",
 												":idProducto"
 											],
 											"variable": [
@@ -4940,13 +4938,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/productos/modificar/:idProducto",
+											"raw": "{{url}}/productos/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar",
 												":idProducto"
 											],
 											"variable": [
@@ -4994,13 +4991,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/productos/modificar/:idProducto",
+											"raw": "{{url}}/productos/:idProducto",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"productos",
-												"modificar",
 												":idProducto"
 											],
 											"variable": [
