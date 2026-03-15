@@ -1852,7 +1852,7 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "PATCH",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "x-mock-response-name",
@@ -1891,7 +1891,7 @@
 									"id": "62424521-099a-42df-befa-12e680d041e1",
 									"name": "ok - deshabilitar empleado",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "PUT",
 										"header": [],
 										"body": {
 											"mode": "raw",
@@ -1944,7 +1944,7 @@
 									"id": "aaa837c2-d5df-426e-b48a-bfd63f53b2b7",
 									"name": "bad request - deshabilitar empleado",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
@@ -1997,7 +1997,7 @@
 									"id": "23ffc091-425a-4f86-bf78-2561e70c590d",
 									"name": "not found - deshabilitar empleado",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
@@ -2050,7 +2050,7 @@
 									"id": "64ea7556-6346-41fd-a0cb-2f52b6ba6d49",
 									"name": "internal server error - deshabilitar empleado",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
