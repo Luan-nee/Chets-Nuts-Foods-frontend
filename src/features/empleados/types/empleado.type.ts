@@ -44,3 +44,17 @@ export type CreateEmpleadoData = {
   rol: number;
   contrasenia_temporal: string;
 }
+
+export type DeshabilitarEmpleado = {
+  motivo: string;
+};
+
+export type EditarEmpleado = {
+  nombres: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  correo: string;
+  dni: string;
+  rol: number;
+  restablecerContrasenia: boolean;
+}
