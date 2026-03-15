@@ -10,7 +10,7 @@ export default class ChoferApi extends BaseRequestApi {
   private base_url = `${url_base}/chofer`;
 
   /* AGREGAR DATOS DE CHOFER */
-  public async iniciarSesion<T>(body: Licencia): Promise<BodyResponse<T>> {
+  public async agregarDatosDeChofer<T>(body: Licencia): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataIniciarSesion as unknown as BodyResponse<T>;
     } else {
