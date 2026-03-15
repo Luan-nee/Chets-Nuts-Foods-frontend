@@ -5088,12 +5088,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"guiasEmision",
+												"transporte",
 												":codigo_seguimiento"
 											],
 											"variable": [
@@ -5147,12 +5147,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"guiasEmision",
+												"transporte",
 												":codigo_seguimiento"
 											],
 											"variable": [
@@ -5200,12 +5200,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"guiasEmision",
+												"transporte",
 												":codigo_seguimiento"
 											],
 											"variable": [
@@ -5245,12 +5245,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"guiasEmision",
+												"transporte",
 												":codigo_seguimiento"
 											],
 											"variable": [
@@ -5296,12 +5296,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
+											"raw": "{{url}}/transporte/:codigo_seguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
-												"guiasEmision",
+												"transporte",
 												":codigo_seguimiento"
 											],
 											"variable": [
