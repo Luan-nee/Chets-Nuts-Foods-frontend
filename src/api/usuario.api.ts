@@ -3,7 +3,7 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponse } from '../types/bodyResponse.type';
-import type { RegistroUsuario } from '../types/usuario.type';
+import type { RegistroUsuario, EditarUsuario } from '../types/usuario.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
 export default class Usuario extends BaseRequestApi {
@@ -25,5 +25,31 @@ export default class Usuario extends BaseRequestApi {
   }
   
   /* EDITAR USUARIO */
+  public async editarUsuario<T>(idUsuario: number, bodyUsuario: EditarUsuario): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataIniciarSesion as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${idUsuario}`, {
+        method: 'PATCH',
+        headers: {
+          'x-mock-response-name': 'ok - editar usuario'
+        },
+        body: JSON.stringify(bodyUsuario)
+      });
+    }
+  }
+
   /* ELIMINAR USUARIO */
+  public async eliminarUsuario<T>(idUsuario: number): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataIniciarSesion as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${idUsuario}`, {
+        method: 'DELETE',
+        headers: {
+          'x-mock-response-name': 'ok - eliminar usuario'
+        }
+      });
+    }
+  }
 }

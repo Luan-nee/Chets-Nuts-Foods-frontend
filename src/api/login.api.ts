@@ -9,6 +9,7 @@ import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 export default class login extends BaseRequestApi {
   private base_url = `${url_base}/usuario`;
 
+  /* INICIAR SESION */
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataIniciarSesion as unknown as BodyResponse<T>;
@@ -21,6 +22,6 @@ export default class login extends BaseRequestApi {
         body: JSON.stringify(credenciales)
       });
     }
-
   }
+  
 }

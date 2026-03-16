@@ -15,6 +15,15 @@ export type RegistroUsuario = {
   contrasenia: string
 }
 
+export type EditarUsuario = {
+  nombres: string,
+  apellidoPaterno: string,
+  apellidoMaterno: string,
+  dni: string,
+  ruc: string,
+  correo: string,
+  contrasenia: string
+}
 
 export type ResponseSesion = {
   tokenZ: string;
