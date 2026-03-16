@@ -3882,7 +3882,7 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "PATCH",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -3916,7 +3916,7 @@
 									"id": "05c2a6e2-c1d2-48f7-aa15-177bbb19f859",
 									"name": "ok - inhabilitar vehiculo",
 									"originalRequest": {
-										"method": "DELETE",
+										"method": "POST",
 										"header": [],
 										"url": {
 											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
@@ -3961,7 +3961,7 @@
 									"id": "05c2462e-6b90-46cc-b641-229273954398",
 									"name": "bad request - inhabilitar vehiculo",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "POST",
 										"header": [],
 										"body": {
 											"mode": "raw",
@@ -4015,7 +4015,7 @@
 									"id": "fc106702-60ca-439b-9d3a-3ad04ff4a884",
 									"name": "not found - inhabilitar vehiculo",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "POST",
 										"header": [],
 										"body": {
 											"mode": "raw",
@@ -4063,7 +4063,7 @@
 									"id": "a4047035-b01e-4073-a40e-871f19f05ae2",
 									"name": "internal server error - inhabilitar vehiculo",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "POST",
 										"header": [],
 										"body": {
 											"mode": "raw",
@@ -4111,7 +4111,7 @@
 									"id": "02a2fb2a-95f6-4cd0-9f4b-9f7bdfef9aae",
 									"name": "forbidden - inhabilitar vehiculo",
 									"originalRequest": {
-										"method": "PATCH",
+										"method": "POST",
 										"header": [],
 										"body": {
 											"mode": "raw",
