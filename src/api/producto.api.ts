@@ -3,7 +3,7 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponseWithPagination, BodyResponse } from '../types/bodyResponse.type';
-import type { Producto } from '../features/productos/types/producto.type';
+import type { ModificarProducto, Producto } from '../features/productos/types/producto.type';
 import dataVehiculos from '../json/vehiculos/get-ok-listarVehiculos.json';
 
 export default class ProductoApi extends BaseRequestApi {
@@ -53,7 +53,7 @@ export default class ProductoApi extends BaseRequestApi {
   }
 
   /* MODIFICAR PRODUCTO */
-  public async modificarProducto<T>(idProducto: number, body: Producto): Promise<BodyResponse<T>> {
+  public async modificarProducto<T>(idProducto: number, body: ModificarProducto): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataVehiculos as unknown as BodyResponse<T>;
     } else {
