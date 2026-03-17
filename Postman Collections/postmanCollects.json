@@ -4631,6 +4631,11 @@
 												"key": "Content-Type",
 												"value": "application/json",
 												"type": "text"
+											},
+											{
+												"key": "Access-Control-Allow-Origin",
+												"value": "*",
+												"type": "text"
 											}
 										],
 										"body": {
