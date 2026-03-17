@@ -5059,7 +5059,13 @@
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "x-mock-response-name",
+										"value": "ok - obtener detalles de un producto",
+										"type": "text"
+									}
+								],
 								"url": {
 									"raw": "{{url}}/productos/:idProducto",
 									"host": [
@@ -5150,7 +5156,83 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en la base de datos\",\r\n    \"data\": null\r\n}"
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "a363d77c-1c52-4205-bf78-ef4aea1eba31",
+									"name": "internal server error - obtener detalles de un producto",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "51120b66-8286-4af3-b945-1213be85447d",
+									"name": "bad request - obtener detalles de un producto",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del producto es inválido, siempre será un numero\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
