@@ -5050,6 +5050,71 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El producto no puede ser inhabilitado porque actualmente está siendo usado\",\r\n    \"data\": null\r\n}"
 								}
 							]
+						},
+						{
+							"name": "obtener detalles de un producto",
+							"id": "2f1dd0a3-657f-455e-bcfe-c941dce9b6b3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/productos/:idProducto",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"productos",
+										":idProducto"
+									],
+									"variable": [
+										{
+											"key": "idProducto",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "cf7cc482-be6c-4c43-a4f1-ff2dd3c7c540",
+									"name": "ok - obtener detalles de un producto",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\",\r\n        \"peso\": 5,\r\n        \"unidadPeso\": \"kg\"\r\n    }\r\n}"
+								}
+							]
 						}
 					],
 					"id": "d83dfe6e-f564-4402-ae58-3713ab591306"
