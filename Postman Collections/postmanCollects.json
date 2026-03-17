@@ -5112,7 +5112,45 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\",\r\n        \"peso\": 5,\r\n        \"unidadPeso\": \"kg\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\",\r\n        \"peso\": 5,\r\n        \"unidadMedidaId\": 1\r\n    }\r\n}"
+								},
+								{
+									"id": "479496fe-d153-456b-b04a-4c080b963130",
+									"name": "not found - obtener detalles de un producto",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/productos/:idProducto",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"productos",
+												":idProducto"
+											],
+											"variable": [
+												{
+													"key": "idProducto",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en la base de datos\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
