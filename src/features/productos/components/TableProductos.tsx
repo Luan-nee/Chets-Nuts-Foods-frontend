@@ -18,7 +18,8 @@ export default function TableProductos({
   const tableHeader: string[] = [
     "Nº",
     "Nombre",
-    "Peso"
+    "Peso",
+    "Acciones"
   ];
   const {
     data: productos,
@@ -91,7 +92,7 @@ export default function TableProductos({
             </td>
             <td className="px-6 py-4">
               <span className="text-white">
-                {producto.peso} {producto.unidadMedida}
+                {producto.peso} {producto.unidadPeso}
               </span>
             </td>
             <td className="px-6 py-4">

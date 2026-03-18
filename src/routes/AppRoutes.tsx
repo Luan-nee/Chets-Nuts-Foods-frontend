@@ -9,6 +9,7 @@ import { AuthProvider } from '../context/AuthContext';
 import Trabajadores from '../pages/administrador/Trabajadores';
 import Vehiculos from '../pages/administrador/Vehiculos';
 import Configuraciones from '../pages/administrador/Configuraciones';
+import Productos from '../pages/administrador/Productos';
 
 export default function AppRoutes() {
   return (
@@ -24,6 +25,16 @@ export default function AppRoutes() {
                   <ListaGre />
                 </MainLayout>
               </PrivateRoute> 
+            }
+          />
+          <Route
+            path="/productos"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Productos />
+                </MainLayout>
+              </PrivateRoute>
             }
           />
           <Route

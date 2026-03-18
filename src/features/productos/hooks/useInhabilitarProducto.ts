@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // importación de clases como servicios
 import ProductoService from '../services/producto.service';
 
@@ -11,17 +11,15 @@ interface FetchState {
 
 export const useInhabilitarProducto = (): FetchState => {
   const productoService = new ProductoService();
-  const [idProducto, setIdProducto] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   // Función asíncrona para obtener los datos
   const refresh = async (id: number) => {
-    setIdProducto(id);
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await productoService.inhabilitarProducto(idProducto as number);
+      const response = await productoService.inhabilitarProducto(id);
       // Manejo de errores basado en el estado y el mensaje de la respuesta
       if (response.status !== "success") {
         throw new Error(response.message);
@@ -33,11 +31,6 @@ export const useInhabilitarProducto = (): FetchState => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    refresh(idProducto as number);
-    console.log("useInhabilitarProducto: el producto ha sido inhabilitado");
-  }, []);
 
   return { isLoading, isError, refresh};
 };

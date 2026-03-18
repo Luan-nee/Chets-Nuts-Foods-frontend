@@ -52,7 +52,7 @@ export const useFetchProductos = (): FetchState => {
   useEffect(() => {
     fetchData(pagina);
     console.log("useFetchProductos: datos de productos obtenidos");
-  }, []);
+  }, [pagina]);
 
   return { data, isLoading, isError, setPagina, fetchData, infoPaginacion};
 };

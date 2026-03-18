@@ -8,17 +8,24 @@ export type ProductoListado = {
   id: number;
   nombre: string;
   peso: number;
-  unidadMedida: string;
+  unidadPeso: string;
 }
 
 export type CrearProducto = {
   nombre: string;
   peso: number;
-  unidadMedida: string;
+  unidadMedidaId: number;
 }
 
 export type ModificarProducto = {
   nombre: string;
   peso: number;
-  unidadMedida: string;
+  unidadMedida: number;
+}
+
+export type DetallesProducto = {
+  id: number;
+  nombre: string;
+  peso: number;
+  unidadMedidaId: number;
 }

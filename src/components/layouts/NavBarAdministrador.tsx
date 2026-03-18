@@ -20,6 +20,7 @@ export default function NavBarAdministrador() {
     { icon: Package, label: 'Guías de Remisión', anchor: '/guias' },
     { icon: Store, label: 'Establecimientos', anchor: '/establecimientos' },
     { icon: Users, label: 'Trabajadores', anchor: '/trabajadores' },
+    { icon: Package, label: 'Productos', anchor: '/productos' },
     { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' },
     { icon: Settings, label: 'Configuraciones', anchor: '/configuraciones' }
   ];
