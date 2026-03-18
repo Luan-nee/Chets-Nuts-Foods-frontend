@@ -4154,45 +4154,6 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El vehículo no puede ser inhabilitado porque actualmente está siendo utilizado\",\r\n    \"data\": null    \r\n}"
-								},
-								{
-									"id": "7f89df05-e296-4baa-8dd4-e0590e49a7ad",
-									"name": "ok - inhabilitar vehiculo",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"vehiculos",
-												"inhabilitar",
-												":id_vehiculo"
-											],
-											"variable": [
-												{
-													"key": "id_vehiculo",
-													"value": "1"
-												}
-											]
-										}
-									},
-									"_postman_previewlanguage": null,
-									"header": null,
-									"cookie": [],
-									"responseTime": null,
-									"body": null
 								}
 							]
 						},
@@ -4222,7 +4183,44 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"id": "e531901d-f839-4fa0-8a7b-6c300ccc8a54",
+									"name": "ok - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": \"toyota\",\r\n        \"modelo\": \"corolla\",\r\n        \"anioFabricacion\": \"2024\",\r\n        \"tipoVehiculo\": \"M3\",\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
+								}
+							]
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
