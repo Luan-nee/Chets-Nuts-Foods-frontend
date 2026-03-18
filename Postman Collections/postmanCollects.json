@@ -4154,8 +4154,75 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El vehículo no puede ser inhabilitado porque actualmente está siendo utilizado\",\r\n    \"data\": null    \r\n}"
+								},
+								{
+									"id": "7f89df05-e296-4baa-8dd4-e0590e49a7ad",
+									"name": "ok - inhabilitar vehiculo",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/vehiculos/inhabilitar/:id_vehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												"inhabilitar",
+												":id_vehiculo"
+											],
+											"variable": [
+												{
+													"key": "id_vehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
 								}
 							]
+						},
+						{
+							"name": "obtener detalles de un vehiculo",
+							"id": "f6c098f4-06f8-4b16-a1b1-278b8925193b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vehiculos/:idVehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										":idVehiculo"
+									],
+									"variable": [
+										{
+											"key": "idVehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
