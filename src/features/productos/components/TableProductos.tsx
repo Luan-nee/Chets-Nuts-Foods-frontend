@@ -1,4 +1,4 @@
-import { Edit } from "lucide-react";
+import { Edit, Trash2} from "lucide-react";
 
 import { useFetchProductos } from "../hooks/useFetchProductos";
 // importación de tipos
@@ -105,6 +105,16 @@ export default function TableProductos({
                 }}
               >
                 <Edit className="w-4 h-4 text-gray-400" />
+              </button>
+              <button
+                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                title="Eliminar"
+                onClick={() => {
+                  setSelectProductoId(producto.id);
+                  showFormEdit(true);
+                }}
+              >
+                <Trash2 className="w-4 h-4 text-gray-400" />
               </button>
             </td>
           </tr>
