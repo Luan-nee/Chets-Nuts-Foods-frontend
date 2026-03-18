@@ -4207,6 +4207,8 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -4219,6 +4221,120 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": \"toyota\",\r\n        \"modelo\": \"corolla\",\r\n        \"anioFabricacion\": \"2024\",\r\n        \"tipoVehiculo\": \"M3\",\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
+								},
+								{
+									"id": "95ecc633-c832-4482-873d-bd7a89de441d",
+									"name": "not found - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un vehiculo con el ID que estás buscando\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "80b2d3b0-b290-4a2b-b0ce-2574c0ccf9d3",
+									"name": "bad request - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "98e5af45-265f-404d-8803-5b1871d95aa0",
+									"name": "internal server error - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al precesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
