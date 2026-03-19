@@ -3374,7 +3374,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de vehículos obtenido correctamente\",\r\n    \"data\": [\r\n        {\r\n            \"idvehempresa\": 1,\r\n            \"placa\": \"ABC-123\",\r\n            \"marca\": \"Volvo\",\r\n            \"modelo\": \"FH\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 32000\r\n        },\r\n        {\r\n            \"idvehempresa\": 2,\r\n            \"placa\": \"XYZ-987\",\r\n            \"marca\": \"Scania\",\r\n            \"modelo\": \"R500\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 30000\r\n        },\r\n        {\r\n            \"idvehempresa\": 3,\r\n            \"placa\": \"DEF-456\",\r\n            \"marca\": \"Mercedes-Benz\",\r\n            \"modelo\": \"Actros\",\r\n            \"anio\": \"2022\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 28000\r\n        },\r\n        {\r\n            \"idvehempresa\": 4,\r\n            \"placa\": \"GHI-789\",\r\n            \"marca\": \"Isuzu\",\r\n            \"modelo\": \"NLR\",\r\n            \"anio\": \"2024\",\r\n            \"tipoVehiculo\": \"N2\",\r\n            \"capacidadCarga\": 5500\r\n        },\r\n        {\r\n            \"idvehempresa\": 5,\r\n            \"placa\": \"JKL-012\",\r\n            \"marca\": \"Freightliner\",\r\n            \"modelo\": \"Cascadia\",\r\n            \"anio\": \"2023\",\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 35000\r\n        },\r\n        {\r\n            \"idvehempresa\": 6,\r\n            \"placa\": \"MNO-345\",\r\n            \"marca\": \"Hino\",\r\n            \"modelo\": \"500\",\r\n            \"anio\": \"2021\",\r\n            \"tipoVehiculo\": \"N3\",\r\n            \"capacidadCarga\": 12000\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de vehículos obtenido correctamente\",\r\n    \"data\": [\r\n        {\r\n            \"idvehempresa\": 1,\r\n            \"placa\": \"ABC-123\",\r\n            \"marca\": \"Volvo\",\r\n            \"modelo\": \"FH\",\r\n            \"anio\": 2024,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 32000\r\n        },\r\n        {\r\n            \"idvehempresa\": 2,\r\n            \"placa\": \"XYZ-987\",\r\n            \"marca\": \"Scania\",\r\n            \"modelo\": \"R500\",\r\n            \"anio\": 2023,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 30000\r\n        },\r\n        {\r\n            \"idvehempresa\": 3,\r\n            \"placa\": \"DEF-456\",\r\n            \"marca\": \"Mercedes-Benz\",\r\n            \"modelo\": \"Actros\",\r\n            \"anio\": 2022,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 28000\r\n        },\r\n        {\r\n            \"idvehempresa\": 4,\r\n            \"placa\": \"GHI-789\",\r\n            \"marca\": \"Isuzu\",\r\n            \"modelo\": \"NLR\",\r\n            \"anio\": 2024,\r\n            \"tipoVehiculo\": \"N2\",\r\n            \"capacidadCarga\": 5500\r\n        },\r\n        {\r\n            \"idvehempresa\": 5,\r\n            \"placa\": \"JKL-012\",\r\n            \"marca\": \"Freightliner\",\r\n            \"modelo\": \"Cascadia\",\r\n            \"anio\": 2023,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 35000\r\n        },\r\n        {\r\n            \"idvehempresa\": 6,\r\n            \"placa\": \"MNO-345\",\r\n            \"marca\": \"Hino\",\r\n            \"modelo\": \"500\",\r\n            \"anio\": 2021,\r\n            \"tipoVehiculo\": \"N3\",\r\n            \"capacidadCarga\": 12000\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
 								},
 								{
 									"id": "1089abaa-aee4-4f3b-82fc-b93c8d6372ba",
@@ -4154,6 +4154,187 @@
 									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El vehículo no puede ser inhabilitado porque actualmente está siendo utilizado\",\r\n    \"data\": null    \r\n}"
+								}
+							]
+						},
+						{
+							"name": "obtener detalles de un vehiculo",
+							"id": "f6c098f4-06f8-4b16-a1b1-278b8925193b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vehiculos/:idVehiculo",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vehiculos",
+										":idVehiculo"
+									],
+									"variable": [
+										{
+											"key": "idVehiculo",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "e531901d-f839-4fa0-8a7b-6c300ccc8a54",
+									"name": "ok - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": \"toyota\",\r\n        \"modelo\": \"corolla\",\r\n        \"anioFabricacion\": 2024,\r\n        \"tipoVehiculo\": \"M3\",\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
+								},
+								{
+									"id": "95ecc633-c832-4482-873d-bd7a89de441d",
+									"name": "not found - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un vehiculo con el ID que estás buscando\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "80b2d3b0-b290-4a2b-b0ce-2574c0ccf9d3",
+									"name": "bad request - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "98e5af45-265f-404d-8803-5b1871d95aa0",
+									"name": "internal server error - obtener detalles de un vehiculo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/vehiculos/:idVehiculo",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vehiculos",
+												":idVehiculo"
+											],
+											"variable": [
+												{
+													"key": "idVehiculo",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al precesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
