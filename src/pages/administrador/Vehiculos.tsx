@@ -1,10 +1,13 @@
 import { Plus, Search, Filter } from "lucide-react";
 import TableVehiculos from "../../features/vehiculos/components/TableVehiculos";
 import { useState } from "react";
+import FormCreate from "../../features/vehiculos/components/FormCreate";
+import FormUpdate from "../../features/vehiculos/components/FormUpdate";
 
 export default function Vehiculos() {
-  const [showFormUpdate, setShowFormUpdate] = useState(false);
-  const [selectVehiculoId, setSelectVehiculoId] = useState<number | null>(null);
+  const [ selectVehiculoId, setSelectVehiculoId ] = useState<number | null>(null);
+  const [ showFormUpdate, setShowFormUpdate ] = useState(false);
+  const [ showFormCreate, setShowFormCreate ] = useState<boolean>(false);
 
   return (
     <div className="relative flex-1 flex flex-col overflow-hidden">
@@ -16,7 +19,8 @@ export default function Vehiculos() {
             <p className="text-sm text-gray-400">Gestiona la información de tus vehículos.</p>
           </div>
           <button 
-          className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+            onClick={() => setShowFormCreate(true)}
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
             <Plus className="w-5 h-5" />
             Nuevo Vehículo
           </button>
@@ -56,7 +60,13 @@ export default function Vehiculos() {
         <TableVehiculos setShowFormUpdate={setShowFormUpdate} setSelectVehiculoId={setSelectVehiculoId} />
       </div>
 
-      {/* Aquí va los apartados/formulario para registrar/editar/eliminar vehiculos.*/}
+      { showFormCreate && (
+        <FormCreate showFormCreate={setShowFormCreate} />
+      )}
+
+      { showFormUpdate && selectVehiculoId !== null && (
+        <FormUpdate showFormUpdate={setShowFormUpdate} idVehiculo={selectVehiculoId} />
+      )}
     </div>
   );
 }

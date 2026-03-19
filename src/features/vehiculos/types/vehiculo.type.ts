@@ -26,4 +26,17 @@ export type EditarVehiculo = {
   capacidadCarga: number;
 }
 
-export type VehiculoGre = Omit<Vehiculo, 'idvehempresa'>;
+export type DetallesVehiculo = {
+  placa: string;
+  marca: string;
+  modelo: string;
+  anioFabricacion: number;
+  tipoVehiculo: string;
+  capacidadCarga: number;
+}
+
+export type DetalleVehiculoModificado = Omit<DetallesVehiculo, 'marca' | 'modelo' | 'tipoVehiculo'> & {
+  marca: number;
+  modelo: number;
+  tipoVehiculo: number;
+};

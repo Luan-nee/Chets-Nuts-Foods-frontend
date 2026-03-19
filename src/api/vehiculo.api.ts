@@ -66,4 +66,18 @@ export default class VehiculoApi extends BaseRequestApi {
       });
     }
   }
+
+  /* DETALLES DE VEHICULO */
+  public async getVehiculo<T>(idVehiculo: number): Promise<BodyResponse<T>> {
+    if (this.OFFLINE_MODE) {
+      return dataVehiculos as unknown as BodyResponse<T>;
+    } else {
+      return this.request<BodyResponse<T>>(`${this.base_url}/${idVehiculo}`, {
+        method: 'GET',
+        headers: {
+          'x-mock-response-name': 'ok - obtener detalles de un vehiculo'
+        }
+      });
+    }
+  }
 }

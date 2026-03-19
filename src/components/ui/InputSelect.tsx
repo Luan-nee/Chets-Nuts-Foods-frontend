@@ -3,7 +3,7 @@ interface InputSelectProps {
   placeholder: string;
   options: { label: string, value: string | number}[];
   handleInputChange: (field: string, value: string | number) => void;
-  valueSelect?: number;
+  valueSelect?: number | string;
 }
 
 export default function InputSelect({ inputName, placeholder, options, handleInputChange, valueSelect }: InputSelectProps) {
@@ -12,7 +12,7 @@ export default function InputSelect({ inputName, placeholder, options, handleInp
       <select
         name={inputName}
         aria-placeholder={placeholder}
-        defaultValue={valueSelect !== undefined ? valueSelect : ''}
+        defaultValue={ valueSelect !== undefined ? valueSelect : '' }
         onChange={(e) => handleInputChange(inputName, e.target.value)}
         className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer"
       >
