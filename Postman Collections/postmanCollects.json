@@ -4220,7 +4220,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": 1,\r\n        \"modelo\": 2,\r\n        \"anioFabricacion\": 2024,\r\n        \"tipoVehiculo\": 3,\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": \"toyota\",\r\n        \"modelo\": \"corolla\",\r\n        \"anioFabricacion\": 2024,\r\n        \"tipoVehiculo\": \"M3\",\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
 								},
 								{
 									"id": "95ecc633-c832-4482-873d-bd7a89de441d",
