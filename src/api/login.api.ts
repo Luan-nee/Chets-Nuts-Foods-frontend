@@ -6,8 +6,8 @@ import type { BodyResponse } from '../types/bodyResponse.type';
 import type { Credenciales } from '../types/usuario.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
-export default class login extends BaseRequestApi {
-  private base_url = `${url_base}/usuario`;
+export default class Login extends BaseRequestApi {
+  private base_url = `${url_base}/login`;
 
   /* INICIAR SESION */
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {

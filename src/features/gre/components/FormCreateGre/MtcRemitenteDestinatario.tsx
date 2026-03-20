@@ -1,6 +1,5 @@
 import { Briefcase, Users } from "lucide-react";
 import InputSelect from "../../../../components/ui/InputSelect";
-import type { GreFormData } from "../../types/gre.type";
 
 const optionsTipoDocumento = [
   { value: 'dni', label: 'DOCUMENTO NACIONAL DE IDENTIDAD' },
@@ -8,13 +7,10 @@ const optionsTipoDocumento = [
 ]
 
 interface MtcRemitenteDestinatarioProps {
-  setFormData: (prev: GreFormData) => void;
+  handleInputChange: (field: string, value: string | boolean | number) => void;
 }
 
-export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDestinatarioProps) {
-  const handleInputChange = (field: string, value: string | boolean) => {
-    // setFormData(prev => ({ ...prev, [field]: value }));
-  };
+export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemitenteDestinatarioProps) {
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">
@@ -47,6 +43,7 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
               <input
                 type="text"
                 className="w-full bg-gray-950 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                onChange={(e) => handleInputChange("numero_registro_MTC", e.target.value)}
               />
             </div>
           </div>
@@ -73,7 +70,17 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
         <div className="bg-gray-900 border border-gray-700 rounded-lg p-5">
           {/* Tipo de documento */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <InputSelect name={"TIPO DE DOCUMENTO"} placeholder={"seleccionar el tipo de documento..."} options={optionsTipoDocumento} handleInputChange={handleInputChange} />
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
+                Tipo de documento
+              </label>
+              <InputSelect 
+                inputName={"remitente.tipo_documento"}
+                placeholder={"Seleccionar el tipo de documento..."}
+                options={optionsTipoDocumento}
+                handleInputChange={handleInputChange}
+              />
+            </div>
             <div>
               <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
                 Nro. del documento
@@ -81,6 +88,7 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
               <input
                 type="text"
                 className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                onChange={(e) => handleInputChange("remitente.numero_documento", e.target.value)}
               />
             </div>
           </div>
@@ -94,6 +102,7 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
               <input
                 type="text"
                 className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
+                onChange={(e) => handleInputChange("remitente.nombre_razonSocial", e.target.value)}
               />
             </div>
           </div>
@@ -108,7 +117,17 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
         <div className="bg-gray-900 border border-gray-700 rounded-lg p-5">
           {/* Tipo de documento */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <InputSelect name={"TIPO DE DOCUMENTO"} placeholder={"seleccionar el tipo de documento..."} options={optionsTipoDocumento} handleInputChange={handleInputChange} />
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
+                Tipo de documento
+              </label>
+              <InputSelect 
+                inputName={"destinatario.tipo_documento"}
+                placeholder={"Seleccionar el tipo de documento..."}
+                options={optionsTipoDocumento}
+                handleInputChange={handleInputChange}
+              />
+            </div>
             <div>
               <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
                 Nro. del documento
@@ -143,7 +162,17 @@ export default function MtcRemitenteDestinatario({ setFormData }: MtcRemitenteDe
         <div className="bg-gray-900 border border-gray-700 rounded-lg p-5">
           {/* Tipo de documento */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <InputSelect name={"TIPO DE DOCUMENTO"} placeholder={"seleccionar el tipo de documento..."} options={optionsTipoDocumento} handleInputChange={handleInputChange} />
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
+                Tipo de documento
+              </label>
+              <InputSelect 
+                inputName={"pagador_flete.tipo_documento"}
+                placeholder={"Seleccionar el tipo de documento..."}
+                options={optionsTipoDocumento}
+                handleInputChange={handleInputChange}
+              />
+            </div>
             <div>
               <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
                 Nro. del documento

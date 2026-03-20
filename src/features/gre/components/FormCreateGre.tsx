@@ -1,10 +1,12 @@
 import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon} from 'lucide-react';
 import { useState } from 'react';
-import type { GreFormData } from '../types/gre.type';
+import type { EmitirGre } from '../types/gre.type';
+import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import MtcRemitenteDestinatario from './FormCreateGre/MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './FormCreateGre/BienesDatosDeCarga';
 import RutaDeTraslado from './FormCreateGre/RutaDeTraslado';
 import ConductorVehiculo from './FormCreateGre/ConductorVehiculo';
+import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
 type TypeProcedimientoUi = {
   focus: boolean,
@@ -18,66 +20,58 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  const [ formData, setFormData ] = useState<GreFormData>({
-  transportistaid: 2,
-  remitente: {
-    tipo_documento: "RUC",
-    numero_documento: "20123456789",
-    nombre_razonSocial: "Corporación Logística del Sur S.A.C."
-  },
-  destinatario: {
-    tipo_documento: "RUC",
-    numero_documento: "20987654321",
-    nombre_razonSocial: "Distribuidora de Alimentos Santa Rosa"
-  },
-  pagador_flete: {
-    tipo_documento: "RUC",
-    numero_documento: "20123456789",
-    nombre_razonSocial: "Corporación Logística del Sur S.A.C."
-  },
-  bienes_transportados: [
-    {
-      codigo_del_bien: "PROD-001",
-      descripcion_detallada_del_bien: "Sacos de harina de trigo especial 50kg",
-      unidad_de_medida_del_bien: "Sacos",
-      cantidad: 120
+  const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
+  const [ formData, setFormData ] = useState<EmitirGre>({
+    numero_registro_MTC: "",
+    remitente: {
+      tipo_documento: "",
+      numero_documento: "",
+      nombre_razonSocial: ""
     },
-    {
-      codigo_del_bien: "S/C",
-      descripcion_detallada_del_bien: "Pallets de madera de retorno",
-      unidad_de_medida_del_bien: "Unidades",
-      cantidad: 10
+    destinatario: {
+      tipo_documento: "",
+      numero_documento: "",
+      nombre_razonSocial: ""
+    },
+    pagador_flete: {
+      tipo_documento: "",
+      numero_documento: "",
+      nombre_razonSocial: ""
+    },
+    bienes_transportados: [],
+    carga: {
+      unidad_medida: "",
+      peso_bruto_total: 0
+    },
+    punto_partida: {
+      departamento: "",
+      provincia: "",
+      distrito: "",
+      direccion_detallada: ""
+    },
+    punto_llegada: {
+      departamento: "",
+      provincia: "",
+      distrito: "",
+      direccion_detallada: ""
+    },
+    datos_de_transporte: {
+      idVehículo: 1,
+      idConductor: 2,
+      fecha_inicio_traslado: "",
+      indicadores_retorno: {
+        retorno_envases_vacios: false,
+        retorno_vehiculo_vacio: true,
+        transporte_subcontratado: false
+      }
     }
-  ],
-  carga: {
-    unidad_medida: "KILOGRAMO",
-    peso_bruto_total: 6500.50
-  },
-  punto_partida: {
-    departamento: "Lima",
-    provincia: "Lima",
-    distrito: "Ate",
-    direccion_detallada: "Av. Industrial 450 - Almacén Central"
-  },
-  punto_llegada: {
-    departamento: "Arequipa",
-    provincia: "Arequipa",
-    distrito: "Cerro Colorado",
-    direccion_detallada: "Calle Prolongación Bolognesi S/N - Sector B"
-  },
-  datos_de_transporte: {
-    placa_vehiculo: "V3X-982",
-    dni_conductor: "45882233",
-    licencia_conductor: "A3C-45882233",
-    fecha_inicio_traslado: "2026-02-25",
-    indicadores_retorno: {
-      retorno_envases_vacios: false,
-      retorno_vehiculo_vacio: true,
-      transporte_subcontratado: false
-    }
-  }
-});
-
+  });
+  const handleInputChange = (
+    field: string,
+    value: string | boolean | number,
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
@@ -99,7 +93,6 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       return newProcedimiento;
     });
   }
-
   const pushAnterior = () => {
     const indexFocus = procedimiento.findIndex(p => p.focus);
     setProcedimiento(prev => {
@@ -131,12 +124,17 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <ChevronLeft className="w-5 h-5" />
             Cancelar
           </button>
-          <button 
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
-          >
-            <Check className="w-5 h-5" />
-            Emitir GRE
-          </button>
+          <ButtonSubmitForm
+            handleSubmit={() => {
+              emitirGre(formData);
+              console.log("Datos enviados:", formData);
+            }}
+            isLoading={isLoading}
+            isError={isError}
+            textButton="Emitir GRE"
+            textError="Error al emitir GRE"
+            color="green"
+          />
           <button 
             onClick={pushAnterior}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
@@ -165,7 +163,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
 
       {/* contenido procedural */}
       {
-        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario setFormData={(formData) => setFormData(prev => ({...prev, ...formData}))} />
+        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario handleInputChange={handleInputChange} />
       }
       {
         procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga />

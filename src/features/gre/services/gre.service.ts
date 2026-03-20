@@ -1,7 +1,7 @@
 // importación de clases
 import GreApi from '../../../api/gre.api';
 // importación de tipos
-import type { simpleGreType, DetailedGreType } from '../types/gre.type';
+import type { simpleGreType, DetailedGreType, EmitirGre } from '../types/gre.type';
 
 const greApi = new GreApi();
 
@@ -11,5 +11,8 @@ export default class GreService {
   }
   public async getDetallesGuiaRemision(id: number) {
     return greApi.getByCodigoSeguimiento<DetailedGreType>(id);
+  }
+  public async emitirGre(body: EmitirGre) {
+    return greApi.emitirGre(body);
   }
 }

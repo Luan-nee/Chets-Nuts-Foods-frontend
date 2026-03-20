@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import type { ResponseSesion, Credenciales } from '../../../types/usuario.type';
-import { UsuarioService } from '../services/usuario.service';
+import LoginService from '../services/login.service';
 
 interface FetchState {
   login: (credenciales: Credenciales) => Promise<ResponseSesion | null>;
@@ -10,7 +10,7 @@ interface FetchState {
 }
 
 export const useLogin = (): FetchState => {
-  const usuarioService = useMemo(() => new UsuarioService(), []);
+  const loginService = useMemo(() => new LoginService(), []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,18 +20,13 @@ export const useLogin = (): FetchState => {
   const login = useCallback(async (credenciales: Credenciales): Promise<ResponseSesion | null> => {
     setIsLoading(true);
     setError(null);
-
     try {
-      const response = await usuarioService.login(credenciales);
-
+      const response = await loginService.login(credenciales);
       if (response.status === "success") {
         setData(response.data);
-
         // Guarda el token en el localStorage, pero en el futuro se espera guardar
         // en una cookie HttpOnly para mayor seguridad
         localStorage.setItem('token', response.data.tokenZ);
-
-
         return response.data; // <--- Retornamos el valor aquí
       } else {
         throw new Error(response.message);
@@ -42,7 +37,7 @@ export const useLogin = (): FetchState => {
     } finally {
       setIsLoading(false);
     }
-  }, [usuarioService]);
+  }, [loginService]);
 
   return { login, isLoading, error, data };
 };

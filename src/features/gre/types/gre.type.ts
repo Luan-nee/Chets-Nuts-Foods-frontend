@@ -1,5 +1,5 @@
 type estadoGre = "entregado" | "en tránsito" | "pendiente";
-import type { VehiculoGre } from "../../vehiculos/types/vehiculo.type";
+import type { RegistrarVehiculo } from "../../vehiculos/types/vehiculo.type";
 
 export type simpleGreType = {
   id: number;
@@ -46,7 +46,7 @@ export type DetailedGreType = {
       tipo_documento: string;
       numero_documento: string;
     };
-    vehiculo: VehiculoGre
+    vehiculo: RegistrarVehiculo
   };
   productos: {
     nombre: string;
@@ -117,14 +117,19 @@ export type GreFormData = {
 export type EmitirGre = {
   numero_registro_MTC: string;
   remitente: {
-      nombres_razonSocial: string;
+      nombre_razonSocial: string;
       tipo_documento: string;
       numero_documento: string;
   };
   destinatario: {
-      nombres_razonSocial: string;
+      nombre_razonSocial: string;
       tipo_documento: string;
       numero_documento: string;
+  };
+  pagador_flete: {
+    nombre_razonSocial: string;
+    tipo_documento: string;
+    numero_documento: string;
   };
   bienes_transportados: number[];
   carga: {
@@ -148,16 +153,10 @@ export type EmitirGre = {
       idConductor: number;
       fecha_inicio_traslado: string;
       indicadores_retorno: {
-          retorno_envases_vacios: boolean;
-          retorno_vehiculo_vacio: boolean;
-          transporte_subcontratado: boolean;
+        retorno_envases_vacios: boolean;
+        retorno_vehiculo_vacio: boolean;
+        transporte_subcontratado: boolean;
       };
-  };
-  pagador_flete: {
-      responsable: "remitente" | "subcontratador" | "tercero";
-      tipo_documento: string;
-      numero_documento: string;
-      nombres_razonSocial: string;
   };
 };
 
