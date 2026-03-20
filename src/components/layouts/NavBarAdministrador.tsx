@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, Package, Users, Store, LogOut, Settings } from 'lucide-react';
+import { Truck, Package, Users, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import UserInfo from '../ui/UserInfo';
 
@@ -18,7 +18,6 @@ export default function NavBarAdministrador() {
 
   const menuItems: MenuItem[] = [
     { icon: Package, label: 'Guías de Remisión', anchor: '/guias' },
-    { icon: Store, label: 'Establecimientos', anchor: '/establecimientos' },
     { icon: Users, label: 'Trabajadores', anchor: '/trabajadores' },
     { icon: Package, label: 'Productos', anchor: '/productos' },
     { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' },
