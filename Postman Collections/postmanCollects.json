@@ -2420,7 +2420,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos el empleado registrado exitosamente\",\r\n    \"data\": {\r\n        \"nombres\": \"Juan Jose\",\r\n        \"apellidoPaterno\": \"Alberto\",\r\n        \"apellidoMaterno\": \"Perez\",\r\n        \"dni\": \"92343212\",\r\n        \"contrasenia\": \"ejemplo123\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos el empleado registrado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
 									"id": "0003676b-8232-4957-b8cc-7b8151bb7735",
