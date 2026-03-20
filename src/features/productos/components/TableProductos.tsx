@@ -5,6 +5,7 @@ import { useFetchProductos } from "../hooks/useFetchProductos";
 import Loading from "../../../components/ui/Loading";
 import Table from "../../../components/ui/Table";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
+import { useAutorizacion } from "../../../config/useAutorizacion";
 
 interface PropTableProductos {
   setSelectProductoId: (p: number | null) => void;
@@ -15,6 +16,7 @@ export default function TableProductos({
   setSelectProductoId,
   showFormEdit,
 }: PropTableProductos) {
+  const { tienePermiso } = useAutorizacion();
   const tableHeader: string[] = [
     "Nº",
     "Nombre",
@@ -96,26 +98,29 @@ export default function TableProductos({
               </span>
             </td>
             <td className="px-6 py-4">
-              <button
-                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                title="Editar"
-                onClick={() => {
-                  setSelectProductoId(producto.id);
-                  showFormEdit(true);
-                }}
-              >
-                <Edit className="w-4 h-4 text-gray-400" />
-              </button>
-              <button
-                className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                title="Eliminar"
-                onClick={() => {
-                  setSelectProductoId(producto.id);
-                  showFormEdit(true);
-                }}
-              >
-                <Trash2 className="w-4 h-4 text-gray-400" />
-              </button>
+              { tienePermiso('PUEDE_EDITAR_PRODUCTO') && (
+                <button
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  title="Editar"
+                  onClick={() => {
+                    setSelectProductoId(producto.id);
+                    showFormEdit(true);
+                  }}>
+                  <Edit className="w-4 h-4 text-gray-400" />
+                </button>
+              )}
+              { tienePermiso('PUEDE_ELIMINAR_PRODUCTO') && (
+                <button
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  title="Eliminar"
+                  onClick={() => {
+                    setSelectProductoId(producto.id);
+                    showFormEdit(true);
+                  }}
+                >
+                  <Trash2 className="w-4 h-4 text-gray-400" />
+                </button>
+              )}
             </td>
           </tr>
         ))}

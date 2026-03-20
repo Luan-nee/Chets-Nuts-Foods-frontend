@@ -3,8 +3,10 @@ import { Search, Filter, Plus } from "lucide-react";
 import TableProductos from "../../features/productos/components/TableProductos";
 import FormUpdate from "../../features/productos/components/FormUpdate";
 import FormCreate from "../../features/productos/components/FormCreate";
+import { useAutorizacion } from "../../config/useAutorizacion";
 
 export default function Productos() {
+  const { tienePermiso } = useAutorizacion();
   const [showFormEditProduct, setShowFormEditProduct] = useState<boolean>(false);
   const [showFormCreateProduct, setShowFormCreateProduct] = useState<boolean>(false);
   const [selectProductoId, setSelectProductoId] = useState<number | null>(null);
@@ -19,12 +21,14 @@ export default function Productos() {
             <p className="text-sm text-gray-400">Administra los productos de la empresa.</p>
           </div>
 
-          <button 
-          onClick={() => setShowFormCreateProduct(true)}
-          className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-            <Plus className="w-5 h-5" />
-            Nuevo Producto
-          </button>
+          { tienePermiso('PUEDE_REGISTRAR_NUEVO_PRODUCTO') && (
+            <button 
+              onClick={() => setShowFormCreateProduct(true)}
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+              <Plus className="w-5 h-5" />
+              Nuevo Producto
+            </button>
+          )}
         </div>
       </div>
 
