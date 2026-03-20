@@ -1,121 +1,93 @@
-import { Edit2, Info, Package, Plus, Scale, Trash2 } from "lucide-react";
-import AgregarBien from "./AgregarBien";
-import type { Producto } from "../../../../types/producto.type";
-import Table from "../../../../components/ui/Table";
 import { useState } from "react";
+import { Info, Scale, Plus, Trash2 } from "lucide-react";
+import Table from "../../../../components/ui/Table";
+import { useFetchProductos } from "../../../productos/hooks/useFetchProductos";
+import ContentSectionProcess from "../../../../components/layouts/ContentSectionProcess";
+import ButtonsPagination from "../../../../components/ui/ButtonsPagination";
 
-function RowTable({ codigo_del_bien, descripcion_detallada_del_bien, unidad_de_medida_del_bien, cantidad }: Producto) {
-  return (
-    <tr
-      className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
-    >
-      <td className="px-4 py-4">
-        <span className="text-sm font-medium text-white">
-          {codigo_del_bien}
-        </span>
-      </td>
-      <td className="px-4 py-4">
-        <span className="text-sm text-gray-300">
-          {descripcion_detallada_del_bien}
-        </span>
-      </td>
-      <td className="px-4 py-4 text-center">
-        <span className="text-sm text-gray-300">{unidad_de_medida_del_bien}</span>
-      </td>
-      <td className="px-4 py-4 text-center">
-        <span className="text-sm font-medium text-white">
-          {cantidad}
-        </span>
-      </td>
-      <td className="px-4 py-4">
-        <div className="flex items-center justify-end gap-2">
-          <button
-            className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
-            aria-label="Editar"
-          >
-            <Edit2 className="w-4 h-4 text-gray-400" />
-          </button>
-          <button
-            className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
-            aria-label="Eliminar"
-          >
-            <Trash2 className="w-4 h-4 text-gray-400" />
-          </button>
-        </div>
-      </td>
-    </tr>
-  );
+interface BienesDatosDeCargaProps {
+  handleInputChange: (field: string, value: string | boolean | number) => void;
 }
 
-export default function BienesDatosDeCarga() {
-  const [measureUnit, setMeasureUnit] = useState<'KG' | 'T'>('KG');
-  const [totalWeight, setTotalWeight] = useState('0');
-  const [showAgregarBien, setShowAgregarBien] = useState<boolean>(false);
+export default function BienesDatosDeCarga({ handleInputChange }: BienesDatosDeCargaProps) {
+  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'T'>('KG');
+  const [pesoBruto, setPesoBruto] = useState('0');
   const headerTabler: string[] = [
-    "Código",
-    "Descripción",
-    "Unidad",
-    "Valor Unidad",
+    "Nrº",
+    "Nombre del producto",
+    "Peso Unitario",
+    "Adicionar a la carga",
+    "Peso Total",
     "Acciones"
   ]
-  const [goods, setGoods] = useState<Producto[]>([
-  {
-    codigo_del_bien: 'ILU-205',
-    descripcion_detallada_del_bien: 'Panel LED circular empotrable 18W - Luz Blanca',
-    unidad_de_medida_del_bien: 'Unidades (NIU)',
-    cantidad: 15
-  },
-  {
-    codigo_del_bien: 'HER-882',
-    descripcion_detallada_del_bien: 'Martillo de uña 16oz mango de fibra de vidrio',
-    unidad_de_medida_del_bien: 'Unidades (NIU)',
-    cantidad: 8
-  },
-  {
-    codigo_del_bien: 'TUB-040',
-    descripcion_detallada_del_bien: 'Tubo PVC SAP presión clase 10 de 1/2 pulgada',
-    unidad_de_medida_del_bien: 'Metros (MTR)',
-    cantidad: 120
-  }
-]);
+
+  const {data: productos, isLoading: productosCargando, isError: errorProductos, setPagina: cambiarPagina, fetchData: fetchProductos, infoPaginacion} = useFetchProductos();
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">
-      {showAgregarBien && (
-        <AgregarBien setShowAgregarBien={setShowAgregarBien} setGoods={(newGood) => setGoods(prev => [...prev, newGood])} />
-      )}
-
       {/* Content */}
       <div className="space-y-6">
         {/* Bienes Transportados */}
         <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <Package className="w-5 h-5 text-[#1f6feb]" />
-              <h2 className="text-lg font-semibold">Bienes Transportados</h2>
-            </div>
-            <button
-              onClick={() => setShowAgregarBien(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#1f6feb] hover:bg-[#1a5cd9] rounded-lg transition-colors text-sm"
-            >
-              <Plus className="w-4 h-4" />
-              Agregar Ítem
-            </button>
-          </div>
-
           {/* Table */}
-          <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden mb-4">
-            <Table tableHeader={headerTabler} >
-              {goods.map((good, index) => (
-                <RowTable 
-                  key={index}
-                  codigo_del_bien={good.codigo_del_bien}
-                  descripcion_detallada_del_bien={good.descripcion_detallada_del_bien}
-                  unidad_de_medida_del_bien={good.unidad_de_medida_del_bien}
-                  cantidad={good.cantidad}
-                />
-              ))}
-            </Table>
+          <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden p-4">
+            <ContentSectionProcess 
+              isLoading={productosCargando}
+              isError={errorProductos}
+              textError="Error al cargar los productos"
+              textButtonError="Reintentar"
+              fetchData={() => fetchProductos}
+            >
+              <ButtonsPagination 
+                total_paginas={infoPaginacion.total_paginas} 
+                pivote={infoPaginacion.pagina_actual} 
+                fetchData={cambiarPagina} 
+                datos_por_pagina={infoPaginacion.datos_por_pagina} 
+                total_data={infoPaginacion.total_data} 
+              />
+              <Table tableHeader={headerTabler} >
+                {productos?.map((producto, index) => (
+                  <tr
+                    className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+                  >
+                    <td className="px-4 py-4">
+                      <span className="text-sm font-medium text-white">
+                        {index + 1}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4">
+                      <span className="text-sm text-gray-300">
+                        {producto.nombre}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-center">
+                      <span className="text-sm text-gray-300">{producto.peso} {producto.unidadPeso}</span>
+                    </td>
+                    <td className="px-4 py-4">
+                      {/* AGREGAR BOTONES PARA SUMAR O RESTAR CANTIDAD */}
+                    </td>
+                    <td className="px-4 py-4 text-center">
+                      <span className="text-sm font-medium text-white">
+                        {/* MOSTRAR EL VALOR TOTAL DEL PESO (peso unitario * cantidad) */}
+                      </span>
+                    </td>
+                    <td className="px-4 py-4">
+                      <div className={"flex items-center gap-2 justify-center"}>
+                        {/* AGREGAR BOTONES PARA ELIMINAR O EDITAR EL ÍTEM DE LA CARGA */}
+                        <button className="text-red-500 hover:text-red-400 flex flex-row gap-2">
+                          <span>Eliminar</span>
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                        <button className="text-green-500 hover:text-green-400 flex flex-row gap-2">
+                          <span>Agregar</span>
+                          <Plus className="w-5 h-5" />
+                        </button>
+                        </div>  
+                    </td>
+                  </tr>
+                ))}
+              </Table>
+            </ContentSectionProcess>
           </div>
 
           <p className="text-xs text-gray-500 italic">
@@ -138,9 +110,13 @@ export default function BienesDatosDeCarga() {
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
-                  onClick={() => setMeasureUnit("KG")}
+                  onClick={() => {
+                    setUnidadMedida("KG");
+                    handleInputChange("carga.unidad_medida", "KG");
+                  }}
+
                   className={`p-4 rounded-lg border transition-colors ${
-                    measureUnit === "KG"
+                    unidadMedida === "KG"
                       ? "bg-blue-500/10 border-blue-500 text-white"
                       : "bg-gray-950 border-gray-700 text-gray-400 hover:border-blue-500/50"
                   }`}
@@ -152,9 +128,12 @@ export default function BienesDatosDeCarga() {
                 </button>   
 
                 <button
-                  onClick={() => setMeasureUnit("T")}
+                  onClick={() => {
+                    setUnidadMedida("T");
+                    handleInputChange("carga.unidad_medida", "T");
+                  }}
                   className={`p-4 rounded-lg border transition-colors ${
-                    measureUnit === "T"
+                    unidadMedida === "T"
                       ? "bg-blue-500/10 border-blue-500 text-white"
                       : "bg-gray-950 border-gray-700 text-gray-400 hover:border-blue-500/50"
                   }`}
@@ -176,17 +155,19 @@ export default function BienesDatosDeCarga() {
                 <input
                   type="number"
                   placeholder="0"
-                  value={totalWeight}
-                  onChange={(e) => setTotalWeight(e.target.value)}
+                  value={pesoBruto}
+                  onChange={(e) => {
+                    handleInputChange("carga.peso_bruto_total", parseFloat(e.target.value) || 0); 
+                    setPesoBruto(e.target.value);
+                  }}
                   className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 pr-12 text-white text-2xl font-bold focus:outline-none focus:border-blue-500 transition-colors"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                  {measureUnit}
+                  {unidadMedida}
                 </span>
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                El peso bruto total debe considerar el peso de los bienes + el
-                embalaje.
+                El peso bruto total debe considerar la suma del peso de todos los bienes transportados.
               </p>
             </div>
           </div>
@@ -205,10 +186,14 @@ export default function BienesDatosDeCarga() {
                 </p>
                 <p className="text-xs text-gray-400">
                   Total ítems:{" "}
-                  <span className="text-white font-medium">{goods.length}</span>{" "}
+                  <span className="text-white font-medium">
+                    {/* MOSTRAR EL PESO TOTAL EN TIEMPO REAL */}
+                    {0}
+                  </span>
+                  {" "}
                   | Peso Bruto:{" "}
                   <span className="text-blue-500 font-bold">
-                    {totalWeight} {measureUnit}
+                    {pesoBruto} {unidadMedida}
                   </span>
                 </p>
               </div>

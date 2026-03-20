@@ -133,30 +133,30 @@ export type EmitirGre = {
   };
   bienes_transportados: number[];
   carga: {
-      unidad_medida: string;
-      peso_bruto_total: number;
+    unidad_medida: string;
+    peso_bruto_total: number;
   };
   punto_partida: {
-      departamento: string;
-      provincia: string;
-      distrito: string;
-      direccion_detallada: string;
+    departamento: string;
+    provincia: string;
+    distrito: string;
+    direccion_detallada: string;
   };
   punto_llegada: {
-      departamento: string;
-      provincia: string;
-      distrito: string;
-      direccion_detallada: string;
+    departamento: string;
+    provincia: string;
+    distrito: string;
+    direccion_detallada: string;
   };
   datos_de_transporte: {
-      idVehículo: number;
-      idConductor: number;
-      fecha_inicio_traslado: string;
-      indicadores_retorno: {
-        retorno_envases_vacios: boolean;
-        retorno_vehiculo_vacio: boolean;
-        transporte_subcontratado: boolean;
-      };
+    idVehículo: number;
+    idConductor: number;
+    fecha_inicio_traslado: string;
+    indicadores_retorno: {
+      retorno_envases_vacios: boolean;
+      retorno_vehiculo_vacio: boolean;
+      transporte_subcontratado: boolean;
+    };
   };
 };
 
