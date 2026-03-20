@@ -3,7 +3,7 @@ import { url_base } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
-import type { UpdateEmpleadoData, DeshabilitarEmpleado, EditarEmpleado } from '../features/empleados/types/empleado.type';
+import type { UpdateEmpleadoData, DeshabilitarEmpleado, CreateEmpleadoData } from '../features/empleados/types/empleado.type';
 import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
 
 export default class EmpleadoApi extends BaseRequestApi {
@@ -38,14 +38,15 @@ export default class EmpleadoApi extends BaseRequestApi {
   }
 
   /* EDITAR EMPLEADO */
-  public async UpdateEmpleadoById<T>(idEmpleado: number, body: UpdateEmpleadoData): Promise<BodyResponse<T>> {
+  public async  UpdateEmpleadoById<T>(idEmpleado: number, body: UpdateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
       return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
         method: 'PATCH',
         headers: {
-          'x-mock-response-name': 'ok - detalles de un empleado'
+          'Content-Type': 'application/json',
+          'x-mock-response-name': 'ok - editar empleado'
         },
         body: JSON.stringify(body)
       });
@@ -72,8 +73,9 @@ export default class EmpleadoApi extends BaseRequestApi {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
       return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
+          'Content-Type': 'application/json',
           'x-mock-response-name': 'ok - deshabilitar empleado'
         },
         body: JSON.stringify(body)
@@ -82,14 +84,15 @@ export default class EmpleadoApi extends BaseRequestApi {
   }
 
   /* REGISTRAR NUEVO EMPLEADO */
-  public async createEmpleado<T>(idEmpleado: number, body: EditarEmpleado): Promise<BodyResponse<T>> {
+  public async createEmpleado<T>(body: CreateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
-        method: 'PATCH',
+      return this.request<BodyResponse<T>>(`${this.base_url}`, {
+        method: 'POST',
         headers: {
-          'x-mock-response-name': 'ok - editar empleado'
+          'Content-Type': 'application/json',
+          'x-mock-response-name': 'ok - registrar empleado'
         },
         body: JSON.stringify(body)
       });

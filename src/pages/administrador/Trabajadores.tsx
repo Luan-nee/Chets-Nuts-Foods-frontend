@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Filter, Plus, Search } from "lucide-react";
 import DetallesEmpleado from "../../features/empleados/components/DetallesEmpleado";
 import FormUpdateEmpleado from "../../features/empleados/components/FormUpdateEmpleado";
-
+import FormCreate from "../../features/empleados/components/FormCreate";
 import TableEmpleados from "../../features/empleados/components/TableEmpleados";
 
 export default function Trabajadores () {
   const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);
   const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
+  const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
   const [selectEmpleadoId, setSelectEmpleadoId] = useState<number | null>(null);
 
   return (
@@ -20,6 +21,7 @@ export default function Trabajadores () {
             <p className="text-sm text-gray-400">Gestiona la información de tus empleados.</p>
           </div>
           <button 
+            onClick={() => setShowFormCreate(true)}
           className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
             <Plus className="w-5 h-5" />
             Nuevo Trabajador
@@ -61,18 +63,22 @@ export default function Trabajadores () {
       { showDetallesEmpleado && 
         <div className="absolute inset-0 z-50 bg-gray-950">
           <DetallesEmpleado 
+            showFormUpdateEmpleado={setShowFormUpdate}
             showDetallesEmpleado={setShowDetallesEmpleado} 
             idEmpleado={selectEmpleadoId!} 
           />
         </div>
       }
       { showFormUpdate && 
-        <div className="absolute inset-0 z-50 bg-gray-950">
-          <FormUpdateEmpleado 
-            setShowFormUpdateEmpleado={setShowFormUpdate} 
-            idEmpleado={selectEmpleadoId!} 
-          />
-        </div>
+        <FormUpdateEmpleado 
+          setShowFormUpdateEmpleado={setShowFormUpdate} 
+          idEmpleado={selectEmpleadoId!} 
+        />
+      }
+      { showFormCreate && 
+        <FormCreate 
+          setShowFormCreateEmpleado={setShowFormCreate}
+        />
       }
     </div>
   );

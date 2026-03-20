@@ -1,27 +1,26 @@
 import { useState } from 'react';
 // importación de clases como servicios
 import EmpleadoService from '../services/empleado.service';
-// importación de tipos
-import type { UpdateEmpleadoData } from '../types/empleado.type';
+import type { DeshabilitarEmpleado } from '../types/empleado.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
-  fetchData: (idEmpleado: number, body: UpdateEmpleadoData) => Promise<void>
+  refresh: (idProducto: number, body: DeshabilitarEmpleado) => void;
 }
 
-export const useUpdateEmpleado = (): FetchState => {
+export const useInhabilitarEmpleado = (): FetchState => {
   const empleadoService = new EmpleadoService();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   // Función asíncrona para obtener los datos
-  const fetchData = async (idEmpleado: number, body: UpdateEmpleadoData) => {
+  const refresh = async (idEmpleado: number, body: DeshabilitarEmpleado) => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await empleadoService.UpdateEmpleadoById(idEmpleado, body);
+      const response = await empleadoService.inhabilitarEmpleado(idEmpleado, body);
       // Manejo de errores basado en el estado y el mensaje de la respuesta
       if (response.status !== "success") {
         throw new Error(response.message);
@@ -34,5 +33,5 @@ export const useUpdateEmpleado = (): FetchState => {
     }
   };
 
-  return { isLoading, isError, fetchData };
+  return { isLoading, isError, refresh };
 };
