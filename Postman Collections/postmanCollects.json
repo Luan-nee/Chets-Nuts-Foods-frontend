@@ -3474,7 +3474,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3492,7 +3492,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"ABC-123\",\r\n    \"marca\": \"Volvo\",\r\n    \"modelo\": \"FH\",\r\n    \"anio\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3522,7 +3522,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3554,7 +3554,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3586,7 +3586,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
