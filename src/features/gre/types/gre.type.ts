@@ -131,7 +131,12 @@ export type EmitirGre = {
     tipo_documento: string;
     numero_documento: string;
   };
-  bienes_transportados: number[];
+  bienes_transportados: 
+    {
+      idProducto: number;
+      cantidad: number;
+    }[]
+  ;
   carga: {
     unidad_medida: string;
     peso_bruto_total: number;

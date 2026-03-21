@@ -1,4 +1,4 @@
-import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon} from 'lucide-react';
+import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import { useState } from 'react';
 import type { EmitirGre } from '../types/gre.type';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
@@ -71,7 +71,34 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
     value: string | boolean | number,
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };  
+  const handleAddProductToList = (
+    field: string, 
+    value: {
+      idProducto: number;
+      cantidad: number;
+    }
+  ) => {
+    setFormData((prev) => ({
+        ...prev,
+        [field]: [...prev.bienes_transportados, value]
+      })
+    );
   };
+  const handleRemoveProductFromList = (
+    field: string,
+    index: number,
+  ) => {
+    setFormData((prev) => {
+      const newList = [...prev.bienes_transportados];
+      newList.splice(newList.findIndex((bien) => bien.idProducto === index), 1);
+      return {
+        ...prev,
+        [field]: newList
+      }
+    });
+  }
+
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
@@ -149,6 +176,16 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             Siguiente
             <ArrowRight className="w-5 h-5" />
           </button>
+          <button 
+            onClick={() => {
+              console.log("----> PRODUCTOS REGISTRADOS:", formData);
+              console.log("formData.bienes_transportados: ", formData.bienes_transportados);
+            }}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
+          >
+            Mostrar datos registrados
+            <List className="w-5 h-5" />
+          </button>
         </div>
       </div>
 
@@ -166,7 +203,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario handleInputChange={handleInputChange} />
       }
       {
-        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga handleInputChange={handleInputChange}/>
+        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList} handleInputChange={handleInputChange} formData={formData}/>
       }
       {
         procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado />

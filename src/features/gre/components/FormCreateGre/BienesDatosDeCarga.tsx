@@ -1,17 +1,31 @@
 import { useState } from "react";
-import { Info, Scale, Plus, Trash2 } from "lucide-react";
+import { Info, Scale, Plus, Trash2, Minus } from "lucide-react";
 import Table from "../../../../components/ui/Table";
+import type { EmitirGre } from "../../types/gre.type";
 import { useFetchProductos } from "../../../productos/hooks/useFetchProductos";
 import ContentSectionProcess from "../../../../components/layouts/ContentSectionProcess";
 import ButtonsPagination from "../../../../components/ui/ButtonsPagination";
 
 interface BienesDatosDeCargaProps {
   handleInputChange: (field: string, value: string | boolean | number) => void;
+  handleAddProductToList: (
+    field: string, 
+    value: {
+      idProducto: number;
+      cantidad: number;
+    }
+  ) => void;
+  handleRemoveProductFromList: (
+    field: string,
+    index: number,
+  ) => void;
+  formData: EmitirGre;
+  setFormData: React.Dispatch<React.SetStateAction<EmitirGre>> ;
 }
 
-export default function BienesDatosDeCarga({ handleInputChange }: BienesDatosDeCargaProps) {
-  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'T'>('KG');
-  const [pesoBruto, setPesoBruto] = useState('0');
+export default function BienesDatosDeCarga({ handleInputChange, handleAddProductToList, handleRemoveProductFromList, formData, setFormData }: BienesDatosDeCargaProps) {
+  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'T' | null>(null);
+  const [pesoBruto, setPesoBruto] = useState<number>(0);
   const headerTabler: string[] = [
     "Nrº",
     "Nombre del producto",
@@ -48,6 +62,7 @@ export default function BienesDatosDeCarga({ handleInputChange }: BienesDatosDeC
               <Table tableHeader={headerTabler} >
                 {productos?.map((producto, index) => (
                   <tr
+                    key={index}
                     className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
                   >
                     <td className="px-4 py-4">
@@ -65,24 +80,131 @@ export default function BienesDatosDeCarga({ handleInputChange }: BienesDatosDeC
                     </td>
                     <td className="px-4 py-4">
                       {/* AGREGAR BOTONES PARA SUMAR O RESTAR CANTIDAD */}
+                      <div className="inline-flex items-center gap-2">
+                        {
+                          formData.bienes_transportados.find((item) => item.idProducto === producto.id)! && (
+                            <>
+                              {/* Botón Izquierdo - Decrementar */}
+                              <button
+                                onClick={
+                                  () => {
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      bienes_transportados: prev.bienes_transportados.map((bien) =>
+                                        bien.idProducto === producto.id
+                                          ? { ...bien, cantidad: (bien.cantidad <= 0) ? 0 : bien.cantidad - 1 } 
+                                          : bien
+                                      ),
+                                    }));
+                                    setPesoBruto((prev) => (
+                                      (prev <= 0) ? 0 : prev - producto.peso
+                                    ))
+                                  }
+                                }
+                                className="transition-colors duration-200 rounded-md hover:bg-red-300 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                                aria-label="Disminuir valor"
+                              >
+                                <Minus size={20} />
+                              </button>
+                              {/* Input Central */}
+                              <input
+                                type="number"
+                                onChange={(e) => {
+                                  const newValue = parseInt(e.target.value) || 0;
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    bienes_transportados: prev.bienes_transportados.map((bien) =>
+                                      bien.idProducto === producto.id
+                                        ? { ...bien, cantidad: newValue } 
+                                        : bien
+                                    ),
+                                  }));
+
+                                  // AGREGAR LOGICA PARA CALCULAR EL PESO BRUTO DE FORMA AUTOMÁTICA.
+                                  // setPesoBruto(
+                                  //   formData.bienes_transportados.reduce((acc, item) => {
+                                  //     const producto = productos.find(p => p.id === item.idProducto);
+                                  //     return acc + (producto ? producto.peso * item.cantidad : 0);
+                                  //   }, 0)
+                                  // );
+                                }}
+                                value={formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad || 0}
+                                min={0}
+                                className="w-16 text-center bg-transparent border-none font-semibold text-white-700 border border-gray-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                              />
+                              {/* Botón Derecho - Incrementar */}
+                              <button
+                                onClick={ () => {
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      bienes_transportados: prev.bienes_transportados.map((bien) =>
+                                        bien.idProducto === producto.id
+                                          ? { ...bien, cantidad: bien.cantidad + 1 } 
+                                          : bien
+                                      ),
+                                    }));
+                                    setPesoBruto((prev) => (
+                                      prev + producto.peso
+                                    ))
+                                  }
+                                }
+                                className="transition-colors duration-200 rounded-md hover:bg-green-300 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                                aria-label="Aumentar valor"
+                              >
+                                <Plus size={20} />
+                              </button>
+                            </>
+                          )
+                        }
+                      </div>
                     </td>
+                    {/* MOSTRAR EL VALOR TOTAL DEL PESO (peso unitario * cantidad) */}
                     <td className="px-4 py-4 text-center">
-                      <span className="text-sm font-medium text-white">
-                        {/* MOSTRAR EL VALOR TOTAL DEL PESO (peso unitario * cantidad) */}
-                      </span>
+                      { formData.bienes_transportados.find((item) => item.idProducto === producto.id)! ? (
+                        <span className="text-sm font-medium text-white">
+                          {formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad! * producto.peso} {producto.unidadPeso}
+                        </span>
+                      ) : (
+                        <span className="text-sm font-medium text-white">
+                          0
+                        </span>
+                      )
+                    }
                     </td>
                     <td className="px-4 py-4">
                       <div className={"flex items-center gap-2 justify-center"}>
-                        {/* AGREGAR BOTONES PARA ELIMINAR O EDITAR EL ÍTEM DE LA CARGA */}
-                        <button className="text-red-500 hover:text-red-400 flex flex-row gap-2">
-                          <span>Eliminar</span>
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                        <button className="text-green-500 hover:text-green-400 flex flex-row gap-2">
-                          <span>Agregar</span>
-                          <Plus className="w-5 h-5" />
-                        </button>
-                        </div>  
+                        {
+                          formData.bienes_transportados.find((item) => item.idProducto === producto.id) ? (
+                            <button 
+                            onClick={() => {
+                              setPesoBruto((prev) => (
+                                prev - (formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad! * producto.peso)
+                              ))
+                              handleRemoveProductFromList(`bienes_transportados`, producto.id);
+                            }}
+                            className="text-red-500 hover:text-red-400 flex flex-row gap-2">
+                              <span>Eliminar</span>
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          ) : (
+                            <button 
+                              onClick={() => {
+                                handleAddProductToList(`bienes_transportados`, {
+                                  idProducto: producto.id,
+                                  cantidad: 1
+                                });
+                                setPesoBruto((prev) => (
+                                  prev + producto.peso
+                                ))
+                              }
+                            }
+                            className="text-green-500 hover:text-green-400 flex flex-row gap-2">
+                              <span>Agregar</span>
+                              <Plus className="w-5 h-5" />
+                            </button>
+                          )
+                        }
+                      </div>  
                     </td>
                   </tr>
                 ))}
@@ -154,12 +276,12 @@ export default function BienesDatosDeCarga({ handleInputChange }: BienesDatosDeC
               <div className="relative">
                 <input
                   type="number"
-                  placeholder="0"
-                  value={pesoBruto}
                   onChange={(e) => {
-                    handleInputChange("carga.peso_bruto_total", parseFloat(e.target.value) || 0); 
-                    setPesoBruto(e.target.value);
+                    const newPesoBruto = parseFloat(e.target.value) || 0;
+                    setPesoBruto(newPesoBruto);
+                    handleInputChange("carga.peso_total", newPesoBruto);
                   }}
+                  value={pesoBruto}
                   className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 pr-12 text-white text-2xl font-bold focus:outline-none focus:border-blue-500 transition-colors"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
