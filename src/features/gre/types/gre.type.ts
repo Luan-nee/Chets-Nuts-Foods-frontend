@@ -137,10 +137,6 @@ export type EmitirGre = {
       cantidad: number;
     }[]
   ;
-  carga: {
-    unidad_medida: string;
-    peso_bruto_total: number;
-  };
   punto_partida: {
     departamento: string;
     provincia: string;

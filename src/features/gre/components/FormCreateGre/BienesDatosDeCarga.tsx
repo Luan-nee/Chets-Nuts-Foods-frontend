@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Info, Scale, Plus, Trash2, Minus } from "lucide-react";
 import Table from "../../../../components/ui/Table";
 import type { EmitirGre } from "../../types/gre.type";
@@ -7,7 +7,6 @@ import ContentSectionProcess from "../../../../components/layouts/ContentSection
 import ButtonsPagination from "../../../../components/ui/ButtonsPagination";
 
 interface BienesDatosDeCargaProps {
-  handleInputChange: (field: string, value: string | boolean | number) => void;
   handleAddProductToList: (
     field: string, 
     value: {
@@ -23,8 +22,8 @@ interface BienesDatosDeCargaProps {
   setFormData: React.Dispatch<React.SetStateAction<EmitirGre>> ;
 }
 
-export default function BienesDatosDeCarga({ handleInputChange, handleAddProductToList, handleRemoveProductFromList, formData, setFormData }: BienesDatosDeCargaProps) {
-  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'T' | null>(null);
+export default function BienesDatosDeCarga({ handleAddProductToList, handleRemoveProductFromList, formData, setFormData }: BienesDatosDeCargaProps) {
+  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'TN' | null>(null);
   const [pesoBruto, setPesoBruto] = useState<number>(0);
   const headerTabler: string[] = [
     "Nrº",
@@ -34,6 +33,11 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
     "Peso Total",
     "Acciones"
   ]
+
+  useEffect(() => {
+    setUnidadMedida("TN");
+    console.log("Peso bruto actualizado: ", pesoBruto);
+  }, []);
 
   const {data: productos, isLoading: productosCargando, isError: errorProductos, setPagina: cambiarPagina, fetchData: fetchProductos, infoPaginacion} = useFetchProductos();
 
@@ -97,7 +101,10 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
                                       ),
                                     }));
                                     setPesoBruto((prev) => (
-                                      (prev <= 0) ? 0 : prev - producto.peso
+                                      (prev <= 0) ? 0 : prev - ( 
+                                        producto.unidadPeso === unidadMedida ? producto.peso :
+                                        (producto.unidadPeso === "TN" ? producto.peso * 0.001 : producto.peso * 1000)
+                                      )
                                     ))
                                   }
                                 }
@@ -121,12 +128,16 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
                                   }));
 
                                   // AGREGAR LOGICA PARA CALCULAR EL PESO BRUTO DE FORMA AUTOMÁTICA.
-                                  // setPesoBruto(
-                                  //   formData.bienes_transportados.reduce((acc, item) => {
-                                  //     const producto = productos.find(p => p.id === item.idProducto);
-                                  //     return acc + (producto ? producto.peso * item.cantidad : 0);
-                                  //   }, 0)
-                                  // );
+                                  setPesoBruto(
+                                    formData.bienes_transportados.reduce((acc, item) => {
+                                      const productoInfo = productos.find(p => p.id === item.idProducto);
+                                      if (item.idProducto === producto.id) {
+                                        return acc + (productoInfo ? productoInfo.peso * newValue : 0);
+                                      } else {
+                                        return acc + (productoInfo ? productoInfo.peso * item.cantidad : 0);
+                                      }
+                                    }, 0)
+                                  );
                                 }}
                                 value={formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad || 0}
                                 min={0}
@@ -144,7 +155,10 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
                                       ),
                                     }));
                                     setPesoBruto((prev) => (
-                                      prev + producto.peso
+                                      prev + ( 
+                                        producto.unidadPeso === unidadMedida ? producto.peso :
+                                        (producto.unidadPeso === "TN" ? producto.peso * 0.001 : producto.peso * 1000)
+                                      )
                                     ))
                                   }
                                 }
@@ -234,7 +248,9 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
                 <button
                   onClick={() => {
                     setUnidadMedida("KG");
-                    handleInputChange("carga.unidad_medida", "KG");
+                    setPesoBruto((prev) => (
+                      prev * ( unidadMedida !== "KG" ? 1000 : 1 )
+                    ));
                   }}
 
                   className={`p-4 rounded-lg border transition-colors ${
@@ -251,18 +267,20 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
 
                 <button
                   onClick={() => {
-                    setUnidadMedida("T");
-                    handleInputChange("carga.unidad_medida", "T");
+                    setUnidadMedida("TN");
+                    setPesoBruto((prev) => (
+                      prev * ( unidadMedida !== "TN" ? 0.001 : 1 )
+                    ));
                   }}
                   className={`p-4 rounded-lg border transition-colors ${
-                    unidadMedida === "T"
+                    unidadMedida === "TN"
                       ? "bg-blue-500/10 border-blue-500 text-white"
                       : "bg-gray-950 border-gray-700 text-gray-400 hover:border-blue-500/50"
                   }`}
                 >
                   <div className="text-center">
                     <p className="font-semibold text-sm mb-1">Tonelada</p>
-                    <p className="text-xs text-gray-500">T</p>
+                    <p className="text-xs text-gray-500">TN</p>
                   </div>
                 </button>
               </div>
@@ -276,11 +294,6 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
               <div className="relative">
                 <input
                   type="number"
-                  onChange={(e) => {
-                    const newPesoBruto = parseFloat(e.target.value) || 0;
-                    setPesoBruto(newPesoBruto);
-                    handleInputChange("carga.peso_total", newPesoBruto);
-                  }}
                   value={pesoBruto}
                   className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-3 pr-12 text-white text-2xl font-bold focus:outline-none focus:border-blue-500 transition-colors"
                 />
@@ -310,7 +323,7 @@ export default function BienesDatosDeCarga({ handleInputChange, handleAddProduct
                   Total ítems:{" "}
                   <span className="text-white font-medium">
                     {/* MOSTRAR EL PESO TOTAL EN TIEMPO REAL */}
-                    {0}
+                    {formData.bienes_transportados.length}
                   </span>
                   {" "}
                   | Peso Bruto:{" "}

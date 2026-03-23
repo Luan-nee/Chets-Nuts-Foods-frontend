@@ -39,10 +39,6 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       nombre_razonSocial: ""
     },
     bienes_transportados: [],
-    carga: {
-      unidad_medida: "",
-      peso_bruto_total: 0
-    },
     punto_partida: {
       departamento: "",
       provincia: "",
@@ -203,7 +199,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario handleInputChange={handleInputChange} />
       }
       {
-        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList} handleInputChange={handleInputChange} formData={formData}/>
+        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList} formData={formData}/>
       }
       {
         procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado />
