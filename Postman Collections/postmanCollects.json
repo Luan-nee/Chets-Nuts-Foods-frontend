@@ -2623,7 +2623,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"unidad_peso\": \"kilogramos\",\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"unidad_peso\": \"TN\",\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
 								},
 								{
 									"id": "e0029ef0-143f-4d91-a808-4dd9ad94740c",
@@ -3474,7 +3474,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+									"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3492,7 +3492,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"ABC-123\",\r\n    \"marca\": \"Volvo\",\r\n    \"modelo\": \"FH\",\r\n    \"anio\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3522,7 +3522,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3554,7 +3554,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -3586,7 +3586,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": \"2024\",\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
+											"raw": "{\r\n    \"placa\": \"\",\r\n    \"marca\": \"\",\r\n    \"modelo\": \"\",\r\n    \"anioFabricacion\": 2024,\r\n    \"tipoVehiculo\": \"M3\",\r\n    \"capacidadCarga\": 320\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4682,7 +4682,7 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de productos obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Castaña entera con cáscara\",\r\n            \"peso\": 5,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\r\n            \"peso\": 0.5,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"Harina de castaña\",\r\n            \"peso\": 1,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Aceite de castaña prensado en frío\",\r\n            \"peso\": 0.250,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombre\": \"Castañas tostadas y saladas\",\r\n            \"peso\": 0.200,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"nombre\": \"Crema de castañas (marrón glacé)\",\r\n            \"peso\": 0.350,\r\n            \"unidadPeso\": \"kg\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Castañas deshidratadas (pilongas)\",\r\n            \"peso\": 0.2,\r\n            \"unidadPeso\": \"kg\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 70,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 7\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de productos obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Castaña entera con cáscara\",\r\n            \"peso\": 5,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\r\n            \"peso\": 0.5,\r\n            \"unidadPeso\": \"TN\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"Harina de castaña\",\r\n            \"peso\": 1,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Aceite de castaña prensado en frío\",\r\n            \"peso\": 100,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombre\": \"Castañas tostadas y saladas\",\r\n            \"peso\": 500,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"nombre\": \"Crema de castañas (marrón glacé)\",\r\n            \"peso\": 0.350,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Castañas deshidratadas (pilongas)\",\r\n            \"peso\": 0.2,\r\n            \"unidadPeso\": \"KG\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 70,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 7\r\n    }\r\n}"
 								},
 								{
 									"id": "c4c6fe3b-2fa1-4307-84d7-3d6adc510d88",
