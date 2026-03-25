@@ -1451,7 +1451,7 @@
 						}
 					],
 					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83",
-					"description": "Tarea:\n\nEliminar la propiedad \"observacion\" de cada producto que está relacionado a los detalles de la guía de remisión, debido a que no es necesario registrar dicho dato para cada producto."
+					"description": "# Endpoints para la gestiónde guías de remisión."
 				},
 				{
 					"name": "Empleados",
