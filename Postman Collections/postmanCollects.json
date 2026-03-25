@@ -1451,7 +1451,7 @@
 						}
 					],
 					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83",
-					"description": "# **[GET]** Listar guias de remisión\nLista los datos más relevantes de cada guía de remisión registrado en el sistema\n\n\n\n| Encabezado 1 | Encabezado 2 | Encabezado 3 |\n| :----------- | :----------: | -----------: |\n| Alineado Izq | Centrado     | Alineado Der |\n| Dato A        | Dato B       | Dato C       |\n| Dato D        | Dato E       | Dato F       |"
+					"description": "# **\\[GET\\]** Listar guias de remisión\n\nLista los datos más relevantes de cada guía de remisión registrado en el sistema\n\nEndpoint: `{{url}}/guiasEmision?pagina=1`\n\nEstructura de la espuesta:\n\n``` typescript\n{\n   status: string,\n   message: string,\n   data: [\n      {\n         \n      }\n   ]\n}\n\n ```"
 				},
 				{
 					"name": "Empleados",
