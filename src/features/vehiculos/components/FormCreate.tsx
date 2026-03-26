@@ -110,7 +110,7 @@ const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
               placeholder="Ej. 2020"
               value={formData.anioFabricacion}
               onChange={(e) =>
-                handleInputChange("anioFabricacion", e.target.value)
+                handleInputChange("anioFabricacion", parseInt(e.target.value) || 0)
               }
               className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
             />
@@ -139,7 +139,7 @@ const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
               placeholder="Ej. 2020"
               value={formData.capacidadCarga}
               onChange={(e) =>
-                handleInputChange("capacidadCarga", e.target.value)
+                handleInputChange("capacidadCarga", parseInt(e.target.value) || 0)
               }
               className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
             />

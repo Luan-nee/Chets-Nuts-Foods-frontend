@@ -14,17 +14,13 @@
 					"item": [
 						{
 							"name": "listar guias de remisión",
-							"id": "d7845838-e15e-42dd-8a83-811f33450742",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "a90fd386-91da-42b9-a5c2-706ebde91d68",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - guias de remision",
-										"type": "text"
+										"value": "ok - guias de remision"
 									}
 								],
 								"url": "{{url}}/guiasEmision"
@@ -33,22 +29,23 @@
 						},
 						{
 							"name": "ver detalles de una guía de remisión",
-							"id": "2f17cbcf-7e70-4670-88ad-0ecd757a568d",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "b4298c2c-c37b-4470-957e-db0459e405dc",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - detalles de una guia de remision",
-										"type": "text"
+										"value": "ok - detalles de una guia de remision"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
@@ -61,6 +58,7 @@
 									],
 									"variable": [
 										{
+											"id": "c86be3dd-102f-402b-8669-ffbff068e715",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -70,29 +68,30 @@
 							"response": []
 						}
 					],
-					"id": "40fbbe4e-c7d3-479c-b1f2-3fd0f5ac16eb"
+					"id": "62471a22-d5c7-42dd-9e82-26cb34c987c6"
 				},
 				{
 					"name": "Empleados",
 					"item": [
 						{
 							"name": "listar empleados",
-							"id": "df19f207-a17b-471a-a1bf-f3283eb715e1",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "e15377a0-0e45-48a7-b01d-8424e8cddd79",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - listar empleados",
-										"type": "text"
+										"value": "ok - listar empleados"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": "{{url}}/empleados"
 							},
@@ -100,17 +99,13 @@
 						},
 						{
 							"name": "ver detalles de un empleado",
-							"id": "0594cd0a-6164-4f37-b1b6-2be87724af68",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "70eccc83-72b0-490d-b183-e35a9c1e0456",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - detalles de un empleado",
-										"type": "text"
+										"value": "ok - detalles de un empleado"
 									}
 								],
 								"body": {
@@ -133,7 +128,7 @@
 									],
 									"variable": [
 										{
-											"id": "7b5f1016-4aaa-4ff3-b648-d0159054f844",
+											"id": "6545ef0e-1d87-40a9-85ec-129ff669032c",
 											"key": "id_empleado",
 											"value": "1"
 										}
@@ -144,17 +139,13 @@
 						},
 						{
 							"name": "registrar nuevo empleado",
-							"id": "e0dd4355-65a7-4304-8810-315ea0c4fa68",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "aad5db01-f568-4221-bbb9-c3cbea59556c",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok",
-										"type": "text"
+										"value": "ok"
 									}
 								],
 								"body": {
@@ -172,17 +163,13 @@
 						},
 						{
 							"name": "editar empleado",
-							"id": "061738a9-3e43-4faf-af8e-87b5de2054d9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "d156026b-3995-4a15-8d3f-4783db4debff",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok",
-										"type": "text"
+										"value": "ok"
 									}
 								],
 								"body": {
@@ -200,17 +187,13 @@
 						},
 						{
 							"name": "deshabilitar empleado",
-							"id": "ddc60345-4e18-4131-a47b-d37ddb0fc5f1",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "11bbfc13-0279-489e-ba93-0e6236ad4a1b",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok",
-										"type": "text"
+										"value": "ok"
 									}
 								],
 								"body": {
@@ -227,24 +210,20 @@
 							"response": []
 						}
 					],
-					"id": "0950ab93-2a51-4e67-8fe3-be7ba010b33c"
+					"id": "bc528658-00cd-41f9-b368-3fb45ca3e596"
 				},
 				{
 					"name": "Seguimiento",
 					"item": [
 						{
 							"name": "realizar seguimiento",
-							"id": "1d51a5b6-6b80-4979-85ae-acba468b289a",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "ea3f656e-f2b5-4ca9-8cc1-027cfc51647f",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - realizar seguimiento",
-										"type": "text"
+										"value": "ok - realizar seguimiento"
 									}
 								],
 								"url": {
@@ -258,6 +237,7 @@
 									],
 									"variable": [
 										{
+											"id": "95019078-4f18-4f97-8195-936a7f150570",
 											"key": "codigo_seguimiento",
 											"value": "GR-2023-0045"
 										}
@@ -267,10 +247,10 @@
 							"response": []
 						}
 					],
-					"id": "5823f95e-4b58-4ae0-87d0-e86be530446c"
+					"id": "96ce6706-efbf-46d2-8689-434c8aa101fe"
 				}
 			],
-			"id": "d0102b5c-33d4-4930-a36f-95f7aa8beb39",
+			"id": "11a4403b-d045-424d-adb1-003a04713987",
 			"description": "# 🛠️ Módulo Administrador\n\nEste módulo centraliza las operaciones críticas de gestión para la plataforma de **CHETS NUTS FOODS**. Está diseñado para ser utilizado exclusivamente por perfiles con privilegios elevados para el control de inventarios, personal y logística.\n\n## 📋 Resumen de Capacidades\n\nLa carpeta contiene un total de **12 solicitudes** distribuidas en los siguientes sub-módulos:\n\n- **Guías de Remisión:** Documentación legal y logística para el traslado de mercancías.\n    \n- **Empleados:** Administración del talento humano, registros y estados laborales.\n    \n- **Seguimiento:** Monitorización en tiempo real de los procesos operativos.\n    \n\n## 🔐 Seguridad y Autorización\n\n> &lt;p &gt;IMPORTANTE:  \nTodas las peticiones dentro de esta carpeta requieren autenticación.&lt;/p&gt; \n  \n\n- **Tipo:** Bearer Token / API Key (configurado en la pestaña _Authorization_ de la carpeta).\n    \n- **Alcance:** El acceso está restringido a usuarios con el rol `ADMINISTRADOR`.\n    \n\n## ⚙️ Configuración Global\n\nPara ejecutar estas peticiones, asegúrate de tener seleccionada la variable de entorno correspondiente"
 		},
 		{
@@ -281,17 +261,13 @@
 					"item": [
 						{
 							"name": "listar guias de remisión",
-							"id": "32011697-62ed-428c-8d2b-5350d366676e",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "6f63c831-512b-4174-9a7c-e15b009c4d14",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - guias de remision",
-										"type": "text"
+										"value": "ok - guias de remision"
 									}
 								],
 								"url": "{{url}}/guiasEmision"
@@ -300,22 +276,23 @@
 						},
 						{
 							"name": "detalles de una guía de remisión",
-							"id": "e4ed9ad1-66c7-4e70-9cac-666c538c8587",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "4ce28186-60c2-459c-9f4c-1c999db5b7f9",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - detalles de una guia de remision",
-										"type": "text"
+										"value": "ok - detalles de una guia de remision"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}"
+									"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{url}}/guiasEmision/:codigo_seguimiento",
@@ -328,7 +305,7 @@
 									],
 									"variable": [
 										{
-											"id": "239f0406-87cd-4902-9597-e6544453ffe2",
+											"id": "e790bb2a-28cd-4018-b19e-5078ffac28cc",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -338,24 +315,20 @@
 							"response": []
 						}
 					],
-					"id": "f8f842fc-c805-4583-afe9-ebbd4a451402"
+					"id": "7a9c2fc2-d7ee-43fe-8fd7-5371370660c2"
 				},
 				{
 					"name": "Usuario",
 					"item": [
 						{
 							"name": "editar informacion",
-							"id": "b1481964-7b41-4cf8-87a1-3415f786f449",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "d8a43fdf-1292-44ed-928c-69c43154cec1",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - editar informacion",
-										"type": "text"
+										"value": "ok - editar informacion"
 									}
 								],
 								"body": {
@@ -372,24 +345,20 @@
 							"response": []
 						}
 					],
-					"id": "83117f24-cb95-4cb7-94cd-4c298e710a6a"
+					"id": "0fef5eaa-cb3c-4158-97af-744ce8640c01"
 				},
 				{
 					"name": "Seguimiento",
 					"item": [
 						{
 							"name": "realizar seguimiento",
-							"id": "bc87d777-5b08-4048-9b67-3d2016aec5a7",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "a75670db-e76e-45db-b516-e8bf3531b219",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - realizar seguimiento",
-										"type": "text"
+										"value": "ok - realizar seguimiento"
 									}
 								],
 								"url": {
@@ -403,6 +372,7 @@
 									],
 									"variable": [
 										{
+											"id": "06cf4b37-7dd5-4d13-9d5e-b20e0f581507",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -412,10 +382,10 @@
 							"response": []
 						}
 					],
-					"id": "11f25027-b907-4839-991e-0cf2833580b4"
+					"id": "05de2797-2e22-4111-ab68-53bcfdf420c1"
 				}
 			],
-			"id": "c7961f92-6320-4b3b-9b2f-ddbbc213e6f5"
+			"id": "414cd2b0-b14c-4cc8-a204-1630bf978f41"
 		},
 		{
 			"name": "CHOFER",
@@ -425,17 +395,13 @@
 					"item": [
 						{
 							"name": "actualizar estado de transporte Copy",
-							"id": "fefe82f9-d14b-46a0-8916-ba66f5591cfc",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "9d4c04d0-81b8-4cbe-832c-88a1cdba07f2",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - actualizar estado de transporte",
-										"type": "text"
+										"value": "ok - actualizar estado de transporte"
 									}
 								],
 								"body": {
@@ -458,7 +424,7 @@
 									],
 									"variable": [
 										{
-											"id": "9d745e99-31d7-440e-946c-b84fe960f825",
+											"id": "f780ab3c-c9ed-4390-a4e0-77d030f6b7b2",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -468,24 +434,20 @@
 							"response": []
 						}
 					],
-					"id": "4607d578-f7ff-41b4-aa1e-2dcf1d105124"
+					"id": "3b588dc2-8667-49ae-9c23-bef58bd0acc6"
 				},
 				{
 					"name": "Usuario",
 					"item": [
 						{
 							"name": "editar informacion",
-							"id": "4062642b-6f40-4ec6-b88d-b5b8ab8f44f4",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "fa5063e4-21ed-4e06-a598-32cef0bc5510",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - editar informacion",
-										"type": "text"
+										"value": "ok - editar informacion"
 									}
 								],
 								"body": {
@@ -502,10 +464,10 @@
 							"response": []
 						}
 					],
-					"id": "7943acfd-696e-4bba-a0f9-dc885d10b333"
+					"id": "b621b0ae-cfee-4d8b-90d3-f8798dc735f2"
 				}
 			],
-			"id": "8e21f1d8-d9e7-4089-80d9-222701a56635"
+			"id": "d47a3dc6-161e-4efd-9cf3-3db65d0ef49c"
 		},
 		{
 			"name": "MOCK SERVER - EXAMPLE",
@@ -515,22 +477,23 @@
 					"item": [
 						{
 							"name": "listar guias de remision",
-							"id": "4fab6304-64b4-4f95-968d-5c5d283b2775",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "aeaa8c7e-d91c-4488-9d7f-85527d7961a6",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - guias de remision",
-										"type": "text"
+										"value": "ok - guias de remision"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{url}}/guiasEmision?pagina=1",
@@ -543,23 +506,21 @@
 									"query": [
 										{
 											"key": "pagina",
-											"value": "1",
-											"type": "text"
+											"value": "1"
 										}
 									]
 								}
 							},
 							"response": [
 								{
-									"id": "0c80f8ca-e56b-448c-9ea7-415e38aeec9d",
+									"id": "9580e6c0-cd40-4c6c-bb2a-0148d47ee6df",
 									"name": "ok - guias de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"value": "application/json"
 											}
 										],
 										"body": {
@@ -580,8 +541,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -589,20 +550,24 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Guías de Emisión obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"numero\": \"EG07-00000001\",\r\n            \"clave\": \"COD-000001\",\r\n            \"fecha_emision\": \"24 Oct 2025\",\r\n            \"hora\": \"14:20\",\r\n            \"destinatario\": {\r\n                \"nombre_razonSocial\": \"Corporación de Alimentos SAC\",\r\n                \"tipo_documento\": \"RUC\",\r\n                \"numero_documento\": \"20541548659\"\r\n            },\r\n            \"punto_de_partida\": \"Madre De Dios\",\r\n            \"punto_de_llegada\": \"Cusco\",\r\n            \"estado\": \"Entregado\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"numero\": \"EG07-00000002\",\r\n            \"clave\": \"COD-000002\",\r\n            \"fecha_emision\": \"25 Oct 2025\",\r\n            \"hora\": \"09:15\",\r\n            \"destinatario\": {\r\n                \"nombre_razonSocial\": \"Distribuidora Logística del Sur E.I.R.L.\",\r\n                \"tipo_documento\": \"RUC\",\r\n                \"numero_documento\": \"20123456789\"\r\n            },\r\n            \"punto_de_partida\": \"Lima\",\r\n            \"punto_de_llegada\": \"Arequipa\",\r\n            \"estado\": \"En Tránsito\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"numero\": \"EG07-00000003\",\r\n            \"clave\": \"COD-000003\",\r\n            \"fecha_emision\": \"26 Oct 2025\",\r\n            \"hora\": \"11:45\",\r\n            \"destinatario\": {\r\n                \"nombre_razonSocial\": \"Inversiones Agrícolas Puno S.A.\",\r\n                \"tipo_documento\": \"RUC\",\r\n                \"numero_documento\": \"20448899112\"\r\n            },\r\n            \"punto_de_partida\": \"Puno\",\r\n            \"punto_de_llegada\": \"Juliaca\",\r\n            \"estado\": \"Detenido\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"numero\": \"EG07-00000004\",\r\n            \"clave\": \"COD-000004\",\r\n            \"fecha_emision\": \"26 Oct 2025\",\r\n            \"hora\": \"16:30\",\r\n            \"destinatario\": {\r\n                \"nombre_razonSocial\": \"Juan Carlos Pérez Quispe\",\r\n                \"tipo_documento\": \"DNI\",\r\n                \"numero_documento\": \"45678912\"\r\n            },\r\n            \"punto_de_partida\": \"Tacna\",\r\n            \"punto_de_llegada\": \"Moquegua\",\r\n            \"estado\": \"Entregado\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"numero\": \"EG07-00000005\",\r\n            \"clave\": \"COD-000005\",\r\n            \"fecha_emision\": \"27 Oct 2025\",\r\n            \"hora\": \"08:00\",\r\n            \"destinatario\": {\r\n                \"nombre_razonSocial\": \"Constructora del Norte S.A.C.\",\r\n                \"tipo_documento\": \"RUC\",\r\n                \"numero_documento\": \"20601234567\"\r\n            },\r\n            \"punto_de_partida\": \"Piura\",\r\n            \"punto_de_llegada\": \"Chiclayo\",\r\n            \"estado\": \"Cancelado\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 130,\r\n        \"total_paginas\": 13,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
 								},
 								{
-									"id": "f71f4b22-8e15-41c8-bb64-74b39df8b9f1",
+									"id": "bb85d420-8d37-4757-b847-841005555ff2",
 									"name": "no content - guias de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "204",
-												"type": "text"
+												"value": "204"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}"
+											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": "{{url}}/guiasEmision"
 									},
@@ -613,8 +578,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -622,20 +587,24 @@
 									"body": "{\r\n  \"status\": \"success\",\r\n  \"message\": \"No hay Guias de remisión\",\r\n  \"data\": null,\r\n  \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								},
 								{
-									"id": "2e5a58b4-aec2-4efd-9600-f30b4041e3fc",
+									"id": "a6d6cc16-0836-40a7-9bd3-dd186060bc4f",
 									"name": "internal server error - listar guias de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - guias de remision",
-												"type": "text"
+												"value": "ok - guias de remision"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": {
 											"raw": "{{url}}/guiasEmision?pagina=1",
@@ -653,13 +622,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -670,22 +641,23 @@
 						},
 						{
 							"name": "detalles de una guia de remision",
-							"id": "b09890e0-98f4-4341-b886-23bb62b5a968",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "f5e38985-d86d-4671-a397-29417f4b0def",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - detalles de una guia de remision",
-										"type": "text"
+										"value": "ok - detalles de una guia de remision"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{url}}/guiasEmision/:id_guiaRemision",
@@ -698,6 +670,7 @@
 									],
 									"variable": [
 										{
+											"id": "3f61e96e-a596-4880-ba37-2fd1b1f4e4d5",
 											"key": "id_guiaRemision",
 											"value": "2"
 										}
@@ -706,20 +679,24 @@
 							},
 							"response": [
 								{
-									"id": "da5fb71c-c1f4-4517-95d0-eeafc6851b23",
+									"id": "6c453522-df5c-400e-92a5-2e0210a48bdc",
 									"name": "ok - detalles de una guia de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": {
 											"raw": "{{url}}/guiasEmision/:id_guiaRemision",
@@ -738,34 +715,40 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
 											"description": "",
-											"type": "text"
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Detalles de la guia obtenido exitosamente\",\r\n    \"data\": {\r\n        \"id_guia\": 1,\r\n        \"clave\": \"COD-000001\",\r\n        \"numero\": \"EG77-00000001\",\r\n        \"fecha_emision\": \"24 Oct 2025\",\r\n        \"hora\": \"14:20\",\r\n        \"remitente\": {\r\n            \"nombre_razonSocial\": \"Jhonatan Maduro preso\",\r\n            \"tipo_documento\": \"DNI\",\r\n            \"numero_documento\": \"45781263\",\r\n            \"direccion\": \"Av. marcado modelo\"\r\n        },\r\n        \"destinatario\": {\r\n            \"nombre_razonSocial\": \"Corporación de Alimentos SAC\",\r\n            \"tipo_documento\": \"RUC\",\r\n            \"numero_documento\": \"20541548659\",\r\n            \"direccion\": \"Av. Dos De Mayo 1707\"\r\n        },\r\n        \"transporte\": {\r\n            \"conductor\":{\r\n                \"nombres\": \"Juan Jose\",\r\n                \"apellidos\": \"Pérez Quispe\",\r\n                \"numero_licencia\": \"Q12345678\"\r\n            },\r\n            \"vehiculo\": {\r\n                \"placa\": \"ABC-123\",\r\n                \"marca\": \"Volvo\",\r\n                \"modelo\": \"FH\",\r\n                \"anio\": \"2024\",\r\n                \"tipoVehiculo\": \"M3\",\r\n                \"capacidadCarga\": 32000\r\n            }\r\n        },\r\n        \"productos\": [\r\n            {\r\n                \"nombre\": \"arroz\",\r\n                \"unidad_medida\": \"kg\",\r\n                \"peso_total\": 200.00,\r\n                \"observacion\": \"no debe estar humedo\"\r\n            }, \r\n            {\r\n                \"nombre\": \"azucar\",\r\n                \"unidad_medida\": \"kg\",\r\n                \"peso_total\": 200.00,\r\n                \"observacion\": \"Atrae hormigas\"\r\n            }\r\n        ],\r\n        \"resumen_carga\": {\r\n            \"cantidad_productos\": 2,\r\n            \"peso_total\": 400.00\r\n        },\r\n        \"estado\": \"Entregado\",\r\n        \"observacion\": \"Observación del paquete si se presenta un percance.\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Detalles de la guia obtenido exitosamente\",\r\n    \"data\": {\r\n        \"id_guia\": 1,\r\n        \"clave\": \"COD-000001\",\r\n        \"numero\": \"EG77-00000001\",\r\n        \"fecha_emision\": \"24 Oct 2025\",\r\n        \"hora\": \"14:20\",\r\n        \"remitente\": {\r\n            \"nombre_razonSocial\": \"Jhonatan Maduro preso\",\r\n            \"tipo_documento\": \"DNI\",\r\n            \"numero_documento\": \"45781263\",\r\n            \"direccion\": \"Av. marcado modelo\"\r\n        },\r\n        \"destinatario\": {\r\n            \"nombre_razonSocial\": \"Corporación de Alimentos SAC\",\r\n            \"tipo_documento\": \"RUC\",\r\n            \"numero_documento\": \"20541548659\",\r\n            \"direccion\": \"Av. Dos De Mayo 1707\"\r\n        },\r\n        \"transporte\": {\r\n            \"conductor\":{\r\n                \"nombres\": \"Juan Jose\",\r\n                \"apellidos\": \"Pérez Quispe\",\r\n                \"numero_licencia\": \"Q12345678\"\r\n            },\r\n            \"vehiculo\": {\r\n                \"placa\": \"ABC-123\",\r\n                \"marca\": \"Volvo\",\r\n                \"modelo\": \"FH\",\r\n                \"anio\": \"2024\",\r\n                \"tipoVehiculo\": \"M3\",\r\n                \"capacidadCarga\": 32000\r\n            }\r\n        },\r\n        \"productos\": [\r\n            {\r\n                \"nombre\": \"arroz\",\r\n                \"cantidad\": 10\r\n            }, \r\n            {\r\n                \"nombre\": \"azucar\",\r\n                \"cantidad\": 20\r\n            }\r\n        ],\r\n        \"resumen_carga\": {\r\n            \"cantidad_productos\": 2,\r\n            \"peso_total\": 30\r\n        },\r\n        \"estado\": \"Entregado\",\r\n        \"observacion\": \"Observación del paquete si se presenta un percance.\"\r\n    }\r\n}"
 								},
 								{
-									"id": "9bcaef0d-a63a-4594-889e-57b15a3fc25e",
+									"id": "3873ab42-75f3-4440-9c47-dfd9bc2af9a3",
 									"name": "bad request - detalles de una guia de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - detalles de una guia de remision",
-												"type": "text"
+												"value": "ok - detalles de una guia de remision"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}"
+											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": {
 											"raw": "{{url}}/guiasEmision/:id_guiaRemision",
@@ -791,35 +774,33 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID ingresado no es válido, debe ser un numero entero positivo\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "b82cb9b4-9d9d-4db6-8948-f43fed940717",
+									"id": "bc479a7b-edd9-41e6-8041-c38261fa96a8",
 									"name": "internal server error - detalles de una guia de remision",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - detalles de una guia de remision",
-												"type": "text"
+												"value": "ok - detalles de una guia de remision"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": {
 											"raw": "{{url}}/guiasEmision/:id_guiaRemision",
@@ -838,13 +819,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -855,10 +838,7 @@
 						},
 						{
 							"name": "emitir guía de remisión",
-							"id": "d409cbc3-49c8-4efd-96b8-c76f661302fd",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "b64aa3ff-2ad7-4887-84d5-fc4d3cea9f18",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -875,7 +855,7 @@
 							},
 							"response": [
 								{
-									"id": "33fd9699-1fe3-42dc-8666-2c906cbe7dc2",
+									"id": "eaea2ff1-21b6-4495-b554-6ead65615d66",
 									"name": "ok - emitir guía de remisión",
 									"originalRequest": {
 										"method": "POST",
@@ -898,22 +878,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Nueva guía registrada exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "08cacf39-166d-4c22-88d2-74ccabf89bb1",
+									"id": "c6f04c97-b903-418d-92d7-c4c35dea54ef",
 									"name": "bad request - emitir guía de remisión",
 									"originalRequest": {
 										"method": "POST",
@@ -936,8 +910,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -945,7 +919,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "5eb506e0-9761-4e6c-9277-d39aeb317688",
+									"id": "895d8c99-e0cc-43a0-b1db-fb7459b68920",
 									"name": "internal server error - emitir guía de remisión",
 									"originalRequest": {
 										"method": "POST",
@@ -961,13 +935,15 @@
 										},
 										"url": "{{url}}/guiasEmision/crear"
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -978,10 +954,7 @@
 						},
 						{
 							"name": "modificar guia de remision",
-							"id": "b2a68be2-f467-4f81-af2d-ac9cfaa1e836",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "bc591493-f780-4c9f-b138-c7cf6b735b96",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -1006,6 +979,7 @@
 									],
 									"variable": [
 										{
+											"id": "a5b2cc32-5389-4825-86e1-2a0031f72c60",
 											"key": "codigo_seguimiento",
 											"value": "COD-000101"
 										}
@@ -1014,7 +988,7 @@
 							},
 							"response": [
 								{
-									"id": "bc55eaa8-ef05-45c2-bbc8-bf5e2045efe3",
+									"id": "e0c55df6-26d1-400d-af99-e97614eb25c2",
 									"name": "ok - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
@@ -1053,8 +1027,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1062,7 +1036,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"guia de remisión actualizado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "f746358d-2ee4-47fb-bb73-ab729a05e04c",
+									"id": "5d92b281-bb8f-4efc-9a38-2a7a45639f1d",
 									"name": "bad request - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
@@ -1101,8 +1075,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1110,7 +1084,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "7c5513fa-4d11-4f83-9608-b36ecbe5e6e2",
+									"id": "79501672-6a64-4415-afe6-467009d2cf09",
 									"name": "internal server error - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
@@ -1149,8 +1123,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1158,7 +1132,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al procesar la consulta\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "556f75a5-479c-4f0d-b1c9-e25ec4a9c670",
+									"id": "9f1b4526-514d-4f64-8e0c-295f20bb0ec8",
 									"name": "forbidden - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
@@ -1197,8 +1171,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1206,7 +1180,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia no puede ser modificado\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "9cb3ff9f-65f7-45f8-bb8d-1fdd9338d73e",
+									"id": "2beac3c3-94b0-4fc8-a764-1ec290ba7313",
 									"name": "not found - modificar guia de remision",
 									"originalRequest": {
 										"method": "PUT",
@@ -1238,13 +1212,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1255,10 +1231,7 @@
 						},
 						{
 							"name": "eliminar guia de remision",
-							"id": "2cb4fe6d-55d4-423e-9189-5ba1b645d979",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "4c291007-b940-4729-82b7-8437e353ab81",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -1274,6 +1247,7 @@
 									],
 									"variable": [
 										{
+											"id": "81d6a9e5-b07b-446c-85ec-5a1f054f93f9",
 											"key": "id_guia",
 											"value": "COD-0314241"
 										}
@@ -1282,7 +1256,7 @@
 							},
 							"response": [
 								{
-									"id": "a3c22268-aea0-4238-8257-800b0f3659c0",
+									"id": "df9ab0e7-e330-42a6-8a6f-ebaa261d8f69",
 									"name": "ok - eliminar guia de remision",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1312,22 +1286,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"La guía de remisión fue eliminada exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "0c6bd4bb-fb49-4e0b-bd4d-c2164893fd44",
+									"id": "c6858b85-62c6-4a0a-9b04-a225a0b4c49a",
 									"name": "not found - eliminar guia de remision",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1357,8 +1325,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1366,7 +1334,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El identificador único de la guia es incorrecto o no existe\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "fe5a757a-8d16-46f0-aaf0-9c40f76a2255",
+									"id": "8f4563d9-5bb9-4401-8765-451c0ee3bdf5",
 									"name": "internal server error - eliminar guia de remision",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1389,13 +1357,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1403,7 +1373,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error mientras procesabamos su solicitud\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "6b0ba66d-bb4e-4557-ad8b-13fa33e0cc33",
+									"id": "defe4a3f-72b7-47c7-bd69-980bb52c3d06",
 									"name": "eliminar guia de remision",
 									"originalRequest": {
 										"method": "DELETE",
@@ -1433,24 +1403,18 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La guia de remison no puede ser eliminada en este momento\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
-					"id": "abd77987-16d5-4e58-a4e1-36cbde7ecd83",
+					"id": "43f21a3e-7675-4dea-aede-5b17239ffee2",
 					"description": "Tarea:\n\nEliminar la propiedad \"observacion\" de cada producto que está relacionado a los detalles de la guía de remisión, debido a que no es necesario registrar dicho dato para cada producto."
 				},
 				{
@@ -1458,22 +1422,23 @@
 					"item": [
 						{
 							"name": "listar empleados",
-							"id": "d91f39e8-8149-4dc1-b2ac-42479d661955",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "dfac7faa-322a-4307-aa56-dfaaa8dffb0b",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - listar empleados",
-										"type": "text"
+										"value": "ok - listar empleados"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
 								},
 								"url": {
 									"raw": "{{url}}/empleados?pagina=1",
@@ -1493,20 +1458,24 @@
 							},
 							"response": [
 								{
-									"id": "3fb5a208-10df-4fd4-aa1e-2217042efec5",
+									"id": "6f266cd6-ab09-4574-88d5-5fb161cc13a8",
 									"name": "ok - listar empleados",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "no content",
-												"type": "text"
+												"value": "no content"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}"
+											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": "{{url}}/empleados"
 									},
@@ -1517,8 +1486,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1526,20 +1495,24 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de Empleados obtenidos exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Luan Del Sol\",\r\n            \"apellidos\": \"Huillca Sanchez\",\r\n            \"rol\": \"empleado\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"Ana Ximena\",\r\n            \"apellidos\": \"Paredes Melgar\",\r\n            \"rol\": \"administrador\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Diego Alonso\",\r\n            \"apellidos\": \"Vargas Machuca\",\r\n            \"rol\": \"empleado\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Milagros Lucía\",\r\n            \"apellidos\": \"Condori Mamani\",\r\n            \"rol\": \"supervisor\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Renato André\",\r\n            \"apellidos\": \"Tello Vizcarra\",\r\n            \"rol\": \"empleado\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 110,\r\n        \"total_paginas\": 11,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
 								},
 								{
-									"id": "0eb65ca4-215e-45fa-8ea6-2707f7394c05",
+									"id": "0da3cc81-01d3-4546-84b1-618946ae9b12",
 									"name": "no content - listar empleados",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "no content",
-												"type": "text"
+												"value": "no content"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}"
+											"raw": "{\r\n    \"id_producto\": 1,\r\n    \"nombre\": \"nombre del nuevo producto\",\r\n    \"description\": \"descripción del nuevo producto\",\r\n    \"categoria\": {\r\n        \"id\": 2,\r\n        \"nombre\": \"laptops\"\r\n    },\r\n    \"stock_ingresado\": 10,\r\n    \"stock_minimo\": 5,\r\n    \"precio_compra_proveedor\": 200,\r\n    \"ganancia\": 0.25\r\n}",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": "{{url}}/empleados"
 									},
@@ -1550,8 +1523,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1559,20 +1532,24 @@
 									"body": "{\n    \"status\": \"success\",\n    \"message\": \"No hay empleados registrados\",\n    \"data\": null,\n    \"pagination\": {\n        \"total_data\": 0,\n        \"total_paginas\": 0,\n        \"pagina_actual\": 0,\n        \"datos_por_pagina\": 0\n    }\n}"
 								},
 								{
-									"id": "dea95677-14a3-4e62-bad9-ac250f1c3c9b",
+									"id": "66af54f1-cabd-4032-817a-74676ceb6142",
 									"name": "internal server error - listar empleados",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - listar empleados",
-												"type": "text"
+												"value": "ok - listar empleados"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "text"
+												}
+											}
 										},
 										"url": {
 											"raw": "{{url}}/empleados?pagina=1",
@@ -1590,13 +1567,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1607,17 +1586,13 @@
 						},
 						{
 							"name": "detalles de un empleado",
-							"id": "ef7b549b-d4f2-4193-83ef-96f43292e214",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "8f7bc6e5-0714-4cf3-bf08-9b21364b9015",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - detalles de un empleado",
-										"type": "text"
+										"value": "ok - detalles de un empleado"
 									}
 								],
 								"body": {
@@ -1640,6 +1615,7 @@
 									],
 									"variable": [
 										{
+											"id": "d6297939-2a07-43d6-b681-428b2c7be5b5",
 											"key": "id_empleado",
 											"value": "1"
 										}
@@ -1648,15 +1624,14 @@
 							},
 							"response": [
 								{
-									"id": "4fb4cf51-4c71-4470-87c8-a7b68b0dc34e",
+									"id": "311327e0-a343-4677-bc4b-5255db4d7652",
 									"name": "ok - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -1677,8 +1652,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1686,15 +1661,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del empleado obtenido exitosamente\",\r\n    \"data\": {\r\n        \"id_empleado\": 2,\r\n        \"nombres\": \"Diego Alonso\",\r\n        \"apellidoPaterno\": \"Vargas\",\r\n        \"apellidoMaterno\": \"Machuca\",\r\n        \"correo\": \"diego.vargas92@gmail.com\",\r\n        \"dni\": \"12345678\",\r\n        \"rol\": {\r\n            \"id\": 2,\r\n            \"nombre\": \"COLABORADOR\"\r\n        },\r\n        \"estado\": true,\r\n        \"fecha_registro\": \"05 diciembre 2025\",\r\n        \"hora_registro\": \"14:52\",\r\n        \"fecha_actualizacion\": \"10 enero 2026\",\r\n        \"hora_actualizacion\": \"09:20\"\r\n    }\r\n}\r\n"
 								},
 								{
-									"id": "41426ef0-dd01-41a3-88fa-53570175dfc6",
+									"id": "eed5449c-be97-41df-a332-d69b3e47556a",
 									"name": "not found - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "exito",
-												"type": "text"
+												"value": "exito"
 											}
 										],
 										"body": {
@@ -1730,8 +1704,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1739,15 +1713,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El Identificar del empleado no existe en el sistema\",\r\n    \"data\": null\r\n}\r\n"
 								},
 								{
-									"id": "854b8701-dc19-41f1-8d11-fdd5f1a2aa37",
+									"id": "808a4256-65a7-42be-b0f4-6a494c4cbf71",
 									"name": "bad request - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - detalles de un empleado",
-												"type": "text"
+												"value": "ok - detalles de un empleado"
 											}
 										],
 										"body": {
@@ -1783,8 +1756,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1792,15 +1765,14 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"El Identificar único es invalido, debe ser un numero entero\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "97b9eebb-f3a1-4133-89cf-b683ac80f29c",
+									"id": "0c44ff6b-9a14-4fbc-86ce-392ee71088e6",
 									"name": "internal server error - detalles de un empleado",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - detalles de un empleado",
-												"type": "text"
+												"value": "ok - detalles de un empleado"
 											}
 										],
 										"body": {
@@ -1829,14 +1801,15 @@
 											]
 										}
 									},
+									"status": "OK",
 									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1847,17 +1820,13 @@
 						},
 						{
 							"name": "deshabilitar empleado",
-							"id": "402c051e-e6ee-4440-9989-15edfa56fdc9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "948014a9-d6b0-4ff3-9a9e-978acd9a460a",
 							"request": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - deshabilitar empleado",
-										"type": "text"
+										"value": "ok - deshabilitar empleado"
 									}
 								],
 								"body": {
@@ -1880,6 +1849,7 @@
 									],
 									"variable": [
 										{
+											"id": "7364b1b7-7325-4e6a-8d81-b87364b48c2b",
 											"key": "id_empleado",
 											"value": "1"
 										}
@@ -1888,7 +1858,7 @@
 							},
 							"response": [
 								{
-									"id": "62424521-099a-42df-befa-12e680d041e1",
+									"id": "dc45fcdc-275b-4117-85eb-0b0c95833078",
 									"name": "ok - deshabilitar empleado",
 									"originalRequest": {
 										"method": "PUT",
@@ -1926,30 +1896,23 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Empleado deshabilitado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "aaa837c2-d5df-426e-b48a-bfd63f53b2b7",
+									"id": "df4d3a1d-ccdd-4702-9846-898ca0bb5fb9",
 									"name": "bad request - deshabilitar empleado",
 									"originalRequest": {
 										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - deshabilitar empleado",
-												"type": "text"
+												"value": "ok - deshabilitar empleado"
 											}
 										],
 										"body": {
@@ -1985,8 +1948,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -1994,15 +1957,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El boby es incorrecto o el identificador del empleado es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "23ffc091-425a-4f86-bf78-2561e70c590d",
+									"id": "4f4eea54-173e-46ec-8f10-267735889af2",
 									"name": "not found - deshabilitar empleado",
 									"originalRequest": {
 										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - deshabilitar empleado",
-												"type": "text"
+												"value": "ok - deshabilitar empleado"
 											}
 										],
 										"body": {
@@ -2038,8 +2000,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2047,15 +2009,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El empleado con el ID consultado no existe\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "64ea7556-6346-41fd-a0cb-2f52b6ba6d49",
+									"id": "0e52a16f-f870-4aeb-9a1f-673446fe1e12",
 									"name": "internal server error - deshabilitar empleado",
 									"originalRequest": {
 										"method": "PUT",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - deshabilitar empleado",
-												"type": "text"
+												"value": "ok - deshabilitar empleado"
 											}
 										],
 										"body": {
@@ -2091,8 +2052,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2103,17 +2064,13 @@
 						},
 						{
 							"name": "editar empleado",
-							"id": "5bc80e7e-e9a0-458a-b890-b2d0bf328d6b",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "2cdb41b2-8bad-4efa-9ac2-95313fc0af8f",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok",
-										"type": "text"
+										"value": "ok"
 									}
 								],
 								"body": {
@@ -2136,6 +2093,7 @@
 									],
 									"variable": [
 										{
+											"id": "32001c87-acfe-4c3f-ada5-4ac568ece41b",
 											"key": "id_empleado",
 											"value": "1"
 										}
@@ -2144,15 +2102,14 @@
 							},
 							"response": [
 								{
-									"id": "309c60cb-add1-499b-a701-21538dc4d79f",
+									"id": "1b5be477-6c9d-4711-b598-e4f95a584d5f",
 									"name": "ok - editar empleado",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "not found",
-												"type": "text"
+												"value": "not found"
 											}
 										],
 										"body": {
@@ -2188,8 +2145,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2197,15 +2154,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del empleado fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "26fefc0d-e472-4216-bcb0-4deaca779d53",
+									"id": "6bc1d9f0-ff51-4caa-9aab-bd81ac3d19ce",
 									"name": "bad request - editar empleado",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2241,8 +2197,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2250,15 +2206,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Body es incorrecto y/o el Identificador del empleado es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "ab5e4d96-d8e8-4502-967f-6d7776286543",
+									"id": "eaa95bc0-6543-49ec-b151-41e281caaa24",
 									"name": "internal server error - editar empleado",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2294,8 +2249,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2303,15 +2258,14 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "e7112c4f-e132-4042-84c5-f7f4ff0dd3b9",
+									"id": "70999fa7-8f88-4279-8e20-a035028591b8",
 									"name": "not found - editar empleado",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2347,8 +2301,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2359,17 +2313,13 @@
 						},
 						{
 							"name": "registrar empleado",
-							"id": "324c2ff4-188a-4251-8e68-2d8e006a2b30",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "c3cae2f6-507e-4e63-ac36-8973f641c5ce",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok",
-										"type": "text"
+										"value": "ok"
 									}
 								],
 								"body": {
@@ -2385,15 +2335,14 @@
 							},
 							"response": [
 								{
-									"id": "d1924e50-969a-4d10-8926-1b821d10eb65",
+									"id": "bbb96bf2-6948-41a3-99b9-f78288741e2a",
 									"name": "ok - registrar empleado",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "no content",
-												"type": "text"
+												"value": "no content"
 											}
 										],
 										"body": {
@@ -2414,8 +2363,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2423,15 +2372,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos el empleado registrado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "0003676b-8232-4957-b8cc-7b8151bb7735",
+									"id": "a859a521-3f7a-41df-8e70-e1e6e46b5cb4",
 									"name": "bad request - registrar empleado",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2452,30 +2400,23 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "f447f994-c959-4280-8480-f4b660585479",
+									"id": "fd9b1e5a-f503-4d96-9e02-4a15b799c7de",
 									"name": "internal server error - registrar empleado",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2496,8 +2437,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2505,15 +2446,14 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "274c02a8-0002-4d6f-9b11-e1b1abb5ea69",
+									"id": "34e4244c-59bf-4ec4-8c31-1c2dd453e2f2",
 									"name": "conflict - registrar empleado",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok",
-												"type": "text"
+												"value": "ok"
 											}
 										],
 										"body": {
@@ -2534,41 +2474,31 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Dni o el correo del empleado coincide con los datos de un empleado dentro del sistema y no pueden repetirse\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
-					"id": "6306b99e-d17e-4665-a82c-0842f4619ab8"
+					"id": "c78139e0-663b-43bb-b0bd-e6abf373a4ed"
 				},
 				{
 					"name": "Seguimiento",
 					"item": [
 						{
 							"name": "realizar seguimiento",
-							"id": "b310d1e6-cc19-439e-9e7d-49d686872f86",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "e703564a-4823-4b50-ad21-f38319f4c6bb",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "200 - realizar seguimiento",
-										"type": "text"
+										"value": "200 - realizar seguimiento"
 									}
 								],
 								"url": {
@@ -2582,6 +2512,7 @@
 									],
 									"variable": [
 										{
+											"id": "40d7f534-06a2-43be-9ce3-5d1862845a4c",
 											"key": "codigo_seguimiento",
 											"value": "GR-2023-0045"
 										}
@@ -2590,7 +2521,7 @@
 							},
 							"response": [
 								{
-									"id": "8583ec5b-5004-4105-98c4-5b2322d0c25f",
+									"id": "06e1c7f5-34b2-46fb-a9c1-0e7f87acee82",
 									"name": "ok - realizar seguimiento",
 									"originalRequest": {
 										"method": "GET",
@@ -2612,13 +2543,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2626,15 +2559,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del seguimiento obtenido exitosamente\",\r\n    \"data\": {\r\n        \"productos\": 20,\r\n        \"peso_total\": 2450,\r\n        \"unidad_peso\": \"TN\",\r\n        \"punto_de_partida\": \"Puerto Maldonado\",\r\n        \"punto_de_llegada\": \"Cusco\",\r\n        \"listo_para_recoger\": true,\r\n        \"historial\": [\r\n            {\r\n                \"evento\": \"Saliendo de Puerto Maldonado\",\r\n                \"fecha\": \"24 oct 2023\",\r\n                \"hora\": \"20:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Llegando a mazuco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"03:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Ingresando a Cusco\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"08:00\"\r\n            },\r\n            {\r\n                \"evento\": \"En almacen\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"15:00\"\r\n            },\r\n            {\r\n                \"evento\": \"Listo para recoger\",\r\n                \"fecha\": \"25 oct 2024\",\r\n                \"hora\": \"17:00\"\r\n            }\r\n        ]\r\n    }\r\n}"
 								},
 								{
-									"id": "e0029ef0-143f-4d91-a808-4dd9ad94740c",
+									"id": "ee279cb3-7640-4a1a-8915-c62ad40c44b5",
 									"name": "not found - realizar seguimiento",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - realizar seguimiento",
-												"type": "text"
+												"value": "200 - realizar seguimiento"
 											}
 										],
 										"url": {
@@ -2661,8 +2593,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2670,15 +2602,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El codigo se seguimiento ingresado no existe en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "1652debb-763a-442e-8c6c-dafbf8c3cf9f",
+									"id": "073c57b8-a50a-49fc-90f1-45da98e95507",
 									"name": "bad request - realizar seguimiento",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - realizar seguimiento",
-												"type": "text"
+												"value": "200 - realizar seguimiento"
 											}
 										],
 										"url": {
@@ -2705,8 +2636,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2714,15 +2645,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Código se seguimiento no existe o es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "effc53bb-2816-483b-9b98-383edc4b611a",
+									"id": "ef37a4b6-3b7b-425f-9def-f6eebda870d5",
 									"name": "internal server error - realizar seguimiento",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - realizar seguimiento",
-												"type": "text"
+												"value": "200 - realizar seguimiento"
 											}
 										],
 										"url": {
@@ -2742,13 +2672,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2758,24 +2690,20 @@
 							]
 						}
 					],
-					"id": "c9d1e3b6-176d-4c6d-a8e2-b9c11e60ca1d"
+					"id": "dc88e4d7-d103-447c-9890-7e80ae35fb52"
 				},
 				{
 					"name": "Usuario",
 					"item": [
 						{
 							"name": "crear usuario",
-							"id": "91c50a59-ff03-4e4b-88d5-af7693fd9f5d",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "e134faa3-6f22-4986-a484-40c959be9ed8",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - crear usuario",
-										"type": "text"
+										"value": "ok - crear usuario"
 									}
 								],
 								"body": {
@@ -2791,7 +2719,7 @@
 							},
 							"response": [
 								{
-									"id": "cd2e5c9e-f733-4d3c-90fe-e6f4a0263f07",
+									"id": "d434f418-ec5e-4cb3-b71f-85eb783fa502",
 									"name": "ok - crear usuario",
 									"originalRequest": {
 										"method": "POST",
@@ -2807,13 +2735,15 @@
 										},
 										"url": "{{url}}/usuario"
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2821,7 +2751,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
 								},
 								{
-									"id": "ee7a9b72-f728-42bc-9663-bcbb27035626",
+									"id": "e2f2f12f-6337-4ad8-83ad-194d6785e462",
 									"name": "bad request - crear usuario",
 									"originalRequest": {
 										"method": "POST",
@@ -2844,8 +2774,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2853,7 +2783,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "70832564-13d7-40cc-87f0-9d73d8a6f0c2",
+									"id": "d94c8359-4498-40c0-878b-b0e769154369",
 									"name": "internal server error - crear usuario",
 									"originalRequest": {
 										"method": "POST",
@@ -2869,14 +2799,15 @@
 										},
 										"url": "{{url}}/usuario"
 									},
+									"status": "OK",
 									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2884,7 +2815,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "93729383-ce72-40fa-90ea-5773a9f32a82",
+									"id": "47b03448-2cbf-4c51-8911-ee4673518923",
 									"name": "forbidden - crear usuario",
 									"originalRequest": {
 										"method": "POST",
@@ -2907,8 +2838,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -2919,17 +2850,13 @@
 						},
 						{
 							"name": "editar usuario",
-							"id": "02b56773-167b-4c74-a765-0e4452e85b8a",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "ef7fc70f-3e83-4d0d-8e33-327f8b0ab9a1",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "200 - editar informacion",
-										"type": "text"
+										"value": "200 - editar informacion"
 									}
 								],
 								"body": {
@@ -2952,6 +2879,7 @@
 									],
 									"variable": [
 										{
+											"id": "85dc7e89-b6c7-464e-acf1-279643678819",
 											"key": "idUsuario",
 											"value": "1"
 										}
@@ -2960,7 +2888,7 @@
 							},
 							"response": [
 								{
-									"id": "c547e77d-8769-402d-ac86-20cc411527d9",
+									"id": "563c8da0-8bad-44cd-8c45-ef6c7827860a",
 									"name": "ok - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
@@ -2998,8 +2926,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3007,15 +2935,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"información del empleado fue actualizado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "d3478e0f-23ec-4379-8441-31d2c4ef8efa",
+									"id": "c5a80751-34af-469c-9c0d-754fdc31b0a3",
 									"name": "bad request - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - editar informacion",
-												"type": "text"
+												"value": "200 - editar informacion"
 											}
 										],
 										"body": {
@@ -3051,8 +2978,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3060,15 +2987,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "41037893-34ed-4c0e-90f9-4e7804a86744",
+									"id": "c0182541-7f11-4880-9946-eebc50f37450",
 									"name": "not found - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - editar informacion",
-												"type": "text"
+												"value": "200 - editar informacion"
 											}
 										],
 										"body": {
@@ -3104,8 +3030,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3113,15 +3039,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id ingresado no existe o es inválido, Revise si la Id pertenece a un empleado que exista en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "d50c2caa-dfb5-4e98-91db-ade7b16bb00e",
+									"id": "aa3c3ea6-3472-4918-b53b-e3a57c50ed27",
 									"name": "forbidden - editar usuario",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - editar informacion",
-												"type": "text"
+												"value": "200 - editar informacion"
 											}
 										],
 										"body": {
@@ -3157,8 +3082,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3169,17 +3094,13 @@
 						},
 						{
 							"name": "eliminar usuario",
-							"id": "c36c7907-509f-48ee-bbc5-4681879c45b9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "af0bcc25-3765-4772-82f0-801a003938af",
 							"request": {
 								"method": "DELETE",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - eliminar usuario",
-										"type": "text"
+										"value": "ok - eliminar usuario"
 									}
 								],
 								"url": {
@@ -3193,6 +3114,7 @@
 									],
 									"variable": [
 										{
+											"id": "d8fdc485-3821-4eae-91ce-f034e4b784cf",
 											"key": "idUsuario",
 											"value": "1"
 										}
@@ -3201,7 +3123,7 @@
 							},
 							"response": [
 								{
-									"id": "dcd58b23-040d-4719-b5c8-d44b1ca72d2e",
+									"id": "ceb55f58-890f-483b-ab9f-784eb454ef84",
 									"name": "ok - eliminar usuario",
 									"originalRequest": {
 										"method": "DELETE",
@@ -3223,13 +3145,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3237,7 +3161,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El usuario fue eliminado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "1740b113-c879-49ba-a04c-16deeaf7a16e",
+									"id": "79c12c7d-5d29-452f-ad52-8ca6d4b8a9ad",
 									"name": "internal server error - eliminar usuario",
 									"originalRequest": {
 										"method": "DELETE",
@@ -3259,13 +3183,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3273,15 +3199,14 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "556af523-f3e8-45b3-a782-f5886d4b95a0",
+									"id": "96e3ff31-bb04-465b-8581-7ac19cc05b25",
 									"name": "forbidden - eliminar usuario",
 									"originalRequest": {
 										"method": "DELETE",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - eliminar usuario",
-												"type": "text"
+												"value": "ok - eliminar usuario"
 											}
 										],
 										"url": {
@@ -3308,8 +3233,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3319,24 +3244,20 @@
 							]
 						}
 					],
-					"id": "420643ed-4cc2-44ea-9903-2af49ae9cc8e"
+					"id": "7d7a5088-ca1e-44d9-9586-b4fba3e85230"
 				},
 				{
 					"name": "vehículos",
 					"item": [
 						{
 							"name": "listar vehiculos",
-							"id": "5d787212-9704-4958-b284-b6dfe1126531",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "b66dfcca-2ab6-4037-81e3-585132adf04a",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - listar vehiculos",
-										"type": "text"
+										"value": "ok - listar vehiculos"
 									}
 								],
 								"url": {
@@ -3357,19 +3278,22 @@
 							},
 							"response": [
 								{
-									"id": "b8b1233d-5c64-403d-8cae-4df8da32ded3",
+									"id": "7edac500-e689-4bbb-a8b4-34cbdcc8661b",
 									"name": "ok - listar vehiculos",
 									"originalRequest": {
 										"method": "GET",
-										"header": []
+										"header": [],
+										"url": ""
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3377,15 +3301,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de vehículos obtenido correctamente\",\r\n    \"data\": [\r\n        {\r\n            \"idvehempresa\": 1,\r\n            \"placa\": \"ABC-123\",\r\n            \"marca\": \"Volvo\",\r\n            \"modelo\": \"FH\",\r\n            \"anio\": 2024,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 32000\r\n        },\r\n        {\r\n            \"idvehempresa\": 2,\r\n            \"placa\": \"XYZ-987\",\r\n            \"marca\": \"Scania\",\r\n            \"modelo\": \"R500\",\r\n            \"anio\": 2023,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 30000\r\n        },\r\n        {\r\n            \"idvehempresa\": 3,\r\n            \"placa\": \"DEF-456\",\r\n            \"marca\": \"Mercedes-Benz\",\r\n            \"modelo\": \"Actros\",\r\n            \"anio\": 2022,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 28000\r\n        },\r\n        {\r\n            \"idvehempresa\": 4,\r\n            \"placa\": \"GHI-789\",\r\n            \"marca\": \"Isuzu\",\r\n            \"modelo\": \"NLR\",\r\n            \"anio\": 2024,\r\n            \"tipoVehiculo\": \"N2\",\r\n            \"capacidadCarga\": 5500\r\n        },\r\n        {\r\n            \"idvehempresa\": 5,\r\n            \"placa\": \"JKL-012\",\r\n            \"marca\": \"Freightliner\",\r\n            \"modelo\": \"Cascadia\",\r\n            \"anio\": 2023,\r\n            \"tipoVehiculo\": \"M3\",\r\n            \"capacidadCarga\": 35000\r\n        },\r\n        {\r\n            \"idvehempresa\": 6,\r\n            \"placa\": \"MNO-345\",\r\n            \"marca\": \"Hino\",\r\n            \"modelo\": \"500\",\r\n            \"anio\": 2021,\r\n            \"tipoVehiculo\": \"N3\",\r\n            \"capacidadCarga\": 12000\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
 								},
 								{
-									"id": "1089abaa-aee4-4f3b-82fc-b93c8d6372ba",
+									"id": "fc990417-396a-410f-a832-833997983440",
 									"name": "no content - listar vehiculos",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - listar vehiculos",
-												"type": "text"
+												"value": "ok - listar vehiculos"
 											}
 										],
 										"url": {
@@ -3411,8 +3334,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3420,15 +3343,14 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No existen vehiculos registrados en el sistema\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								},
 								{
-									"id": "c5046a46-7b59-41f3-8396-39d85b74a577",
+									"id": "25a9c0d8-9a3e-49b8-bfe3-b69c04c91079",
 									"name": "internal server error - listar vehiculos",
 									"originalRequest": {
 										"method": "GET",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - listar vehiculos",
-												"type": "text"
+												"value": "ok - listar vehiculos"
 											}
 										],
 										"url": {
@@ -3447,14 +3369,15 @@
 											]
 										}
 									},
+									"status": "OK",
 									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3465,10 +3388,7 @@
 						},
 						{
 							"name": "registrar vehiculo",
-							"id": "a0861e9b-b493-4ae4-a62c-879162e0872f",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "d2d03cf4-937c-41ca-a0c4-272354934f73",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -3485,7 +3405,7 @@
 							},
 							"response": [
 								{
-									"id": "d495651d-1848-4e36-8d32-1b3ed068506d",
+									"id": "4e185773-c899-43fa-bb2e-54dc7f850ad2",
 									"name": "ok - registrar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3501,13 +3421,15 @@
 										},
 										"url": "{{url}}/vehiculos"
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3515,7 +3437,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Vehículo registrado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "e9918d72-8c6a-4bdb-a20e-c48fe6005837",
+									"id": "9cc1fa57-0916-4b51-86b5-b3b5077a4cf9",
 									"name": "bad request - registrar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3538,8 +3460,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3547,7 +3469,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La Body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "f3d78ab0-96b2-46fd-a105-26fb3a621d70",
+									"id": "19d5e8ee-252b-4c6e-beb1-7dc4d24cfa30",
 									"name": "internal server error - registrar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3570,8 +3492,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3579,7 +3501,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al precesar tu consulta\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "d0bca527-1739-482f-87ca-d7a258603785",
+									"id": "452f871a-5d78-43d0-92f8-18d0785e12db",
 									"name": "forbidden - registrar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3602,8 +3524,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3614,10 +3536,7 @@
 						},
 						{
 							"name": "editar vehiculo",
-							"id": "e055021d-7aff-4f5c-888a-d156b5f417cf",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "8ed8519e-ebc5-4d4c-ae58-6b094f79225f",
 							"request": {
 								"method": "PATCH",
 								"header": [],
@@ -3641,6 +3560,7 @@
 									],
 									"variable": [
 										{
+											"id": "f949f002-3908-48df-bf25-a9a3c619d290",
 											"key": "id_vehiculo",
 											"value": "1"
 										}
@@ -3649,7 +3569,7 @@
 							},
 							"response": [
 								{
-									"id": "70ef37f8-3662-4489-bf2e-a76fde35213f",
+									"id": "0f69498c-dd24-42ff-b54f-bb8396181c34",
 									"name": "ok - editar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3678,8 +3598,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3687,7 +3607,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos del vehículo se actualizaron exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "16ff6358-0fd9-46bd-be7f-87b30de436df",
+									"id": "0ea54183-2d67-4905-bb4e-cf3f1970f473",
 									"name": "bad request - editar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3718,14 +3638,15 @@
 											]
 										}
 									},
+									"status": "OK",
 									"code": 400,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3733,7 +3654,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "cc525c0f-c72f-4171-a33e-4c00c1168099",
+									"id": "d343b6bc-bc19-4983-a71a-5653c24c4c29",
 									"name": "forbidden - editar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3771,8 +3692,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3780,7 +3701,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La placa de vehículo ya está siendo usado por otro vehículo dentro del sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "2d2ae5d4-1a67-4669-bbaf-3c81832107e4",
+									"id": "af147be7-6273-4048-92f8-67ed07edab11",
 									"name": "internal server error  - editar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3818,8 +3739,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3827,7 +3748,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "5c87b913-ac22-49d1-a6e2-b55b9569ebb9",
+									"id": "e478ed0f-a13c-4103-8af0-e1b584241133",
 									"name": "not found - editar vehiculo",
 									"originalRequest": {
 										"method": "PATCH",
@@ -3865,8 +3786,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -3877,10 +3798,7 @@
 						},
 						{
 							"name": "inhabilitar vehiculo",
-							"id": "02b5712f-7af6-4653-96c7-86e03614cac2",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "0108830f-2039-4ba5-b887-d7411d705f46",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -3905,6 +3823,7 @@
 									],
 									"variable": [
 										{
+											"id": "af760df5-cd7a-4a6f-8f69-45d1443bd79a",
 											"key": "id_vehiculo",
 											"value": "1"
 										}
@@ -3913,7 +3832,7 @@
 							},
 							"response": [
 								{
-									"id": "05c2a6e2-c1d2-48f7-aa15-177bbb19f859",
+									"id": "6135bd0f-bbbd-4eb6-86df-32d1b7738c2d",
 									"name": "ok - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3943,22 +3862,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El vehículo fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "05c2462e-6b90-46cc-b641-229273954398",
+									"id": "ff8be841-0f33-4517-b0af-d60b7f349573",
 									"name": "bad request - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -3997,22 +3910,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "fc106702-60ca-439b-9d3a-3ad04ff4a884",
+									"id": "9b85ee8a-eec0-46a2-a45b-26001028a5a5",
 									"name": "not found - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -4051,8 +3958,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4060,7 +3967,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del vehículo no existe en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "a4047035-b01e-4073-a40e-871f19f05ae2",
+									"id": "5ee922f3-c40a-47fa-a78b-d8b1a372a0a6",
 									"name": "internal server error - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -4099,8 +4006,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4108,7 +4015,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "02a2fb2a-95f6-4cd0-9f4b-9f7bdfef9aae",
+									"id": "419bd7d8-64f8-49e5-86d0-cbceca760282",
 									"name": "forbidden - inhabilitar vehiculo",
 									"originalRequest": {
 										"method": "POST",
@@ -4147,8 +4054,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4159,10 +4066,7 @@
 						},
 						{
 							"name": "obtener detalles de un vehiculo",
-							"id": "f6c098f4-06f8-4b16-a1b1-278b8925193b",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "6b64a3c5-0073-4037-85ed-f06850b35c09",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -4177,6 +4081,7 @@
 									],
 									"variable": [
 										{
+											"id": "9486bf23-165b-4a6a-8069-5303e90bc4be",
 											"key": "idVehiculo",
 											"value": "1"
 										}
@@ -4185,7 +4090,7 @@
 							},
 							"response": [
 								{
-									"id": "e531901d-f839-4fa0-8a7b-6c300ccc8a54",
+									"id": "b727567c-dc5b-431b-8c96-5e2ec41053b1",
 									"name": "ok - obtener detalles de un vehiculo",
 									"originalRequest": {
 										"method": "GET",
@@ -4214,8 +4119,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4223,7 +4128,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del vehiculo obtenido exitosamente\",\r\n    \"data\": {\r\n        \"placa\": \"ABC-123\",\r\n        \"marca\": \"toyota\",\r\n        \"modelo\": \"corolla\",\r\n        \"anioFabricacion\": 2024,\r\n        \"tipoVehiculo\": \"M3\",\r\n        \"capacidadCarga\": 320\r\n    }\r\n}"
 								},
 								{
-									"id": "95ecc633-c832-4482-873d-bd7a89de441d",
+									"id": "30b74973-087e-4dee-889d-a775ddff2931",
 									"name": "not found - obtener detalles de un vehiculo",
 									"originalRequest": {
 										"method": "GET",
@@ -4252,8 +4157,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4261,7 +4166,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No existe un vehiculo con el ID que estás buscando\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "80b2d3b0-b290-4a2b-b0ce-2574c0ccf9d3",
+									"id": "f3079c56-bb69-463c-b1b7-c9bdca9324f9",
 									"name": "bad request - obtener detalles de un vehiculo",
 									"originalRequest": {
 										"method": "GET",
@@ -4290,8 +4195,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4299,7 +4204,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del vehiculo es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "98e5af45-265f-404d-8803-5b1871d95aa0",
+									"id": "4d3756c2-b7a4-41f1-94ff-599038c9eabc",
 									"name": "internal server error - obtener detalles de un vehiculo",
 									"originalRequest": {
 										"method": "GET",
@@ -4328,8 +4233,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4339,17 +4244,14 @@
 							]
 						}
 					],
-					"id": "f7e9091f-23ca-4be3-9820-504ca98ca9b0"
+					"id": "a02e3756-257c-4c97-a843-2e0d3a42788a"
 				},
 				{
 					"name": "Transportistas",
 					"item": [
 						{
 							"name": "listar transportistas",
-							"id": "3e202122-972e-46bf-83fb-d06d33fe7c3b",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "da4500bf-c3ee-43c6-a5cf-ee0a56f6c99f",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -4366,11 +4268,12 @@
 							},
 							"response": [
 								{
-									"id": "309a8160-72d2-449a-a470-d0aa206187f2",
+									"id": "e96155ae-52b0-4cf1-af55-5207dce0542c",
 									"name": "ok - listar transportistas",
 									"originalRequest": {
 										"method": "GET",
-										"header": []
+										"header": [],
+										"url": ""
 									},
 									"status": "OK",
 									"code": 200,
@@ -4379,22 +4282,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Lista de transportistas obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombres\": \"Carlos Alberto\",\r\n            \"apellidos\": \"García Mendoza\",\r\n            \"dni\": \"45678912\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombres\": \"María Fernanda\",\r\n            \"apellidos\": \"Rodríguez Silva\",\r\n            \"dni\": \"72345678\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombres\": \"Juan Pablo\",\r\n            \"apellidos\": \"Villalobos Soto\",\r\n            \"dni\": \"10987654\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombres\": \"Ana Lucía\",\r\n            \"apellidos\": \"Palacios Quispe\",\r\n            \"dni\": \"44556677\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombres\": \"Diego Armando\",\r\n            \"apellidos\": \"Torres Rojas\",\r\n            \"dni\": \"33221100\"\r\n        }\r\n    ]\r\n}"
 								},
 								{
-									"id": "c180483b-27f4-4ba1-985a-3d2ef7fdeb02",
+									"id": "3ef06be1-844d-48c1-912f-f1b292733e70",
 									"name": "no content - listar transportistas",
 									"originalRequest": {
 										"method": "GET",
@@ -4408,8 +4305,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4417,20 +4314,22 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay lista de transportistas registrados en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "6509c9d7-ae6e-45f4-96ed-186c8167e1cd",
+									"id": "f349ee56-d712-4f0b-958e-ca34148897bd",
 									"name": "internal server error - listar transportistas",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
 										"url": "{{url}}/transportistas"
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4440,17 +4339,14 @@
 							]
 						}
 					],
-					"id": "94b53f5b-7233-439a-9b4e-17c00052bea7"
+					"id": "b56c9fd4-3031-4b34-82a5-8f1d73aa89d7"
 				},
 				{
 					"name": "Roles",
 					"item": [
 						{
 							"name": "listar roles",
-							"id": "9e000ce5-ff24-448c-9377-5bed39204dac",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "a4b77a95-0f35-4f70-8102-8fbe6b4d60ca",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -4458,7 +4354,7 @@
 							},
 							"response": [
 								{
-									"id": "da8a79e3-c85b-4ba5-affa-18d09a1b25b9",
+									"id": "8e3ec241-8053-45a8-b42b-864a8c93fcd7",
 									"name": "ok - listar roles",
 									"originalRequest": {
 										"method": "GET",
@@ -4472,22 +4368,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Listando roles con exito\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"rol\": \"ADMIN\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"rol\": \"CHOFER\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"rol\": \"CLIENTE\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"rol\": \"COLABORADOR\"\r\n        }\r\n    ]\r\n}"
 								},
 								{
-									"id": "dd42815d-3593-4462-be24-9940848cb00b",
+									"id": "887df666-aea1-4782-b2cb-77213a414db7",
 									"name": "no content - listar roles",
 									"originalRequest": {
 										"method": "GET",
@@ -4501,8 +4391,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4510,7 +4400,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay roles registrados en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "160e682a-50bc-4b0d-9fb4-0dd17095a145",
+									"id": "f9d16a67-c77a-4c34-acc5-81d2f8708e2a",
 									"name": "internal server error - listar roles",
 									"originalRequest": {
 										"method": "GET",
@@ -4524,40 +4414,31 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Error en el servidor\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
-					"id": "743cbb99-1a89-4934-9672-22908d90a4f1"
+					"id": "17105dff-317b-4eb1-a603-9623afece18f"
 				},
 				{
 					"name": "Productos",
 					"item": [
 						{
 							"name": "registrar producto",
-							"id": "8859fc73-d762-47f3-a451-678277e1c903",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "9339520c-7170-4cb5-8b36-d65eaa6e6887",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": 1\r\n}",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4568,7 +4449,7 @@
 							},
 							"response": [
 								{
-									"id": "e7000c51-f6d2-4452-90df-215560c61b05",
+									"id": "87e68ac5-90d0-444d-9ce6-6153a9585a55",
 									"name": "ok - registrar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -4582,8 +4463,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4591,7 +4472,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "f9d48457-7770-4d81-afb2-ac7da9c95663",
+									"id": "1d850b05-5bff-42ef-83fc-afe865dce745",
 									"name": "bad request - registrar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -4605,8 +4486,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4617,10 +4498,7 @@
 						},
 						{
 							"name": "listar productos",
-							"id": "7b70712c-f46e-444a-b5dc-59688dacb520",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "06700574-7dcd-4c3d-ae22-bf145372c695",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -4642,7 +4520,7 @@
 							},
 							"response": [
 								{
-									"id": "ca55e55f-81c1-4a9d-acab-49715bba9187",
+									"id": "638d8dfb-6203-4f81-be16-bc7ac52a25e5",
 									"name": "ok - listar productos",
 									"originalRequest": {
 										"method": "GET",
@@ -4671,21 +4549,15 @@
 											"key": "Content-Type",
 											"value": "application/json",
 											"description": "",
-											"type": "text"
+											"disabled": false
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de productos obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Castaña entera con cáscara\",\r\n            \"peso\": 5,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\r\n            \"peso\": 0.5,\r\n            \"unidadPeso\": \"TN\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"Harina de castaña\",\r\n            \"peso\": 1,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Aceite de castaña prensado en frío\",\r\n            \"peso\": 100,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"nombre\": \"Castañas tostadas y saladas\",\r\n            \"peso\": 500,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"nombre\": \"Crema de castañas (marrón glacé)\",\r\n            \"peso\": 0.350,\r\n            \"unidadPeso\": \"KG\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"nombre\": \"Castañas deshidratadas (pilongas)\",\r\n            \"peso\": 0.2,\r\n            \"unidadPeso\": \"KG\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 70,\r\n        \"total_paginas\": 10,\r\n        \"pagina_actual\": 2,\r\n        \"datos_por_pagina\": 7\r\n    }\r\n}"
+									"body": "{\n  \"status\": \"success\",\n  \"message\": \"Datos de productos obtenido exitosamente\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"nombre\": \"Castaña entera con cáscara\"\n    },\n    {\n      \"id\": 2,\n      \"nombre\": \"Nueces de Brasil (Castañas peladas)\"\n    },\n    {\n      \"id\": 3,\n      \"nombre\": \"Harina de castaña\"\n    },\n    {\n      \"id\": 4,\n      \"nombre\": \"Aceite de castaña prensado en frío\"\n    },\n    {\n      \"id\": 5,\n      \"nombre\": \"Castañas tostadas y saladas\"\n    },\n    {\n      \"id\": 6,\n      \"nombre\": \"Crema de castañas (marrón glacé)\"\n    },\n    {\n      \"id\": 7,\n      \"nombre\": \"Castañas deshidratadas (pilongas)\"\n    }\n  ],\n  \"pagination\": {\n    \"total_data\": 70,\n    \"total_paginas\": 10,\n    \"pagina_actual\": 2,\n    \"datos_por_pagina\": 7\n  }\n}"
 								},
 								{
-									"id": "c4c6fe3b-2fa1-4307-84d7-3d6adc510d88",
+									"id": "268be6b3-f099-410f-982a-c9a6c71458ef",
 									"name": "no content - listar productos",
 									"originalRequest": {
 										"method": "GET",
@@ -4713,8 +4585,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4722,7 +4594,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"No hay productos registrados en el sistema\",\r\n    \"data\": null,\r\n    \"pagination\": {\r\n        \"total_data\": 0,\r\n        \"total_paginas\": 0,\r\n        \"pagina_actual\": 0,\r\n        \"datos_por_pagina\": 0\r\n    }\r\n}"
 								},
 								{
-									"id": "833404f2-45b3-4f49-927b-303f99c11931",
+									"id": "ee54b79a-a933-424e-89ce-b8469e6f7cfb",
 									"name": "internal server error - listar productos",
 									"originalRequest": {
 										"method": "GET",
@@ -4750,8 +4622,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4762,22 +4634,18 @@
 						},
 						{
 							"name": "modificar producto",
-							"id": "0f95d0fc-8601-450d-82e5-99136ed7a366",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "84a26bdb-67c9-47d6-9a15-28aaf5215a09",
 							"request": {
 								"method": "PATCH",
 								"header": [
 									{
 										"key": "Access-Control-Allow-Origin",
-										"value": "*",
-										"type": "text"
+										"value": "*"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadMedida\": \"kg\"\r\n}",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4803,20 +4671,18 @@
 							},
 							"response": [
 								{
-									"id": "904312df-87ad-4b98-9ec4-85a5f4144b04",
+									"id": "0b0fb4b8-a8b8-4b65-b5da-17c6b8cc1ce9",
 									"name": "ok - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"value": "application/json"
 											},
 											{
 												"key": "Access-Control-Allow-Origin",
-												"value": "*",
-												"type": "text"
+												"value": "*"
 											}
 										],
 										"body": {
@@ -4852,35 +4718,27 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue modificado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "5395f748-54b9-49eb-9e46-37395c624b78",
+									"id": "841fcf54-7a50-44ea-9caa-2302fc0971cd",
 									"name": "bad request - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"value": "application/json"
 											},
 											{
 												"key": "Access-Control-Allow-Origin",
-												"value": "*",
-												"type": "text"
+												"value": "*"
 											}
 										],
 										"body": {
@@ -4909,14 +4767,15 @@
 											]
 										}
 									},
+									"status": "OK",
 									"code": 400,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4924,20 +4783,18 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "0fac6428-8f39-430d-976c-40ca97e18e2f",
+									"id": "0059ca27-3d44-47a6-8140-912b6a55f3ca",
 									"name": "no content - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"value": "application/json"
 											},
 											{
 												"key": "Access-Control-Allow-Origin",
-												"value": "*",
-												"type": "text"
+												"value": "*"
 											}
 										],
 										"body": {
@@ -4973,8 +4830,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -4982,20 +4839,18 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "6603a6ac-7d90-4936-a03a-dd3e94df0e1d",
+									"id": "c2a6f8b1-9e83-4516-9bc1-d58c933c233e",
 									"name": "forbidden - modificar producto",
 									"originalRequest": {
 										"method": "PATCH",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"value": "application/json"
 											},
 											{
 												"key": "Access-Control-Allow-Origin",
-												"value": "*",
-												"type": "text"
+												"value": "*"
 											}
 										],
 										"body": {
@@ -5031,8 +4886,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5043,10 +4898,7 @@
 						},
 						{
 							"name": "inhabilitar producto",
-							"id": "0af7c134-13a5-4d09-bcc1-eefccd07e996",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "6b9ca93f-f2ed-4f54-bf57-5e0074b7859b",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -5062,6 +4914,7 @@
 									],
 									"variable": [
 										{
+											"id": "7a06db6f-9a1b-48eb-8190-58f43b8614b9",
 											"key": "idProducto",
 											"value": "1"
 										}
@@ -5070,7 +4923,7 @@
 							},
 							"response": [
 								{
-									"id": "8fac8b02-4780-4af4-b6ef-2bfe09140115",
+									"id": "40879644-da80-4423-b8df-0a0001318084",
 									"name": "ok - inhabilitar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -5100,22 +4953,16 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El producto fue inhabilitado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "d34338b2-71e0-49f0-8122-c5a368fb8dc0",
+									"id": "3c13e5fb-0edc-4ce9-be83-c8350ce4ee7b",
 									"name": "bad request - inhabilitar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -5138,14 +4985,15 @@
 											]
 										}
 									},
+									"status": "OK",
 									"code": 400,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5153,7 +5001,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto es inválido\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "32f7b7fb-edc6-4c2d-a5c4-1b46dccd232d",
+									"id": "eea4c9ff-2088-4efa-b2bd-242dde0e42bd",
 									"name": "no content - inhabilitar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -5183,8 +5031,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5192,7 +5040,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "a9fbe4fb-77b7-4fa5-bebf-91ee999bca3f",
+									"id": "289ed444-4814-486b-9b81-b578dff4cee9",
 									"name": "forbidden - inhabilitar producto",
 									"originalRequest": {
 										"method": "POST",
@@ -5222,8 +5070,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5234,17 +5082,13 @@
 						},
 						{
 							"name": "obtener detalles de un producto",
-							"id": "2f1dd0a3-657f-455e-bcfe-c941dce9b6b3",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "8834ce6e-2d6f-422b-9ec8-42c1688d8644",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - obtener detalles de un producto",
-										"type": "text"
+										"value": "ok - obtener detalles de un producto"
 									}
 								],
 								"url": {
@@ -5258,6 +5102,7 @@
 									],
 									"variable": [
 										{
+											"id": "718e59b9-9b41-4c28-91d9-9481638280b9",
 											"key": "idProducto",
 											"value": "1"
 										}
@@ -5266,7 +5111,7 @@
 							},
 							"response": [
 								{
-									"id": "cf7cc482-be6c-4c43-a4f1-ff2dd3c7c540",
+									"id": "7f70a26f-fcb7-4fe0-a3c9-7f9fcb86a017",
 									"name": "ok - obtener detalles de un producto",
 									"originalRequest": {
 										"method": "GET",
@@ -5288,21 +5133,23 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
 											"description": "",
-											"type": "text"
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\",\r\n        \"peso\": 5,\r\n        \"unidadMedidaId\": 1\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\"\r\n    }\r\n}"
 								},
 								{
-									"id": "479496fe-d153-456b-b04a-4c080b963130",
+									"id": "c9d77aa1-bac0-43e2-9916-f09c8791a54f",
 									"name": "not found - obtener detalles de un producto",
 									"originalRequest": {
 										"method": "GET",
@@ -5331,8 +5178,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5340,7 +5187,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El ID del producto no existe en el sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "a363d77c-1c52-4205-bf78-ef4aea1eba31",
+									"id": "ae491d16-3fc5-417f-8d2c-8cceab5d6017",
 									"name": "internal server error - obtener detalles de un producto",
 									"originalRequest": {
 										"method": "GET",
@@ -5369,8 +5216,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5378,7 +5225,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "51120b66-8286-4af3-b945-1213be85447d",
+									"id": "182be1f3-bee0-4431-8d51-18629c5010a1",
 									"name": "bad request - obtener detalles de un producto",
 									"originalRequest": {
 										"method": "GET",
@@ -5407,8 +5254,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5418,24 +5265,20 @@
 							]
 						}
 					],
-					"id": "d83dfe6e-f564-4402-ae58-3713ab591306"
+					"id": "8c355c3a-e507-4ffd-b8d6-2d1fb49d2931"
 				},
 				{
 					"name": "Transporte",
 					"item": [
 						{
 							"name": "actualizar estado de transporte",
-							"id": "7c86dea8-3c6c-4d79-a3b8-4f9c6227bb71",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "48a0e6c3-9a76-4f4a-ac7e-376ac41a7bef",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - actualizar estado de transporte",
-										"type": "text"
+										"value": "ok - actualizar estado de transporte"
 									}
 								],
 								"body": {
@@ -5458,6 +5301,7 @@
 									],
 									"variable": [
 										{
+											"id": "88bf3606-c544-4cdc-ae75-9a0d793cbfe3",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -5466,7 +5310,7 @@
 							},
 							"response": [
 								{
-									"id": "2093d0b1-059c-4ba0-9ddc-c1f09a7b0d6f",
+									"id": "6061c46f-3370-443a-8585-bd43e71fa928",
 									"name": "ok - actualizar estado de transporte",
 									"originalRequest": {
 										"method": "POST",
@@ -5504,30 +5348,23 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
-									"cookie": [
-										{
-											"expires": "Invalid Date",
-											"domain": "",
-											"path": ""
-										}
-									],
+									"cookie": [],
 									"responseTime": null,
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Estado de transporte actualizado exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "678cc27c-fb4b-46ec-9291-06de34fc11fc",
+									"id": "495d6ed0-3e43-474b-81d9-d08cafbff03f",
 									"name": "bad request - actualizar estado de transporte",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "200 - actualizar estado de transporte",
-												"type": "text"
+												"value": "200 - actualizar estado de transporte"
 											}
 										],
 										"body": {
@@ -5563,8 +5400,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5572,15 +5409,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "5f1212e4-6588-4fe4-8ff9-db4692ebbfba",
+									"id": "1eebcea9-d263-441f-aed8-1c1f07d9ac49",
 									"name": "internal server error - actualizar estado de transporte",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - actualizar estado de transporte",
-												"type": "text"
+												"value": "ok - actualizar estado de transporte"
 											}
 										],
 										"body": {
@@ -5609,13 +5445,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5623,7 +5461,7 @@
 									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Sucedió un error en el servidor al procesar la consulta\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "613f3775-8f33-43bb-899b-63b8fb694ae4",
+									"id": "b73446b1-34cf-47ed-9df3-002943ca59c1",
 									"name": "not found - actualizar estado de transporte",
 									"originalRequest": {
 										"method": "PUT",
@@ -5654,13 +5492,15 @@
 											]
 										}
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5668,15 +5508,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El Identificador únido para realizar el seguimiento no existe o es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "eda21162-df68-455c-9e34-e29b445a5453",
+									"id": "5968baee-ea4d-4ee9-a6b0-475ec2e68183",
 									"name": "forbidden - actualizar estado de transporte",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - actualizar estado de transporte",
-												"type": "text"
+												"value": "ok - actualizar estado de transporte"
 											}
 										],
 										"body": {
@@ -5712,8 +5551,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5723,24 +5562,20 @@
 							]
 						}
 					],
-					"id": "152b0413-a246-4e0f-8644-3bc529f1593a"
+					"id": "211714b9-b79a-40f4-a7c4-d07d511f2457"
 				},
 				{
 					"name": "Login",
 					"item": [
 						{
 							"name": "iniciar sesion",
-							"id": "f052ec6e-9791-4598-9eb7-ab90313b8080",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "d8c3220b-1496-4758-93ba-f515034b700c",
 							"request": {
 								"method": "POST",
 								"header": [
 									{
 										"key": "x-mock-response-name",
-										"value": "ok - iniciar sesion",
-										"type": "text"
+										"value": "ok - iniciar sesion"
 									}
 								],
 								"body": {
@@ -5756,7 +5591,7 @@
 							},
 							"response": [
 								{
-									"id": "a324797e-482e-42b4-a956-a7910ac9e886",
+									"id": "25b8e9df-afee-4895-bdc0-e1e844cfa883",
 									"name": "ok - iniciar sesion",
 									"originalRequest": {
 										"method": "POST",
@@ -5780,15 +5615,15 @@
 											"key": "Content-Type",
 											"value": "application/json",
 											"description": "",
-											"type": "text"
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"COLABORADOR\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
 								},
 								{
-									"id": "c749b10c-8845-4d16-bc13-c78d224714de",
+									"id": "7bbf76b1-87ec-4c89-b897-b58707a07602",
 									"name": "not found - iniciar sesion",
 									"originalRequest": {
 										"method": "POST",
@@ -5811,8 +5646,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5820,15 +5655,14 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"Las credenciales son incorrectas\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "ffc926d2-fd43-4a3f-a759-635c2d3fcf1f",
+									"id": "dc7e555c-1817-4232-938a-ebd50946b926",
 									"name": "internal server error - iniciar sesion",
 									"originalRequest": {
 										"method": "POST",
 										"header": [
 											{
 												"key": "x-mock-response-name",
-												"value": "ok - iniciar sesion",
-												"type": "text"
+												"value": "ok - iniciar sesion"
 											}
 										],
 										"body": {
@@ -5842,13 +5676,15 @@
 										},
 										"url": "{{url}}/login"
 									},
+									"status": "OK",
+									"code": 200,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5858,17 +5694,14 @@
 							]
 						}
 					],
-					"id": "c492856b-b41f-43a7-8095-2be123736adc"
+					"id": "828f5be6-5cb5-4719-b0de-789736fb4627"
 				},
 				{
 					"name": "Chofer",
 					"item": [
 						{
 							"name": "agregar datos de chofer",
-							"id": "fa0cdf2f-7128-459c-96be-97efce40723c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"id": "9ac25460-f39c-46bc-96f8-937a9da46cce",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -5892,6 +5725,7 @@
 									],
 									"variable": [
 										{
+											"id": "d05ea8ed-13d1-417f-b872-1439abc4d8f4",
 											"key": "idChofer",
 											"value": "1"
 										}
@@ -5900,7 +5734,7 @@
 							},
 							"response": [
 								{
-									"id": "4fdb21ac-7e8a-4047-8c38-b81452b9cd53",
+									"id": "b2fa8479-6d7f-4704-a384-ab36904b6ad3",
 									"name": "ok - agregar datos de chofer",
 									"originalRequest": {
 										"method": "POST",
@@ -5938,8 +5772,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5947,7 +5781,7 @@
 									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Los datos se agregaron al chofer exitosamente\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "fd3f58bb-af22-4205-8031-29939387ada0",
+									"id": "b53d472c-fa31-4d40-950a-342d9b628d73",
 									"name": "bad request - agregar datos de chofer",
 									"originalRequest": {
 										"method": "POST",
@@ -5985,8 +5819,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -5994,7 +5828,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "327abc6a-0d2b-4cad-865b-d06d99267141",
+									"id": "f728f25a-aefb-4542-acf2-445e134c1d60",
 									"name": "not found - agregar datos de chofer",
 									"originalRequest": {
 										"method": "POST",
@@ -6032,8 +5866,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"description": "",
-											"type": "text"
+											"disabled": false,
+											"description": ""
 										}
 									],
 									"cookie": [],
@@ -6041,7 +5875,7 @@
 									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El id del chofer no existe dentro del sistema\",\r\n    \"data\": null\r\n}"
 								},
 								{
-									"id": "737d8c70-6191-4ea9-8ccc-a3a35747bf9b",
+									"id": "5f5886f5-11ab-4d8d-bc3d-0cc5fc197723",
 									"name": "forbidden - agregar datos de chofer",
 									"originalRequest": {
 										"method": "POST",
@@ -6079,6 +5913,77 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
+											"disabled": false,
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El chofer ya tiene registrado una licencia en el sistema\",\r\n    \"data\": {\r\n        \"licencia\": \"EJEM0231\"\r\n    }\r\n}"
+								}
+							]
+						}
+					],
+					"id": "e10751b2-9093-429c-b2a3-66434998e02e"
+				},
+				{
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "listar clientes",
+							"id": "cc532242-2788-461a-bc3c-0dc292d35eb2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/clientes?pagina=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"clientes"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "8952b313-5f06-402c-ae7b-727d979ad215",
+									"name": "ok - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
 											"description": "",
 											"type": "text"
 										}
@@ -6091,15 +5996,257 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El chofer ya tiene registrado una licencia en el sistema\",\r\n    \"data\": {\r\n        \"licencia\": \"EJEM0231\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de clientes obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20604895988\",\r\n            \"nombre_razonSocial\": \"AGRICOLA Y SERVICIOS GENERALES COROCAS SOCIEDAD COMERCIAL DE RESPONSABILIDAD LIMITADA\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20568242271\",\r\n            \"nombre_razonSocial\": \"AGROSORIA E.I.R.L.\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20408113891\",\r\n            \"nombre_razonSocial\": \"ASAP GROUP SAC ENGINEERING AND CONSTRUCTION\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"45781234\",\r\n            \"nombre_razonSocial\": \"CARLOS ALBERTO RIVERA MENDOZA\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"70124598\",\r\n            \"nombre_razonSocial\": \"ANA LUCIA TORRES VELASQUEZ\"\r\n        }\r\n    ]\r\n}"
+								},
+								{
+									"id": "38f403fa-41d1-40cb-b8a2-f4616fd6d762",
+									"name": "no content - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No hay clientes registrados en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "223ec99a-f757-4dc0-9b36-256ab2871203",
+									"name": "internal server error - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6d11a2bd-3fa4-41b0-9af1-8e52e9ebe516",
+									"name": "bad request - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La pagina que está buscando no existe o es inválido\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "registrar cliente",
+							"id": "d2fe47c8-f2aa-4798-8cbf-a70ffed95b42",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/clientes"
+							},
+							"response": [
+								{
+									"id": "dff16910-31f7-4288-84e5-801464efc6a1",
+									"name": "ok - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El cliente fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "329deec7-1af0-4e1b-8caf-8566618bd8b0",
+									"name": "bad request - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "152e8194-89a7-4af4-8077-320e822caa0e",
+									"name": "internal server error - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
 								}
 							]
 						}
 					],
-					"id": "769501c7-60a8-4a72-a538-518077fa0a4f"
+					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
 				}
 			],
-			"id": "dff50e37-71ce-41a2-804e-43aad4f9c806"
+			"id": "c8e96edf-97b2-4b0b-b009-4ef42b534cba"
 		}
 	]
 }

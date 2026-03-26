@@ -1,31 +1,14 @@
-export type Producto = {
-  nombre: string;
-  peso: number;
-  unidadMedida: string;
-}
-
-export type ProductoListado = {
+type Producto = {
   id: number;
   nombre: string;
-  peso: number;
-  unidadPeso: string;
+  fechaCreacion: Date;
+  fechaActualizacion: Date;
 }
 
-export type CrearProducto = {
-  nombre: string;
-  peso: number;
-  unidadMedidaId: number;
-}
+export type ProductoListado = Omit< Producto, 'fechaCreacion' | 'fechaActualizacion' >;
 
-export type ModificarProducto = {
-  nombre: string;
-  peso: number;
-  unidadMedida: number;
-}
+export type CrearProducto = Omit< Producto, 'id' | 'fechaCreacion' | 'fechaActualizacion' >;
 
-export type DetallesProducto = {
-  id: number;
-  nombre: string;
-  peso: number;
-  unidadMedidaId: number;
-}
+export type ModificarProducto = Omit< Producto, 'id' | 'fechaCreacion' | 'fechaActualizacion' >;
+
+export type DetallesProducto =  Omit< Producto, 'fechaCreacion' | 'fechaActualizacion' >;

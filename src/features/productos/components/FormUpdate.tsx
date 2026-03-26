@@ -25,18 +25,14 @@ export default function FormUpdate({ showFormEdit, idProducto }: FormUpdateEstPr
   const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, refresh: refreshInhabilitar } = useInhabilitarProducto();
 
   const [formData, setFormData] = useState<ModificarProducto>({
-    nombre: "",
-    peso: 0,
-    unidadMedida: 0,
+    nombre: ""
   });
 
   useEffect(() => {
     if (!detallesProducto) return;
 
     setFormData({
-      nombre: detallesProducto.nombre || "",
-      peso: detallesProducto.peso || 0,
-      unidadMedida: detallesProducto.unidadMedidaId || 0,
+      nombre: detallesProducto.nombre || ""
     });
   }, [detallesProducto]);
 
