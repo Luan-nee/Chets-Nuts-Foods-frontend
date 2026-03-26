@@ -6134,7 +6134,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "",
+									"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -6143,7 +6143,72 @@
 								},
 								"url": "{{url}}/clientes"
 							},
-							"response": []
+							"response": [
+								{
+									"id": "dff16910-31f7-4288-84e5-801464efc6a1",
+									"name": "ok - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El cliente fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "329deec7-1af0-4e1b-8caf-8566618bd8b0",
+									"name": "bad request - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								}
+							]
 						}
 					],
 					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
