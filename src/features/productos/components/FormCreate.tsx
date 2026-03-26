@@ -15,9 +15,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
   const { isLoading, isError, refresh: createProducto } = useCreateProducto();
 
   const [formData, setFormData] = useState<CrearProducto>({
-    nombre: "",
-    peso: 0,
-    unidadMedidaId: 0
+    nombre: ""
   });
 
   const handleInputChange = (
