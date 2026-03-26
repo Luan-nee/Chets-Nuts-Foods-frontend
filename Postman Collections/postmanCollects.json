@@ -5925,6 +5925,40 @@
 						}
 					],
 					"id": "e10751b2-9093-429c-b2a3-66434998e02e"
+				},
+				{
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "listar clientes",
+							"id": "cc532242-2788-461a-bc3c-0dc292d35eb2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/clientes"
+							},
+							"response": [
+								{
+									"id": "8952b313-5f06-402c-ae7b-727d979ad215",
+									"name": "listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{url}}/clientes"
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"responseTime": null,
+									"body": null
+								}
+							]
+						}
+					],
+					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
 				}
 			],
 			"id": "c8e96edf-97b2-4b0b-b009-4ef42b534cba"
