@@ -4,7 +4,7 @@ import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../conf
 import InputSelect from "../../../components/ui/InputSelect";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import type { EditarVehiculo, DetalleVehiculoModificado } from "../types/vehiculo.type";
+import type { EditarVehiculo, DetallesNumerados } from "../types/vehiculo.type";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
@@ -19,7 +19,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
   const { data: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, fetchData: fetchVehiculo } = useFetchVehiculo(idVehiculo);
   const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, fetchData: fetchInhabilitar } = useInhabilitarVehiculo();
 
-  const [ DataFetch, setDataFetch ] = useState<DetalleVehiculoModificado>({
+  const [ DataFetch, setDataFetch ] = useState<DetallesNumerados>({
     placa: "",
     marca: 0,
     modelo: 0,
