@@ -4645,7 +4645,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadMedida\": \"kg\"\r\n}",
+									"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4663,7 +4663,6 @@
 									],
 									"variable": [
 										{
-											"id": "2e4a1ed4-9c63-497b-86f6-009fc8a9557a",
 											"key": "idProducto",
 											"value": "1"
 										}
@@ -5141,13 +5140,13 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\",\r\n        \"peso\": 5,\r\n        \"unidadMedidaId\": 1\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Se obtuvo la información de un producto\",\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Castaña entera con cáscara\"\r\n    }\r\n}"
 								},
 								{
 									"id": "c9d77aa1-bac0-43e2-9916-f09c8791a54f",
