@@ -8,38 +8,45 @@ import ButtonsPagination from "../../../../components/ui/ButtonsPagination";
 
 interface BienesDatosDeCargaProps {
   handleAddProductToList: (
-    field: string, 
+    field: string,
     value: {
       idProducto: number;
       cantidad: number;
-    }
+    },
   ) => void;
-  handleRemoveProductFromList: (
-    field: string,
-    index: number,
-  ) => void;
+  handleRemoveProductFromList: (field: string, index: number) => void;
   formData: EmitirGre;
-  setFormData: React.Dispatch<React.SetStateAction<EmitirGre>> ;
+  setFormData: React.Dispatch<React.SetStateAction<EmitirGre>>;
 }
 
-export default function BienesDatosDeCarga({ handleAddProductToList, handleRemoveProductFromList, formData, setFormData }: BienesDatosDeCargaProps) {
-  const [unidadMedida, setUnidadMedida] = useState<'KG' | 'TN' | null>(null);
+export default function BienesDatosDeCarga({
+  handleAddProductToList,
+  handleRemoveProductFromList,
+  formData,
+  setFormData,
+}: BienesDatosDeCargaProps) {
+  const [unidadMedida, setUnidadMedida] = useState<"KG" | "TN" | null>(null);
   const [pesoBruto, setPesoBruto] = useState<number>(0);
   const headerTabler: string[] = [
     "Nrº",
     "Nombre del producto",
-    "Peso Unitario",
     "Adicionar a la carga",
-    "Peso Total",
-    "Acciones"
-  ]
+    "Acciones",
+  ];
 
   useEffect(() => {
     setUnidadMedida("TN");
     console.log("Peso bruto actualizado: ", pesoBruto);
   }, []);
 
-  const {data: productos, isLoading: productosCargando, isError: errorProductos, setPagina: cambiarPagina, fetchData: fetchProductos, infoPaginacion} = useFetchProductos();
+  const {
+    data: productos,
+    isLoading: productosCargando,
+    isError: errorProductos,
+    setPagina: cambiarPagina,
+    fetchData: fetchProductos,
+    infoPaginacion,
+  } = useFetchProductos();
 
   return (
     <div className="flex flex-col gap-4 px-8 py-6">
@@ -49,21 +56,21 @@ export default function BienesDatosDeCarga({ handleAddProductToList, handleRemov
         <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
           {/* Table */}
           <div className="bg-[#0d1117] border border-[#30363d] rounded-lg overflow-hidden p-4">
-            <ContentSectionProcess 
+            <ContentSectionProcess
               isLoading={productosCargando}
               isError={errorProductos}
               textError="Error al cargar los productos"
               textButtonError="Reintentar"
               fetchData={() => fetchProductos}
             >
-              <ButtonsPagination 
-                total_paginas={infoPaginacion.total_paginas} 
-                pivote={infoPaginacion.pagina_actual} 
-                fetchData={cambiarPagina} 
-                datos_por_pagina={infoPaginacion.datos_por_pagina} 
-                total_data={infoPaginacion.total_data} 
+              <ButtonsPagination
+                total_paginas={infoPaginacion.total_paginas}
+                pivote={infoPaginacion.pagina_actual}
+                fetchData={cambiarPagina}
+                datos_por_pagina={infoPaginacion.datos_por_pagina}
+                total_data={infoPaginacion.total_data}
               />
-              <Table tableHeader={headerTabler} >
+              <Table tableHeader={headerTabler}>
                 {productos?.map((producto, index) => (
                   <tr
                     key={index}
@@ -79,146 +86,138 @@ export default function BienesDatosDeCarga({ handleAddProductToList, handleRemov
                         {producto.nombre}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-center">
-                      <span className="text-sm text-gray-300">{producto.peso} {producto.unidadPeso}</span>
-                    </td>
                     <td className="px-4 py-4">
                       {/* AGREGAR BOTONES PARA SUMAR O RESTAR CANTIDAD */}
                       <div className="inline-flex items-center gap-2">
-                        {
-                          formData.bienes_transportados.find((item) => item.idProducto === producto.id)! && (
-                            <>
-                              {/* Botón Izquierdo - Decrementar */}
-                              <button
-                                onClick={
-                                  () => {
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      bienes_transportados: prev.bienes_transportados.map((bien) =>
-                                        bien.idProducto === producto.id
-                                          ? { ...bien, cantidad: (bien.cantidad <= 0) ? 0 : bien.cantidad - 1 } 
-                                          : bien
-                                      ),
-                                    }));
-                                    setPesoBruto((prev) => (
-                                      (prev <= 0) ? 0 : prev - ( 
-                                        producto.unidadPeso === unidadMedida ? producto.peso :
-                                        (producto.unidadPeso === "TN" ? producto.peso * 0.001 : producto.peso * 1000)
-                                      )
-                                    ))
-                                  }
-                                }
-                                className="transition-colors duration-200 rounded-md hover:bg-red-300 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
-                                aria-label="Disminuir valor"
-                              >
-                                <Minus size={20} />
-                              </button>
-                              {/* Input Central */}
-                              <input
-                                type="number"
-                                onChange={(e) => {
-                                  const newValue = parseInt(e.target.value) || 0;
-                                  setFormData((prev) => ({
-                                    ...prev,
-                                    bienes_transportados: prev.bienes_transportados.map((bien) =>
+                        {formData.bienes_transportados.find(
+                          (item) => item.idProducto === producto.id,
+                        )! && (
+                          <>
+                            {/* Botón Izquierdo - Decrementar */}
+                            <button
+                              onClick={() => {
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  bienes_transportados:
+                                    prev.bienes_transportados.map((bien) =>
                                       bien.idProducto === producto.id
-                                        ? { ...bien, cantidad: newValue } 
-                                        : bien
+                                        ? {
+                                            ...bien,
+                                            cantidad:
+                                              bien.cantidad <= 0
+                                                ? 0
+                                                : bien.cantidad - 1,
+                                          }
+                                        : bien,
                                     ),
-                                  }));
-
-                                  // AGREGAR LOGICA PARA CALCULAR EL PESO BRUTO DE FORMA AUTOMÁTICA.
-                                  setPesoBruto(
-                                    formData.bienes_transportados.reduce((acc, item) => {
-                                      const productoInfo = productos.find(p => p.id === item.idProducto);
-                                      if (item.idProducto === producto.id) {
-                                        return acc + (productoInfo ? productoInfo.peso * newValue : 0);
-                                      } else {
-                                        return acc + (productoInfo ? productoInfo.peso * item.cantidad : 0);
-                                      }
-                                    }, 0)
-                                  );
-                                }}
-                                value={formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad || 0}
-                                min={0}
-                                className="w-16 text-center bg-transparent border-none font-semibold text-white-700 border border-gray-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                              />
-                              {/* Botón Derecho - Incrementar */}
-                              <button
-                                onClick={ () => {
-                                    setFormData((prev) => ({
-                                      ...prev,
-                                      bienes_transportados: prev.bienes_transportados.map((bien) =>
-                                        bien.idProducto === producto.id
-                                          ? { ...bien, cantidad: bien.cantidad + 1 } 
-                                          : bien
-                                      ),
-                                    }));
-                                    setPesoBruto((prev) => (
-                                      prev + ( 
-                                        producto.unidadPeso === unidadMedida ? producto.peso :
-                                        (producto.unidadPeso === "TN" ? producto.peso * 0.001 : producto.peso * 1000)
-                                      )
-                                    ))
-                                  }
-                                }
-                                className="transition-colors duration-200 rounded-md hover:bg-green-300 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
-                                aria-label="Aumentar valor"
-                              >
-                                <Plus size={20} />
-                              </button>
-                            </>
-                          )
-                        }
+                                }));
+                                setPesoBruto((prev) =>
+                                  prev <= 0 ? 0 : prev - 1,
+                                );
+                              }}
+                              className="transition-colors duration-200 rounded-md hover:bg-red-300 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                              aria-label="Disminuir valor"
+                            >
+                              <Minus size={20} />
+                            </button>
+                            {/* Input Central */}
+                            <input
+                              type="number"
+                              onChange={(e) => {
+                                const newValue = parseInt(e.target.value) || 0;
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  bienes_transportados:
+                                    prev.bienes_transportados.map((bien) =>
+                                      bien.idProducto === producto.id
+                                        ? { ...bien, cantidad: newValue }
+                                        : bien,
+                                    ),
+                                }));
+                                // AGREGAR LOGICA PARA CALCULAR EL PESO BRUTO DE FORMA AUTOMÁTICA.
+                                setPesoBruto(
+                                  formData.bienes_transportados.reduce(
+                                    (acc, item) => {
+                                      return acc + item.cantidad;
+                                    },
+                                    0,
+                                  ),
+                                );
+                              }}
+                              value={
+                                formData.bienes_transportados.find(
+                                  (item) => item.idProducto === producto.id,
+                                )?.cantidad || 0
+                              }
+                              min={0}
+                              className="w-16 text-center bg-transparent border-none font-semibold text-white-700 border border-gray-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            />
+                            {/* Botón Derecho - Incrementar */}
+                            <button
+                              onClick={() => {
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  bienes_transportados:
+                                    prev.bienes_transportados.map((bien) =>
+                                      bien.idProducto === producto.id
+                                        ? {
+                                            ...bien,
+                                            cantidad: bien.cantidad + 1,
+                                          }
+                                        : bien,
+                                    ),
+                                }));
+                                setPesoBruto((prev) => prev + 1);
+                              }}
+                              className="transition-colors duration-200 rounded-md hover:bg-green-300 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                              aria-label="Aumentar valor"
+                            >
+                              <Plus size={20} />
+                            </button>
+                          </>
+                        )}
                       </div>
-                    </td>
-                    {/* MOSTRAR EL VALOR TOTAL DEL PESO (peso unitario * cantidad) */}
-                    <td className="px-4 py-4 text-center">
-                      { formData.bienes_transportados.find((item) => item.idProducto === producto.id)! ? (
-                        <span className="text-sm font-medium text-white">
-                          {formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad! * producto.peso} {producto.unidadPeso}
-                        </span>
-                      ) : (
-                        <span className="text-sm font-medium text-white">
-                          0
-                        </span>
-                      )
-                    }
                     </td>
                     <td className="px-4 py-4">
                       <div className={"flex items-center gap-2 justify-center"}>
-                        {
-                          formData.bienes_transportados.find((item) => item.idProducto === producto.id) ? (
-                            <button 
+                        {formData.bienes_transportados.find(
+                          (item) => item.idProducto === producto.id,
+                        ) ? (
+                          <button
                             onClick={() => {
-                              setPesoBruto((prev) => (
-                                prev - (formData.bienes_transportados.find((item) => item.idProducto === producto.id)?.cantidad! * producto.peso)
-                              ))
-                              handleRemoveProductFromList(`bienes_transportados`, producto.id);
+                              setPesoBruto(
+                                (prev) =>
+                                  prev -
+                                  formData.bienes_transportados.find(
+                                    (item) => item.idProducto === producto.id,
+                                  )?.cantidad!,
+                              );
+                              handleRemoveProductFromList(
+                                `bienes_transportados`,
+                                producto.id,
+                              );
                             }}
-                            className="text-red-500 hover:text-red-400 flex flex-row gap-2">
-                              <span>Eliminar</span>
-                              <Trash2 className="w-5 h-5" />
-                            </button>
-                          ) : (
-                            <button 
-                              onClick={() => {
-                                handleAddProductToList(`bienes_transportados`, {
-                                  idProducto: producto.id,
-                                  cantidad: 1
-                                });
-                                setPesoBruto((prev) => (
-                                  prev + producto.peso
-                                ))
-                              }
-                            }
-                            className="text-green-500 hover:text-green-400 flex flex-row gap-2">
-                              <span>Agregar</span>
-                              <Plus className="w-5 h-5" />
-                            </button>
-                          )
-                        }
-                      </div>  
+                            className="text-red-500 hover:text-red-400 flex flex-row gap-2"
+                          >
+                            <span>Eliminar</span>
+                            <Trash2 className="w-5 h-5" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              handleAddProductToList(`bienes_transportados`, {
+                                idProducto: producto.id,
+                                cantidad: 1,
+                              });
+                              setPesoBruto((prev) => prev + 1);
+                            }}
+                            className="text-green-500 hover:text-green-400 flex flex-row gap-2"
+                          >
+                            <span>Agregar</span>
+                            <Plus className="w-5 h-5" />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -244,39 +243,9 @@ export default function BienesDatosDeCarga({ handleAddProductToList, handleRemov
               <label className="block text-sm font-medium text-gray-300 mb-3">
                 Unidad de Medida
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 <button
-                  onClick={() => {
-                    setUnidadMedida("KG");
-                    setPesoBruto((prev) => (
-                      prev * ( unidadMedida !== "KG" ? 1000 : 1 )
-                    ));
-                  }}
-
-                  className={`p-4 rounded-lg border transition-colors ${
-                    unidadMedida === "KG"
-                      ? "bg-blue-500/10 border-blue-500 text-white"
-                      : "bg-gray-950 border-gray-700 text-gray-400 hover:border-blue-500/50"
-                  }`}
-                >
-                  <div className="text-center">
-                    <p className="font-semibold text-sm mb-1">Kilogramo</p>
-                    <p className="text-xs text-gray-500">KG</p>
-                  </div>
-                </button>   
-
-                <button
-                  onClick={() => {
-                    setUnidadMedida("TN");
-                    setPesoBruto((prev) => (
-                      prev * ( unidadMedida !== "TN" ? 0.001 : 1 )
-                    ));
-                  }}
-                  className={`p-4 rounded-lg border transition-colors ${
-                    unidadMedida === "TN"
-                      ? "bg-blue-500/10 border-blue-500 text-white"
-                      : "bg-gray-950 border-gray-700 text-gray-400 hover:border-blue-500/50"
-                  }`}
+                  className={`p-4 rounded-lg border transition-colors bg-blue-500/10 border-blue-500 text-white`}
                 >
                   <div className="text-center">
                     <p className="font-semibold text-sm mb-1">Tonelada</p>
@@ -302,7 +271,8 @@ export default function BienesDatosDeCarga({ handleAddProductToList, handleRemov
                 </span>
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                El peso bruto total debe considerar la suma del peso de todos los bienes transportados.
+                El peso bruto total debe considerar la suma del peso de todos
+                los bienes transportados.
               </p>
             </div>
           </div>
@@ -324,8 +294,7 @@ export default function BienesDatosDeCarga({ handleAddProductToList, handleRemov
                   <span className="text-white font-medium">
                     {/* MOSTRAR EL PESO TOTAL EN TIEMPO REAL */}
                     {formData.bienes_transportados.length}
-                  </span>
-                  {" "}
+                  </span>{" "}
                   | Peso Bruto:{" "}
                   <span className="text-blue-500 font-bold">
                     {pesoBruto} {unidadMedida}
