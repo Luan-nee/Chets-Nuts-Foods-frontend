@@ -5925,6 +5925,325 @@
 						}
 					],
 					"id": "e10751b2-9093-429c-b2a3-66434998e02e"
+				},
+				{
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "listar clientes",
+							"id": "cc532242-2788-461a-bc3c-0dc292d35eb2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/clientes?pagina=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"clientes"
+									],
+									"query": [
+										{
+											"key": "pagina",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "8952b313-5f06-402c-ae7b-727d979ad215",
+									"name": "ok - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de clientes obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20604895988\",\r\n            \"nombre_razonSocial\": \"AGRICOLA Y SERVICIOS GENERALES COROCAS SOCIEDAD COMERCIAL DE RESPONSABILIDAD LIMITADA\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20568242271\",\r\n            \"nombre_razonSocial\": \"AGROSORIA E.I.R.L.\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20408113891\",\r\n            \"nombre_razonSocial\": \"ASAP GROUP SAC ENGINEERING AND CONSTRUCTION\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"45781234\",\r\n            \"nombre_razonSocial\": \"CARLOS ALBERTO RIVERA MENDOZA\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"70124598\",\r\n            \"nombre_razonSocial\": \"ANA LUCIA TORRES VELASQUEZ\"\r\n        }\r\n    ]\r\n}"
+								},
+								{
+									"id": "38f403fa-41d1-40cb-b8a2-f4616fd6d762",
+									"name": "no content - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"No hay clientes registrados en el sistema\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "223ec99a-f757-4dc0-9b36-256ab2871203",
+									"name": "internal server error - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu solicitud\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "6d11a2bd-3fa4-41b0-9af1-8e52e9ebe516",
+									"name": "bad request - listar clientes",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/clientes?pagina=1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"clientes"
+											],
+											"query": [
+												{
+													"key": "pagina",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La pagina que está buscando no existe o es inválido\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						},
+						{
+							"name": "registrar cliente",
+							"id": "d2fe47c8-f2aa-4798-8cbf-a70ffed95b42",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/clientes"
+							},
+							"response": [
+								{
+									"id": "dff16910-31f7-4288-84e5-801464efc6a1",
+									"name": "ok - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"El cliente fue registrado exitosamente\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "329deec7-1af0-4e1b-8caf-8566618bd8b0",
+									"name": "bad request - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"El body es incorrecto\",\r\n    \"data\": null\r\n}"
+								},
+								{
+									"id": "152e8194-89a7-4af4-8077-320e822caa0e",
+									"name": "internal server error - registrar cliente",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"tipoDocumento\": \"RUC\",\r\n    \"numeroDocumento\": \"20604895988\",\r\n    \"nombre_razonSocial\": \"AGRINOVA DEL PERU S.R.L\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{url}}/clientes"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\r\n    \"status\": \"error\",\r\n    \"message\": \"Se produjo un error en el servidor al procesar tu consulta\",\r\n    \"data\": null\r\n}"
+								}
+							]
+						}
+					],
+					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
 				}
 			],
 			"id": "c8e96edf-97b2-4b0b-b009-4ef42b534cba"
