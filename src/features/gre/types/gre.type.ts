@@ -41,18 +41,11 @@ export type DetailedGreType = {
       apellidos: string;
       numero_licencia: string;
     };
-    empresa_transportista: {
-      nombre_razonSocial: string;
-      tipo_documento: string;
-      numero_documento: string;
-    };
     vehiculo: RegistrarVehiculo
   };
   productos: {
     nombre: string;
-    unidad_medida: string;
-    peso_total: number;
-    observacion: string;
+    cantidad: number;
   }[];
   resumen_carga: {
     cantidad_productos: number;
