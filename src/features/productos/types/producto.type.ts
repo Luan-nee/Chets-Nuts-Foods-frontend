@@ -7,8 +7,6 @@ export type Producto = {
 export type ProductoListado = {
   id: number;
   nombre: string;
-  peso: number;
-  unidadPeso: string;
 }
 
 export type CrearProducto = {
