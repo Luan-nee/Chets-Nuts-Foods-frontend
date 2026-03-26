@@ -6063,6 +6063,8 @@
 											]
 										}
 									},
+									"status": "Internal Server Error",
+									"code": 500,
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
@@ -6078,7 +6080,7 @@
 								},
 								{
 									"id": "6d11a2bd-3fa4-41b0-9af1-8e52e9ebe516",
-									"name": "listar clientes",
+									"name": "bad request - listar clientes",
 									"originalRequest": {
 										"method": "GET",
 										"header": [],
@@ -6098,13 +6100,50 @@
 											]
 										}
 									},
-									"_postman_previewlanguage": null,
-									"header": null,
-									"cookie": [],
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date",
+											"domain": "",
+											"path": ""
+										}
+									],
 									"responseTime": null,
-									"body": null
+									"body": "{\r\n    \"status\": \"warning\",\r\n    \"message\": \"La pagina que está buscando no existe o es inválido\",\r\n    \"data\": null\r\n}"
 								}
 							]
+						},
+						{
+							"name": "registrar cliente",
+							"id": "d2fe47c8-f2aa-4798-8cbf-a70ffed95b42",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/clientes"
+							},
+							"response": []
 						}
 					],
 					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
