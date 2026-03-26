@@ -2,6 +2,39 @@
 
 Sistema web creado con la finalidad de optimizar la gestión de guias de remisión de empresas, siempre y cuando cuentes con su propia flota de vehiculos.
 
+## IMPLEMENTACIONES 
+
+// emisión de GRE.
+agregar dos botones "nuevo" y "habitual" al momento de registrar el remitente y el destinatario.
+
+// Correción de productos en la GRE
+Optimizar el apartado de agregar productos, eliminar los tipos que no están siendo utilizados.
+
+// sub apartado para guardar la información de la empresa (UBICACIÓN)
+Agregar formulario para guardar la provincia, departamento y distrito junto con una descripción exacta de la empresa
+en el apartado de configuraciones.
+
+//DEFINICIÓN DE DATOS PARA ACCESO AL SISTEMA:
+
+ADMINISTRADOR.
+usuario: Vanny
+contraseña: 1234567
+
+TRABAJADOR
+usuario: Aracely
+contraseña: 1234567
+
+CHOFER
+usuario: Juan Perez
+contraseña: 1234567
+
+// GENERACIÓN DE ARCHIVOS TIPO .PDF 
+Después de haber rellenado los datos para emitir una GRE, se debe generar un pdf con opción a descargar.
+
+// Correción de la gestión de productos
+Eliminar el peso unitario y la unidad de peso de cada producto.
+
+
 ## Arquitectura del Sistema de Gestión de Guías de Remisión
 
 Esta aplicación utiliza una arquitectura **Basada en Características (Features)**. El objetivo es mantener la lógica de negocio (Administrador, Trabajador, Chofer) desacoplada y facilitar la reutilización de componentes entre roles.
