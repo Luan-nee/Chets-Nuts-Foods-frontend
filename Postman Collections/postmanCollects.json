@@ -4548,13 +4548,13 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\n  \"status\": \"success\",\n  \"message\": \"Datos de productos obtenido exitosamente\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"nombre\": \"Castaña entera con cáscara\",\n      \"peso\": 5,\n      \"unidadPeso\": \"KG\"\n    },\n    {\n      \"id\": 2,\n      \"nombre\": \"Nueces de Brasil (Castañas peladas)\",\n      \"peso\": 0.5,\n      \"unidadPeso\": \"TN\"\n    },\n    {\n      \"id\": 3,\n      \"nombre\": \"Harina de castaña\",\n      \"peso\": 1,\n      \"unidadPeso\": \"KG\"\n    },\n    {\n      \"id\": 4,\n      \"nombre\": \"Aceite de castaña prensado en frío\",\n      \"peso\": 100,\n      \"unidadPeso\": \"KG\"\n    },\n    {\n      \"id\": 5,\n      \"nombre\": \"Castañas tostadas y saladas\",\n      \"peso\": 500,\n      \"unidadPeso\": \"KG\"\n    },\n    {\n      \"id\": 6,\n      \"nombre\": \"Crema de castañas (marrón glacé)\",\n      \"peso\": 0.35,\n      \"unidadPeso\": \"KG\"\n    },\n    {\n      \"id\": 7,\n      \"nombre\": \"Castañas deshidratadas (pilongas)\",\n      \"peso\": 0.2,\n      \"unidadPeso\": \"KG\"\n    }\n  ],\n  \"pagination\": {\n    \"total_data\": 70,\n    \"total_paginas\": 10,\n    \"pagina_actual\": 2,\n    \"datos_por_pagina\": 7\n  }\n}"
+									"body": "{\n  \"status\": \"success\",\n  \"message\": \"Datos de productos obtenido exitosamente\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"nombre\": \"Castaña entera con cáscara\"\n    },\n    {\n      \"id\": 2,\n      \"nombre\": \"Nueces de Brasil (Castañas peladas)\"\n    },\n    {\n      \"id\": 3,\n      \"nombre\": \"Harina de castaña\"\n    },\n    {\n      \"id\": 4,\n      \"nombre\": \"Aceite de castaña prensado en frío\"\n    },\n    {\n      \"id\": 5,\n      \"nombre\": \"Castañas tostadas y saladas\"\n    },\n    {\n      \"id\": 6,\n      \"nombre\": \"Crema de castañas (marrón glacé)\"\n    },\n    {\n      \"id\": 7,\n      \"nombre\": \"Castañas deshidratadas (pilongas)\"\n    }\n  ],\n  \"pagination\": {\n    \"total_data\": 70,\n    \"total_paginas\": 10,\n    \"pagina_actual\": 2,\n    \"datos_por_pagina\": 7\n  }\n}"
 								},
 								{
 									"id": "268be6b3-f099-410f-982a-c9a6c71458ef",
