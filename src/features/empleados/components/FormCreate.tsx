@@ -65,6 +65,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               </label>
               <input
                 type="text"
+                pattern="^[a-zA-Z ]+$"
                 value={formDate.nombres}
                 onChange={(e) => handleInputChange("nombres", e.target.value)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
@@ -77,6 +78,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               </label>
               <input
                 type="text"
+                pattern="[0-9]{8}"
                 value={formDate.dni}
                 onChange={(e) => handleInputChange("dni", e.target.value)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
@@ -92,6 +94,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               </label>
               <input
                 type="text"
+                pattern="^[a-zA-Z ]+$"
                 value={formDate.apellidoPaterno}
                 onChange={(e) => handleInputChange("apellidoPaterno", e.target.value)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
@@ -176,6 +179,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               </label>
               <input
                 type="text"
+                readOnly
                 value={formDate.dni+formDate.nombres[0]?.toUpperCase()+formDate.apellidoPaterno[0]?.toUpperCase()+formDate.apellidoMaterno[0]?.toUpperCase()}
                 onChange={(e) => handleInputChange("contraseniaTemporal", e.target.value)}
                 className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
