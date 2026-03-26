@@ -13,9 +13,7 @@ interface DetallesGreProps {
 const headerTable: string[] = [
   'Nº',
   'Nombre',
-  'Observación',
-  'Unidad',
-  'Peso Total'
+  'Cantidad'
 ]
 
 export default function DetallesGre({ showDetallesGre, selectedGreId }: DetallesGreProps) {
@@ -195,7 +193,19 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
               
               <div className="overflow-x-auto">
                 <Table tableHeader={headerTable}>
-                  {detallesGre?.productos.map((producto, index) => RowTable(index + 1, producto))}
+                  {detallesGre?.productos.map((producto, index) => (
+                    <tr key={index} className="hover:bg-gray-800/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <span className="text-gray-400 font-medium">{index}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-white">{producto.nombre}</span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="text-white font-medium">{producto.cantidad}</span>
+                      </td>
+                    </tr>
+                  ))}
                 </Table>
               </div>
             </div>
@@ -224,34 +234,5 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
         )
       }
     </div>
-  );
-}
-
-interface SimpleProductoProps {
-  nombre: string;
-  unidad_medida: string;
-  peso_total: number;
-  observacion: string;
-}
-
-function RowTable (index: number, producto: SimpleProductoProps) {
-  return (
-    <tr key={index} className="hover:bg-gray-800/50 transition-colors">
-      <td className="px-6 py-4">
-        <span className="text-gray-400 font-medium">{index}</span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white">{producto.nombre}</span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-gray-400">{producto.observacion}</span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-gray-400">{producto.unidad_medida}</span>
-      </td>
-      <td className="px-6 py-4">
-        <span className="text-white font-medium">{producto.peso_total.toFixed(2)}</span>
-      </td>
-    </tr>
   );
 }
