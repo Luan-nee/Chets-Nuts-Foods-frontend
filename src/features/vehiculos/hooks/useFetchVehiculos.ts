@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 // importación de clases como servicios
 import { VehiculoService } from '../services/vehiculo.service';
 // importación de tipos
-import type { Vehiculo } from '../types/vehiculo.type';
+import type { ListarVehiculo } from '../types/vehiculo.type';
 import type { PaginationInfo } from '../../../types/bodyResponse.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: Vehiculo[] | null;
+  data: ListarVehiculo[] | null;
   isLoading: boolean;
   isError: boolean;
   fetchData: (pagina: number) => Promise<void>;
@@ -17,7 +17,7 @@ interface FetchState {
 
 export const useFetchVehiculos = (): FetchState => {
   const vehiculoService = new VehiculoService();
-  const [data, setData] = useState<Vehiculo[] | null>(null);
+  const [data, setData] = useState<ListarVehiculo[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({

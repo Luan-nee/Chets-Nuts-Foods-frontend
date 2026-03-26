@@ -47,6 +47,14 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
       tipoVehiculo: dataVehiculo.tipoVehiculo || 0,
       capacidadCarga: dataVehiculo.capacidadCarga || 0,
     });
+    setFormData({
+      placa: dataVehiculo.placa || "",
+      marca: marcasVehiculos[dataVehiculo.marca]?.value || "",
+      modelo: modelosVehiculos[dataVehiculo.modelo]?.value || "",
+      tipoVehiculo: tiposVehiculos[dataVehiculo.tipoVehiculo]?.value || "",
+      anioFabricacion: dataVehiculo.anioFabricacion || 0,
+      capacidadCarga: dataVehiculo.capacidadCarga || 0
+    });
   }, [dataVehiculo]);
 
   const handleInputChange = (
