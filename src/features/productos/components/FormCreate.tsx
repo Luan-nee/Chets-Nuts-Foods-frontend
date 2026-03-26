@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
-import InputSelect from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
-import { UNIDAD_PESO } from "../../../config/unidadPedo";
 import type { CrearProducto } from "../types/producto.type";
 import { useCreateProducto } from "../hooks/useCreateProducto";
 
@@ -73,40 +71,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
               />
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Peso
-              </label>
-              <input
-                type="number"
-                placeholder="Ej. 10.5"
-                value={formData.peso}
-                onChange={(e) =>
-                  handleInputChange("peso", e.target.value)
-                }
-                className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Unidad de Medida
-              </label>
-              <InputSelect
-                inputName={"unidadMedidaId"}
-                placeholder="Selecciona una unidad de medida"
-                options={UNIDAD_PESO.map((option) => ({
-                  value: option.id,
-                  label: option.medida,
-                }))}
-                handleInputChange={handleInputChange}
-                valueSelect={1}
-              />
-            </div>
-          </div>
-      </div>
+        </div>
 
         {/* Footer */}
         <div className="flex justify-end mt-6 gap-4">

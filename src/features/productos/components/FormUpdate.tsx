@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
-import InputSelect from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import { UNIDAD_PESO } from "../../../config/unidadPedo";
 import type { ModificarProducto } from "../types/producto.type";
 import { useUpdateProducto } from "../hooks/useUpdateProducto";
 import { useFetchDetallesProducto } from "../hooks/useFetchDetallesProducto";
@@ -97,39 +95,6 @@ export default function FormUpdate({ showFormEdit, idProducto }: FormUpdateEstPr
                       handleInputChange("nombre", e.target.value)
                     }
                     className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Peso
-                  </label>
-                  <input
-                    type="number"
-                    placeholder="Ej. 10.5"
-                    value={formData.peso}
-                    onChange={(e) =>
-                      handleInputChange("peso", e.target.value)
-                    }
-                    className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Unidad de Medida
-                  </label>
-                  <InputSelect
-                    inputName={"unidadMedida"}
-                    placeholder="Selecciona una unidad de medida"
-                    options={UNIDAD_PESO.map((option) => ({
-                      value: option.id,
-                      label: option.medida,
-                    }))}
-                    handleInputChange={handleInputChange}
-                    valueSelect={formData.unidadMedida}
                   />
                 </div>
               </div>
