@@ -2,19 +2,8 @@ import { useState } from "react";
 import { User, Lock, Eye, EyeOff, Save, MapPin, Building2 } from "lucide-react";
 
 export default function Configuraciones() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    paternalSurname: "",
-    maternalSurname: "",
-    dni: "",
-    password: "",
-  });
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -47,7 +36,8 @@ export default function Configuraciones() {
                 RUC
               </label>
               <input
-                type="text"
+                type="number"
+                defaultValue={20603171200}
                 className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
@@ -58,6 +48,7 @@ export default function Configuraciones() {
               </label>
               <input
                 type="email"
+                defaultValue={'empresa@gmail.com'}
                 className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
               />
             </div>
@@ -92,10 +83,7 @@ export default function Configuraciones() {
                 <input
                   type="text"
                   placeholder="actualizar nombres"
-                  value={formData.firstName}
-                  onChange={(e) =>
-                    handleInputChange("firstName", e.target.value)
-                  }
+                  defaultValue={'Luis Alberto'}
                   className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
@@ -108,10 +96,7 @@ export default function Configuraciones() {
                 <input
                   type="text"
                   placeholder="nuevoApellido"
-                  value={formData.paternalSurname}
-                  onChange={(e) =>
-                    handleInputChange("paternalSurname", e.target.value)
-                  }
+                  defaultValue={'Quispe'}
                   className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
@@ -124,10 +109,7 @@ export default function Configuraciones() {
                 <input
                   type="text"
                   placeholder="nuevoApellido"
-                  value={formData.maternalSurname}
-                  onChange={(e) =>
-                    handleInputChange("maternalSurname", e.target.value)
-                  }
+                  defaultValue={'Mendoza'}
                   className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
@@ -139,9 +121,7 @@ export default function Configuraciones() {
                 </label>
                 <input
                   type="number"
-                  placeholder="12345678"
-                  value={formData.dni}
-                  onChange={(e) => handleInputChange("dni", e.target.value)}
+                  defaultValue={70456789}
                   className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
               </div>
@@ -227,6 +207,8 @@ export default function Configuraciones() {
                 </label>
                 <div className="relative">
                   <select className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer">
+                    {/* Las Piedras */}
+                    <option value="Las Piedras">Las Piedras</option>
                     <option value="Laberinto">Laberinto</option>
                     <option value="Tambopata">Tambopata</option>
                     <option value="Inambari">Inambari</option>
@@ -253,7 +235,7 @@ export default function Configuraciones() {
                   Dirección Detallada
                 </label>
                 <textarea
-                  placeholder="Frente al colegio las piedras"
+                  defaultValue={'Cal. los Triunfadores Mza. a Lote. 12 C.P. el Triunfo (Exserpentario,una Cdra Carret. Interocea)'}
                   rows={3}
                   className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors resize-none"
                 />
@@ -284,10 +266,7 @@ export default function Configuraciones() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="nueva contraseña"
-                  value={formData.password}
-                  onChange={(e) =>
-                    handleInputChange("password", e.target.value)
-                  }
+                  defaultValue={12345678}
                   className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
                 />
                 <button
