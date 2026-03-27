@@ -2569,18 +2569,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "COD-000001"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2592,8 +2592,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -2612,18 +2612,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "GR-2023-0045"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2635,8 +2635,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -2655,18 +2655,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "GR-2023-0045"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2678,8 +2678,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
