@@ -14,20 +14,6 @@ Optimizar el apartado de agregar productos, eliminar los tipos que no están sie
 Agregar formulario para guardar la provincia, departamento y distrito junto con una descripción exacta de la empresa
 en el apartado de configuraciones.
 
-//DEFINICIÓN DE DATOS PARA ACCESO AL SISTEMA:
-
-ADMINISTRADOR.
-usuario: Vanny
-contraseña: 1234567
-
-TRABAJADOR
-usuario: Aracely
-contraseña: 1234567
-
-CHOFER
-usuario: Juan Perez
-contraseña: 1234567
-
 // GENERACIÓN DE ARCHIVOS TIPO .PDF 
 Después de haber rellenado los datos para emitir una GRE, se debe generar un pdf con opción a descargar.
 
