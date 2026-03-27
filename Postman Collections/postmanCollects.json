@@ -4687,7 +4687,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4718,8 +4718,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
