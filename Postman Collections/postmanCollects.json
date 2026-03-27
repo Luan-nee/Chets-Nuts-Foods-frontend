@@ -2502,19 +2502,18 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+									"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"seguimiento",
-										":codigo_seguimiento"
+										":codigoSeguimiento"
 									],
 									"variable": [
 										{
-											"id": "40d7f534-06a2-43be-9ce3-5d1862845a4c",
-											"key": "codigo_seguimiento",
-											"value": "GR-2023-0045"
+											"key": "codigoSeguimiento",
+											"value": "GRE-00001"
 										}
 									]
 								}
@@ -2527,18 +2526,18 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "GR-2023-0045"
+													"key": "codigoSeguimiento",
+													"value": "GRE-0001"
 												}
 											]
 										}
@@ -2550,8 +2549,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -2570,18 +2569,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "COD-000001"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2593,8 +2592,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -2613,18 +2612,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "GR-2023-0045"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2636,8 +2635,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -2656,18 +2655,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{url}}/seguimiento/:codigo_seguimiento",
+											"raw": "{{url}}/seguimiento/:codigoSeguimiento",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"seguimiento",
-												":codigo_seguimiento"
+												":codigoSeguimiento"
 											],
 											"variable": [
 												{
-													"key": "codigo_seguimiento",
-													"value": "GR-2023-0045"
+													"key": "codigoSeguimiento",
+													"value": "GRE-00001"
 												}
 											]
 										}
@@ -2679,8 +2678,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -4687,7 +4686,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\",\r\n    \"peso\": 5,\r\n    \"unidadPeso\": \"kg\"\r\n}",
+											"raw": "{\r\n    \"nombre\": \"Castaña entera con cáscara\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4718,8 +4717,8 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
@@ -5283,7 +5282,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\",\r\n    \"fecha\": {\r\n        \"data\": \"24/01/2026\",\r\n        \"formato\": \"DD/MM/YYYY\"\r\n    },\r\n    \"hora\": \"23:00\"\r\n}",
+									"raw": "{\r\n    \"evento\": \"En revisión por SUTRAN\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5301,7 +5300,6 @@
 									],
 									"variable": [
 										{
-											"id": "88bf3606-c544-4cdc-ae75-9a0d793cbfe3",
 											"key": "codigo_seguimiento",
 											"value": "COD-000001"
 										}
@@ -5620,7 +5618,7 @@
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Franklyn Walsh\"\r\n    }\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Logeado con Exito !! \",\r\n    \"data\": {\r\n        \"tokenZ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzZXIiOjEsImlhdCI6MTc2OTg4ODc0NCwiZXhwIjoxNzY5ODkyMzQ0fQ.PSKq6psWQVlbVm9GeMBq9-4k4xsRbKA9URZdTDDHYPc\",\r\n        \"rol\": \"ADMIN\",\r\n        \"nombreUser\": \"Vanny\"\r\n    }\r\n}"
 								},
 								{
 									"id": "7bbf76b1-87ec-4c89-b897-b58707a07602",
