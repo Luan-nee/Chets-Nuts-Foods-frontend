@@ -1,9 +1,13 @@
 import { useState, useCallback, useMemo } from 'react';
-import type { ResponseSesion, Credenciales } from '../../../types/usuario.type';
+import type { ResponseSesion, Credenciales, UserRole } from '../../../types/usuario.type';
 import LoginService from '../services/login.service';
 
 interface FetchState {
-  login: (credenciales: Credenciales) => Promise<ResponseSesion | null>;
+  login: (
+    credenciales: Credenciales,
+    rol: UserRole,
+    accesoRapido: boolean
+  ) => Promise<ResponseSesion | null>;
   isLoading: boolean;
   error: string | null;
   data: ResponseSesion | null;
@@ -17,11 +21,11 @@ export const useLogin = (): FetchState => {
   const [data, setData] = useState<ResponseSesion | null>(null);
 
   // En tu useLogin.ts
-  const login = useCallback(async (credenciales: Credenciales): Promise<ResponseSesion | null> => {
+  const login = useCallback(async (credenciales: Credenciales, rol: UserRole, accesoRapido: boolean): Promise<ResponseSesion | null> => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await loginService.login(credenciales);
+      const response = await loginService.login(credenciales, rol, accesoRapido);
       if (response.status === "success") {
         setData(response.data);
         // Guarda el token en el localStorage, pero en el futuro se espera guardar

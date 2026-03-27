@@ -3,14 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../features/auth/hooks/useLogin';
 import { Truck, LogIn } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import SwitchTest from '../components/ui/SwitchTest';
 import type { User, Credenciales } from '../types/usuario.type';
+import type { UserRole } from '../types/usuario.type';
 
 export default function Login() {
   const { login, isLoading, error } = useLogin();
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
-  const [usuario, setUsuario] = useState('');
-  const [contrasenia, setContrasenia] = useState('');
+  const [usuario, setUsuario] = useState<string>('');
+  const [contrasenia, setContrasenia] = useState<string>('');
+  const [verAccesoRapido, setVerAccesoRapido] = useState<boolean>(false);
+  const [rolSeleccionado, setRolSeleccionado] = useState<UserRole>('ADMIN');
+
   
   const handleLogin = async () => {
     if (!usuario.trim() || !contrasenia.trim()) {
@@ -23,13 +28,13 @@ export default function Login() {
       contrasenia: contrasenia.trim()
     };
 
-    const response = await login(credenciales);
+    const response = await login(credenciales, rolSeleccionado, verAccesoRapido);
 
     console.log("Login response data:", response, "Error:", error);
     if (response && !error) {
       authLogin(response as unknown as User);
       navigate('/');
-    }else {
+    } else { 
       console.log("Login failed:", error);
       alert('Error de autenticación: ' + (error || 'Respuesta inválida del servidor'));
     }
@@ -73,6 +78,45 @@ export default function Login() {
                 placeholder="Pérez"
               />
             </div>
+            <div>
+              <label className="flex items-center gap-2 text-sm text-gray-300">
+                <SwitchTest 
+                  estado={verAccesoRapido}
+                  onClick={() => setVerAccesoRapido(!verAccesoRapido)}
+                />
+                Activar acceso rápido.
+              </label>
+            </div>
+
+            { verAccesoRapido && (
+              <div className="grid grid-cols-3 gap-4">
+                {/* AGREGAR 3 BOTONES QUE DIGA "ADMIN", "TRABAJADOR" Y "CHOFER" */}
+                <button 
+                  type={'button'}
+                  onClick={() => setRolSeleccionado('ADMIN')}
+                  className={`mr-2 mb-2 px-4 py-2
+                  ${rolSeleccionado === 'ADMIN' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
+                  rounded-lg transition-colors text-white`}>
+                  Admin
+                </button>
+                <button 
+                  type={'button'}
+                  onClick={() => setRolSeleccionado('COLABORADOR')}
+                  className={`mr-2 mb-2 px-4 py-2
+                  ${rolSeleccionado === 'COLABORADOR' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
+                  rounded-lg transition-colors text-white`}>
+                  Trabajador
+                </button>
+                <button 
+                  type={'button'}
+                  onClick={() => setRolSeleccionado('CHOFER')}
+                  className={`mr-2 mb-2 px-4 py-2
+                  ${rolSeleccionado === 'CHOFER' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
+                  rounded-lg transition-colors text-white`}>
+                  Chofer
+                </button>
+              </div>
+            )}
 
             <button
               type="submit"
