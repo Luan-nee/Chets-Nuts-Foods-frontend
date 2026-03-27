@@ -17,9 +17,6 @@ en el apartado de configuraciones.
 // GENERACIÓN DE ARCHIVOS TIPO .PDF 
 Después de haber rellenado los datos para emitir una GRE, se debe generar un pdf con opción a descargar.
 
-// Correción de la gestión de productos
-Eliminar el peso unitario y la unidad de peso de cada producto.
-
 
 ## Arquitectura del Sistema de Gestión de Guías de Remisión
 
