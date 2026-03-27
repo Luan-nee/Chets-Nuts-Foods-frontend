@@ -7,13 +7,6 @@ Sistema web creado con la finalidad de optimizar la gestión de guias de remisi�
 // emisión de GRE.
 agregar dos botones "nuevo" y "habitual" al momento de registrar el remitente y el destinatario.
 
-// Correción de productos en la GRE
-Optimizar el apartado de agregar productos, eliminar los tipos que no están siendo utilizados.
-
-// sub apartado para guardar la información de la empresa (UBICACIÓN)
-Agregar formulario para guardar la provincia, departamento y distrito junto con una descripción exacta de la empresa
-en el apartado de configuraciones.
-
 // GENERACIÓN DE ARCHIVOS TIPO .PDF 
 Después de haber rellenado los datos para emitir una GRE, se debe generar un pdf con opción a descargar.
 
