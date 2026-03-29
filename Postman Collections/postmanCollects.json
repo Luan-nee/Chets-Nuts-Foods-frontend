@@ -5585,7 +5585,7 @@
 										}
 									}
 								},
-								"url": "{{url}}/auth/login"
+								"url": "{{url}}auth/login"
 							},
 							"response": [
 								{
