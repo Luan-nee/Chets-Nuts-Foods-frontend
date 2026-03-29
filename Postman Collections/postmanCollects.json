@@ -5692,7 +5692,8 @@
 							]
 						}
 					],
-					"id": "828f5be6-5cb5-4719-b0de-789736fb4627"
+					"id": "828f5be6-5cb5-4719-b0de-789736fb4627",
+					"description": "ENDPOINT DEL BACKEND:\n\n``` bash\n{{url}}/auth/login\n\n ```\n\nENDPOINT DEL MOCK_SERVER:\n\n``` bash\n{{url}}/login\n\n ```"
 				},
 				{
 					"name": "Chofer",
