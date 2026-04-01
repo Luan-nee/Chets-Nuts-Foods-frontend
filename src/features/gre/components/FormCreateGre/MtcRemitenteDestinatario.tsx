@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Users, LucideList, LucideListX } from "lucide-react";
 import InputSelect from "../../../../components/ui/InputSelect";
 import { optionsTipoDocumento } from "../../../../config/tipoDocumento";
+import TableClientes from "../../../clientes/components/TableClientes";
 
 interface MtcRemitenteDestinatarioProps {
   handleInputChange: (field: string, value: string | boolean | number) => void;
@@ -10,15 +11,18 @@ interface MtcRemitenteDestinatarioProps {
 export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemitenteDestinatarioProps) {
   const [showTablaClientes, setShowTablaClientes] = useState<boolean>(false);
   const [pagadorFlete, setPagadorFlete] = useState<'destinatario' | 'tercero'>('tercero');
+  const [setSelectIdCliente, setSetSelectIdCliente] = useState<number | null>(null);
 
   return (
-    <div className="grid grid-cols-2 gap-4 px-8 py-6">
+    <div className="flex flex-col gap-4 px-8 py-6">
         {/* Sección Destinatario (Receptor) */}
         <section className="bg-gray-900 border border-gray-700 rounded-lg p-5">
           <div className="flex flex-row justify-between mb-4">
             <div className="flex flex-row items-center gap-2">
               <Users className="w-5 h-5 text-blue-500" />
-              <h2 className="text-lg font-semibold">DESTINATARIO</h2>
+              <h2 className="text-lg font-semibold">
+                DESTINATARIO. ID {setSelectIdCliente !== null ? `- ${setSelectIdCliente}` : ''}
+              </h2>
             </div>
 
             <button 
@@ -39,7 +43,9 @@ export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemit
           </div>
 
           { showTablaClientes ? (
-            <TablaClientes />
+            <TableClientes 
+              setSelectedClienteId={setSetSelectIdCliente}
+            />
           ) : (
             <>
               {/* Tipo de documento y Nro. del documento */}
@@ -148,17 +154,6 @@ export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemit
             </>
           )}
         </section>
-    </div>
-  );
-}
-
-function TablaClientes() {
-  return (
-    <div className="bg-gray-900 border border-gray-700 rounded-lg p-5">
-      <p>Esta es la tabla de clientes frecuentes</p>
-      <p>Esta es la tabla de clientes frecuentes</p>
-      <p>Esta es la tabla de clientes frecuentes</p>
-      <p>Esta es la tabla de clientes frecuentes</p>
     </div>
   );
 }

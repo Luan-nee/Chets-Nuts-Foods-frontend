@@ -1,4 +1,4 @@
 export const optionsTipoDocumento: { value: string; label: string }[] = [
-  { value: 'dni', label: 'DNI' },
-  { value: 'ruc', label: 'RUC' }
+  { value: 'DNI', label: 'DNI' },
+  { value: 'RUC', label: 'RUC' }
 ]
