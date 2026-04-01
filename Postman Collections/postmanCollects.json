@@ -5578,14 +5578,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"usuario\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+									"raw": "{\r\n    \"usuario\": \"zviamontevilca@gmail.com\",\r\n    \"password\": \"zainmaster123\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{url}}/login"
+								"url": "{{url}}auth/login"
 							},
 							"response": [
 								{
@@ -5692,7 +5692,8 @@
 							]
 						}
 					],
-					"id": "828f5be6-5cb5-4719-b0de-789736fb4627"
+					"id": "828f5be6-5cb5-4719-b0de-789736fb4627",
+					"description": "ENDPOINT DEL BACKEND:\n\n``` bash\nhttp://localhost:4000/auth/login\n\n ```\n\nENDPOINT DEL MOCK_SERVER:\n\n``` bash\n{{url}}/login\n\n ```"
 				},
 				{
 					"name": "Chofer",
@@ -5994,7 +5995,7 @@
 										}
 									],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de clientes obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20604895988\",\r\n            \"nombre_razonSocial\": \"AGRICOLA Y SERVICIOS GENERALES COROCAS SOCIEDAD COMERCIAL DE RESPONSABILIDAD LIMITADA\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20568242271\",\r\n            \"nombre_razonSocial\": \"AGROSORIA E.I.R.L.\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20408113891\",\r\n            \"nombre_razonSocial\": \"ASAP GROUP SAC ENGINEERING AND CONSTRUCTION\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"45781234\",\r\n            \"nombre_razonSocial\": \"CARLOS ALBERTO RIVERA MENDOZA\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"70124598\",\r\n            \"nombre_razonSocial\": \"ANA LUCIA TORRES VELASQUEZ\"\r\n        }\r\n    ]\r\n}"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos de clientes obtenido exitosamente\",\r\n    \"data\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20604895988\",\r\n            \"nombre_razonSocial\": \"AGRICOLA Y SERVICIOS GENERALES COROCAS SOCIEDAD COMERCIAL DE RESPONSABILIDAD LIMITADA\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20568242271\",\r\n            \"nombre_razonSocial\": \"AGROSORIA E.I.R.L.\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"tipoDocumento\": \"RUC\",\r\n            \"numeroDocumento\": \"20408113891\",\r\n            \"nombre_razonSocial\": \"ASAP GROUP SAC ENGINEERING AND CONSTRUCTION\"\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"45781234\",\r\n            \"nombre_razonSocial\": \"CARLOS ALBERTO RIVERA MENDOZA\"\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"tipoDocumento\": \"DNI\",\r\n            \"numeroDocumento\": \"70124598\",\r\n            \"nombre_razonSocial\": \"ANA LUCIA TORRES VELASQUEZ\"\r\n        }\r\n    ],\r\n    \"pagination\": {\r\n        \"total_data\": 120,\r\n        \"total_paginas\": 12,\r\n        \"pagina_actual\": 3,\r\n        \"datos_por_pagina\": 10\r\n    }\r\n}"
 								},
 								{
 									"id": "38f403fa-41d1-40cb-b8a2-f4616fd6d762",
@@ -6244,7 +6245,8 @@
 					"id": "388b61f3-cb35-4099-8258-d67fc38bcd39"
 				}
 			],
-			"id": "c8e96edf-97b2-4b0b-b009-4ef42b534cba"
+			"id": "c8e96edf-97b2-4b0b-b009-4ef42b534cba",
+			"description": "# 📦 API – CHETS NOOS PROS\n\nDocumentación de endpoints del backend.\n\nBase URL:\n\n```\n{{dir}}/api\n\n ```\n\nAutenticación:\n\n```\nAuthorization: bearer {{tokenZ}}\n\n ```\n\n---\n\n# 🔐 Auth\n\n## POST /auth/login\n\nInicia sesión y genera token.\n\n### Body\n\n``` json\n{\n  \"usuario\": \"correo@gmail.com\",\n  \"password\": \"password\"\n}\n\n ```\n\n### Response OK\n\n``` json\n{\n  \"status\": \"success\",\n  \"message\": \"INICIASTE SESION...\",\n  \"data\": {\n    \"nombreUser\": \"ZAIN\",\n    \"rol\": \"ADMIN\",\n    \"tokenZ\": \"JWT_TOKEN\"\n  }\n}\n\n ```\n\n---\n\n## POST /auth/create\n\nCrea una cuenta nueva.\n\n### Body\n\n``` json\n{\n  \"nombrecompleto\": \"Nombre completo\",\n  \"correo\": \"correo@gmail.com\",\n  \"contra\": \"password\",\n  \"dni\": \"12345678\"\n}\n\n ```\n\n---\n\n# 🏢 Empresa\n\n## POST /empresa\n\nRegistra datos de empresa.\n\n### Headers\n\n```\nAuthorization: bearer {{tokenZ}}\n\n ```\n\n### Body\n\n``` json\n{\n  \"ruc\": \"10752761278\",\n  \"denominacion\": \"Empresa SAC\",\n  \"numeroRegistroMtc\": \"123456789\",\n  \"correo\": \"correo@gmail.com\",\n  \"codigoMtc\": \"12345678\",\n  \"fechaVigenciaRegistroMtc\": \"2027-12-12\"\n}\n\n ```\n\nCampos opcionales:\n\n- urlApi\n    \n- claveAcceso\n    \n\n---\n\n# 👤 Usuarios\n\n## POST /usuarios\n\nCrear usuario.\n\n### Headers\n\n```\nAuthorization: bearer {{tokenZ}}\n\n ```\n\n### Body\n\n``` json\n{\n  \"nombre\": \"nombre\",\n  \"apellidomaterno\": \"apellido\",\n  \"apellidopaterno\": \"apellido\",\n  \"dni\": \"12345678\",\n  \"numero\": \"999999999\",\n  \"edad\": 22,\n  \"sexo\": \"MASCULINO\",\n  \"correo\": \"correo@gmail.com\",\n  \"tipo\": \"NATURAL\"\n}\n\n ```\n\nOpcional:\n\n```\nruc\n\n ```\n\n---\n\n## POST /usuarios/dni\n\nBuscar usuario por DNI.\n\n### Body\n\n``` json\n{\n  \"dni\": \"12345678\"\n}\n\n ```\n\n---\n\n## POST /usuarios/ruc\n\nBuscar usuario por RUC.\n\n### Body\n\n``` json\n{\n  \"ruc\": \"10752761278\"\n}\n\n ```\n\n---\n\n## GET /usuarios\n\nObtiene todos los usuarios.\n\n---\n\n## GET /usuarios/clientes\n\nObtiene clientes registrados.\n\n---\n\n# 🔑 Accesos (Admin)\n\nEndpoints exclusivos para administradores.\n\n---\n\n## POST /accesos\n\nCrear acceso + usuario.\n\n### Body\n\n``` json\n{\n  \"password\": \"password\",\n  \"tipos\": \"COLABORADOR\",\n  \"correo\": \"correo@gmail.com\",\n  \"nombre\": \"nombre\",\n  \"apellidomaterno\": \"apellido\",\n  \"apellidopaterno\": \"apellido\",\n  \"dni\": \"12345678\",\n  \"numero\": \"999999999\",\n  \"ruc\": \"10752761278\",\n  \"edad\": 22,\n  \"sexo\": \"MASCULINO\",\n  \"tipo\": \"NATURAL\"\n}\n\n ```\n\nTipos posibles:\n\n```\nADMIN\nCOLABORADOR\nCHOFER\nCLIENTE\n\n ```\n\n---\n\n## GET /accesos\n\nLista accesos registrados.\n\n---\n\n## GET /accesos/{id}\n\nObtiene acceso por ID.\n\nEjemplo:\n\n```\nGET /accesos/1\n\n ```\n\n---\n\n## PATCH /accesos\n\nActualizar estado de acceso.\n\n### Body\n\n``` json\n{\n  \"estado\": true,\n  \"idacceso\": 4\n}\n\n ```\n\n---\n\n# 🏬 Establecimientos\n\n## GET /establecimientos\n\nLista establecimientos.\n\n---\n\n## GET /establecimientos/{id}\n\nObtiene establecimiento por ID.\n\nEjemplo:\n\n```\nGET /establecimientos/1\n\n ```\n\n---\n\n## POST /establecimientos\n\nCrear establecimiento.\n\n### Body\n\n``` json\n{\n  \"nombreEstablecimiento\": \"la zona\",\n  \"departamento\": \"PUNO\",\n  \"descripcion\": \"Establecimiento de recibo\",\n  \"direccion\": \"av. san martin\",\n  \"distrito\": \"JULIACA\",\n  \"idResponsable\": 4\n}\n\n ```"
 		}
 	]
 }
