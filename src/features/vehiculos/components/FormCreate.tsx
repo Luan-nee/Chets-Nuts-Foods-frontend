@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
-import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../config/caractVehiculo.ts";
+import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../config/constantes.ts";
 import InputSelect from "../../../components/ui/InputSelect";
 import ContentPage from "../../../components/layouts/ContentPage";
 import type { RegistrarVehiculo } from "../types/vehiculo.type";

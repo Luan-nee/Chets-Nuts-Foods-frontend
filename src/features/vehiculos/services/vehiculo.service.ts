@@ -1,6 +1,6 @@
 import VehiculoApi from '../../../api/vehiculo.api';
 import type { ListarVehiculo, RegistrarVehiculo, EditarVehiculo, DetallesVehiculo, DetallesNumerados } from '../types/vehiculo.type';
-import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from '../../../config/caractVehiculo';
+import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from '../../../config/constantes.ts';
 import type { BodyResponse } from '../../../types/bodyResponse.type';
 
 const vehiculoApi = new VehiculoApi();

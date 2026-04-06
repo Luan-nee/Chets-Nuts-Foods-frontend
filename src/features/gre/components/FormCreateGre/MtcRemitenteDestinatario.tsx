@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Users, LucideList, LucideListX } from "lucide-react";
 import InputSelect from "../../../../components/ui/InputSelect";
-import { optionsTipoDocumento } from "../../../../config/tipoDocumento";
+import { optionsTipoDocumento } from "../../../../config/constantes.ts";
 import TableClientes from "../../../clientes/components/TableClientes";
 
 interface MtcRemitenteDestinatarioProps {
