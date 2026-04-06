@@ -1,10 +1,17 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Truck, Package, Users, LogOut, Settings } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import UserInfo from '../ui/UserInfo';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Truck, Package, Users, LogOut, Settings, MapPin } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import UserInfo from "../ui/UserInfo";
 
-type LabelType = '/guias' | '/productos' | '/establecimientos' | '/trabajadores' | '/vehiculos' | '/configuraciones';
+type LabelType =
+  | "/guias"
+  | "/productos"
+  | "/establecimientos"
+  | "/trabajadores"
+  | "/vehiculos"
+  | "/configuraciones"
+  | "/seguimiento";
 
 interface MenuItem {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -14,14 +21,15 @@ interface MenuItem {
 
 export default function NavBarAdministrador() {
   const { user, logout } = useAuth();
-  const [active, setActive] = useState<LabelType>('/guias');
+  const [active, setActive] = useState<LabelType>("/guias");
 
   const menuItems: MenuItem[] = [
-    { icon: Package, label: 'Guías de Remisión', anchor: '/guias' },
-    { icon: Users, label: 'Trabajadores', anchor: '/trabajadores' },
-    { icon: Package, label: 'Productos', anchor: '/productos' },
-    { icon: Truck, label: 'Vehículos', anchor: '/vehiculos' },
-    { icon: Settings, label: 'Configuraciones', anchor: '/configuraciones' }
+    { icon: Package, label: "Guías de Remisión", anchor: "/guias" },
+    { icon: Users, label: "Trabajadores", anchor: "/trabajadores" },
+    { icon: Package, label: "Productos", anchor: "/productos" },
+    { icon: Truck, label: "Vehículos", anchor: "/vehiculos" },
+    { icon: Settings, label: "Configuraciones", anchor: "/configuraciones" },
+    { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento" },
   ];
 
   return (
@@ -45,8 +53,8 @@ export default function NavBarAdministrador() {
               onClick={() => setActive(item.anchor)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                 active === item.anchor
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-400 hover:bg-gray-800 hover:text-white"
               }`}
             >
               <item.icon className="w-5 h-5" />
@@ -57,7 +65,7 @@ export default function NavBarAdministrador() {
       </nav>
 
       <div className="p-3 border-t border-gray-800 space-y-2">
-        <UserInfo nombreUser={user?.nombreUser || ''} rol={user?.rol || ''} />
+        <UserInfo nombreUser={user?.nombreUser || ""} rol={user?.rol || ""} />
         <button
           onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-red-900 hover:text-red-200 transition-colors"
