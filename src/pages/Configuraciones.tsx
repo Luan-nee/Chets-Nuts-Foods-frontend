@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { User, Lock, Eye, EyeOff, Save, MapPin, Building2 } from "lucide-react";
+import InputText from "../components/ui/InputText";
 
 export default function Configuraciones() {
 
@@ -31,27 +32,17 @@ export default function Configuraciones() {
 
           <div className="grid grid-cols-2 gap-4">
             {/* RUC */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                RUC
-              </label>
-              <input
-                type="number"
-                defaultValue={20603171200}
-                className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
+            <InputText
+              label="RUC"
+              value="20603171200"
+              htmlForm="ruc"
+            ></InputText>
             {/* Correo electrónico */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Correo electrónico
-              </label>
-              <input
-                type="email"
-                defaultValue={'empresa@gmail.com'}
-                className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
+            <InputText
+              label="Correo electrónico"
+              value="empresa@gmail.com"
+              htmlForm="correo"
+            ></InputText>
           </div>
         </section>
 
@@ -76,55 +67,32 @@ export default function Configuraciones() {
 
             <div className="space-y-4">
               {/* Nombres */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Nombres
-                </label>
-                <input
-                  type="text"
-                  placeholder="actualizar nombres"
-                  defaultValue={'Luis Alberto'}
-                  className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
-
+              <InputText
+                label="Nombres"
+                value="Luis Alberto"
+                htmlForm="nombres"
+              ></InputText>
+              
               {/* Apellido Paterno */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Apellido Paterno
-                </label>
-                <input
-                  type="text"
-                  placeholder="nuevoApellido"
-                  defaultValue={'Quispe'}
-                  className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+              <InputText
+                label="Apellido Paterno"
+                value="Quispe"
+                htmlForm="apellido-paterno"
+              ></InputText>
 
               {/* Apellido Materno */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Apellido Materno
-                </label>
-                <input
-                  type="text"
-                  placeholder="nuevoApellido"
-                  defaultValue={'Mendoza'}
-                  className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+              <InputText
+                label="Apellido Materno"
+                value="Mendoza"
+                htmlForm="apellido-materno"
+              ></InputText>
 
               {/* DNI */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  DNI
-                </label>
-                <input
-                  type="number"
-                  defaultValue={70456789}
-                  className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+              <InputText
+                label="DNI"
+                value="70456789"
+                htmlForm="dni"
+              ></InputText>
             </div>
           </div>
 
