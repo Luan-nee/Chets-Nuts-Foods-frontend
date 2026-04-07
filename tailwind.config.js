@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         // Colores de Marca y UI Principal
+        'dark-deep': '#0b0f14', // Fondo oscuro profundo
         brand: {
           primary: '#137fec',   // Tu azul de hover
           secondary: '#94a393', // Tu verde apagado
