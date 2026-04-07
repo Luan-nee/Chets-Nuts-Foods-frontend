@@ -1,8 +1,8 @@
 import { Plus, Search, Filter } from "lucide-react";
-import TableVehiculos from "../../features/vehiculos/components/TableVehiculos";
 import { useState } from "react";
-import FormCreate from "../../features/vehiculos/components/FormCreate";
-import FormUpdate from "../../features/vehiculos/components/FormUpdate";
+import TableVehiculos from "../features/vehiculos/components/TableVehiculos";
+import FormCreate from "../features/vehiculos/components/FormCreate";
+import FormUpdate from "../features/vehiculos/components/FormUpdate";
 
 export default function Vehiculos() {
   const [ selectVehiculoId, setSelectVehiculoId ] = useState<number | null>(null);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // importación de clases como servicios
-import ClienteService from '../services/Cliente.service';
+import ClienteService from '../services/cliente.service';
 // importación de tipos
 import type { ListarCliente } from '../types/cliente.type';
 import type { PaginationInfo } from '../../../types/bodyResponse.type';

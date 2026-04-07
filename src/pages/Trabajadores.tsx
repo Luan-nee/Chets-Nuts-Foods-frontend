@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Filter, Plus, Search } from "lucide-react";
-import DetallesEmpleado from "../../features/empleados/components/DetallesEmpleado";
-import FormUpdateEmpleado from "../../features/empleados/components/FormUpdateEmpleado";
-import FormCreate from "../../features/empleados/components/FormCreate";
-import TableEmpleados from "../../features/empleados/components/TableEmpleados";
+import FormCreate from "../features/empleados/components/FormCreate";
+import TableEmpleados from "../features/empleados/components/TableEmpleados";
+import DetallesEmpleado from "../features/empleados/components/DetallesEmpleado";
+import FormUpdateEmpleado from "../features/empleados/components/FormUpdateEmpleado";
 
 export default function Trabajadores () {
   const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);

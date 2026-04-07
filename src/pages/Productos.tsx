@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { useAutorizacion } from "../config/useAutorizacion";
 import { Search, Filter, Plus } from "lucide-react";
-import TableProductos from "../../features/productos/components/TableProductos";
-import FormUpdate from "../../features/productos/components/FormUpdate";
-import FormCreate from "../../features/productos/components/FormCreate";
-import { useAutorizacion } from "../../config/useAutorizacion";
+import FormUpdate from "../features/productos/components/FormUpdate";
+import FormCreate from "../features/productos/components/FormCreate";
+import TableProductos from "../features/productos/components/TableProductos";
 
 export default function Productos() {
   const { tienePermiso } = useAutorizacion();

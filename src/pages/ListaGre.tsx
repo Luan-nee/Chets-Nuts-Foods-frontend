@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
-import TableGre from '../../features/gre/components/TableGre';
-import DetallesGre from '../../features/gre/components/DetallesGre';
-import FormCreateGre from '../../features/gre/components/FormCreateGre';
+import TableGre from '../features/gre/components/TableGre';
+import DetallesGre from '../features/gre/components/DetallesGre';
+import FormCreateGre from '../features/gre/components/FormCreateGre';
 
 export default function ListaGre() {
   const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);

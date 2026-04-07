@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
-import ListaGre from '../pages/administrador/ListaGre';
+import ListaGre from '../pages/ListaGre';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import MainLayout from '../components/layouts/MainLayout';
 import PrivateRoute from './PrivateRoute';
-import Trabajadores from '../pages/administrador/Trabajadores';
-import Vehiculos from '../pages/administrador/Vehiculos';
-import Configuraciones from '../pages/administrador/Configuraciones';
-import Productos from '../pages/administrador/Productos';
-import Seguimiento from '../pages/cliente/Seguimiento';
+import Trabajadores from '../pages/Trabajadores';
+import Vehiculos from '../pages/Vehiculos';
+import Configuraciones from '../pages/Configuraciones';
+import Productos from '../pages/Productos';
+import Seguimiento from '../pages/Seguimiento';
 
 export default function AppRoutes() {
   return (
