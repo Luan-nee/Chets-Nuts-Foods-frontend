@@ -29,11 +29,11 @@ export default function NavBarAdministrador() {
 
   const menuItems: MenuItem[] = [
     { icon: Package, label: "Guías de Remisión", anchor: "/guias", userRol: ["ADMIN", "COLABORADOR"] },
-    { icon: Users, label: "Trabajadores", anchor: "/trabajadores", userRol: ["ADMIN", "COLABORADOR"] },
+    { icon: Users, label: "Trabajadores", anchor: "/trabajadores", userRol: ["ADMIN"] },
     { icon: Package, label: "Productos", anchor: "/productos", userRol: ["ADMIN"] },
     { icon: Truck, label: "Vehículos", anchor: "/vehiculos", userRol: ["ADMIN"] },
     { icon: Settings, label: "Configuraciones", anchor: "/configuraciones", userRol: ["ADMIN"] },
-    { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN"] },
+    { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN", "CHOFER", "CLIENTE"] },
   ];
 
   return (
