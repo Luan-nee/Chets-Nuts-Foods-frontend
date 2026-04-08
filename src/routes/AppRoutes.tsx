@@ -10,7 +10,6 @@ import Vehiculos from '../pages/Vehiculos';
 import Configuraciones from '../pages/Configuraciones';
 import Productos from '../pages/Productos';
 import Seguimiento from '../pages/Seguimiento';
-import InputSelectTest from '../components/ui/InputSelectTest';
 
 export default function AppRoutes() {
   return (
@@ -26,16 +25,6 @@ export default function AppRoutes() {
                   <ListaGre />
                 </MainLayout>
               </PrivateRoute> 
-            }
-          />
-          <Route
-            path="/InputSelect"
-            element={
-              <PrivateRoute>
-                <MainLayout>
-                  <InputSelectTest />
-                </MainLayout>
-              </PrivateRoute>
             }
           />
           <Route
