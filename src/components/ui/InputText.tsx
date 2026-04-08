@@ -1,7 +1,12 @@
-interface InputTextProps { label: string , value: string, htmlForm: string }
+interface InputTextProps { 
+  label: string , 
+  value: string, 
+  htmlForm: string,
+  onChange: (value: string) => void
+}
 
 export default function InputText ({
-  label, value, htmlForm
+  label, value, htmlForm, onChange
 } : InputTextProps) {
   return (
     <div className="flex flex-col items-center justify-center font-sans">
@@ -13,6 +18,9 @@ export default function InputText ({
           {label}
         </label>
         <input
+          onChange={
+            (e) => onChange(e.currentTarget.value)
+          }
           id={htmlForm}
           type="text"
           defaultValue={value}

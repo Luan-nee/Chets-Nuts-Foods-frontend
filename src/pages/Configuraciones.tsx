@@ -3,8 +3,17 @@ import { User, Lock, Eye, EyeOff, Save, MapPin, Building2 } from "lucide-react";
 import InputText from "../components/ui/InputText";
 
 export default function Configuraciones() {
-
   const [showPassword, setShowPassword] = useState(false);
+  const [infoSUNAT, setInfoSUNAT] = useState({
+    ruc: "20603171200",
+    correo: "empresa@gmail.com"
+  });
+  const [infoPersonal, setInfoPersonal] = useState({
+    nombres: "Luis Alberto",
+    apellidoPaterno: "Quispe",
+    apellidoMaterno: "Mendoza",
+    dni: "70456789"
+  });
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -34,14 +43,20 @@ export default function Configuraciones() {
             {/* RUC */}
             <InputText
               label="RUC"
-              value="20603171200"
+              value={infoSUNAT.ruc}
               htmlForm="ruc"
+              onChange={
+                (value) => setInfoSUNAT({ ...infoSUNAT, ruc: value })
+              }
             ></InputText>
             {/* Correo electrónico */}
             <InputText
               label="Correo electrónico"
-              value="empresa@gmail.com"
+              value={infoSUNAT.correo}
               htmlForm="correo"
+              onChange={
+                (value) => setInfoSUNAT({ ...infoSUNAT, correo: value })
+              }
             ></InputText>
           </div>
         </section>
@@ -69,29 +84,41 @@ export default function Configuraciones() {
               {/* Nombres */}
               <InputText
                 label="Nombres"
-                value="Luis Alberto"
+                value={infoPersonal.nombres}
                 htmlForm="nombres"
+                onChange={
+                  (value) => setInfoPersonal({ ...infoPersonal, nombres: value })
+                }
               ></InputText>
               
               {/* Apellido Paterno */}
               <InputText
                 label="Apellido Paterno"
-                value="Quispe"
+                value={infoPersonal.apellidoPaterno}
                 htmlForm="apellido-paterno"
+                onChange={
+                  (value) => setInfoPersonal({ ...infoPersonal, apellidoPaterno: value })
+                }
               ></InputText>
 
               {/* Apellido Materno */}
               <InputText
                 label="Apellido Materno"
-                value="Mendoza"
+                value={infoPersonal.apellidoMaterno}
                 htmlForm="apellido-materno"
+                onChange={
+                  (value) => setInfoPersonal({ ...infoPersonal, apellidoMaterno: value })
+                }
               ></InputText>
 
               {/* DNI */}
               <InputText
                 label="DNI"
-                value="70456789"
+                value={infoPersonal.dni}
                 htmlForm="dni"
+                onChange={
+                  (value) => setInfoPersonal({ ...infoPersonal, dni: value })
+                }
               ></InputText>
             </div>
           </div>
@@ -264,7 +291,11 @@ export default function Configuraciones() {
           <button className="px-6 py-2.5 rounded-lg border border-gray-800 hover:bg-gray-900 transition-colors text-white">
             Cancelar
           </button>
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-white">
+          <button 
+            onClick={
+              () => console.log("Información recopilada:", { infoSUNAT, infoPersonal })
+            }
+            className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-white">
             <Save className="w-4 h-4" />
             Guardar Cambios
           </button>
