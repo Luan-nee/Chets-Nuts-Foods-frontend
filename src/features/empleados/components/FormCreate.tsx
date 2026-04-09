@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import InputSelectTest from "../../../components/ui/InputSelectTest";
+import InputPassword from "../../../components/ui/InputPassword";
+import InputText from "../../../components/ui/InputText";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
@@ -17,7 +19,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
   const { data: roles, isLoading: cargandoRoles, isError: errorRoles, fetchData: recargarRoles } = useFetchRoles();
   const { isLoading: cargandoCreateEmpleado, isError: errorCreateEmpleado, refresh: crearEmpleado } = useCreateEmpleado();
 
-  const [ formDate, setFormData ] = useState<CreateEmpleadoData>({
+  const [ formData, setFormData ] = useState<CreateEmpleadoData>({
     nombres: '',
     apellidoMaterno: '',
     apellidoPaterno: '',
@@ -26,14 +28,28 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     rol: 0,
     contrasenia_temporal: '',
   });
-
   
-  const handleInputChange = (
-    field: string,    
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  useEffect(() => {
+    if (
+      formData.dni && 
+      formData.nombres && 
+      formData.apellidoPaterno && 
+      formData.apellidoMaterno
+    ) {
+      setFormData(prev => ({
+        ...prev,
+        contrasenia_temporal: (formData.dni || '') +
+          (formData.nombres[0]?.toUpperCase() || '') +
+          (formData.apellidoPaterno[0]?.toUpperCase() || '') +
+          (formData.apellidoMaterno[0]?.toUpperCase() || '')
+      }));
+    }
+  }, [
+    formData.dni, 
+    formData.nombres, 
+    formData.apellidoPaterno, 
+    formData.apellidoMaterno
+  ]);
 
   return (
     <ContentPage>
@@ -59,74 +75,44 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
         <div className="space-y-6">
           {/* Row 1: Nombres y DNI */}
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Nombres
-              </label>
-              <input
-                type="text"
-                pattern="^[a-zA-Z ]+$"
-                value={formDate.nombres}
-                onChange={(e) => handleInputChange("nombres", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                DNI
-              </label>
-              <input
-                type="text"
-                pattern="[0-9]{8}"
-                value={formDate.dni}
-                onChange={(e) => handleInputChange("dni", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
+            <InputText
+              label="Nombres"
+              value={formData.nombres}
+              htmlForm="nombres"
+              onChange={(value) => setFormData(prev => ({ ...prev, nombres: value }))}
+            />
+            <InputText
+              label="DNI"
+              value={formData.dni}
+              htmlForm="dni"
+              onChange={(value) => setFormData(prev => ({ ...prev, dni: value }))}
+            />
           </div>
 
           {/* Row 2: Apellidos */}
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Apellido Paterno
-              </label>
-              <input
-                type="text"
-                pattern="^[a-zA-Z ]+$"
-                value={formDate.apellidoPaterno}
-                onChange={(e) => handleInputChange("apellidoPaterno", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Apellido Materno
-              </label>
-              <input
-                type="text"
-                value={formDate.apellidoMaterno}
-                onChange={(e) => handleInputChange("apellidoMaterno", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
+            <InputText
+              label="Apellido Paterno"
+              value={formData.apellidoPaterno}
+              htmlForm="apellidoPaterno"
+              onChange={(value) => setFormData(prev => ({ ...prev, apellidoPaterno: value }))}
+            />
+            <InputText
+              label="Apellido Materno"
+              value={formData.apellidoMaterno}
+              htmlForm="apellidoMaterno"
+              onChange={(value) => setFormData(prev => ({ ...prev, apellidoMaterno: value }))}
+            />
           </div>
 
           {/* Row 3: Correo y Rol */}
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                value={formDate.correo}
-                onChange={(e) => handleInputChange("correo", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
+            <InputText
+              label="Correo electrónico"
+              value={formData.correo}
+              htmlForm="correo"
+              onChange={(value) => setFormData(prev => ({ ...prev, correo: value }))}
+            />
 
             <div>
               {
@@ -160,20 +146,17 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
           </div>
 
           {/* Row 4: Contraseña */}
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Contraseña temporal
-              </label>
-              <input
-                type="text"
-                readOnly
-                value={formDate.dni+formDate.nombres[0]?.toUpperCase()+formDate.apellidoPaterno[0]?.toUpperCase()+formDate.apellidoMaterno[0]?.toUpperCase()}
-                onChange={(e) => handleInputChange("contraseniaTemporal", e.target.value)}
-                className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-          </div>
+          <InputPassword
+            label="Contraseña"
+            value={
+              (formData.dni || '') +
+              (formData.nombres[0]?.toUpperCase() || '') +
+              (formData.apellidoPaterno[0]?.toUpperCase() || '') +
+              (formData.apellidoMaterno[0]?.toUpperCase() || '')
+            }
+            htmlForm="contrasenia"
+            onChange={(value) => setFormData(prev => ({ ...prev, contrasenia_temporal: value }))}
+          />
         </div>
 
         {/* Action Buttons */}
@@ -188,8 +171,8 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               />
               <ButtonSubmitForm
                 handleSubmit={() => {
-                  crearEmpleado(formDate);
-                  console.log("Datos del nuevo empleado: ", formDate);
+                  crearEmpleado(formData);
+                  console.log("Datos del nuevo empleado: ", formData);
                 }}
                 isLoading={cargandoCreateEmpleado}
                 isError={errorCreateEmpleado}
