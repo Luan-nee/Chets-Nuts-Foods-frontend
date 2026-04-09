@@ -9,7 +9,7 @@ export default function InputText ({
   label, value, htmlForm, onChange
 } : InputTextProps) {
   return (
-    <div className="flex flex-col items-center justify-center font-sans">
+    <div className="flex flex-col items-center justify-center font-sans py-2">
       <div className="relative w-full">
         <label
           htmlFor={htmlForm}
@@ -29,7 +29,6 @@ export default function InputText ({
           border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition-all duration-200"
         />
       </div>
-      
     </div>
   );
 }

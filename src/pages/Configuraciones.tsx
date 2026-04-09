@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { User, Lock, Eye, EyeOff, Save, MapPin, Building2 } from "lucide-react";
+import { User, Lock, Save, MapPin, Building2 } from "lucide-react";
 import InputText from "../components/ui/InputText";
+import InputSelectTest from "../components/ui/InputSelectTest";
+import InputPassword from "../components/ui/InputPassword";
 
 export default function Configuraciones() {
-  const [showPassword, setShowPassword] = useState(false);
   const [infoSUNAT, setInfoSUNAT] = useState({
     ruc: "20603171200",
     correo: "empresa@gmail.com"
@@ -14,6 +15,13 @@ export default function Configuraciones() {
     apellidoMaterno: "Mendoza",
     dni: "70456789"
   });
+  const [infoUbicacion, setInfoUbicacion] = useState({
+    departamento: "Madre De Dios",
+    provincia: "Tambopata",
+    distrito: "Las Piedras",
+    direccionDetallada: "Cal. los Triunfadores Mza. a Lote. 12 C.P. el Triunfo (Exserpentario,una Cdra Carret. Interocea)"
+  });
+  const [password, setPassword] = useState("123456789");
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -89,7 +97,7 @@ export default function Configuraciones() {
                 onChange={
                   (value) => setInfoPersonal({ ...infoPersonal, nombres: value })
                 }
-              ></InputText>
+              />
               
               {/* Apellido Paterno */}
               <InputText
@@ -99,7 +107,7 @@ export default function Configuraciones() {
                 onChange={
                   (value) => setInfoPersonal({ ...infoPersonal, apellidoPaterno: value })
                 }
-              ></InputText>
+              />
 
               {/* Apellido Materno */}
               <InputText
@@ -109,7 +117,7 @@ export default function Configuraciones() {
                 onChange={
                   (value) => setInfoPersonal({ ...infoPersonal, apellidoMaterno: value })
                 }
-              ></InputText>
+              />
 
               {/* DNI */}
               <InputText
@@ -119,7 +127,7 @@ export default function Configuraciones() {
                 onChange={
                   (value) => setInfoPersonal({ ...infoPersonal, dni: value })
                 }
-              ></InputText>
+              />
             </div>
           </div>
 
@@ -141,100 +149,59 @@ export default function Configuraciones() {
 
             <div className="space-y-4">
               {/* Departamento */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Departamento
-                </label>
-                <div className="relative">
-                  <select className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer">
-                    <option value="Madre De Dios">Madre De Dios</option>
-                    <option value="Lima">Lima</option>
-                    <option value="Cusco">Cusco</option>
-                    <option value="Arequipa">Arequipa</option>
-                  </select>
-                  <svg
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <InputSelectTest
+                label="Departamento"
+                options={[
+                  { value: "Madre De Dios", label: "Madre De Dios" },
+                  { value: "Lima", label: "Lima" },
+                  { value: "Cusco", label: "Cusco" },
+                  { value: "Arequipa", label: "Arequipa" },
+                ]}
+                placeholder="Selecciona un departamento"
+                onSelect={
+                  (value) => setInfoUbicacion({ ...infoUbicacion, departamento: value as string })
+                }
+              />
 
               {/* Provincia */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Provincia
-                </label>
-                <div className="relative">
-                  <select className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer">
-                    <option value="Tambopata">Tambopata</option>
-                    <option value="Manu">Manu</option>
-                    <option value="Tahuamanu">Tahuamanu</option>
-                  </select>
-                  <svg
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <InputSelectTest
+                label="Provincia"
+                options={[
+                  { value: "Tambopata", label: "Tambopata" },
+                  { value: "Manu", label: "Manu" },
+                  { value: "Tahuamanu", label: "Tahuamanu" },
+                  { value: "Las Piedras", label: "Las Piedras" },
+                ]}
+                placeholder="Selecciona una provincia"
+                onSelect={
+                  (value) => setInfoUbicacion({ ...infoUbicacion, provincia: value as string })
+                }
+              />
 
               {/* Distrito */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Distrito
-                </label>
-                <div className="relative">
-                  <select className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 pr-10 text-white focus:outline-none focus:border-[#1f6feb] transition-colors appearance-none cursor-pointer">
-                    {/* Las Piedras */}
-                    <option value="Las Piedras">Las Piedras</option>
-                    <option value="Laberinto">Laberinto</option>
-                    <option value="Tambopata">Tambopata</option>
-                    <option value="Inambari">Inambari</option>
-                  </select>
-                  <svg
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <InputSelectTest
+                label="Distrito"
+                options={[
+                  { value: "Las Piedras", label: "Las Piedras" },
+                  { value: "Inambari", label: "Inambari" },
+                  { value: "Laberinto", label: "Labertino" },
+                  { value: "Puerto Maldonado", label: "Puerto Maldonado" }
+                ]}
+                placeholder="Selecciona un distrito"
+                onSelect={
+                  (value) => setInfoUbicacion({ ...infoUbicacion, distrito: value as string })
+                }
+              />
 
               {/* Dirección Detallada */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Dirección Detallada
-                </label>
-                <textarea
-                  defaultValue={'Cal. los Triunfadores Mza. a Lote. 12 C.P. el Triunfo (Exserpentario,una Cdra Carret. Interocea)'}
-                  rows={3}
-                  className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors resize-none"
-                />
-              </div>
+              <InputText
+                label="Dirección detallada"
+                value={infoUbicacion.direccionDetallada}
+                htmlForm="direccionDetallada"
+                onChange={
+                  (value) => setInfoUbicacion({ ...infoUbicacion, direccionDetallada: value })
+                }
+              />
             </div>
           </div>
         </div>
@@ -248,41 +215,14 @@ export default function Configuraciones() {
 
           <div className="space-y-4">
             {/* Password Field */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-gray-300">
-                  Cambiar Contraseña
-                </label>
-                <a href="#" className="text-sm text-[#1f6feb] hover:underline">
-                  ¿Olvidaste tu contraseña?
-                </a>
-              </div>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="nueva contraseña"
-                  defaultValue={12345678}
-                  className="w-full bg-[#0d1117] border border-gray-800 rounded-lg px-4 py-2.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
-                  aria-label={
-                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
-                  }
-                >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
-                </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2 italic">
-                Ingresa una nueva contraseña solo si deseas cambiar la actual.
-              </p>
-            </div>
+            <InputPassword
+              label="Contraseña"
+              value={password}
+              htmlForm="password"
+              onChange={
+                (value) => setPassword(value)
+              }
+            />
           </div>
         </section>
 
@@ -293,7 +233,7 @@ export default function Configuraciones() {
           </button>
           <button 
             onClick={
-              () => console.log("Información recopilada:", { infoSUNAT, infoPersonal })
+              () => console.log("Información recopilada:", { infoSUNAT, infoPersonal, infoUbicacion, password })
             }
             className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-white">
             <Save className="w-4 h-4" />

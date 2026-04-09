@@ -7,13 +7,14 @@ type Option = {
 };
 
 interface InputSelectTestProps {
+  label: string;
   options: Option[];
   placeholder: string;
   onSelect: (value: string | number) => void;
   valueSelected?: string | number | null;
 }
 
-export default function InputSelectTest({ options, placeholder, onSelect, valueSelected }: InputSelectTestProps) {
+export default function InputSelectTest({ options, placeholder, onSelect, valueSelected, label }: InputSelectTestProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<Option | null>(
     valueSelected ? options.find(option => option.value === valueSelected) || null : null
@@ -34,7 +35,10 @@ export default function InputSelectTest({ options, placeholder, onSelect, valueS
   }, []);
 
   return (
-    <div className="w-full max-w-sm mx-auto bg-red-500" ref={dropdownRef}>
+    <div ref={dropdownRef}>
+      <label className="block text-sm font-medium text-gray-300 mb-2">
+        {label}
+      </label>
       <div className="relative">
         {/* Botón Principal */}
         <button
@@ -42,7 +46,7 @@ export default function InputSelectTest({ options, placeholder, onSelect, valueS
           onClick={() => setIsOpen(!isOpen)}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
-          className={`w-full flex flex-row justify-between p-3 pl-4 text-left bg-transparent text-white border border-[#2D3340] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 transition ease-in-out duration-150 text-[15px]
+          className={`w-full flex flex-row justify-between p-3 pl-4 text-left bg-dark-deep text-white border border-[#2D3340] rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 transition ease-in-out duration-150 text-[15px]
             ${isOpen ? 'border-slate-500' : ''}`}
         >
           <p>{optionSelected ? optionSelected.label : placeholder}</p>
@@ -52,7 +56,7 @@ export default function InputSelectTest({ options, placeholder, onSelect, valueS
         {/* Menú Dropdown */}
         {isOpen && (
           <ul
-            className="absolute z-10 w-full mt-1.5 bg-[#171A24] border border-[#2D3340] rounded-lg shadow-lg max-h-[310px] overflow-auto focus:outline-none scrollbar-thin scrollbar-thumb-gray-600"
+            className="absolute z-10 w-full mt-1.5 bg-dark-deep border border-[#2D3340] rounded-lg shadow-lg max-h-[310px] overflow-auto focus:outline-none scrollbar-thin scrollbar-thumb-gray-600"
             role="listbox"
           >
             {options.map((option) => (
