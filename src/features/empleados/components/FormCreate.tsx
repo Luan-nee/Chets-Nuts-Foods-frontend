@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import InputSelect from "../../../components/ui/InputSelect";
+import InputSelectTest from "../../../components/ui/InputSelectTest";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
@@ -129,9 +129,6 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white mb-2">
-                Rol
-              </label>
               {
                 cargandoRoles ? (
                   <div className="flex justify-center items-center py-2">
@@ -151,21 +148,12 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
                 ) : roles === null || roles.length === 0 ? (
                   <div>No hay roles registrados en el sistema.</div>
                 ) : (
-                  <div className="flex flex-row gap-2">
-                    <button
-                      className="px-4 py-2 bg-blue-600 text-white rounded"
-                      onClick={recargarRoles}
-                    >
-                      Recargar
-                    </button>
-                    <InputSelect
-                      inputName="tipoEst"
-                      placeholder="Seleccione el tipo de establecimiento"
-                      options={roles ? roles.map(te => ({ label: te.rol, value: te.id })) : []}
-                      handleInputChange={handleInputChange}
-                      valueSelect={formDate.rol}
-                    />
-                  </div>
+                  <InputSelectTest
+                    label="Rol del empleado"
+                    options={roles ? roles.map(te => ({ label: te.rol, value: te.id })) : []}
+                    placeholder="Seleccione el rol del empleado"
+                    onSelect={(value) => setFormData(prev => ({ ...prev, rol: value as number }))}
+                  />
                 )
               }
             </div>
