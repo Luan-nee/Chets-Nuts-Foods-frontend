@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { Users, LucideList, LucideListX } from "lucide-react";
-import InputSelect from "../../../../components/ui/InputSelect";
+import InputSelectTest from "../../../../components/ui/InputSelectTest";
+import InputText from "../../../../components/ui/InputText";
 import { optionsTipoDocumento } from "../../../../config/constantes.ts";
+import type { EmitirGre } from "../../types/gre.type";
 import TableClientes from "../../../clientes/components/TableClientes";
 
 interface MtcRemitenteDestinatarioProps {
-  handleInputChange: (field: string, value: string | boolean | number) => void;
+  setFormData: React.Dispatch<React.SetStateAction<EmitirGre>>;
+  formData: EmitirGre;
 }
 
-export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemitenteDestinatarioProps) {
+export default function MtcRemitenteDestinatario({ setFormData, formData }: MtcRemitenteDestinatarioProps) {
   const [showTablaClientes, setShowTablaClientes] = useState<boolean>(false);
   const [pagadorFlete, setPagadorFlete] = useState<'destinatario' | 'tercero'>('tercero');
   const [setSelectIdCliente, setSetSelectIdCliente] = useState<number | null>(null);
@@ -50,39 +53,46 @@ export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemit
             <>
               {/* Tipo de documento y Nro. del documento */}
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Tipo de documento
-                  </label>
-                  <InputSelect 
-                    inputName={"destinatario.tipo_documento"}
-                    placeholder={"Tipo de documento..."}
-                    options={optionsTipoDocumento}
-                    handleInputChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Nro. del documento
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
+                <InputSelectTest
+                  label="Tipo de documento"
+                  placeholder="Tipo de documento..."
+                  options={optionsTipoDocumento}
+                  onSelect={(value) => setFormData((prev) => ({
+                    ...prev,
+                    destinatario: {
+                      ...prev.destinatario,
+                      tipo_documento: value as string
+                    }
+                  }))}
+                />
+                <InputText 
+                  label="Nro. del documento"
+                  value={formData.destinatario.numero_documento}
+                  htmlForm="destinatario_numero_documento"
+                  onChange={(value) => setFormData((prev) => ({
+                    ...prev,
+                    destinatario: {
+                      ...prev.destinatario,
+                      numero_documento: value
+                    }
+                  }))}
+                />
               </div>
 
               {/* Razon social o nombre completo */}
               <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Razon social o nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
+                <InputText 
+                  label="Razon social o nombre completo"
+                  value={formData.destinatario.nombre_razonSocial}
+                  htmlForm="destinatario_nombre_razonSocial"
+                  onChange={(value) => setFormData((prev) => ({
+                    ...prev,
+                    destinatario: {
+                      ...prev.destinatario,
+                      nombre_razonSocial: value
+                    }
+                  }))}
+                />
               </div>
             </>
           ) }
@@ -118,38 +128,45 @@ export default function MtcRemitenteDestinatario({ handleInputChange }: MtcRemit
           ) : (
             <>
               <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Tipo de documento
-                  </label>
-                  <InputSelect 
-                    inputName={"pagador_flete.tipo_documento"}
-                    placeholder={"Tipo de documento..."}
-                    options={optionsTipoDocumento}
-                    handleInputChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Nro. del documento
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
+                <InputSelectTest
+                  label="Tipo de documento"
+                  placeholder="Tipo de documento..."
+                  options={optionsTipoDocumento}
+                  onSelect={(value) => setFormData((prev) => ({
+                    ...prev,
+                    pagador_flete: {
+                      ...prev.pagador_flete,
+                      tipo_documento: value as string
+                    }
+                  }))}
+                />
+                <InputText 
+                  label="Nro. del documento"
+                  value={formData.pagador_flete.numero_documento}
+                  htmlForm="pagador_flete_numero_documento"
+                  onChange={(value) => setFormData((prev) => ({
+                    ...prev,
+                    pagador_flete: {
+                      ...prev.pagador_flete,
+                      numero_documento: value
+                    }
+                  }))}
+                />
               </div>
 
               <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-400 mb-2 uppercase">
-                    Razon social o nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
+                <InputText 
+                  label="Razon social o nombre completo"
+                  value={formData.pagador_flete.nombre_razonSocial}
+                  htmlForm="pagador_flete_nombre_razonSocial"
+                  onChange={(value) => setFormData((prev) => ({
+                    ...prev,
+                    pagador_flete: {
+                      ...prev.pagador_flete,
+                      nombre_razonSocial: value
+                    }
+                  }))}
+                />
               </div>
             </>
           )}

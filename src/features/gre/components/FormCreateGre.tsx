@@ -61,13 +61,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         transporte_subcontratado: false
       }
     }
-  });
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };  
+  }); 
   const handleAddProductToList = (
     field: string, 
     value: {
@@ -196,7 +190,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
 
       {/* contenido procedural */}
       {
-        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario handleInputChange={handleInputChange} />
+        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario setFormData={setFormData} formData={formData}/>
       }
       {
         procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList} formData={formData}/>
