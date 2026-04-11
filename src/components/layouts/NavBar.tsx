@@ -12,7 +12,8 @@ type LabelType =
   | "/trabajadores"
   | "/vehiculos"
   | "/configuraciones"
-  | "/seguimiento";
+  | "/seguimiento"
+  | "/test";
 
 interface MenuItem {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -34,6 +35,7 @@ export default function NavBarAdministrador() {
     { icon: Truck, label: "Vehículos", anchor: "/vehiculos", userRol: ["ADMIN"] },
     { icon: Settings, label: "Configuraciones", anchor: "/configuraciones", userRol: ["ADMIN"] },
     { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN", "CHOFER", "CLIENTE"] },
+    { icon: Package, label: "Test", anchor: "/test", userRol: ["ADMIN", "COLABORADOR"] },
   ];
 
   return (
