@@ -262,6 +262,7 @@ export default function BienesDatosDeCarga({
           </div>
 
           <InputNumber 
+            placeholder="0.00"
             label="Peso Bruto Total" 
             simbol={"TN"}
             defaultValue={pesoBruto}

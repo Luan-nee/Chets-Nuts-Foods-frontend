@@ -3,12 +3,14 @@ interface InputNumberProp {
   simbol: string;
   defaultValue: number;
   onChange: (value: number) => void;
+  placeholder: string;
 }
 
 export default function InputNumber({
-  label = "palabra",
-  simbol = "NT",
-  defaultValue = 0,
+  placeholder,
+  label,
+  simbol,
+  defaultValue,
   onChange
 }: InputNumberProp) {
   return (
@@ -18,9 +20,9 @@ export default function InputNumber({
         {/* Amount input */}
         <input
           type="number"
-          placeholder="0.00"
           min={0}
           step={0.01}
+          placeholder={placeholder}
           defaultValue={defaultValue}
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
           className="flex-1 pl-2 bg-transparent border-none outline-none text-sm text-slate-400 placeholder-slate-600 py-2.5 min-w-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
