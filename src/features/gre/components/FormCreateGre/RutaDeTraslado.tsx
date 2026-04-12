@@ -1,5 +1,5 @@
 import { Flag } from "lucide-react";
-import InputSelectTest from "../../../../components/ui/InputSelect";
+import InputSelectTest from "../../../../components/ui/InputSelectTest";
 import InputText from "../../../../components/ui/InputText";
 import type { EmitirGre } from '../../types/gre.type';
 
@@ -46,31 +46,31 @@ export default function RutaDeTranslado({ setFormData, formData }: RutaDeTraslad
         <div className="space-y-4">
           {/* Departamento */}
           <InputSelectTest
-            inputName="Departamento"
-            placeholder="Seleccionar departamento"
+            label="Departamento"
             options={departamentos}
-            handleInputChange={(value) => {
-              setFormData((prev) => ({ 
-                ...prev, 
+            placeholder="Seleccionar departamento"
+            onSelect={(value) => 
+              setFormData((prev) => ({
+                ...prev,
                 punto_llegada: {
                   ...prev.punto_llegada,
-                  departamento: value
-                } 
-              }));
-            }}
+                  departamento: value as string,
+                }
+              }))
+            }
           />
 
           {/* Provincia */}
           <InputSelectTest
-            inputName="Provincia"
+            label="Provincia"
             placeholder="Seleccionar provincia"
             options={provincias}
-            handleInputChange={(value) => {
+            onSelect={(value) => {
               setFormData((prev) => ({ 
                 ...prev, 
                 punto_llegada: {
                   ...prev.punto_llegada,
-                  provincia: value
+                  provincia: value as string,
                 } 
               }));
             }}
@@ -78,15 +78,15 @@ export default function RutaDeTranslado({ setFormData, formData }: RutaDeTraslad
 
           {/* Distrito */}
           <InputSelectTest
-            inputName="Distrito"
+            label="Distrito"
             placeholder="Seleccionar distrito"
             options={distritos}
-            handleInputChange={(value) => {
+            onSelect={(value) => {
               setFormData((prev) => ({ 
                 ...prev, 
                 punto_llegada: {
                   ...prev.punto_llegada,
-                  distrito: value
+                  distrito: value as string
                 } 
               }));
             }}
