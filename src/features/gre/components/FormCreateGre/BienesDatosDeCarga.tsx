@@ -162,7 +162,6 @@ export default function BienesDatosDeCarga({
                                         : bien,
                                     ),
                                 }));
-                                // AGREGAR LOGICA PARA CALCULAR EL PESO BRUTO DE FORMA AUTOMÁTICA.
                                 setPesoBruto(
                                   formData.bienes_transportados.reduce(
                                     (acc, item) => {
@@ -263,7 +262,8 @@ export default function BienesDatosDeCarga({
 
           <InputNumber 
             placeholder="0.00"
-            label="Peso Bruto Total" 
+            disabled={true}
+            label="Peso Bruto Total (Toneladas)" 
             simbol={"TN"}
             defaultValue={pesoBruto}
             onChange={(value)=>{

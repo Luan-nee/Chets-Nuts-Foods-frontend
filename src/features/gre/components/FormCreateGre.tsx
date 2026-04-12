@@ -196,7 +196,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} formData={formData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList}/>
       }
       {
-        procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado />
+        procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado setFormData={setFormData} formData={formData} />
       }
       {
         procedimiento.find(p => p.focus)?.label === "Transporte" && <ConductorVehiculo />

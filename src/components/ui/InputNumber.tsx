@@ -4,6 +4,8 @@ interface InputNumberProp {
   defaultValue: number;
   onChange: (value: number) => void;
   placeholder: string;
+  disabled?: boolean;
+  value?: number;
 }
 
 export default function InputNumber({
@@ -11,7 +13,9 @@ export default function InputNumber({
   label,
   simbol,
   defaultValue,
-  onChange
+  onChange,
+  disabled = false,
+  value
 }: InputNumberProp) {
   return (
     <div className="flex flex-col gap-2">
@@ -22,6 +26,8 @@ export default function InputNumber({
           type="number"
           min={0}
           step={0.01}
+          value={value || defaultValue}
+          disabled={disabled}
           placeholder={placeholder}
           defaultValue={defaultValue}
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
