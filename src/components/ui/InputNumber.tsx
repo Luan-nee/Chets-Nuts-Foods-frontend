@@ -26,7 +26,7 @@ export default function InputNumber({
           type="number"
           min={0}
           step={0.01}
-          value={value || defaultValue}
+          value={value !== undefined ? value : defaultValue}
           disabled={disabled}
           placeholder={placeholder}
           defaultValue={defaultValue}

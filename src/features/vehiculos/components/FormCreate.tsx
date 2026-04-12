@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
-import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../config/constantes.ts";
-import InputSelect from "../../../components/ui/InputSelect";
-import ContentPage from "../../../components/layouts/ContentPage";
+import {
+  marcasVehiculos,
+  modelosVehiculos,
+  tiposVehiculos,
+} from "../../../config/constantes.ts";
+import type { marca, modelo, tipoVehiculo } from "../types/vehiculo.type.ts";
 import type { RegistrarVehiculo } from "../types/vehiculo.type";
+import InputSelectTest from "../../../components/ui/InputSelectTest";
+import InputText from "../../../components/ui/InputText";
+import InputNumber from "../../../components/ui/InputNumber";
+import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
@@ -13,24 +20,16 @@ interface FormCreateProps {
 }
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
-const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
+  const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
 
-  const [ formData, setFormData] = useState<RegistrarVehiculo>({
+  const [formData, setFormData] = useState<RegistrarVehiculo>({
     placa: "",
     marca: "",
     modelo: "",
     anioFabricacion: 0,
     tipoVehiculo: "",
-    capacidadCarga: 0
+    capacidadCarga: 0,
   });
-
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
 
   return (
     <ContentPage>
@@ -61,91 +60,82 @@ const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
 
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Placa
-              </label>
-              <input
-                type="text"
-                placeholder="Ej. ABC-123"
-                value={formData.placa}
-                onChange={(e) =>
-                  handleInputChange("placa", e.target.value)
-                }
-                className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Marca
-              </label>
-              <InputSelect
-                inputName={"marca"}
-                placeholder="Selecciona una marca"
-                options={marcasVehiculos}
-                handleInputChange={handleInputChange}
-              />
-            </div>
+            <InputSelectTest
+              label="Marca"
+              placeholder="Selecciona una marca"
+              options={marcasVehiculos}
+              onSelect={(value) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  marca: value as marca,
+                }));
+              }}
+            />
+            <InputText
+              label="Placa"
+              value={formData.placa}
+              htmlForm={"placa"}
+              onChange={(value) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  placa: value,
+                }))
+              }
+            />
           </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Modelo
-            </label>
-            <InputSelect
-              inputName={"modelo"}
-              placeholder="Selecciona un modelo"
+          <div className="grid grid-cols-2 gap-4">
+            <InputSelectTest
+              label="Modelo"
               options={modelosVehiculos}
-              handleInputChange={handleInputChange}
+              placeholder="Selecciona un modelo"
+              onSelect={(value) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  modelo: value as modelo,
+                }));
+              }}
             />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Año de fabricación
-            </label>
-            <input
-              type="number"
-              placeholder="Ej. 2020"
-              value={formData.anioFabricacion}
-              onChange={(e) =>
-                handleInputChange("anioFabricacion", parseInt(e.target.value) || 0)
+            <InputText
+              label="Año de fabricación"
+              value={formData.anioFabricacion.toString()}
+              htmlForm={"anioFabricacion"}
+              onChange={(value) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  anioFabricacion: parseInt(value) || 0,
+                }))
               }
-              className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
             />
           </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Tipo de vehículo
-            </label>
-            <InputSelect
-              inputName={"tipoVehiculo"}
-              placeholder="Selecciona un tipo de vehículo"
+          <div className="grid grid-cols-2 gap-4">
+            <InputSelectTest
+              label="Tipo de vehículo"
               options={tiposVehiculos}
-              handleInputChange={handleInputChange}
+              placeholder="Selecciona un tipo de vehículo"
+              onSelect={(value) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  tipoVehiculo: value as tipoVehiculo,
+                }));
+              }}
             />
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Capacidad maxima de carga (toneladas)
-            </label>
-            <input
-              type="number"
-              placeholder="Ej. 2020"
-              value={formData.capacidadCarga}
-              onChange={(e) =>
-                handleInputChange("capacidadCarga", parseInt(e.target.value) || 0)
+            <InputNumber
+              label="Capacidad máxima de carga (toneladas)"
+              simbol="TN"
+              defaultValue={formData.capacidadCarga}
+              placeholder="0"
+              onChange={(value) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  capacidadCarga: value,
+                }))
               }
-              className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
             />
           </div>
         </div>
-      </div>
 
         {/* Footer */}
         <div className="flex justify-end mt-6 gap-4">
