@@ -1,21 +1,19 @@
 interface InputNumberProp {
+  defaultValue: number;
   label: string;
   simbol: string;
-  defaultValue: number;
   onChange: (value: number) => void;
   placeholder: string;
   disabled?: boolean;
-  value?: number;
 }
 
 export default function InputNumber({
-  placeholder,
+  defaultValue,
   label,
   simbol,
-  defaultValue,
   onChange,
+  placeholder,
   disabled = false,
-  value
 }: InputNumberProp) {
   return (
     <div className="flex flex-col gap-2">
@@ -25,11 +23,9 @@ export default function InputNumber({
         <input
           type="number"
           min={0}
-          step={0.01}
-          value={value !== undefined ? value : defaultValue}
+          defaultValue={defaultValue}
           disabled={disabled}
           placeholder={placeholder}
-          defaultValue={defaultValue}
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
           className="flex-1 pl-2 bg-transparent border-none outline-none text-sm text-slate-400 placeholder-slate-600 py-2.5 min-w-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
