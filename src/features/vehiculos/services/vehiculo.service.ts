@@ -1,7 +1,5 @@
 import VehiculoApi from '../../../api/vehiculo.api';
-import type { ListarVehiculo, RegistrarVehiculo, EditarVehiculo, DetallesVehiculo, DetallesNumerados } from '../types/vehiculo.type';
-import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from '../../../config/constantes.ts';
-import type { BodyResponse } from '../../../types/bodyResponse.type';
+import type { ListarVehiculo, RegistrarVehiculo, EditarVehiculo, DetallesVehiculo } from '../types/vehiculo.type';
 
 const vehiculoApi = new VehiculoApi();
 
@@ -23,15 +21,6 @@ export class VehiculoService {
   }
 
   public async obtenerDetallesVehiculo(idVehiculo: number) {
-    const response = await vehiculoApi.getVehiculo<DetallesVehiculo>(idVehiculo);
-    return {
-      ...response,
-      data: {
-        ...response.data,
-        marca: marcasVehiculos.findIndex((m) => m.value === response.data.marca) || 0,
-        modelo: modelosVehiculos.findIndex((m) => m.value === response.data.modelo) || 0,
-        tipoVehiculo: tiposVehiculos.findIndex((t) => t.value === response.data.tipoVehiculo) || 0,
-      }
-    } as BodyResponse<DetallesNumerados>;
+    return await vehiculoApi.getVehiculo<DetallesVehiculo>(idVehiculo);
   }
 }
