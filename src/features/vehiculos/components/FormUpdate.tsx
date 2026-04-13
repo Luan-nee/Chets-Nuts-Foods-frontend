@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
 import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../config/constantes.ts";
-import InputSelect from "../../../components/ui/InputSelect";
+import type { EditarVehiculo } from "../types/vehiculo.type";
+import type { marca, modelo, tipoVehiculo } from "../types/vehiculo.type.ts";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import type { EditarVehiculo, DetallesNumerados } from "../types/vehiculo.type";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import InputSelectTest from "../../../components/ui/InputSelectTest.tsx";
+import InputText from "../../../components/ui/InputText.tsx";
+import InputNumber from "../../../components/ui/InputNumber.tsx";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
 import { useInhabilitarVehiculo } from "../hooks/useInhabilitarVehiculo";
 
@@ -19,15 +22,6 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
   const { data: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, fetchData: fetchVehiculo } = useFetchVehiculo(idVehiculo);
   const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, fetchData: fetchInhabilitar } = useInhabilitarVehiculo();
 
-  const [ DataFetch, setDataFetch ] = useState<DetallesNumerados>({
-    placa: "",
-    marca: 0,
-    modelo: 0,
-    anioFabricacion: 0,
-    tipoVehiculo: 0,
-    capacidadCarga: 0
-  });
-
   const [ formData, setFormData ] = useState<EditarVehiculo>({
     placa: "",
     marca: "",
@@ -39,30 +33,15 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
   useEffect(() => {
     if (!dataVehiculo) return;
-    setDataFetch({
-      placa: dataVehiculo.placa || "",
-      marca: dataVehiculo.marca || 0,
-      modelo: dataVehiculo.modelo || 0,
-      anioFabricacion: dataVehiculo.anioFabricacion || 0,
-      tipoVehiculo: dataVehiculo.tipoVehiculo || 0,
-      capacidadCarga: dataVehiculo.capacidadCarga || 0,
-    });
     setFormData({
       placa: dataVehiculo.placa || "",
-      marca: marcasVehiculos[dataVehiculo.marca]?.value || "",
-      modelo: modelosVehiculos[dataVehiculo.modelo]?.value || "",
-      tipoVehiculo: tiposVehiculos[dataVehiculo.tipoVehiculo]?.value || "",
+      marca: dataVehiculo.marca || "",
+      modelo: dataVehiculo.modelo || "",
+      tipoVehiculo: dataVehiculo.tipoVehiculo || "",
       anioFabricacion: dataVehiculo.anioFabricacion || 0,
       capacidadCarga: dataVehiculo.capacidadCarga || 0
     });
   }, [dataVehiculo]);
-
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
 
   return (
@@ -101,92 +80,87 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Placa
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ej. ABC-123"
-                  value={DataFetch.placa}
-                  onChange={(e) =>
-                    handleInputChange("placa", e.target.value)
-                  }
-                  className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Marca
-                </label>
-                <InputSelect
-                  valueSelect={DataFetch.marca}
-                  inputName={"marca"}
-                  placeholder="Selecciona una marca"
-                  options={marcasVehiculos}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
+              <InputSelectTest
+                label="Marca"
+                options={marcasVehiculos}
+                placeholder="Selecciona una marca"
+                onSelect={(value) => 
+                  setFormData((prev) => ({ 
+                    ...prev, 
+                    marca: value as marca 
+                  }))
+                }
+                valueSelected={
+                  dataVehiculo?.marca
+                }
+              />
+
+              <InputText 
+                label="Placa"
+                value={dataVehiculo ? dataVehiculo.placa : ""}
+                htmlForm={"placa"}
+                onChange={(value) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    placa: value
+                  }))
+                }}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Modelo
-                </label>
-                <InputSelect
-                  valueSelect={DataFetch.modelo}
-                  inputName={"modelo"}
-                  placeholder="Selecciona un modelo"
-                  options={modelosVehiculos}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
+              <InputSelectTest
+                label="Modelo"
+                options={modelosVehiculos}
+                placeholder="Selecciona un modelo"
+                onSelect={(value) => setFormData((prev) => ({ 
+                  ...prev,
+                  modelo: value as modelo 
+                }))}
+                valueSelected={
+                  dataVehiculo?.modelo
+                }
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Año de fabricación
-                </label>
-                <input
-                  type="number"
-                  placeholder="Ej. 2020"
-                  value={DataFetch.anioFabricacion}
-                  onChange={(e) =>
-                    handleInputChange("anioFabricacion", e.target.value)
-                  }
-                  className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+              <InputText 
+                label="Año de fabricación"
+                value={dataVehiculo ? dataVehiculo.anioFabricacion.toString() : ""}
+                htmlForm={"anioFabricacion"}
+                onChange={(value) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    anioFabricacion: parseInt(value) || 0
+                  }))
+                }}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Tipo de vehículo
-                </label>
-                <InputSelect
-                  valueSelect={DataFetch.tipoVehiculo}
-                  inputName={"tipoVehiculo"}
-                  placeholder="Selecciona un tipo de vehículo"
-                  options={tiposVehiculos}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
+              <InputSelectTest
+                label="Tipo de vehículo"
+                options={tiposVehiculos}
+                placeholder="Selecciona un tipo de vehículo"
+                onSelect={(value) => setFormData((prev) => ({ 
+                  ...prev, 
+                  tipoVehiculo: value as tipoVehiculo 
+                }))}
+                valueSelected={
+                  dataVehiculo?.tipoVehiculo
+                }
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Capacidad maxima de carga (toneladas)
-                </label>
-                <input
-                  type="number"
-                  placeholder="Ej. 2020"
-                  value={DataFetch.capacidadCarga}
-                  onChange={(e) =>
-                    handleInputChange("capacidadCarga", e.target.value)
-                  }
-                  className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                />
-              </div>
+              <InputNumber
+                label="Capacidad máxima de carga (toneladas)"
+                placeholder="0.00"
+                simbol="TN"
+                defaultValue={dataVehiculo?.capacidadCarga as number || 0}
+                onChange={(value) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    capacidadCarga: value
+                  }))
+                }}
+              />
             </div>
           </div>
 
@@ -213,7 +187,6 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
               />
               <ButtonSubmitForm
                 handleSubmit={() => {
-                  
                   console.log("Datos a enviar:", formData);
                 }}
                 isLoading={isLoadingVehiculo || isLoadingInhabilitar}
