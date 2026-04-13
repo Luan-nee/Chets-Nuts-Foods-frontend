@@ -182,7 +182,7 @@ export default function FormUpdateEmpleado({
                     onSelect={(value) =>
                       setFormData((prev) => ({ ...prev, rol: value as number }))
                     }
-                    valueSelected={formDate.rol}
+                    valueSelected={empleado?.rol.id || 0}
                   />
                 )}
               </div>
