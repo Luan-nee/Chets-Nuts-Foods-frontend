@@ -1652,13 +1652,13 @@
 										{
 											"key": "Content-Type",
 											"value": "application/json",
-											"disabled": false,
-											"description": ""
+											"description": "",
+											"disabled": false
 										}
 									],
 									"cookie": [],
 									"responseTime": null,
-									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del empleado obtenido exitosamente\",\r\n    \"data\": {\r\n        \"id_empleado\": 2,\r\n        \"nombres\": \"Diego Alonso\",\r\n        \"apellidoPaterno\": \"Vargas\",\r\n        \"apellidoMaterno\": \"Machuca\",\r\n        \"correo\": \"diego.vargas92@gmail.com\",\r\n        \"dni\": \"12345678\",\r\n        \"rol\": {\r\n            \"id\": 2,\r\n            \"nombre\": \"COLABORADOR\"\r\n        },\r\n        \"estado\": true,\r\n        \"fecha_registro\": \"05 diciembre 2025\",\r\n        \"hora_registro\": \"14:52\",\r\n        \"fecha_actualizacion\": \"10 enero 2026\",\r\n        \"hora_actualizacion\": \"09:20\"\r\n    }\r\n}\r\n"
+									"body": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"Datos del empleado obtenido exitosamente\",\r\n    \"data\": {\r\n        \"id_empleado\": 2,\r\n        \"nombres\": \"Diego Alonso\",\r\n        \"apellidoPaterno\": \"Vargas\",\r\n        \"apellidoMaterno\": \"Machuca\",\r\n        \"correo\": \"diego.vargas92@gmail.com\",\r\n        \"dni\": \"12345678\",\r\n        \"rol\": {\r\n            \"id\": 2,\r\n            \"nombre\": \"CHOFER\"\r\n        },\r\n        \"estado\": true,\r\n        \"fecha_registro\": \"05 diciembre 2025\",\r\n        \"hora_registro\": \"14:52\",\r\n        \"fecha_actualizacion\": \"10 enero 2026\",\r\n        \"hora_actualizacion\": \"09:20\"\r\n    }\r\n}\r\n"
 								},
 								{
 									"id": "eed5449c-be97-41df-a332-d69b3e47556a",
