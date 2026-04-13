@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import InputSelectTest from "../../../components/ui/InputSelectTest";
+import InputSelectTest from "../../../components/ui/InputSelect";
 import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
 import ContentPage from "../../../components/layouts/ContentPage";

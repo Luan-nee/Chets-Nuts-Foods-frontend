@@ -1,5 +1,5 @@
 import { Flag } from "lucide-react";
-import InputSelectTest from "../../../../components/ui/InputSelectTest";
+import InputSelectTest from "../../../../components/ui/InputSelect";
 import InputText from "../../../../components/ui/InputText";
 import type { EmitirGre } from '../../types/gre.type';
 

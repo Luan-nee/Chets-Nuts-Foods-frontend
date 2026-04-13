@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import InputText from "../../../components/ui/InputText";
-import InputSelectTest from "../../../components/ui/InputSelectTest";
+import InputSelectTest from "../../../components/ui/InputSelect";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";

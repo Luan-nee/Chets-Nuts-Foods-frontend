@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Users, LucideList, LucideListX } from "lucide-react";
-import InputSelectTest from "../../../../components/ui/InputSelectTest";
+import InputSelectTest from "../../../../components/ui/InputSelect.tsx";
 import InputText from "../../../../components/ui/InputText";
 import { optionsTipoDocumento } from "../../../../config/constantes.ts";
 import type { EmitirGre } from "../../types/gre.type";

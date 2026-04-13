@@ -7,7 +7,7 @@ import {
 } from "../../../config/constantes.ts";
 import type { marca, modelo, tipoVehiculo } from "../types/vehiculo.type.ts";
 import type { RegistrarVehiculo } from "../types/vehiculo.type";
-import InputSelectTest from "../../../components/ui/InputSelectTest";
+import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText";
 import InputNumber from "../../../components/ui/InputNumber";
 import ContentPage from "../../../components/layouts/ContentPage";

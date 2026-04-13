@@ -7,7 +7,7 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import InputSelectTest from "../../../components/ui/InputSelectTest.tsx";
+import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText.tsx";
 import InputNumber from "../../../components/ui/InputNumber.tsx";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";

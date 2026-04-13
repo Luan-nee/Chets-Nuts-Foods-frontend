@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { User, Lock, Save, MapPin, Building2 } from "lucide-react";
 import InputText from "../components/ui/InputText";
-import InputSelectTest from "../components/ui/InputSelectTest";
+import InputSelectTest from "../components/ui/InputSelect";
 import InputPassword from "../components/ui/InputPassword";
 
 export default function Configuraciones() {
