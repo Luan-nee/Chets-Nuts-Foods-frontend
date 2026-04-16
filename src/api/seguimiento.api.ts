@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -6,7 +6,7 @@ import type { BodyResponse } from '../types/bodyResponse.type';
 import dataGre from '../json/guiaderemision/get-ok-guiasDeRemision.json';
 
 export default class SeguimientoApi extends BaseRequestApi {
-  private base_url = `${url_base}/seguimiento`;
+  private base_url = `${url_base_postman}/seguimiento`;
 
   /* REALIZAR SEGUIMIENTO */
   public async realizarSeguimiento<T>(codigoSeguimiento: string): Promise<BodyResponse<T>> {

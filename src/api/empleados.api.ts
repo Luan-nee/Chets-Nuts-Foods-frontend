@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman, url_base_production } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -7,20 +7,25 @@ import type { UpdateEmpleadoData, DeshabilitarEmpleado, CreateEmpleadoData } fro
 import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
 
 export default class EmpleadoApi extends BaseRequestApi {
-  private base_url = `${url_base}/empleados`;
+  private base_url_postman = `${url_base_postman}/empleados`;
+  private base_url_production = `${url_base_production}/api/accesos`;
 
   /* LISTAR EMPLEADOS */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponseWithPagination<T>;
-    } else {
-      return this.request<BodyResponseWithPagination<T>>(`${this.base_url}?pagina=${pagina}`, {
-        method: 'GET',
-        headers: {
-          'x-mock-response-name': 'ok - listar empleados'
-        }
+    }
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?pagina=${pagina}`, {
+        method: 'GET'
       });
     }
+    return this.request<BodyResponseWithPagination<T>>(`${this.base_url_postman}?pagina=${pagina}`, {
+      method: 'GET',
+      headers: {
+        'x-mock-response-name': 'ok - listar empleados'
+      }
+    });
   }
 
   /* DETALLES DE UN EMPLEADO */
@@ -28,7 +33,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
         method: 'GET',
         headers: {
           'x-mock-response-name': 'ok - detalles de un empleado'
@@ -42,7 +47,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +63,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}/roles`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_postman}/roles`, {
         method: 'GET',
         headers: {
           'x-mock-response-name': 'ok - listar roles'
@@ -72,7 +77,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}/${idEmpleado}`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +93,7 @@ export default class EmpleadoApi extends BaseRequestApi {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
     } else {
-      return this.request<BodyResponse<T>>(`${this.base_url}`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_postman}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

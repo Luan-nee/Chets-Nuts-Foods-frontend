@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -7,7 +7,7 @@ import type { RegistroUsuario, EditarUsuario } from '../types/usuario.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
 export default class Usuario extends BaseRequestApi {
-  private base_url = `${url_base}/usuario`;
+  private base_url = `${url_base_postman}/usuario`;
 
   /* CREAR USUARIO */
   public async crearUsuario<T>(bodyUsuario: RegistroUsuario): Promise<BodyResponse<T>> {

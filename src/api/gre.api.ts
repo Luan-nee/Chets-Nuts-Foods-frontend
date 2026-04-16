@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -8,7 +8,7 @@ import dataGre from '../json/guiaderemision/get-ok-guiasDeRemision.json';
 import dataGreDetalle from '../json/guiaderemision/get-ok-detallesDeUnaGuiaDeRemision.json';
 
 export default class GreApi extends BaseRequestApi {
-  private base_url = `${url_base}/guiasEmision`;
+  private base_url = `${url_base_postman}/guiasEmision`;
 
   /* LISTAR GUIAS DE REMISION */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {

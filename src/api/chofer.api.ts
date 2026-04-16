@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -7,7 +7,7 @@ import type { Licencia } from '../features/chofer/types/chofer.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
 export default class ChoferApi extends BaseRequestApi {
-  private base_url = `${url_base}/chofer`;
+  private base_url = `${url_base_postman}/chofer`;
 
   /* AGREGAR DATOS DE CHOFER */
   public async agregarDatosDeChofer<T>(body: Licencia): Promise<BodyResponse<T>> {

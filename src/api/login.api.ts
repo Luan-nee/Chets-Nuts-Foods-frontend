@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -7,7 +7,7 @@ import type { Credenciales } from '../types/usuario.type';
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 
 export default class Login extends BaseRequestApi {
-  private base_url = `${url_base}/login`;
+  private base_url = `${url_base_postman}/login`;
 
   /* INICIAR SESION */
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {

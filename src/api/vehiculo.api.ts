@@ -1,4 +1,4 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
 // importación de tipos
@@ -7,7 +7,7 @@ import dataVehiculos from '../json/vehiculos/get-ok-listarVehiculos.json';
 import type { RegistrarVehiculo, EditarVehiculo } from "../features/vehiculos/types/vehiculo.type";
 
 export default class VehiculoApi extends BaseRequestApi {
-  private base_url = `${url_base}/vehiculos`;
+  private base_url = `${url_base_postman}/vehiculos`;
   
   /* LISTAR VEHICULOS */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {

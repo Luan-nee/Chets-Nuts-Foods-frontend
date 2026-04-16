@@ -1,10 +1,10 @@
-import { url_base } from "../config/url_base";
+import { url_base_postman } from "../config/url_base";
 import type { BodyResponseWithPagination } from "../types/bodyResponse.type";
 import dataIniciarSesion from '../json/usuario/post-ok-iniciarSesion.json';
 import BaseRequestApi from "./BaseRequest.api";
 
 export default class ClienteApi extends BaseRequestApi {
-  private base_url = `${url_base}/clientes`;
+  private base_url = `${url_base_postman}/clientes`;
 
   /* LISTAR CLIENTES */
   public async listarClientes<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
