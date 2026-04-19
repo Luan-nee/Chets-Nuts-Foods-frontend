@@ -49,8 +49,8 @@ export default function Login() {
               <Truck className="w-7 h-7 text-white" />
             </div>
             <div className="text-left">
-              <h1 className="font-bold text-2xl text-white">LogiTrans ERP</h1>
-              <p className="text-sm text-gray-400">Gestión Logística</p>
+              <h1 className="font-bold text-2xl text-white">Chets Nuts Foods</h1>
+              <p className="text-sm text-gray-400">ERP</p>
             </div>
           </div>
         </div>
