@@ -32,30 +32,45 @@ export default class EmpleadoApi extends BaseRequestApi {
   public async getEmpleadoById<T>(idEmpleado: number): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
-    } else {
-      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
-        method: 'GET',
-        headers: {
-          'x-mock-response-name': 'ok - detalles de un empleado'
-        }
+    }
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}/${idEmpleado}`, {
+        method: 'GET'
       });
     }
+    return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
+      method: 'GET',
+      headers: {
+        'x-mock-response-name': 'ok - detalles de un empleado'
+      }
+    });
   }
 
   /* EDITAR EMPLEADO */
   public async  UpdateEmpleadoById<T>(idEmpleado: number, body: UpdateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
-    } else {
-      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
+    }
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
-          'x-mock-response-name': 'ok - editar empleado'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          ...body,
+          idacceso: idEmpleado
+        })
       });
     }
+    return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-mock-response-name': 'ok - editar empleado'
+      },
+      body: JSON.stringify(body)
+    });
   }
 
   /* LISTAR ROLES ------------------------------> mover a otra clase */
@@ -76,31 +91,51 @@ export default class EmpleadoApi extends BaseRequestApi {
   public async deshabilitarEmpleado<T>(idEmpleado: number, body: DeshabilitarEmpleado): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
-    } else {
-      return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
-        method: 'PUT',
+    }
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}`, {
+        method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
-          'x-mock-response-name': 'ok - deshabilitar empleado'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          ...body,
+          idacceso: idEmpleado
+        })
       });
     }
+    return this.request<BodyResponse<T>>(`${this.base_url_postman}/${idEmpleado}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-mock-response-name': 'ok - deshabilitar empleado'
+      },
+      body: JSON.stringify(body)
+    });
+    
   }
 
   /* REGISTRAR NUEVO EMPLEADO */
   public async createEmpleado<T>(body: CreateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataEmpleados as unknown as BodyResponse<T>;
-    } else {
-      return this.request<BodyResponse<T>>(`${this.base_url_postman}`, {
+    } 
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'x-mock-response-name': 'ok - registrar empleado'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
       });
     }
+    return this.request<BodyResponse<T>>(`${this.base_url_postman}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-mock-response-name': 'ok - registrar empleado'
+      },
+      body: JSON.stringify(body)
+    });
   }
 }
