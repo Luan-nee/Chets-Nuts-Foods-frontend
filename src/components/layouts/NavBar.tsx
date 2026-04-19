@@ -46,8 +46,8 @@ export default function NavBarAdministrador() {
             <Truck className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-white text-sm">LogiTrans ERP</h1>
-            <p className="text-xs text-gray-400">Administrador</p>
+            <h1 className="font-bold text-white text-sm">Chets Nuts Foods</h1>
+            <p className="text-xs text-gray-400">dashboard</p>
           </div>
         </div>
       </div>
