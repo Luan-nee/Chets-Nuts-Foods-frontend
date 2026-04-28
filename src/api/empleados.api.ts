@@ -8,7 +8,7 @@ import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
 
 export default class EmpleadoApi extends BaseRequestApi {
   private base_url_postman = `${url_base_postman}/empleados`;
-  private base_url_production = `${url_base_production}/api/accesos`;
+  private base_url_production = `${url_base_production}/api`;
 
   /* LISTAR EMPLEADOS */
   public async get<T>(pagina: number): Promise<BodyResponseWithPagination<T>> {
@@ -16,7 +16,7 @@ export default class EmpleadoApi extends BaseRequestApi {
       return dataEmpleados as unknown as BodyResponseWithPagination<T>;
     }
     if (this.PRODUCTION_MODE) {
-      return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?pagina=${pagina}`, {
+      return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}/accesos?pagina=${pagina}`, {
         method: 'GET',
         headers: {
           Authorization: `bearer ${localStorage.getItem('token') || ''}`
