@@ -17,7 +17,10 @@ export default class EmpleadoApi extends BaseRequestApi {
     }
     if (this.PRODUCTION_MODE) {
       return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?pagina=${pagina}`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          Authorization: `bearer ${localStorage.getItem('token') || ''}`
+        }
       });
     }
     return this.request<BodyResponseWithPagination<T>>(`${this.base_url_postman}?pagina=${pagina}`, {

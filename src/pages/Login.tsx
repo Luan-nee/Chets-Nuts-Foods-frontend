@@ -25,7 +25,7 @@ export default function Login() {
 
     const credenciales: Credenciales = {
       usuario: usuario.trim(),
-      contrasenia: contrasenia.trim()
+      password: contrasenia.trim()
     };
 
     const response = await login(credenciales, rolSeleccionado, verAccesoRapido);

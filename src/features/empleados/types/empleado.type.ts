@@ -1,10 +1,13 @@
 export type empleadoRol = 'administrador' | 'chofer' | 'trabajador';
+export type accesoEstado = "DISPONIBLE" | "OCUPADO" | "OBSERVACION";
 
 export type empleado = {
   id: number;
   nombres: string;
   apellidos: string;
   rol: empleadoRol;
+  dni: string;
+  estado: accesoEstado;
 }
 
 export type DetallesEmpleado = {

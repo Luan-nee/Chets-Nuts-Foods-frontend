@@ -28,8 +28,10 @@ export default function TableEmpleados({
 
   const tableHeader: string[] = [
     "ID",
-    "Nombres y Apellidos",
+    "Nombres",
     "Rol",
+    "DNI",
+    "Estado",
     "Acciones",
   ];
 
@@ -111,6 +113,16 @@ export default function TableEmpleados({
             {/* Role */}
             <td className="px-6 py-4">
               <span className="text-sm text-gray-300">{empleado.rol}</span>
+            </td>
+
+            {/* DNI */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-gray-300">{empleado.dni}</span>
+            </td>
+
+            {/* Estado */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-gray-300">{empleado.estado}</span>
             </td>
 
             {/* Actions */}

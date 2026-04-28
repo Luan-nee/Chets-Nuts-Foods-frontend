@@ -2,7 +2,7 @@ export type UserRole = 'ADMIN' | 'CHOFER' | 'CLIENTE' | 'COLABORADOR';
 
 export type Credenciales = {
   usuario: string;
-  contrasenia: string;
+  password: string;
 }
 
 export type RegistroUsuario = {
