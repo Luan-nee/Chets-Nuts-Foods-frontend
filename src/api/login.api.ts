@@ -14,7 +14,9 @@ export default class Login extends BaseRequestApi {
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
       return dataIniciarSesion as unknown as BodyResponse<T>;
-    } else if (this.PRODUCTION_MODE) {
+    } 
+    
+    if (this.PRODUCTION_MODE) {
       return this.request<BodyResponse<T>>(`${this.base_url_production}`, {
         method: 'POST',
         body: JSON.stringify(credenciales),
