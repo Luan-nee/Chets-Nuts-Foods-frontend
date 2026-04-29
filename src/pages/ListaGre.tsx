@@ -3,11 +3,15 @@ import { Search, Filter } from 'lucide-react';
 import TableGre from '../features/gre/components/TableGre';
 import DetallesGre from '../features/gre/components/DetallesGre';
 import FormCreateGre from '../features/gre/components/FormCreateGre';
+import { InfoWarning } from '../components/messages/infoWarning';
 
 export default function ListaGre() {
   const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);
   const [ showFormCreateGre, setShowFormCreateGre ] = useState<boolean>(false);
   const [ selectGreId, setSelectGreId ] = useState<number | null>(null);
+  const messageWarning = (title: string, message: string) => {
+    InfoWarning(title, message);
+  }
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -17,6 +21,13 @@ export default function ListaGre() {
           <div>
             <h2 className="text-3xl font-bold text-white mb-2">Gestión de Guías de remisión</h2>
             <p className="text-sm text-gray-400">Administra las guías de remisión de la empresa.</p>
+            <button 
+              onClick={
+                () => messageWarning('Error en GRE','guia de remisión errada')
+              }
+            >
+              <span className="text-sm text-gray-300 hover:text-white transition-colors">Crear nueva guía de remisión</span>
+            </button>
           </div>
         </div>
       </div>
