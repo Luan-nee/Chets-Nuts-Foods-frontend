@@ -12,10 +12,12 @@ export default class EmpleadoService {
     const empleadosformateados: empleado[] = empleados.data.map((emp) => ({
       id: emp.idacceso,
       nombres: emp.nombres,
-      apellidos: emp.nombres,
-      rol: emp.tipos.toLowerCase() as empleado['rol'],
+      apellidos: '', // El backend no envía apellidos
+      rol: emp.tipos as empleado['rol'],
       dni: emp.dniuser,
-      estado: emp.estado,
+      estado: emp.estadoacceso,
+      estadoHabilitado: emp.estado,
+      correo: emp.correo,
     }));
 
     return {

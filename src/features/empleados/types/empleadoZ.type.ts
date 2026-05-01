@@ -1,12 +1,11 @@
-import type { accesoEstado } from './empleado.type';
-import type { empleadoRol } from './empleado.type';
+import type { accesoEstado, estadoEmpleado, empleadoRol } from './empleado.type';
 
 export type empleado = {
   idacceso: number;
   correo: string;
-  estado: accesoEstado;
+  estado: estadoEmpleado; // 0 o 1
   tipos: empleadoRol;
-  estadoacceso: string;
+  estadoacceso: accesoEstado;
   dniuser: string;
-  nombres: string
+  nombres: string;
 }

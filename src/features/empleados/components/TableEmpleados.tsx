@@ -100,12 +100,11 @@ export default function TableEmpleados({
                   className={`w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0`}
                 >
                   <span className="text-sm font-bold text-white">
-                    {empleado.nombres?.charAt(0) +
-                      empleado.apellidos?.charAt(0)}
+                    {empleado.nombres?.charAt(0)}
                   </span>
                 </div>
                 <span className="font-medium text-sm text-white">
-                  {empleado.nombres} {empleado.apellidos}
+                  {empleado.nombres}
                 </span>
               </div>
             </td>

@@ -94,7 +94,7 @@ export default function Login() {
 
             { verAccesoRapido && (
               <div className="grid grid-cols-3 gap-4">
-                {/* AGREGAR 3 BOTONES QUE DIGA "ADMIN", "TRABAJADOR" Y "CHOFER" */}
+                {/* AGREGAR 3 BOTONES QUE DIGA "ADMIN", "COLABORADOR" Y "CHOFER" */}
                 <button 
                   type={'button'}
                   onClick={() => setRolSeleccionado('ADMIN')}
@@ -109,7 +109,7 @@ export default function Login() {
                   className={`mr-2 mb-2 px-4 py-2
                   ${rolSeleccionado === 'COLABORADOR' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
                   rounded-lg transition-colors text-white`}>
-                  Trabajador
+                  Colaborador
                 </button>
                 <button 
                   type={'button'}

@@ -3,34 +3,46 @@
   "message": "Lista de Empleados obtenidos exitosamente",
   "data": [
     {
-      "id": 1,
-      "nombres": "Luan Del Sol",
-      "apellidos": "Huillca Sanchez",
-      "rol": "empleado"
+      "idacceso": 1,
+      "correo": "luan@gmail.com",
+      "estado": 1,
+      "tipos": "ADMIN",
+      "estadoacceso": "DISPONIBLE",
+      "dniuser": "12345678",
+      "nombres": "LUAN DEL SOL"
     },
     {
-      "id": 2,
-      "nombres": "Ana Ximena",
-      "apellidos": "Paredes Melgar",
-      "rol": "administrador"
+      "idacceso": 2,
+      "correo": "ana@gmail.com",
+      "estado": 1,
+      "tipos": "COLABORADOR",
+      "estadoacceso": "DISPONIBLE",
+      "dniuser": "87654321",
+      "nombres": "ANA XIMENA"
     },
     {
-      "id": 3,
-      "nombres": "Diego Alonso",
-      "apellidos": "Vargas Machuca",
-      "rol": "empleado"
+      "idacceso": 3,
+      "correo": "diego@gmail.com",
+      "estado": 1,
+      "tipos": "CHOFER",
+      "estadoacceso": "OCUPADO",
+      "dniuser": "11111111",
+      "nombres": "DIEGO ALONSO"
     },
     {
-      "id": 4,
-      "nombres": "Milagros Lucía",
-      "apellidos": "Condori Mamani",
-      "rol": "supervisor"
-    },
-    {
-      "id": 5,
-      "nombres": "Renato André",
-      "apellidos": "Tello Vizcarra",
-      "rol": "empleado"
+      "idacceso": 4,
+      "correo": "milagros@gmail.com",
+      "estado": 0,
+      "tipos": "CLIENTE",
+      "estadoacceso": "OBSERVACION",
+      "dniuser": "22222222",
+      "nombres": "MILAGROS LUCIA"
     }
-  ]
+  ],
+  "pagination": {
+    "total_data": 4,
+    "datos_por_pagina": 10,
+    "pagina_actual": 0,
+    "total_paginas": 1
+  }
 }

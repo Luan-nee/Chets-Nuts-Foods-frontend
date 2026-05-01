@@ -1,13 +1,16 @@
-export type empleadoRol = 'administrador' | 'chofer' | 'trabajador';
+export type empleadoRol = 'ADMIN' | 'CHOFER' | 'CLIENTE' | 'COLABORADOR';
 export type accesoEstado = "DISPONIBLE" | "OCUPADO" | "OBSERVACION";
+export type estadoEmpleado = 0 | 1; // 0 = deshabilitado, 1 = habilitado
 
 export type empleado = {
   id: number;
   nombres: string;
-  apellidos: string;
+  apellidos?: string; // Opcional, el backend no lo envía
   rol: empleadoRol;
   dni: string;
   estado: accesoEstado;
+  estadoHabilitado: estadoEmpleado; // 0 o 1
+  correo?: string;
 }
 
 export type DetallesEmpleado = {
