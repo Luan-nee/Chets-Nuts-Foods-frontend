@@ -1,6 +1,8 @@
 export type empleadoRol = 'ADMIN' | 'CHOFER' | 'CLIENTE' | 'COLABORADOR';
 export type accesoEstado = "DISPONIBLE" | "OCUPADO" | "OBSERVACION";
 export type estadoEmpleado = 0 | 1; // 0 = deshabilitado, 1 = habilitado
+export type sexoEmpleado = 'MASCULINO' | 'FEMENINO';
+export type tipoPersona = 'NATURAL' | 'JURIDICO';
 
 export type empleado = {
   id: number;
@@ -42,13 +44,18 @@ export type UpdateEmpleadoData = {
 }
 
 export type CreateEmpleadoData = {
-  nombres: string;
-  apellidoPaterno: string;
-  apellidoMaterno: string;
+  password: string;
+  tipos: empleadoRol; // Rol: ADMIN | CHOFER | CLIENTE | COLABORADOR
   correo: string;
+  nombre: string;
+  apellidomaterno: string;
+  apellidopaterno: string;
   dni: string;
-  rol: number;
-  contrasenia_temporal: string;
+  numero: string; // Teléfono
+  edad: number;
+  sexo: sexoEmpleado; // MASCULINO | FEMENINO
+  tipo: tipoPersona; // NATURAL | JURIDICO
+  numeroLicenciaConducir?: string; // Solo si es CHOFER
 }
 
 export type DeshabilitarEmpleado = {

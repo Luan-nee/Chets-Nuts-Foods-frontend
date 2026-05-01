@@ -5,6 +5,7 @@ import BaseRequestApi from './BaseRequest.api';
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
 import type { UpdateEmpleadoData, DeshabilitarEmpleado, CreateEmpleadoData } from '../features/empleados/types/empleado.type';
 import dataEmpleados from '../json/empleados/get-ok-listarEmpleados.json';
+import dataRoles from '../json/roles/get-ok-listarRoles.json';
 
 export default class EmpleadoApi extends BaseRequestApi {
   private base_url_postman = `${url_base_postman}/empleados`;
@@ -76,18 +77,25 @@ export default class EmpleadoApi extends BaseRequestApi {
     });
   }
 
-  /* LISTAR ROLES ------------------------------> mover a otra clase */
+  /* LISTAR ROLES */
   public async getRoles<T>(): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
-      return dataEmpleados as unknown as BodyResponse<T>;
-    } else {
-      return this.request<BodyResponse<T>>(`${this.base_url_postman}/roles`, {
+      return dataRoles as unknown as BodyResponse<T>;
+    } 
+    if (this.PRODUCTION_MODE) {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}/accesos/roles`, {
         method: 'GET',
         headers: {
-          'x-mock-response-name': 'ok - listar roles'
+          Authorization: `bearer ${localStorage.getItem('token') || ''}`
         }
       });
     }
+    return this.request<BodyResponse<T>>(`${this.base_url_postman}/accesos/roles`, {
+      method: 'GET',
+      headers: {
+        'x-mock-response-name': 'ok - listar roles'
+      }
+    });
   }
 
   /* DESHABILITAR EMPLEADO */
@@ -121,13 +129,14 @@ export default class EmpleadoApi extends BaseRequestApi {
   /* REGISTRAR NUEVO EMPLEADO */
   public async createEmpleado<T>(body: CreateEmpleadoData): Promise<BodyResponse<T>> {
     if (this.OFFLINE_MODE) {
-      return dataEmpleados as unknown as BodyResponse<T>;
+      return { status: 'success', message: 'ok', data: null } as unknown as BodyResponse<T>;
     } 
     if (this.PRODUCTION_MODE) {
-      return this.request<BodyResponse<T>>(`${this.base_url_production}`, {
+      return this.request<BodyResponse<T>>(`${this.base_url_production}/accesos`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${localStorage.getItem('token') || ''}`
         },
         body: JSON.stringify(body)
       });
