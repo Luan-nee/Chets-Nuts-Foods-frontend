@@ -28,7 +28,14 @@ export const useCreateEmpleado = (): FetchState => {
       setErrorMessage(null);
       setSuccessMessage(null);
       
-      const response = await empleadoService.createEmpleado(body);
+      // Limpiar el body: excluir ruc y numeroLicenciaConducir si no es CHOFER
+      const cleanBody = { ...body };
+      if (cleanBody.tipos !== 'CHOFER') {
+        delete cleanBody.ruc;
+        delete cleanBody.numeroLicenciaConducir;
+      }
+      
+      const response = await empleadoService.createEmpleado(cleanBody);
       
       // Manejo de respuestas basado en el estado
       if (response.status === 'success') {

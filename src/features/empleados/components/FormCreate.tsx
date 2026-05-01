@@ -34,6 +34,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     sexo: 'MASCULINO',
     tipo: 'NATURAL',
     numeroLicenciaConducir: '',
+    ruc: '',
   });
 
   // Generar contraseña automáticamente
@@ -60,6 +61,12 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     if (!formData.nombre || !formData.apellidopaterno || !formData.apellidomaterno || 
         !formData.dni || !formData.correo || !formData.numero || formData.edad === 0) {
       InfoError('Validación', 'Por favor completa todos los campos requeridos');
+      return;
+    }
+
+    // Validar campos específicos para CHOFER
+    if (formData.tipos === 'CHOFER' && (!formData.numeroLicenciaConducir || !formData.ruc)) {
+      InfoError('Validación', 'Para un CHOFER es obligatorio el número de licencia y RUC');
       return;
     }
 
@@ -206,14 +213,22 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
             }
           </div>
 
-          {/* Row 6: Número de Licencia (solo si es CHOFER) */}
+          {/* Row 6: Número de Licencia y RUC (solo si es CHOFER) */}
           {formData.tipos === 'CHOFER' && (
-            <InputText
-              label="Número de Licencia de Conducir"
-              value={formData.numeroLicenciaConducir || ''}
-              htmlForm="numeroLicencia"
-              onChange={(value) => setFormData(prev => ({ ...prev, numeroLicenciaConducir: value }))}
-            />
+            <div className="grid grid-cols-2 gap-6">
+              <InputText
+                label="Número de Licencia de Conducir"
+                value={formData.numeroLicenciaConducir || ''}
+                htmlForm="numeroLicencia"
+                onChange={(value) => setFormData(prev => ({ ...prev, numeroLicenciaConducir: value }))}
+              />
+              <InputText
+                label="RUC"
+                value={formData.ruc || ''}
+                htmlForm="ruc"
+                onChange={(value) => setFormData(prev => ({ ...prev, ruc: value }))}
+              />
+            </div>
           )}
 
           {/* Row 7: Contraseña (solo lectura) */}
@@ -229,16 +244,6 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
         <div className="flex gap-4 mt-8">
           <div className="flex flex-row gap-4 w-full justify-end">
             <div className="flex flex-row gap-4">
-              <ButtonSubmitForm
-                handleSubmit={() => {
-                  console.log(formData);
-                }}
-                isLoading={false}
-                isError={false}
-                textButton="Ver Datos"
-                textError={"Error al mostrar los datos"}
-                color="blue"
-              />
               <ButtonCancelForm
                 handleCancel={() => setShowFormCreateEmpleado(false)}
                 isLoading={cargandoCreateEmpleado}

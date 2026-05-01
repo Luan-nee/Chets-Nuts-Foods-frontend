@@ -56,6 +56,7 @@ export type CreateEmpleadoData = {
   sexo: sexoEmpleado; // MASCULINO | FEMENINO
   tipo: tipoPersona; // NATURAL | JURIDICO
   numeroLicenciaConducir?: string; // Solo si es CHOFER
+  ruc?: string; // Solo si es CHOFER
 }
 
 export type DeshabilitarEmpleado = {
