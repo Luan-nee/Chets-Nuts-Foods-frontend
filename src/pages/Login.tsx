@@ -6,6 +6,8 @@ import { useAuth } from '../context/AuthContext';
 import SwitchTest from '../components/ui/SwitchTest';
 import type { User, Credenciales } from '../types/usuario.type';
 import type { UserRole } from '../types/usuario.type';
+import { InfoSuccess } from '../components/messages/InfoSuccess';
+import { InfoError } from '../components/messages/InfoError';
 
 export default function Login() {
   const { login, isLoading, error } = useLogin();
@@ -30,13 +32,15 @@ export default function Login() {
 
     const response = await login(credenciales, rolSeleccionado, verAccesoRapido);
 
-    console.log("Login response data:", response, "Error:", error);
-    if (response && !error) {
-      authLogin(response as unknown as User);
+    console.log('Login response data:', response, 'Error:', error);
+    if (response && response.status === 'success') {
+      authLogin(response.data as unknown as User);
+      InfoSuccess('Autenticación', response.message || 'Login exitoso');
       navigate('/');
-    } else { 
-      console.log("Login failed:", error);
-      alert('Error de autenticación: ' + (error || 'Respuesta inválida del servidor'));
+    } else if (response && response.status === 'error') {
+      InfoError('Error de autenticación', response.message || 'Usuario o contraseña incorrectas');
+    } else {
+      InfoError('Error', error || 'Las credenciales son incorrectas');
     }
   };
 

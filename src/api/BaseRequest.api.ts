@@ -11,9 +11,31 @@ export default class BaseRequestApi {
       },
     });
 
-    if (!response.ok) {
-      throw new Error("Error en la petición");
+    const text = await response.text();
+    const contentType = response.headers.get('content-type') || '';
+
+    // Try to parse JSON when possible
+    const looksLikeJson = contentType.includes('application/json') || text.trim().startsWith('{') || text.trim().startsWith('[');
+
+    if (looksLikeJson) {
+      try {
+        const json = JSON.parse(text);
+        // If server responded with error HTTP status but returned JSON body,
+        // return the parsed JSON so callers can inspect `status`/`message` fields.
+        return json as T;
+      } catch (e) {
+        if (!response.ok) {
+          throw new Error(text || 'Error en la petición');
+        }
+        throw e;
+      }
     }
-    return response.json();
+
+    if (!response.ok) {
+      throw new Error(text || 'Error en la petición');
+    }
+
+    // Non-JSON successful response: return raw text casted to T
+    return text as unknown as T;
   }
 }
