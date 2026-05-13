@@ -11,7 +11,7 @@ import type { CreateAcceso, UpdateAcceso } from '../../types/backend/accesos.typ
 // importación de datos mock
 // ...
 
-export default class Auth extends BaseRequestApi {
+export default class Accesos extends BaseRequestApi {
   // private base_url_postman = `${url_base_postman}`;
   private base_url_production = `${url_base_production}/api/accesos`;
 
