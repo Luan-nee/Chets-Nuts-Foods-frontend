@@ -23,12 +23,12 @@ export default class Login extends BaseRequestApi {
       });
     }
 
-      return this.request<BodyResponse<T>>(`${this.base_url}`, {
-        method: 'POST',
-        headers: {
-          'x-mock-response-name': 'ok - iniciar sesion'
-        },
-        body: JSON.stringify(credenciales)
-      });
-    }
+    return this.request<BodyResponse<T>>(`${this.base_url}`, {
+      method: 'POST',
+      headers: {
+        'x-mock-response-name': 'ok - iniciar sesion'
+      },
+      body: JSON.stringify(credenciales)
+    });
+  }
 }
