@@ -21,7 +21,7 @@ export default class Accesos extends BaseRequestApi {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `bearer ${this.token}`
       }
     });
   }
@@ -31,7 +31,7 @@ export default class Accesos extends BaseRequestApi {
     return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?page=${page}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `bearer ${this.token}`
       }
     });
   }
@@ -41,7 +41,7 @@ export default class Accesos extends BaseRequestApi {
     return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `bearer ${this.token}`
       }
     });
   }
@@ -52,7 +52,17 @@ export default class Accesos extends BaseRequestApi {
       method: 'PATCH',
       body: JSON.stringify(body),
       headers: {
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `bearer ${this.token}`
+      }
+    });
+  }
+
+  /* roles */
+  public async roles<T>(): Promise<BodyResponse<T>> {
+    return this.request<BodyResponse<T>>(`${this.base_url_production}/roles`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `bearer ${this.token}`
       }
     });
   }
