@@ -8,6 +8,10 @@ export type CreateSalidaTransporte = {
   idVehiculo: number;
 }
 
+export type ResponseGetAll = {
+  // aún no tiene tipo definido
+}
+
 export type UpdateSalidaTransporte = {
   idsalidatransporte: number,
   idVehiculo?: number,

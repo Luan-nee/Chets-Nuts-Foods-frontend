@@ -1,10 +1,7 @@
 export type BodyResponse<T> = {
   status: "success" | "warning" | "error";
   message: string;
-  data: T;
-} | {
-  status: "success" | "warning" | "error";
-  message: string;
+  data?: T;
 };
 
 export type PaginationInfo = {

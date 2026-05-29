@@ -17,4 +17,6 @@ export type TipoEstablecimiento =
 
 export type TipoVehiculo = "PUBLICO" | "PRIVADO";
 
+export type EstadoVehiculo = "OPERATIVO" | "MANTENIMIENTO";
+
 export type EstadoTransporte = "INICIO" | "EN CAMINO" | "FINALIZADO" | "CANCELADO"

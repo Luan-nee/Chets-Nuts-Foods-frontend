@@ -1,5 +1,39 @@
 import type { TipoEstablecimiento } from "./constantes.type";
 
+export type ResponseGetAll = {
+  nombreEst: string;
+  codigoSunat: string | null; 
+  direccion: string;
+  distrito: string;
+  provincia: string;
+  tipoestablecimiento: TipoEstablecimiento;
+  estado: boolean; 
+  descripcion: string;
+  idEst: number;
+  nombres: string;
+}
+
+export type ResponseGetByID = {
+  idEst: number;
+  iduser: number;
+  nombres: string;
+  apellidomaterno: string;
+  apellidopaterno: string;
+  dniuser: string;
+  numero: string;
+  codigoSunat: string | null;
+  departamento: string;
+  descripcion: string;
+  distrito: string;
+  provincia: string;
+  latitud: string;  
+  longitud: string; 
+  tipoestablecimiento: TipoEstablecimiento;
+  ubigeo: string;   
+  activo: boolean;  
+  fechaCreacion: Date;
+}
+
 export interface CreateEstablecimiento {
   idResponsable: number;
   nombreEstablecimiento: string;
