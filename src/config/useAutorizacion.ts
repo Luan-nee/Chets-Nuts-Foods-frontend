@@ -1,5 +1,5 @@
 import { useAuth } from '../context/AuthContext';
-import type { UserRole } from '../types/usuario.type';
+import type { UserRole } from '../types/constantes.type';
 
 interface Permisos {
   tienePermiso: (permiso: string) => boolean;

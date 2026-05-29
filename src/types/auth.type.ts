@@ -1,3 +1,5 @@
+import type { UserRole } from './constantes.type';
+
 export type Credenciales = {
   usuario: string,
   password: string
@@ -5,6 +7,6 @@ export type Credenciales = {
 
 export type AuthResponse = {
   nombreUser: string,
-  rol: string,
+  rol: UserRole,
   tokenZ: string
 }

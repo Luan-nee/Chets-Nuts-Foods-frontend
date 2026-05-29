@@ -1,24 +1,24 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import type { User } from '../types/usuario.type';
+import type { AuthResponse } from '../types/auth.type'
 
 interface AuthContextType {
-  user: User | null;
+  user: AuthResponse | null;
   isAuthenticated: boolean;
-  login: (userData: User) => void;
+  login: (userData: AuthResponse) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthResponse | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
     if (stored) {
       try {
-        const parsed: User = JSON.parse(stored);
+        const parsed: AuthResponse = JSON.parse(stored);
         setUser(parsed);
         setIsAuthenticated(true);
       } catch (error) {
@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: AuthResponse) => {
     setUser(userData);
     setIsAuthenticated(true);
     localStorage.setItem('user', JSON.stringify(userData));
