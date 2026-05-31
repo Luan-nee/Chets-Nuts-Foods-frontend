@@ -48,16 +48,4 @@ export default class BaseRequestApi {
     });
     return response.json();
   }
-
-  public async UPDATE<T>(url: string, body: any): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(url, {
-      method: 'UPDATE',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`,
-        "Content-Type": "application/json"
-      }
-    });
-    return response.json();
-  }
 }
