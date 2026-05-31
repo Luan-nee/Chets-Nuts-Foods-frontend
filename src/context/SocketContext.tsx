@@ -1,17 +1,16 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { url_base_production } from '../config/url_base';
-import { ClientToServerEvents, ServerToClientEvents } from '../types/socket.types';
+import type { ClientToServerEvents, ServerToClientEvents } from '../types/socket.types';
 
 // Tipamos el Socket con nuestras interfaces personalizadas
 type TypedSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
-const SocketContext = createContext(
-  io(
-    url_base_production, 
-    { autoConnect: false }
-  )
-);
+interface SocketContextType {
+  socket: TypedSocket;
+}
+
+const SocketContext = createContext<SocketContextType | null>(null);
 
 export default function SocketProvider({ children }: { children: React.ReactNode }) {
   const socket: TypedSocket = useMemo(() => {
@@ -28,7 +27,7 @@ export default function SocketProvider({ children }: { children: React.ReactNode
   }, [socket]);
 
   return (
-    <SocketContext.Provider value={{  }}>
+    <SocketContext.Provider value={{ socket }}>
       {children}
     </SocketContext.Provider>
   );

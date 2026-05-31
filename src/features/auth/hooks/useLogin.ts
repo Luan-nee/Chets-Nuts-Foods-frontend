@@ -43,7 +43,7 @@ export const useLogin = (): FetchState => {
           return null;
         }
 
-        if (response.status === "success") {
+        if (response.status === "success"  && response.data !==undefined) {
           setData(response.data);
           // Guarda el token en el localStorage, pero en el futuro se espera guardar
           // en una cookie HttpOnly para mayor seguridad

@@ -1,4 +1,4 @@
-import VehiculoApi from '../../../api/vehiculo.api';
+import VehiculoApi from '../../../api/Vehiculos.api';
 import type { ListarVehiculo, RegistrarVehiculo, EditarVehiculo, DetallesVehiculo } from '../types/vehiculo.type';
 
 const vehiculoApi = new VehiculoApi();
