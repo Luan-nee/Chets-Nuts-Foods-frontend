@@ -6,7 +6,7 @@ import BaseRequestApi from './BaseRequest.api';
 
 // importación de tipos
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
-import type { ResponseGetByID, CreateVehiculo, UpdateVehiculo, ResponseGetAllChoferes, ResponseCreate, ResponseUpdate} from '../types/vehiculos.type';
+import type { ResponseGetAllChoferes} from '../types/vehiculos.type';
 
 // importación de datos mock
 // ...
@@ -16,7 +16,7 @@ export default class Vehiculos extends BaseRequestApi {
   private base_url_production = `${url_base_production}/api/vehiculos`;
 
   /* getAll */
-  public async getAll<T>(page: number = 1): Promise<BodyResponseWithPagination<T>> {
+  public async get<T>(page: number = 1): Promise<BodyResponseWithPagination<T>> {
     const response: Response = await fetch(`${this.base_url_production}?page=${page}`, {
       method: 'GET',
       headers: {
@@ -28,7 +28,7 @@ export default class Vehiculos extends BaseRequestApi {
   }
 
   /* getByID */
-  public async getByID(id: number): Promise<BodyResponse<ResponseGetByID>> {
+  public async getVehiculo<T>(id: number): Promise<BodyResponse<T>> {
     const response: Response = await fetch(`${this.base_url_production}/${id}`, {
       method: 'GET',
       headers: {
@@ -52,12 +52,13 @@ export default class Vehiculos extends BaseRequestApi {
   }
 
   /* create */
-  public async create(body: CreateVehiculo): Promise<BodyResponse<ResponseCreate>> {
+  public async registrarVehiculo<T>(body: unknown): Promise<BodyResponse<T>> {
     const response: Response = await fetch(`${this.base_url_production}`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
-        'Authorization': `bearer ${this.token}`
+        'Authorization': `bearer ${this.token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -65,10 +66,23 @@ export default class Vehiculos extends BaseRequestApi {
   }
 
   /* update */
-  public async update(body: UpdateVehiculo): Promise<BodyResponse<ResponseUpdate>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+  public async editarVehiculo<T>(id: number, body: unknown): Promise<BodyResponse<T>> {
+    const response: Response = await fetch(`${this.base_url_production}/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(body),
+      headers: {
+        'Authorization': `bearer ${this.token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    return response.json();
+  }
+
+  /* inhabilitar */
+  public async inhabilitarVehiculo<T>(id: number): Promise<BodyResponse<T>> {
+    const response: Response = await fetch(`${this.base_url_production}/${id}/deshabilitar`, {
+      method: 'PATCH',
       headers: {
         'Authorization': `bearer ${this.token}`
       }

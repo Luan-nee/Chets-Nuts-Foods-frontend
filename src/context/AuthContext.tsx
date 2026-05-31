@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import type { AuthResponse } from '../types/auth.type'
 
 interface AuthContextType {
@@ -11,22 +11,25 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthResponse | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<AuthResponse | null>(()=>{
+    const stored = localStorage.getItem("user");
+    if(!stored)return null;
 
-  useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) {
-      try {
-        const parsed: AuthResponse = JSON.parse(stored);
-        setUser(parsed);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error('No se pudo leer usuario de localStorage', error);
-        localStorage.removeItem('user');
-      }
+    try {
+      const parsed: AuthResponse = JSON.parse(stored);
+      return parsed;
+    } catch (error) {
+      console.error("No se pudo leer usuario de localStorage", error);
+      localStorage.removeItem("user");
+      return null;
     }
-  }, []);
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(()=>{
+    const stored = localStorage.getItem("user");
+
+    return stored? true:false; 
+  });
 
   const login = (userData: AuthResponse) => {
     setUser(userData);

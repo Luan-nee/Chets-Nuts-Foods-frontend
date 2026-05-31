@@ -4,10 +4,10 @@ import { useLogin } from '../features/auth/hooks/useLogin';
 import { Truck, LogIn } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import SwitchTest from '../components/ui/SwitchTest';
-import type { User, Credenciales } from '../types/usuario.type';
-import type { UserRole } from '../types/usuario.type';
 import { InfoSuccess } from '../components/messages/InfoSuccess';
 import { InfoError } from '../components/messages/InfoError';
+import type { UserRole } from '../types/constantes.type';
+import type { Credenciales } from '../types/auth.type';
 
 export default function Login() {
   const { login, isLoading, error } = useLogin();

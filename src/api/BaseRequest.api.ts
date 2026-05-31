@@ -5,7 +5,7 @@ export default class BaseRequestApi {
   public PRODUCTION_MODE: boolean = false;
   public token: string | null = localStorage.getItem('token');
 
-  public async POST<T>(url: string, body: any): Promise<BodyResponse<T>> {
+  public async POST<T>(url: string, body: unknown ): Promise<BodyResponse<T>> {
     const response: Response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(body),
@@ -37,7 +37,7 @@ export default class BaseRequestApi {
     return response.json();
   }
 
-  public async PATCH<T>(url: string, body: any): Promise<BodyResponse<T>> {
+  public async PATCH<T>(url: string, body: unknown): Promise<BodyResponse<T>> {
     const response: Response = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(body),
@@ -49,9 +49,9 @@ export default class BaseRequestApi {
     return response.json();
   }
 
-  public async UPDATE<T>(url: string, body: any): Promise<BodyResponse<T>> {
+  public async UPDATE<T>(url: string, body: unknown): Promise<BodyResponse<T>> {
     const response: Response = await fetch(url, {
-      method: 'UPDATE',
+      method: 'PUT',
       body: JSON.stringify(body),
       headers: {
         'Authorization': `bearer ${this.token}`,

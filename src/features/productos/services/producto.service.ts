@@ -1,4 +1,5 @@
 import ProductoApi from "../../../api/producto.api";
+
 import type { ProductoListado, ModificarProducto, DetallesProducto, CrearProducto} from "../types/producto.type";
 
 const productoApi = new ProductoApi();
