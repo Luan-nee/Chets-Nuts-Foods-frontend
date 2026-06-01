@@ -24,10 +24,10 @@ export const useFetchRoles = (): FetchState => {
       setIsError(false);
       const response = await usuarioService.getRoles();
       // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success") {
+      if (response.status !== "success" || response.data === undefined) {
         throw new Error(response.message);
       }
-
+      
       setData(response.data);
     } catch (error) {
       console.error("Fetch error: ", error);
