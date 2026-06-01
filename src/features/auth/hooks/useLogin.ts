@@ -42,7 +42,8 @@ export const useLogin = (): FetchState => {
           setError("Sin respuesta del servidor");
           return null;
         }
-
+        console.log(response);
+        
         if (response.status === "success"  && response.data !==undefined) {
           setData(response.data);
           // Guarda el token en el localStorage, pero en el futuro se espera guardar

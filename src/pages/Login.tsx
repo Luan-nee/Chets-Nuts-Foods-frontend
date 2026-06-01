@@ -8,6 +8,7 @@ import { InfoSuccess } from '../components/messages/InfoSuccess';
 import { InfoError } from '../components/messages/InfoError';
 import type { UserRole } from '../types/constantes.type';
 import type { Credenciales } from '../types/auth.type';
+import type { ResponseSesion } from '../types/usuario.type';
 
 export default function Login() {
   const { login, isLoading, error } = useLogin();
@@ -34,7 +35,7 @@ export default function Login() {
 
     console.log('Login response data:', response, 'Error:', error);
     if (response && response.status === 'success') {
-      authLogin(response.data as unknown as User);
+      authLogin(response.data as unknown as ResponseSesion);
       InfoSuccess('Autenticación', response.message || 'Login exitoso');
       navigate('/');
     } else if (response && response.status === 'error') {
