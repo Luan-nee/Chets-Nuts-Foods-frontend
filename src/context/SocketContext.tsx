@@ -1,42 +1,37 @@
-import { createContext, useContext, useEffect, useMemo } from 'react';
-import { io, Socket } from 'socket.io-client';
-import { url_base_production } from '../config/url_base';
-import type { ClientToServerEvents, ServerToClientEvents } from '../types/socket.types';
+import { createContext, useContext, useEffect } from "react";
+import { getSocket } from "../socketConexion";
+import { useAuth } from "./AuthContext";
 
-// Tipamos el Socket con nuestras interfaces personalizadas
-type TypedSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
+const SocketContext = createContext(getSocket);
 
-interface SocketContextType {
-  socket: TypedSocket;
-}
+export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
+  const {logout} = useAuth()
+  
+  useEffect(() => {
+    getSocket.connect();
+    getSocket.on("connect_error", (error) => {
+      console.log("conexion de socket no permitido");
+      console.log(error.message);
 
-const SocketContext = createContext<SocketContextType | null>(null);
-
-export default function SocketProvider({ children }: { children: React.ReactNode }) {
-  const socket: TypedSocket = useMemo(() => {
-    return io(url_base_production, {
-      autoConnect: false,
+      if (
+        error.message === "TOKEN_INVALIDO" ||
+        error.message === "TOKEN_EXPIRADO"
+      ) {
+        logout();
+      }
     });
+
+    return () => {
+      getSocket.off("connect_error");
+      getSocket.disconnect();
+    };
   }, []);
 
-  useEffect(() => {
-    socket.connect();
-    return () => {
-      socket.disconnect();
-    };
-  }, [socket]);
-
   return (
-    <SocketContext.Provider value={{ socket }}>
+    <SocketContext.Provider value={getSocket}>
       {children}
     </SocketContext.Provider>
   );
 };
 
-export const useSocket = () => {
-  const context = useContext(SocketContext);
-  if (!context) {
-    throw new Error('useSocket debe ser usado dentro de un SocketProvider');
-  }
-  return context.socket;
-};
+export const useSocket = () => useContext(SocketContext);
