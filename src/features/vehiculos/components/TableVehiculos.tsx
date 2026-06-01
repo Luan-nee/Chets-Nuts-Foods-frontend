@@ -15,6 +15,7 @@ export default function TableVehiculos({
   setShowFormUpdate,
   setSelectVehiculoId,
 }: PropTableVehiculo) {
+  
   const {
     data: vehiculos,
     isLoading,

@@ -9,7 +9,7 @@ interface paramsType{
 
 export interface getTypeConsulta{
     ruta:string,
-    body:string,
+    body?:string,
     params?:paramsType[]
     token?:string
 }
