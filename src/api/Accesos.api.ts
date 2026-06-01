@@ -35,16 +35,8 @@ export default class Accesos extends BaseRequestApi {
   }
 
   /* update */
-  public async update(body: UpdateAcceso): Promise<BodyResponse<string>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
-      method: 'PATCH',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+  public async actualizarAcceso(body: UpdateAcceso): Promise<BodyResponse<string>> {
+    return this.PATCH<string>(`${this.base_url_production}`, body);
   }
 
   /* roles */

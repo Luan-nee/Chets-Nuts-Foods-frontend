@@ -16,7 +16,9 @@ export default class GreApi extends BaseRequestApi {
       }
     });
 
-    return response.json();
+    const response2 = await response.json(); // recomendación de zain
+
+    return response2;
   }
 
   public async getByCodigoSeguimiento<T>(id: number): Promise<BodyResponse<T>> {

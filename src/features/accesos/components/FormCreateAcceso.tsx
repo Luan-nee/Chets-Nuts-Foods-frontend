@@ -12,7 +12,7 @@ import type {
   UserRole as empleadoRol 
 } from "../../../types/constantes.type";
 import type { CreateAcceso } from "../../../types/accesos.type";
-import { useFetchRoles } from "../../accesos/hooks/useFetchRoles";
+import { useFetchRoles } from "../hooks/useFetchRoles";
 import { useCreateAcceso } from "../hooks/useCreateAcceso";
 import Loading from "../../../components/ui/Loading";
 import { InfoSuccess } from "../../../components/messages/InfoSuccess";
