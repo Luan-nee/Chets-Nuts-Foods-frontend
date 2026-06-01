@@ -4,19 +4,16 @@ import BaseRequestApi from './BaseRequest.api';
 
 import type { BodyResponse } from '../types/bodyResponse.type';
 import type { Credenciales } from '../types/usuario.type';
+import { EmitConsultas } from "./EmitConsultas";
 
 export default class LoginApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/auth`;
+  private base_url_production = `${url_base_production}/api/auth/login`;
 
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(`${this.base_url_production}/login`, {
-      method: 'POST',
-      body: JSON.stringify(credenciales),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    return response.json();
+      const response =await EmitConsultas.POST(
+        this.base_url_production,
+        JSON.stringify(credenciales),
+      );
+      return response;
   }
 }
