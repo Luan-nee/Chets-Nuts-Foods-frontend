@@ -9,8 +9,15 @@ import type {
   BodyResponse,
   BodyResponseWithPagination,
 } from "../types/bodyResponse.type";
-import type { ResponseGetAllChoferes } from "../types/vehiculos.type";
-import { EmitConsultas } from "./EmitConsultas";
+import type { 
+  ResponseGetAll, 
+  ResponseGetByID, 
+  ResponseGetAllChoferes, 
+  CreateVehiculo,
+  ResponseCreate,
+  UpdateVehiculo,
+  ResponseUpdate
+} from "../types/vehiculos.type";
 
 // importación de datos mock
 // ...
@@ -19,93 +26,27 @@ export default class Vehiculos extends BaseRequestApi {
   private base_url_production = `${url_base_production}/api/vehiculos`;
 
   /* getAll */
-  public async get<T>(
-    page: number = 1,
-  ): Promise<BodyResponseWithPagination<T>> {
-    const response = await EmitConsultas.GET({
-      ruta: this.base_url_production,
-      token: this.token == null ? undefined : this.token,
-      params:[{ key:"page",valor:page+""}]
-    });
-    return response;
+  public async getAllVehiculos(page: number): Promise<BodyResponseWithPagination<ResponseGetAll[]>> {
+    return this.GET<ResponseGetAll[]>(`${this.base_url_production}?page=${page}`) as Promise<BodyResponseWithPagination<ResponseGetAll[]>>;
   }
 
   /* getByID */
-  public async getVehiculo<T>(id: number): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(
-      `${this.base_url_production}/${id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `bearer ${this.token}`,
-        },
-      },
-    );
-
-    return response.json();
+  public async getById(id: number): Promise<BodyResponse<ResponseGetByID>> {
+    return this.GET<ResponseGetByID>(`${this.base_url_production}/${id}`) as Promise<BodyResponse<ResponseGetByID>>;
   }
 
   /* getAllChoferes */
   public async getAllChoferes(): Promise<BodyResponse<ResponseGetAllChoferes>> {
-    const response: Response = await fetch(
-      `${this.base_url_production}/choferes`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `bearer ${this.token}`,
-        },
-      },
-    );
-
-    return response.json();
+    return this.GET<ResponseGetAllChoferes>(`${this.base_url_production}/choferes`) as Promise<BodyResponse<ResponseGetAllChoferes>>;
   }
 
   /* create */
-  public async registrarVehiculo<T>(body: unknown): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        Authorization: `bearer ${this.token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    return response.json();
+  public async createVehiculo(body: CreateVehiculo): Promise<BodyResponse<ResponseCreate>> {
+    return this.POST<ResponseCreate>(`${this.base_url_production}`, body) as Promise<BodyResponse<ResponseCreate>>;
   }
 
   /* update */
-  public async editarVehiculo<T>(
-    id: number,
-    body: unknown,
-  ): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(
-      `${this.base_url_production}/${id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify(body),
-        headers: {
-          Authorization: `bearer ${this.token}`,
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
-    return response.json();
-  }
-
-  /* inhabilitar */
-  public async inhabilitarVehiculo<T>(id: number): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(
-      `${this.base_url_production}/${id}/deshabilitar`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `bearer ${this.token}`,
-        },
-      },
-    );
-
-    return response.json();
+  public async editarVehiculo(body: UpdateVehiculo): Promise<BodyResponse<ResponseUpdate>> {
+    return this.PATCH<ResponseUpdate>(`${this.base_url_production}`, body) as Promise<BodyResponse<ResponseUpdate>>;
   }
 }

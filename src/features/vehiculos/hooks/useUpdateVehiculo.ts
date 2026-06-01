@@ -1,39 +1,50 @@
 import { useState } from 'react';
-// importación de clases como servicios
-import { VehiculoService } from '../services/vehiculo.service';
-// importación de tipos
-import type { EditarVehiculo } from '../types/vehiculo.type';
+import Vehiculos from '../../../api/Vehiculos.api';
+import type { UpdateVehiculo, ResponseUpdate } from '../../../types/vehiculos.type'
+import type { BodyResponse } from '../../../types/bodyResponse.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
-  fetchData: (idVehiculo: number, bodyVehiculo: EditarVehiculo) => Promise<void>;
+  message: string;
+  execute: (body: UpdateVehiculo) => Promise<BodyResponse<ResponseUpdate>>;
 }
 
 export const useUpdateVehiculo = (): FetchState => {
-  const vehiculoService = new VehiculoService();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false); // Estado para la página actual
+  const vehiculos_api = new Vehiculos();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
-  // Función asíncrona para obtener los datos
-  const fetchData = async (idVehiculo: number, bodyVehiculo: EditarVehiculo) => {
+  const updateVehiculo = async (body: UpdateVehiculo): Promise<BodyResponse<ResponseUpdate>> => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await vehiculoService.editarVehiculo(idVehiculo, bodyVehiculo);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success") {
-        throw new Error(response.message);
+      setMessage("");
+
+      const response = await vehiculos_api.editarVehiculo(body);
+      
+      // Manejo de respuestas basado en el estado
+      if (response.status === 'success') {
+        setMessage('Vehículo actualizado exitosamente');
+        return response;
+      } else {
+        setIsError(true);
+        setMessage('Error al actualizar el vehículo');
+        return response;
       }
-    } catch (error) {
-      console.error("Fetch error: ", error);
+    } catch (error: any) {
       setIsError(true);
+      setMessage('Se produjo un error al actualizar el vehículo en el frontend');
+      return {
+        status: "error",
+        message: "Error al actualizar el vehículo"
+      };
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, fetchData };
+  return { isLoading, isError, message, execute: updateVehiculo };
 };
-

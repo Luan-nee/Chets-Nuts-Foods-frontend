@@ -1,49 +1,65 @@
-import { useState, useEffect } from 'react';
-// importación de clases como servicios
-import { VehiculoService } from '../services/vehiculo.service';
-// importación de tipos
-import type { DetallesVehiculo } from '../types/vehiculo.type';
+import { useState } from "react";
+import Vehiculos from "../../../api/Vehiculos.api";
+import type { ResponseGetByID } from "../../../types/vehiculos.type"
+import type { 
+  BodyResponse
+} from "../../../types/bodyResponse.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: DetallesVehiculo | null;
+  vehiculo: ResponseGetByID | null;
   isLoading: boolean;
   isError: boolean;
-  fetchData: (idVehiculo: number) => Promise<void>;
+  message: string;
+  execute: (idVehiculo: number) => Promise<
+    BodyResponse<ResponseGetByID>
+  >;
 }
 
-export const useFetchVehiculo = (idVehiculoProp: number): FetchState => {
-  const vehiculoService = new VehiculoService();
-  const [idVehiculoState, setIdVehiculoState] = useState<number>(idVehiculoProp);
-  const [data, setData] = useState<DetallesVehiculo | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+export const useFetchVehiculo = (): FetchState => {
+  const vehiculos_api = new Vehiculos();
+  const [vehiculo, setVehiculo] = useState<ResponseGetByID | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
-  // Función asíncrona para obtener los datos
-  const fetchData = async (idVehiculo: number) => {
-    setIdVehiculoState(idVehiculo);
+  const getVehiculo = async (idVehiculo: number): Promise<
+    BodyResponse<ResponseGetByID>
+  > => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await vehiculoService.obtenerDetallesVehiculo(idVehiculo);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success" || response.data === undefined) {
-        throw new Error(response.message);
+      setMessage("");
+
+      const response = await vehiculos_api.getById(idVehiculo);
+
+      // Manejo de respuestas basado en el estado
+      if (response.status === "success") {
+        setMessage("Datos del vehículo obtenidos exitosamente");
+        setVehiculo(response.data ?? null); // Aseguramos que vehículo sea un objeto, incluso si data es undefined
+        return response;
+      } else {
+        setIsError(true);
+        setMessage("Error al obtener los datos del vehículo");
+        return response;
       }
-      setData(response.data);
-    } catch (error) {
-      console.error("Fetch error: ", error);
+    } catch (error: any) {
       setIsError(true);
+      setMessage("Se produjo un error al obtener los datos del vehículo en el frontend");
+      return {
+        status: "error",
+        message: "Error al obtener los datos del vehículo",
+      };
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchData(idVehiculoState);
-    console.log("useFetchVehiculos: datos de vehículos obtenidos");
-  }, [idVehiculoState]);
-
-  return { data, isLoading, isError, fetchData };
+  return {
+    vehiculo,
+    isLoading,
+    isError,
+    message,
+    execute: getVehiculo,
+  };
 };
-
