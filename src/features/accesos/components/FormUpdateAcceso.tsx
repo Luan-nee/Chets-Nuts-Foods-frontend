@@ -18,10 +18,10 @@ import Loading from "../../../components/ui/Loading";
 
 interface FormCreateEmpleadoProps {
   idEmpleado: number;
-  setShowFormCreateEmpleado: (p: boolean) => void;
+  setShowFormUpdateEmpleado: (p: boolean) => void;
 }
 
-export default function FormCreate({ idEmpleado, setShowFormCreateEmpleado }: FormCreateEmpleadoProps ) {
+export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: FormCreateEmpleadoProps ) {
   const {
     roles, 
     isLoading: cargandoRoles, 
@@ -53,7 +53,7 @@ export default function FormCreate({ idEmpleado, setShowFormCreateEmpleado }: Fo
     const response = await updateAcceso(formData);
     if (response && response.status === 'success') {
       InfoSuccess('Éxito', response.message || 'Acceso actualizado exitosamente');
-      setShowFormCreateEmpleado(false);
+      setShowFormUpdateEmpleado(false);
     } else if (response && response.status === 'error') {
       InfoError('Error', response.message || 'Error al actualizar el acceso');
     } else if (messageUpdateAcceso) {
@@ -66,7 +66,7 @@ export default function FormCreate({ idEmpleado, setShowFormCreateEmpleado }: Fo
       {/* Header */}
       <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
         <button
-          onClick={() => setShowFormCreateEmpleado(false)}
+          onClick={() => setShowFormUpdateEmpleado(false)}
           className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
         >
           <ArrowLeft className="w-6 h-6" />
@@ -141,7 +141,7 @@ export default function FormCreate({ idEmpleado, setShowFormCreateEmpleado }: Fo
           <div className="flex flex-row gap-4 w-full justify-end">
             <div className="flex flex-row gap-4">
               <ButtonCancelForm
-                handleCancel={() => setShowFormCreateEmpleado(false)}
+                handleCancel={() => setShowFormUpdateEmpleado(false)}
                 isLoading={cargandoActualizarAcceso}
                 textButton="Cancelar"
                 color="red"

@@ -1,5 +1,8 @@
 // importación de componentes UI
-import { Edit2, Eye } from "lucide-react";
+import { 
+  Edit2, 
+  // Eye 
+} from "lucide-react";
 import Table from "../../../components/ui/Table";
 import Loading from "../../../components/ui/Loading";
 // importación de custom hooks
@@ -7,13 +10,13 @@ import { useFetchAccesos } from "../hooks/useFetchAccesos";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 
 interface PropTableAccesos {
-  setShowDetallesAcceso: (p: boolean) => void;
+  // setShowDetallesAcceso: (p: boolean) => void;
   setSelectAccesoId: (p: number | null) => void;
   setShowFormUpdate: (p: boolean) => void;
 }
 
 export default function TableAccesos({
-  setShowDetallesAcceso,
+  // setShowDetallesAcceso,
   setSelectAccesoId,
   setShowFormUpdate
 }: PropTableAccesos) {
@@ -137,7 +140,7 @@ export default function TableAccesos({
                 >
                   <Edit2 className="w-4 h-4 text-gray-400" />
                 </button>
-                <button
+                {/* <button
                   onClick={() => {
                     setShowDetallesAcceso(true);
                     setSelectAccesoId(acceso.idacceso);
@@ -146,7 +149,7 @@ export default function TableAccesos({
                   aria-label="Ver detalles"
                 >
                   <Eye className="w-4 h-4 text-gray-400" />
-                </button>
+                </button> */}
               </div>
             </td>
           </tr>
