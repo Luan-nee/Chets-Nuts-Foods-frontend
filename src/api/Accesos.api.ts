@@ -14,48 +14,24 @@ import type {
   ResponseRoles
 } from '../types/accesos.type';
 
-// importación de datos mock
-// ...
 
 export default class Accesos extends BaseRequestApi {
   // private base_url_postman = `${url_base_postman}`;
   private base_url_production = `${url_base_production}/api/accesos`;
 
   /* create */
-  public async create(body: CreateAcceso): Promise<BodyResponse<string>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+  public async create(body: CreateAcceso) {
+    return this.POST<string>(`${this.base_url_production}`, body);
   }
   
   /* getAllColaboradores */
   public async getAllColaboradores(page: number): Promise<BodyResponseWithPagination<ResponseGetAllColaboradores[]>> {
-    const response: Response = await fetch(`${this.base_url_production}?page=${page}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+    return this.GET<ResponseGetAllColaboradores[]>(`${this.base_url_production}?page=${page}`) as Promise<BodyResponseWithPagination<ResponseGetAllColaboradores[]>>;
   }
 
   /* getByID */
   public async getByID(id: number): Promise<BodyResponse<ResponseGetByID>> {
-    const response: Response = await fetch(`${this.base_url_production}/${id}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+    return this.GET<ResponseGetByID>(`${this.base_url_production}/${id}`);
   }
 
   /* update */
@@ -73,13 +49,6 @@ export default class Accesos extends BaseRequestApi {
 
   /* roles */
   public async roles(): Promise<BodyResponse<ResponseRoles[]>> {
-    const response: Response = await fetch(`${this.base_url_production}/roles`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+    return this.GET<ResponseRoles[]>(`${this.base_url_production}/roles`)
   }
 }

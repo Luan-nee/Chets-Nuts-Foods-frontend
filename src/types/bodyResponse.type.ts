@@ -13,4 +13,4 @@ export type PaginationInfo = {
 
 export type BodyResponseWithPagination<T> = BodyResponse<T> & {
   pagination: PaginationInfo;
-} | BodyResponse<T>;
+};

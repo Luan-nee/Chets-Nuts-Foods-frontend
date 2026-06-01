@@ -25,7 +25,7 @@ export default function AppRoutes() {
               element={
                 <PrivateRoute>
                   <MainLayout>
-                    <ListaGre />
+                    <Trabajadores />
                   </MainLayout>
                 </PrivateRoute> 
               }

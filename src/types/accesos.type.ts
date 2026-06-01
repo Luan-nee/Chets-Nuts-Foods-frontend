@@ -41,7 +41,6 @@ export type ResponseGetByID = {
   fechaCreacion: Date; // string si viene directo del JSON, Date si lo transformas
 }
 
-
 export type UpdateAcceso = {
   idacceso: number;
   estado?: boolean;
