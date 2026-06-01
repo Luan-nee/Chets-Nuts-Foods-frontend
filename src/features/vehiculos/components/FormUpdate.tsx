@@ -124,7 +124,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
               <InputText 
                 label="Año de fabricación"
-                value={dataVehiculo ? dataVehiculo.anioFabricacion.toString() : ""}
+                value={dataVehiculo ? dataVehiculo.anioFabricacion?.toString() : ""}
                 htmlForm={"anioFabricacion"}
                 onChange={(value) => {
                   setFormData((prev) => ({
