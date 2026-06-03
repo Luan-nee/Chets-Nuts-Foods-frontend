@@ -1,59 +1,82 @@
-import { useState, useEffect } from 'react';
-// importación de clases como servicios
-import { VehiculoService } from '../services/vehiculo.service';
-// importación de tipos
-import type { ListarVehiculo } from '../types/vehiculo.type';
-import type { PaginationInfo } from '../../../types/bodyResponse.type';
+import { useState, useEffect } from "react";
+import Vehiculos from "../../../api/Vehiculos.api";
+import type { ResponseGetAll } from "../../../types/vehiculos.type";
+import type {
+  BodyResponseWithPagination,
+  PaginationInfo,
+} from "../../../types/bodyResponse.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: ListarVehiculo[] | null;
+  vehiculos: ResponseGetAll[];
   isLoading: boolean;
   isError: boolean;
-  fetchData: (pagina: number) => Promise<void>;
+  message: string;
+  execute: (pagina: number) => Promise<
+    BodyResponseWithPagination<ResponseGetAll[]>
+  >;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
 
 export const useFetchVehiculos = (): FetchState => {
-  const vehiculoService = new VehiculoService();
-  const [data, setData] = useState<ListarVehiculo[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const vehiculos_api = new Vehiculos();
+  const [vehiculos, setVehiculos] = useState<ResponseGetAll[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [pagina, setPagina] = useState<number>(1);
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
     total_data: 0,
     total_paginas: 0,
     pagina_actual: 1,
-    datos_por_pagina: 10,
+    datos_por_pagina: 0,
   });
-  const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
-
-  // Función asíncrona para obtener los datos
-  const fetchData = async (nueva_pagina: number) => {
+  const getVehiculos = async (pagina: number): Promise<
+    BodyResponseWithPagination<ResponseGetAll[]>
+  > => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await vehiculoService.listarVehiculos(nueva_pagina);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success" || response.data === undefined ) {
-        throw new Error(response.message);
-      }
+      setMessage("");
 
-      setData(response.data);
-      setInfoPaginacion(response.pagination);
-    } catch (error) {
-      console.error("Fetch error: ", error);
+      const response = await vehiculos_api.getAllVehiculos(pagina);
+
+      // Manejo de respuestas basado en el estado
+      if (response.status === "success") {
+        setMessage("Vehículos obtenidos exitosamente");
+        setVehiculos(response.data ?? []); // Aseguramos que vehiculos sea un array, incluso si data es undefined
+        setInfoPaginacion(response.pagination);
+        return response;
+      } else {
+        setIsError(true);
+        setMessage("Error al obtener los vehículos");
+        return response;
+      }
+    } catch (error: any) {
       setIsError(true);
+      setMessage("Se produjo un error al obtener los vehículos en el frontend");
+      return {
+        status: "error",
+        message: "Error al obtener los vehículos",
+        pagination: infoPaginacion,
+      };
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData(pagina);
-    console.log("useFetchVehiculos: datos de vehículos obtenidos");
+    getVehiculos(pagina);
   }, [pagina]);
 
-  return { data, isLoading, isError, fetchData, setPagina, infoPaginacion };
+  return {
+    vehiculos,
+    isLoading,
+    isError,
+    message,
+    execute: getVehiculos,
+    setPagina,
+    infoPaginacion,
+  };
 };
-
