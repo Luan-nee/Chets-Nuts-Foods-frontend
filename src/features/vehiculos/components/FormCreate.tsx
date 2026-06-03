@@ -28,7 +28,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
     modelo: "",
     anioFabricacion: 0,
     tipoVehiculo: "",
-    capacidadCarga: 0,
+    capacidadCarga: 1,
   });
 
   return (

@@ -2,6 +2,7 @@ export type BodyResponse<T> = {
   status: "success" | "warning" | "error";
   message: string;
   data?: T;
+  statusCode?:number
 };
 
 export type PaginationInfo = {
