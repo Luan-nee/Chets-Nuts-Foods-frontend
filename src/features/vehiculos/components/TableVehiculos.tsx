@@ -8,7 +8,7 @@ import { useFetchVehiculos } from "../hooks/useFetchVehiculos";
 
 interface PropTableVehiculo {
   setShowFormUpdate: (p: boolean) => void;
-  setSelectVehiculoId: (p: number | null) => void;
+  setSelectVehiculoId: (p: number| null) => void;
 }
 
 export default function TableVehiculos({

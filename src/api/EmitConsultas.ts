@@ -1,17 +1,18 @@
+import Swal from "sweetalert2";
 
-type methodoType = "POST" | "GET" | "PATCH" | "DELETE"
+type methodoType = "POST" | "GET" | "PATCH" | "DELETE";
 
-
-interface paramsType{
-    key:string,
-    valor:string
+interface paramsType {
+  key: string;
+  valor: string;
 }
 
-export interface getTypeConsulta{
-    ruta:string,
-    body?:string,
-    params?:paramsType[]
-    token?:string
+export interface getTypeConsulta {
+  ruta: string;
+  body?: string;
+  params?: paramsType[];
+  token?: string;
+  error?: string;
 }
 
 export class EmitConsultas {
@@ -26,18 +27,19 @@ export class EmitConsultas {
     });
 
     const response2 = await response.json();
-
-    return response2;
+    
+    return {...response2,statusCode:response.status};
   }
 
-  static async GET({body,params,ruta,token}:getTypeConsulta) {
+  static async GET({ body, params, ruta, token }: getTypeConsulta) {
     let ruta2 = ruta;
-    if(params !== undefined){
-        ruta2 += "?"
-        params.map(valor=>{
-            return `${valor.key}=${valor.valor}`;
-        }).join("&");
-
+    if (params !== undefined) {
+      ruta2 += "?";
+      params
+        .map((valor) => {
+          return `${valor.key}=${valor.valor}`;
+        })
+        .join("&");
     }
     const response: Response = await fetch(ruta2, {
       method: "GET",
@@ -48,9 +50,17 @@ export class EmitConsultas {
       },
     });
 
+    if (response.status === 401) {
+      Swal.fire({
+        title: "Secion Caducada",
+        text: "La secion ah caducado, por favor vuelva ingresar",
+        icon: "error",
+      });
+    }
+
     const response2 = await response.json();
 
-    return response2;
+    return { ...response2, statusCode: response.status };
   }
 
   static async Consulta(
@@ -70,6 +80,6 @@ export class EmitConsultas {
 
     const response2 = await response.json();
 
-    return response2;
+    return {...response2,statusCode:response.status};
   }
 }

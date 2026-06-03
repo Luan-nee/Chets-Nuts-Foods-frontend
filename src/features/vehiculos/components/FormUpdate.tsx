@@ -21,14 +21,13 @@ interface FormUpdateProps {
 export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdateProps) {
   const { data: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, fetchData: fetchVehiculo } = useFetchVehiculo(idVehiculo);
   const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, fetchData: fetchInhabilitar } = useInhabilitarVehiculo();
-
   const [ formData, setFormData ] = useState<EditarVehiculo>({
     placa: "",
     marca: "",
     modelo: "",
     anioFabricacion: 0,
     tipoVehiculo: "",
-    capacidadCarga: 0
+    capacidadCarga: 0,
   });
 
   useEffect(() => {
@@ -37,9 +36,9 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
       placa: dataVehiculo.placa || "",
       marca: dataVehiculo.marca || "",
       modelo: dataVehiculo.modelo || "",
-      tipoVehiculo: dataVehiculo.tipoVehiculo || "",
+      tipoVehiculo: dataVehiculo.tipoVehiculo || "M3",
       anioFabricacion: dataVehiculo.anioFabricacion || 0,
-      capacidadCarga: dataVehiculo.capacidadCarga || 0
+      capacidadCarga: Number(dataVehiculo.capacidadCarga) / 10 || 0,
     });
   }, [dataVehiculo]);
 
