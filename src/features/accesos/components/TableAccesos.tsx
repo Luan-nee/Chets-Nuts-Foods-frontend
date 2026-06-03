@@ -1,7 +1,7 @@
 // importación de componentes UI
 import { 
   Edit2, 
-  // Eye 
+  Eye 
 } from "lucide-react";
 import Table from "../../../components/ui/Table";
 import Loading from "../../../components/ui/Loading";
@@ -10,13 +10,13 @@ import { useFetchAccesos } from "../hooks/useFetchAccesos";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 
 interface PropTableAccesos {
-  // setShowDetallesAcceso: (p: boolean) => void;
+  setShowDetallesAcceso: (p: boolean) => void;
   setSelectAccesoId: (p: number | null) => void;
   setShowFormUpdate: (p: boolean) => void;
 }
 
 export default function TableAccesos({
-  // setShowDetallesAcceso,
+  setShowDetallesAcceso,
   setSelectAccesoId,
   setShowFormUpdate
 }: PropTableAccesos) {
@@ -31,11 +31,12 @@ export default function TableAccesos({
 
   const tableHeader: string[] = [
     "ID",
-    "Nombres",
-    "Rol",
-    "DNI",
-    "Estado",
-    "Acciones",
+    "correo",
+    "estado",
+    "rol (tipo de acceso)",
+    "Estado de acceso",
+    "dni del usuario",
+    "nombres del usuario",
   ];
 
   if (isLoading) {
@@ -96,35 +97,38 @@ export default function TableAccesos({
               <span className="text-sm text-gray-400">{acceso.idacceso}</span>
             </td>
 
-            {/* Name with Avatar */}
+            {/* Correo */}
             <td className="px-6 py-4">
               <div className="flex items-center gap-3">
-                <div
-                  className={`w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0`}
-                >
-                  <span className="text-sm font-bold text-white">
-                    {acceso.nombres?.charAt(0)}
-                  </span>
-                </div>
                 <span className="font-medium text-sm text-white">
-                  {acceso.nombres}
+                  {acceso.correo}
                 </span>
               </div>
             </td>
 
-            {/* Role */}
+            {/* Estado */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-gray-300">{acceso.estado}</span>
+            </td>
+
+            {/* Rol (tipo de acceso) */}
             <td className="px-6 py-4">
               <span className="text-sm text-gray-300">{acceso.tipos}</span>
             </td>
 
-            {/* DNI */}
+            {/* Estado de acceso */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-gray-300">{acceso.estadoacceso}</span>
+            </td>
+
+            {/* DNI del usuario */}
             <td className="px-6 py-4">
               <span className="text-sm text-gray-300">{acceso.dniuser}</span>
             </td>
 
-            {/* Estado */}
+            {/* Nombres del usuario */}
             <td className="px-6 py-4">
-              <span className="text-sm text-gray-300">{acceso.estadoacceso}</span>
+              <span className="text-sm text-gray-300">{acceso.nombres}</span>
             </td>
 
             {/* Actions */}
@@ -140,7 +144,8 @@ export default function TableAccesos({
                 >
                   <Edit2 className="w-4 h-4 text-gray-400" />
                 </button>
-                {/* <button
+                {
+                <button
                   onClick={() => {
                     setShowDetallesAcceso(true);
                     setSelectAccesoId(acceso.idacceso);
@@ -149,7 +154,8 @@ export default function TableAccesos({
                   aria-label="Ver detalles"
                 >
                   <Eye className="w-4 h-4 text-gray-400" />
-                </button> */}
+                </button>
+                }
               </div>
             </td>
           </tr>

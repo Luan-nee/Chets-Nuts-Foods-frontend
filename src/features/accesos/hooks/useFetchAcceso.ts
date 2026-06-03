@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Accesos from "../../../api/Accesos.api";
 import type { ResponseGetByID } from "../../../types/accesos.type";
 import type {
@@ -16,14 +16,14 @@ interface FetchState {
   >;
 }
 
-export const useFetchAcceso = (): FetchState => {
+export const useFetchAcceso = (idAccesoConsulta: number): FetchState => {
   const accesos_api = new Accesos();
   const [acceso, setAcceso] = useState<ResponseGetByID | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const getAcceso = async (idAcceso: number): Promise<
+  const getAcceso = async (idAcceso: number = idAccesoConsulta): Promise<
     BodyResponse<ResponseGetByID>
   > => {
     try {
@@ -54,6 +54,10 @@ export const useFetchAcceso = (): FetchState => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    getAcceso(idAccesoConsulta);
+  }, [idAccesoConsulta]);
 
   return {
     acceso,

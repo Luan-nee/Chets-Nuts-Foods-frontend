@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Filter, Plus, Search } from "lucide-react";
-import FormCreate from "../features/empleados/components/FormCreate";
-import TableEmpleados from "../features/empleados/components/TableEmpleados";
-import DetallesEmpleado from "../features/empleados/components/DetallesEmpleado";
-import FormUpdateEmpleado from "../features/empleados/components/FormUpdateEmpleado";
+import FormCreate from "../features/accesos/components/FormCreateAcceso";
+import TableAccesos from "../features/accesos/components/TableAccesos";
+import DetallesAcceso from "../features/accesos/components/DetallesAcceso";
+import FormUpdate from "../features/accesos/components/FormUpdateAcceso";
 
 export default function Trabajadores () {
-  const [showDetallesEmpleado, setShowDetallesEmpleado] = useState<boolean>(false);
+  const [showDetallesAcceso, setShowDetallesAcceso] = useState<boolean>(false);
   const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
-  const [selectEmpleadoId, setSelectEmpleadoId] = useState<number | null>(null);
+  const [selectAccesoId, setSelectAccesoId] = useState<number | null>(null);
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -58,21 +58,25 @@ export default function Trabajadores () {
       </div>
 
       {/* Table */}
-      <TableEmpleados setShowDetallesEmpleado={setShowDetallesEmpleado} setShowFormUpdate={setShowFormUpdate} setSelectEmpleadoId={setSelectEmpleadoId} />
+      <TableAccesos 
+        setShowDetallesAcceso={setShowDetallesAcceso}
+        setShowFormUpdate={setShowFormUpdate} 
+        setSelectAccesoId={setSelectAccesoId} 
+        />
 
-      { showDetallesEmpleado && 
+      { showDetallesAcceso && 
         <div className="absolute inset-0 z-50 bg-gray-950">
-          <DetallesEmpleado 
-            showFormUpdateEmpleado={setShowFormUpdate}
-            showDetallesEmpleado={setShowDetallesEmpleado} 
-            idEmpleado={selectEmpleadoId!} 
+          <DetallesAcceso 
+            showFormUpdateAcceso={setShowFormUpdate}
+            showDetallesAcceso={setShowDetallesAcceso} 
+            idAcceso={selectAccesoId!} 
           />
         </div>
       }
       { showFormUpdate && 
-        <FormUpdateEmpleado 
+        <FormUpdate 
           setShowFormUpdateEmpleado={setShowFormUpdate} 
-          idEmpleado={selectEmpleadoId!} 
+          idEmpleado={selectAccesoId!} 
         />
       }
       { showFormCreate && 
