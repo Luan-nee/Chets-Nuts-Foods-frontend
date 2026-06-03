@@ -5,8 +5,7 @@ import {
   modelosVehiculos,
   tiposVehiculos,
 } from "../../../config/constantes.ts";
-import type { marca, modelo, tipoVehiculo } from "../types/vehiculo.type.ts";
-import type { RegistrarVehiculo } from "../types/vehiculo.type";
+import type { CreateVehiculo } from "../../../types/vehiculos.type";
 import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText";
 import InputNumber from "../../../components/ui/InputNumber";
@@ -20,15 +19,15 @@ interface FormCreateProps {
 }
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
-  const { isLoading, isError, fetchData: createVehiculo } = useCreateVehiculo();
+  const { isLoading, isError, execute: registrarVehiculo } = useCreateVehiculo();
 
-  const [formData, setFormData] = useState<RegistrarVehiculo>({
-    placa: "",
+  const [formData, setFormData] = useState<CreateVehiculo>({
+    anio: "",
+    capacidadCarga: 0,
     marca: "",
     modelo: "",
-    anioFabricacion: 0,
-    tipoVehiculo: "",
-    capacidadCarga: 0,
+    placa: "",
+    tipoVehiculo: ""
   });
 
   return (
@@ -67,7 +66,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
               onSelect={(value) => {
                 setFormData((prev) => ({
                   ...prev,
-                  marca: value as marca,
+                  marca: value as string,
                 }));
               }}
             />
@@ -92,18 +91,18 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
               onSelect={(value) => {
                 setFormData((prev) => ({
                   ...prev,
-                  modelo: value as modelo,
+                  modelo: value as string,
                 }));
               }}
             />
             <InputText
               label="Año de fabricación"
-              value={formData.anioFabricacion.toString()}
-              htmlForm={"anioFabricacion"}
+              value={formData.anio}
+              htmlForm={"anio"}
               onChange={(value) =>
                 setFormData((prev) => ({
                   ...prev,
-                  anioFabricacion: parseInt(value) || 0,
+                  anio: value,
                 }))
               }
             />
@@ -117,7 +116,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
               onSelect={(value) => {
                 setFormData((prev) => ({
                   ...prev,
-                  tipoVehiculo: value as tipoVehiculo,
+                  tipoVehiculo: value as string,
                 }));
               }}
             />
@@ -146,13 +145,13 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           />
           <ButtonSubmitForm
             handleSubmit={() => {
-              createVehiculo(formData);
+              registrarVehiculo(formData);
               console.log("Datos a enviar:", formData);
             }}
             isLoading={isLoading}
             isError={isError}
             textButton="Guardar"
-            textError="Error al crear el vehiculo"
+            textError="Error al registra nuevo vehiculo"
           />
         </div>
       </section>

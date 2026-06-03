@@ -25,7 +25,7 @@ export const useFetchVehiculos = (): FetchState => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const [pagina, setPagina] = useState<number>(1);
+  const [pagina, setPagina] = useState<number>(1); // La página actual
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
     total_data: 0,
     total_paginas: 0,
