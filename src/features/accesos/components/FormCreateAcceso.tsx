@@ -47,8 +47,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     sexo: 'MASCULINO',
     numero: '',
     tipo: 'NATURAL',
-    numeroLicenciaConducir: '',
-    ruc: '',
+    numeroLicenciaConducir: ''
   });
 
   // Generar contraseña automáticamente
