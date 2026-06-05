@@ -2,9 +2,9 @@
 import { Edit2, Truck } from "lucide-react";
 import Table from "../../../components/ui/Table";
 import Loading from "../../../components/ui/Loading";
-import ButtonsPagination from '../../../components/ui/ButtonsPagination';
 // importación de custom hooks
 import { useFetchVehiculos } from "../hooks/useFetchVehiculos";
+import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 
 interface PropTableVehiculo {
   setShowFormUpdate: (p: boolean) => void;
@@ -17,12 +17,12 @@ export default function TableVehiculos({
 }: PropTableVehiculo) {
   
   const {
-    data: vehiculos,
+    vehiculos,
     isLoading,
     isError,
-    fetchData: recargarVehiculos,
-    infoPaginacion,
+    execute: recargarVehiculos,
     setPagina,
+    infoPaginacion,
   } = useFetchVehiculos();
 
   const tableHeader: string[] = [
@@ -31,6 +31,7 @@ export default function TableVehiculos({
     "Año",
     "Tipo",
     "Capacidad (KG)",
+    "estado",
     "Acciones",
   ];
 
@@ -65,7 +66,7 @@ export default function TableVehiculos({
   return (
     <div className="flex-1 overflow-auto px-8 py-6">
       <div className="p-4 flex justify-end gap-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => recargarVehiculos(infoPaginacion.pagina_actual)}>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setPagina(infoPaginacion.pagina_actual)}>
           Recargar
         </button>
       </div>
@@ -94,17 +95,17 @@ export default function TableVehiculos({
               </div>
             </td>
 
-            {/* Brand/Model */}
+            {/* Marca/Modelo */}
             <td className="px-6 py-4">
               <span className="text-sm text-white">{vehiculo.marca} / {vehiculo.modelo}</span>
             </td>
 
-            {/* Year */}
+            {/* Año */}
             <td className="px-6 py-4">
               <span className="text-sm text-gray-300">{vehiculo.anio}</span>
             </td>
 
-            {/* Type */}
+            {/* Tipo de vehiculo */}
             <td className="px-6 py-4">
               <span
                 className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border bg-blue-500/20 text-blue-400 border-blue-500/30`}
@@ -113,10 +114,17 @@ export default function TableVehiculos({
               </span>
             </td>
 
-            {/* Capacity */}
+            {/* Capacidad de carga */}
             <td className="px-6 py-4">
               <span className="text-sm text-white font-medium">
                 {vehiculo.capacidadCarga}
+              </span>
+            </td>
+
+            {/* Estado del vehiculo */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-white font-medium">
+                {vehiculo.estadovehiculo}
               </span>
             </td>
 
