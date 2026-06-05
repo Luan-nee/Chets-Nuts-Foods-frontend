@@ -38,7 +38,7 @@ export type ResponseGetByID = {
   numero: string | null; // Se mantiene string por si incluye prefijos o ceros a la izquierda
   edad: number;
   contra: string;
-  fechaCreacion: Date; // string si viene directo del JSON, Date si lo transformas
+  fechaCreacion: string; // string si viene directo del JSON, Date si lo transformas
 }
 
 export type UpdateAcceso = {
