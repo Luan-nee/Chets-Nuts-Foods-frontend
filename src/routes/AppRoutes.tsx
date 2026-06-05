@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "../context/AuthContext";
-import ListaGre from "../pages/ListaGre";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import MainLayout from "../components/layouts/MainLayout";
@@ -66,16 +65,6 @@ export default function AppRoutes() {
               <PrivateRoute>
                 <MainLayout>
                   <Configuraciones />
-                </MainLayout>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/guias"
-            element={
-              <PrivateRoute>
-                <MainLayout>
-                  <ListaGre />
                 </MainLayout>
               </PrivateRoute>
             }
