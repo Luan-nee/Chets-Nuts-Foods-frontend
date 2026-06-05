@@ -2,7 +2,9 @@ export type UserRole =
   | "ADMIN"
   | "CHOFER"
   | "CLIENTE"
-  | "COLABORADOR";
+  | "COLABORADOR"
+  | "SIN ROL"
+  ;
 
 export type UserGender = "MASCULINO" | "FEMENINO";
 
