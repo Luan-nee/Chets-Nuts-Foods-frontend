@@ -1,4 +1,4 @@
-import type { marca, modelo, tipoVehiculo } from "../features/vehiculos/types/vehiculo.type";
+import type { marca, modelo, tipoVehiculo } from "../types/vehiculos.type";
 
 export const marcasVehiculos: { label: string; value: marca }[] = [
   { label: "Toyota", value: "toyota" }, // 1

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Vehiculos from "../../../api/Vehiculos.api";
 import type { ResponseGetByID } from "../../../types/vehiculos.type"
 import type { 
@@ -16,7 +16,7 @@ interface FetchState {
   >;
 }
 
-export const useFetchVehiculo = (): FetchState => {
+export const useFetchVehiculo = (idVehiculo: number): FetchState => {
   const vehiculos_api = new Vehiculos();
   const [vehiculo, setVehiculo] = useState<ResponseGetByID | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,6 +54,10 @@ export const useFetchVehiculo = (): FetchState => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    getVehiculo(idVehiculo);
+  }, [idVehiculo]);
 
   return {
     vehiculo,

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Info } from "lucide-react";
-import { marcasVehiculos, modelosVehiculos, tiposVehiculos } from "../../../config/constantes.ts";
-import type { EditarVehiculo } from "../types/vehiculo.type";
-import type { marca, modelo, tipoVehiculo } from "../types/vehiculo.type.ts";
+import { marcasVehiculos, modelosVehiculos } from "../../../config/constantes.ts";
+import type { UpdateVehiculo } from "../../../types/vehiculos.type";
+import type { marca, modelo } from "../../../types/vehiculos.type";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
@@ -11,7 +11,6 @@ import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText.tsx";
 import InputNumber from "../../../components/ui/InputNumber.tsx";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
-import { useInhabilitarVehiculo } from "../hooks/useInhabilitarVehiculo";
 
 interface FormUpdateProps {
   showFormUpdate: (p: boolean) => void;
@@ -19,26 +18,23 @@ interface FormUpdateProps {
 }
 
 export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdateProps) {
-  const { data: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, fetchData: fetchVehiculo } = useFetchVehiculo(idVehiculo);
-  const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, fetchData: fetchInhabilitar } = useInhabilitarVehiculo();
-  const [ formData, setFormData ] = useState<EditarVehiculo>({
-    placa: "",
+  const { vehiculo: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, execute: fetchVehiculo } = useFetchVehiculo(idVehiculo);
+  const [ formData, setFormData ] = useState<UpdateVehiculo>({
+    idVehiculo: idVehiculo,
+    anio: "",
+    capacidadCarga: 0,
     marca: "",
     modelo: "",
-    anioFabricacion: 0,
-    tipoVehiculo: "",
-    capacidadCarga: 0,
   });
 
   useEffect(() => {
     if (!dataVehiculo) return;
     setFormData({
-      placa: dataVehiculo.placa || "",
+      idVehiculo: idVehiculo,
+      anio: dataVehiculo.anio || "",
+      capacidadCarga: Number(dataVehiculo.capacidadCarga) / 10 || 0,
       marca: dataVehiculo.marca || "",
       modelo: dataVehiculo.modelo || "",
-      tipoVehiculo: dataVehiculo.tipoVehiculo || "M3",
-      anioFabricacion: dataVehiculo.anioFabricacion || 0,
-      capacidadCarga: Number(dataVehiculo.capacidadCarga) / 10 || 0,
     });
   }, [dataVehiculo]);
 
@@ -93,18 +89,6 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   dataVehiculo?.marca
                 }
               />
-
-              <InputText 
-                label="Placa"
-                value={dataVehiculo ? dataVehiculo.placa : ""}
-                htmlForm={"placa"}
-                onChange={(value) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    placa: value
-                  }))
-                }}
-              />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -123,36 +107,23 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
               <InputText 
                 label="Año de fabricación"
-                value={dataVehiculo ? dataVehiculo.anioFabricacion?.toString() : ""}
+                value={dataVehiculo ? dataVehiculo.anio?.toString() : ""}
                 htmlForm={"anioFabricacion"}
                 onChange={(value) => {
                   setFormData((prev) => ({
                     ...prev,
-                    anioFabricacion: parseInt(value) || 0
+                    anio: value
                   }))
                 }}
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <InputSelectTest
-                label="Tipo de vehículo"
-                options={tiposVehiculos}
-                placeholder="Selecciona un tipo de vehículo"
-                onSelect={(value) => setFormData((prev) => ({ 
-                  ...prev, 
-                  tipoVehiculo: value as tipoVehiculo 
-                }))}
-                valueSelected={
-                  dataVehiculo?.tipoVehiculo
-                }
-              />
-
+            <div className="grid grid-cols-1 gap-4">
               <InputNumber
                 label="Capacidad máxima de carga (toneladas)"
                 placeholder="0.00"
                 simbol="TN"
-                defaultValue={dataVehiculo?.capacidadCarga as number || 0}
+                defaultValue={dataVehiculo ? Number(dataVehiculo.capacidadCarga) : 0}
                 onChange={(value) => {
                   setFormData((prev) => ({
                     ...prev,
@@ -165,30 +136,17 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
           {/* Footer */}
           <div className="flex justify-between mt-6 gap-4">
-            <div>
-              <ButtonSubmitForm
-                color={"green"}
-                handleSubmit={() => {
-                  fetchInhabilitar(idVehiculo);
-                  console.log("Inhabilitar vehículo con ID:", idVehiculo);
-                }}
-                isLoading={isLoadingInhabilitar}
-                isError={isErrorInhabilitar || isErrorVehiculo}
-                textButton="Inhabilitar vehículo"
-                textError="Error al inhabilitar vehículo"
-              />
-            </div>
             <div className="flex gap-2">
               <ButtonCancelForm
                 handleCancel={() => showFormUpdate(false)}
-                isLoading={isLoadingVehiculo || isLoadingInhabilitar}
+                isLoading={isLoadingVehiculo}
                 textButton="Cancelar"
               />
               <ButtonSubmitForm
                 handleSubmit={() => {
                   console.log("Datos a enviar:", formData);
                 }}
-                isLoading={isLoadingVehiculo || isLoadingInhabilitar}
+                isLoading={isLoadingVehiculo}
                 isError={isErrorVehiculo}
                 textButton="Guardar"
                 textError="Error al actualizar el vehiculo"

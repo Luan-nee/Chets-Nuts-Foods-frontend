@@ -1,5 +1,10 @@
 import type { TipoVehiculo, EstadoVehiculo, UserRole } from './constantes.type';
 
+export type marca = "toyota" | "honda" | "ford" | "";
+export type modelo = "corolla" | "civic" | "mustang" | "";
+export type tipoVehiculo = "M3" | "M4" | "M5" | "";
+
+
 export type ResponseGetAll = {
   idvehempresa: number;
   placa: string;
@@ -55,11 +60,11 @@ export type ResponseCreate = {
 }
 
 export type UpdateVehiculo = {
-  idVehiculo: number,
-  anio: string,
+  idVehiculo: number, //
+  anio: string, //
   capacidadCarga: number, // kilogramos
-  marca: string,
-  modelo: string
+  marca: string, //
+  modelo: string //
 }
 
 export type ResponseUpdate = {
