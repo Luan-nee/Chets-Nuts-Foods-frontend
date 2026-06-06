@@ -8,7 +8,8 @@ interface PrivateRouteProps {
 export default function PrivateRoute({ children }: PrivateRouteProps) {
 	const { isAuthenticated } = useAuth();
 
-	if (!isAuthenticated && !localStorage.getItem('user')) {
+	if (!isAuthenticated) {
+		console.log("usuario no autentificado");
 		return <Navigate to="/login" replace />;
 	}
 

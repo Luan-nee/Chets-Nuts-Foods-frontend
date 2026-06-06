@@ -1,61 +1,65 @@
 import { createContext, useContext, useState } from 'react';
 import type { UserRole } from '../types/constantes.type';
 
-interface AuthContextType {
+type AuthState = {
   user: string | null;
   token: string | null;
   rol: UserRole | null;
+}
+
+interface AuthContextType {
+  auth: AuthState;
   isAuthenticated: boolean;
   logout: () => void;
+  guardarInformacionLogin: (authData: AuthState) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<string | null>(()=>{
-    if (localStorage.getItem("user")) {
-      return localStorage.getItem("user")
-    } else {
-      console.log("No se encontró usuario en localStorage");
-      return null;
-    }
-  });
+  const [auth, setAuth] = useState<AuthState>(() => ({
+    user: localStorage.getItem('user'),
+    token: localStorage.getItem('token'),
+    rol: (localStorage.getItem('rol') as UserRole | null) ?? null
+  }));
 
-  const [token, setToken] = useState<string | null>(()=>{
-    if (localStorage.getItem("token")) {
-      return localStorage.getItem("token")
-    } else {
-      console.log("No se encontró token en localStorage");
-      return null;
-    }
-  });
+  const guardarInformacionLogin = ({ user, token, rol }: AuthState) => {
+    setAuth({ user, token, rol });
 
-  const [rol, setRol] = useState<UserRole | null>(()=>{
-    if (localStorage.getItem("rol")) {
-      return localStorage.getItem("rol") as UserRole;
+    if (user) {
+      localStorage.setItem('user', user);
     } else {
-      console.log("No se encontró rol en localStorage");
-      return "SIN ROL" as UserRole;
+      localStorage.removeItem('user');
     }
-  });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(()=>{
-    const token = localStorage.getItem("token");
-    return token ? true : false; 
-  });
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+
+    if (rol) {
+      localStorage.setItem('rol', rol);
+    } else {  
+      localStorage.removeItem('rol');
+    }
+  };
+
+  const isAuthenticated = Boolean(auth.token);
 
   const logout = () => {
-    setUser(null);
-    setToken(null);
-    setRol(null);
-    setIsAuthenticated(false);
+    setAuth({
+      user: null,
+      token: null,
+      rol: null
+    });
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, rol, isAuthenticated, logout }}>
+    <AuthContext.Provider value={{ auth, isAuthenticated, logout, guardarInformacionLogin }}>
       {children}
     </AuthContext.Provider>
   );

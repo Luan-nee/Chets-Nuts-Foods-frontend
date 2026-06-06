@@ -10,7 +10,7 @@ import Configuraciones from "../pages/Configuraciones";
 import Productos from "../pages/Productos";
 import Seguimiento from "../pages/Seguimiento";
 import Test from "../pages/Test";
-import { SocketProvider } from "../context/SocketContext";
+// import { SocketProvider } from "../context/SocketContext";
 
 export default function AppRoutes() {
   return (
@@ -23,11 +23,9 @@ export default function AppRoutes() {
             path="/"
             element={
               <PrivateRoute>
-                <SocketProvider>
-                  <MainLayout>
-                    <Trabajadores />
-                  </MainLayout>
-                </SocketProvider>
+                <MainLayout>
+                  <Trabajadores />
+                </MainLayout>
               </PrivateRoute>
             }
           />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Auth from "../../../api/Auth.api";
+import { useAuth } from "../../../context/AuthContext";
 import type { AuthResponse, Credenciales } from "../../../types/auth.type";
 import type { BodyResponse } from "../../../types/bodyResponse.type";
 
@@ -15,6 +16,7 @@ export const useLogin = (): FetchState => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+  const { guardarInformacionLogin } = useAuth();
 
   const login = async (body: Credenciales,): Promise<BodyResponse<AuthResponse>> => {
     try {
@@ -25,9 +27,11 @@ export const useLogin = (): FetchState => {
 
         if (response.status === 'success') {
           setMessage('Login exitoso');
-          localStorage.setItem("token", response.data?.tokenZ || "");
-          localStorage.setItem("user", response.data?.nombreUser || "");
-          localStorage.setItem("rol", response.data?.rol || "");
+          guardarInformacionLogin({
+            user: response.data?.nombreUser || null,
+            token: response.data?.tokenZ || null,
+            rol: response.data?.rol || null
+          });
           return response;
         } else {
           setIsError(true);

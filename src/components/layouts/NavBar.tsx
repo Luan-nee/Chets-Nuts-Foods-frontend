@@ -23,7 +23,7 @@ interface MenuItem {
 }
 
 export default function NavBarAdministrador() {
-  const { user, rol, logout } = useAuth();
+  const { auth, logout } = useAuth();
   const [active, setActive] = useState<LabelType>("/guias");
 
   // la propiedad "useRol" indica que roles de usuario pueden ver ese item del menu, por ejemplo, el item "Productos" solo lo pueden ver los usuarios con rol "ADMIN"
@@ -54,7 +54,7 @@ export default function NavBarAdministrador() {
 
       <nav className="p-3 space-y-1 flex-1">
         {menuItems.map((item) => (
-          rol && item.userRol.includes(rol) && (
+          auth.rol && item.userRol.includes(auth.rol) && (
             <Link key={item.label} to={item.anchor}>
               <button
                 onClick={() => setActive(item.anchor)}
@@ -73,7 +73,7 @@ export default function NavBarAdministrador() {
       </nav>
 
       <div className="p-3 border-t border-gray-800 space-y-2">
-        <UserInfo nombreUser={user || "Anónimo"} rol={rol || "Sin asignar"} />
+        <UserInfo nombreUser={auth.user || "Anónimo"} rol={auth.rol || "Sin asignar"} />
         <button
           onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-red-900 hover:text-red-200 transition-colors"

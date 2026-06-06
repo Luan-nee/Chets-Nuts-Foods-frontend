@@ -6,7 +6,7 @@ interface Permisos {
 }
 
 export function useAutorizacion (): Permisos {
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
   const PERMISOS: Record<string, UserRole[]> = {
     // GUIA DE REMISIÓN
@@ -21,9 +21,9 @@ export function useAutorizacion (): Permisos {
   };
 
   const tienePermiso = (permiso: string): boolean => {
-    if (!user) return false;
+    if (!auth.user) return false;
     if (!PERMISOS[permiso]) return false;
-    return PERMISOS[permiso].includes(user.rol);
+    return PERMISOS[permiso].includes(auth.rol || "SIN ROL");
   }
 
   return { tienePermiso };
