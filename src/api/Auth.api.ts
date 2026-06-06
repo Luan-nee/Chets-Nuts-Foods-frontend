@@ -16,14 +16,6 @@ export default class Auth extends BaseRequestApi {
 
   /* login */
   public async login(credenciales: Credenciales): Promise<BodyResponse<AuthResponse>> {
-    const response: Response = await fetch(`${this.base_url_production}/login`, {
-      method: 'POST',
-      body: JSON.stringify(credenciales),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    return response.json();
+    return this.POST<AuthResponse>(`${this.base_url_production}/login`, credenciales);
   }
 }

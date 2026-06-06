@@ -1,24 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Truck } from 'lucide-react';
+import ButtonSubmitForm from '../components/ui/ButtonSubmitForm';
 import { useLogin } from '../features/auth/hooks/useLogin';
-import { Truck, LogIn } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import SwitchTest from '../components/ui/SwitchTest';
 import { InfoSuccess } from '../components/messages/InfoSuccess';
 import { InfoError } from '../components/messages/InfoError';
-import type { UserRole } from '../types/constantes.type';
 import type { Credenciales } from '../types/auth.type';
-import type { ResponseSesion } from '../types/usuario.type';
 
 export default function Login() {
-  const { login, isLoading, error } = useLogin();
-  const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { execute: login, isLoading, isError, message } = useLogin();
   const [usuario, setUsuario] = useState<string>('');
   const [contrasenia, setContrasenia] = useState<string>('');
-  const [verAccesoRapido, setVerAccesoRapido] = useState<boolean>(false);
-  const [rolSeleccionado, setRolSeleccionado] = useState<UserRole>('ADMIN');
-
   
   const handleLogin = async () => {
     if (!usuario.trim() || !contrasenia.trim()) {
@@ -31,17 +24,16 @@ export default function Login() {
       password: contrasenia.trim()
     };
 
-    const response = await login(credenciales, rolSeleccionado, verAccesoRapido);
+    const response = await login(credenciales);
 
-    console.log('Login response data:', response, 'Error:', error);
+    console.log('Login response data:', response, 'message:', message);
     if (response && response.status === 'success') {
-      authLogin(response.data as unknown as ResponseSesion);
       InfoSuccess('Autenticación', response.message || 'Login exitoso');
       navigate('/');
     } else if (response && response.status === 'error') {
       InfoError('Error de autenticación', response.message || 'Usuario o contraseña incorrectas');
     } else {
-      InfoError('Error', error || 'Las credenciales son incorrectas');
+      InfoError('Error', message || 'Las credenciales son incorrectas');
     }
   };
 
@@ -83,63 +75,16 @@ export default function Login() {
                 placeholder="Pérez"
               />
             </div>
-            <div>
-              <label className="flex items-center gap-2 text-sm text-gray-300">
-                <SwitchTest 
-                  estado={verAccesoRapido}
-                  onClick={() => setVerAccesoRapido(!verAccesoRapido)}
-                />
-                Activar acceso rápido.
-              </label>
+            <div className="flex">
+              <ButtonSubmitForm
+                handleSubmit={() => handleLogin()}
+                isLoading={isLoading}
+                isError={isError}
+                textButton="Iniciar Sesión"
+                textError="Error al iniciar sesión"
+                color="blue"
+              />
             </div>
-
-            { verAccesoRapido && (
-              <div className="grid grid-cols-3 gap-4">
-                {/* AGREGAR 3 BOTONES QUE DIGA "ADMIN", "COLABORADOR" Y "CHOFER" */}
-                <button 
-                  type={'button'}
-                  onClick={() => setRolSeleccionado('ADMIN')}
-                  className={`mr-2 mb-2 px-4 py-2
-                  ${rolSeleccionado === 'ADMIN' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
-                  rounded-lg transition-colors text-white`}>
-                  Admin
-                </button>
-                <button 
-                  type={'button'}
-                  onClick={() => setRolSeleccionado('COLABORADOR')}
-                  className={`mr-2 mb-2 px-4 py-2
-                  ${rolSeleccionado === 'COLABORADOR' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
-                  rounded-lg transition-colors text-white`}>
-                  Colaborador
-                </button>
-                <button 
-                  type={'button'}
-                  onClick={() => setRolSeleccionado('CHOFER')}
-                  className={`mr-2 mb-2 px-4 py-2
-                  ${rolSeleccionado === 'CHOFER' ? 'bg-blue-700 hover:bg-blue-500' : 'bg-gray-700 hover:bg-gray-500'} 
-                  rounded-lg transition-colors text-white`}>
-                  Chofer
-                </button>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold rounded-lg transition flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-gray-300 border-t-white rounded-full animate-spin" />
-                  Cargando...
-                </>
-              ) : (
-                <>
-                  <LogIn className="w-5 h-5" />
-                  Iniciar Sesión
-                </>
-              )}
-            </button>
           </form>
         </div>
       </div>

@@ -1,50 +1,61 @@
 import { createContext, useContext, useState } from 'react';
-import type { AuthResponse } from '../types/auth.type'
+import type { UserRole } from '../types/constantes.type';
 
 interface AuthContextType {
-  user: AuthResponse | null;
+  user: string | null;
+  token: string | null;
+  rol: UserRole | null;
   isAuthenticated: boolean;
-  login: (userData: AuthResponse) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthResponse | null>(()=>{
-    const stored = localStorage.getItem("user");
-    if(!stored)return null;
-
-    try {
-      const parsed: AuthResponse = JSON.parse(stored);
-      return parsed;
-    } catch (error) {
-      console.error("No se pudo leer usuario de localStorage", error);
-      localStorage.removeItem("user");
+  const [user, setUser] = useState<string | null>(()=>{
+    if (localStorage.getItem("user")) {
+      return localStorage.getItem("user")
+    } else {
+      console.log("No se encontró usuario en localStorage");
       return null;
     }
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(()=>{
-    const stored = localStorage.getItem("user");
-
-    return stored? true:false; 
+  const [token, setToken] = useState<string | null>(()=>{
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token")
+    } else {
+      console.log("No se encontró token en localStorage");
+      return null;
+    }
   });
 
-  const login = (userData: AuthResponse) => {
-    setUser(userData);
-    setIsAuthenticated(true);
-    localStorage.setItem('user', JSON.stringify(userData));
-  };
+  const [rol, setRol] = useState<UserRole | null>(()=>{
+    if (localStorage.getItem("rol")) {
+      return localStorage.getItem("rol") as UserRole;
+    } else {
+      console.log("No se encontró rol en localStorage");
+      return "SIN ROL" as UserRole;
+    }
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(()=>{
+    const token = localStorage.getItem("token");
+    return token ? true : false; 
+  });
 
   const logout = () => {
     setUser(null);
+    setToken(null);
+    setRol(null);
     setIsAuthenticated(false);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, token, rol, isAuthenticated, logout }}>
       {children}
     </AuthContext.Provider>
   );

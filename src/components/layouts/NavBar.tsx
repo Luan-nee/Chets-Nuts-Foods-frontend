@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Truck, Package, Users, LogOut, Settings, MapPin } from "lucide-react";
-import type { UserRole } from "../../types/usuario.type";
+import type { UserRole } from "../../types/constantes.type";
 import { useAuth } from "../../context/AuthContext";
 import UserInfo from "../ui/UserInfo";
 
@@ -23,7 +23,7 @@ interface MenuItem {
 }
 
 export default function NavBarAdministrador() {
-  const { user, logout } = useAuth();
+  const { user, rol, logout } = useAuth();
   const [active, setActive] = useState<LabelType>("/guias");
 
   // la propiedad "useRol" indica que roles de usuario pueden ver ese item del menu, por ejemplo, el item "Productos" solo lo pueden ver los usuarios con rol "ADMIN"
@@ -54,26 +54,26 @@ export default function NavBarAdministrador() {
 
       <nav className="p-3 space-y-1 flex-1">
         {menuItems.map((item) => (
-          user?.rol && item.userRol.includes(user.rol) && (
-          <Link key={item.label} to={item.anchor}>
-            <button
-              onClick={() => setActive(item.anchor)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                active === item.anchor
-                  ? "bg-blue-600 text-white"
-                  : "text-gray-400 hover:bg-gray-800 hover:text-white"
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
-            </button>
-          </Link>
+          rol && item.userRol.includes(rol) && (
+            <Link key={item.label} to={item.anchor}>
+              <button
+                onClick={() => setActive(item.anchor)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  active === item.anchor
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                }`}
+              >
+                <item.icon className="w-5 h-5" />
+                <span>{item.label}</span>
+              </button>
+            </Link>
           )
         ))}
       </nav>
 
       <div className="p-3 border-t border-gray-800 space-y-2">
-        <UserInfo nombreUser={user?.nombreUser || ""} rol={user?.rol || ""} />
+        <UserInfo nombreUser={user || "Anónimo"} rol={rol || "Sin asignar"} />
         <button
           onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:bg-red-900 hover:text-red-200 transition-colors"
