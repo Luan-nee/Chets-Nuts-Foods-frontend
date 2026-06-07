@@ -62,7 +62,7 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
         tipos: acceso.tipos || 'SIN ROL'
       });
     }
-  }, [idEmpleado]);
+  }, [acceso, idEmpleado]);
 
   const handleSubmit = async () => {
     // Validar campos requeridos
@@ -107,7 +107,7 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
         isError={errorAcceso}
         textError={messageAcceso || "Error al cargar los datos del acceso"}
         textButtonError="Reintentar"
-        fetchData={() =>recargarAcceso}
+        fetchData={() => recargarAcceso(idEmpleado)}
       >
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
           <div className="space-y-6">
@@ -162,9 +162,8 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
               <div>
                 <label className="block text-sm font-medium mb-1">Estado del acceso</label>
                 <Switch
-                  inputName="estado"
-                  activo={formData.estado ?? false}
-                  handleInputChange={(field, value) => setFormData(prev => ({ ...prev, [field]: value }))}
+                  estado={formData.estado ?? false}
+                  handleInputChange={(value) => setFormData(prev => ({ ...prev, estado: value }))}
                 />
               </div>
             </div>
