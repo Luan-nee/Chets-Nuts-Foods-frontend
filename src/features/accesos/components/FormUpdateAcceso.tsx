@@ -111,18 +111,27 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
       >
         <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
           <div className="space-y-6">
-            {/* Row 1: Correo */}
-            <div className="grid grid-cols-1 gap-6">
+            {/* Row 1: Correo y contraseña */}
+            <div className="grid grid-cols-2 gap-6">
               <InputText
                 label="Correo electrónico"
                 value={formData.correo ?? ''}
                 htmlForm="correo"
                 onChange={(value) => setFormData(prev => ({ ...prev, correo: value }))}
               />
+              <InputPassword
+                label="Contraseña generada automáticamente"
+                value={formData.password ?? ''}
+                htmlForm="password"
+                onChange={(e) => {
+                  setFormData(prev => ({ ...prev, password: e }));
+                }} 
+              />
             </div>
 
-            {/* Row 2: Tipo de rol*/}
-            <div>
+            {/* Row 2: Rol asignado y estado de acceso */}
+            <div className="grid grid-cols-2 gap-6">
+
               {
                 cargandoRoles ? (
                   <div className="flex justify-center items-center py-2">
@@ -142,7 +151,7 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
                   <div>No hay roles registrados en el sistema.</div>
                 ) : (
                   <InputSelect 
-                    label="Tipo de acceso"
+                    label="Rol asignado"
                     options={roles.map(te => ({ label: te.rol, value: te.rol }))}
                     placeholder="Seleccione el tipo de empleado"
                     onSelect={(value) => setFormData(prev => ({ ...prev, tipos: value as empleadoRol }))}
@@ -150,25 +159,14 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
                   />
                 )
               }
-            </div>
-
-            {/* Row 3: Contraseña (solo lectura) */}
-            <InputPassword
-              label="Contraseña generada automáticamente"
-              value={formData.password ?? ''}
-              htmlForm="password"
-              onChange={(e) => {
-                setFormData(prev => ({ ...prev, password: e }));
-              }} 
-            />
-
-            {/* Row 4: Estado del acceso*/}
-            <div>
-              <Switch
-                inputName="estado"
-                activo={formData.estado ?? false}
-                handleInputChange={(field, value) => setFormData(prev => ({ ...prev, [field]: value }))}
-              />
+              <div>
+                <label className="block text-sm font-medium mb-1">Estado del acceso</label>
+                <Switch
+                  inputName="estado"
+                  activo={formData.estado ?? false}
+                  handleInputChange={(field, value) => setFormData(prev => ({ ...prev, [field]: value }))}
+                />
+              </div>
             </div>
           </div>
 
