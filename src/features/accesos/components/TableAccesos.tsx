@@ -31,12 +31,12 @@ export default function TableAccesos({
 
   const tableHeader: string[] = [
     "ID",
-    "correo",
-    "estado",
-    "rol (tipo de acceso)",
-    "Estado de acceso",
-    "dni del usuario",
-    "nombres del usuario",
+    "Correo electrónico",
+    "Estado",
+    "Rol",
+    "Estado de disponibilidad",
+    "DNI",
+    "nombres",
   ];
 
   if (isLoading) {
@@ -108,7 +108,9 @@ export default function TableAccesos({
 
             {/* Estado */}
             <td className="px-6 py-4">
-              <span className="text-sm text-gray-300">{acceso.estado}</span>
+              <span className="text-sm text-gray-300">
+                {(acceso.estado) ? "Activo" : "Inactivo"}
+                </span>
             </td>
 
             {/* Rol (tipo de acceso) */}
