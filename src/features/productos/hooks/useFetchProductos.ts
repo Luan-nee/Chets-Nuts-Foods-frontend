@@ -1,58 +1,87 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // importación de clases como servicios
-import ProductoService from '../services/producto.service';
+import ProductoApi from "../../../api/producto.api";
 // importación de tipos
-import type { ProductoListado } from '../types/producto.type';
-import type { PaginationInfo } from '../../../types/bodyResponse.type';
+import type { ResponseGetAllProductos } from "../../../types/producto.type";
+import type {
+  BodyResponseWithPagination,
+  PaginationInfo,
+} from "../../../types/bodyResponse.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: ProductoListado[] | null;
+  productos: ResponseGetAllProductos[];
   isLoading: boolean;
   isError: boolean;
-  fetchData: (pagina: number) => Promise<void>;
+  message: string;
+  execute: (
+    pagina: number,
+  ) => Promise<BodyResponseWithPagination<ResponseGetAllProductos[]>>;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
 
 export const useFetchProductos = (): FetchState => {
-  const productoService = new ProductoService();
-  const [data, setData] = useState<ProductoListado[] | null>(null);
+  const producto_api = new ProductoApi();
+  const [productos, setProductos] = useState<ResponseGetAllProductos[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
     total_data: 0,
     total_paginas: 0,
-    pagina_actual: 0,
+    pagina_actual: 1,
     datos_por_pagina: 0,
   });
   const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
 
   // Función asíncrona para obtener los datos
-  const fetchData = async (nueva_pagina: number) => {
+  const obtenerProductos = async (nueva_pagina: number) => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await productoService.listarProductos(nueva_pagina);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success") {
-        throw new Error(response.message);
-      }
+      const response = await producto_api.get(nueva_pagina);
 
-      setData(response.data);
-      setInfoPaginacion(response.pagination);
+      if (response.status == "success") {
+        setMessage("Productos obtenidos exitosamente");
+        setProductos(response.data ?? []);
+        setInfoPaginacion(response.pagination);
+        return response;
+      } else {
+        setIsError(true);
+        setMessage("Error al obtener los productos");
+        return response;
+      }
     } catch (error) {
-      console.error("Fetch error: ", error);
       setIsError(true);
+      setMessage("Se produjo un error al obtener los productos en el frontend");
+      return {
+        status: "error",
+        message: "Error al obtener los productos",
+        data: [],
+        pagination: {
+          total_data: 0,
+          total_paginas: 0,
+          pagina_actual: nueva_pagina,
+          datos_por_pagina: 0,
+        },
+      } as BodyResponseWithPagination<ResponseGetAllProductos[]>;
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData(pagina);
-    console.log("useFetchProductos: datos de productos obtenidos");
+    obtenerProductos(pagina);
   }, [pagina]);
 
-  return { data, isLoading, isError, setPagina, fetchData, infoPaginacion};
+  return {
+    productos,
+    isLoading,
+    isError,
+    message,
+    setPagina,
+    execute: obtenerProductos,
+    infoPaginacion,
+  };
 };
