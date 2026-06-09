@@ -3,8 +3,9 @@ import { ArrowLeft, Info } from "lucide-react";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
-import type { CrearProducto } from "../types/producto.type";
+import InputText from "../../../components/ui/InputText";
 import { useCreateProducto } from "../hooks/useCreateProducto";
+import type { CreateProducto } from "../../../types/producto.type";
 
 interface FormCreateProps {
   showFormCreate: (p: boolean) => void;
@@ -12,18 +13,12 @@ interface FormCreateProps {
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
 
-  const { isLoading, isError, refresh: createProducto } = useCreateProducto();
+  const { isLoading, isError, message,  execute: registrarProducto } = useCreateProducto();
 
-  const [formData, setFormData] = useState<CrearProducto>({
-    nombre: ""
+  const [formData, setFormData] = useState<CreateProducto>({
+    nombre: "",
+    descripcion: ""
   });
-
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
     <ContentPage>
@@ -52,24 +47,19 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           <h2 className="text-xl font-semibold">Información General</h2>
         </div>
 
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Nombre del Producto
-              </label>
-              <input
-                type="text"
-                placeholder="Ej. Castaña de cajú"
-                value={formData.nombre}
-                onChange={(e) =>
-                  handleInputChange("nombre", e.target.value)
-                }
-                className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-              />
-            </div>
-          </div>
-        </div>
+        <InputText 
+          label="Nombre del producto"
+          value={formData.nombre}
+          htmlForm="nombre"
+          onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
+        />
+
+        <InputText 
+          label="Descripción del producto"
+          value={formData.descripcion}
+          htmlForm="descripcion"
+          onChange={(value) => setFormData(prev => ({ ...prev, descripcion: value }))}
+        />
 
         {/* Footer */}
         <div className="flex justify-end mt-6 gap-4">
@@ -80,13 +70,12 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           />
           <ButtonSubmitForm
             handleSubmit={() => {
-              createProducto(formData);
-              console.log("Datos a enviar:", formData);
+              registrarProducto(formData);
             }}
             isLoading={isLoading}
             isError={isError}
             textButton="Guardar"
-            textError="Error al crear el producto"
+            textError="Error al registrar el producto"
           />
         </div>
       </section>
