@@ -4,44 +4,44 @@ import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import type { ModificarProducto } from "../types/producto.type";
+import InputText from "../../../components/ui/InputText";
+import { useFetchProducto } from "../hooks/useFetchProducto";
 import { useUpdateProducto } from "../hooks/useUpdateProducto";
-import { useFetchDetallesProducto } from "../hooks/useFetchDetallesProducto";
-import { useInhabilitarProducto } from "../hooks/useInhabilitarProducto";
+import type { UpdateProducto } from "../../../types/producto.type";
 
 interface FormUpdateEstProps {
   showFormEdit: (p: boolean) => void;
   idProducto: number;
+  pagina: number;
 }
 
-export default function FormUpdate({ showFormEdit, idProducto }: FormUpdateEstProps) {
+export default function FormUpdate({ showFormEdit, idProducto, pagina }: FormUpdateEstProps) {
   const {
-    isLoading,
-    isError,
-    refresh: updateProducto,
+    producto,
+    isLoading: getProductoByIdIsLoading,
+    isError: getProductoByIdIsError,
+    execute: obtenerProducto,
+  } = useFetchProducto(idProducto, pagina);
+  const {
+    isLoading: isLoadingUpdate,
+    isError: isErrorUpdate,
+    execute: updateProducto,
   } = useUpdateProducto();
 
-  const { data: detallesProducto, isLoading: isLoadingDetalles, isError: isErrorDetalles, fetchData: fetchDetallesProducto } = useFetchDetallesProducto(idProducto);
-  const { isLoading: isLoadingInhabilitar, isError: isErrorInhabilitar, refresh: refreshInhabilitar } = useInhabilitarProducto();
-
-  const [formData, setFormData] = useState<ModificarProducto>({
-    nombre: ""
+  const [formData, setFormData] = useState<UpdateProducto>({
+    idProductDefect: idProducto,
+    nombre: "",
+    descripcion: ""
   });
 
   useEffect(() => {
-    if (!detallesProducto) return;
-
+    if (!producto) return;
     setFormData({
-      nombre: detallesProducto.nombre || ""
+      idProductDefect: idProducto,
+      nombre: producto?.nombre || "",
+      descripcion: producto?.descripcion || ""
     });
-  }, [detallesProducto]);
-
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  }, [producto]);
 
   return (
     <ContentPage>
@@ -72,59 +72,45 @@ export default function FormUpdate({ showFormEdit, idProducto }: FormUpdateEstPr
 
         <div className="space-y-4">
           <ContentSectionProcess
-            isLoading={isLoadingDetalles}
-            isError={isErrorDetalles}
-            textError="Error al cargar los detalles del producto."
+            isLoading={getProductoByIdIsLoading}
+            isError={getProductoByIdIsError}
+            textError="Error al cargar los datos delproducto."
             textButtonError="Reintentar"
-            fetchData={() => fetchDetallesProducto(idProducto)}
+            fetchData={() => obtenerProducto(idProducto, pagina)}
             >
-              <div className="grid grid-cols-1 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Nombre del Producto
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Ej. Castaña de cajú"
-                    value={formData.nombre}
-                    onChange={(e) =>
-                      handleInputChange("nombre", e.target.value)
-                    }
-                    className="w-full bg-gray-950 border border-[#30363d] rounded-lg px-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#1f6feb] transition-colors"
-                  />
-                </div>
-              </div>
+              <InputText
+                label="Nombre del Producto"
+                value={formData.nombre || ""}
+                htmlForm="nombre del producto"
+                onChange={(value) => 
+                  setFormData({ ...formData, nombre: value })
+                }
+              />
+              <InputText
+                label="Descripción del Producto"
+                value={formData.descripcion || ""}
+                htmlForm="descripcion del producto"
+                onChange={(value) => 
+                  setFormData({ ...formData, descripcion: value })
+                }
+              />
           </ContentSectionProcess>
         </div>
 
         {/* Footer */}
         <div className="flex justify-between mt-6 gap-4">
-          <div>
-            <ButtonSubmitForm
-              handleSubmit={() => {
-                refreshInhabilitar(idProducto);
-                console.log("Producto inhabilitado ID:", idProducto);
-              }}
-              isLoading={isLoadingInhabilitar}
-              isError={isErrorInhabilitar}
-              textButton="Inhabilitar Producto"
-              textError="Error al inhabilitar"
-            />
-          </div>
           <div className="flex flex-row gap-2">
             <ButtonCancelForm
               handleCancel={() => showFormEdit(false)}
-              isLoading={isLoading}
+              isLoading={isLoadingUpdate}
               textButton="Cancelar"
             />
             <ButtonSubmitForm
               handleSubmit={() => {
-                updateProducto(idProducto, formData);
-                console.log("Datos a enviar:", formData);
-                console.log("ID del producto a actualizar:", idProducto);
+                updateProducto(formData);
               }}
-              isLoading={isLoading}
-              isError={isError}
+              isLoading={isLoadingUpdate}
+              isError={isErrorUpdate}
               textButton="Guardar Cambios"
               textError="Error al actualizar"
             />
