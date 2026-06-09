@@ -10,6 +10,11 @@ export default function Productos() {
   const [showFormEditProduct, setShowFormEditProduct] = useState<boolean>(false);
   const [showFormCreateProduct, setShowFormCreateProduct] = useState<boolean>(false);
   const [selectProductoId, setSelectProductoId] = useState<number | null>(null);
+  
+  // Este estado se utiliza para compartir el estado actual de la pagina 
+  // al componente FormUpdate, porque no existe un endpoint en en backend
+  // que me permita obtener los datos de un solo producto por su ID.
+  const [paginaActual, setPaginaActual] = useState<number>(1);
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -53,10 +58,10 @@ export default function Productos() {
       </div>
 
       {/* Table */}
-      <TableProductos setSelectProductoId={setSelectProductoId}  showFormEdit={setShowFormEditProduct} />
+      <TableProductos setSelectProductoId={setSelectProductoId}  showFormEdit={setShowFormEditProduct} setPaginActual={setPaginaActual} />
 
       { showFormEditProduct && 
-        <FormUpdate showFormEdit={setShowFormEditProduct} idProducto={selectProductoId? selectProductoId : 0} />
+        <FormUpdate showFormEdit={setShowFormEditProduct} idProducto={selectProductoId? selectProductoId : 0} pagina={paginaActual}  />
       }
 
       { showFormCreateProduct && 
