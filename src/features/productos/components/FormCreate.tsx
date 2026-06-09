@@ -13,7 +13,7 @@ interface FormCreateProps {
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
 
-  const { isLoading, isError, message,  execute: registrarProducto } = useCreateProducto();
+  const { isLoading, isError, execute: registrarProducto } = useCreateProducto();
 
   const [formData, setFormData] = useState<CreateProducto>({
     nombre: "",
