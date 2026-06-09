@@ -2,9 +2,10 @@
 interface TableProps {
   tableHeader: string[];
   children: React.ReactNode;
+  cantidadDatos?: number;
 }
 
-export default function Table({ children, tableHeader }: TableProps) {
+export default function Table({ children, tableHeader, cantidadDatos }: TableProps) {
   return (
     <table className="w-full bg-gray-900 rounded-lg">
       <thead>
@@ -15,7 +16,15 @@ export default function Table({ children, tableHeader }: TableProps) {
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-800">
-        {children}
+        {cantidadDatos === 0 ? (
+          <tr>
+            <td colSpan={tableHeader.length} className="text-center py-10">
+              <p className="text-gray-400">No hay datos para mostrar.</p>
+            </td>
+          </tr>
+        ) : (
+          children
+        )}
       </tbody>
     </table>
   );
