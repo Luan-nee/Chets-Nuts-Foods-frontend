@@ -1,7 +1,7 @@
 // importación de componentes UI
 import { Edit2, Truck } from "lucide-react";
 import Table from "../../../components/ui/Table";
-import Loading from "../../../components/ui/Loading";
+import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 // importación de custom hooks
 import { useFetchVehiculos } from "../hooks/useFetchVehiculos";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
@@ -18,8 +18,8 @@ export default function TableVehiculos({
   
   const {
     vehiculos,
-    isLoading,
-    isError,
+    isLoading: vehiculosIsLoading,
+    isError: vehiculosIsError,
     execute: recargarVehiculos,
     setPagina,
     infoPaginacion,
@@ -35,35 +35,15 @@ export default function TableVehiculos({
     "Acciones",
   ];
 
-  if (isLoading) {
-    // has uso del componente de carga Loading.tsx
-    return (
-      <div className="flex justify-center items-center py-10">
-        <Loading w={6} h={6} color="blue" />
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="flex justify-center items-center py-10">
-        <p className="text-red-500">Error al cargar los vehículos.</p>
-        {/* agrega un botón para reintentar la carga */}
-        <button
-          className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
-          onClick={ () => recargarVehiculos(1)}
-        >
-          Reintentar
-        </button>
-      </div>
-    );
-  }
-
-  if (vehiculos === null || vehiculos.length === 0) {
-    return <div>No hay vehículos disponibles.</div>;
-  }
-
   return (
+    <ContentSectionProcess 
+      isLoading={vehiculosIsLoading}
+      isError={vehiculosIsError}
+      textError="Error al cargar los vehículos."
+      textButtonError="Reintentar"
+      fetchData={() => recargarVehiculos(infoPaginacion.pagina_actual)}
+    >
+
     <div className="flex-1 overflow-auto px-8 py-6">
       <div className="p-4 flex justify-end gap-4">
         <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setPagina(infoPaginacion.pagina_actual)}>
@@ -79,7 +59,7 @@ export default function TableVehiculos({
       total_data={infoPaginacion.total_data} 
       />
 
-      <Table tableHeader={tableHeader}>
+      <Table tableHeader={tableHeader} cantidadDatos={vehiculos.length}>
         {vehiculos?.map((vehiculo, index) => (
           <tr
             key={index}
@@ -147,5 +127,7 @@ export default function TableVehiculos({
         ))}
       </Table>
     </div>
+
+    </ContentSectionProcess>
   );
 }
