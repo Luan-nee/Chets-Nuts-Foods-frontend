@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // importación de clases como servicios
 import ProductoApi from "../../../api/producto.api";
 // importación de tipos
@@ -19,7 +19,7 @@ interface FetchState {
   ) => Promise<BodyResponse<ResponseGetProductoById | null>>;
 }
 
-export const useFetchProducto = (): FetchState => {
+export const useFetchProducto = (idProducto: number, pagina: number): FetchState => {
   const producto_api = new ProductoApi();
   const [producto, setProducto] = useState<ResponseGetProductoById | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -65,6 +65,10 @@ export const useFetchProducto = (): FetchState => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    obtenerProducto(idProducto, pagina);
+  }, [idProducto, pagina]);
 
   return {
     producto,
