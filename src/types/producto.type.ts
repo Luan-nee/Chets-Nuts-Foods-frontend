@@ -29,3 +29,8 @@ export type ResponseUpdateProducto = {
   descripcion: string;
   fechacreacion: string;
 }
+
+export type ResponseGetProductoById = {
+  nombre: string;
+  descripcion: string;
+}
