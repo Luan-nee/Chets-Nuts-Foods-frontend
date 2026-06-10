@@ -17,14 +17,6 @@ export default class DatosEmpresa extends BaseRequestApi {
 
   /* setDatos */
   public async setDatos(body: UpdateDatosEmpresa): Promise<BodyResponse<string>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
-    });
-
-    return response.json();
+    return this.POST<string>(`${this.base_url_production}`, body);
   }
 }
