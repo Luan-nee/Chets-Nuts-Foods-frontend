@@ -47,13 +47,13 @@ export default function Login() {
             </div>
             <div className="text-left">
               <h1 className="font-bold text-2xl text-white">Chets Nuts Foods</h1>
-              <p className="text-sm text-gray-400">ERP</p>
+              {/* <p className="text-sm text-gray-400">ERP</p> */}
             </div>
           </div>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-8">
-          <h2 className="text-xl font-bold text-white mb-6">Iniciar Sesión</h2>
+          <h2 className="text-xl text-center font-bold text-white mb-6">Iniciar Sesión</h2>
           <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Usuario</label>
