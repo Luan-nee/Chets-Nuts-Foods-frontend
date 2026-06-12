@@ -13,6 +13,7 @@ type LabelType =
   | "/vehiculos"
   | "/configuraciones"
   | "/seguimiento"
+  | "/clientes"
   | "/test";
 
 interface MenuItem {
@@ -35,6 +36,7 @@ export default function NavBarAdministrador() {
     { icon: Truck, label: "Vehículos", anchor: "/vehiculos", userRol: ["ADMIN"] },
     { icon: Settings, label: "Configuraciones", anchor: "/configuraciones", userRol: ["ADMIN"] },
     { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN", "CHOFER", "CLIENTE"] },
+    { icon: Package, label: "Clientes", anchor: "/clientes", userRol: ["ADMIN", "COLABORADOR"] },
     { icon: Package, label: "Test", anchor: "/test", userRol: ["ADMIN", "COLABORADOR"] },
   ];
 

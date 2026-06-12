@@ -9,6 +9,7 @@ import Vehiculos from "../pages/Vehiculos";
 import Configuraciones from "../pages/Configuraciones";
 import Productos from "../pages/Productos";
 import Seguimiento from "../pages/Seguimiento";
+import Clientes from "../pages/Clientes";
 import Test from "../pages/Test";
 // import { SocketProvider } from "../context/SocketContext";
 
@@ -35,6 +36,16 @@ export default function AppRoutes() {
               <MainLayout>
                 <Test />
               </MainLayout>
+            }
+          />
+          <Route
+            path="/clientes"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Clientes />
+                </MainLayout>
+              </PrivateRoute>
             }
           />
           <Route

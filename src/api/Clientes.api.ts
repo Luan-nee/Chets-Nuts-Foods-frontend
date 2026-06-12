@@ -4,7 +4,7 @@ import type { ResponseGetAllClientes, ResponseCreateCliente, CreateCliente, Upda
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
 
 export default class ClienteApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/clientes`;
+  private base_url_production = `${url_base_production}/api/usuarios`;
 
   public async getClientes(page: number = 1): Promise<BodyResponseWithPagination<ResponseGetAllClientes[]>> {
     return this.GET<ResponseGetAllClientes[]>(`${this.base_url_production}?page=${page}`) as Promise<BodyResponseWithPagination<ResponseGetAllClientes[]>>;
