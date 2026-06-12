@@ -1,58 +1,83 @@
-import { useState, useEffect } from 'react';
-// importación de clases como servicios
-import ClienteService from '../services/cliente.service';
-// importación de tipos
-import type { ListarCliente } from '../types/cliente.type';
-import type { PaginationInfo } from '../../../types/bodyResponse.type';
+import { useState, useEffect } from "react";
+import ClienteApi from "../../../api/Clientes.api";
+import type { ResponseGetAllClientes } from "../../../types/clientes.type";
+import type {
+  BodyResponseWithPagination,
+  PaginationInfo,
+} from "../../../types/bodyResponse.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: ListarCliente[] | null;
+  clientes: ResponseGetAllClientes[];
   isLoading: boolean;
   isError: boolean;
-  fetchData: (pagina: number) => Promise<void>;
+  message: string;
+  execute: (pagina: number) => Promise<
+    BodyResponseWithPagination<ResponseGetAllClientes[]>
+  >;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
 
 export const useFetchClientes = (): FetchState => {
-  const clienteService = new ClienteService();
-  const [data, setData] = useState<ListarCliente[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const cliente_api = new ClienteApi();
+  const [clientes, setClientes] = useState<ResponseGetAllClientes[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [pagina, setPagina] = useState<number>(1);
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
     total_data: 0,
     total_paginas: 0,
-    pagina_actual: 0,
+    pagina_actual: 1,
     datos_por_pagina: 0,
   });
-  const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
 
-  // Función asíncrona para obtener los datos
-  const fetchData = async (pagina: number) => {
+  const getClientes = async (pagina: number): Promise<
+    BodyResponseWithPagination<ResponseGetAllClientes[]>
+  > => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await clienteService.listarClientes(pagina);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success") {
-        throw new Error(response.message);
-      }
+      setMessage("");
 
-      setData(response.data);
-      setInfoPaginacion(response.pagination);
-    } catch (error) {
-      console.error("Fetch error: ", error);
+      const response = await cliente_api.getClientes(pagina);
+
+      // Manejo de respuestas basado en el estado
+      if (response.status === "success") {
+        setMessage("Accesos obtenidos exitosamente");
+        setClientes(response.data ?? []); // Aseguramos que accesos sea un array, incluso si data es undefined
+        setInfoPaginacion(response.pagination);
+        return response;
+      } else {
+        setIsError(true);
+        setMessage("Error al obtener los accesos");
+        return response;
+      }
+    } catch (error: any) {
       setIsError(true);
+      setMessage("Se produjo un error al obtener los accesos en el frontend");
+      return {
+        status: "error",
+        message: "Error al obtener los accesos",
+        pagination: infoPaginacion,
+      };
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData(pagina);
-    console.log("useFetchEmpleados: datos de empleados obtenidos");
+    getClientes(pagina);
   }, [pagina]);
 
-  return { data, isLoading, isError, fetchData, setPagina, infoPaginacion};
+  return {
+    clientes,
+    isLoading,
+    isError,
+    message,
+    execute: getClientes,
+    setPagina,
+    infoPaginacion,
+  };
 };
