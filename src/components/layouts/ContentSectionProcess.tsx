@@ -9,8 +9,14 @@ interface ContentSectionProcessProps {
   children: React.ReactNode;
 }
 
-export default function ContentSectionProcess({ isLoading, isError, textError, textButtonError, fetchData, children }: ContentSectionProcessProps) {
-
+export default function ContentSectionProcess({
+  isLoading,
+  isError,
+  textError,
+  textButtonError,
+  fetchData,
+  children,
+}: ContentSectionProcessProps) {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-10">
@@ -33,9 +39,5 @@ export default function ContentSectionProcess({ isLoading, isError, textError, t
     );
   }
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
