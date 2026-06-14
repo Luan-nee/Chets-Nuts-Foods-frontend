@@ -17,53 +17,33 @@ export default class SalidaTransporte extends BaseRequestApi {
 
   /* create */
   public async create(body: CreateSalidaTransporte): Promise<BodyResponse<CreateSalidaTransporte>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<CreateSalidaTransporte>>(`${this.base_url_production}`, {
       method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body,
     });
-
-    return response.json();
   }
 
   /* getAll */
   // el tipo no está definido
   public async getAll(): Promise<BodyResponse<null>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<null>>(`${this.base_url_production}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   /* getByID */
   public async getByID<T>(id: number): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(`${this.base_url_production}/${id}`, {
+    return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   /* update */
   // el tipo no está definido
   public async update(body: UpdateSalidaTransporte): Promise<BodyResponse<null>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<null>>(`${this.base_url_production}`, {
       method: 'PATCH',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body,
     });
-
-    return response.json();
   }
 }

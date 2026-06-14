@@ -17,51 +17,31 @@ export default class Establecimientos extends BaseRequestApi {
 
   /* getAll */
   public async getAll(): Promise<BodyResponse<ResponseGetAll[]>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<ResponseGetAll[]>>(`${this.base_url_production}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   /* getById */
   public async getById(id: number): Promise<BodyResponse<ResponseGetByID>> {
-    const response: Response = await fetch(`${this.base_url_production}/${id}`, {
+    return this.request<BodyResponse<ResponseGetByID>>(`${this.base_url_production}/${id}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   /* create */
   public async create(body: CreateEstablecimiento): Promise<BodyResponse<CreateEstablecimiento>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<CreateEstablecimiento>>(`${this.base_url_production}`, {
       method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body,
     });
-
-    return response.json();
   }
 
   /* update */
   public async update(body: UpdateEstablecimiento): Promise<BodyResponse<UpdateEstablecimiento>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<UpdateEstablecimiento>>(`${this.base_url_production}`, {
       method: 'PATCH',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body,
     });
-
-    return response.json();
   }
 }

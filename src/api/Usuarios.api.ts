@@ -17,64 +17,39 @@ export default class Usuarios extends BaseRequestApi {
 
   /* create */
   public async create(body: CreateUsuario): Promise<BodyResponse<CreateUsuario>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<CreateUsuario>>(`${this.base_url_production}`, {
       method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body,
     });
-
-    return response.json();
   }
 
   /* getDni */
   public async getDni(p_dni: string): Promise<BodyResponse<ResponseGetDni>> {
-    const response: Response = await fetch(`${this.base_url_production}/dni`, {
+    return this.request<BodyResponse<ResponseGetDni>>(`${this.base_url_production}/dni`, {
       method: 'POST',
-      body: JSON.stringify({ dni: p_dni }),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body: { dni: p_dni },
     });
-
-    return response.json();
   }
 
   /* getRuc */
   public async getRuc(p_ruc: string): Promise<BodyResponse<null>> {
-    const response: Response = await fetch(`${this.base_url_production}/ruc`, {
+    return this.request<BodyResponse<null>>(`${this.base_url_production}/ruc`, {
       method: 'POST',
-      body: JSON.stringify({ ruc: p_ruc }),
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
+      body: { ruc: p_ruc },
     });
-
-    return response.json();
   }
 
   /* getAll */
   public async getAll(): Promise<BodyResponse<ResponseGetAll>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<ResponseGetAll>>(`${this.base_url_production}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   /* getClientes */
   public async getClientes(): Promise<BodyResponse<null>> {
-    const response: Response = await fetch(`${this.base_url_production}/clientes`, {
+    return this.request<BodyResponse<null>>(`${this.base_url_production}/clientes`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 }

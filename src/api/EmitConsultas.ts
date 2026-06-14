@@ -1,5 +1,3 @@
-import Swal from "sweetalert2";
-
 type methodoType = "POST" | "GET" | "PATCH" | "DELETE";
 
 interface paramsType {
@@ -16,6 +14,13 @@ export interface getTypeConsulta {
 }
 
 export class EmitConsultas {
+  private static redirectToLogin() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("rol");
+    window.location.replace("/login");
+  }
+
   static async POST(ruta: string, body: string, token?: string) {
     const response: Response = await fetch(ruta, {
       method: "POST",
@@ -25,6 +30,10 @@ export class EmitConsultas {
         ...(token && { Authorization: `bearer ${token}` }),
       },
     });
+
+    if (response.status === 401 && token) {
+      this.redirectToLogin();
+    }
 
     const response2 = await response.json();
     
@@ -51,11 +60,7 @@ export class EmitConsultas {
     });
 
     if (response.status === 401) {
-      Swal.fire({
-        title: "Secion Caducada",
-        text: "La secion ah caducado, por favor vuelva ingresar",
-        icon: "error",
-      });
+      this.redirectToLogin();
     }
 
     const response2 = await response.json();
@@ -77,6 +82,10 @@ export class EmitConsultas {
         ...(token && { Authorization: `bearer ${token}` }),
       },
     });
+
+    if (response.status === 401 && token) {
+      this.redirectToLogin();
+    }
 
     const response2 = await response.json();
 

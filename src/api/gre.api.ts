@@ -9,39 +9,21 @@ export default class GreApi extends BaseRequestApi {
   private base_url_production = `${url_base_production}/api/guias-remision`;
 
   public async get<T>(page: number = 1): Promise<BodyResponseWithPagination<T>> {
-    const response: Response = await fetch(`${this.base_url_production}?page=${page}`, {
+    return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?page=${page}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    const response2 = await response.json(); // recomendación de zain
-
-    return response2;
   }
 
   public async getByCodigoSeguimiento<T>(id: number): Promise<BodyResponse<T>> {
-    const response: Response = await fetch(`${this.base_url_production}/${id}`, {
+    return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
       method: 'GET',
-      headers: {
-        'Authorization': `bearer ${this.token}`
-      }
     });
-
-    return response.json();
   }
 
   public async emitirGre(body: EmitirGre): Promise<BodyResponse<unknown>> {
-    const response: Response = await fetch(`${this.base_url_production}`, {
+    return this.request<BodyResponse<unknown>>(`${this.base_url_production}`, {
       method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Authorization': `bearer ${this.token}`,
-        "Content-Type": "application/json"
-      }
+      body,
     });
-
-    return response.json();
   }
 }
