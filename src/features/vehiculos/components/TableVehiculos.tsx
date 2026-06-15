@@ -30,7 +30,7 @@ export default function TableVehiculos({
     "Marca/Modelo",
     "Año",
     "Tipo",
-    "Capacidad (KG)",
+    "Capacidad (TN)",
     "estado",
     "Acciones",
   ];
