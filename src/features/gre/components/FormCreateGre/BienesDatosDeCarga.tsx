@@ -98,7 +98,7 @@ export default function BienesDatosDeCarga({
                 datos_por_pagina={infoPaginacion.datos_por_pagina}
                 total_data={infoPaginacion.total_data}
               />
-              <Table tableHeader={headerTabler}>
+              <Table tableHeader={headerTabler} cantidadDatos={productos?.length || 0}>
                 {productos?.map((producto, index) => (
                   <tr
                     key={index}
