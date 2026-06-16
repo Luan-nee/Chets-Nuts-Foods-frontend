@@ -1,15 +1,17 @@
 import type { UserGender, UserType } from "./constantes.type";
 
 export type CreateCliente = {
-  nombre: string,
-  apellidomaterno: string,
-  apellidopaterno: string,
-  dni: string,
-  numero: string,
-  edad: number,
-  sexo: UserGender,
-  correo: string,
-  tipo: UserType
+  nombre: string, //
+  apellidomaterno: string, //
+  apellidopaterno: string, //
+  dni: string, // 
+  edad: number, //
+  sexo: UserGender, 
+  ruc: string | null, //
+  numero: string | null,
+  tipo: UserType | null,
+  numeroLicenciaConducir: string | null,
+  correo: string | null,
 }
 
 export type ResponseCreateCliente = {
@@ -48,11 +50,9 @@ export type ResponseGetClienteByRUC = {
 }
 
 export type ResponseGetAllClientes = {
-  iduser: number,
-  apellidomaterno: string,
-  apellidopaterno: string,
-  dniuser: string,
   nombres: string,
-  numero: string,
-  rucuser: null | string,
+  apellidopaterno: string,
+  apellidomaterno: string,
+  dniuser: string,
+  cantenvios: number,
 }

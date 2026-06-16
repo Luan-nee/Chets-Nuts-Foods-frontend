@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import ClienteApi from "../../../api/Clientes.api";
 import type { ResponseGetAllClientes } from "../../../types/clientes.type";
-import type {
-  BodyResponseWithPagination,
-  PaginationInfo,
-} from "../../../types/bodyResponse.type";
+import type { BodyResponse } from "../../../types/bodyResponse.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
@@ -12,11 +9,9 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (pagina: number) => Promise<
-    BodyResponseWithPagination<ResponseGetAllClientes[]>
+  execute: () => Promise<
+    BodyResponse<ResponseGetAllClientes[]>
   >;
-  setPagina: (pagina: number) => void;
-  infoPaginacion: PaginationInfo;
 }
 
 export const useFetchClientes = (): FetchState => {
@@ -25,29 +20,21 @@ export const useFetchClientes = (): FetchState => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const [pagina, setPagina] = useState<number>(1);
-  const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
-    total_data: 0,
-    total_paginas: 0,
-    pagina_actual: 1,
-    datos_por_pagina: 0,
-  });
 
-  const getClientes = async (pagina: number): Promise<
-    BodyResponseWithPagination<ResponseGetAllClientes[]>
+  const getClientes = async (): Promise<
+    BodyResponse<ResponseGetAllClientes[]>
   > => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await cliente_api.getClientes(pagina);
+      const response = await cliente_api.getClientes();
 
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Accesos obtenidos exitosamente");
         setClientes(response.data ?? []); // Aseguramos que accesos sea un array, incluso si data es undefined
-        setInfoPaginacion(response.pagination);
         return response;
       } else {
         setIsError(true);
@@ -60,7 +47,6 @@ export const useFetchClientes = (): FetchState => {
       return {
         status: "error",
         message: "Error al obtener los accesos",
-        pagination: infoPaginacion,
       };
     } finally {
       setIsLoading(false);
@@ -68,16 +54,14 @@ export const useFetchClientes = (): FetchState => {
   };
 
   useEffect(() => {
-    getClientes(pagina);
-  }, [pagina]);
+    getClientes();
+  }, []);
 
   return {
     clientes,
     isLoading,
     isError,
     message,
-    execute: getClientes,
-    setPagina,
-    infoPaginacion,
+    execute: getClientes
   };
 };

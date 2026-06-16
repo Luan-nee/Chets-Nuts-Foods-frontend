@@ -1,22 +1,13 @@
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 import { useFetchClientes } from "../hooks/useFetchClientes";
 
-interface TableClientesProps {
-  setSelectedClienteId: (id: number) => void;
-}
-
-export default function TableClientes({
-  setSelectedClienteId,
-}: TableClientesProps) {
+export default function TableClientes() {
   const {
     clientes,
     isLoading: clientesLoading,
     isError: clientesError,
-    execute: fetchClientes,
-    infoPaginacion: pageClientes,
-    setPagina: setPageClientes,
+    execute: fetchClientes
   } = useFetchClientes();
 
   const tableHeader: string[] = [
@@ -25,9 +16,7 @@ export default function TableClientes({
     "Apellido Paterno",
     "Apellido Materno",
     "DNI",
-    "Número teléfono",
-    "ruc",
-    "Acciones",
+    "cantidad de compras"
   ];
 
   return (
@@ -42,21 +31,13 @@ export default function TableClientes({
         <div className="p-4 flex justify-end">
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => fetchClientes(pageClientes.pagina_actual)}
+            onClick={() => fetchClientes()}
           >
             Recargar
           </button>
         </div>
 
-        <ButtonsPagination
-          total_paginas={pageClientes.total_paginas}
-          pivote={pageClientes.pagina_actual}
-          fetchData={setPageClientes}
-          datos_por_pagina={pageClientes.datos_por_pagina}
-          total_data={pageClientes.total_data}
-        />
-
-        <Table tableHeader={tableHeader}>
+        <Table tableHeader={tableHeader} cantidadDatos={clientes.length}>
           {clientes?.map((cliente, index) => (
             <tr key={index} className="hover:bg-gray-800/50 transition-colors">
               {/* NUMERO */}
@@ -92,17 +73,10 @@ export default function TableClientes({
                 </span>
               </td>
 
-              {/* Numero telefónico */}
-              <td className="px-6 py-4">
-                <span className="text-sm text-gray-300">
-                  {cliente.numero}
-                </span>
-              </td>
-
               {/* RUC */}
               <td className="px-6 py-4">
                 <span className="text-sm text-gray-300">
-                  {cliente.rucuser ? cliente.rucuser : "Sin ruc"}
+                  {cliente.cantenvios}
                 </span>
               </td>
 
@@ -111,11 +85,11 @@ export default function TableClientes({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => {
-                      setSelectedClienteId(cliente.iduser);
+                      console.log("Aún no existe la opción a editar")
                     }}
                     className="p-2 bg-blue-600 text-white rounded"
                   >
-                    <p>Seleccionar</p>
+                    <p>Editar</p>
                   </button>
                 </div>
               </td>
