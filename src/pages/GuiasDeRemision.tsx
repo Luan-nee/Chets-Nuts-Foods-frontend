@@ -3,7 +3,7 @@ import { Search, Filter } from 'lucide-react';
 import TableGre from '../features/gre/components/TableGre';
 import DetallesGre from '../features/gre/components/DetallesGre';
 import FormCreateGre from '../features/gre/components/FormCreateGre';
-import { InfoWarning } from '../components/messages/infoWarning';
+import { InfoWarning } from '../components/messages/InfoWarning';
 
 export default function ListaGre() {
   const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);
