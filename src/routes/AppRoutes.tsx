@@ -11,7 +11,7 @@ import Productos from "../pages/Productos";
 import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
 import Test from "../pages/Test";
-import GuiasDeRemision from "../pages/GuiasDeRemision";
+// import GuiasDeRemision from "../pages/GuiasDeRemision";
 // import { SocketProvider } from "../context/SocketContext";
 
 export default function AppRoutes() {
@@ -31,7 +31,7 @@ export default function AppRoutes() {
               </PrivateRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/guias"
             element={
               <PrivateRoute>
@@ -40,7 +40,7 @@ export default function AppRoutes() {
                 </MainLayout>
               </PrivateRoute>
             }
-          />
+          /> */}
           <Route
             path="/test"
             element={
