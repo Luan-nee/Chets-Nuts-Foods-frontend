@@ -1,52 +1,37 @@
 import { useState } from "react";
-import { Building2, Lock, MapPin, User } from "lucide-react";
-import { useUpdateDatosEmpresa } from "../hook/useUpdateDatosEmpresa";
-import type { UpdateDatosEmpresa } from "../../../types/datosEmpresa.type";
+import { MapPin, User } from "lucide-react";
+import { registrarInfoEmpresarial } from "../hook/useRegistrarInfoEmpresarial";
+import { useRegistrarUbicacionEmpresa } from "../hook/useRegistrarUbicacionEmpresa";
 import InputText from "../../../components/ui/InputText";
 import InputSelectTest from "../../../components/ui/InputSelect";
-import InputPassword from "../../../components/ui/InputPassword";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
+import type { UpdateDatosEmpresa, InfoUbicacionState } from "../../../types/datosEmpresa.type";
 
-type InfoPersonalState = {
-  nombres: string;
-  apellidoPaterno: string;
-  apellidoMaterno: string;
-  dni: string;
-};
-
-type InfoUbicacionState = {
-  departamento: string;
-  provincia: string;
-  distrito: string;
-  direccionDetallada: string;
-};
 
 export default function Form() {
-  const { isLoading, isError, execute: actualizarDatosEmpresa } = useUpdateDatosEmpresa();
-  const [formData, setFormData] = useState<UpdateDatosEmpresa>({
+  const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = registrarInfoEmpresarial();
+  const { isLoading: isLoadingUbiEmpresa , isError: isErrorUbiEmpresa, execute: registrarUbicacionEmpresa } = useRegistrarUbicacionEmpresa();
+  const [formDataUbicacion, setFormDataUbicacion] = useState<InfoUbicacionState>({
+    nombreEstablecimiento: "chets nuts foods",
+    departamento: "",
+    provincia: "",
+    distrito: "",
+    direccion: "",
+    descripcion: "empresa principal",
+    latitud: "",
+    longitud: "",
+    ubigeo: "",
+    idResponsable: 1,
+    tipoEstado: "oficina"
+  });
+  const [formDataEmpresa, setFormDataEmpresa] = useState<UpdateDatosEmpresa>({
     ruc: "",
     denominacion: "",
     numeroRegistroMtc: "",
     correo: "",
     codigoMtc: "",
-    urlApi: "",
-    claveAcceso: "",
     fechaVigenciaRegistroMtc: ""
   });
-  const [infoPersonal, setInfoPersonal] = useState<InfoPersonalState>({
-    nombres: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
-    dni: "",
-  });
-  const [infoUbicacion, setInfoUbicacion] = useState<InfoUbicacionState>({
-    departamento: "",
-    provincia: "",
-    distrito: "",
-    direccionDetallada: "",
-  });
-  const [password, setPassword] = useState<string>("");
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -54,9 +39,9 @@ export default function Form() {
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-2">Mi Cuenta</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">Configuraciones</h2>
             <p className="text-sm text-gray-400">
-              Edita tu información personal y de seguridad.
+              Registra la información de tu empresa para generar guías de remisión y otros documentos relacionados. Asegúrate de que los datos sean correctos para evitar problemas futuros.
             </p>
           </div>
         </div>
@@ -64,10 +49,9 @@ export default function Form() {
 
       {/* Form Sections */}
       <div className=" flex flex-col gap-4 overflow-auto px-8 py-6">
-        {/* Información del usuario y ubicación de la empresa */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* Información personal del usuario*/}
-          <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+        <div className="grid grid-cols-2 items-start gap-4">
+          {/* Información empresarial*/}
+          <div className="self-start bg-gray-900 border border-gray-700 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
                 <User className="w-5 h-5 text-[#1f6feb]" />
@@ -77,64 +61,72 @@ export default function Form() {
                   Información empresarial
                 </h2>
                 <p className="text-xs text-gray-400">
-                  Recuerda que esta información se usará para generar tus guias
-                  de remisión, asegúrate de que sea correcta.
+                  Asegúrate de que la información registrada sea correcta.
                 </p>
               </div>
             </div>
-
             <div className="space-y-4">
               {/* RUC */}
               <InputText
                 label="RUC"
-                value={formData.ruc}
+                value={formDataEmpresa.ruc}
                 htmlForm="ruc"
                 onChange={
-                  (value) => setFormData({ ...formData, ruc: value })
+                  (value) => setFormDataEmpresa({ ...formDataEmpresa, ruc: value })
                 }
               />
               {/* Correo electrónico */}
               <InputText
                 label="Correo electrónico"
-                value={formData.correo}
+                value={formDataEmpresa.correo}
                 htmlForm="correo"
                 onChange={
-                  (value) => setFormData({ ...formData, correo: value })
+                  (value) => setFormDataEmpresa({ ...formDataEmpresa, correo: value })
                 }
               />
               
               {/* denominacion */}
               <InputText
                 label="Denominación"
-                value={formData.denominacion}
+                value={formDataEmpresa.denominacion}
                 htmlForm="denominacion"
                 onChange={
-                  (value) => setFormData({ ...formData, denominacion: value })
+                  (value) => setFormDataEmpresa({ ...formDataEmpresa, denominacion: value })
                 }
               />
               {/* número de registro en la MTC */}
               <InputText
                 label="Número de Registro en la MTC"
-                value={formData.numeroRegistroMtc}
+                value={formDataEmpresa.numeroRegistroMtc}
                 htmlForm="numero-registro-mtc"
                 onChange={
-                  (value) => setFormData({ ...formData, numeroRegistroMtc: value })
+                  (value) => setFormDataEmpresa({ ...formDataEmpresa, numeroRegistroMtc: value })
                 }
               />
               {/* fecha de vigencia registro MTC */}
               <InputText
                 label="Fecha de Vigencia del Registro en la MTC"
-                value={formData.fechaVigenciaRegistroMtc}
+                value={formDataEmpresa.fechaVigenciaRegistroMtc}
                 htmlForm="fecha-vigencia-registro-mtc"
                 onChange={
-                  (value) => setFormData({ ...formData, fechaVigenciaRegistroMtc: value })
+                  (value) => setFormDataEmpresa({ ...formDataEmpresa, fechaVigenciaRegistroMtc: value })
                 }
+              />
+            </div>
+            <div className="flex gap-3 pt-4">
+              <ButtonSubmitForm 
+                handleSubmit={() => registrarDatosEmpresarial(formDataEmpresa)}
+                isLoading={isLoadingDatosEmpresa}
+                isError={isErrorDatosEmpresa}
+                textButton="Registrar información"
+                textError="Error al guardar los cambios"
+                color="blue"
               />
             </div>
           </div>
 
           {/* Ubicación de la empresa */}
-          <div className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+          <div className="self-start bg-gray-900 border border-gray-700 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
                 <MapPin className="w-5 h-5 text-green-500" />
@@ -148,7 +140,6 @@ export default function Form() {
                 </p>
               </div>
             </div>
-
             <div className="space-y-4">
               {/* Departamento */}
               <InputSelectTest
@@ -161,7 +152,7 @@ export default function Form() {
                 ]}
                 placeholder="Selecciona un departamento"
                 onSelect={
-                  (value) => setInfoUbicacion({ ...infoUbicacion, departamento: value as string })
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, departamento: value as string })
                 }
               />
 
@@ -176,7 +167,7 @@ export default function Form() {
                 ]}
                 placeholder="Selecciona una provincia"
                 onSelect={
-                  (value) => setInfoUbicacion({ ...infoUbicacion, provincia: value as string })
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, provincia: value as string })
                 }
               />
 
@@ -191,59 +182,58 @@ export default function Form() {
                 ]}
                 placeholder="Selecciona un distrito"
                 onSelect={
-                  (value) => setInfoUbicacion({ ...infoUbicacion, distrito: value as string })
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, distrito: value as string })
                 }
               />
 
               {/* Dirección Detallada */}
               <InputText
                 label="Dirección detallada"
-                value={infoUbicacion.direccionDetallada}
+                value={formDataUbicacion.direccion}
                 htmlForm="direccionDetallada"
                 onChange={
-                  (value) => setInfoUbicacion({ ...infoUbicacion, direccionDetallada: value })
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, direccion: value })
+                }
+              />
+              {/* Latitud */}
+              <InputText
+                label="Latitud"
+                value={formDataUbicacion.latitud}
+                htmlForm="latitud de la empresa"
+                onChange={
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, latitud: value })
+                }
+              />
+              {/* Longitud */}
+              <InputText
+                label="Longitud"
+                value={formDataUbicacion.longitud}
+                htmlForm="longitud de la empresa"
+                onChange={
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, longitud: value })
+                }
+              />
+              {/* Ubigeo */}
+              <InputText
+                label="Ubigeo"
+                value={formDataUbicacion.ubigeo}
+                htmlForm="ubigeo de la empresa"
+                onChange={
+                  (value) => setFormDataUbicacion({ ...formDataUbicacion, ubigeo: value })
                 }
               />
             </div>
+            <div className="flex gap-3 pt-4">
+              <ButtonSubmitForm 
+                handleSubmit={() => registrarUbicacionEmpresa(formDataUbicacion)}
+                isLoading={isLoadingUbiEmpresa}
+                isError={isErrorUbiEmpresa}
+                textButton="Registrar información"
+                textError="Error al guardar los cambios"
+                color="blue"
+              />
+            </div>
           </div>
-        </div>
-
-        {/* Seguridad */}
-        <section className="bg-gray-900 border border-gray-800 rounded-lg p-6">
-          <div className="flex items-center mb-4 gap-3">
-            <Lock className="w-5 h-5 text-[#1f6feb]" />
-            <h2 className="text-xl font-semibold">Seguridad</h2>
-          </div>
-
-          <div className="space-y-4">
-            {/* Password Field */}
-            <InputPassword
-              label="Contraseña"
-              value={password}
-              htmlForm="password"
-              onChange={
-                (value) => setPassword(value)
-              }
-            />
-          </div>
-        </section>
-
-        {/* Action Buttons */}
-        <div className="flex justify-end gap-3 pt-4">
-          <ButtonCancelForm
-            handleCancel={() => console.log("Operación cancelada")}
-            isLoading={false}
-            textButton="Cancelar"
-            color="red"
-          />
-          <ButtonSubmitForm 
-            handleSubmit={() => actualizarDatosEmpresa(formData)}
-            isLoading={isLoading}
-            isError={isError}
-            textButton="Guardar Cambios"
-            textError="Error al guardar los cambios"
-            color="blue"
-          />
         </div>
       </div>
     </div>
