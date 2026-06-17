@@ -7,6 +7,12 @@ import InputSelectTest from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import type { UpdateDatosEmpresa, InfoUbicacionState } from "../../../types/datosEmpresa.type";
 
+/*
+  Se necesita verificar si los dos formularios 
+  funcionan correctamente, también se debe 
+  validar e implementar una interfaz que 
+  avisa si los datos fueron registrados. 
+*/
 
 export default function Form() {
   const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = registrarInfoEmpresarial();
