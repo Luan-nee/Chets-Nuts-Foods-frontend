@@ -18,7 +18,7 @@ interface FormCreateEmpleadoProps {
 }
 
 export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpleadoProps ) {
-  const { data: roles, isLoading: cargandoRoles, isError: errorRoles, fetchData: recargarRoles } = useFetchRoles();
+  const { data: roles, isLoading: cargandoRoles, isError: errorRoles, execute: recargarRoles } = useFetchRoles();
   const { isLoading: cargandoCreateEmpleado, errorMessage, successMessage, refresh: crearEmpleado } = useCreateEmpleado();
 
   const [ formData, setFormData ] = useState<CreateEmpleadoData>({

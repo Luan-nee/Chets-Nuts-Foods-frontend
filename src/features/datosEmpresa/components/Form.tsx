@@ -5,16 +5,14 @@ import { useRegistrarUbicacionEmpresa } from "../hook/useRegistrarUbicacionEmpre
 import InputText from "../../../components/ui/InputText";
 import InputSelectTest from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import ContentPage from "../../../components/layouts/ContentPage";
 import type { UpdateDatosEmpresa, InfoUbicacionState } from "../../../types/datosEmpresa.type";
 
-/*
-  Se necesita verificar si los dos formularios 
-  funcionan correctamente, también se debe 
-  validar e implementar una interfaz que 
-  avisa si los datos fueron registrados. 
-*/
+interface FormProps {
+  setShowFormCreate: (p: boolean) => void;
+}
 
-export default function Form() {
+export default function Form({setShowFormCreate}: FormProps) {
   const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = registrarInfoEmpresarial();
   const { isLoading: isLoadingUbiEmpresa , isError: isErrorUbiEmpresa, execute: registrarUbicacionEmpresa } = useRegistrarUbicacionEmpresa();
   const [formDataUbicacion, setFormDataUbicacion] = useState<InfoUbicacionState>({
@@ -41,23 +39,11 @@ export default function Form() {
 
   return (
     <div className="relative flex-1 flex flex-col">
-      {/* Header */}
-      <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-2">Configuraciones</h2>
-            <p className="text-sm text-gray-400">
-              Registra la información de tu empresa para generar guías de remisión y otros documentos relacionados. Asegúrate de que los datos sean correctos para evitar problemas futuros.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Form Sections */}
       <div className=" flex flex-col gap-4 overflow-auto px-8 py-6">
         <div className="grid grid-cols-2 items-start gap-4">
           {/* Información empresarial*/}
-          <div className="self-start bg-gray-900 border border-gray-700 rounded-lg p-6">
+          <div className="sehylf-start bg-gray-900 border border-gray-700 rounded-lg p-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
                 <User className="w-5 h-5 text-[#1f6feb]" />
@@ -121,7 +107,10 @@ export default function Form() {
             </div>
             <div className="flex gap-3 pt-4">
               <ButtonSubmitForm 
-                handleSubmit={() => registrarDatosEmpresarial(formDataEmpresa)}
+                handleSubmit={() => {
+                  registrarDatosEmpresarial(formDataEmpresa)
+                  setShowFormCreate(false)
+                }}
                 isLoading={isLoadingDatosEmpresa}
                 isError={isErrorDatosEmpresa}
                 textButton="Registrar información"
@@ -151,7 +140,7 @@ export default function Form() {
               <InputSelectTest
                 label="Departamento"
                 options={[
-                  { value: "Madre De Dios", label: "Madre De Dios" },
+                  { value: "MADRE DE DIOS", label: "MADRE DE DIOS" },
                   { value: "Lima", label: "Lima" },
                   { value: "Cusco", label: "Cusco" },
                   { value: "Arequipa", label: "Arequipa" },
@@ -231,7 +220,10 @@ export default function Form() {
             </div>
             <div className="flex gap-3 pt-4">
               <ButtonSubmitForm 
-                handleSubmit={() => registrarUbicacionEmpresa(formDataUbicacion)}
+                handleSubmit={() => {
+                  registrarUbicacionEmpresa(formDataUbicacion);
+                  setShowFormCreate(false);
+                }}
                 isLoading={isLoadingUbiEmpresa}
                 isError={isErrorUbiEmpresa}
                 textButton="Registrar información"
