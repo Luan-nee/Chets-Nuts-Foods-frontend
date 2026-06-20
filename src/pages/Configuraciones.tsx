@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import Form from "../features/datosEmpresa/components/Form";
 import Detalles from '../features/datosEmpresa/components/Detalles';
+import { useFetchInfoEmpresa } from '../features/datosEmpresa/hook/useFetchInfoEmpresa';
 
 export default function Configuraciones() {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
+  const { infoEmpresa } = useFetchInfoEmpresa();
+  console.log("🚀 ~ file: Configuraciones.tsx:8 ~ Configuraciones ~ infoEmpresa:", infoEmpresa)
   return (
     <div className="relative flex-1 flex flex-col">
       {/* Header */}

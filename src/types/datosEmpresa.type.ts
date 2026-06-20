@@ -23,3 +23,13 @@ export type InfoUbicacionState = {
   tipoEstado: "oficina";
   codigoSunat?: string; // solo puede tener 5 caracteres. 
 };
+
+export type ResponseObtenerInfoEmpresa = {
+  claveAcceso: string,
+  codigoMtc: string,
+  correo: string,
+  denominacion: string,
+  fechavigenciaregistro: string,
+  numeroRegistroMtc: string,
+  ruc: string
+}
