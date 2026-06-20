@@ -5,7 +5,6 @@ import { useRegistrarUbicacionEmpresa } from "../hook/useRegistrarUbicacionEmpre
 import InputText from "../../../components/ui/InputText";
 import InputSelectTest from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import ContentPage from "../../../components/layouts/ContentPage";
 import type { UpdateDatosEmpresa, InfoUbicacionState } from "../../../types/datosEmpresa.type";
 
 interface FormProps {
