@@ -1,15 +1,25 @@
 import { createContext, useContext, useEffect } from "react";
-import { getSocket } from "../socketConexion";
 import { useAuth } from "./AuthContext";
+import {  Socket } from "socket.io-client";
+import { socket } from "../const";
 
-const SocketContext = createContext(getSocket);
+const SocketContext = createContext<Socket | null>(null);
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
-  const {logout} = useAuth()
-  
+  const { logout,auth } = useAuth()
+
   useEffect(() => {
-    getSocket.connect();
-    getSocket.on("connect_error", (error) => {
+    if(!auth.token){
+      socket.disconnect()
+      return
+    }
+
+    socket.auth = {
+      token:auth.token
+    }
+    
+    socket.connect();
+    socket.on("connect_error", (error) => {
       console.log("conexion de socket no permitido");
       console.log(error.message);
 
@@ -22,13 +32,13 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     return () => {
-      getSocket.off("connect_error");
-      getSocket.disconnect();
+      socket.off("connect_error");
+      socket.disconnect();
     };
-  }, []);
+  }, [auth.token]);
 
   return (
-    <SocketContext.Provider value={getSocket}>
+    <SocketContext.Provider value={socket}>
       {children}
     </SocketContext.Provider>
   );
