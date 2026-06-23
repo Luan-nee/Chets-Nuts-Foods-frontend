@@ -20,46 +20,39 @@ export default class EstablecimientosApi extends BaseRequestApi {
   // private base_url_postman = `${url_base_postman}`;
   private base_url_production = `${url_base_production}/api/establecimientos`;
 
-  /* getAll */
+  /* obtener establecimientos */
   public async obtenerEstablecimientos(): Promise<BodyResponse<ResponseGetAll[]>> {
     return this.GET<BodyResponse<ResponseGetAll[]>>(
       `${this.base_url_production}`,
     ) as Promise<BodyResponse<ResponseGetAll[]>>;
   }
 
-  /* getById */
-  public async getById(id: number): Promise<BodyResponse<ResponseGetByID>> {
-    return this.request<BodyResponse<ResponseGetByID>>(
+  /* obtener toda la información de un establecimiento */
+  public async detallesEstablecimiento(id: number): Promise<BodyResponse<ResponseGetByID>> {
+    return this.GET<BodyResponse<ResponseGetByID>>(
       `${this.base_url_production}/${id}`,
-      {
-        method: "GET",
-      },
-    );
+    ) as Promise<BodyResponse<ResponseGetByID>>;
   }
 
-  /* create */
-  public async create(
-    body: CreateEstablecimiento,
-  ): Promise<BodyResponse<CreateEstablecimiento>> {
-    return this.request<BodyResponse<CreateEstablecimiento>>(
-      `${this.base_url_production}`,
-      {
-        method: "POST",
-        body,
-      },
-    );
-  }
-
-  /* update */
-  public async update(
+  /* actualizar información del establecimiento */
+  public async actualizarEstablecimiento(
     body: UpdateEstablecimiento,
   ): Promise<BodyResponse<UpdateEstablecimiento>> {
-    return this.request<BodyResponse<UpdateEstablecimiento>>(
-      `${this.base_url_production}`,
-      {
-        method: "PATCH",
-        body,
-      },
-    );
+    return this.PATCH<UpdateEstablecimiento>(
+      `${this.base_url_production}/${body.idEstablecimiento}`,
+      body,
+    ) as Promise<BodyResponse<UpdateEstablecimiento>>;
   }
+
+  /* registrar nuevo establecimiento */
+  public async registrarEstablecimiento(
+    body: CreateEstablecimiento,
+  ): Promise<BodyResponse<number>> {
+    return this.POST<number>(
+      `${this.base_url_production}`,
+      body,
+    ) as Promise<BodyResponse<number>>;
+  }
+
+  
 }
