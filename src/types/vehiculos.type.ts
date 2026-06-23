@@ -1,9 +1,15 @@
-import type { TipoVehiculo, EstadoVehiculo, UserRole } from './constantes.type';
+import type { TipoVehiculo, EstadoVehiculo, UserRole } from "./constantes.type";
 
 export type marca = "toyota" | "honda" | "ford" | "";
 export type modelo = "corolla" | "civic" | "mustang" | "";
 export type tipoVehiculo = "M3" | "M4" | "M5" | "";
 
+export type queryGetVehiculos = {
+  page: number;
+  estado?: EstadoVehiculo;
+  tipo?:tipoVehiculo,
+  placa?:string
+};
 
 export type ResponseGetAll = {
   idvehempresa: number;
@@ -15,7 +21,7 @@ export type ResponseGetAll = {
   tiposervicio: TipoVehiculo;
   capacidadCarga: string;
   estadovehiculo: EstadoVehiculo;
-}
+};
 
 export type ResponseGetByID = {
   idvehempresa: number;
@@ -28,7 +34,7 @@ export type ResponseGetByID = {
   capacidadCarga: string;
   fechacreado: Date;
   estadovehiculo: EstadoVehiculo;
-}
+};
 
 export type ResponseGetAllChoferes = {
   nombres: string;
@@ -40,7 +46,7 @@ export type ResponseGetAllChoferes = {
   numeroLicenciaConducir: string | null;
   rucuser: string | null;
   tipos: UserRole;
-}
+};
 
 export type CreateVehiculo = {
   anio: string;
@@ -52,21 +58,21 @@ export type CreateVehiculo = {
   vin?: string;
   tipo?: TipoVehiculo;
   numeroHabilitacion?: string;
-}
+};
 
 export type ResponseCreate = {
   message: string;
   idVehiculo: number;
-}
+};
 
 export type UpdateVehiculo = {
-  idVehiculo: number, //
-  anio: string, //
-  capacidadCarga: number, // kilogramos
-  marca: string, //
-  modelo: string //
-}
+  idVehiculo: number; //
+  anio: string; //
+  capacidadCarga: number; // kilogramos
+  marca: string; //
+  modelo: string; //
+};
 
 export type ResponseUpdate = {
   message: string;
-}
+};

@@ -12,7 +12,6 @@ createRoot(document.getElementById("root")!).render(
       richColors
       closeButton
       theme="dark"
-      toastOptions={{ unstyled: true, className: "my-custom-toast-container" }}
     />
   </StrictMode>,
 );
