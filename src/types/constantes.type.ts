@@ -20,8 +20,6 @@ export type TipoEstablecimiento =
 export type TipoVehiculo = "PUBLICO" | "PRIVADO";
 
 export const ESTADOS = [
-  "MANTENIMIENTO",
-  "OCUPADO",
   "RESERVADO",
   "INACTIVO",
   "OPERATIVO",

@@ -15,8 +15,6 @@ export default function Vehiculos() {
   const [estado, setEstado] = useState<EstadoVehiculo | string>("");
 
   const estados = [
-    "MANTENIMIENTO",
-    "OCUPADO",
     "RESERVADO",
     "INACTIVO",
     "OPERATIVO",

@@ -42,15 +42,12 @@ export default function TableVehiculos({
 
     const estado2 = isEstadoVehiculo(estado) ? estado : undefined;
 
-
   useEffect(() => {
     if(!busqueda) return
-    if(SearchPlaca === null) return;
-    if (!SearchPlaca.trim()) return;
 
     setQueryVehiculo({
       page: 1,
-      placa: SearchPlaca,
+      placa: SearchPlaca === null?undefined:SearchPlaca,
       estado:estado2
     });
     setBusqueda(false)
