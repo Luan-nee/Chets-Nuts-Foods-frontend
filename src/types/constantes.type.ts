@@ -28,3 +28,10 @@ export const ESTADOS = [
 export type EstadoVehiculo = (typeof ESTADOS)[number];
 
 export type EstadoTransporte = "INICIO" | "EN CAMINO" | "FINALIZADO" | "CANCELADO"
+
+export interface PropsNotificaciones {
+  icon: "PRODUCTO" | "VEHICULO" | "NOTIFICACION" | "USER";
+  titulo: string;
+  descripcion: string;
+  t: any;
+}
