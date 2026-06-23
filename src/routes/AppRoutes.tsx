@@ -10,6 +10,7 @@ import Configuraciones from "../pages/Configuraciones";
 import Productos from "../pages/Productos";
 import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
+import Establecimientos from "../pages/Establecimientos";
 import Test from "../pages/Test";
 // import GuiasDeRemision from "../pages/GuiasDeRemision";
 // import { SocketProvider } from "../context/SocketContext";
@@ -41,6 +42,16 @@ export default function AppRoutes() {
               </PrivateRoute>
             }
           /> */}
+          <Route
+            path="/establecimientos"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Establecimientos />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/test"
             element={
