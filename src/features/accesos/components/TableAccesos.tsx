@@ -86,7 +86,7 @@ export default function TableAccesos({
         total_data={infoPaginacion.total_data} 
       />
 
-      <Table tableHeader={tableHeader}>
+      <Table tableHeader={tableHeader} cantidadDatos={accesos.length}>
         {accesos?.map((acceso, index) => (
           <tr
             key={index}

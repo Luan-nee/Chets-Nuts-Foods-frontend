@@ -192,7 +192,7 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
               </div>
               
               <div className="overflow-x-auto">
-                <Table tableHeader={headerTable}>
+                <Table tableHeader={headerTable} cantidadDatos={detallesGre?.productos.length || 0}>
                   {detallesGre?.productos.map((producto, index) => (
                     <tr key={index} className="hover:bg-gray-800/50 transition-colors">
                       <td className="px-6 py-4">

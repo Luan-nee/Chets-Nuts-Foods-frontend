@@ -1,30 +1,30 @@
 import { useState } from "react";
 import DatosEmpresa from "../../../api/DatosEmpresa.api";
-import type { UpdateDatosEmpresa } from "../../../types/datosEmpresa.type";
+import type { InfoUbicacionState } from "../../../types/datosEmpresa.type";
 import type { BodyResponse } from "../../../types/bodyResponse.type";
 
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: UpdateDatosEmpresa) => Promise<BodyResponse<string> | null>;
+  execute: (body: InfoUbicacionState) => Promise<BodyResponse<string> | null>;
 }
 
-export const useUpdateDatosEmpresa = (): FetchState => {
+export const useRegistrarUbicacionEmpresa = (): FetchState => {
   const datosEmpresa_api = new DatosEmpresa();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const actualizarDatosEmpresa = async (
-    body: UpdateDatosEmpresa,
+  const registrarDatosEmpresarial = async (
+    body: InfoUbicacionState,
   ): Promise<BodyResponse<string>> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await datosEmpresa_api.setDatos(body);
+      const response = await datosEmpresa_api.registraUbicacionEmpresa(body);
 
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
@@ -49,5 +49,5 @@ export const useUpdateDatosEmpresa = (): FetchState => {
     }
   };
 
-  return { isLoading, isError, message, execute: actualizarDatosEmpresa };
+  return { isLoading, isError, message, execute: registrarDatosEmpresarial };
 };

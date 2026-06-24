@@ -10,108 +10,106 @@ import Configuraciones from "../pages/Configuraciones";
 import Productos from "../pages/Productos";
 import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
+import Establecimientos from "../pages/Establecimientos";
 import Test from "../pages/Test";
-import { SocketProvider } from "../context/SocketContext";
-
-
+// import { SocketProvider } from "../context/SocketContext";
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <SocketProvider>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Trabajadores />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/test"
-              element={
+        <Routes>
+          <Route path="/login" element={<Login />} />
+
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
                 <MainLayout>
-                  <Test />
+                  <Trabajadores />
                 </MainLayout>
-              }
-            />
-            <Route
-              path="/clientes"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Clientes />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/productos"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Productos />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/seguimiento"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Seguimiento />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/configuraciones"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Configuraciones />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/trabajadores"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Trabajadores />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/vehiculos"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <Vehiculos />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <PrivateRoute>
-                  <MainLayout>
-                    <NotFound />
-                  </MainLayout>
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-        </SocketProvider>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/test"
+            element={
+              <MainLayout>
+                <Test />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/clientes"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Clientes />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/productos"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Productos />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/seguimiento"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Seguimiento />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/configuraciones"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Configuraciones />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/trabajadores"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Trabajadores />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/vehiculos"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Vehiculos />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <NotFound />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );

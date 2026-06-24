@@ -82,7 +82,7 @@ export default function TableEmpleados({
         total_data={infoPaginacion.total_data} 
       />
 
-      <Table tableHeader={tableHeader}>
+      <Table tableHeader={tableHeader} cantidadDatos={empleados.length}>
         {empleados?.map((empleado, index) => (
           <tr
             key={index}

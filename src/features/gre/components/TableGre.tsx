@@ -85,7 +85,7 @@ export default function TableGre({ setShowDetallesGre, setShowFormCreateGre, set
       total_data={infoPaginacion.total_data} 
       />
 
-      <Table tableHeader={tableHeader}>
+      <Table tableHeader={tableHeader} cantidadDatos={guiasRemision.length}>
         {guiasRemision?.map((guia, index) => (
           <tr key={index} className="hover:bg-gray-800/50 transition-colors">
             <td className="px-6 py-4">
