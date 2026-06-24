@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import Form from "../features/datosEmpresa/components/Form";
-import Detalles from '../features/datosEmpresa/components/Detalles';
-import { useFetchInfoEmpresa } from '../features/datosEmpresa/hook/useFetchInfoEmpresa';
+import DetallesInfoEstablecimiento from '../features/datosEmpresa/components/DetallesInfoEstablecimiento'
+import DetallesInfoEmpresa from '../features/datosEmpresa/components/DetallesInfoEmpresarial'
+import FormRegistrarInfoEmpresarial from '../features/datosEmpresa/components/FormRegistrarInfoEmpresarial'
+import FormRegistrarInfoEstablecimiento from '../features/datosEmpresa/components/FormRegistrarInfoEstablecimiento'
 
 export default function Configuraciones() {
-  const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
-  const { infoEmpresa } = useFetchInfoEmpresa();
-  console.log("🚀 ~ file: Configuraciones.tsx:8 ~ Configuraciones ~ infoEmpresa:", infoEmpresa)
+  const [showFormInfoEmpresarial, setShowFormInfoEmpresarial] = useState<boolean>(false);
+  const [showFormInfoEstablecimiento, setShowFormInfoEstablecimiento] = useState<boolean>(false);
+
   return (
     <div className="relative flex-1 flex flex-col">
       {/* Header */}
@@ -18,27 +19,28 @@ export default function Configuraciones() {
               Registra la información de tu empresa para generar guías de remisión y otros documentos relacionados. Asegúrate de que los datos sean correctos para evitar problemas futuros.
             </p>
           </div>
-          { showFormCreate ? (
-            <button 
-              onClick={() => setShowFormCreate(false)}
-            className="flex text-nowrap items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-              Regresar
-            </button>
-          ) : (
-            <button 
-              onClick={() => setShowFormCreate(true)}
-            className="flex text-nowrap items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-              Modificar datos
-            </button>
-          )}
         </div>
       </div>
-      { showFormCreate ? (
-        <Form setShowFormCreate={setShowFormCreate}/>
-      ) : (
-        <Detalles />
-      )}
-      
+      <div className="grid grid-cols-2 items-start gap-4 p-6">
+        {
+          showFormInfoEstablecimiento ? (
+            <FormRegistrarInfoEstablecimiento 
+              setShowForm={setShowFormInfoEstablecimiento} 
+            />
+          ) : (
+            <DetallesInfoEstablecimiento setShowForm={setShowFormInfoEstablecimiento} />
+          )
+        }
+        {
+          showFormInfoEmpresarial ? (
+            <FormRegistrarInfoEmpresarial
+              setShowForm={setShowFormInfoEmpresarial}
+            />
+          ) : (
+            <DetallesInfoEmpresa setShowForm={setShowFormInfoEmpresarial} />
+          )
+        }
+      </div>
     </div>
   );
 }

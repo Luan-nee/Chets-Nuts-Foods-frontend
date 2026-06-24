@@ -28,10 +28,10 @@ export default class EstablecimientosApi extends BaseRequestApi {
   }
 
   /* obtener toda la información de un establecimiento */
-  public async detallesEstablecimiento(id: number): Promise<BodyResponse<ResponseGetByID>> {
-    return this.GET<BodyResponse<ResponseGetByID>>(
+  public async detallesEstablecimiento(id: number): Promise<BodyResponse<ResponseGetByID[]>> {
+    return this.GET<BodyResponse<ResponseGetByID[]>>(
       `${this.base_url_production}/${id}`,
-    ) as Promise<BodyResponse<ResponseGetByID>>;
+    ) as Promise<BodyResponse<ResponseGetByID[]>>;
   }
 
   /* actualizar información del establecimiento */

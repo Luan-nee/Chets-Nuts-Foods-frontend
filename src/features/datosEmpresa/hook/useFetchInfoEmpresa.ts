@@ -38,7 +38,7 @@ export const useFetchInfoEmpresa = (): FetchState => {
         return response;
       } else {
         setIsError(true);
-        setMessage("Error al obtener la información de la empresa");
+        setMessage("Los datos de la empresa no se encuentran registrados");
         return response;
       }
     } catch (error: any) {

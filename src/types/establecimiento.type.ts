@@ -31,7 +31,7 @@ export type ResponseGetByID = {
   tipoestablecimiento: TipoEstablecimiento;
   ubigeo: string;   
   activo: boolean;  
-  fechaCreacion: Date;
+  fechaCreacion: string;
 }
 
 export interface CreateEstablecimiento {
