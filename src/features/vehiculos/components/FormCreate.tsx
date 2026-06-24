@@ -13,6 +13,7 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
+import Swal from "sweetalert2";
 
 interface FormCreateProps {
   showFormCreate: (p: boolean) => void;
@@ -144,10 +145,24 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
             textButton="Cancelar"
           />
           <ButtonSubmitForm
-            handleSubmit={() => {
-              registrarVehiculo(formData);
-              console.log("Datos a enviar:", formData);
-            }}
+            handleSubmit={async () => {
+              const vehiculonuevo = await registrarVehiculo(formData);
+              const status = vehiculonuevo.status;
+              const mensaje = vehiculonuevo.message? vehiculonuevo.message :"Vehiculo registrado exitosamente";
+              Swal.fire({
+                title: mensaje,
+                icon: status,
+                position: "center",
+                showConfirmButton: status === "success"?false:true,
+                theme:"dark",
+                timer:1500
+              }).then(()=>{
+                if(vehiculonuevo.status === "success"){
+                  showFormCreate(false)
+                }
+              });
+            }
+            }
             isLoading={isLoading}
             isError={isError}
             textButton="Guardar"

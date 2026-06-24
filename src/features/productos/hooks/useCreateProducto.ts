@@ -3,13 +3,14 @@ import { useState } from 'react';
 import ProductoApi from '../../../api/producto.api';
 // importación de tipos
 import type { CreateProducto } from '../../../types/producto.type';
+import type { BodyResponse } from '../../../types/bodyResponse.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreateProducto) => void;
+  execute: (body: CreateProducto) => Promise<BodyResponse<any>>;
 }
 
 export const useCreateProducto = (): FetchState => {
@@ -18,21 +19,20 @@ export const useCreateProducto = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const registrarProducto = async (bodyProducto: CreateProducto) => {
+  const registrarProducto = async (bodyProducto: CreateProducto):Promise<BodyResponse<any>> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
       const response = await producto_api.create(bodyProducto);
-      
       if (response.status == "success") {
         setMessage("Producto registrado exitosamente");
-        return response;
+        return { ...response, message};
       } else {
         setIsError(true);
         setMessage("Error al registrar el producto");
-        return response;
+        return {...response,message};
       }
     } catch (error) {
       setIsError(true);

@@ -38,8 +38,9 @@ export default class BaseRequestApi {
     if (response.status === 401) {
       this.redirectToLogin();
     }
-
-    return response.json();
+    const response2 = await response.json()
+    console.log(response2);
+    return response2;
   }
 
   public async POST<T>(url: string, body: unknown ): Promise<BodyResponse<T>> {

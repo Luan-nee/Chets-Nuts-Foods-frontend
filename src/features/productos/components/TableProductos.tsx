@@ -4,6 +4,10 @@ import ContentSectionProcess from "../../../components/layouts/ContentSectionPro
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 import { useFetchProductos } from "../hooks/useFetchProductos";
 import { useAutorizacion } from "../../../config/useAutorizacion";
+import { useSocket } from "../../../context/SocketContext";
+import { useEffect } from "react";
+import type { ResponseCreateProducto } from "../../../types/producto.type";
+import { NotificationProductDefect } from "../../../components/messages/NotificationProductDefect";
 
 interface PropTableProductos {
   setSelectProductoId: (p: number | null) => void;
@@ -17,6 +21,8 @@ export default function TableProductos({
   setPaginActual
 }: PropTableProductos) {
   const { tienePermiso } = useAutorizacion();
+   const socket = useSocket();
+
   const {
     productos,
     isLoading,
@@ -25,6 +31,25 @@ export default function TableProductos({
     execute: recargarProductos,
     infoPaginacion
   } = useFetchProductos();
+
+
+ useEffect(() => {
+   if(socket === null){
+    return
+   }
+
+   const handler = (data: ResponseCreateProducto) => {
+     NotificationProductDefect(data);
+     productos.push(data)
+   };
+
+   socket.on("server::newProductDefect", handler);
+
+   return () => {
+     socket.off("server::newProductDefect", handler);
+   };
+ }, [socket]);
+
 
   const tableHeader: string[] = [
     "Nº",

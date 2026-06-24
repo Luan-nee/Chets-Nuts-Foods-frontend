@@ -5,15 +5,25 @@ import ContentSectionProcess from "../../../components/layouts/ContentSectionPro
 // importación de custom hooks
 import { useFetchVehiculos } from "../hooks/useFetchVehiculos";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
+import { useEffect } from "react";
+import { ESTADOS, type EstadoVehiculo } from "../../../types/constantes.type";
 
 interface PropTableVehiculo {
   setShowFormUpdate: (p: boolean) => void;
-  setSelectVehiculoId: (p: number| null) => void;
+  setSelectVehiculoId: (p: number | null) => void;
+  SearchPlaca: string | null;
+  setBusqueda: (p: boolean) => void;
+  estado?:string;
+  busqueda: boolean;
 }
 
 export default function TableVehiculos({
   setShowFormUpdate,
   setSelectVehiculoId,
+  SearchPlaca,
+  setBusqueda,
+  busqueda,
+  estado
 }: PropTableVehiculo) {
   
   const {
@@ -21,9 +31,27 @@ export default function TableVehiculos({
     isLoading: vehiculosIsLoading,
     isError: vehiculosIsError,
     execute: recargarVehiculos,
-    setPagina,
+    setQueryVehiculo,
     infoPaginacion,
   } = useFetchVehiculos();
+
+
+  
+    const isEstadoVehiculo = (value: any): value is EstadoVehiculo =>
+      ESTADOS.includes(value);
+
+    const estado2 = isEstadoVehiculo(estado) ? estado : undefined;
+
+  useEffect(() => {
+    if(!busqueda) return
+
+    setQueryVehiculo({
+      page: 1,
+      placa: SearchPlaca === null?undefined:SearchPlaca,
+      estado:estado2
+    });
+    setBusqueda(false)
+  }, [busqueda]);
 
   const tableHeader: string[] = [
     "Placa",
@@ -35,18 +63,21 @@ export default function TableVehiculos({
     "Acciones",
   ];
 
+  const cambiarPagina = (pagina: number) => {
+    setQueryVehiculo({page:pagina});
+  };
   return (
     <ContentSectionProcess 
       isLoading={vehiculosIsLoading}
       isError={vehiculosIsError}
       textError="Error al cargar los vehículos."
       textButtonError="Reintentar"
-      fetchData={() => recargarVehiculos(infoPaginacion.pagina_actual)}
+      fetchData={() => recargarVehiculos({page:infoPaginacion.pagina_actual})}
     >
 
     <div className="flex-1 overflow-auto px-8 py-6">
       <div className="p-4 flex justify-end gap-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setPagina(infoPaginacion.pagina_actual)}>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setQueryVehiculo({page:infoPaginacion.pagina_actual})}>
           Recargar
         </button>
       </div>
@@ -54,7 +85,7 @@ export default function TableVehiculos({
       <ButtonsPagination 
       total_paginas={infoPaginacion.total_paginas} 
       pivote={infoPaginacion.pagina_actual} 
-      fetchData={setPagina}
+      fetchData={cambiarPagina}
       datos_por_pagina={infoPaginacion.datos_por_pagina} 
       total_data={infoPaginacion.total_data} 
       />

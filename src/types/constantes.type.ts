@@ -19,6 +19,19 @@ export type TipoEstablecimiento =
 
 export type TipoVehiculo = "PUBLICO" | "PRIVADO";
 
-export type EstadoVehiculo = "OPERATIVO" | "MANTENIMIENTO";
+export const ESTADOS = [
+  "RESERVADO",
+  "INACTIVO",
+  "OPERATIVO",
+] as const;
+
+export type EstadoVehiculo = (typeof ESTADOS)[number];
 
 export type EstadoTransporte = "INICIO" | "EN CAMINO" | "FINALIZADO" | "CANCELADO"
+
+export interface PropsNotificaciones {
+  icon: "PRODUCTO" | "VEHICULO" | "NOTIFICACION" | "USER";
+  titulo: string;
+  descripcion: string;
+  t: any;
+}

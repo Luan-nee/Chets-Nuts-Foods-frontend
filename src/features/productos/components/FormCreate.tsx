@@ -6,6 +6,7 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import { useCreateProducto } from "../hooks/useCreateProducto";
 import type { CreateProducto } from "../../../types/producto.type";
+import Swal from "sweetalert2";
 
 interface FormCreateProps {
   showFormCreate: (p: boolean) => void;
@@ -69,8 +70,22 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
             textButton="Cancelar"
           />
           <ButtonSubmitForm
-            handleSubmit={() => {
-              registrarProducto(formData);
+            handleSubmit={async() => {
+              const datoss  = await registrarProducto(formData);
+              const status = datoss.status
+              const mensaje = datoss.message? datoss.message :"Producto registrado exitosamente";
+              Swal.fire({
+                title: mensaje,
+                icon: status,
+                position: "center",
+                showConfirmButton: status === "success"?false:true,
+                theme:"dark",
+                timer:1500
+              }).then(()=>{
+                if(datoss.status === "success"){
+                  showFormCreate(false)
+                }
+              });
             }}
             isLoading={isLoading}
             isError={isError}
