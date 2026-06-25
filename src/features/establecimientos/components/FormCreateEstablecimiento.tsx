@@ -2,25 +2,14 @@ import { useState } from "react";
 import { ArrowLeft, Building2 } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
-import InputNumber from "../../../components/ui/InputNumber";
-import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { useCreateEstablecimiento } from "../hooks/useCreateEstablecimiento";
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
-import type { TipoEstablecimiento } from "../../../types/constantes.type";
 
 interface FormCreateEstablecimientoProps {
 	setShowFormCreateEstablecimiento: (value: boolean) => void;
 }
-
-const tipoEstablecimientoOptions: Array<{ value: TipoEstablecimiento; label: string }> = [
-	{ value: "fiscal", label: "Fiscal" },
-	{ value: "anexo", label: "Anexo" },
-	{ value: "almacen", label: "Almacén" },
-	{ value: "oficina", label: "Oficina" },
-	{ value: "no_registrado", label: "No registrado" },
-];
 
 export default function FormCreateEstablecimiento({
 	setShowFormCreateEstablecimiento,
@@ -28,36 +17,23 @@ export default function FormCreateEstablecimiento({
 	const {
 		isLoading: cargandoCreate,
 		isError: errorCreate,
-		message: messageCreate,
 		execute: registrarEstablecimiento,
 	} = useCreateEstablecimiento();
 
 	const [formData, setFormData] = useState<CreateEstablecimiento>({
-		idResponsable: 0,
+		idResponsable: 1,
 		nombreEstablecimiento: "",
 		direccion: "",
 		descripcion: "",
-		latitud: "",
-		longitud: "",
+		latitud: "-12.589880",
+		longitud: "-69.210107",
 		distrito: "",
 		provincia: "",
 		departamento: "",
-		ubigeo: "",
-		tipoEstado: "no_registrado",
-		codigoSunat: "",
+		ubigeo: "17001",
+		tipoEstado: "oficina",
+		codigoSunat: "affe",
 	});
-
-	const handleSubmit = async (): Promise<void> => {
-		const response = await registrarEstablecimiento({
-			...formData,
-			codigoSunat: formData.codigoSunat?.trim() ? formData.codigoSunat : undefined,
-			tipoEstado: formData.tipoEstado ?? "no_registrado",
-		});
-
-		if (response.status === "success") {
-			setShowFormCreateEstablecimiento(false);
-		}
-	};
 
 	return (
 		<ContentPage>
@@ -88,35 +64,12 @@ export default function FormCreateEstablecimiento({
 				</div>
 
 				<div className="space-y-6">
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputNumber
-							defaultValue={formData.idResponsable}
-							label="ID responsable"
-							simbol="usuario"
-							onChange={(value) => setFormData((prev) => ({ ...prev, idResponsable: value }))}
-							placeholder="Ingresa el ID del responsable"
-						/>
-						<InputText
-							label="Código SUNAT (opcional)"
-							value={formData.codigoSunat ?? ""}
-							htmlForm="codigoSunat"
-							onChange={(value) => setFormData((prev) => ({ ...prev, codigoSunat: value }))}
-						/>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-1 gap-6">
 						<InputText
 							label="Nombre del establecimiento"
 							value={formData.nombreEstablecimiento}
 							htmlForm="nombreEstablecimiento"
 							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
-						/>
-						<InputSelect
-							label="Tipo de establecimiento"
-							options={tipoEstablecimientoOptions}
-							placeholder="Selecciona el tipo de establecimiento"
-							onSelect={(value) => setFormData((prev) => ({ ...prev, tipoEstado: value as TipoEstablecimiento }))}
-							valueSelected={formData.tipoEstado}
 						/>
 					</div>
 
@@ -125,13 +78,13 @@ export default function FormCreateEstablecimiento({
 							label="Departamento"
 							value={formData.departamento}
 							htmlForm="departamento"
-							onChange={(value) => setFormData((prev) => ({ ...prev, departamento: value }))}
+							onChange={(value) => setFormData((prev) => ({ ...prev, departamento: value.toUpperCase() }))}
 						/>
 						<InputText
-							label="Provincia"
-							value={formData.provincia}
-							htmlForm="provincia"
-							onChange={(value) => setFormData((prev) => ({ ...prev, provincia: value }))}
+							label="Dirección"
+							value={formData.direccion}
+							htmlForm="direccion"
+							onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
 						/>
 					</div>
 
@@ -140,25 +93,10 @@ export default function FormCreateEstablecimiento({
 							label="Distrito"
 							value={formData.distrito}
 							htmlForm="distrito"
-							onChange={(value) => setFormData((prev) => ({ ...prev, distrito: value }))}
+							onChange={(value) => setFormData((prev) => ({ ...prev, distrito: value.toUpperCase() }))}
 						/>
 						<InputText
-							label="Ubigeo"
-							value={formData.ubigeo}
-							htmlForm="ubigeo"
-							onChange={(value) => setFormData((prev) => ({ ...prev, ubigeo: value }))}
-						/>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
-							label="Dirección"
-							value={formData.direccion}
-							htmlForm="direccion"
-							onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
-						/>
-						<InputText
-							label="Descripción"
+							label="Referencias"
 							value={formData.descripcion}
 							htmlForm="descripcion"
 							onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
@@ -167,25 +105,13 @@ export default function FormCreateEstablecimiento({
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<InputText
-							label="Latitud"
-							value={formData.latitud}
-							htmlForm="latitud"
-							onChange={(value) => setFormData((prev) => ({ ...prev, latitud: value }))}
-						/>
-						<InputText
-							label="Longitud"
-							value={formData.longitud}
-							htmlForm="longitud"
-							onChange={(value) => setFormData((prev) => ({ ...prev, longitud: value }))}
+							label="Provincia"
+							value={formData.provincia}
+							htmlForm="provincia"
+							onChange={(value) => setFormData((prev) => ({ ...prev, provincia: value.toUpperCase() }))}
 						/>
 					</div>
 				</div>
-
-				{messageCreate ? (
-					<p className={`mt-5 text-sm ${errorCreate ? "text-rose-300" : "text-emerald-300"}`}>
-						{messageCreate}
-					</p>
-				) : null}
 
 				<div className="flex gap-4 mt-8">
 					<div className="flex flex-row gap-4 w-full justify-end">
@@ -197,7 +123,10 @@ export default function FormCreateEstablecimiento({
 								color="red"
 							/>
 							<ButtonSubmitForm
-								handleSubmit={handleSubmit}
+								handleSubmit={async () => {
+									await registrarEstablecimiento(formData);
+									setShowFormCreateEstablecimiento(false);
+								}}
 								isLoading={cargandoCreate}
 								isError={errorCreate}
 								textButton="Guardar establecimiento"

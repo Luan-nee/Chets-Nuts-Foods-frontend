@@ -1,13 +1,14 @@
 import { useState } from "react";
 import EstablecimientosApi from "../../../api/Establecimientos.api";
-import type { BodyResponse } from "../../../types/bodyResponse.type";
+import { InfoSuccess } from '../../../components/messages/InfoSuccess';
+import { InfoError } from '../../../components/messages/InfoError';
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
 
 interface FetchState {
 	isLoading: boolean;
 	isError: boolean;
 	message: string;
-	execute: (body: CreateEstablecimiento) => Promise<BodyResponse<number>>;
+	execute: (body: CreateEstablecimiento) => void;
 }
 
 export const useCreateEstablecimiento = (): FetchState => {
@@ -18,7 +19,7 @@ export const useCreateEstablecimiento = (): FetchState => {
 
 	const createEstablecimiento = async (
 		body: CreateEstablecimiento,
-	): Promise<BodyResponse<number>> => {
+	): Promise<void> => {
 		try {
 			setIsLoading(true);
 			setIsError(false);
@@ -28,20 +29,16 @@ export const useCreateEstablecimiento = (): FetchState => {
 
 			if (response.status === "success") {
 				setMessage("Establecimiento registrado exitosamente");
+				InfoSuccess("ESTABLECIMIENTO", "Establecimiento registrado exitosamente");
 			} else {
 				setIsError(true);
 				setMessage("Error al registrar el establecimiento");
+				InfoError("ESTABLECIMIENTO", `${response.message ?? "El error no está especificado por el backend"}`);
 			}
-
-			return response;
 		} catch (error: any) {
-			setIsError(true);
+			setIsError(true);0
 			setMessage("Se produjo un error al registrar el establecimiento en el frontend");
-
-			return {
-				status: "error",
-				message: "Error al registrar el establecimiento",
-			};
+			InfoError("ESTABLECIMIENTO", "Se produjo un error al registrar el establecimiento en el frontend");
 		} finally {
 			setIsLoading(false);
 		}
