@@ -1,58 +1,63 @@
 import { useState, useEffect } from 'react';
-// importación de clases como servicios
-import GreService from '../services/gre.service';
-// importación de tipos
-import type { simpleGreType } from '../types/gre.type';
+import GreService from '../../../api/gre.api';
+import type { ResponseGetAll } from '../../../types/gre.type';
 import type { PaginationInfo } from '../../../types/bodyResponse.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  data: simpleGreType[] | null;
+  guias: ResponseGetAll[] | null;
   isLoading: boolean;
   isError: boolean;
-  fetchData: (pagina: number) => Promise<void>;
+  message: string;
+  execute: (pagina: number) => void;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
 
 export const useFetchGuiasRemision = (): FetchState => {
-  const greService = new GreService();
-  const [data, setData] = useState<simpleGreType[] | null>(null);
+  const Gre_api = new GreService();
+  const [guias, setGuias] = useState<ResponseGetAll[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
   const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
     total_data: 0,
     total_paginas: 0,
     pagina_actual: 1,
     datos_por_pagina: 10,
   });
-  const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
+  
 
   // Función asíncrona para obtener los datos
-  const fetchData = async (nueva_pagina: number) => {
+  const ObtenerGuias = async (nueva_pagina: number) => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await greService.getGuiasRemision(nueva_pagina);
-      // Manejo de errores basado en el estado y el mensaje de la respuesta
-      if (response.status !== "success") {
-        throw new Error(response.message);
-      }
+      setMessage("");
 
-      setData(response.data);
-      setInfoPaginacion(response.pagination);
+      const response = await Gre_api.ListarGuias(nueva_pagina);
+      
+      // Manejo de errores basado en el estado y el mensaje de la respuesta
+      if (response.status == "success"){
+        setMessage("Accesos obtenidos exitosamente");
+        setGuias(response.data ?? []);
+        setInfoPaginacion(response.pagination);
+      } else {
+        setIsError(true);
+        setMessage("Error al obtener las guias de remisión");
+      }
     } catch (error) {
-      console.error("Fetch error: ", error);
       setIsError(true);
+      setMessage("Se produjo un error al obtener las guias de remisión en el frontend");
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData(pagina);
-    console.log("useFetchGuiasRemision: datos de guías de remisión obtenidos");
+    ObtenerGuias(pagina);
   }, [pagina]);
 
-  return { data, isLoading, isError, fetchData, setPagina, infoPaginacion };
+  return { guias, isLoading, isError, message, execute: ObtenerGuias, setPagina, infoPaginacion };
 };
