@@ -22,7 +22,7 @@ export default function FormRegistrarInfoEstablecimiento({setShowForm}: FormRegi
     descripcion: "empresa principal",
     latitud: "",
     longitud: "",
-    ubigeo: "",
+    ubigeo: "211102",
     idResponsable: 1,
     tipoEstado: "oficina"
   });

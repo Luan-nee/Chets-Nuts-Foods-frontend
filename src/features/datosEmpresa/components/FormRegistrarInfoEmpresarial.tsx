@@ -19,7 +19,9 @@ export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistra
     numeroRegistroMtc: "",
     correo: "",
     codigoMtc: "",
-    fechaVigenciaRegistroMtc: ""
+    fechaVigenciaRegistroMtc: "",
+    urlApi: "https://sandbox.apisunat.pe/api/v3/dispatches",
+    claveAcceso: "537.KqEU17Wl0lzO3jYjhVR2SNfqGnqtKFOvoJa7MRyzTrPHfvqeQFrA3xSAPnXaRRtaYdL0oyKVVagFOoIW2OOtKn735RGiH1sYIPR7Ixr5Dx9fIP54mp286t07"
   });
 
   return (
