@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import DatosEmpresa from "../../../api/DatosEmpresa.api";
 import type { ResponseObtenerInfoEmpresa } from "../../../types/datosEmpresa.type";
-import type { BodyResponse } from "../../../types/bodyResponse.type";
+import { InfoError } from "../../../components/messages/InfoError"
+import { InfoSuccess } from "../../../components/messages/InfoSuccess"
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
@@ -9,9 +10,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: () => Promise<
-    BodyResponse<ResponseObtenerInfoEmpresa>
-  >;
+  execute: () => void;
 }
 
 export const useFetchInfoEmpresa = (): FetchState => {
@@ -21,9 +20,7 @@ export const useFetchInfoEmpresa = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const getInfoEmpresa = async (): Promise<
-    BodyResponse<ResponseObtenerInfoEmpresa>
-  > => {
+  const getInfoEmpresa = async (): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -35,19 +32,16 @@ export const useFetchInfoEmpresa = (): FetchState => {
       if (response.status === "success") {
         setMessage("Información de la empresa obtenida exitosamente");
         setInfoEmpresa(response.data ?? null); // Aseguramos que infoEmpresa sea un objeto, incluso si data es undefined
-        return response;
+        InfoSuccess("ÉXITO" ,`Información de la empresa obtenida exitosamente`);
       } else {
         setIsError(true);
         setMessage("Los datos de la empresa no se encuentran registrados");
-        return response;
+        InfoError("ERROR" ,`Error: ${response.message}`);
       }
     } catch (error: any) {
       setIsError(true);
       setMessage("Se produjo un error al obtener la información de la empresa en el frontend");
-      return {
-        status: "error",
-        message: "Error al obtener la información de la empresa",
-      };
+      InfoError("ERROR" , "Error: Se produjo un error al obtener la información de la empresa en el frontend");
     } finally {
       setIsLoading(false);
     }
