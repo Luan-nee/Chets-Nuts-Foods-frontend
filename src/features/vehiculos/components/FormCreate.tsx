@@ -13,14 +13,17 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
-import Swal from "sweetalert2";
 
 interface FormCreateProps {
   showFormCreate: (p: boolean) => void;
 }
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
-  const { isLoading, isError, execute: registrarVehiculo } = useCreateVehiculo();
+  const {
+    isLoading,
+    isError,
+    execute: registrarVehiculo,
+  } = useCreateVehiculo();
 
   const [formData, setFormData] = useState<CreateVehiculo>({
     anio: "",
@@ -28,7 +31,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
     marca: "",
     modelo: "",
     placa: "",
-    tipoVehiculo: ""
+    tipoVehiculo: "",
   });
 
   return (
@@ -146,23 +149,9 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           />
           <ButtonSubmitForm
             handleSubmit={async () => {
-              const vehiculonuevo = await registrarVehiculo(formData);
-              const status = vehiculonuevo.status;
-              const mensaje = vehiculonuevo.message? vehiculonuevo.message :"Vehiculo registrado exitosamente";
-              Swal.fire({
-                title: mensaje,
-                icon: status,
-                position: "center",
-                showConfirmButton: status === "success"?false:true,
-                theme:"dark",
-                timer:1500
-              }).then(()=>{
-                if(vehiculonuevo.status === "success"){
-                  showFormCreate(false)
-                }
-              });
-            }
-            }
+              await registrarVehiculo(formData);
+              showFormCreate(false);
+            }}
             isLoading={isLoading}
             isError={isError}
             textButton="Guardar"

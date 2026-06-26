@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import Vehiculo from '../../../api/Vehiculos.api';
-import type { CreateVehiculo, ResponseCreate } from '../../../types/vehiculos.type'
-import type { BodyResponse } from '../../../types/bodyResponse.type';
+import { InfoSuccess } from '../../../components/messages/InfoSuccess';
+import { InfoError, InfoErrorSwal } from '../../../components/messages/InfoError';
+import { InfoWarning } from '../../../components/messages/InfoWarning';
+import type { CreateVehiculo } from '../../../types/vehiculos.type'
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreateVehiculo) => Promise<BodyResponse<ResponseCreate>>;
+  execute: (body: CreateVehiculo) => void;
 }
 
 export const useCreateVehiculo = (): FetchState => {
@@ -17,7 +19,7 @@ export const useCreateVehiculo = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const createVehiculo = async (body: CreateVehiculo): Promise<BodyResponse<ResponseCreate>> => {
+  const createVehiculo = async (body: CreateVehiculo): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -28,23 +30,26 @@ export const useCreateVehiculo = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === 'success') {
         setMessage('Vehículo creado exitosamente');
-        return response;
+        InfoSuccess('Éxito', `Vehículo creado exitosamente ${response.message ?? 'Mensaje no definido por el backend'}`);
       } else {
         setIsError(true);
         setMessage('Error al crear el vehículo');
-        return response;
+        InfoError('Error', `Error al registrar vehículo ${response.message ?? 'Error no definido por el backend'} `);
+        InfoErrorSwal('error', `Error al registrar vehículo ${response.message ?? 'Error no definido por el backend'} `);
       }
     } catch (error: any) {
       setIsError(true);
       setMessage('Se produjo un error al crear el vehículo en el frontend');
-      return {
-        status: "error",
-        message: "Error al crear el vehículo"
-      };
+      InfoWarning('Advertencia', 'Se produjo un error al crear el vehículo en el frontend');
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, message, execute: createVehiculo };
+  return { 
+    isLoading, 
+    isError, 
+    message, 
+    execute: createVehiculo 
+  };
 };
