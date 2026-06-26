@@ -1,13 +1,14 @@
 import { useState } from "react";
 import DatosEmpresa from "../../../api/DatosEmpresa.api";
+import { InfoError } from "../../../components/messages/InfoError";
+import { InfoSuccess } from "../../../components/messages/InfoSuccess";
 import type { UpdateDatosEmpresa } from "../../../types/datosEmpresa.type";
-import type { BodyResponse } from "../../../types/bodyResponse.type";
 
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: UpdateDatosEmpresa) => Promise<BodyResponse<string> | null>;
+  execute: (body: UpdateDatosEmpresa) => void;
 }
 
 export const registrarInfoEmpresarial = (): FetchState => {
@@ -18,7 +19,7 @@ export const registrarInfoEmpresarial = (): FetchState => {
 
   const registrarDatosEmpresarial = async (
     body: UpdateDatosEmpresa,
-  ): Promise<BodyResponse<string>> => {
+  ): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -29,25 +30,30 @@ export const registrarInfoEmpresarial = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Datos de empresa actualizados exitosamente");
-        return response;
+        InfoSuccess("ÉXITO", `Datos de empresa actualizados exitosamente`);
       } else {
         setIsError(true);
         setMessage("Error al actualizar los datos de la empresa");
-        return response;
+        InfoError("ERROR", `Error: ${response.message}`);
       }
     } catch (error: any) {
       setIsError(true);
       setMessage(
         "Se produjo un error al actualizar los datos de la empresa en el frontend",
       );
-      return {
-        status: "error",
-        message: "Error al actualizar los datos de la empresa",
-      };
+      InfoError(
+        "ERROR",
+        "Error: Se produjo un error al actualizar los datos de la empresa en el frontend",
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, message, execute: registrarDatosEmpresarial };
+  return { 
+    isLoading, 
+    isError, 
+    message, 
+    execute: registrarDatosEmpresarial 
+  };
 };

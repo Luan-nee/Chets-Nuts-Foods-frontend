@@ -12,6 +12,7 @@ import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
 import Establecimientos from "../pages/Establecimientos";
 import Test from "../pages/Test";
+import GuiasDeRemision from "../pages/GuiasDeRemision";
 import { SocketProvider } from "../context/SocketContext";
 
 export default function AppRoutes() {
@@ -38,6 +39,16 @@ export default function AppRoutes() {
                 <MainLayout>
                   <Test />
                 </MainLayout>
+              }
+            />
+            <Route
+              path="/guias"
+              element={
+                <PrivateRoute>
+                  <MainLayout>
+                    <GuiasDeRemision />
+                  </MainLayout>
+                </PrivateRoute>
               }
             />
             <Route

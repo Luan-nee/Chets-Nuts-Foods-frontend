@@ -1,18 +1,7 @@
-import { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 import TableGre from '../features/gre/components/TableGre';
-import DetallesGre from '../features/gre/components/DetallesGre';
-import FormCreateGre from '../features/gre/components/FormCreateGre';
-import { InfoWarning } from '../components/messages/InfoWarning';
 
 export default function ListaGre() {
-  const [ showDetallesGre, setShowDetallesGre] = useState<boolean>(false);
-  const [ showFormCreateGre, setShowFormCreateGre ] = useState<boolean>(false);
-  const [ selectGreId, setSelectGreId ] = useState<number | null>(null);
-  const messageWarning = (title: string, message: string) => {
-    InfoWarning(title, message);
-  }
-
   return (
     <div className="relative flex-1 flex flex-col">
       {/* Header */}
@@ -21,11 +10,7 @@ export default function ListaGre() {
           <div>
             <h2 className="text-3xl font-bold text-white mb-2">Gestión de Guías de remisión</h2>
             <p className="text-sm text-gray-400">Administra las guías de remisión de la empresa.</p>
-            <button 
-              onClick={
-                () => messageWarning('Error en GRE','guia de remisión errada')
-              }
-            >
+            <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
               <span className="text-sm text-gray-300 hover:text-white transition-colors">Crear nueva guía de remisión</span>
             </button>
           </div>
@@ -61,19 +46,7 @@ export default function ListaGre() {
       </div>
 
       {/* Table */}
-      <TableGre setShowDetallesGre={setShowDetallesGre} setSelectGreId={setSelectGreId} setShowFormCreateGre={setShowFormCreateGre} />
-      
-      { showDetallesGre && 
-        <div className="absolute inset-0 z-50 bg-gray-950">
-          <DetallesGre showDetallesGre={setShowDetallesGre} selectedGreId={selectGreId} />
-        </div>
-      }
-      
-      { showFormCreateGre && 
-        <div className="absolute inset-0 z-50 bg-gray-950">
-          <FormCreateGre setShowFormCreateGre={setShowFormCreateGre} />
-        </div>
-      }
+      <TableGre />
     </div>
   );
 }

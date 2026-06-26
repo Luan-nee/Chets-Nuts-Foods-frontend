@@ -30,7 +30,7 @@ export default function FormCreateEstablecimiento({
 		distrito: "",
 		provincia: "",
 		departamento: "",
-		ubigeo: "17001",
+		ubigeo: "211102",
 		tipoEstado: "oficina",
 		codigoSunat: "affe",
 	});
