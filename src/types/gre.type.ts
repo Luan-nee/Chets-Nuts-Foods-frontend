@@ -1,6 +1,10 @@
 export type ResponseGetAll = {
-  idGre: number;
-  informacion: string;
+  estadoguia: string;
+  numero: string;
+  qrUrl: string;
+  confirmado: boolean;
+  fechaConfirmacion: string | null;
+  idguia: number;
 }
 
 export type EmitirGre = {

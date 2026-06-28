@@ -1,4 +1,3 @@
-import { Edit, Eye } from "lucide-react";
 import Table from "../../../components/ui/Table";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
@@ -6,12 +5,12 @@ import { useFetchGuiasRemision } from "../hooks/useFetchGuiasRemision";
 
 export default function TableGre() {
   const tableHeader: string[] = [
-    "Nº Guía",
-    "Fecha Emisión",
-    "Cliente / Destinatario",
-    "Punto de Partida / Llegada",
     "Estado",
-    "Acciones",
+    "Número",
+    "QR",
+    "Confirmado",
+    "Fecha Confirmación",
+    "ID Guía",
   ];
 
   const {
@@ -53,25 +52,39 @@ export default function TableGre() {
           {guiasRemision?.map((guia, index) => (
             <tr key={index} className="hover:bg-gray-800/50 transition-colors">
               <td className="px-6 py-4">
-                <span className="text-blue-400 font-medium">
-                  {guia.informacion}
+                <span className="inline-flex rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-300">
+                  {guia.estadoguia}
                 </span>
               </td>
               <td className="px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                    title="Ver"
-                  >
-                    <Eye className="w-4 h-4 text-gray-400" />
-                  </button>
-                  <button
-                    className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                    title="Editar"
-                  >
-                    <Edit className="w-4 h-4 text-gray-400" />
-                  </button>
-                </div>
+                <span className="font-medium text-gray-200">{guia.numero}</span>
+              </td>
+              <td className="px-6 py-4">
+                <a
+                  href={guia.qrUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-400 underline-offset-4 hover:underline"
+                >
+                  Abrir QR
+                </a>
+              </td>
+              <td className="px-6 py-4">
+                <span
+                  className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                    guia.confirmado
+                      ? "bg-emerald-500/10 text-emerald-300"
+                      : "bg-amber-500/10 text-amber-300"
+                  }`}
+                >
+                  {guia.confirmado ? "Sí" : "No"}
+                </span>
+              </td>
+              <td className="px-6 py-4 text-gray-300">
+                {guia.fechaConfirmacion ?? "Sin confirmar"}
+              </td>
+              <td className="px-6 py-4 text-gray-300">
+                {guia.idguia}
               </td>
             </tr>
           ))}
