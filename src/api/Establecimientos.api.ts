@@ -39,7 +39,7 @@ export default class EstablecimientosApi extends BaseRequestApi {
     body: UpdateEstablecimiento,
   ): Promise<BodyResponse<UpdateEstablecimiento>> {
     return this.PATCH<UpdateEstablecimiento>(
-      `${this.base_url_production}/${body.idEstablecimiento}`,
+      `${this.base_url_production}`,
       body,
     ) as Promise<BodyResponse<UpdateEstablecimiento>>;
   }

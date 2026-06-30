@@ -67,7 +67,6 @@ export default function FormUpdateEstablecimiento({
 				idEstablecimiento: establecimiento.idEst,
 				idResponsable: establecimiento.iduser,
 				nombreEstablecimiento: establecimiento.nombres ?? "",
-				direccion: establecimiento.direccion ?? "",
 				descripcion: establecimiento.descripcion ?? "",
 				latitud: establecimiento.latitud ?? "",
 				longitud: establecimiento.longitud ?? "",
@@ -136,22 +135,6 @@ export default function FormUpdateEstablecimiento({
 
 					<div className="space-y-6">
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<InputNumber
-								defaultValue={formData.idResponsable ?? 0}
-								label="ID responsable"
-								simbol="usuario"
-								onChange={(value) => setFormData((prev) => ({ ...prev, idResponsable: value }))}
-								placeholder="Ingresa el ID del responsable"
-							/>
-							<InputText
-								label="Código SUNAT (opcional)"
-								value={formData.codigoSunat ?? ""}
-								htmlForm="codigoSunatUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, codigoSunat: value }))}
-							/>
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<InputText
 								label="Nombre del establecimiento"
 								value={formData.nombreEstablecimiento ?? ""}
@@ -199,16 +182,16 @@ export default function FormUpdateEstablecimiento({
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 							<InputText
-								label="Dirección"
-								value={formData.direccion ?? ""}
-								htmlForm="direccionUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
-							/>
-							<InputText
 								label="Descripción"
 								value={formData.descripcion ?? ""}
 								htmlForm="descripcionUpdate"
 								onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
+							/>
+							<InputText
+								label="Código SUNAT (opcional)"
+								value={formData.codigoSunat ?? ""}
+								htmlForm="codigoSunatUpdate"
+								onChange={(value) => setFormData((prev) => ({ ...prev, codigoSunat: value }))}
 							/>
 						</div>
 
