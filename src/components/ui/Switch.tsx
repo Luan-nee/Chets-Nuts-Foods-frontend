@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface PropSwitch {
   estado: boolean;
   handleInputChange: (value: boolean) => void;

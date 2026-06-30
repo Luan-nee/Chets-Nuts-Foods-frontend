@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import InputSelectTest from "../../../components/ui/InputSelect";
+import InputSelect from "../../../components/ui/InputSelect";
 import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import Loading from "../../../components/ui/Loading";
 import type { CreateEmpleadoData, empleadoRol, sexoEmpleado, tipoPersona } from "../types/empleado.type";
 import { useFetchRoles } from "../../auth/hooks/useFetchRoles";
 import { useCreateEmpleado } from "../hooks/useCreateEmpleado";
-import Loading from "../../../components/ui/Loading";
 import { InfoSuccess } from "../../../components/messages/InfoSuccess";
 import { InfoError } from "../../../components/messages/InfoError";
 
@@ -18,8 +18,8 @@ interface FormCreateEmpleadoProps {
 }
 
 export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpleadoProps ) {
-  const { data: roles, isLoading: cargandoRoles, isError: errorRoles, execute: recargarRoles } = useFetchRoles();
-  const { isLoading: cargandoCreateEmpleado, errorMessage, successMessage, refresh: crearEmpleado } = useCreateEmpleado();
+  const { roles, isLoading: cargandoRoles, isError: errorRoles, execute: recargarRoles } = useFetchRoles();
+  const { isLoading: cargandoCreateEmpleado, isError: errorCreateEmpleado, message, refresh: crearEmpleado } = useCreateEmpleado();
 
   const [ formData, setFormData ] = useState<CreateEmpleadoData>({
     password: '',
@@ -33,7 +33,6 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     edad: 0,
     sexo: 'MASCULINO',
     tipo: 'NATURAL',
-    numeroLicenciaConducir: '',
     ruc: '',
   });
 
@@ -76,8 +75,8 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
       setShowFormCreateEmpleado(false);
     } else if (response && response.status === 'error') {
       InfoError('Error', response.message || 'Error al crear el empleado');
-    } else if (errorMessage) {
-      InfoError('Error', errorMessage);
+    } else if (message) {
+      InfoError('Error', message);
     }
   };
 
@@ -203,7 +202,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               ) : roles === null || roles.length === 0 ? (
                 <div>No hay roles registrados en el sistema.</div>
               ) : (
-                <InputSelectTest
+                <InputSelect
                   label="Rol del empleado"
                   options={roles ? roles.map(te => ({ label: te.rol, value: te.rol })) : []}
                   placeholder="Seleccione el rol del empleado"
@@ -253,9 +252,9 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               <ButtonSubmitForm
                 handleSubmit={handleSubmit}
                 isLoading={cargandoCreateEmpleado}
-                isError={!!errorMessage}
+                isError={!!errorCreateEmpleado}
                 textButton="Guardar Cambios"
-                textError={errorMessage || "Error al guardar los cambios"}
+                textError={message || "Error al guardar los cambios"}
                 color="blue"
               />
             </div>

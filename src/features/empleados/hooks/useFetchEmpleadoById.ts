@@ -30,7 +30,7 @@ export const useFetchEmpleadoById = (id: number): FetchState => {
       if (response.status !== "success") {
         throw new Error(response.message);
       }
-      setData(response.data);
+      setData(response.data ?? null);
     } catch (error) {
       console.error("Fetch error: ", error);
       setIsError(true);

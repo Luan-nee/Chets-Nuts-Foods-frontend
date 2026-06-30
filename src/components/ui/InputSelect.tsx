@@ -14,18 +14,12 @@ interface InputSelectTestProps {
   valueSelected?: string | number | null;
 }
 
-export default function InputSelectTest({ options, placeholder, onSelect, valueSelected, label }: InputSelectTestProps) {
+export default function InputSelect({ options, placeholder, onSelect, valueSelected, label }: InputSelectTestProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<Option | null>(
-    valueSelected ? options.find(option => option.value === valueSelected) || null : null
+    (valueSelected != null) ? options.find(option => option.value === valueSelected) || null : null
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setOptionSelected(
-      valueSelected ? options.find(option => option.value === valueSelected) || null : null
-    );
-  }, [options, valueSelected]);
 
   // Cerrar el dropdown si se hace clic fuera de él
   useEffect(() => {
@@ -71,6 +65,7 @@ export default function InputSelectTest({ options, placeholder, onSelect, valueS
                 onClick={() => {
                   setOptionSelected(option);
                   onSelect(option.value);
+                  setIsOpen(false);
                 }}
                 className={`group relative py-3 pl-11 pr-4 text-[15px] text-white cursor-pointer select-none 
                   hover:bg-slate-700/50 transition-colors duration-150

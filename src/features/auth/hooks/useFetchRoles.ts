@@ -25,7 +25,7 @@ export const useFetchRoles = (): FetchState => {
       setIsError(false);
 
       const response = await accesos_api.roles();
-
+      setMessage(response.message || "");
       if (response.status !== "success" || response.data === undefined) {
         throw new Error(response.message);
       }

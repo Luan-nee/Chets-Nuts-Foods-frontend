@@ -22,10 +22,10 @@ export default function FormUpdateEmpleado({
   setShowFormUpdateEmpleado,
 }: FormUpdateEmpleadoProps) {
   const {
-    data: roles,
+    roles,
     isLoading: cargandoRoles,
     isError: errorRoles,
-    fetchData: recargarRoles,
+    execute: recargarRoles,
   } = useFetchRoles();
   const {
     data: empleado,
