@@ -1,6 +1,5 @@
-import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import { useState } from 'react';
-import type { EmitirGre } from '../types/gre.type';
+import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import MtcRemitenteDestinatario from './FormCreateGre/MtcRemitenteDestinatario';
 import BienesDatosDeCarga from './FormCreateGre/BienesDatosDeCarga';

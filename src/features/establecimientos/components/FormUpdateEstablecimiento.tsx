@@ -3,7 +3,6 @@ import { ArrowLeft, Building2 } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
-import InputNumber from "../../../components/ui/InputNumber";
 import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";

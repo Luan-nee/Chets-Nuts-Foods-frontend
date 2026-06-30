@@ -1,7 +1,7 @@
 // importación de componentes IU
 import { Truck, Package, ChevronRight, Info, MapPin} from 'lucide-react';
 import Loading from '../../../components/ui/Loading';
-import Table from '../../../components/ui/Table';
+// import Table from '../../../components/ui/Table';
 // importación de custom hooks
 import { useFetchDetallesGuiaRemision } from '../hooks/useFetchDetallesGuiaRemision';
 
@@ -10,11 +10,11 @@ interface DetallesGreProps {
   selectedGreId: number | null;
 }
 
-const headerTable: string[] = [
-  'Nº',
-  'Nombre',
-  'Cantidad'
-]
+// const headerTable: string[] = [
+//   'Nº',
+//   'Nombre',
+//   'Cantidad'
+// ]
 
 export default function DetallesGre({ showDetallesGre, selectedGreId }: DetallesGreProps) {
   // usa el hook personalizado para obtener los detalles de la guía de remisión
@@ -192,7 +192,7 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
               </div>
               
               <div className="overflow-x-auto">
-                <Table tableHeader={headerTable} cantidadDatos={detallesGre?.productos.length || 0}>
+                {/* <Table tableHeader={headerTable} cantidadDatos={detallesGre?.productos.length || 0}>
                   {detallesGre?.productos.map((producto, index) => (
                     <tr key={index} className="hover:bg-gray-800/50 transition-colors">
                       <td className="px-6 py-4">
@@ -206,7 +206,7 @@ export default function DetallesGre({ showDetallesGre, selectedGreId }: Detalles
                       </td>
                     </tr>
                   ))}
-                </Table>
+                </Table> */}
               </div>
             </div>
 
