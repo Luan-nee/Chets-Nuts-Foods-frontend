@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Building2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
 import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useFetchEstablecimiento } from "../hooks/useFetchEstablecimiento";
 import { useUpdateEstablecimiento } from "../hooks/useUpdateEstablecimiento";
 import type { UpdateEstablecimiento } from "../../../types/establecimiento.type";
@@ -95,20 +96,11 @@ export default function FormUpdateEstablecimiento({
 
 	return (
 		<ContentPage>
-			<div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-				<button
-					onClick={() => setShowFormUpdateEstablecimiento(false)}
-					className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-				>
-					<ArrowLeft className="w-6 h-6" />
-				</button>
-				<div className="min-w-0">
-					<h1 className="text-3xl font-bold mb-1">Actualizar establecimiento</h1>
-					<p className="text-gray-400">
-						Modifica la información registrada y guarda los cambios cuando termines.
-					</p>
-				</div>
-			</div>
+			<HeaderFormPage
+				title="Actualizar establecimiento"
+				description="Modifica la información registrada y guarda los cambios cuando termines."
+				setShowForm={() => setShowFormUpdateEstablecimiento(false)}
+			/>
 
 			<ContentSectionProcess
 				isLoading={cargandoDatos || !formReady}
