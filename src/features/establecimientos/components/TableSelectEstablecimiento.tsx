@@ -29,62 +29,72 @@ export default function TableSelectEstablecimiento({ selectIdEstablecimiento }: 
       textButtonError="Reintentar"
       fetchData={listarEstablecimientos}
     >
-      <Table
-        tableHeader={tableHeader}
-        cantidadDatos={establecimientos.length}
-      >
-        {establecimientos.map((establecimiento, index) => (
-          <tr
-            key={index}
-            className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+      <div className="flex-1 overflow-auto px-8 py-6">
+        <div className="p-4 flex justify-end">
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+            onClick={() => listarEstablecimientos()}
           >
-            {/* Establecimiento */}
-            <td className="px-6 py-4">
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
-                  <Building2 className="w-5 h-5 text-[#1f6feb]" />
+            Recargar
+          </button>
+        </div>
+        <Table
+          tableHeader={tableHeader}
+          cantidadDatos={establecimientos.length}
+        >
+          {establecimientos.map((establecimiento, index) => (
+            <tr
+              key={index}
+              className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+            >
+              {/* Establecimiento */}
+              <td className="px-6 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
+                    <Building2 className="w-5 h-5 text-[#1f6feb]" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block font-medium text-sm text-white truncate">
+                      {establecimiento.nombreEst}
+                    </span>
+                    <span className="block text-xs text-gray-400 truncate">
+                      {establecimiento.descripcion}
+                    </span>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <span className="block font-medium text-sm text-white truncate">
-                    {establecimiento.nombreEst}
-                  </span>
-                  <span className="block text-xs text-gray-400 truncate">
-                    {establecimiento.descripcion}
-                  </span>
+              </td>
+
+              {/* Ubicación */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <MapPin className="w-4 h-4 text-gray-500" />
+                  <span>{establecimiento.distrito}, {establecimiento.provincia}</span>
                 </div>
-              </div>
-            </td>
+              </td>
 
-            {/* Ubicación */}
-            <td className="px-6 py-4">
-              <div className="flex items-center gap-2 text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-gray-500" />
-                <span>{establecimiento.distrito}, {establecimiento.provincia}</span>
-              </div>
-            </td>
+              {/* Dirección */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{establecimiento.direccion}</span>
+              </td>
 
-            {/* Dirección */}
-            <td className="px-6 py-4">
-              <span className="text-sm text-gray-300">{establecimiento.direccion}</span>
-            </td>
-
-            {/* Actions */}
-            <td className="px-6 py-4">
-              <div className="flex items-center justify-end gap-2">
-                <button
-                  onClick={() => {
-                    selectIdEstablecimiento(establecimiento.idEst);
-                  }}
-                  className="text-green-500 hover:text-green-400 flex flex-row gap-2"
-                >
-                  <span>Seleccionar</span>
-                  <Plus className="w-5 h-5" />
-                </button>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </Table>
+              {/* Actions */}
+              <td className="px-6 py-4">
+                <div className="flex items-center justify-end gap-2">
+                  <button
+                    onClick={() => {
+                      selectIdEstablecimiento(establecimiento.idEst);
+                    }}
+                    className="text-green-500 hover:text-green-400 flex flex-row gap-2"
+                  >
+                    <span>Seleccionar</span>
+                    <Plus className="w-5 h-5" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
+      </div>
     </ContentSectionProcess>
   );
 }
