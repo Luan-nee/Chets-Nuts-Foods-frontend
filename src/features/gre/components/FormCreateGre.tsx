@@ -26,9 +26,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
-      { label: 'Bienes y Carga', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Destino', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Establecimiento', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Salida transporte', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: true},
     ] 
   );
   
@@ -75,6 +76,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <ChevronLeft className="w-5 h-5" />
             Cancelar
           </button>
+          
           <ButtonSubmitForm
             handleSubmit={() => {
               // emitirGre(formData);
@@ -86,6 +88,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             textError="Error al emitir GRE"
             color="green"
           />
+          
           <button 
             onClick={pushAnterior}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
@@ -93,6 +96,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <ArrowLeft className="w-5 h-5" />
             Anterior
           </button>
+          
           <button 
             onClick={pushSiguiente}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
@@ -100,6 +104,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             Siguiente
             <ArrowRight className="w-5 h-5" />
           </button>
+          
           <button 
             // onClick={() => {
             //   console.log("----> PRODUCTOS REGISTRADOS:", formData);
