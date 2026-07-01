@@ -37,7 +37,8 @@ export default function NavBarAdministrador() {
     { icon: Settings, label: "Configuraciones", anchor: "/configuraciones", userRol: ["ADMIN"] },
     { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN", "CHOFER", "CLIENTE"] },
     { icon: Package, label: "Clientes", anchor: "/clientes", userRol: ["ADMIN", "COLABORADOR"] },
-    { icon: MapPin, label: "Establecimientos", anchor: "/establecimientos", userRol: ["ADMIN"] }
+    { icon: MapPin, label: "Establecimientos", anchor: "/establecimientos", userRol: ["ADMIN"] },
+    { icon: MapPin, label: "Test", anchor: "/test", userRol: ["ADMIN", "COLABORADOR"] },
   ];
 
   return (

@@ -218,7 +218,11 @@ function TimePanel({ hour, minute, ampm, onChangeHour, onChangeMinute, onChangeA
 
 // ── Main Component ─────────────────────────────────────────────────────────
 
-export default function DateTimePicker() {
+interface DateTimePickerProps {
+  onChange: (value: SelectedDateTime | null) => void;
+}
+
+export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("date");
   const [viewDate, setViewDate] = useState(new Date());
@@ -253,6 +257,7 @@ export default function DateTimePicker() {
   };
 
   const handleClear = () => {
+    onChange(null);
     setSelectedDate(null);
     setHour(12);
     setMinute(0);
@@ -264,6 +269,7 @@ export default function DateTimePicker() {
   const handleApply = () => {
     if (!selectedDate) { setOpen(false); return; }
     setApplied({ date: selectedDate, hour, minute, ampm });
+    onChange({ date: selectedDate, hour, minute, ampm });
     setOpen(false);
   };
 

@@ -12,6 +12,7 @@ import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
 import Establecimientos from "../pages/Establecimientos";
 import GuiasDeRemision from "../pages/GuiasDeRemision";
+import Test from "../pages/Test";
 import { SocketProvider } from "../context/SocketContext";
 
 export default function AppRoutes() {
@@ -28,6 +29,16 @@ export default function AppRoutes() {
                 <PrivateRoute>
                   <MainLayout>
                     <Trabajadores />
+                  </MainLayout>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/test"
+              element={
+                <PrivateRoute>
+                  <MainLayout>
+                    <Test />
                   </MainLayout>
                 </PrivateRoute>
               }
