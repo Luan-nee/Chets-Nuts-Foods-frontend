@@ -34,13 +34,11 @@ export default function TableVehiculos({
     setQueryVehiculo,
     infoPaginacion,
   } = useFetchVehiculos();
-
-
   
-    const isEstadoVehiculo = (value: any): value is EstadoVehiculo =>
-      ESTADOS.includes(value);
+  const isEstadoVehiculo = (value: any): value is EstadoVehiculo =>
+    ESTADOS.includes(value);
 
-    const estado2 = isEstadoVehiculo(estado) ? estado : undefined;
+  const estado2 = isEstadoVehiculo(estado) ? estado : undefined;
 
   useEffect(() => {
     if(!busqueda) return
@@ -75,7 +73,7 @@ export default function TableVehiculos({
       fetchData={() => recargarVehiculos({page:infoPaginacion.pagina_actual})}
     >
 
-    <div className="flex-1 overflow-auto px-8 py-6">
+    <div className="flex-1 overflow-auto">
       <div className="p-4 flex justify-end gap-4">
         <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setQueryVehiculo({page:infoPaginacion.pagina_actual})}>
           Recargar

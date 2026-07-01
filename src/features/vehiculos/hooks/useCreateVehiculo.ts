@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import Vehiculo from '../../../api/Vehiculos.api';
-import { InfoSuccess } from '../../../components/messages/InfoSuccess';
-import { InfoError, InfoErrorSwal } from '../../../components/messages/InfoError';
-import { InfoWarning } from '../../../components/messages/InfoWarning';
 import type { CreateVehiculo } from '../../../types/vehiculos.type'
+import swalAlert from "../../../components/messages/swalAlert"
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
@@ -30,17 +28,25 @@ export const useCreateVehiculo = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === 'success') {
         setMessage('Vehículo creado exitosamente');
-        InfoSuccess('Éxito', `Vehículo creado exitosamente ${response.message ?? 'Mensaje no definido por el backend'}`);
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Vehículo registrado exitosamente",
+        })
       } else {
         setIsError(true);
         setMessage('Error al crear el vehículo');
-        InfoError('Error', `Error al registrar vehículo ${response.message ?? 'Error no definido por el backend'} `);
-        InfoErrorSwal('error', `Error al registrar vehículo ${response.message ?? 'Error no definido por el backend'} `);
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Error al registrar vehículo",
+        })
       }
     } catch (error: any) {
       setIsError(true);
       setMessage('Se produjo un error al crear el vehículo en el frontend');
-      InfoWarning('Advertencia', 'Se produjo un error al crear el vehículo en el frontend');
+      swalAlert({
+        status: "warning",
+        message: "Se produjo un error al crear el vehículo en el frontend",
+      })
     } finally {
       setIsLoading(false);
     }

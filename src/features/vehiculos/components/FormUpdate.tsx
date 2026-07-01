@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { marcasVehiculos, modelosVehiculos } from "../../../config/constantes.ts";
 import type { UpdateVehiculo } from "../../../types/vehiculos.type";
 import type { marca, modelo } from "../../../types/vehiculos.type";
@@ -10,6 +10,7 @@ import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText.tsx";
 import InputNumber from "../../../components/ui/InputNumber.tsx";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage.tsx";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
 
 interface FormUpdateProps {
@@ -42,25 +43,14 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
   return (
     <ContentPage>
       {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => showFormUpdate(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Actualiza información del vehículo
-          </h1>
-          <p className="text-gray-400">
-            Completa la información y guarda los cambios.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage 
+        description="Completa la información y guarda los cambios."
+        title="Actualiza información del vehículo"
+        setShowForm={() => showFormUpdate(false)}
+      />
 
       {/* Form */}
-      <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+      <section className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <ContentSectionProcess
           isLoading={isLoadingVehiculo}
           isError={isErrorVehiculo}
@@ -143,7 +133,10 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                 textButton="Cancelar"
               />
               <ButtonSubmitForm
-                handleSubmit={() => {
+                handleSubmit={async () => {
+                  // FALTA IMPLEMENTAR LA LLAMA 
+                  // EL ENDPOINT PARA ACTUALIZAR LA INFORMACIÓN 
+                  // DEL VEHÍCULO
                   console.log("Datos a enviar:", formData);
                 }}
                 isLoading={isLoadingVehiculo}
