@@ -11,10 +11,9 @@ export default function Establecimientos() {
 	const [showDetallesEstablecimiento, setShowDetallesEstablecimiento] = useState<boolean>(false);
 	const [selectEstablecimientoId, setSelectEstablecimientoId] = useState<number | null>(null);
 
-	const isTableView = !showFormCreate && !showFormUpdate && !showDetallesEstablecimiento;
-
 	return (
 		<div className="relative flex-1 flex flex-col">
+			{/* Header */}
 			<div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 					<div className="min-w-0">
@@ -29,15 +28,13 @@ export default function Establecimientos() {
 						</p>
 					</div>
 
-					{isTableView ? (
-						<button
-							onClick={() => setShowFormCreate(true)}
-							className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors"
-						>
-							<Plus className="w-5 h-5" />
-							Nuevo establecimiento
-						</button>
-					) : null}
+					<button
+						onClick={() => setShowFormCreate(true)}
+						className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors"
+					>
+						<Plus className="w-5 h-5" />
+						Nuevo establecimiento
+					</button>
 				</div>
 			</div>
 

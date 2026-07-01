@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Truck, Package, Book, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
+import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
+import ContentPage from '../../../components/layouts/ContentPage';
+import TableSelectEstablecimiento from '../../establecimientos/components/TableSelectEstablecimiento';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
-import MtcRemitenteDestinatario from './FormCreateGre/MtcRemitenteDestinatario';
+import FormCreateEstablecimiento from '../../establecimientos/components/FormCreateEstablecimiento';
 import BienesDatosDeCarga from './FormCreateGre/BienesDatosDeCarga';
-import RutaDeTraslado from './FormCreateGre/RutaDeTraslado';
 import ConductorVehiculo from './FormCreateGre/ConductorVehiculo';
-import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
+// import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
 type TypeProcedimientoUi = {
   focus: boolean,
@@ -19,80 +20,14 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
-  const [ formData, setFormData ] = useState<EmitirGre>({
-    numero_registro_MTC: "",
-    remitente: {
-      tipo_documento: "",
-      numero_documento: "",
-      nombre_razonSocial: ""
-    },
-    destinatario: {
-      tipo_documento: "",
-      numero_documento: "",
-      nombre_razonSocial: ""
-    },
-    pagador_flete: {
-      tipo_documento: "",
-      numero_documento: "",
-      nombre_razonSocial: ""
-    },
-    bienes_transportados: [],
-    punto_partida: {
-      departamento: "",
-      provincia: "",
-      distrito: "",
-      direccion_detallada: ""
-    },
-    punto_llegada: {
-      departamento: "",
-      provincia: "",
-      distrito: "",
-      direccion_detallada: ""
-    },
-    datos_de_transporte: {
-      idVehículo: 1,
-      idConductor: 2,
-      fecha_inicio_traslado: "",
-      indicadores_retorno: {
-        retorno_envases_vacios: false,
-        retorno_vehiculo_vacio: true,
-        transporte_subcontratado: false
-      }
-    }
-  }); 
-  const handleAddProductToList = (
-    field: string, 
-    value: {
-      idProducto: number;
-      cantidad: number;
-    }
-  ) => {
-    setFormData((prev) => ({
-        ...prev,
-        [field]: [...prev.bienes_transportados, value]
-      })
-    );
-  };
-  const handleRemoveProductFromList = (
-    field: string,
-    index: number,
-  ) => {
-    setFormData((prev) => {
-      const newList = [...prev.bienes_transportados];
-      newList.splice(newList.findIndex((bien) => bien.idProducto === index), 1);
-      return {
-        ...prev,
-        [field]: newList
-      }
-    });
-  }
-
+  // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
+  const [idEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
+  const [showFormCreateEstablecimiento, setShowFormCreateEstablecimiento] = useState<boolean>(false);
+  
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
-      { label: 'Datos Generales', status: false, icon: <Book className="w-4 h-4 text-white" />, focus: true},
       { label: 'Bienes y Carga', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Ruta de Traslado', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Destino', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
   );
@@ -124,7 +59,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   }
 
   return (
-    <div className="relative flex-1 flex flex-col ">
+    <ContentPage>
       {/* Header */}
       <div className="flex items-center justify-between bg-gray-900 px-8 py-6">
         <div>
@@ -142,11 +77,11 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           </button>
           <ButtonSubmitForm
             handleSubmit={() => {
-              emitirGre(formData);
-              console.log("Datos enviados:", formData);
+              // emitirGre(formData);
+              // console.log("Datos enviados:", formData);
             }}
-            isLoading={isLoading}
-            isError={isError}
+            isLoading={false}
+            isError={false}
             textButton="Emitir GRE"
             textError="Error al emitir GRE"
             color="green"
@@ -166,10 +101,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <ArrowRight className="w-5 h-5" />
           </button>
           <button 
-            onClick={() => {
-              console.log("----> PRODUCTOS REGISTRADOS:", formData);
-              console.log("formData.bienes_transportados: ", formData.bienes_transportados);
-            }}
+            // onClick={() => {
+            //   console.log("----> PRODUCTOS REGISTRADOS:", formData);
+            //   console.log("formData.bienes_transportados: ", formData.bienes_transportados);
+            // }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             Mostrar datos registrados
@@ -178,45 +113,38 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         </div>
       </div>
 
-      {/* Procedimiento */}
+      {/* UI Progresivo */}
       <div className="flex items-center gap-4 px-6 py-4">
         {
-          procedimiento.map((p, index) => (
-            <Procedimiento key={index} label={p.label} status={p.status} icon={p.icon} focus={p.focus} />
+          procedimiento.map((p) => (
+            <>
+              <div className="flex items-center gap-2">
+                <div className={`w-8 h-8 ${p.status ? 'bg-green-500' : p.focus ? 'bg-blue-500' : 'bg-gray-700'} rounded-full flex items-center justify-center`}>
+                  { p.status ? <Check className="w-4 h-4 text-white" /> : p.icon }
+                </div>
+                <span className={`text-sm font-medium ${p.status ? 'text-green-400' : p.focus ? 'text-blue-500' : 'text-gray-400'}`}>{p.label}</span>
+              </div>
+
+              { p.label !== "Transporte" && (
+                <div className={`flex-1 h-px ${p.status ? 'bg-green-400' : 'bg-gray-700'}`}></div>
+              )}
+            </>
           ))
         }
       </div>
 
-      {/* contenido procedural */}
-      {
-        procedimiento.find(p => p.focus)?.label === "Datos Generales" && <MtcRemitenteDestinatario setFormData={setFormData} formData={formData}/>
+      <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
+      
+      {/* Formularios para registrar información antes de emitir una guia de remisión */}
+      {/* { procedimiento.find(p => p.focus)?.label === "Destino" && 
+        <FormCreateEstablecimiento setShowFormCreateEstablecimiento={setShowFormCreateEstablecimiento}/>
       }
-      {
-        procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && <BienesDatosDeCarga setFormData={setFormData} formData={formData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList}/>
-      }
-      {
-        procedimiento.find(p => p.focus)?.label === "Ruta de Traslado" && <RutaDeTraslado setFormData={setFormData} formData={formData} />
+      { procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && 
+        <BienesDatosDeCarga setFormData={setFormData} formData={formData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList}/>
       }
       {
         procedimiento.find(p => p.focus)?.label === "Transporte" && <ConductorVehiculo />
-      }
-    </div>
-  );
-}
-
-function Procedimiento({label, status, icon, focus}: TypeProcedimientoUi) {
-  return (
-    <>
-      <div className="flex items-center gap-2">
-        <div className={`w-8 h-8 ${status ? 'bg-green-500' : focus ? 'bg-blue-500' : 'bg-gray-700'} rounded-full flex items-center justify-center`}>
-          { status ? <Check className="w-4 h-4 text-white" /> : icon }
-        </div>
-        <span className={`text-sm font-medium ${status ? 'text-green-400' : focus ? 'text-blue-500' : 'text-gray-400'}`}>{label}</span>
-      </div>
-
-      { label !== "Transporte" && (
-        <div className={`flex-1 h-px ${status ? 'bg-green-400' : 'bg-gray-700'}`}></div>
-      )}
-    </>
+      } */}
+    </ContentPage>
   );
 }

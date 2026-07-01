@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import InputSelectTest from "../../../components/ui/InputSelect";
 import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
@@ -96,23 +96,13 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
   return (
     <ContentPage>
       {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => setShowFormCreateEmpleado(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Registra un nuevo empleado
-          </h1>
-          <p className="text-gray-400">
-            Ingresa los datos del nuevo empleado para agregarlo al sistema. Asegúrate de proporcionar información precisa y completa.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage 
+        setShowForm={setShowFormCreateEmpleado}
+        title="Registro de nuevo empleado"
+        description="Ingresa los datos del nuevo empleado para agregarlo al sistema. Asegúrate de proporcionar información precisa y completa."
+      />
 
+      {/* Form */}
       <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <div className="space-y-6">
           {/* Row 1: Nombre y DNI */}

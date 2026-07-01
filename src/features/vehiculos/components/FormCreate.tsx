@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import {
   marcasVehiculos,
   modelosVehiculos,
@@ -12,6 +12,7 @@ import InputNumber from "../../../components/ui/InputNumber";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
 
 interface FormCreateProps {
@@ -37,25 +38,14 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
   return (
     <ContentPage>
       {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => showFormCreate(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Registra un nuevo vehiculo
-          </h1>
-          <p className="text-gray-400">
-            Completa la información y guarda el nuevo vehiculo.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage
+        title="Registrar nuevo vehiculo"
+        description="Completa la información y guarda el nuevo vehiculo."
+        setShowForm={showFormCreate}
+      />
 
       {/* Form */}
-      <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+      <section className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <div className="flex items-center gap-2 mb-6">
           <Info className="w-5 h-5 text-blue-500" />
           <h2 className="text-xl font-semibold">Información General</h2>

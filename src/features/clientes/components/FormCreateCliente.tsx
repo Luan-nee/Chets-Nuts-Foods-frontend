@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import InputNumber from "../../../components/ui/InputNumber";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import InputSelect from "../../../components/ui/InputSelect";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useCreateCliente } from "../hooks/useCreateCliente";
 import type { CreateCliente } from "../../../types/clientes.type";
 import type { UserGender } from "../../../types/constantes.type";
@@ -38,22 +38,11 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
   return (
     <ContentPage>
       {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => setShowFormCreate(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Registra un nuevo cliente
-          </h1>
-          <p className="text-gray-400">
-            Ingresa los datos del nuevo cliente para agregarlo al sistema. Asegúrate de proporcionar información precisa y completa.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage
+        title="Gestión de clientes"
+        description="Registra un nuevo cliente en el sistema."
+        setShowForm={setShowFormCreate}
+      />
 
       <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <div className="space-y-6">
