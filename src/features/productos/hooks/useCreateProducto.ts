@@ -3,14 +3,14 @@ import { useState } from 'react';
 import ProductoApi from '../../../api/producto.api';
 // importación de tipos
 import type { CreateProducto } from '../../../types/producto.type';
-import type { BodyResponse } from '../../../types/bodyResponse.type';
+import swalAlert from "../../../components/messages/swalAlert";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreateProducto) => Promise<BodyResponse<any>>;
+  execute: (body: CreateProducto) => Promise<void>;
 }
 
 export const useCreateProducto = (): FetchState => {
@@ -19,28 +19,35 @@ export const useCreateProducto = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const registrarProducto = async (bodyProducto: CreateProducto):Promise<BodyResponse<any>> => {
+  const registrarProducto = async (bodyProducto: CreateProducto): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
       const response = await producto_api.create(bodyProducto);
+
       if (response.status == "success") {
         setMessage("Producto registrado exitosamente");
-        return { ...response, message};
+        swalAlert({
+          status: response.status,
+          message: "Producto registrado exitosamente"
+        })
       } else {
         setIsError(true);
         setMessage("Error al registrar el producto");
-        return {...response,message};
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Error al registrar el producto"
+        })
       }
     } catch (error) {
       setIsError(true);
       setMessage("Se produjo un error al registrar el producto en el frontend");
-      return {
+      swalAlert({
         status: "error",
-        message: "Error al registrar el producto"
-      }
+        message: "Se produjo un error al registrar el producto en el frontend"
+      });
     } finally {
       setIsLoading(false);
     }
