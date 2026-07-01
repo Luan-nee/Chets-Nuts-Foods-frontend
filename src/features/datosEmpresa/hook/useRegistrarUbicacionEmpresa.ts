@@ -1,8 +1,7 @@
 import { useState } from "react";
 import DatosEmpresa from "../../../api/DatosEmpresa.api";
-import { InfoError } from "../../../components/messages/InfoError";
-import { InfoSuccess } from "../../../components/messages/InfoSuccess";
 import type { InfoUbicacionState } from "../../../types/datosEmpresa.type";
+import swalAlert from "../../../components/messages/swalAlert";
 
 interface FetchState {
   isLoading: boolean;
@@ -30,21 +29,25 @@ export const useRegistrarUbicacionEmpresa = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Datos de empresa actualizados exitosamente");
-        InfoSuccess("ÉXITO", `Datos de empresa actualizados exitosamente`);
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Datos de empresa actualizados exitosamente"
+        });
       } else {
         setIsError(true);
         setMessage("Error al actualizar los datos de la empresa");
-        InfoError("ERROR", `Error: ${response.message ?? "Error no definido por el backend"}`);
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Error al actualizar los datos de la empresa"
+        });
       }
     } catch (error: any) {
       setIsError(true);
-      setMessage(
-        "Se produjo un error al actualizar los datos de la empresa en el frontend",
-      );
-      InfoError(
-        "ERROR",
-        "Error: Se produjo un error al actualizar los datos de la empresa en el frontend",
-      );
+      setMessage("Se produjo un error al actualizar los datos de la empresa en el frontend");
+      swalAlert({
+        status: "error",
+        message: "Se produjo un error al actualizar los datos de la empresa en el frontend"
+      });
     } finally {
       setIsLoading(false);
     }
