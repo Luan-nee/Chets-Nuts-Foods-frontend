@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useFetchProducto } from "../hooks/useFetchProducto";
 import { useUpdateProducto } from "../hooks/useUpdateProducto";
 import type { UpdateProducto } from "../../../types/producto.type";
@@ -46,25 +47,14 @@ export default function FormUpdate({ showFormEdit, idProducto, pagina }: FormUpd
   return (
     <ContentPage>
       {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => showFormEdit(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Actualiza la información de un producto
-          </h1>
-          <p className="text-gray-400">
-            Modifica la información y guarda los cambios.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage 
+        title="Actualiza la información de un producto"
+        description="Modifica la información y guarda los cambios."
+        setShowForm={() => showFormEdit(false)}
+      />
 
       {/* Form */}
-      <section className="bg-gray-900 border border-gray-700 rounded-lg p-6">
+      <section className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <div className="flex items-center gap-2 mb-6">
           <Info className="w-5 h-5 text-blue-500" />
           <h2 className="text-xl font-semibold">Información General</h2>
@@ -106,8 +96,9 @@ export default function FormUpdate({ showFormEdit, idProducto, pagina }: FormUpd
               textButton="Cancelar"
             />
             <ButtonSubmitForm
-              handleSubmit={() => {
-                updateProducto(formData);
+              handleSubmit={async () => {
+                await updateProducto(formData);
+                showFormEdit(false)
               }}
               isLoading={isLoadingUpdate}
               isError={isErrorUpdate}

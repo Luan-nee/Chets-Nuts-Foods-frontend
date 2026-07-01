@@ -1,16 +1,16 @@
 import { useState } from 'react';
-// importación de clases como servicios
+import swalAlert from "../../../components/messages/swalAlert"
+// importación de clases
 import ProdutoApi from '../../../api/producto.api';
 // importación de tipos
-import type { BodyResponse } from '../../../types/bodyResponse.type';
-import type { ResponseUpdateProducto, UpdateProducto } from '../../../types/producto.type';
+import type { UpdateProducto } from '../../../types/producto.type';
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: UpdateProducto) => Promise<BodyResponse<ResponseUpdateProducto>>;
+  execute: (body: UpdateProducto) => Promise<void>;
 }
 
 export const useUpdateProducto = (): FetchState => {
@@ -29,23 +29,34 @@ export const useUpdateProducto = (): FetchState => {
       
       if (response.status === 'success') {
         setMessage('Producto actualizado exitosamente');
-        return response;
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Producto actualizado exitosamente"
+        });
       } else {
         setIsError(true);
         setMessage('Error al actualizar el producto');
-        return response;
+        swalAlert({
+          status: response.status,
+          message: response.message ?? "Error al actualizar el producto"
+        })
       }
     } catch (error) {
       setIsError(true);
       setMessage('Se produjo un error al actualizar el producto en el frontend');
-      return {
-        status: "error",
-        message: "Error al actualizar el producto"
-      } as BodyResponse<ResponseUpdateProducto>;
+      swalAlert({
+        status: 'warning',
+        message: 'Se produjo un error al actualizar el producto en el frontend'
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, message, execute: actualizarProducto };
+  return { 
+    isLoading, 
+    isError, 
+    message, 
+    execute: actualizarProducto 
+  };
 };
