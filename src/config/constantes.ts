@@ -1,5 +1,15 @@
 import type { marca, modelo, tipoVehiculo } from "../types/vehiculos.type";
 
+export const tiposPersona: { label: string; value: string }[] = [
+  { label: "Natural", value: "NATURAL" },
+  { label: "Jurídica", value: "JURIDICA" }
+];
+
+export const sexos: { label: string; value: string }[] = [
+  { label: "Masculino", value: "MASCULINO" },
+  { label: "Femenino", value: "FEMENINO" }
+];
+
 export const marcasVehiculos: { label: string; value: marca }[] = [
   { label: "Toyota", value: "toyota" }, // 1
   { label: "Honda", value: "honda" },   // 2
