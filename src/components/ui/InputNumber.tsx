@@ -22,6 +22,7 @@ export default function InputNumber({
         {/* Amount input */}
         <input
           type="number"
+          autoComplete="off"
           min={0}
           defaultValue={defaultValue}
           disabled={disabled}
