@@ -1,5 +1,13 @@
 import type { marca, modelo, tipoVehiculo } from "../types/vehiculos.type";
 
+export const tipoEstablecimiento: { label: string; value: string }[] = [
+  { label: "Fiscal", value: "fiscal" },
+  { label: "Anexo", value: "anexo" },
+  { label: "Almacén", value: "almacen" },
+  { label: "Oficina", value: "oficina" },
+  { label: "No registrado", value: "no_registrado" } // solo visible por el frontend. No se envía al backend.
+];
+
 export const tiposPersona: { label: string; value: string }[] = [
   { label: "Natural", value: "NATURAL" },
   { label: "Jurídica", value: "JURIDICA" }
