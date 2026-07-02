@@ -2,12 +2,14 @@ import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
 import { Building2, MapPin, Plus } from 'lucide-react';
 import { useFetchEstablecimientos } from '../hooks/useFetchEstablecimientos'; 
+import { useState } from 'react';
 
 interface TableSelectEstablecimientoProps {
-  selectIdEstablecimiento: (idEstablecimiento: number) => void;
+  selectIdEstablecimiento: (idEstablecimiento: number | null) => void;
 }
 
 export default function TableSelectEstablecimiento({ selectIdEstablecimiento }: TableSelectEstablecimientoProps) {
+  const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
     "Nombre", 
     "Distrito / Provincia / Departamento", 
@@ -80,15 +82,27 @@ export default function TableSelectEstablecimiento({ selectIdEstablecimiento }: 
               {/* Actions */}
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-2">
-                  <button
-                    onClick={() => {
-                      selectIdEstablecimiento(establecimiento.idEst);
-                    }}
-                    className="text-green-500 hover:text-green-400 flex flex-row gap-2"
-                  >
-                    <span>Seleccionar</span>
-                    <Plus className="w-5 h-5" />
-                  </button>
+                  { idSelected === establecimiento.idEst ? (
+                    <button onClick={() => {
+                      setIdSelected(null);
+                      selectIdEstablecimiento(null);
+                    }} className="hover:text-red-400">
+                      <span className="text-red-500 flex flex-row gap-2">
+                        <span>Eliminar</span>
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        selectIdEstablecimiento(establecimiento.idEst);
+                        setIdSelected(establecimiento.idEst);
+                      }}
+                      className="text-green-500 hover:text-green-400 flex flex-row gap-2"
+                    >
+                      <span>Seleccionar</span>
+                      <Plus className="w-5 h-5" />
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
