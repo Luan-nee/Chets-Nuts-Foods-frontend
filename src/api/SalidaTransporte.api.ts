@@ -5,8 +5,8 @@ import { url_base_production } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 
 // importación de tipos
-import type { BodyResponse } from '../types/bodyResponse.type';
-import type { CreateSalidaTransporte, UpdateSalidaTransporte } from '../types/salidaTransporte.type';
+import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
+import type { CreateSalidaTransporte, UpdateSalidaTransporte, ResponseGetAll} from '../types/salidaTransporte.type';
 
 // importación de datos mock
 // ...
@@ -24,11 +24,8 @@ export default class SalidaTransporte extends BaseRequestApi {
   }
 
   /* getAll */
-  // el tipo no está definido
-  public async getAll(): Promise<BodyResponse<null>> {
-    return this.request<BodyResponse<null>>(`${this.base_url_production}`, {
-      method: 'GET',
-    });
+  public async getAll(): Promise<BodyResponseWithPagination<ResponseGetAll[]>> {
+    return this.GET<ResponseGetAll[]>(`${this.base_url_production}`) as Promise<BodyResponseWithPagination<ResponseGetAll[]>>; 
   }
 
   /* getByID */

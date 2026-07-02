@@ -9,7 +9,9 @@ export type CreateSalidaTransporte = {
 }
 
 export type ResponseGetAll = {
-  // aún no tiene tipo definido
+  idsalidatransporte: number,
+  estadotransporte: string,
+  fechasalida: string,
 }
 
 export type UpdateSalidaTransporte = {
