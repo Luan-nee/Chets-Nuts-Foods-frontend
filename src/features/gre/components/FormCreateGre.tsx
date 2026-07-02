@@ -1,11 +1,9 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import ContentPage from '../../../components/layouts/ContentPage';
 import TableSelectEstablecimiento from '../../establecimientos/components/TableSelectEstablecimiento';
+import TableSelectSalidaTransporte from '../../transporte/components/TableSelectSalidaTransporte';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
-import FormCreateEstablecimiento from '../../establecimientos/components/FormCreateEstablecimiento';
-import BienesDatosDeCarga from './FormCreateGre/BienesDatosDeCarga';
-import ConductorVehiculo from './FormCreateGre/ConductorVehiculo';
 // import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
 type TypeProcedimientoUi = {
@@ -21,8 +19,8 @@ interface FormCreateGreProps {
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
-  const [idEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
-  const [showFormCreateEstablecimiento, setShowFormCreateEstablecimiento] = useState<boolean>(false);
+  const [, setIdEstablecimiento] = useState<number | null>(null);
+  const [, setIdSalidaTransporte] = useState<number | null>(null);
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
@@ -56,7 +54,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         newProcedimiento[indexFocus - 1].status = false;
       }
       return newProcedimiento;
-    });
+    }); 
   }
 
   return (
@@ -121,8 +119,8 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       {/* UI Progresivo */}
       <div className="flex items-center gap-4 px-6 py-4">
         {
-          procedimiento.map((p) => (
-            <>
+          procedimiento.map((p, index) => (
+            <Fragment key={index}>
               <div className="flex items-center gap-2">
                 <div className={`w-8 h-8 ${p.status ? 'bg-green-500' : p.focus ? 'bg-blue-500' : 'bg-gray-700'} rounded-full flex items-center justify-center`}>
                   { p.status ? <Check className="w-4 h-4 text-white" /> : p.icon }
@@ -133,25 +131,17 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
               { p.label !== "Transporte" && (
                 <div className={`flex-1 h-px ${p.status ? 'bg-green-400' : 'bg-gray-700'}`}></div>
               )}
-            </>
+            </Fragment>
           ))
         }
       </div>
       
-      { procedimiento.find(p => p.focus)?.label === "Establecimiento" && 
+      { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
+        <TableSelectSalidaTransporte selectIdSalidaTransporte={setIdSalidaTransporte} />
+      }
+      { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
         <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
-      }
-      
-      {/* Formularios para registrar información antes de emitir una guia de remisión */}
-      {/* { procedimiento.find(p => p.focus)?.label === "Destino" && 
-        <FormCreateEstablecimiento setShowFormCreateEstablecimiento={setShowFormCreateEstablecimiento}/>
-      }
-      { procedimiento.find(p => p.focus)?.label === "Bienes y Carga" && 
-        <BienesDatosDeCarga setFormData={setFormData} formData={formData} handleAddProductToList={handleAddProductToList} handleRemoveProductFromList={handleRemoveProductFromList}/>
-      }
-      {
-        procedimiento.find(p => p.focus)?.label === "Transporte" && <ConductorVehiculo />
-      } */}
+      } 
     </ContentPage>
   );
 }
