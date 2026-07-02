@@ -137,8 +137,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           ))
         }
       </div>
-
-      <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
+      
+      { procedimiento.find(p => p.focus)?.label === "Establecimiento" && 
+        <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
+      }
       
       {/* Formularios para registrar información antes de emitir una guia de remisión */}
       {/* { procedimiento.find(p => p.focus)?.label === "Destino" && 
