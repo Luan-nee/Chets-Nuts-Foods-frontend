@@ -1,4 +1,4 @@
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 
 import BaseRequestApi from './BaseRequest.api';
 
@@ -7,7 +7,7 @@ import type { Credenciales } from '../types/usuario.type';
 import { EmitConsultas } from "./EmitConsultas";
 
 export default class LoginApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/auth/login`;
+  private base_url_production = `${url_base_endpoint}/api/auth/login`;
 
   public async iniciarSesion<T>(credenciales: Credenciales): Promise<BodyResponse<T>> {
       const response =await EmitConsultas.POST(

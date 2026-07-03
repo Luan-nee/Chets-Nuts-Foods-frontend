@@ -1,4 +1,4 @@
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 
 import BaseRequestApi from './BaseRequest.api';
 
@@ -6,7 +6,7 @@ import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResp
 import type { roles } from '../types/usuario.type';
 
 export default class EmpleadoApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/empleados`;
+  private base_url_production = `${url_base_endpoint}/api/empleados`;
 
   public async get<T>(page: number = 1): Promise<BodyResponseWithPagination<T>> {
     return this.request<BodyResponseWithPagination<T>>(`${this.base_url_production}?page=${page}`, {

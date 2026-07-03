@@ -1,5 +1,5 @@
 // import { url_base_postman } from "../../config/url_base";
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 
 // importación de clases
 import BaseRequestApi from "./BaseRequest.api";
@@ -24,7 +24,7 @@ import type {
 // ...
 
 export default class Vehiculos extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/vehiculos`;
+  private base_url_production = `${url_base_endpoint}/api/vehiculos`;
 
   /* getAll */
   public async getAllVehiculos({page,estado,placa,tipo}: queryGetVehiculos): Promise<

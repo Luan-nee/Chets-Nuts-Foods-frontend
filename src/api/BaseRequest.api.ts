@@ -9,8 +9,6 @@ type RequestOptions = {
 };
 
 export default class BaseRequestApi {
-  public OFFLINE_MODE: boolean = false;
-  public PRODUCTION_MODE: boolean = false;
   public get token(): string | null {
     return localStorage.getItem('token');
   }

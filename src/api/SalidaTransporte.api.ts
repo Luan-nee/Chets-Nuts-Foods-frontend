@@ -1,5 +1,5 @@
 // import { url_base_postman } from "../../config/url_base";
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 
 // importación de clases
 import BaseRequestApi from './BaseRequest.api';
@@ -13,7 +13,7 @@ import type { CreateSalidaTransporte, UpdateSalidaTransporte, ResponseGetAll} fr
 
 export default class SalidaTransporte extends BaseRequestApi {
   // private base_url_postman = `${url_base_postman}`;
-  private base_url_production = `${url_base_production}/api/salidas`;
+  private base_url_production = `${url_base_endpoint}/api/salidas`;
 
   /* create */
   public async create(body: CreateSalidaTransporte): Promise<BodyResponse<CreateSalidaTransporte>> {

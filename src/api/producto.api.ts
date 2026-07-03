@@ -1,4 +1,4 @@
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 import type {
   CreateProducto,
   ResponseGetAllProductos,
@@ -14,7 +14,7 @@ import type {
 } from "../types/bodyResponse.type";
 
 export default class ProductoApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/productos`;
+  private base_url_production = `${url_base_endpoint}/api/productos`;
 
   public async get(
     page: number = 1,

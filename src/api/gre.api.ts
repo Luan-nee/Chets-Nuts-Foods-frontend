@@ -1,10 +1,10 @@
-import { url_base_production } from "../config/url_base";
+import { url_base_endpoint } from "../config/url_base";
 import BaseRequestApi from './BaseRequest.api';
 import type { BodyResponse, BodyResponseWithPagination } from '../types/bodyResponse.type';
 import type { ResponseGetAll, EmitirGre } from '../types/gre.type'
 
 export default class GreApi extends BaseRequestApi {
-  private base_url_production = `${url_base_production}/api/paquetes`;
+  private base_url_production = `${url_base_endpoint}/api/paquetes`;
 
   public async ListarGuias(page: number = 1): Promise<BodyResponseWithPagination<ResponseGetAll[]>> {
     return this.GET<ResponseGetAll[]>(`${this.base_url_production}/guias?page=${page}`) as Promise<BodyResponseWithPagination<ResponseGetAll[]>>;
