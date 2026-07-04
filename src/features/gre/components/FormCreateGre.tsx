@@ -3,6 +3,8 @@ import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEdit
 import ContentPage from '../../../components/layouts/ContentPage';
 import TableSelectEstablecimiento from '../../establecimientos/components/TableSelectEstablecimiento';
 import TableSelectSalidaTransporte from '../../transporte/components/TableSelectSalidaTransporte';
+import TableSelectChofer from '../../chofer/components/TableSelectChofer';
+import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 // import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
@@ -21,6 +23,8 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
   const [, setIdEstablecimiento] = useState<number | null>(null);
   const [, setIdSalidaTransporte] = useState<number | null>(null);
+  const [, setIdChofer] = useState<number | null>(null);
+  const [, setIdVehiculo] = useState<number | null>(null);
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
@@ -137,10 +141,16 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       </div>
       
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
-        <TableSelectSalidaTransporte selectIdSalidaTransporte={setIdSalidaTransporte} />
+        <>
+          <TableSelectSalidaTransporte selectIdSalidaTransporte={setIdSalidaTransporte} />
+        </>
       }
       { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
-        <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
+        <>
+          <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
+          <TableSelectChofer selectIdChofer={setIdChofer} />
+          <TableSelectVehiculo selectIdVehiculo={setIdVehiculo} />
+        </>
       } 
     </ContentPage>
   );
