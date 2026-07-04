@@ -70,8 +70,8 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
-      { label: 'Establecimiento', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
-      { label: 'Salida transporte', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Salida transporte', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
+      { label: 'Establecimiento', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
       { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
@@ -189,12 +189,12 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         }
       </div>
       
-      { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
+      { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
         <>
           <TableSelectSalidaTransporte selectIdSalidaTransporte={setIdSalidaTransporte} />
         </>
       }
-      { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
+      { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
         <div className="px-6 py-4 bg-gray-900 mx-6">
           <ButtonSubmitForm 
             handleSubmit={async () => {
