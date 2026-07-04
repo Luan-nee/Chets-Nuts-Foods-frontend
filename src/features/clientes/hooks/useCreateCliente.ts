@@ -1,10 +1,9 @@
 import { useState } from "react";
 import ClienteApi from "../../../api/Clientes.api";
 import type {
-  CreateCliente,
-  ResponseCreateCliente,
+  CreateCliente
 } from "../../../types/clientes.type";
-import type { BodyResponse } from "../../../types/bodyResponse.type";
+import swalAlert from "../../../components/messages/swalAlert";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
@@ -13,7 +12,7 @@ interface FetchState {
   message: string;
   execute: (
     body: CreateCliente,
-  ) => Promise<BodyResponse<ResponseCreateCliente>>;
+  ) => Promise<void>;
 }
 
 export const useCreateCliente = (): FetchState => {
@@ -24,7 +23,7 @@ export const useCreateCliente = (): FetchState => {
 
   const createCliente = async (
     body: CreateCliente,
-  ): Promise<BodyResponse<ResponseCreateCliente>> => {
+  ): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -35,23 +34,34 @@ export const useCreateCliente = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Acceso creado exitosamente");
-        return response;
+        swalAlert({
+          status: "success",
+          message: `${response.message || "Cliente registrador exitosamente"}`
+        })
       } else {
         setIsError(true);
         setMessage("Error al crear el acceso");
-        return response;
+        swalAlert({
+          status: "error",
+          message: `${response.message || "Error al registrar al cliente"}`
+        })
       }
     } catch (error: any) {
       setIsError(true);
       setMessage("Se produjo un error al crear el acceso en el frontend");
-      return {
+      swalAlert({
         status: "error",
-        message: "Error al crear el acceso",
-      };
+        message: "Se produjo un error al registrar un cliente en el frontend"
+      })
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, message, execute: createCliente };
+  return { 
+    isLoading, 
+    isError, 
+    message, 
+    execute: createCliente 
+  };
 };
