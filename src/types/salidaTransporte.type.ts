@@ -1,11 +1,12 @@
 import type { EstadoTransporte } from "./constantes.type";
 
 export type CreateSalidaTransporte = {
-  fechaSalida: Date;
+  fechaSalida: string;
   idChoferAcceso: number;
   idOrigenEstablecimiento: number;
   idDestinoEstablecimiento: number;
   idVehiculo: number;
+  horasalida: string;
 }
 
 export type ResponseGetAll = {

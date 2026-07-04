@@ -7,6 +7,7 @@ import TableSelectChofer from '../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import DateTimePicker from '../../../components/ui/SelectDateTime';
+import { useRegistrarSalidaTransporte } from '../hooks/useRegistrarSalidaTransporte';
 // import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
 type TypeProcedimientoUi = {
@@ -32,6 +33,14 @@ type FormData = {
   horasalida: string
 }
 
+const formatDateMMDDYYYY = (date: Date) => {
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+};
+
 interface FormCreateGreProps {
   setShowFormCreateGre: (p: boolean) => void;
 }
@@ -43,6 +52,13 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   const [IdChofer, setIdChofer] = useState<number | null>(null);
   const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
   const [selectedDateTime, setSelectedDateTime] = useState<SelectedDateTime | null>(null);
+  
+  const { 
+    isLoading,
+    isError,
+    execute: registrarSalidaTransporte 
+  } = useRegistrarSalidaTransporte();
+
   const [formData, setFormData] = useState<FormData>({
     idChoferAcceso: IdChofer || 0,
     idOrigenEstablecimiento: 1,
@@ -140,7 +156,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
                 idChoferAcceso: IdChofer || 0,
                 idDestinoEstablecimiento: IdEstablecimiento || 0,
                 idVehiculo: IdVehiculo || 0,
-                fechaSalida: selectedDateTime ? selectedDateTime.date.toISOString().split('T')[0] : '',
+                fechaSalida: selectedDateTime ? formatDateMMDDYYYY(selectedDateTime.date) : '',
                 horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
               }));
               console.log("----> PRODUCTOS REGISTRADOS:", formData);
@@ -180,12 +196,29 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       }
       { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
         <div className="px-6 py-4 bg-gray-900 mx-6">
+          <ButtonSubmitForm 
+            handleSubmit={async () => {
+              await registrarSalidaTransporte(formData);
+            }}
+            isLoading={isLoading}
+            isError={isError}
+            textButton="Registrar Salida de Transporte"
+            textError="Error al registrar la salida de transporte"
+            color="blue"
+          />
           <div>
             <div className="text-lg font-medium text-white mb-4">
               Calendario
             </div>
             <DateTimePicker
-              onChange={setSelectedDateTime}
+              onChange={(value) => {
+                setSelectedDateTime(value);
+                setFormData((prev) => ({
+                  ...prev,
+                  fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
+                  horasalida: value ? `${value.hour}:${value.minute}` : ''
+                }));
+              }}
             />
           </div>
           <TableSelectEstablecimiento 

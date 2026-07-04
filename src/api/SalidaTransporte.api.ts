@@ -17,10 +17,7 @@ export default class SalidaTransporte extends BaseRequestApi {
 
   /* create */
   public async create(body: CreateSalidaTransporte): Promise<BodyResponse<CreateSalidaTransporte>> {
-    return this.request<BodyResponse<CreateSalidaTransporte>>(`${this.base_url_production}`, {
-      method: 'POST',
-      body,
-    });
+    return this.POST<CreateSalidaTransporte>(`${this.base_url_production}`, body);
   }
 
   /* getAll */
