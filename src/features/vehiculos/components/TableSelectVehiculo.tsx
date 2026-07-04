@@ -7,9 +7,10 @@ import { useFetchVehiculos } from '../hooks/useFetchVehiculos';
 
 interface TableSelectVehiculoProps {
   selectIdVehiculo: (idVehiculo: number | null) => void;
+  onChange: (idVehiculo: number) => void;
 }
 
-export default function TableSelectVehiculo({ selectIdVehiculo }: TableSelectVehiculoProps) {
+export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: TableSelectVehiculoProps) {
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
     "Placa",
@@ -38,8 +39,11 @@ export default function TableSelectVehiculo({ selectIdVehiculo }: TableSelectVeh
       textButtonError="Reintentar"
       fetchData={() => listarVehiculos({page: 1})}
     >
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <div className="p-4 flex justify-end">
+      <div className="flex-1 overflow-auto">
+        <div className="p-4 flex justify-between items-center">
+          <h2 className="text-lg font-medium text-white">
+            Selecciona un vehículo para la guía de remisión
+          </h2>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={() => setQueryVehiculo({page:infoPaginacion.pagina_actual})}
@@ -116,6 +120,7 @@ export default function TableSelectVehiculo({ selectIdVehiculo }: TableSelectVeh
                       onClick={() => {
                         selectIdVehiculo(vehiculo.idvehempresa);
                         setIdSelected(vehiculo.idvehempresa);
+                        onChange(vehiculo.idvehempresa);
                       }}
                       className="text-green-500 hover:text-green-400 flex flex-row gap-2"
                     >

@@ -6,6 +6,7 @@ import TableSelectSalidaTransporte from '../../transporte/components/TableSelect
 import TableSelectChofer from '../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
+import DateTimePicker from '../../../components/ui/SelectDateTime';
 // import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
 type TypeProcedimientoUi = {
@@ -15,23 +16,48 @@ type TypeProcedimientoUi = {
   icon: React.ReactNode
 }
 
+type SelectedDateTime = {
+  date: Date;
+  hour: number;
+  minute: number;
+  ampm: "AM" | "PM";
+};
+
+type FormData = {
+  idChoferAcceso: number,
+  idOrigenEstablecimiento: number,
+  idDestinoEstablecimiento: number,
+  idVehiculo: number,
+  fechaSalida: string,
+  horasalida: string
+}
+
 interface FormCreateGreProps {
   setShowFormCreateGre: (p: boolean) => void;
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
-  const [, setIdEstablecimiento] = useState<number | null>(null);
   const [, setIdSalidaTransporte] = useState<number | null>(null);
-  const [, setIdChofer] = useState<number | null>(null);
-  const [, setIdVehiculo] = useState<number | null>(null);
+  const [IdEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
+  const [IdChofer, setIdChofer] = useState<number | null>(null);
+  const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
+  const [selectedDateTime, setSelectedDateTime] = useState<SelectedDateTime | null>(null);
+  const [formData, setFormData] = useState<FormData>({
+    idChoferAcceso: IdChofer || 0,
+    idOrigenEstablecimiento: 1,
+    idDestinoEstablecimiento: IdEstablecimiento || 0,
+    idVehiculo: IdVehiculo || 0,
+    fechaSalida: '',
+    horasalida: ''
+  });
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
-      { label: 'Establecimiento', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Establecimiento', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
       { label: 'Salida transporte', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
       { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: true},
+      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
   );
   
@@ -108,10 +134,17 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           </button>
           
           <button 
-            // onClick={() => {
-            //   console.log("----> PRODUCTOS REGISTRADOS:", formData);
-            //   console.log("formData.bienes_transportados: ", formData.bienes_transportados);
-            // }}
+            onClick={() => {
+              setFormData((prev) => ({
+                ...prev,
+                idChoferAcceso: IdChofer || 0,
+                idDestinoEstablecimiento: IdEstablecimiento || 0,
+                idVehiculo: IdVehiculo || 0,
+                fechaSalida: selectedDateTime ? selectedDateTime.date.toISOString().split('T')[0] : '',
+                horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
+              }));
+              console.log("----> PRODUCTOS REGISTRADOS:", formData);
+            }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             Mostrar datos registrados
@@ -146,11 +179,40 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         </>
       }
       { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
-        <>
-          <TableSelectEstablecimiento selectIdEstablecimiento={setIdEstablecimiento} />
-          <TableSelectChofer selectIdChofer={setIdChofer} />
-          <TableSelectVehiculo selectIdVehiculo={setIdVehiculo} />
-        </>
+        <div className="px-6 py-4 bg-gray-900 mx-6">
+          <div>
+            <div className="text-lg font-medium text-white mb-4">
+              Calendario
+            </div>
+            <DateTimePicker
+              onChange={setSelectedDateTime}
+            />
+          </div>
+          <TableSelectEstablecimiento 
+            selectIdEstablecimiento={setIdEstablecimiento} 
+            onChange={(setIdEstablecimiento) => {
+            setFormData((prev) => ({
+              ...prev,
+              idDestinoEstablecimiento: setIdEstablecimiento || 0
+            }));
+          }} />
+          <TableSelectChofer 
+          selectIdChofer={setIdChofer} 
+          onChange={(setIdChofer) => {
+            setFormData((prev) => ({
+              ...prev,
+              idChoferAcceso: setIdChofer || 0
+            }));
+          }} />
+          <TableSelectVehiculo 
+          selectIdVehiculo={setIdVehiculo} 
+          onChange={(setIdVehiculo) => {
+            setFormData((prev) => ({
+              ...prev,
+              idVehiculo: setIdVehiculo || 0
+            }));
+          }} />
+        </div>
       } 
     </ContentPage>
   );

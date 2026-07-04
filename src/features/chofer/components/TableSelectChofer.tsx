@@ -7,9 +7,10 @@ import { useFetchChoferes } from '../hooks/useFetchChoferes';
 
 interface TableSelectChoferProps {
   selectIdChofer: (idChofer: number | null) => void;
+  onChange: (idChofer: number) => void;
 }
 
-export default function TableSelectChofer({ selectIdChofer }: TableSelectChoferProps) {
+export default function TableSelectChofer({ selectIdChofer, onChange }: TableSelectChoferProps) {
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
     "Nombre",
@@ -34,8 +35,11 @@ export default function TableSelectChofer({ selectIdChofer }: TableSelectChoferP
       textButtonError="Reintentar"
       fetchData={() => listarChoferes(1)}
     >
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <div className="p-4 flex justify-end">
+      <div className="flex-1 overflow-auto">
+        <div className="p-4 flex justify-between items-center">
+          <h2 className="text-lg font-medium text-white">
+            Selecciona un chofer para la guía de remisión
+          </h2>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={() => listarChoferes(infoPaginacion.pagina_actual)}
@@ -107,6 +111,7 @@ export default function TableSelectChofer({ selectIdChofer }: TableSelectChoferP
                       onClick={() => {
                         selectIdChofer(chofer.idacceso);
                         setIdSelected(chofer.idacceso);
+                        onChange(chofer.idacceso);
                       }}
                       className="text-green-500 hover:text-green-400 flex flex-row gap-2"
                     >
