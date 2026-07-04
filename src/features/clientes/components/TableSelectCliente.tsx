@@ -1,82 +1,61 @@
 import { useState } from 'react';
 import { CalendarDays, Hash, Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
-import ButtonsPagination from '../../../components/ui/ButtonsPagination';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
-import { useFetchSalidaTransportes } from '../hooks/useFechSalidasTransporte';
+import { useFetchClientes } from '../hooks/useFetchClientes';
 
-interface TableSelectSalidaTransporteProps {
-  selectIdSalidaTransporte: (idSalidaTransporte: number | null) => void,
-  onChange: (idSalidaTransporte: number | null) => void
+interface TableSelectClienteProps {
+  selectIdCliente: (idCliente: number | null) => void;
+  onChange: (idCliente: number | null) => void;
 }
 
-export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, onChange }: TableSelectSalidaTransporteProps) {
+export default function TableSelectCliente({ selectIdCliente, onChange }: TableSelectClienteProps) {
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
-    "ID Salida", 
-    "Estado", 
-    "Fecha de salida", 
+    "N°",
+    "Nombres",
+    "Apellido Paterno",
+    "Apellido Materno",
+    "DNI",
+    "Cant. envíos",
     ""
   ];
   const { 
-    salidaTransportes,
-    isLoading: isLoadingSalidaTransportes,
-    isError: isErrorSalidaTransportes,
-    execute: obtenerSalidaTransportes,
-    setPagina,
-    infoPaginacion,
-  } = useFetchSalidaTransportes();
-
-  const formatFechaSalida = (fechaSalida: string) => {
-    const fecha = new Date(fechaSalida);
-
-    if (Number.isNaN(fecha.getTime())) {
-      return fechaSalida;
-    }
-
-    return new Intl.DateTimeFormat('es-PE', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    }).format(fecha);
-  };
+    clientes,
+    isLoading: isLoadingClientes,
+    isError: isErrorClientes,
+    execute: obtenerClientes,
+  } = useFetchClientes();
 
   return (
     <ContentSectionProcess
-      isLoading={isLoadingSalidaTransportes}
-      isError={isErrorSalidaTransportes}
-      textError="Error al cargar las salidas de transporte"
+      isLoading={isLoadingClientes}
+      isError={isErrorClientes}
+      textError="Error al cargar los clientes"
       textButtonError="Reintentar"
-      fetchData={() => obtenerSalidaTransportes(1)}
+      fetchData={() => obtenerClientes()}
     >
       <div className="flex-1 overflow-auto px-8 py-6">
         <div className="p-4 flex justify-between items-center">
           <h2 className="text-lg font-medium text-white">
-            Selecciona una salida de transporte
+            Selecciona un cliente
           </h2>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => obtenerSalidaTransportes(1)}
+            onClick={() => obtenerClientes()}
           >
             Recargar
           </button>
         </div>
-        <ButtonsPagination 
-          total_paginas={infoPaginacion.total_paginas} 
-          pivote={infoPaginacion.pagina_actual} 
-          fetchData={setPagina} 
-          datos_por_pagina={infoPaginacion.datos_por_pagina} 
-          total_data={infoPaginacion.total_data} 
-        />
         <Table
           tableHeader={tableHeader}
-          cantidadDatos={salidaTransportes.length}
+          cantidadDatos={clientes.length}
         >
-          {salidaTransportes.map((salidaTransporte, index) => (
+          {clientes.map((cliente, index) => (
             <tr
               key={index}
               className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
             >
-              {/* ID */}
               <td className="px-6 py-4">
                 <div className="flex items-start gap-3">
                   <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
@@ -84,39 +63,53 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
                   </div>
                   <div className="min-w-0">
                     <span className="block font-medium text-sm text-white truncate">
-                      Salida #{salidaTransporte.idsalidatransporte}
+                      {index + 1}
                     </span>
                     <span className="block text-xs text-gray-400 truncate">
-                      Registro de transporte
+                      Cliente registrado
                     </span>
                   </div>
                 </div>
               </td>
 
-              {/* Estado */}
               <td className="px-6 py-4">
-                <div className="flex items-center gap-2 text-sm text-gray-300">
-                  <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff]">
-                    {salidaTransporte.estadotransporte}
-                  </span>
-                </div>
+                <span className="font-medium text-sm text-white">
+                  {cliente.nombres}
+                </span>
               </td>
 
-              {/* Fecha */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">
+                  {cliente.apellidopaterno}
+                </span>
+              </td>
+
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">
+                  {cliente.apellidomaterno}
+                </span>
+              </td>
+
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2 text-sm text-gray-300">
                   <CalendarDays className="w-4 h-4 text-gray-500" />
-                  <span>{formatFechaSalida(salidaTransporte.fechasalida)}</span>
+                  <span>{cliente.dniuser}</span>
                 </div>
               </td>
 
-              {/* Actions */}
+              <td className="px-6 py-4">
+                <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff]">
+                  {cliente.cantenvios}
+                </span>
+              </td>
+
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-2">
-                  { idSelected === salidaTransporte.idsalidatransporte ? (
+                  { idSelected === index + 1 ? (
                     <button onClick={() => {
                       setIdSelected(null);
-                      selectIdSalidaTransporte(null);
+                      selectIdCliente(null);
+                      onChange(null);
                     }} className="hover:text-red-400">
                       <span className="text-red-500 flex flex-row gap-2">
                         <span>Eliminar</span>
@@ -125,9 +118,9 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
                   ) : (
                     <button
                       onClick={() => {
-                        selectIdSalidaTransporte(salidaTransporte.idsalidatransporte);
-                        setIdSelected(salidaTransporte.idsalidatransporte);
-                        onChange(salidaTransporte.idsalidatransporte);
+                        selectIdCliente(index + 1);
+                        setIdSelected(index + 1);
+                        onChange(index + 1);
                       }}
                       className="text-green-500 hover:text-green-400 flex flex-row gap-2"
                     >

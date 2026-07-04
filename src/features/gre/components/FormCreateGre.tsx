@@ -5,6 +5,7 @@ import TableSelectEstablecimiento from '../../establecimientos/components/TableS
 import TableSelectSalidaTransporte from '../../transporte/components/TableSelectSalidaTransporte';
 import TableSelectChofer from '../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
+import TableSelectCliente from '../../clientes/components/TableSelectCliente';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import DateTimePicker from '../../../components/ui/SelectDateTime';
 import { useRegistrarSalidaTransporte } from '../hooks/useRegistrarSalidaTransporte';
@@ -33,6 +34,15 @@ type FormData = {
   horasalida: string
 }
 
+type FormDataPaquete = {
+  clave: string,
+  destino: string,
+  idSalidaTransporte: number,
+  idUsuario: number,
+  idUsuarioDestino: number,
+  montoCobrado: number
+}
+
 const formatDateMMDDYYYY = (date: Date) => {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
@@ -47,7 +57,9 @@ interface FormCreateGreProps {
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
-  const [, setIdSalidaTransporte] = useState<number | null>(null);
+  const [IdSalidaTransporte, setIdSalidaTransporte] = useState<number | null>(null);
+  const [IdCliente, setIdCliente] = useState<number | null>(null);
+  
   const [IdEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
   const [IdChofer, setIdChofer] = useState<number | null>(null);
   const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
@@ -67,6 +79,14 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
     fechaSalida: '',
     horasalida: ''
   });
+  const [formDataPaquete, setFormDataPaquete] = useState<FormDataPaquete>({
+    clave: '',
+    destino: '',
+    idSalidaTransporte: 0,
+    idUsuario: 1,
+    idUsuarioDestino: 0,
+    montoCobrado: 0
+  })
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
@@ -160,6 +180,16 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
                 horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
               }));
               console.log("----> PRODUCTOS REGISTRADOS:", formData);
+
+              setFormDataPaquete((prev) => ({
+                ...prev,
+                idSalidaTransporte: IdSalidaTransporte || 0,
+                idUsuarioDestino: IdCliente || 0,
+                destino: 'destino por defecto',
+                idUsuario: 1,
+                montoCobrado: 0,
+              }))
+              console.log("----> DATOS DEL PAQUETE REGISTRADOS:", formDataPaquete);
             }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
@@ -191,7 +221,34 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       
       { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
         <>
-          <TableSelectSalidaTransporte selectIdSalidaTransporte={setIdSalidaTransporte} />
+          <div className="px-6 py-4 bg-gray-900 mx-6">
+            {/* <ButtonSubmitForm 
+              handleSubmit={async () => {
+                // await registrarSalidaTransporte(formData);
+              }}
+              isLoading={isLoading}
+              isError={isError}
+              textButton="Registrar paquete"
+              textError="Error al registrar el paquete"
+              color="blue"
+            /> */}
+            <TableSelectSalidaTransporte 
+            selectIdSalidaTransporte={setIdSalidaTransporte} 
+            onChange={(setIdSalidaTransporte) => {
+              setFormData((prev) => ({
+                ...prev,
+                idSalidaTransporte: setIdSalidaTransporte || 0
+              }));
+            }} />
+            <TableSelectCliente 
+            selectIdCliente={setIdCliente} 
+            onChange={(setIdCliente) => {
+              setFormData((prev) => ({
+                ...prev,
+                idUsuarioDestino: setIdCliente || 0
+              }));
+            }} />
+          </div>
         </>
       }
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
