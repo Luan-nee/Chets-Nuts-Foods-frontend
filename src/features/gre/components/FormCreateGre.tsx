@@ -8,6 +8,7 @@ import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo'
 import TableSelectCliente from '../../clientes/components/TableSelectCliente';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import DateTimePicker from '../../../components/ui/SelectDateTime';
+import InputText from '../../../components/ui/InputText';
 import { useRegistrarSalidaTransporte } from '../hooks/useRegistrarSalidaTransporte';
 // import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
 
@@ -175,7 +176,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
               setFormData((prev) => ({
                 ...prev,
                 paquete: {
-                  clave: "Clave de prueba",
+                  clave: prev.paquete.clave,
                   destino: "Destino de prueba",
                   idSalidaTransporte: IdSalidaTransporte || 0,
                   idUsuario: 1,
@@ -235,6 +236,18 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
               textError="Error al registrar el paquete"
               color="blue"
             /> */}
+            <InputText 
+              htmlForm='clave de seguimiento'
+              label='Clave de seguimiento'
+              onChange={(value) => setFormData((prev) => ({
+                ...prev,
+                paquete: {
+                  ...prev.paquete,
+                  clave: value
+                }
+              }))}
+              value={formData.paquete?.clave || ''}
+            />
             <TableSelectSalidaTransporte 
             selectIdSalidaTransporte={setIdSalidaTransporte} 
             onChange={(setIdSalidaTransporte) => {
