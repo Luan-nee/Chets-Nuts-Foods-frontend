@@ -25,22 +25,23 @@ type SelectedDateTime = {
   ampm: "AM" | "PM";
 };
 
-type FormData = {
-  idChoferAcceso: number,
-  idOrigenEstablecimiento: number,
-  idDestinoEstablecimiento: number,
-  idVehiculo: number,
-  fechaSalida: string,
-  horasalida: string
-}
-
-type FormDataPaquete = {
-  clave: string,
-  destino: string,
-  idSalidaTransporte: number,
-  idUsuario: number,
-  idUsuarioDestino: number,
-  montoCobrado: number
+interface FormData {
+  salidaTransporte: {
+    idChoferAcceso: number,
+    idOrigenEstablecimiento: number,
+    idDestinoEstablecimiento: number,
+    idVehiculo: number,
+    fechaSalida: string,
+    horasalida: string
+  }
+  paquete: {
+    clave: string,
+    destino: string,
+    idSalidaTransporte: number,
+    idUsuario: number,
+    idUsuarioDestino: number,
+    montoCobrado: number
+  }
 }
 
 const formatDateMMDDYYYY = (date: Date) => {
@@ -59,34 +60,34 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
   const [IdSalidaTransporte, setIdSalidaTransporte] = useState<number | null>(null);
   const [IdCliente, setIdCliente] = useState<number | null>(null);
-  
+
   const [IdEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
   const [IdChofer, setIdChofer] = useState<number | null>(null);
   const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
   const [selectedDateTime, setSelectedDateTime] = useState<SelectedDateTime | null>(null);
-  
+  const [formData, setFormData] = useState<FormData>({
+    salidaTransporte: {
+      idChoferAcceso: IdChofer || 0,
+      idOrigenEstablecimiento: 1,
+      idDestinoEstablecimiento: IdEstablecimiento || 0,
+      idVehiculo: IdVehiculo || 0,
+      fechaSalida: '',
+      horasalida: ''
+    },
+    paquete: {
+      clave: '',
+      destino: 'Destino de prueba',
+      idSalidaTransporte: IdSalidaTransporte || 0,
+      idUsuario: 1,
+      idUsuarioDestino: IdCliente || 0,
+      montoCobrado: 0
+    },
+  })
   const { 
     isLoading,
     isError,
     execute: registrarSalidaTransporte 
   } = useRegistrarSalidaTransporte();
-
-  const [formData, setFormData] = useState<FormData>({
-    idChoferAcceso: IdChofer || 0,
-    idOrigenEstablecimiento: 1,
-    idDestinoEstablecimiento: IdEstablecimiento || 0,
-    idVehiculo: IdVehiculo || 0,
-    fechaSalida: '',
-    horasalida: ''
-  });
-  const [formDataPaquete, setFormDataPaquete] = useState<FormDataPaquete>({
-    clave: '',
-    destino: '',
-    idSalidaTransporte: 0,
-    idUsuario: 1,
-    idUsuarioDestino: 0,
-    montoCobrado: 0
-  })
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
@@ -173,23 +174,25 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             onClick={() => {
               setFormData((prev) => ({
                 ...prev,
-                idChoferAcceso: IdChofer || 0,
-                idDestinoEstablecimiento: IdEstablecimiento || 0,
-                idVehiculo: IdVehiculo || 0,
-                fechaSalida: selectedDateTime ? formatDateMMDDYYYY(selectedDateTime.date) : '',
-                horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
+                paquete: {
+                  clave: "Clave de prueba",
+                  destino: "Destino de prueba",
+                  idSalidaTransporte: IdSalidaTransporte || 0,
+                  idUsuario: 1,
+                  idUsuarioDestino: IdCliente || 0,
+                  montoCobrado: 0,
+                },
+                salidaTransporte: {
+                  fechaSalida: selectedDateTime ? formatDateMMDDYYYY(selectedDateTime.date) : '',
+                  idChoferAcceso: IdChofer || 0,
+                  idOrigenEstablecimiento: 1,
+                  idDestinoEstablecimiento: IdEstablecimiento || 0,
+                  idVehiculo: IdVehiculo || 0,
+                  horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
+                }
               }));
-              console.log("----> PRODUCTOS REGISTRADOS:", formData);
+              console.log("----> TODOS LOS DATOS REGISTRADOS:", formData);
 
-              setFormDataPaquete((prev) => ({
-                ...prev,
-                idSalidaTransporte: IdSalidaTransporte || 0,
-                idUsuarioDestino: IdCliente || 0,
-                destino: 'destino por defecto',
-                idUsuario: 1,
-                montoCobrado: 0,
-              }))
-              console.log("----> DATOS DEL PAQUETE REGISTRADOS:", formDataPaquete);
             }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
@@ -237,7 +240,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             onChange={(setIdSalidaTransporte) => {
               setFormData((prev) => ({
                 ...prev,
-                idSalidaTransporte: setIdSalidaTransporte || 0
+                paquete: {
+                  ...prev.paquete,
+                  idSalidaTransporte: setIdSalidaTransporte || 0
+                }
               }));
             }} />
             <TableSelectCliente 
@@ -245,7 +251,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             onChange={(setIdCliente) => {
               setFormData((prev) => ({
                 ...prev,
-                idUsuarioDestino: setIdCliente || 0
+                paquete: {
+                  ...prev.paquete,
+                  idUsuarioDestino: setIdCliente || 0
+                }
               }));
             }} />
           </div>
@@ -255,7 +264,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         <div className="px-6 py-4 bg-gray-900 mx-6">
           <ButtonSubmitForm 
             handleSubmit={async () => {
-              await registrarSalidaTransporte(formData);
+              await registrarSalidaTransporte(formData.salidaTransporte);
             }}
             isLoading={isLoading}
             isError={isError}
@@ -272,8 +281,11 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
                 setSelectedDateTime(value);
                 setFormData((prev) => ({
                   ...prev,
-                  fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
-                  horasalida: value ? `${value.hour}:${value.minute}` : ''
+                  salidaTransporte: {
+                    ...prev.salidaTransporte,
+                    fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
+                    horasalida: value ? `${value.hour}:${value.minute}` : ''
+                  }
                 }));
               }}
             />
@@ -283,7 +295,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             onChange={(setIdEstablecimiento) => {
             setFormData((prev) => ({
               ...prev,
-              idDestinoEstablecimiento: setIdEstablecimiento || 0
+              salidaTransporte: {
+                ...prev.salidaTransporte,
+                idDestinoEstablecimiento: setIdEstablecimiento || 0
+              }
             }));
           }} />
           <TableSelectChofer 
@@ -291,7 +306,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           onChange={(setIdChofer) => {
             setFormData((prev) => ({
               ...prev,
-              idChoferAcceso: setIdChofer || 0
+              salidaTransporte: {
+                ...prev.salidaTransporte,
+                idChoferAcceso: setIdChofer || 0
+              }
             }));
           }} />
           <TableSelectVehiculo 
@@ -299,7 +317,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           onChange={(setIdVehiculo) => {
             setFormData((prev) => ({
               ...prev,
-              idVehiculo: setIdVehiculo || 0
+              salidaTransporte: {
+                ...prev.salidaTransporte,
+                idVehiculo: setIdVehiculo || 0
+              }
             }));
           }} />
         </div>
