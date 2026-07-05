@@ -1,35 +1,16 @@
 import { Fragment, useState } from 'react';
 import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import ContentPage from '../../../components/layouts/ContentPage';
-import TableSelectEstablecimiento from '../../establecimientos/components/TableSelectEstablecimiento';
-import TableSelectSalidaTransporte from '../../transporte/components/TableSelectSalidaTransporte';
-import TableSelectChofer from '../../chofer/components/TableSelectChofer';
-import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
-import TableSelectCliente from '../../clientes/components/TableSelectCliente';
-import TableSelectProductos from '../../productos/components/TableSelectProductos';
+// import TableSelectProductos from '../../productos/components/TableSelectProductos';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
-import DateTimePicker from '../../../components/ui/SelectDateTime';
-import InputText from '../../../components/ui/InputText';
-import { useRegistrarSalidaTransporte } from '../hooks/useRegistrarSalidaTransporte';
-import type { SelectedDateTime, ProductoEnPaquete} from '../../../types/constantes.type';
+import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
+import FormPaquete from './FormCreateGre/FormPaquete';
+import type { SelectedDateTime } from '../../../types/constantes.type';
+import type { SalidaTransporteFormData, PaqueteFormData } from '../../../types/constantes.type';
 
-interface FormData {
-  salidaTransporte: {
-    idChoferAcceso: number,
-    idOrigenEstablecimiento: number,
-    idDestinoEstablecimiento: number,
-    idVehiculo: number,
-    fechaSalida: string,
-    horasalida: string
-  }
-  paquete: {
-    clave: string,
-    destino: string,
-    idSalidaTransporte: number,
-    idUsuario: number,
-    idUsuarioDestino: number,
-    montoCobrado: number
-  }
+export interface FormData {
+  salidaTransporte: SalidaTransporteFormData
+  paquete: PaqueteFormData
 }
 
 type TypeProcedimientoUi = {
@@ -45,13 +26,12 @@ interface FormCreateGreProps {
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
-  const [IdSalidaTransporte, setIdSalidaTransporte] = useState<number | null>(null);
-  const [IdCliente, setIdCliente] = useState<number | null>(null);
-  
-  const [IdEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
-  const [IdChofer, setIdChofer] = useState<number | null>(null);
-  const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
-  const [selectedDateTime, setSelectedDateTime] = useState<SelectedDateTime | null>(null);
+  const [IdSalidaTransporte,] = useState<number | null>(null);
+  const [IdCliente,] = useState<number | null>(null);
+  const [IdEstablecimiento,] = useState<number | null>(null);
+  const [IdChofer,] = useState<number | null>(null);
+  const [IdVehiculo,] = useState<number | null>(null);
+  const [selectedDateTime,] = useState<SelectedDateTime | null>(null);
   const [formData, setFormData] = useState<FormData>({
     salidaTransporte: {
       idChoferAcceso: IdChofer || 0,
@@ -70,12 +50,6 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       montoCobrado: 0
     },
   })
-  const [formDataProductos, setFormDataProductos] = useState<ProductoEnPaquete[]>([]);
-  const { 
-    isLoading,
-    isError,
-    execute: registrarSalidaTransporte 
-  } = useRegistrarSalidaTransporte();
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
@@ -211,119 +185,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       </div>
       
       { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
-        <>
-          <div className="px-6 py-4 bg-gray-900 mx-6">
-            {/* <ButtonSubmitForm 
-              handleSubmit={async () => {
-                // await registrarSalidaTransporte(formData);
-              }}
-              isLoading={isLoading}
-              isError={isError}
-              textButton="Registrar paquete"
-              textError="Error al registrar el paquete"
-              color="blue"
-            /> */}
-            <InputText 
-              htmlForm='clave de seguimiento'
-              label='Clave de seguimiento'
-              onChange={(value) => setFormData((prev) => ({
-                ...prev,
-                paquete: {
-                  ...prev.paquete,
-                  clave: value
-                }
-              }))}
-              value={formData.paquete?.clave || ''}
-            />
-            <TableSelectSalidaTransporte 
-            selectIdSalidaTransporte={setIdSalidaTransporte} 
-            onChange={(setIdSalidaTransporte) => {
-              setFormData((prev) => ({
-                ...prev,
-                paquete: {
-                  ...prev.paquete,
-                  idSalidaTransporte: setIdSalidaTransporte || 0
-                }
-              }));
-            }} />
-            <TableSelectCliente 
-            selectIdCliente={setIdCliente} 
-            onChange={(setIdCliente) => {
-              setFormData((prev) => ({
-                ...prev,
-                paquete: {
-                  ...prev.paquete,
-                  idUsuarioDestino: setIdCliente || 0
-                }
-              }));
-            }} />
-          </div>
-        </>
+        <FormPaquete setFormData={setFormData} />
       }
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
-        <div className="px-6 py-4 bg-gray-900 mx-6">
-          <ButtonSubmitForm 
-            handleSubmit={async () => {
-              await registrarSalidaTransporte(formData.salidaTransporte);
-            }}
-            isLoading={isLoading}
-            isError={isError}
-            textButton="Registrar Salida de Transporte"
-            textError="Error al registrar la salida de transporte"
-            color="blue"
-          />
-          <div>
-            <div className="text-lg font-medium text-white mb-4">
-              Calendario
-            </div>
-            <DateTimePicker
-              onChange={(value) => {
-                setSelectedDateTime(value);
-                setFormData((prev) => ({
-                  ...prev,
-                  salidaTransporte: {
-                    ...prev.salidaTransporte,
-                    fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
-                    horasalida: value ? `${value.hour}:${value.minute}` : ''
-                  }
-                }));
-              }}
-            />
-          </div>
-          <TableSelectEstablecimiento 
-            selectIdEstablecimiento={setIdEstablecimiento} 
-            onChange={(setIdEstablecimiento) => {
-            setFormData((prev) => ({
-              ...prev,
-              salidaTransporte: {
-                ...prev.salidaTransporte,
-                idDestinoEstablecimiento: setIdEstablecimiento || 0
-              }
-            }));
-          }} />
-          <TableSelectChofer 
-          selectIdChofer={setIdChofer} 
-          onChange={(setIdChofer) => {
-            setFormData((prev) => ({
-              ...prev,
-              salidaTransporte: {
-                ...prev.salidaTransporte,
-                idChoferAcceso: setIdChofer || 0
-              }
-            }));
-          }} />
-          <TableSelectVehiculo 
-          selectIdVehiculo={setIdVehiculo} 
-          onChange={(setIdVehiculo) => {
-            setFormData((prev) => ({
-              ...prev,
-              salidaTransporte: {
-                ...prev.salidaTransporte,
-                idVehiculo: setIdVehiculo || 0
-              }
-            }));
-          }} />
-        </div>
+        <FormSalidaTransporte setFormData={setFormData} />
       }
     </ContentPage>
   );

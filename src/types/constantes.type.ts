@@ -50,3 +50,21 @@ export type SelectedDateTime = {
   minute: number;
   ampm: "AM" | "PM";
 };
+
+export type SalidaTransporteFormData = {
+  idChoferAcceso: number,
+  idOrigenEstablecimiento: number,
+  idDestinoEstablecimiento: number,
+  idVehiculo: number,
+  fechaSalida: string,
+  horasalida: string
+}
+
+export type PaqueteFormData = {
+  clave: string,
+  destino: string,
+  idSalidaTransporte: number,
+  idUsuario: number,
+  idUsuarioDestino: number,
+  montoCobrado: number
+}
