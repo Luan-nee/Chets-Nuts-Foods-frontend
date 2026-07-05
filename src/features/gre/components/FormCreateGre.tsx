@@ -5,13 +5,14 @@ import ContentPage from '../../../components/layouts/ContentPage';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
 import FormPaquete from './FormCreateGre/FormPaquete';
-import type { SelectedDateTime } from '../../../types/constantes.type';
+import type { ProductoEnPaquete, SelectedDateTime } from '../../../types/constantes.type';
 import type { SalidaTransporteFormData, PaqueteFormData } from '../../../types/constantes.type';
 import FormProductos from './FormCreateGre/FormProductos';
 
 export interface FormData {
-  salidaTransporte: SalidaTransporteFormData
-  paquete: PaqueteFormData
+  salidaTransporte: SalidaTransporteFormData,
+  paquete: PaqueteFormData,
+  productos: ProductoEnPaquete[]
 }
 
 type TypeProcedimientoUi = {
@@ -50,12 +51,13 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       idUsuarioDestino: IdCliente || 0,
       montoCobrado: 0
     },
+    productos: []
   })
   
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Salida transporte', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
-      { label: 'Establecimiento', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
+      { label: 'Paquete', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
       { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
       { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
     ] 
@@ -185,14 +187,14 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         }
       </div>
       
-      { procedimiento.find(p => p.focus)?.label === "Establecimiento" &&
-        <FormPaquete setFormData={setFormData} />
-      }
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
         <FormSalidaTransporte setFormData={setFormData} />
       }
+      { procedimiento.find(p => p.focus)?.label === "Paquete" &&
+        <FormPaquete setFormData={setFormData} />
+      }
       { procedimiento.find(p => p.focus)?.label === "Productos" &&
-        <FormProductos />
+        <FormProductos setFormData={setFormData} />
       }
     </ContentPage>
   );

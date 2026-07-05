@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { CalendarDays, Hash, Plus } from 'lucide-react';
+import { Minus, Plus, Trash } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
 import ButtonsPagination from '../../../components/ui/ButtonsPagination';
@@ -7,20 +6,19 @@ import type { ProductoEnPaquete } from '../../../types/constantes.type';
 import { useFetchProductos } from '../hooks/useFetchProductos';
 
 interface TableSelectProductosProps {
-  selectIdProducto: (idProducto: number | null) => void;
-  selectInfoProducto: (infoProducto: ProductoEnPaquete) => void;
+  setListProductsSelected: React.Dispatch<React.SetStateAction<ProductoEnPaquete[]>>;
+  listProductsSelected: ProductoEnPaquete[];
 }
 
 export default function TableSelectProductos({ 
-  selectIdProducto, 
-  selectInfoProducto
+  setListProductsSelected,
+  listProductsSelected
 }: TableSelectProductosProps ) {
-  const [listProductsSelected, setListProductsSelected] = useState<ProductoEnPaquete[]>([]);
   const tableHeader = [
     "N°",
     "Nombre",
     "Descripción",
-    "Fecha de creación",
+    "Cantidad",
     ""
   ];
   const { 
@@ -72,17 +70,7 @@ export default function TableSelectProductos({
             >
               <td className="px-6 py-4">
                 <div className="flex items-start gap-3">
-                  <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
-                    <Hash className="w-5 h-5 text-[#1f6feb]" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="block font-medium text-sm text-white truncate">
-                      {index + 1}
-                    </span>
-                    <span className="block text-xs text-gray-400 truncate">
-                      Producto registrado
-                    </span>
-                  </div>
+                  {index + 1}
                 </div>
               </td>
 
@@ -98,46 +86,111 @@ export default function TableSelectProductos({
                 </span>
               </td>
 
-              <td className="px-6 py-4">
-                <div className="flex items-center gap-2 text-sm text-gray-300">
-                  <CalendarDays className="w-4 h-4 text-gray-500" />
-                  <span>{new Date(producto.fechacreacion).toLocaleDateString('es-PE')}</span>
-                </div>
+              <td className="px-4 py-4">
+                {/* AGREGAR BOTONES PARA SUMAR O RESTAR CANTIDAD */}
+                { listProductsSelected.some((p) => p.nombreproducto === producto.nombre) ? (
+                  <div className="inline-flex items-center gap-2">
+                    {/* Botón Izquierdo - Decrementar */}
+                    <button
+                      onClick={ () => {
+                        setListProductsSelected((prev) => {
+                          const updatedList = prev.map((p) => {
+                            if (p.nombreproducto === producto.nombre) {
+                              return {
+                                ...p,
+                                cantidad: (p.cantidad == 0 ? 0 : p.cantidad - 1)
+                              };
+                            }
+                            return p;
+                          });
+                          return updatedList;
+                        })
+                      }}
+                      className="transition-colors duration-200 rounded-md hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                      aria-label="Disminuir valor"
+                    >
+                      <Minus size={20} />
+                    </button>
+                    {/* Input Central */}
+                    <input
+                      type="number"
+                      value={listProductsSelected.find((p) => p.nombreproducto === producto.nombre)?.cantidad || 0}
+                      onChange={(e) => {
+                        const newValue = parseInt(e.target.value, 10);
+                        if (!isNaN(newValue) && newValue >= 0) {
+                          setListProductsSelected((prev) => {
+                            const updatedList = prev.map((p) => {
+                              if (p.nombreproducto === producto.nombre) {
+                                return {
+                                  ...p,
+                                  cantidad: newValue
+                                };
+                              }
+                              return p;
+                            });
+                            return updatedList;
+                          });
+                        }
+                      }}
+                      min={0}
+                      className="w-16 text-center bg-transparent border-none font-semibold text-white-700 border border-gray-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    {/* Botón Derecho - Incrementar */}
+                    <button
+                      onClick={ () => {
+                        setListProductsSelected((prev) => {
+                          const updatedList = prev.map((p) => {
+                            if (p.nombreproducto === producto.nombre) {
+                              return {
+                                ...p,
+                                cantidad: p.cantidad + 1
+                              };
+                            }
+                            return p;
+                          });
+                          return updatedList;
+                        })
+                      }}
+                      className="transition-colors duration-200 rounded-md hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-gray-200 border border-gray-700"
+                      aria-label="Aumentar valor"
+                    >
+                      <Plus size={20} />
+                    </button>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </td>
 
+              {/* Botón para agregar/quitar producto */}
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-2">
                   { listProductsSelected.some((p) => p.nombreproducto === producto.nombre) ? (
-                    <button onClick={() => {
-                      selectIdProducto(null);
-                    }} className="hover:text-red-400">
-                      <span className="text-red-500 flex flex-row gap-2">
-                        <span>Eliminar</span>
-                      </span>
+                    <button 
+                      onClick={() => {
+                        setListProductsSelected((prev) => 
+                          prev.filter((listProducts) => listProducts.idproductdefect !== producto.idproductdefect)
+                        );
+                      }}
+                    className="text-red-500 hover:text-red-400">
+                      <Trash className="w-5 h-5" />
                     </button>
                   ) : (
                     <button
                       onClick={() => {
-                        selectIdProducto(producto.idproductdefect);
                         setListProductsSelected((prev) => [
                           ...prev,
                           {
+                            idproductdefect: producto.idproductdefect,
                             nombreproducto: producto.nombre,
                             pesounitario: 1.0,
-                            observacion: "",
+                            observacion: "sin observación",
                             cantidad: 1
                           }
                         ]);
-                        selectInfoProducto({
-                          nombreproducto: producto.nombre,
-                          pesounitario: 1.0,
-                          observacion: "",
-                          cantidad: 777
-                        })
                       }}
-                      className="text-green-500 hover:text-green-400 flex flex-row gap-2"
+                      className="text-green-500 hover:text-green-400"
                     >
-                      <span>Seleccionar</span>
                       <Plus className="w-5 h-5" />
                     </button>
                   )}

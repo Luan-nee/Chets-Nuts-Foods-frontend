@@ -38,6 +38,7 @@ export interface PropsNotificaciones {
 
 // TIPOS QUE SON USADONS EN EL FRONTEND Y BACKEND
 export type ProductoEnPaquete = {
+  idproductdefect: number;
   nombreproducto: string;
   pesounitario: number;
   observacion: string;
