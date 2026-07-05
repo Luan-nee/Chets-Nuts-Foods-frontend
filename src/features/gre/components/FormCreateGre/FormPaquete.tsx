@@ -2,10 +2,10 @@ import { useState } from "react";
 import InputText from "../../../../components/ui/InputText";
 import TableSelectCliente from "../../../clientes/components/TableSelectCliente";
 import TableSelectSalidaTransporte from "../../../transporte/components/TableSelectSalidaTransporte";
-import type { FormData } from '../FormCreateGre';
+import type { FormCreateGreData } from '../FormCreateGre';
 
 interface FormPaqueteProps {
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  setFormData: React.Dispatch<React.SetStateAction<FormCreateGreData>>;
 }
 
 export default function FormEstablecimiento({ setFormData }: FormPaqueteProps) {

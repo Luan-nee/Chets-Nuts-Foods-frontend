@@ -3,10 +3,10 @@ import DateTimePicker from '../../../../components/ui/SelectDateTime';
 import TableSelectEstablecimiento from '../../../establecimientos/components/TableSelectEstablecimiento';
 import TableSelectChofer from '../../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../../vehiculos/components/TableSelectVehiculo';
-import type { FormData } from '../FormCreateGre';
+import type { FormCreateGreData } from '../FormCreateGre';
 
 interface FormSalidaTransporteProps {
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  setFormData: React.Dispatch<React.SetStateAction<FormCreateGreData>>;
 }
 
 export default function FormSalidaTransporte({ setFormData }: FormSalidaTransporteProps) {

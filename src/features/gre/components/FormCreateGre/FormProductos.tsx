@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import type { ProductoEnPaquete } from '../../../../types/constantes.type';
 import TableSelectProductos from '../../../productos/components/TableSelectProductos';
+import type { FormCreateGreData } from '../FormCreateGre';
 
 interface FormProductosProps {
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  setFormData: React.Dispatch<React.SetStateAction<FormCreateGreData>>;
 }
 
 export default function FormProductos ({ setFormData }: FormProductosProps) {

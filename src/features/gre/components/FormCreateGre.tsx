@@ -9,7 +9,7 @@ import type { ProductoEnPaquete, SelectedDateTime } from '../../../types/constan
 import type { SalidaTransporteFormData, PaqueteFormData } from '../../../types/constantes.type';
 import FormProductos from './FormCreateGre/FormProductos';
 
-export interface FormData {
+export interface FormCreateGreData {
   salidaTransporte: SalidaTransporteFormData,
   paquete: PaqueteFormData,
   productos: ProductoEnPaquete[]
@@ -34,7 +34,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   const [IdChofer,] = useState<number | null>(null);
   const [IdVehiculo,] = useState<number | null>(null);
   const [selectedDateTime,] = useState<SelectedDateTime | null>(null);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormCreateGreData>({
     salidaTransporte: {
       idChoferAcceso: IdChofer || 0,
       idOrigenEstablecimiento: 1,
