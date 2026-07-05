@@ -8,7 +8,6 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import Loading from "../../../components/ui/Loading";
 import { sexos, tiposPersona } from "../../../config/constantes";
 import type { 
   UserGender as sexoEmpleado, 
