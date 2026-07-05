@@ -9,15 +9,13 @@ import { useFetchProductos } from '../hooks/useFetchProductos';
 interface TableSelectProductosProps {
   selectIdProducto: (idProducto: number | null) => void;
   selectInfoProducto: (infoProducto: ProductoEnPaquete) => void;
-  onChange: (idProducto: number) => void;
 }
 
 export default function TableSelectProductos({ 
   selectIdProducto, 
-  selectInfoProducto,
-  onChange }: TableSelectProductosProps
-) {
-  const [idSelected, setIdSelected] = useState<number | null>(null);
+  selectInfoProducto
+}: TableSelectProductosProps ) {
+  const [listProductsSelected, setListProductsSelected] = useState<ProductoEnPaquete[]>([]);
   const tableHeader = [
     "N°",
     "Nombre",
@@ -109,9 +107,8 @@ export default function TableSelectProductos({
 
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-2">
-                  { idSelected === producto.idproductdefect ? (
+                  { listProductsSelected.some((p) => p.nombreproducto === producto.nombre) ? (
                     <button onClick={() => {
-                      setIdSelected(null);
                       selectIdProducto(null);
                     }} className="hover:text-red-400">
                       <span className="text-red-500 flex flex-row gap-2">
@@ -122,8 +119,15 @@ export default function TableSelectProductos({
                     <button
                       onClick={() => {
                         selectIdProducto(producto.idproductdefect);
-                        setIdSelected(producto.idproductdefect);
-                        onChange(producto.idproductdefect);
+                        setListProductsSelected((prev) => [
+                          ...prev,
+                          {
+                            nombreproducto: producto.nombre,
+                            pesounitario: 1.0,
+                            observacion: "",
+                            cantidad: 1
+                          }
+                        ]);
                         selectInfoProducto({
                           nombreproducto: producto.nombre,
                           pesounitario: 1.0,

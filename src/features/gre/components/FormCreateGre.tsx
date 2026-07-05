@@ -7,6 +7,7 @@ import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
 import FormPaquete from './FormCreateGre/FormPaquete';
 import type { SelectedDateTime } from '../../../types/constantes.type';
 import type { SalidaTransporteFormData, PaqueteFormData } from '../../../types/constantes.type';
+import FormProductos from './FormCreateGre/FormProductos';
 
 export interface FormData {
   salidaTransporte: SalidaTransporteFormData
@@ -189,6 +190,9 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       }
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
         <FormSalidaTransporte setFormData={setFormData} />
+      }
+      { procedimiento.find(p => p.focus)?.label === "Productos" &&
+        <FormProductos />
       }
     </ContentPage>
   );
