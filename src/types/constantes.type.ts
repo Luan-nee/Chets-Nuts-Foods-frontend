@@ -35,3 +35,18 @@ export interface PropsNotificaciones {
   descripcion: string;
   t: any;
 }
+
+// TIPOS QUE SON USADONS EN EL FRONTEND Y BACKEND
+export type ProductoEnPaquete = {
+  nombreproducto: string;
+  pesounitario: number;
+  observacion: string;
+  cantidad: number;
+}
+
+export type SelectedDateTime = {
+  date: Date;
+  hour: number;
+  minute: number;
+  ampm: "AM" | "PM";
+};
