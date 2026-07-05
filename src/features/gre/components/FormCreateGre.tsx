@@ -6,25 +6,12 @@ import TableSelectSalidaTransporte from '../../transporte/components/TableSelect
 import TableSelectChofer from '../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../vehiculos/components/TableSelectVehiculo';
 import TableSelectCliente from '../../clientes/components/TableSelectCliente';
+import TableSelectProductos from '../../productos/components/TableSelectProductos';
 import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import DateTimePicker from '../../../components/ui/SelectDateTime';
 import InputText from '../../../components/ui/InputText';
 import { useRegistrarSalidaTransporte } from '../hooks/useRegistrarSalidaTransporte';
-// import { useEmitirGuiaRemision } from '../hooks/useEmitirGuiaRemision';
-
-type TypeProcedimientoUi = {
-  focus: boolean,
-  label: string, 
-  status: boolean, 
-  icon: React.ReactNode
-}
-
-type SelectedDateTime = {
-  date: Date;
-  hour: number;
-  minute: number;
-  ampm: "AM" | "PM";
-};
+import type { SelectedDateTime, ProductoEnPaquete} from '../../../types/constantes.type';
 
 interface FormData {
   salidaTransporte: {
@@ -45,13 +32,12 @@ interface FormData {
   }
 }
 
-const formatDateMMDDYYYY = (date: Date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${month}/${day}/${year}`;
-};
+type TypeProcedimientoUi = {
+  focus: boolean,
+  label: string, 
+  status: boolean, 
+  icon: React.ReactNode
+}
 
 interface FormCreateGreProps {
   setShowFormCreateGre: (p: boolean) => void;
@@ -61,7 +47,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
   const [IdSalidaTransporte, setIdSalidaTransporte] = useState<number | null>(null);
   const [IdCliente, setIdCliente] = useState<number | null>(null);
-
+  
   const [IdEstablecimiento, setIdEstablecimiento] = useState<number | null>(null);
   const [IdChofer, setIdChofer] = useState<number | null>(null);
   const [IdVehiculo, setIdVehiculo] = useState<number | null>(null);
@@ -84,6 +70,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       montoCobrado: 0
     },
   })
+  const [formDataProductos, setFormDataProductos] = useState<ProductoEnPaquete[]>([]);
   const { 
     isLoading,
     isError,
@@ -337,7 +324,17 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             }));
           }} />
         </div>
-      } 
+      }
     </ContentPage>
   );
 }
+
+
+
+const formatDateMMDDYYYY = (date: Date) => {
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+};
