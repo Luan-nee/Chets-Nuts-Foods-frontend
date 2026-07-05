@@ -3,19 +3,55 @@ import DateTimePicker from '../../../../components/ui/SelectDateTime';
 import TableSelectEstablecimiento from '../../../establecimientos/components/TableSelectEstablecimiento';
 import TableSelectChofer from '../../../chofer/components/TableSelectChofer';
 import TableSelectVehiculo from '../../../vehiculos/components/TableSelectVehiculo';
-import type { FormCreateGreData } from '../FormCreateGre';
+import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
+import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
+import { useRegistrarSalidaTransporte } from '../../../gre/hooks/useRegistrarSalidaTransporte';
 
-interface FormSalidaTransporteProps {
-  setFormData: React.Dispatch<React.SetStateAction<FormCreateGreData>>;
+type SalidaTransporteFormData = {
+  idChoferAcceso: number,
+  idOrigenEstablecimiento: number,
+  idDestinoEstablecimiento: number,
+  idVehiculo: number,
+  fechaSalida: string,
+  horasalida: string
 }
 
-export default function FormSalidaTransporte({ setFormData }: FormSalidaTransporteProps) {
+export default function FormSalidaTransporte() {
   const [, setIdEstablecimiento] = useState<number | null>(null);
   const [, setIdChofer] = useState<number | null>(null);
   const [, setIdVehiculo] = useState<number | null>(null);
+  const [formData, setFormData] = useState<SalidaTransporteFormData>({
+    fechaSalida: '',
+    horasalida: '',
+    idChoferAcceso: 0,
+    idOrigenEstablecimiento: 1,
+    idDestinoEstablecimiento: 0,
+    idVehiculo: 0
+  }) 
+  const {
+    isLoading: isLoadingSalidaTransporte,
+    isError: isErrorSalidaTransporte,
+    execute: createSalidaTransporte
+  } = useRegistrarSalidaTransporte();
 
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
+      <div className="flex gap-2">
+        <ButtonSubmitForm 
+          handleSubmit={() => createSalidaTransporte(formData)}
+          isError={isErrorSalidaTransporte}
+          isLoading={isLoadingSalidaTransporte}
+          textButton='Registrar salida de transporte'
+          textError='Se produjo un error al registrar la salida de transporte'
+          color='blue'
+        />
+        <ButtonCancelForm 
+          handleCancel={() => {}}
+          isLoading={false}
+          textButton='Cancelar'
+          color='red'
+        />
+      </div>
       <div>
         <div className="text-lg font-medium text-white mb-4">
           Calendario
@@ -24,11 +60,8 @@ export default function FormSalidaTransporte({ setFormData }: FormSalidaTranspor
           onChange={(value) => {
             setFormData((prev) => ({
               ...prev,
-              salidaTransporte: {
-                ...prev.salidaTransporte,
-                fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
-                horasalida: value ? `${value.hour}:${value.minute}` : ''
-              }
+              fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
+              horasalida: value ? `${value.hour}:${value.minute}` : ''
             }));
           }}
         />
@@ -38,10 +71,7 @@ export default function FormSalidaTransporte({ setFormData }: FormSalidaTranspor
         onChange={(setIdEstablecimiento) => {
         setFormData((prev) => ({
           ...prev,
-          salidaTransporte: {
-            ...prev.salidaTransporte,
-            idDestinoEstablecimiento: setIdEstablecimiento || 0
-          }
+          idDestinoEstablecimiento: setIdEstablecimiento || 0
         }));
       }} />
       <TableSelectChofer 
@@ -49,10 +79,7 @@ export default function FormSalidaTransporte({ setFormData }: FormSalidaTranspor
       onChange={(setIdChofer) => {
         setFormData((prev) => ({
           ...prev,
-          salidaTransporte: {
-            ...prev.salidaTransporte,
-            idChoferAcceso: setIdChofer || 0
-          }
+          idChoferAcceso: setIdChofer || 0
         }));
       }} />
       <TableSelectVehiculo 
@@ -60,10 +87,7 @@ export default function FormSalidaTransporte({ setFormData }: FormSalidaTranspor
       onChange={(setIdVehiculo) => {
         setFormData((prev) => ({
           ...prev,
-          salidaTransporte: {
-            ...prev.salidaTransporte,
-            idVehiculo: setIdVehiculo || 0
-          }
+          idVehiculo: setIdVehiculo || 0
         }));
       }} />
     </div>

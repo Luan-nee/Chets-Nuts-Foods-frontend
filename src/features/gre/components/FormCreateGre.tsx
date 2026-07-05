@@ -188,7 +188,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       </div>
       
       { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
-        <FormSalidaTransporte setFormData={setFormData} />
+        <FormSalidaTransporte />
       }
       { procedimiento.find(p => p.focus)?.label === "Paquete" &&
         <FormPaquete setFormData={setFormData} />
