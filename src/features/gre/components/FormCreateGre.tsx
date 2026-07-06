@@ -194,7 +194,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         <FormPaquete />
       }
       { procedimiento.find(p => p.focus)?.label === "Productos" &&
-        <FormProductos setFormData={setFormData} />
+        <FormProductos />
       }
     </ContentPage>
   );

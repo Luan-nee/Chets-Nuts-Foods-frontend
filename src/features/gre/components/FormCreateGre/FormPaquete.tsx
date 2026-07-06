@@ -14,9 +14,9 @@ export default function FormPaquete() {
     clave: "",
     destino: "sin definir",
     idSalidaTransporte: 0,
-    idUsuario: 0,
+    idUsuario: 1,
     idUsuarioDestino: 0,
-    montoCobrado: 0
+    montoCobrado: 1
   });
   const {
     execute: registrarPaquete,
