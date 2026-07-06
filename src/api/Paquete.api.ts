@@ -1,7 +1,8 @@
 import { url_base_endpoint } from "../config/url_base";
-import BaseRequestApi from './BaseRequest.api';
-import type { CreatePaquete } from '../types/paquete.type';
-import type { BodyResponse } from '../types/bodyResponse.type';
+import BaseRequestApi from "./BaseRequest.api";
+import type { CreatePaquete } from "../types/paquete.type";
+import type { BodyResponse } from "../types/bodyResponse.type";
+import type { ProductoEnPaquete } from "../types/constantes.type";
 
 export default class PaqueteApi extends BaseRequestApi {
   private base_url_production = `${url_base_endpoint}/api/paquetes`;
@@ -10,7 +11,35 @@ export default class PaqueteApi extends BaseRequestApi {
     Verificar que la estructura del dato que retorna el endpoint 
     coincide con lo definido en el método createPaquete.
   */
-  public async createPaquete(body: CreatePaquete): Promise<BodyResponse<string>> {
+  public async createPaquete(
+    body: CreatePaquete,
+  ): Promise<BodyResponse<string>> {
     return this.POST<string>(`${this.base_url_production}`, body);
+  }
+
+  public async agregarProductoEnPaquete(
+    productos: ProductoEnPaquete[],
+    idPaquete: number,
+  ): Promise<BodyResponse<string>> {
+    let todoBien = true;
+    const productosFormateados: Omit<ProductoEnPaquete, "idproductdefect">[] =
+    productos.map(({ idproductdefect, ...producto }) => producto);
+
+    productosFormateados.map((producto) => {
+      this.POST<string>(
+        `${this.base_url_production}/${idPaquete}/productos`, 
+        producto  
+      ).then((response) => {
+        if (response.status !== "success") {
+          todoBien = false;
+        }
+        return response;
+      });
+    })
+
+    return {
+      status: "success",
+      message: todoBien ? "Productos agregados exitosamente" : "Error al agregar productos al paquete",
+    }
   }
 }
