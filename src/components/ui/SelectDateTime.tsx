@@ -28,10 +28,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
 const formatTrigger = (dt: SelectedDateTime) =>
   `${dt.date.getDate()} ${MONTHS[dt.date.getMonth()].slice(0, 3)}. · ${pad(dt.hour)}:${pad(dt.minute)} ${dt.ampm}`;
 
-const formatResultDate = (date: Date) => {
-  const days = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-  return `${days[date.getDay()]}, ${date.getDate()} de ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
-};
+// const formatResultDate = (date: Date) => {
+//   const days = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+//   return `${days[date.getDay()]}, ${date.getDate()} de ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+// };
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -374,7 +374,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
       )}
 
       {/* Result card */}
-      <div className="flex items-center gap-3 bg-[#1a2030] border border-[#2d3748] rounded-xl px-4 py-3">
+      {/* <div className="flex items-center gap-3 bg-[#1a2030] border border-[#2d3748] rounded-xl px-4 py-3">
         <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
           <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 text-indigo-400">
             <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" strokeWidth="1.2" />
@@ -394,7 +394,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
             <p className="text-sm text-slate-500">Sin fecha seleccionada</p>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
