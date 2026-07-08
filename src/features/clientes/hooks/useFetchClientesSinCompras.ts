@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react";
 import ClienteApi from "../../../api/Clientes.api";
-import type { ResponseGetAllClientes } from "../../../types/clientes.type";
+import type { GetClienteSinCompras } from "../../../types/clientes.type";
 
 // Definimos el tipo de retorno de nuestro Hook
 interface FetchState {
-  clientes: ResponseGetAllClientes[];
+  clientes: GetClienteSinCompras[];
   isLoading: boolean;
   isError: boolean;
   message: string;
   execute: () => Promise<void>;
 }
 
-export const useFetchClientes = (): FetchState => {
+export const useFetchClientesSinCompras = (): FetchState => {
   const cliente_api = new ClienteApi();
-  const [clientes, setClientes] = useState<ResponseGetAllClientes[]>([]);
+  const [clientes, setClientes] = useState<GetClienteSinCompras[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const getClientes = async (): Promise<void> => {
+  const getClientesSinCompras = async (): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await cliente_api.getClientes();
+      const response = await cliente_api.getClientesSinCompras();
 
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
@@ -43,7 +43,7 @@ export const useFetchClientes = (): FetchState => {
   };
 
   useEffect(() => {
-    getClientes();
+    getClientesSinCompras();
   }, []);
 
   return {
@@ -51,6 +51,6 @@ export const useFetchClientes = (): FetchState => {
     isLoading,
     isError,
     message,
-    execute: getClientes
+    execute: getClientesSinCompras
   };
 };

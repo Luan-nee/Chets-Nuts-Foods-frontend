@@ -1,5 +1,15 @@
 import type { UserGender, UserType } from "./constantes.type";
 
+export type GetClienteSinCompras = {
+  iduser: number,
+  apellidomaterno: string,
+  apellidopaterno: string,
+  dniuser: string,
+  nombres: string,
+  numero: string,
+  rucuser: string | null
+}
+
 export type CreateCliente = {
   nombre: string, //
   apellidomaterno: string, //
