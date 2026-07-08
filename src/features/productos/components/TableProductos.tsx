@@ -21,7 +21,7 @@ export default function TableProductos({
   setPaginActual
 }: PropTableProductos) {
   const { tienePermiso } = useAutorizacion();
-   const socket = useSocket();
+  const socket = useSocket();
 
   const {
     productos,
@@ -33,22 +33,22 @@ export default function TableProductos({
   } = useFetchProductos();
 
 
- useEffect(() => {
-   if(socket === null){
+  useEffect(() => {
+    if(socket === null){
     return
-   }
+    }
 
-   const handler = (data: ResponseCreateProducto) => {
-     NotificationProductDefect(data);
-     productos.push(data)
-   };
+    const handler = (data: ResponseCreateProducto) => {
+      NotificationProductDefect(data);
+      productos.push(data)
+    };
 
-   socket.on("server::newProductDefect", handler);
+    socket.on("server::newProductDefect", handler);
 
-   return () => {
-     socket.off("server::newProductDefect", handler);
-   };
- }, [socket]);
+    return () => {
+      socket.off("server::newProductDefect", handler);
+    };
+  }, [socket]);
 
 
   const tableHeader: string[] = [
@@ -89,16 +89,16 @@ export default function TableProductos({
             <tr key={index} className="hover:bg-gray-800/50 transition-colors">
               <td className="px-6 py-4">
                 <span className="text-blue-400">
-                  {index}
+                  {index + 1}
                 </span>
               </td>
               <td className="px-6 py-4">
-                <span className="text-white font-medium">
+                <span className="text-white">
                   {producto.nombre}
                 </span>
               </td>
               <td className="px-6 py-4">
-                <span className="text-white font-medium">
+                <span className="text-white">
                   {producto.descripcion}
                 </span>
               </td>
