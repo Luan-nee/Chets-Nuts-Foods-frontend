@@ -25,65 +25,50 @@ export default function FormPaquete() {
   } = useRegistrarPaquete();
 
   return (
-    <div className="mx-6 bg-gray-900 px-6 py-6">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <div className="flex flex-wrap justify-end gap-2">
-          <ButtonSubmitForm 
-            handleSubmit={() => {
-              registrarPaquete(formData)
-            }}
-            isError={isErrorPaquete}
-            isLoading={isLoadingPaquete}
-            textButton="Registrar paquete"
-            textError="Error al registrar el paquete"
-            color='blue'
-          />
-          <ButtonCancelForm 
-            handleCancel={() => {}}
-            isLoading={isLoadingPaquete}
-            textButton="Cancelar"
-            color='red'
-          />
-        </div>
-
-        <div className="grid gap-6 xl:grid-cols-[320px_minmax(0,1fr)]">
-          <aside className="space-y-6">
-            <InputText 
-              htmlForm='clave de seguimiento'
-              label='Clave de seguimiento'
-              onChange={(value) => setFormData((prev) => ({
-                ...prev,
-                clave: value
-              }))}
-              value={formData.clave}
-            />
-          </aside>
-
-          <main className="space-y-6">
-            <section>
-              <TableSelectSalidaTransporte 
-                selectIdSalidaTransporte={setIdSalidaTransporte} 
-                onChange={(idSalidaTransporte) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    idSalidaTransporte: idSalidaTransporte || 0
-                  }));
-                }} />
-            </section>
-
-            <section>
-              <TableSelectCliente 
-                selectIdCliente={setIdCliente} 
-                onChange={(idCliente) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    idUsuarioDestino: idCliente || 0
-                  }));
-                }} />
-            </section>
-          </main>
-        </div>
+    <div className="px-6 py-4 bg-gray-900 mx-6">
+      <div className='flex gap-2'>
+        <ButtonSubmitForm 
+          handleSubmit={() => {
+            registrarPaquete(formData)
+          }}
+          isError={isErrorPaquete}
+          isLoading={isLoadingPaquete}
+          textButton="Registrar paquete"
+          textError="Error al registrar el paquete"
+          color='blue'
+        />
+        <ButtonCancelForm 
+          handleCancel={() => {}}
+          isLoading={isLoadingPaquete}
+          textButton="Cancelar"
+          color='red'
+        />
       </div>
+      <InputText 
+        htmlForm='clave de seguimiento'
+        label='Clave de seguimiento'
+        onChange={(value) => setFormData((prev) => ({
+          ...prev,
+          clave: value
+        }))}
+        value={''}
+      />
+      <TableSelectSalidaTransporte 
+      selectIdSalidaTransporte={setIdSalidaTransporte} 
+      onChange={(setIdSalidaTransporte) => {
+        setFormData((prev) => ({
+          ...prev,
+          idSalidaTransporte: setIdSalidaTransporte || 0
+        }));
+      }} />
+      <TableSelectCliente 
+      selectIdCliente={setIdCliente} 
+      onChange={(setIdCliente) => {
+        setFormData((prev) => ({
+          ...prev,
+          idUsuarioDestino: setIdCliente || 0
+        }));
+      }} />
     </div>
   );
 }
