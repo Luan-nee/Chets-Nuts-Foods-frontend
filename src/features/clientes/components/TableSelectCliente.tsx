@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CalendarDays, Hash, Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
-import { useFetchClientes } from '../hooks/useFetchClientes';
+import { useFetchClientesSinCompras } from '../hooks/useFetchClientesSinCompras';
 
 interface TableSelectClienteProps {
   selectIdCliente: (idCliente: number | null) => void;
@@ -17,15 +17,15 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
     "Apellido Paterno",
     "Apellido Materno",
     "DNI",
-    "Cant. envíos",
-    ""
+    "Número telefónico",
+    "RUC"
   ];
   const { 
     clientes,
     isLoading: isLoadingClientes,
     isError: isErrorClientes,
     execute: obtenerClientes,
-  } = useFetchClientes();
+  } = useFetchClientesSinCompras();
 
   return (
     <ContentSectionProcess
@@ -57,19 +57,9 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
               className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
             >
               <td className="px-6 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
-                    <Hash className="w-5 h-5 text-[#1f6feb]" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="block font-medium text-sm text-white truncate">
-                      {index + 1}
-                    </span>
-                    <span className="block text-xs text-gray-400 truncate">
-                      Cliente registrado
-                    </span>
-                  </div>
-                </div>
+                <span className="font-medium text-sm text-white">
+                  {index + 1}
+                </span>
               </td>
 
               <td className="px-6 py-4">
@@ -98,8 +88,14 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
               </td>
 
               <td className="px-6 py-4">
-                <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff]">
-                  {cliente.cantenvios}
+                <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff] text-center">
+                  {cliente.numero ?? 'sin número'}
+                </span>
+              </td>
+
+              <td className="px-6 py-4">
+                <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff] text-center">
+                  {cliente.rucuser ?? 'sin ruc'}
                 </span>
               </td>
 
@@ -118,9 +114,9 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
                   ) : (
                     <button
                       onClick={() => {
-                        selectIdCliente(index + 1);
-                        setIdSelected(index + 1);
-                        onChange(index + 1);
+                        selectIdCliente(cliente.iduser);
+                        setIdSelected(cliente.iduser);
+                        onChange(cliente.iduser);
                       }}
                       className="text-green-500 hover:text-green-400 flex flex-row gap-2"
                     >

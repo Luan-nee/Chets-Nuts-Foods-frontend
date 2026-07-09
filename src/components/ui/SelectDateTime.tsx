@@ -2,14 +2,12 @@ import { useState, useRef, useEffect } from "react";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-type AMPM = "AM" | "PM";
 type Tab = "date" | "time";
 
 interface SelectedDateTime {
   date: Date;
   hour: number;
   minute: number;
-  ampm: AMPM;
 }
 
 // ── Constants ──────────────────────────────────────────────────────────────
@@ -26,12 +24,12 @@ const DAY_NAMES = ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"];
 const pad = (n: number) => String(n).padStart(2, "0");
 
 const formatTrigger = (dt: SelectedDateTime) =>
-  `${dt.date.getDate()} ${MONTHS[dt.date.getMonth()].slice(0, 3)}. · ${pad(dt.hour)}:${pad(dt.minute)} ${dt.ampm}`;
+  `${dt.date.getDate()} ${MONTHS[dt.date.getMonth()].slice(0, 3)}. · ${pad(dt.hour)}:${pad(dt.minute)}`;
 
-const formatResultDate = (date: Date) => {
-  const days = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-  return `${days[date.getDay()]}, ${date.getDate()} de ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
-};
+// const formatResultDate = (date: Date) => {
+//   const days = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+//   return `${days[date.getDay()]}, ${date.getDate()} de ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+// };
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -46,6 +44,9 @@ function CalendarPanel({ viewDate, selectedDate, onSelectDay, onChangeMonth }: C
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
   const today = new Date();
+  const currentMonth = today.getFullYear() === year && today.getMonth() === month;
+  const canGoPrev = year > today.getFullYear() || (year === today.getFullYear() && month > today.getMonth());
+  const isPastDate = (date: Date) => date.getTime() < new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 
   const firstWeekday = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -68,7 +69,8 @@ function CalendarPanel({ viewDate, selectedDate, onSelectDay, onChangeMonth }: C
         <button
           onClick={() => onChangeMonth(-1)}
           aria-label="Mes anterior"
-          className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#2d3748] bg-transparent text-slate-400 hover:bg-[#252d3d] transition-colors"
+          disabled={!canGoPrev}
+          className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#2d3748] bg-transparent text-slate-400 hover:bg-[#252d3d] transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
         >
           <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
             <path d="M6.5 2L3.5 5L6.5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -98,22 +100,45 @@ function CalendarPanel({ viewDate, selectedDate, onSelectDay, onChangeMonth }: C
         ))}
 
         {/* Prev month trailing days */}
-        {Array.from({ length: firstWeekday }, (_, i) => (
-          <div key={`prev-${i}`} className="h-8 flex items-center justify-center text-[13px] text-slate-600 mx-auto w-8">
-            {prevMonthDays - firstWeekday + 1 + i}
-          </div>
-        ))}
+        {Array.from({ length: firstWeekday }, (_, i) => {
+          const day = prevMonthDays - firstWeekday + 1 + i;
+          const date = new Date(year, month - 1, day);
+
+          if (isPastDate(date)) {
+            return <div key={`prev-${i}`} className="h-8 w-8 mx-auto invisible" aria-hidden="true" />;
+          }
+
+          return (
+            <button
+              key={`prev-${i}`}
+              onClick={() => onSelectDay(date)}
+              className="h-8 w-8 mx-auto flex items-center justify-center rounded-lg text-[13px] text-slate-300 hover:bg-[#252d3d]"
+            >
+              {day}
+            </button>
+          );
+        })}
 
         {/* Current month */}
         {Array.from({ length: daysInMonth }, (_, i) => {
           const d = i + 1;
+          const cellDate = new Date(year, month, d);
+          const isPast = isPastDate(cellDate);
           const selected = isSelected(d);
           const todayDay = isToday(d);
+
+          if (currentMonth && isPast) {
+            return <div key={d} className="h-8 w-8 mx-auto invisible" aria-hidden="true" />;
+          }
+
+          if (isPast) {
+            return <div key={d} className="h-8 w-8 mx-auto invisible" aria-hidden="true" />;
+          }
 
           return (
             <button
               key={d}
-              onClick={() => onSelectDay(new Date(year, month, d))}
+              onClick={() => onSelectDay(cellDate)}
               className={[
                 "h-8 w-8 mx-auto flex items-center justify-center rounded-lg text-[13px] transition-colors",
                 selected
@@ -130,11 +155,24 @@ function CalendarPanel({ viewDate, selectedDate, onSelectDay, onChangeMonth }: C
 
         {/* Next month leading days */}
         {trailing > 0 &&
-          Array.from({ length: 7 - trailing }, (_, i) => (
-            <div key={`next-${i}`} className="h-8 flex items-center justify-center text-[13px] text-slate-600 mx-auto w-8">
-              {i + 1}
-            </div>
-          ))}
+          Array.from({ length: 7 - trailing }, (_, i) => {
+            const day = i + 1;
+            const date = new Date(year, month + 1, day);
+
+            if (isPastDate(date)) {
+              return <div key={`next-${i}`} className="h-8 w-8 mx-auto invisible" aria-hidden="true" />;
+            }
+
+            return (
+              <button
+                key={`next-${i}`}
+                onClick={() => onSelectDay(date)}
+                className="h-8 w-8 mx-auto flex items-center justify-center rounded-lg text-[13px] text-slate-300 hover:bg-[#252d3d]"
+              >
+                {day}
+              </button>
+            );
+          })}
       </div>
     </div>
   );
@@ -145,13 +183,11 @@ function CalendarPanel({ viewDate, selectedDate, onSelectDay, onChangeMonth }: C
 interface TimePanelProps {
   hour: number;
   minute: number;
-  ampm: AMPM;
   onChangeHour: (dir: 1 | -1) => void;
   onChangeMinute: (dir: 1 | -1) => void;
-  onChangeAMPM: (val: AMPM) => void;
 }
 
-function TimePanel({ hour, minute, ampm, onChangeHour, onChangeMinute, onChangeAMPM }: TimePanelProps) {
+function TimePanel({ hour, minute, onChangeHour, onChangeMinute }: TimePanelProps) {
   const ChevronBtn = ({ onClick, up, label }: { onClick: () => void; up: boolean; label: string }) => (
     <button
       onClick={onClick}
@@ -194,24 +230,6 @@ function TimePanel({ hour, minute, ampm, onChangeHour, onChangeMinute, onChangeA
           <ChevronBtn onClick={() => onChangeMinute(-1)} up={false} label="Disminuir minutos" />
         </div>
       </div>
-
-      {/* AM / PM */}
-      <div className="flex gap-1.5">
-        {(["AM", "PM"] as AMPM[]).map((val) => (
-          <button
-            key={val}
-            onClick={() => onChangeAMPM(val)}
-            className={[
-              "flex-1 py-1.5 text-sm font-medium rounded-lg border transition-all",
-              ampm === val
-                ? "bg-indigo-500 border-indigo-500 text-white"
-                : "bg-transparent border-[#2d3748] text-slate-400 hover:bg-[#252d3d] hover:text-slate-200",
-            ].join(" ")}
-          >
-            {val}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
@@ -227,12 +245,13 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   const [activeTab, setActiveTab] = useState<Tab>("date");
   const [viewDate, setViewDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [hour, setHour] = useState(12);
+  const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
-  const [ampm, setAmpm] = useState<AMPM>("AM");
   const [applied, setApplied] = useState<SelectedDateTime | null>(null);
 
   const wrapRef = useRef<HTMLDivElement>(null);
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -249,7 +268,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   };
 
   const handleChangeHour = (dir: 1 | -1) => {
-    setHour((h) => ((h - 1 + dir + 12) % 12) + 1);
+    setHour((h) => (h + dir + 24) % 24);
   };
 
   const handleChangeMinute = (dir: 1 | -1) => {
@@ -259,17 +278,16 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   const handleClear = () => {
     onChange(null);
     setSelectedDate(null);
-    setHour(12);
+    setHour(0);
     setMinute(0);
-    setAmpm("AM");
     setApplied(null);
     setOpen(false);
   };
 
   const handleApply = () => {
-    if (!selectedDate) { setOpen(false); return; }
-    setApplied({ date: selectedDate, hour, minute, ampm });
-    onChange({ date: selectedDate, hour, minute, ampm });
+    if (!selectedDate || selectedDate.getTime() < todayStart.getTime()) { setOpen(false); return; }
+    setApplied({ date: selectedDate, hour, minute });
+    onChange({ date: selectedDate, hour, minute });
     setOpen(false);
   };
 
@@ -348,10 +366,8 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
             <TimePanel
               hour={hour}
               minute={minute}
-              ampm={ampm}
               onChangeHour={handleChangeHour}
               onChangeMinute={handleChangeMinute}
-              onChangeAMPM={setAmpm}
             />
           )}
 
@@ -374,7 +390,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
       )}
 
       {/* Result card */}
-      <div className="flex items-center gap-3 bg-[#1a2030] border border-[#2d3748] rounded-xl px-4 py-3">
+      {/* <div className="flex items-center gap-3 bg-[#1a2030] border border-[#2d3748] rounded-xl px-4 py-3">
         <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
           <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 text-indigo-400">
             <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" strokeWidth="1.2" />
@@ -394,7 +410,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
             <p className="text-sm text-slate-500">Sin fecha seleccionada</p>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
