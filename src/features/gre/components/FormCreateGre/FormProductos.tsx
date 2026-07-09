@@ -3,6 +3,7 @@ import InputSearch from '../../../../components/ui/InputSearch';
 import Table from '../../../../components/ui/Table';
 import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
 import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
+import TableSelectPaquete from "../../../paquetes/components/TableSelectPaquete";
 import { useRegistrarProductoEnPaquete } from '../../../paquetes/hooks/useRegistrarProductoEnPaquete';
 import { useFetchProductos } from '../../../productos/hooks/useFetchProductos';
 import type { ProductoEnPaquete } from '../../../../types/constantes.type';
@@ -10,6 +11,8 @@ import type { ResponseGetAllProductos } from '../../../../types/producto.type';
 
 export default function FormProductos () {
   const [formData, setFormData] = useState<ProductoEnPaquete[]>([]);
+  const [idSalidaTransporte, ] = useState<number>(1);
+  const [, setIdPaquete] = useState<number | null>(null);
   const { 
     isLoading: isLoadingProductos, 
     isError: isErrorProductos
@@ -103,6 +106,11 @@ export default function FormProductos () {
           ))}
         </Table>
       </div>
+
+      <TableSelectPaquete 
+        SelectIdPaquete={setIdPaquete}
+        idSalidaTransporte={idSalidaTransporte}
+      />
 
       <div className='flex gap-2'>
         <ButtonSubmitForm 
