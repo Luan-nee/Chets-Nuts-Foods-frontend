@@ -4,6 +4,22 @@ import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
 import { useFetchPaquetes } from '../hooks/useFetchPaquetes';
 
+function formatFechacreado(fecha: string): string {
+  const date = new Date(fecha);
+
+  if (Number.isNaN(date.getTime())) {
+    return fecha;
+  }
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = String(date.getFullYear()).slice(-2);
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
 interface TableSelectPaqueteProps {
   idSalidaTransporte: number;
   SelectIdPaquete: (idPaquete: number | null) => void;
@@ -65,12 +81,12 @@ export default function TableSelectPaquete({
               </td>
 
               <td className="px-6 py-4">
-                <span className="font-medium text-sm text-white">
+                <span className="font-medium text-sm text-white text-ellipsis overflow-hidden whitespace-nowrap">
                   {paquete.destino}
                 </span>
               </td>
 
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 text-center">
                 <span className="text-sm text-gray-300">
                   {paquete.montocobrado}
                 </span>
@@ -85,11 +101,11 @@ export default function TableSelectPaquete({
               <td className="px-6 py-4">
                 <div className="flex items-center gap-2 text-sm text-gray-300">
                   <CalendarDays className="w-4 h-4 text-gray-500" />
-                  <span>{paquete.fechacreado}</span>
+                  <span>{formatFechacreado(paquete.fechacreado)}</span>
                 </div>
               </td>
 
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 text-center">
                 <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff] text-center">
                   {paquete.cantidadProductos}
                 </span>
