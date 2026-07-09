@@ -8,7 +8,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (bodyPaquetes: ProductoEnPaquete[], idPaquete: number) => Promise<void>;
+  execute: (bodyPaquetes: ProductoEnPaquete[], idPaquete: number | null) => Promise<void>;
 }
 
 export const useRegistrarProductoEnPaquete = (): FetchState => {
@@ -19,12 +19,22 @@ export const useRegistrarProductoEnPaquete = (): FetchState => {
 
   const registrarPaquete = async (
     bodyPaquetes: ProductoEnPaquete[], 
-    idPaquete: number
+    idPaquete: number | null
   ): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
+
+      if (idPaquete === null) {
+        setIsError(true);
+        setMessage("Falta seleccionar un paquete");
+        swalAlert({
+          status: "error",
+          message: "Falta seleccionar un paquete"
+        });
+        return;
+      }
 
       const response = await paquete_api.agregarProductoEnPaquete(bodyPaquetes, idPaquete);
 
