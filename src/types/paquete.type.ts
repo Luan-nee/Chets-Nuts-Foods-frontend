@@ -6,3 +6,12 @@ export type CreatePaquete = {
   idUsuarioDestino: number,
   montoCobrado: number
 }
+
+export type ResponseGetAllPaquetes = {
+  idpaquete: number,
+  destino: string,
+  montocobrado: string,
+  estadopaquete: string,
+  fechacreado: string,
+  cantidadProductos: number
+}
