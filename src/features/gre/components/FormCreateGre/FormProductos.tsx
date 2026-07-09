@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import InputSearch from '../../../../components/ui/InputSearch';
+import Table from '../../../../components/ui/Table';
 import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
 import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
 import { useRegistrarProductoEnPaquete } from '../../../paquetes/hooks/useRegistrarProductoEnPaquete';
@@ -11,8 +12,7 @@ export default function FormProductos () {
   const [formData, setFormData] = useState<ProductoEnPaquete[]>([]);
   const { 
     isLoading: isLoadingProductos, 
-    isError: isErrorProductos, 
-    execute: registrarProductoEnPaquete
+    isError: isErrorProductos
   } = useRegistrarProductoEnPaquete();
   const { productos } = useFetchProductos();
 
@@ -46,6 +46,10 @@ export default function FormProductos () {
     });
   };
 
+  const handleRemoveProducto = (idproductdefect: number) => {
+    setFormData((prev) => prev.filter((item) => item.idproductdefect !== idproductdefect));
+  };
+
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
       <div className="mb-4">
@@ -57,6 +61,49 @@ export default function FormProductos () {
         />
       </div>
 
+      <div className="mb-4 overflow-hidden rounded-lg border border-gray-800">
+        <Table
+          tableHeader={[
+            "N°",
+            "Producto",
+            "Descripción",
+            "Cantidad",
+            "Acción",
+          ]}
+          cantidadDatos={formData.length}
+        >
+          {formData.map((producto, index) => (
+            <tr
+              key={producto.idproductdefect}
+              className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors"
+            >
+              <td className="px-6 py-4 text-sm text-gray-300">
+                {index + 1}
+              </td>
+              <td className="px-6 py-4 text-sm text-white font-medium">
+                {producto.nombreproducto}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-300">
+                {producto.observacion}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-300">
+                {producto.cantidad}
+              </td>
+              <td className="px-6 py-4">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveProducto(producto.idproductdefect)}
+                  className="rounded-md border border-red-500/40 px-3 py-1.5 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 hover:text-red-300"
+                  aria-label={`Eliminar producto ${producto.nombreproducto}`}
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </Table>
+      </div>
+
       <div className='flex gap-2'>
         <ButtonSubmitForm 
           isError={isErrorProductos}
@@ -66,7 +113,7 @@ export default function FormProductos () {
           color='blue'
           handleSubmit={async () => {
             // await registrarProductoEnPaquete(formData, 1); // Aquí se pasa el ID del paquete (1) como ejemplo
-            console.log('Productos registrados en paquete:', formData);
+            // console.log('Productos registrados en paquete:', formData);
           }}
         />
         <ButtonCancelForm 
@@ -77,14 +124,6 @@ export default function FormProductos () {
         />
 
       </div>
-      <button
-        className="px-4 py-2 bg-blue-600 text-white rounded mb-4"
-        onClick={() => {
-          console.log('Productos seleccionados:', formData);
-        }}
-      >
-        VER DATOS DE PRODUCTOS
-      </button>
     </div>
   );
 }
