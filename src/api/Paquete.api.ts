@@ -27,7 +27,7 @@ export default class PaqueteApi extends BaseRequestApi {
 
     productosFormateados.map((producto) => {
       this.POST<string>(
-        `${this.base_url_production}/${idPaquete}/productos`,
+        `${this.base_url_production}/${idPaquete}/producto`,
         producto,
       ).then((response) => {
         if (response.status !== "success") {
