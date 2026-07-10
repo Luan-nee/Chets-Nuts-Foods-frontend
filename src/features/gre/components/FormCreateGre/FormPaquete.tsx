@@ -51,7 +51,7 @@ export default function FormPaquete() {
           ...prev,
           clave: value
         }))}
-        value={''}
+        value={formData.clave}
       />
       <TableSelectSalidaTransporte 
       selectIdSalidaTransporte={setIdSalidaTransporte} 
