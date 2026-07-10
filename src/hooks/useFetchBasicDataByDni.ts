@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import UsuariosApi from "../api/Usuarios.api";
+import swalAlert from '../components/messages/swalAlert';
 import type { ResponseGetDataBasicByDni } from "../types/usuarios.type";
 
 // Definimos el tipo de retorno de nuestro Hook
@@ -37,17 +38,29 @@ export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
 			if (response.status === "success") {
 				setMessage(response.message || "Datos básicos obtenidos exitosamente");
 				setBasicData(response.data ?? null);
+				swalAlert({
+					status: response.status,
+					message: response.message || "Datos básicos obtenidos exitosamente"
+				});
 				return response.data ?? null;
 			}
 
 			setIsError(true);
 			setBasicData(null);
 			setMessage(response.message || "Error al obtener los datos básicos");
+			swalAlert({
+				status: response.status,
+				message: response.message || "Error al obtener los datos básicos"
+			});
 			return null;
 		} catch (error: any) {
 			setIsError(true);
 			setBasicData(null);
 			setMessage("Se produjo un error al obtener los datos básicos en el frontend");
+			swalAlert({
+				status: "warning",
+				message: "Se produjo un error al obtener los datos básicos en el frontend"
+			});
 			return null;
 		} finally {
 			setIsLoading(false);
