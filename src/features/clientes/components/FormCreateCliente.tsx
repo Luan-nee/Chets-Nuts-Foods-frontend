@@ -28,11 +28,9 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
     dni: '',
     edad: 0,
     sexo: 'MASCULINO',
-    ruc: null,
     numero: null,
     tipo: null,
-    numeroLicenciaConducir: null,
-    correo: null,
+    correo: '',
   });
 
   return (
@@ -122,6 +120,12 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
               simbol="celular"
               onChange={(value) => setFormData(prev => ({ ...prev, numero: value.toString() }))}
               placeholder="Ingrese el número telefónico del cliente"
+            />
+            <InputText
+              label="Correo electrónico"
+              value={formData.correo}
+              htmlForm="correo electrónico"
+              onChange={(value) => setFormData(prev => ({ ...prev, correo: value }))}
             />
           </div>
         </div>

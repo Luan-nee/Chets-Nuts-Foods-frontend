@@ -17,11 +17,10 @@ export type CreateCliente = {
   dni: string, // 
   edad: number, //
   sexo: UserGender, 
-  ruc: string | null, //
+  ruc?: string, //
   numero: string | null,
   tipo: UserType | null,
-  numeroLicenciaConducir: string | null,
-  correo: string | null,
+  correo: string,
 }
 
 export type ResponseCreateCliente = {

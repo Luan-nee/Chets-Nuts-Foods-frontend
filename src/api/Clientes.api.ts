@@ -30,7 +30,7 @@ export default class ClienteApi extends BaseRequestApi {
     body: CreateCliente,
   ): Promise<BodyResponse<ResponseCreateCliente>> {
     return this.POST<ResponseCreateCliente>(
-      `${this.base_url_production}`,
+      `${url_base_endpoint}/api/usuarios`,
       body,
     );
   }
