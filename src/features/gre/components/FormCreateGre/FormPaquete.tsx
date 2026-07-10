@@ -6,9 +6,11 @@ import ButtonCancelForm from "../../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../../components/ui/ButtonSubmitForm";
 import { useRegistrarPaquete } from "../../../paquetes/hooks/useRegistrarPaquete";
 import type { CreatePaquete } from '../../../../types/paquete.type';
+import { useGreContext } from '../../../../context/GreContext';
 
 export default function FormPaquete() {
-  const [, setIdSalidaTransporte] = useState<number | null>(null);
+  const { setIdSalidaTransporte: setIdSalidaTransporteContext, setDataEmitirGre } = useGreContext();
+  const [, setIdSalidaTransporteLocal] = useState<number | null>(null);
   const [, setIdCliente] = useState<number | null>(null);
   const [formData, setFormData] = useState<CreatePaquete>({
     clave: "",
@@ -24,11 +26,34 @@ export default function FormPaquete() {
     isError: isErrorPaquete,
   } = useRegistrarPaquete();
 
+  const syncPaquete = (nextValues: Partial<CreatePaquete>) => {
+    setFormData((prev) => {
+      const updatedFormData = {
+        ...prev,
+        ...nextValues,
+      };
+
+      setDataEmitirGre((current) => ({
+        ...current,
+        paquete: updatedFormData,
+        idSalidaTransporte: updatedFormData.idSalidaTransporte,
+      }));
+
+      return updatedFormData;
+    });
+  };
+
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
       <div className='flex gap-2'>
         <ButtonSubmitForm 
           handleSubmit={() => {
+            setIdSalidaTransporteContext(formData.idSalidaTransporte);
+            setDataEmitirGre((current) => ({
+              ...current,
+              paquete: formData,
+              idSalidaTransporte: formData.idSalidaTransporte,
+            }));
             registrarPaquete(formData)
           }}
           isError={isErrorPaquete}
@@ -47,27 +72,22 @@ export default function FormPaquete() {
       <InputText 
         htmlForm='clave de seguimiento'
         label='Clave de seguimiento'
-        onChange={(value) => setFormData((prev) => ({
-          ...prev,
-          clave: value
-        }))}
+        onChange={(value) => syncPaquete({ clave: value })}
         value={formData.clave}
       />
       <TableSelectSalidaTransporte 
-      selectIdSalidaTransporte={setIdSalidaTransporte} 
+      selectIdSalidaTransporte={setIdSalidaTransporteLocal} 
       onChange={(setIdSalidaTransporte) => {
-        setFormData((prev) => ({
-          ...prev,
-          idSalidaTransporte: setIdSalidaTransporte || 0
-        }));
+        syncPaquete({
+          idSalidaTransporte: setIdSalidaTransporte || 0,
+        });
       }} />
       <TableSelectCliente 
       selectIdCliente={setIdCliente} 
       onChange={(setIdCliente) => {
-        setFormData((prev) => ({
-          ...prev,
-          idUsuarioDestino: setIdCliente || 0
-        }));
+        syncPaquete({
+          idUsuarioDestino: setIdCliente || 0,
+        });
       }} />
     </div>
   );
