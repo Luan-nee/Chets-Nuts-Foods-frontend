@@ -27,6 +27,10 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: Tabl
     setQueryVehiculo,
     infoPaginacion,
   } = useFetchVehiculos();
+
+  const vehiculosOperativos = vehiculos.filter(
+    (vehiculo) => vehiculo.estadovehiculo === "OPERATIVO"
+  );
   
   const cambiarPagina = (pagina: number) => {
     setQueryVehiculo({page:pagina});
@@ -62,9 +66,9 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: Tabl
 
         <Table
           tableHeader={tableHeader}
-          cantidadDatos={vehiculos.length}
+          cantidadDatos={vehiculosOperativos.length}
         >
-          {vehiculos.map((vehiculo) => (
+          {vehiculosOperativos.map((vehiculo) => (
             <tr
               key={vehiculo.idvehempresa}
               className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"

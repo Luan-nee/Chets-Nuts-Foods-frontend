@@ -27,6 +27,10 @@ export default function TableSelectChofer({ selectIdChofer, onChange }: TableSel
     infoPaginacion,
   } = useFetchChoferes();
 
+  const choferesDisponibles = choferes.filter(
+    (chofer) => chofer.estadoacceso === "DISPONIBLE"
+  );
+
   return (
     <ContentSectionProcess
       isLoading={isLoadingChoferes}
@@ -58,9 +62,9 @@ export default function TableSelectChofer({ selectIdChofer, onChange }: TableSel
 
         <Table
           tableHeader={tableHeader}
-          cantidadDatos={choferes.length}
+          cantidadDatos={choferesDisponibles.length}
         >
-          {choferes.map((chofer) => (
+          {choferesDisponibles.map((chofer) => (
             <tr
               key={chofer.idacceso}
               className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
