@@ -9,17 +9,28 @@ import { useRegistrarProductoEnPaquete } from '../../../paquetes/hooks/useRegist
 import { useFetchProductos } from '../../../productos/hooks/useFetchProductos';
 import type { ProductoEnPaquete } from '../../../../types/constantes.type';
 import type { ResponseGetAllProductos } from '../../../../types/producto.type';
+import { useGreContext } from '../../../../context/GreContext';
 
 export default function FormProductos () {
+  const { setIdPaquete: setIdPaqueteContext, setDataEmitirGre } = useGreContext();
   const [formData, setFormData] = useState<ProductoEnPaquete[]>([]);
   const [idSalidaTransporte, ] = useState<number>(1);
-  const [idPaquete, setIdPaquete] = useState<number | null>(1);
+  const [idPaqueteLocal, setIdPaqueteLocal] = useState<number | null>(1);
   const { 
     isLoading: isLoadingProductos, 
     isError: isErrorProductos,
     execute: registrarProductoEnPaquete
   } = useRegistrarProductoEnPaquete();
   const { productos } = useFetchProductos();
+
+  const syncProductosEnContexto = (nextProductos: ProductoEnPaquete[]) => {
+    setFormData(nextProductos);
+    setDataEmitirGre((current) => ({
+      ...current,
+      productosEnPaquete: nextProductos,
+      idPaquete: idPaqueteLocal || 0,
+    }));
+  };
 
   const handleProductoSelected = (producto: ResponseGetAllProductos) => {
     setFormData((prev) => {
@@ -28,7 +39,7 @@ export default function FormProductos () {
       );
 
       if (alreadySelected) {
-        return prev.map((item) =>
+        const updatedList = prev.map((item) =>
           item.idproductdefect === producto.idproductdefect
             ? {
                 ...item,
@@ -36,9 +47,13 @@ export default function FormProductos () {
               }
             : item
         );
+
+        syncProductosEnContexto(updatedList);
+
+        return updatedList;
       }
 
-      return [
+      const updatedList = [
         ...prev,
         {
           idproductdefect: producto.idproductdefect,
@@ -48,11 +63,21 @@ export default function FormProductos () {
           cantidad: 1,
         },
       ];
+
+      syncProductosEnContexto(updatedList);
+
+      return updatedList;
     });
   };
 
   const handleRemoveProducto = (idproductdefect: number) => {
-    setFormData((prev) => prev.filter((item) => item.idproductdefect !== idproductdefect));
+    setFormData((prev) => {
+      const updatedList = prev.filter((item) => item.idproductdefect !== idproductdefect);
+
+      syncProductosEnContexto(updatedList);
+
+      return updatedList;
+    });
   };
 
   return (
@@ -107,6 +132,7 @@ export default function FormProductos () {
                             }
                             return p;
                           });
+                          syncProductosEnContexto(updatedList);
                           return updatedList;
                         })
                       }}
@@ -132,6 +158,7 @@ export default function FormProductos () {
                               }
                               return p;
                             });
+                            syncProductosEnContexto(updatedList);
                             return updatedList;
                           });
                         }
@@ -152,6 +179,7 @@ export default function FormProductos () {
                             }
                             return p;
                           });
+                          syncProductosEnContexto(updatedList);
                           return updatedList;
                         })
                       }}
@@ -178,7 +206,7 @@ export default function FormProductos () {
       </div>
 
       <TableSelectPaquete 
-        SelectIdPaquete={setIdPaquete}
+        SelectIdPaquete={setIdPaqueteLocal}
         idSalidaTransporte={idSalidaTransporte}
       />
 
@@ -190,7 +218,9 @@ export default function FormProductos () {
           textError='Error al registrar productos en paquete'
           color='blue'
           handleSubmit={async () => {
-            await registrarProductoEnPaquete(formData, idPaquete);
+              setIdPaqueteContext(idPaqueteLocal);
+              syncProductosEnContexto(formData);
+              await registrarProductoEnPaquete(formData, idPaqueteLocal);
             console.log('Productos registrados en paquete:', formData);
           }}
         />
