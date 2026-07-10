@@ -121,12 +121,6 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
               onChange={(value) => setFormData(prev => ({ ...prev, numero: value.toString() }))}
               placeholder="Ingrese el número telefónico del cliente"
             />
-            <InputText
-              label="Correo electrónico"
-              value={formData.correo}
-              htmlForm="correo electrónico"
-              onChange={(value) => setFormData(prev => ({ ...prev, correo: value }))}
-            />
           </div>
         </div>
 
