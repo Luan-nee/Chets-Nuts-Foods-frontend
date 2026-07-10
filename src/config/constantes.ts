@@ -1,5 +1,16 @@
 import type { marca, modelo, tipoVehiculo } from "../types/vehiculos.type";
 
+export const numeroDeSerieGre: number = parseInt(import.meta.env.VITE_NUMERO_SERIE_GUIA_REMISION);
+
+export const motivoTranslado: { label: string; value: string }[] = [
+  { label: "Venta", value: "01" },
+  { label: "Traslado entre establecimientos", value: "03" }
+]
+
+export const modalidadTransporte: { label: string; value: string }[] = [
+  { label: "Privado", value: "01" },
+]
+
 export const tipoEstablecimiento: { label: string; value: string }[] = [
   { label: "Fiscal", value: "fiscal" },
   { label: "Anexo", value: "anexo" },

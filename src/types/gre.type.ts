@@ -11,4 +11,5 @@ export type EmitirGre = {
   motivoTraslado: string;
   docDestinatario: string;
   modalidadTransporte: string;
+  codigoTransporte: number;
 }
