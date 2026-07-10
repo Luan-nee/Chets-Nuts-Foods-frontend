@@ -45,9 +45,9 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: Tabl
     >
       <div className="flex-1 overflow-auto">
         <div className="p-4 flex justify-between items-center">
-          <h2 className="text-lg font-medium text-white">
+          <p className="text-lg text-xl font-medium text-white">
             Selecciona un vehículo para la guía de remisión
-          </h2>
+          </p>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
             onClick={() => setQueryVehiculo({page:infoPaginacion.pagina_actual})}

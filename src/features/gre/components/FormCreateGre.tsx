@@ -2,7 +2,6 @@ import { Fragment, useState } from 'react';
 import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
 import ContentPage from '../../../components/layouts/ContentPage';
 // import TableSelectProductos from '../../productos/components/TableSelectProductos';
-import ButtonSubmitForm from '../../../components/ui/ButtonSubmitForm';
 import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
 import FormPaquete from './FormCreateGre/FormPaquete';
 import type { ProductoEnPaquete, SelectedDateTime } from '../../../types/constantes.type';
@@ -28,7 +27,6 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  // const { isLoading, isError, fetchData: emitirGre } = useEmitirGuiaRemision();
   const [IdSalidaTransporte,] = useState<number | null>(null);
   const [IdCliente,] = useState<number | null>(null);
   const [IdEstablecimiento,] = useState<number | null>(null);
@@ -95,7 +93,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       {/* Header */}
       <div className="flex items-center justify-between bg-gray-900 px-8 py-6">
         <div>
-          <h1 className="text-3xl font-bold mb-2">EMISIÓN DE GUÍA DE REMISIÓN</h1>
+          <h1 className="text-xl font-bold mb-2">EMISIÓN DE GUÍA DE REMISIÓN</h1>
           <p className="text-gray-400">Siga los pasos para completar la información de transporte.</p>
         </div>
         {/* Botones */}
@@ -107,19 +105,6 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <ChevronLeft className="w-5 h-5" />
             Cancelar
           </button>
-          
-          <ButtonSubmitForm
-            handleSubmit={() => {
-              // emitirGre(formData);
-              // console.log("Datos enviados:", formData);
-            }}
-            isLoading={false}
-            isError={false}
-            textButton="Emitir GRE"
-            textError="Error al emitir GRE"
-            color="green"
-          />
-          
           <button 
             onClick={pushAnterior}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"

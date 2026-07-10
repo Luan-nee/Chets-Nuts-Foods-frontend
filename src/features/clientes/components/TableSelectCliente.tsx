@@ -13,9 +13,7 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
     "N°",
-    "Nombres",
-    "Apellido Paterno",
-    "Apellido Materno",
+    "Nombres y apellidos",
     "DNI",
     "Número telefónico",
     "RUC"
@@ -63,26 +61,13 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
               </td>
 
               <td className="px-6 py-4">
-                <span className="font-medium text-sm text-white">
-                  {cliente.nombres}
+                <span className="text-sm text-white">
+                  {`${cliente.nombres} ${cliente.apellidopaterno} ${cliente.apellidomaterno}`} 
                 </span>
               </td>
 
               <td className="px-6 py-4">
-                <span className="text-sm text-gray-300">
-                  {cliente.apellidopaterno}
-                </span>
-              </td>
-
-              <td className="px-6 py-4">
-                <span className="text-sm text-gray-300">
-                  {cliente.apellidomaterno}
-                </span>
-              </td>
-
-              <td className="px-6 py-4">
-                <div className="flex items-center gap-2 text-sm text-gray-300">
-                  <CalendarDays className="w-4 h-4 text-gray-500" />
+                <div className="flex items-center gap-2 font-medium text-gray-300">
                   <span>{cliente.dniuser}</span>
                 </div>
               </td>
@@ -93,7 +78,7 @@ export default function TableSelectCliente({ selectIdCliente, onChange }: TableS
                 </span>
               </td>
 
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 text-center">
                 <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff] text-center">
                   {cliente.rucuser ?? 'sin ruc'}
                 </span>

@@ -45,30 +45,6 @@ export default function FormPaquete() {
 
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
-      <div className='flex gap-2'>
-        <ButtonSubmitForm 
-          handleSubmit={() => {
-            setIdSalidaTransporteContext(formData.idSalidaTransporte);
-            setDataEmitirGre((current) => ({
-              ...current,
-              paquete: formData,
-              idSalidaTransporte: formData.idSalidaTransporte,
-            }));
-            registrarPaquete(formData)
-          }}
-          isError={isErrorPaquete}
-          isLoading={isLoadingPaquete}
-          textButton="Registrar paquete"
-          textError="Error al registrar el paquete"
-          color='blue'
-        />
-        <ButtonCancelForm 
-          handleCancel={() => {}}
-          isLoading={isLoadingPaquete}
-          textButton="Cancelar"
-          color='red'
-        />
-      </div>
       <InputText 
         htmlForm='clave de seguimiento'
         label='Clave de seguimiento'
@@ -89,6 +65,30 @@ export default function FormPaquete() {
           idUsuarioDestino: setIdCliente || 0,
         });
       }} />
+      <div className='flex gap-2'>
+        <ButtonCancelForm 
+          handleCancel={() => {}}
+          isLoading={isLoadingPaquete}
+          textButton="Cancelar"
+          color='red'
+        />
+        <ButtonSubmitForm 
+          handleSubmit={() => {
+            setIdSalidaTransporteContext(formData.idSalidaTransporte);
+            setDataEmitirGre((current) => ({
+              ...current,
+              paquete: formData,
+              idSalidaTransporte: formData.idSalidaTransporte,
+            }));
+            registrarPaquete(formData)
+          }}
+          isError={isErrorPaquete}
+          isLoading={isLoadingPaquete}
+          textButton="Registrar paquete"
+          textError="Error al registrar el paquete"
+          color='blue'
+        />
+      </div>
     </div>
   );
 }

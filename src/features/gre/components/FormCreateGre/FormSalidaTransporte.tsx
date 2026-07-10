@@ -55,28 +55,6 @@ export default function FormSalidaTransporte() {
 
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
-      <div className="flex gap-2">
-        <ButtonSubmitForm 
-          handleSubmit={() => {
-            setDataEmitirGre((current) => ({
-              ...current,
-              salidaTransporte: formData,
-            }));
-            createSalidaTransporte(formData);
-          }}
-          isError={isErrorSalidaTransporte}
-          isLoading={isLoadingSalidaTransporte}
-          textButton='Registrar salida de transporte'
-          textError='Se produjo un error al registrar la salida de transporte'
-          color='blue'
-        />
-        <ButtonCancelForm 
-          handleCancel={() => {}}
-          isLoading={false}
-          textButton='Cancelar'
-          color='red'
-        />
-      </div>
       <div>
         <div className="text-lg font-medium text-white mb-4">
           Calendario
@@ -111,6 +89,28 @@ export default function FormSalidaTransporte() {
           idVehiculo: setIdVehiculo || 0,
         });
       }} />
+      <div className="flex gap-2">
+        <ButtonCancelForm 
+          handleCancel={() => {}}
+          isLoading={false}
+          textButton='Cancelar'
+          color='red'
+        />
+        <ButtonSubmitForm 
+          handleSubmit={() => {
+            setDataEmitirGre((current) => ({
+              ...current,
+              salidaTransporte: formData,
+            }));
+            createSalidaTransporte(formData);
+          }}
+          isError={isErrorSalidaTransporte}
+          isLoading={isLoadingSalidaTransporte}
+          textButton='Registrar salida de transporte'
+          textError='Se produjo un error al registrar la salida de transporte'
+          color='blue'
+        />
+      </div>
     </div>
   );
 }

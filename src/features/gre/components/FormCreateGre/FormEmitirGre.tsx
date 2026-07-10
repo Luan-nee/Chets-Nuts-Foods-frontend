@@ -148,14 +148,6 @@ export default function FormEmitirGre() {
 			</div>
 
 			<div className="flex gap-2">
-				<ButtonSubmitForm
-					handleSubmit={handleEmitirGre}
-					isError={isError}
-					isLoading={isLoading}
-					textButton="Emitir guia de remision"
-					textError="Error al emitir guia de remision"
-					color="green"
-				/>
 				<ButtonCancelForm
 					handleCancel={() => {
 						setFormData(initialEmitirGre);
@@ -167,6 +159,14 @@ export default function FormEmitirGre() {
 					isLoading={isLoading}
 					textButton="Cancelar"
 					color="red"
+				/>
+				<ButtonSubmitForm
+					handleSubmit={handleEmitirGre}
+					isError={isError}
+					isLoading={isLoading}
+					textButton="Emitir guia de remision"
+					textError="Error al emitir guia de remision"
+					color="green"
 				/>
 			</div>
 		</div>
