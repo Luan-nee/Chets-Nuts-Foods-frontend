@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import InputNumber from "../../../components/ui/InputNumber";
@@ -7,6 +7,7 @@ import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import InputSelect from "../../../components/ui/InputSelect";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useCreateCliente } from "../hooks/useCreateCliente";
+import { useFetchBasicDataByDni } from "../../../hooks/useFetchBasicDataByDni";
 import type { CreateCliente } from "../../../types/clientes.type";
 import type { UserGender } from "../../../types/constantes.type";
 
@@ -33,6 +34,33 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
     correo: '',
   });
 
+  const dniBusqueda = formData.dni.trim().length === 8 ? formData.dni.trim() : "";
+
+  const {
+    basicData,
+  } = useFetchBasicDataByDni(dniBusqueda);
+
+  useEffect(() => {
+    if (basicData) {
+      setFormData(prev => ({
+        ...prev,
+        nombre: basicData.nombres ?? '',
+        apellidopaterno: basicData.apellido_paterno ?? '',
+        apellidomaterno: basicData.apellido_materno ?? ''
+      }));
+      return;
+    }
+
+    if (!dniBusqueda) {
+      setFormData(prev => ({
+        ...prev,
+        nombre: '',
+        apellidopaterno: '',
+        apellidomaterno: ''
+      }));
+    }
+  }, [basicData, dniBusqueda]);
+
   return (
     <ContentPage>
       {/* Header */}
@@ -47,16 +75,16 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
           {/* Row 1: DNI y RUC */}
           <div className="grid grid-cols-2 gap-6">
             <InputText
-              label="RUC (opcional)"
-              value={formData.ruc ?? ''}
-              htmlForm="ruc"
-              onChange={(value) => setFormData(prev => ({ ...prev, ruc: value }))}
-            />
-            <InputText
               label="DNI"
               value={formData.dni}
               htmlForm="dni"
               onChange={(value) => setFormData(prev => ({ ...prev, dni: value }))}
+            />
+            <InputText
+              label="RUC (opcional)"
+              value={formData.ruc ?? ''}
+              htmlForm="ruc"
+              onChange={(value) => setFormData(prev => ({ ...prev, ruc: value }))}
             />
           </div>
 
