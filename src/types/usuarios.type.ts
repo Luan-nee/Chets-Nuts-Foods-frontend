@@ -36,3 +36,10 @@ export type ResponseGetAll = {
   numero: string;
   rucuser: string | null;
 }
+
+export type ResponseGetDataBasicByDni = {
+  dni: string;
+  nombres: string;
+  apellido_paterno: string;
+  apellido_materno: string;
+}

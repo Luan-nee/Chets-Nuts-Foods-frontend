@@ -6,14 +6,17 @@ import BaseRequestApi from './BaseRequest.api';
 
 // importación de tipos
 import type { BodyResponse } from '../types/bodyResponse.type';
-import type { CreateUsuario, ResponseGetDni, ResponseGetAll } from '../types/usuarios.type';
+import type { CreateUsuario, ResponseGetDni, ResponseGetAll, ResponseGetDataBasicByDni } from '../types/usuarios.type';
 
 // importación de datos mock
 // ...
 
 export default class Usuarios extends BaseRequestApi {
-  // private base_url_postman = `${url_base_postman}`;
   private base_url_production = `${url_base_endpoint}/api/usuarios`;
+
+  public async getBasicDataByDNI(dni: string): Promise<BodyResponse<ResponseGetDataBasicByDni>> {
+    return this.POST<ResponseGetDataBasicByDni>(`${this.base_url_production}/dni/dev`, { dni: dni });
+  }
 
   /* create */
   public async create(body: CreateUsuario): Promise<BodyResponse<CreateUsuario>> {
