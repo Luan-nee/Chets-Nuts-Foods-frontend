@@ -6,6 +6,7 @@ import TableSelectVehiculo from '../../../vehiculos/components/TableSelectVehicu
 import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
 import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
 import { useRegistrarSalidaTransporte } from '../../../gre/hooks/useRegistrarSalidaTransporte';
+import { useGreContext } from '../../../../context/GreContext';
 
 type SalidaTransporteFormData = {
   idChoferAcceso: number,
@@ -17,6 +18,7 @@ type SalidaTransporteFormData = {
 }
 
 export default function FormSalidaTransporte() {
+  const { setDataEmitirGre } = useGreContext();
   const [, setIdEstablecimiento] = useState<number | null>(null);
   const [, setIdChofer] = useState<number | null>(null);
   const [, setIdVehiculo] = useState<number | null>(null);
@@ -34,11 +36,34 @@ export default function FormSalidaTransporte() {
     execute: createSalidaTransporte
   } = useRegistrarSalidaTransporte();
 
+  const syncSalidaTransporte = (nextValues: Partial<SalidaTransporteFormData>) => {
+    setFormData((prev) => {
+      const updatedFormData = {
+        ...prev,
+        ...nextValues,
+      };
+
+      setDataEmitirGre((current) => ({
+        ...current,
+        salidaTransporte: updatedFormData,
+        idSalidaTransporte: updatedFormData.idDestinoEstablecimiento,
+      }));
+
+      return updatedFormData;
+    });
+  };
+
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
       <div className="flex gap-2">
         <ButtonSubmitForm 
-          handleSubmit={() => createSalidaTransporte(formData)}
+          handleSubmit={() => {
+            setDataEmitirGre((current) => ({
+              ...current,
+              salidaTransporte: formData,
+            }));
+            createSalidaTransporte(formData);
+          }}
           isError={isErrorSalidaTransporte}
           isLoading={isLoadingSalidaTransporte}
           textButton='Registrar salida de transporte'
@@ -58,37 +83,33 @@ export default function FormSalidaTransporte() {
         </div>
         <DateTimePicker
           onChange={(value) => {
-            setFormData((prev) => ({
-              ...prev,
+            syncSalidaTransporte({
               fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
-              horasalida: value ? `${value.hour}:${value.minute}` : ''
-            }));
+              horasalida: value ? `${value.hour}:${value.minute}` : '',
+            });
           }}
         />
       </div>
       <TableSelectEstablecimiento 
         selectIdEstablecimiento={setIdEstablecimiento} 
         onChange={(setIdEstablecimiento) => {
-        setFormData((prev) => ({
-          ...prev,
-          idDestinoEstablecimiento: setIdEstablecimiento || 0
-        }));
+        syncSalidaTransporte({
+          idDestinoEstablecimiento: setIdEstablecimiento || 0,
+        });
       }} />
       <TableSelectChofer 
       selectIdChofer={setIdChofer} 
       onChange={(setIdChofer) => {
-        setFormData((prev) => ({
-          ...prev,
-          idChoferAcceso: setIdChofer || 0
-        }));
+        syncSalidaTransporte({
+          idChoferAcceso: setIdChofer || 0,
+        });
       }} />
       <TableSelectVehiculo 
       selectIdVehiculo={setIdVehiculo} 
       onChange={(setIdVehiculo) => {
-        setFormData((prev) => ({
-          ...prev,
-          idVehiculo: setIdVehiculo || 0
-        }));
+        syncSalidaTransporte({
+          idVehiculo: setIdVehiculo || 0,
+        });
       }} />
     </div>
   );
