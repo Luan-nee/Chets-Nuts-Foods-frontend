@@ -22,7 +22,7 @@ export default function InputText ({
             (e) => onChange(e.currentTarget.value)
           }
           id={htmlForm}
-          defaultValue={value}
+          value={value}
           type="text"
           autoComplete="off"
           className="w-full p-3 bg-dark-deep border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition-all duration-200"

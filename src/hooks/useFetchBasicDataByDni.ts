@@ -30,6 +30,7 @@ export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
 			setIsLoading(true);
 			setIsError(false);
 			setMessage("");
+			setBasicData(null);
 
 			const response = await usuarios_api.getBasicDataByDNI(dniParam);
 
@@ -56,7 +57,12 @@ export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
 	useEffect(() => {
 		if (dni) {
 			getBasicDataByDni(dni);
+			return;
 		}
+
+		setBasicData(null);
+		setIsError(false);
+		setMessage("");
 	}, [dni]);
 
 	return {

@@ -9,6 +9,7 @@ import ContentSectionProcess from "../../../components/layouts/ContentSectionPro
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { sexos, tiposPersona } from "../../../config/constantes";
+import { useFetchBasicDataByDni } from "../../../hooks/useFetchBasicDataByDni";
 import type { 
   UserGender as sexoEmpleado, 
   UserType as tipoPersona, 
@@ -50,6 +51,33 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
     numero: '',
     tipo: 'NATURAL'
   });
+
+  const dniBusqueda = formData.dni.trim().length === 8 ? formData.dni.trim() : "";
+
+  const {
+    basicData
+  } = useFetchBasicDataByDni(dniBusqueda);
+
+  useEffect(() => {
+    if (basicData) {
+      setFormData(prev => ({
+        ...prev,
+        nombre: basicData.nombres ?? '',
+        apellidopaterno: basicData.apellido_paterno ?? '',
+        apellidomaterno: basicData.apellido_materno ?? ''
+      }));
+      return;
+    }
+
+    if (!dniBusqueda) {
+      setFormData(prev => ({
+        ...prev,
+        nombre: '',
+        apellidopaterno: '',
+        apellidomaterno: ''
+      }));
+    }
+  }, [basicData, dniBusqueda]);
 
   // Generar contraseña automáticamente
   useEffect(() => {
@@ -110,16 +138,16 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
           {/* Row 1: Nombre y DNI */}
           <div className="grid grid-cols-2 gap-6">
             <InputText
-              label="Nombre"
-              value={formData.nombre}
-              htmlForm="nombre"
-              onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
-            />
-            <InputText
               label="DNI"
               value={formData.dni}
               htmlForm="dni"
               onChange={(value) => setFormData(prev => ({ ...prev, dni: value }))}
+            />
+            <InputText
+              label="Nombre"
+              value={formData.nombre}
+              htmlForm="nombre"
+              onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
             />
           </div>
 
