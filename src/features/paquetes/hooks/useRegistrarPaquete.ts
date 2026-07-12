@@ -8,7 +8,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreatePaquete) => Promise<void>;
+  execute: (body: CreatePaquete) => Promise<number>;
 }
 
 export const useRegistrarPaquete = (): FetchState => {
@@ -17,7 +17,9 @@ export const useRegistrarPaquete = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const registrarPaquete = async (bodyPaquete: CreatePaquete): Promise<void> => {
+  const registrarPaquete = async (
+    bodyPaquete: CreatePaquete,
+  ): Promise<number> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -31,6 +33,7 @@ export const useRegistrarPaquete = (): FetchState => {
           status: response.status,
           message: "Paquete registrado exitosamente"
         })
+        return response.data?.idPaquete || 777;
       } else {
         setIsError(true);
         setMessage("Error al registrar el paquete");
@@ -38,6 +41,7 @@ export const useRegistrarPaquete = (): FetchState => {
           status: response.status,
           message: response.message ?? "Error al registrar el paquete"
         })
+        return 0;
       }
     } catch (error) {
       setIsError(true);
@@ -46,6 +50,7 @@ export const useRegistrarPaquete = (): FetchState => {
         status: "error",
         message: "Se produjo un error al registrar el paquete en el frontend"
       });
+      return 0;
     } finally {
       setIsLoading(false);
     }

@@ -4,7 +4,7 @@ import InputSearch from '../../../../components/ui/InputSearch';
 import Table from '../../../../components/ui/Table';
 import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
 import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
-import TableSelectPaquete from "../../../paquetes/components/TableSelectPaquete";
+// import TableSelectPaquete from "../../../paquetes/components/TableSelectPaquete";
 import { useRegistrarProductoEnPaquete } from '../../../paquetes/hooks/useRegistrarProductoEnPaquete';
 import { useFetchProductos } from '../../../productos/hooks/useFetchProductos';
 import type { ProductoEnPaquete } from '../../../../types/constantes.type';
@@ -12,10 +12,11 @@ import type { ResponseGetAllProductos } from '../../../../types/producto.type';
 import { useGreContext } from '../../../../context/GreContext';
 
 export default function FormProductos () {
-  const { setIdPaquete: setIdPaqueteContext, setDataEmitirGre } = useGreContext();
+  const { 
+    dataEmitirGre,
+    setDataEmitirGre
+  } = useGreContext();
   const [formData, setFormData] = useState<ProductoEnPaquete[]>([]);
-  const [idSalidaTransporte, ] = useState<number>(1);
-  const [idPaqueteLocal, setIdPaqueteLocal] = useState<number | null>(1);
   const { 
     isLoading: isLoadingProductos, 
     isError: isErrorProductos,
@@ -28,7 +29,7 @@ export default function FormProductos () {
     setDataEmitirGre((current) => ({
       ...current,
       productosEnPaquete: nextProductos,
-      idPaquete: idPaqueteLocal || 0,
+      idPaquete: dataEmitirGre.idPaquete || 0,
     }));
   };
 
@@ -37,7 +38,6 @@ export default function FormProductos () {
       const alreadySelected = prev.some(
         (item) => item.idproductdefect === producto.idproductdefect
       );
-
       if (alreadySelected) {
         const updatedList = prev.map((item) =>
           item.idproductdefect === producto.idproductdefect
@@ -47,12 +47,9 @@ export default function FormProductos () {
               }
             : item
         );
-
         syncProductosEnContexto(updatedList);
-
         return updatedList;
       }
-
       const updatedList = [
         ...prev,
         {
@@ -63,9 +60,7 @@ export default function FormProductos () {
           cantidad: 1,
         },
       ];
-
       syncProductosEnContexto(updatedList);
-
       return updatedList;
     });
   };
@@ -73,9 +68,7 @@ export default function FormProductos () {
   const handleRemoveProducto = (idproductdefect: number) => {
     setFormData((prev) => {
       const updatedList = prev.filter((item) => item.idproductdefect !== idproductdefect);
-
       syncProductosEnContexto(updatedList);
-
       return updatedList;
     });
   };
@@ -205,11 +198,6 @@ export default function FormProductos () {
         </Table>
       </div>
 
-      <TableSelectPaquete 
-        SelectIdPaquete={setIdPaqueteLocal}
-        idSalidaTransporte={idSalidaTransporte}
-      />
-
       <div className='flex gap-2'>
         <ButtonSubmitForm 
           isError={isErrorProductos}
@@ -218,10 +206,12 @@ export default function FormProductos () {
           textError='Error al registrar productos en paquete'
           color='blue'
           handleSubmit={async () => {
-              setIdPaqueteContext(idPaqueteLocal);
-              syncProductosEnContexto(formData);
-              await registrarProductoEnPaquete(formData, idPaqueteLocal);
-            console.log('Productos registrados en paquete:', formData);
+            // syncProductosEnContexto(formData);
+            setDataEmitirGre((current) => ({
+              ...current,
+              productosEnPaquete: formData,
+            }));
+            registrarProductoEnPaquete(formData, dataEmitirGre.idPaquete || 0);
           }}
         />
         <ButtonCancelForm 

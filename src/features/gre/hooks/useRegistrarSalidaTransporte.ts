@@ -7,7 +7,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreateSalidaTransporte) => void;
+  execute: (body: CreateSalidaTransporte) => Promise<number>;
 }
 
 export const useRegistrarSalidaTransporte = (): FetchState => {
@@ -18,7 +18,7 @@ export const useRegistrarSalidaTransporte = (): FetchState => {
 
   const createSalidaTransporte = async (
     body: CreateSalidaTransporte,
-  ): Promise<void> => {
+  ): Promise<number> => {
     try {
       setIsLoading(true);
       setIsError(false);
@@ -32,6 +32,7 @@ export const useRegistrarSalidaTransporte = (): FetchState => {
           status: "success",
           message: `${response.message || "Salida de transporte registrado exitosamente"}`
         })
+        return response.data?.idSalidaTransporte || 777;
       } else {
         setIsError(true);
         setMessage("Error al registrar la salida de transporte");
@@ -39,6 +40,7 @@ export const useRegistrarSalidaTransporte = (): FetchState => {
           status: "error",
           message: `${response.message || "Error al registrar la salida de transporte"}`
         })
+        return 0;
       }
     } catch (error: any) {
       setIsError(true);0
@@ -47,6 +49,7 @@ export const useRegistrarSalidaTransporte = (): FetchState => {
         status: "error",
         message: "Se produjo un error al registrar la salida de transporte en el frontend"
       })
+      return 0;
     } finally {
       setIsLoading(false);
     }

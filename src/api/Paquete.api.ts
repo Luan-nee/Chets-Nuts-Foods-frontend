@@ -1,6 +1,6 @@
 import { url_base_endpoint } from "../config/url_base";
 import BaseRequestApi from "./BaseRequest.api";
-import type { CreatePaquete, ResponseGetAllPaquetes } from "../types/paquete.type";
+import type { CreatePaquete, ResponseGetAllPaquetes, ResponseCreatePaquete } from "../types/paquete.type";
 import type { BodyResponse } from "../types/bodyResponse.type";
 import type { ProductoEnPaquete } from "../types/constantes.type";
 
@@ -13,8 +13,8 @@ export default class PaqueteApi extends BaseRequestApi {
   */
   public async createPaquete(
     body: CreatePaquete,
-  ): Promise<BodyResponse<string>> {
-    return this.POST<string>(`${this.base_url_production}`, body);
+  ): Promise<BodyResponse<ResponseCreatePaquete>> {
+    return this.POST<ResponseCreatePaquete>(`${this.base_url_production}`, body);
   }
 
   public async agregarProductoEnPaquete(

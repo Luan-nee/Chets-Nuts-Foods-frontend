@@ -4,10 +4,11 @@ import ContentPage from '../../../components/layouts/ContentPage';
 // import TableSelectProductos from '../../productos/components/TableSelectProductos';
 import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
 import FormPaquete from './FormCreateGre/FormPaquete';
-import type { ProductoEnPaquete, SelectedDateTime } from '../../../types/constantes.type';
+import type { ProductoEnPaquete } from '../../../types/constantes.type';
 import type { SalidaTransporteFormData, PaqueteFormData } from '../../../types/constantes.type';
 import FormProductos from './FormCreateGre/FormProductos';
 import FormEmitirGre from './FormCreateGre/FormEmitirGre';
+import { useGreContext } from '../../../context/GreContext';
 
 export interface FormCreateGreData {
   salidaTransporte: SalidaTransporteFormData,
@@ -27,32 +28,7 @@ interface FormCreateGreProps {
 }
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  const [IdSalidaTransporte,] = useState<number | null>(null);
-  const [IdCliente,] = useState<number | null>(null);
-  const [IdEstablecimiento,] = useState<number | null>(null);
-  const [IdChofer,] = useState<number | null>(null);
-  const [IdVehiculo,] = useState<number | null>(null);
-  const [selectedDateTime,] = useState<SelectedDateTime | null>(null);
-  const [formData, setFormData] = useState<FormCreateGreData>({
-    salidaTransporte: {
-      idChoferAcceso: IdChofer || 0,
-      idOrigenEstablecimiento: 1,
-      idDestinoEstablecimiento: IdEstablecimiento || 0,
-      idVehiculo: IdVehiculo || 0,
-      fechaSalida: '',
-      horasalida: ''
-    },
-    paquete: {
-      clave: '',
-      destino: 'Destino de prueba',
-      idSalidaTransporte: IdSalidaTransporte || 0,
-      idUsuario: 1,
-      idUsuarioDestino: IdCliente || 0,
-      montoCobrado: 0
-    },
-    productos: []
-  })
-  
+  const { dataEmitirGre } = useGreContext();  
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
     [
       { label: 'Salida transporte', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
@@ -123,27 +99,7 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
           
           <button 
             onClick={() => {
-              setFormData((prev) => ({
-                ...prev,
-                paquete: {
-                  clave: prev.paquete.clave,
-                  destino: "Destino de prueba",
-                  idSalidaTransporte: IdSalidaTransporte || 0,
-                  idUsuario: 1,
-                  idUsuarioDestino: IdCliente || 0,
-                  montoCobrado: 0,
-                },
-                salidaTransporte: {
-                  fechaSalida: selectedDateTime ? formatDateMMDDYYYY(selectedDateTime.date) : '',
-                  idChoferAcceso: IdChofer || 0,
-                  idOrigenEstablecimiento: 1,
-                  idDestinoEstablecimiento: IdEstablecimiento || 0,
-                  idVehiculo: IdVehiculo || 0,
-                  horasalida: selectedDateTime ? `${selectedDateTime.hour}:${selectedDateTime.minute}` : ''
-                }
-              }));
-              console.log("----> TODOS LOS DATOS REGISTRADOS:", formData);
-
+              console.log('Datos registrados: ', dataEmitirGre)
             }}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
@@ -188,13 +144,3 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
     </ContentPage>
   );
 }
-
-
-
-const formatDateMMDDYYYY = (date: Date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${month}/${day}/${year}`;
-};

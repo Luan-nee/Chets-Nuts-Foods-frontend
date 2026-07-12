@@ -7,6 +7,11 @@ export type CreatePaquete = {
   montoCobrado: number
 }
 
+export type ResponseCreatePaquete = {
+  sala: string,
+  idPaquete: number,
+}
+
 export type ResponseGetAllPaquetes = {
   idpaquete: number,
   destino: string,

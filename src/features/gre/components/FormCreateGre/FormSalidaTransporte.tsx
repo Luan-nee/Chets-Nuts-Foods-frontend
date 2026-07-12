@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DateTimePicker from '../../../../components/ui/SelectDateTime';
 import TableSelectEstablecimiento from '../../../establecimientos/components/TableSelectEstablecimiento';
 import TableSelectChofer from '../../../chofer/components/TableSelectChofer';
@@ -37,21 +37,18 @@ export default function FormSalidaTransporte() {
   } = useRegistrarSalidaTransporte();
 
   const syncSalidaTransporte = (nextValues: Partial<SalidaTransporteFormData>) => {
-    setFormData((prev) => {
-      const updatedFormData = {
-        ...prev,
-        ...nextValues,
-      };
-
-      setDataEmitirGre((current) => ({
-        ...current,
-        salidaTransporte: updatedFormData,
-        idSalidaTransporte: updatedFormData.idDestinoEstablecimiento,
-      }));
-
-      return updatedFormData;
-    });
+    setFormData((prev) => ({
+      ...prev,
+      ...nextValues,
+    }));
   };
+
+  useEffect(() => {
+    setDataEmitirGre((current) => ({
+      ...current,
+      salidaTransporte: formData,
+    }));
+  }, [formData, setDataEmitirGre]);
 
   return (
     <div className="px-6 py-4 bg-gray-900 mx-6">
@@ -97,12 +94,16 @@ export default function FormSalidaTransporte() {
           color='red'
         />
         <ButtonSubmitForm 
-          handleSubmit={() => {
-            setDataEmitirGre((current) => ({
-              ...current,
-              salidaTransporte: formData,
-            }));
-            createSalidaTransporte(formData);
+          handleSubmit={ async () => {
+            createSalidaTransporte(formData).then((response) => {
+              if (response !== 0) {
+                setDataEmitirGre((current) => ({
+                  ...current,
+                  salidaTransporte: formData,
+                  idSalidaTransporte: response,
+                }));
+              }
+            });
           }}
           isError={isErrorSalidaTransporte}
           isLoading={isLoadingSalidaTransporte}

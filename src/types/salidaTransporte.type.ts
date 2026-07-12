@@ -9,6 +9,10 @@ export type CreateSalidaTransporte = {
   horasalida: string;
 }
 
+export type ResponseCreateSalidaTransporte = {
+  idSalidaTransporte: number;
+};
+
 export type ResponseGetAll = {
   idsalidatransporte: number,
   estadotransporte: string,
