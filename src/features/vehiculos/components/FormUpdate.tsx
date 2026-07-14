@@ -79,9 +79,6 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   dataVehiculo?.marca
                 }
               />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
               <InputSelectTest
                 label="Modelo"
                 options={modelosVehiculos}
@@ -94,21 +91,9 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   dataVehiculo?.modelo
                 }
               />
-
-              <InputText 
-                label="Año de fabricación"
-                value={dataVehiculo ? dataVehiculo.anio?.toString() : ""}
-                htmlForm={"anioFabricacion"}
-                onChange={(value) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    anio: value
-                  }))
-                }}
-              />
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <InputNumber
                 label="Capacidad máxima de carga (toneladas)"
                 placeholder="0.00"
@@ -118,6 +103,17 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   setFormData((prev) => ({
                     ...prev,
                     capacidadCarga: value
+                  }))
+                }}
+              />
+              <InputText 
+                label="Año de fabricación"
+                value={dataVehiculo ? dataVehiculo.anio?.toString() : ""}
+                htmlForm={"anioFabricacion"}
+                onChange={(value) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    anio: value
                   }))
                 }}
               />
