@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CalendarDays, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
 import { useFetchClientesSinCompras } from '../hooks/useFetchClientesSinCompras';
