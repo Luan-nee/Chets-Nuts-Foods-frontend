@@ -13,6 +13,7 @@ import type { UserGender } from "../../../types/constantes.type";
 
 interface FormCreateClienteProps {
   setShowFormCreate: (value: boolean) => void;
+  setDniCliente?: (value: string) => void;
 }
 
 export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClienteProps) {

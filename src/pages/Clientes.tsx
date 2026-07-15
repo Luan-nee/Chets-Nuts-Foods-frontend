@@ -2,9 +2,12 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import TableClientes from "../features/clientes/components/TableClientes";
 import FormCreateCliente from "../features/clientes/components/FormCreateCliente";
+import FormUpdateCliente from "../features/clientes/components/FormUpdateCliente";
 
 export default function Clientes() {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
+  const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
+  const [dniCliente, setDniCliente] = useState<string>("");
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -24,11 +27,15 @@ export default function Clientes() {
         </div>
       </div>
 
-      <TableClientes/>
+      <TableClientes setShowFormUpdate={setShowFormUpdate} setDniCliente={setDniCliente} />
 
       { showFormCreate && (
-        <FormCreateCliente setShowFormCreate={setShowFormCreate} />
+        <FormCreateCliente setShowFormCreate={setShowFormCreate} setDniCliente={setDniCliente} />
       )}
+      { showFormUpdate && (
+        <FormUpdateCliente setShowFormUpdate={setShowFormUpdate} dniCliente={dniCliente} />
+      )}
+
     </div>
   );
 }

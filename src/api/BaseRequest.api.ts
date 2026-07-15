@@ -48,9 +48,10 @@ export default class BaseRequestApi {
     });
   }
 
-  public async GET<T>(url: string): Promise<BodyResponseWithPagination<T> | BodyResponse<T>> {
+  public async GET<T>(url: string, body?: unknown): Promise<BodyResponseWithPagination<T> | BodyResponse<T>> {
     return this.request<BodyResponseWithPagination<T> | BodyResponse<T>>(url, {
       method: 'GET',
+      body,
     });
   }
 

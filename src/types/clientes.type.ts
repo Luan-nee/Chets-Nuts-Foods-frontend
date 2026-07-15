@@ -49,8 +49,26 @@ export type ResponseGetClienteByDNI = {
 }
 
 export type UpdateCliente = {
-  // Aún no se ha definido la estructura.
-  // No existe documentación en postman sobre esta operación.
+  iduser: number,
+  nombre: string,
+  apellidopaterno: string,
+  apellidomaterno: string,
+  ruc: string,
+  numero: string,
+  edad: number,
+  dni: string,
+  tipo: UserType,
+}
+
+export type ResponseUpdateCliente = {
+  iduser: number,
+  apellidomaterno: string,
+  apellidopaterno: string,
+  dniuser: string,
+  nombres: string,
+  numero: string,
+  rucuser: null,
+  tipo: UserType,
 }
 
 export type ResponseGetClienteByRUC = {

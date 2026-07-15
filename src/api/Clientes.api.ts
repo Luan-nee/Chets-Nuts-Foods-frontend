@@ -7,6 +7,8 @@ import type {
   CreateCliente,
   UpdateCliente,
   GetClienteSinCompras,
+  ResponseUpdateCliente,
+  ResponseGetClienteByDNI
 } from "../types/clientes.type";
 
 export default class ClienteApi extends BaseRequestApi {
@@ -36,9 +38,17 @@ export default class ClienteApi extends BaseRequestApi {
   }
 
   public async updateCliente(
-    id: number,
     body: UpdateCliente,
-  ): Promise<BodyResponse<string>> {
-    return this.PATCH<string>(`${this.base_url_production}/${id}`, body);
+  ): Promise<BodyResponse<ResponseUpdateCliente>> {
+    return this.PATCH<ResponseUpdateCliente>(`${url_base_endpoint}/api/usuarios`, body);
+  }
+
+  public async getClienteByDNI(
+    dni: string
+  ): Promise<BodyResponse<ResponseGetClienteByDNI>> {
+    return this.POST<ResponseGetClienteByDNI>(
+      `${url_base_endpoint}/api/usuarios/dni`,
+      { dni }
+    );
   }
 }

@@ -2,7 +2,12 @@ import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import { useFetchClientes } from "../hooks/useFetchClientes";
 
-export default function TableClientes() {
+interface TableClientesProps {
+  setShowFormUpdate: (value: boolean) => void;
+  setDniCliente: (value: string) => void;
+}
+
+export default function TableClientes({ setShowFormUpdate, setDniCliente }: TableClientesProps) {
   const {
     clientes,
     isLoading: clientesLoading,
@@ -85,7 +90,8 @@ export default function TableClientes() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => {
-                      console.log("Aún no existe la opción a editar")
+                      setShowFormUpdate(true);
+                      setDniCliente(cliente.dniuser);
                     }}
                     className="p-2 bg-blue-600 text-white rounded"
                   >
