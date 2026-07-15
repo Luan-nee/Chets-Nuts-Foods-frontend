@@ -7,6 +7,11 @@ import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
+import {
+	departamentos,
+	getDistritosByProvincia,
+	getProvinciasByDepartamento,
+} from "../../../config/infoUbicacion";
 import { useFetchEstablecimiento } from "../hooks/useFetchEstablecimiento";
 import { useUpdateEstablecimiento } from "../hooks/useUpdateEstablecimiento";
 import type { UpdateEstablecimiento } from "../../../types/establecimiento.type";
@@ -60,6 +65,9 @@ export default function FormUpdateEstablecimiento({
 		tipoEstado: "no_registrado",
 		codigoSunat: "",
 	});
+
+	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento ?? "");
+	const distritosDisponibles = getDistritosByProvincia(formData.departamento ?? "", formData.provincia ?? "");
 
 	useEffect(() => {
 		if (establecimiento) {
@@ -141,33 +149,40 @@ export default function FormUpdateEstablecimiento({
 							/>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<InputText
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+							<InputSelect
 								label="Departamento"
-								value={formData.departamento ?? ""}
-								htmlForm="departamentoUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, departamento: value }))}
+								options={departamentos}
+								placeholder="Selecciona un departamento"
+								valueSelected={formData.departamento ?? ""}
+								onSelect={(value) =>
+									setFormData((prev) => ({
+										...prev,
+										departamento: value as string,
+										provincia: "",
+										distrito: "",
+									}))
+								}
 							/>
-							<InputText
+							<InputSelect
 								label="Provincia"
-								value={formData.provincia ?? ""}
-								htmlForm="provinciaUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, provincia: value }))}
+								options={provinciasDisponibles}
+								placeholder="Selecciona una provincia"
+								valueSelected={formData.provincia ?? ""}
+								onSelect={(value) =>
+									setFormData((prev) => ({
+										...prev,
+										provincia: value as string,
+										distrito: "",
+									}))
+								}
 							/>
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<InputText
+							<InputSelect
 								label="Distrito"
-								value={formData.distrito ?? ""}
-								htmlForm="distritoUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, distrito: value }))}
-							/>
-							<InputText
-								label="Ubigeo"
-								value={formData.ubigeo ?? ""}
-								htmlForm="ubigeoUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, ubigeo: value }))}
+								options={distritosDisponibles}
+								placeholder="Selecciona un distrito"
+								valueSelected={formData.distrito ?? ""}
+								onSelect={(value) => setFormData((prev) => ({ ...prev, distrito: value as string }))}
 							/>
 						</div>
 
@@ -186,7 +201,13 @@ export default function FormUpdateEstablecimiento({
 							/>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+							<InputText
+								label="Ubigeo"
+								value={formData.ubigeo ?? ""}
+								htmlForm="ubigeoUpdate"
+								onChange={(value) => setFormData((prev) => ({ ...prev, ubigeo: value }))}
+							/>
 							<InputText
 								label="Latitud"
 								value={formData.latitud ?? ""}
