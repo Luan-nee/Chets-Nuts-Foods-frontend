@@ -5,6 +5,11 @@ import InputText from "../../../components/ui/InputText";
 import InputSelectTest from "../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm"
+import {
+  departamentos,
+  getDistritosByProvincia,
+  getProvinciasByDepartamento,
+} from "../../../config/infoUbicacion";
 import type { InfoUbicacionState } from "../../../types/datosEmpresa.type";
 
 interface FormRegistrarInfoEstablecimientoProps {
@@ -27,6 +32,9 @@ export default function FormRegistrarInfoEstablecimiento({setShowForm}: FormRegi
     tipoEstado: "oficina"
   });
 
+  const provinciasDisponibles = getProvinciasByDepartamento(formDataUbicacion.departamento);
+  const distritosDisponibles = getDistritosByProvincia(formDataUbicacion.departamento, formDataUbicacion.provincia);
+
   return (
     <div className="self-start bg-gray-900 border border-gray-700 rounded-lg p-6">
       <div className="flex items-center gap-3 mb-6">
@@ -46,42 +54,27 @@ export default function FormRegistrarInfoEstablecimiento({setShowForm}: FormRegi
         {/* Departamento */}
         <InputSelectTest
           label="Departamento"
-          options={[
-            { value: "MADRE DE DIOS", label: "MADRE DE DIOS" },
-            { value: "Lima", label: "Lima" },
-            { value: "Cusco", label: "Cusco" },
-            { value: "Arequipa", label: "Arequipa" },
-          ]}
+          options={departamentos}
           placeholder="Selecciona un departamento"
           onSelect={
-            (value) => setFormDataUbicacion({ ...formDataUbicacion, departamento: value as string })
+            (value) => setFormDataUbicacion({ ...formDataUbicacion, departamento: value as string, provincia: "", distrito: "" })
           }
         />
 
         {/* Provincia */}
         <InputSelectTest
           label="Provincia"
-          options={[
-            { value: "Tambopata", label: "Tambopata" },
-            { value: "Manu", label: "Manu" },
-            { value: "Tahuamanu", label: "Tahuamanu" },
-            { value: "Las Piedras", label: "Las Piedras" },
-          ]}
+          options={provinciasDisponibles}
           placeholder="Selecciona una provincia"
           onSelect={
-            (value) => setFormDataUbicacion({ ...formDataUbicacion, provincia: value as string })
+            (value) => setFormDataUbicacion({ ...formDataUbicacion, provincia: value as string, distrito: "" })
           }
         />
 
         {/* Distrito */}
         <InputSelectTest
           label="Distrito"
-          options={[
-            { value: "Las Piedras", label: "Las Piedras" },
-            { value: "Inambari", label: "Inambari" },
-            { value: "Laberinto", label: "Labertino" },
-            { value: "Puerto Maldonado", label: "Puerto Maldonado" }
-          ]}
+          options={distritosDisponibles}
           placeholder="Selecciona un distrito"
           onSelect={
             (value) => setFormDataUbicacion({ ...formDataUbicacion, distrito: value as string })

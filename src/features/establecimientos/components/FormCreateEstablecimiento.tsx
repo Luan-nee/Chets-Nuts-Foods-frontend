@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { ArrowLeft, Building2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
+import InputSelect from "../../../components/ui/InputSelect";
+import {
+	departamentos,
+	getDistritosByProvincia,
+	getProvinciasByDepartamento,
+} from "../../../config/infoUbicacion";
 import { useCreateEstablecimiento } from "../hooks/useCreateEstablecimiento";
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
 
@@ -35,22 +42,16 @@ export default function FormCreateEstablecimiento({
 		codigoSunat: "affe",
 	});
 
+	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento);
+	const distritosDisponibles = getDistritosByProvincia(formData.departamento, formData.provincia);
+
 	return (
 		<ContentPage>
-			<div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-				<button
-					onClick={() => setShowFormCreateEstablecimiento(false)}
-					className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-				>
-					<ArrowLeft className="w-6 h-6" />
-				</button>
-				<div className="min-w-0">
-					<h1 className="text-3xl font-bold mb-1">Registrar nuevo establecimiento</h1>
-					<p className="text-gray-400">
-						Completa la información principal, ubicación y datos técnicos para crear el establecimiento.
-					</p>
-				</div>
-			</div>
+			<HeaderFormPage 
+				title="Registrar nuevo establecimiento"
+				description="Completa la información principal, ubicación y datos técnicos para crear el establecimiento."
+				setShowForm={() => setShowFormCreateEstablecimiento(false)}
+			/>
 
 			<div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mx-8 my-6 shadow-lg">
 				<div className="flex items-center gap-3 mb-6">
@@ -73,42 +74,55 @@ export default function FormCreateEstablecimiento({
 						/>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+						<InputSelect
 							label="Departamento"
-							value={formData.departamento}
-							htmlForm="departamento"
-							onChange={(value) => setFormData((prev) => ({ ...prev, departamento: value.toUpperCase() }))}
+							options={departamentos}
+							placeholder="Selecciona un departamento"
+							valueSelected={formData.departamento}
+							onSelect={(value) =>
+								setFormData((prev) => ({
+									...prev,
+									departamento: value as string,
+									provincia: "",
+									distrito: "",
+								}))
+							}
 						/>
+						<InputSelect
+							label="Provincia"
+							options={provinciasDisponibles}
+							placeholder="Selecciona una provincia"
+							valueSelected={formData.provincia}
+							onSelect={(value) =>
+								setFormData((prev) => ({
+									...prev,
+									provincia: value as string,
+									distrito: "",
+								}))
+							}
+						/>
+						<InputSelect
+							label="Distrito"
+							options={distritosDisponibles}
+							placeholder="Selecciona un distrito"
+							valueSelected={formData.distrito}
+							onSelect={(value) => setFormData((prev) => ({ ...prev, distrito: value as string }))}
+						/>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<InputText
 							label="Dirección"
 							value={formData.direccion}
 							htmlForm="direccion"
 							onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
 						/>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
-							label="Distrito"
-							value={formData.distrito}
-							htmlForm="distrito"
-							onChange={(value) => setFormData((prev) => ({ ...prev, distrito: value.toUpperCase() }))}
-						/>
 						<InputText
 							label="Referencias"
 							value={formData.descripcion}
 							htmlForm="descripcion"
 							onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
-						/>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
-							label="Provincia"
-							value={formData.provincia}
-							htmlForm="provincia"
-							onChange={(value) => setFormData((prev) => ({ ...prev, provincia: value.toUpperCase() }))}
 						/>
 					</div>
 				</div>

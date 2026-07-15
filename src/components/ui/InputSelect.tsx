@@ -21,6 +21,12 @@ export default function InputSelect({ options, placeholder, onSelect, valueSelec
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setOptionSelected(
+      (valueSelected != null) ? options.find(option => option.value === valueSelected) || null : null
+    );
+  }, [options, valueSelected]);
+
   // Cerrar el dropdown si se hace clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
