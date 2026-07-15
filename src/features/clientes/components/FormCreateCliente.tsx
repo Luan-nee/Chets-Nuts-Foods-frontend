@@ -73,7 +73,7 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
       <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
         <div className="space-y-6">
           {/* Row 1: DNI y RUC */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-3 gap-6">
             <InputText
               label="DNI"
               value={formData.dni}
@@ -86,16 +86,6 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
               htmlForm="ruc"
               onChange={(value) => setFormData(prev => ({ ...prev, ruc: value }))}
             />
-          </div>
-
-          {/* Row 2: Nombres y Correo */}
-          <div className="grid grid-cols-2 gap-6">
-            <InputText
-              label="Nombres"
-              value={formData.nombre}
-              htmlForm="nombres"
-              onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
-            />
             <InputText
               label="Correo electrónico"
               value={formData.correo ?? ''}
@@ -104,8 +94,14 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
             />
           </div>
 
-          {/* Row 3: Apellidos Paterno y Apellido Materno */}
-          <div className="grid grid-cols-2 gap-6">
+          {/* Row 3: Nombres, Apellidos Paterno y Apellido Materno */}
+          <div className="grid grid-cols-3 gap-6">
+            <InputText
+              label="Nombres"
+              value={formData.nombre}
+              htmlForm="nombres"
+              onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
+            />
             <InputText
               label="Apellido paterno"
               value={formData.apellidopaterno}
@@ -121,7 +117,7 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
           </div>
 
           {/* Row 4: Sexo y Edad */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-3 gap-6">
             <InputSelect
               label="Género"
               options={[
@@ -138,10 +134,6 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
               onChange={(value) => setFormData(prev => ({ ...prev, edad: value}))}
               placeholder="Ingrese la edad del cliente"
             />
-          </div>
-
-          {/* Row 5: Numero telefónico y correo */}
-          <div className="grid grid-cols-2 gap-6">
             <InputNumber
               defaultValue={parseInt(formData.numero ?? '000000000')}
               label="Número telefónico"
