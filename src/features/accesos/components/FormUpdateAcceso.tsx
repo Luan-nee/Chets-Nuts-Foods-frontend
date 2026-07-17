@@ -8,6 +8,7 @@ import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import InputSelect from "../../../components/ui/InputSelect";
 import Switch from "../../../components/ui/Switch";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
+import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import type { 
   UserRole as empleadoRol 
 } from "../../../types/constantes.type";
@@ -84,23 +85,11 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
 
   return (
     <ContentPage>
-      {/* Header */}
-      <div className="flex gap-4 border bg-gray-900 border-gray-700 rounded-lg px-6 py-4 mb-8">
-        <button
-          onClick={() => setShowFormUpdateEmpleado(false)}
-          className="p-2 bg-blue-700 hover:bg-blue-500 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div>
-          <h1 className="text-3xl font-bold mb-1">
-            Actualizar las credenciales de acceso del empleado
-          </h1>
-          <p className="text-gray-400">
-            Ingresa nuevos datos del empleado para actualizar sus credenciales de acceso. Asegúrate de proporcionar información precisa y completa.
-          </p>
-        </div>
-      </div>
+      <HeaderFormPage 
+        title="Actualizar las credenciales de acceso del empleado"
+        description="Ingresa nuevos datos del empleado para actualizar sus credenciales de acceso. Asegúrate de proporcionar información precisa y completa."
+        setShowForm={() => setShowFormUpdateEmpleado(false)}
+      />
 
       <ContentSectionProcess
         isLoading={cargandoAcceso}

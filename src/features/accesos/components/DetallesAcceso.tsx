@@ -14,6 +14,34 @@ export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso
   // usa el hook personalizado para obtener los detalles de la guía de remisión
   const { acceso, isLoading, isError, execute: ObtenerDetallesAccesoPorID } = useFetchAcceso(idAcceso);
 
+  const formatReadableDate = (isoString: string): string => {
+  if (!isoString) return "";
+
+  try {
+    const date = new Date(isoString);
+
+    // Validar si la fecha es correcta
+    if (isNaN(date.getTime())) {
+      return "Fecha inválida";
+    }
+
+    // Configuración de formato en español
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long", // "julio"
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true, // Formato AM/PM
+    };
+
+    return new Intl.DateTimeFormat("es-PE", options).format(date);
+  } catch (error) {
+    console.error("Error al formatear la fecha:", error);
+    return "Error de formato";
+  }
+};
+
   return (
     <ContentSectionProcess
       isLoading={isLoading}
@@ -109,9 +137,6 @@ export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso
                 <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Correo Electrónico</p>
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-medium text-white">{(acceso!=null) ? acceso.correo : 'Sin correo'}</p>
-                  <svg className="w-4 h-4 text-[#1f6feb]" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
                 </div>
               </div>
             </div>
@@ -123,7 +148,7 @@ export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso
           <div className="grid grid-cols-3 gap-4">
             <div className="p-5">
               <p className="text-lg text-gray-500 mb-2 uppercase tracking-wide">Fecha de Registro</p>
-              <p className="text-lg font-bold text-white">{acceso?.fechaCreacion}</p>
+              <p className="text-lg font-bold text-white">{formatReadableDate(acceso?.fechaCreacion || '')}</p>
             </div>
           </div>
         </div>

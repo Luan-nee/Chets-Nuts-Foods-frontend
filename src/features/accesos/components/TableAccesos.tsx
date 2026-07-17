@@ -30,7 +30,6 @@ export default function TableAccesos({
   } = useFetchAccesos();
 
   const tableHeader: string[] = [
-    "ID",
     "Correo electrónico",
     "Estado",
     "Rol",
@@ -92,10 +91,6 @@ export default function TableAccesos({
             key={index}
             className="hover:bg-gray-800/50 transition-colors"
           >
-            {/* ID */}
-            <td className="px-6 py-4">
-              <span className="text-sm text-gray-400">{acceso.idacceso}</span>
-            </td>
 
             {/* Correo */}
             <td className="px-6 py-4">
