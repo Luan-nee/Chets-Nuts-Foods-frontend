@@ -1,6 +1,7 @@
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import { useFetchClientes } from "../hooks/useFetchClientes";
+import { Edit2 } from "lucide-react";
 
 interface TableClientesProps {
   setShowFormUpdate: (value: boolean) => void;
@@ -93,9 +94,9 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
                       setShowFormUpdate(true);
                       setDniCliente(cliente.dniuser);
                     }}
-                    className="p-2 bg-blue-600 text-white rounded"
+                    className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
                   >
-                    <p>Editar</p>
+                    <Edit2 className="w-4 h-4 text-gray-400" />
                   </button>
                 </div>
               </td>

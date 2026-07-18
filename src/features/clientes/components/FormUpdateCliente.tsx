@@ -52,12 +52,13 @@ export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: Fo
         apellidomaterno: cliente.apellidomaterno,
         apellidopaterno: cliente.apellidopaterno,
         ruc: cliente.rucuser ?? '',
-        numero: cliente.numero ?? '',
+        numero: cliente.numero,
         edad: cliente.edad,
-        dni: cliente.dniuser ?? '',
-        tipo: cliente.tipo ?? 'NATURAL',
+        dni: cliente.dniuser,
+        tipo: cliente.tipo,
       });
     }
+    console.log("Cliente obtenido en FormUpdateCliente: ", cliente);
   }, [cliente]);
 
 

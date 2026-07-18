@@ -48,7 +48,7 @@ export default class ClienteApi extends BaseRequestApi {
   ): Promise<BodyResponse<ResponseGetClienteByDNI>> {
     return this.POST<ResponseGetClienteByDNI>(
       `${url_base_endpoint}/api/usuarios/dni`,
-      { dni }
+      { dni: dni }
     );
   }
 }
