@@ -12,7 +12,7 @@ interface FetchState {
   isError: boolean;
   message: string;
   execute: (idVehiculo: number) => Promise<
-    BodyResponse<ResponseGetByID>
+    BodyResponse<ResponseGetByID[]>
   >;
 }
 
@@ -24,7 +24,7 @@ export const useFetchVehiculo = (idVehiculo: number): FetchState => {
   const [message, setMessage] = useState<string>("");
 
   const getVehiculo = async (idVehiculo: number): Promise<
-    BodyResponse<ResponseGetByID>
+    BodyResponse<ResponseGetByID[]>
   > => {
     try {
       setIsLoading(true);
@@ -36,7 +36,7 @@ export const useFetchVehiculo = (idVehiculo: number): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Datos del vehículo obtenidos exitosamente");
-        setVehiculo(response.data ?? null); // Aseguramos que vehículo sea un objeto, incluso si data es undefined
+        setVehiculo(response.data?.[0] || null); // Aseguramos que vehículo sea un objeto, incluso si data es undefined
         return response;
       } else {
         setIsError(true);

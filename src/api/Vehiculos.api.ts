@@ -51,10 +51,10 @@ export default class Vehiculos extends BaseRequestApi {
   }
 
   /* getByID */
-  public async getById(id: number): Promise<BodyResponse<ResponseGetByID>> {
-    return this.GET<ResponseGetByID>(
+  public async getById(id: number): Promise<BodyResponse<ResponseGetByID[]>> {
+    return this.GET<ResponseGetByID[]>(
       `${this.base_url_production}/${id}`,
-    ) as Promise<BodyResponse<ResponseGetByID>>;
+    ) as Promise<BodyResponse<ResponseGetByID[]>>;
   }
 
   /* getAllChoferes */

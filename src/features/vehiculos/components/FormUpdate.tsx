@@ -7,11 +7,19 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import InputSelectTest from "../../../components/ui/InputSelect.tsx";
+import InputSelect from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText.tsx";
 import InputNumber from "../../../components/ui/InputNumber.tsx";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage.tsx";
+import { useUpdateVehiculo } from "../hooks/useUpdateVehiculo";
 import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
+
+/*
+  TAREA PENDIENTE:
+  La capacidad de carga del vehículo no se muestra
+  en la interfaz y hasta el momento no se encontró
+  una solución a este problema. Se requiere investigar y corregir
+*/
 
 interface FormUpdateProps {
   showFormUpdate: (p: boolean) => void;
@@ -19,9 +27,21 @@ interface FormUpdateProps {
 }
 
 export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdateProps) {
-  const { vehiculo: dataVehiculo, isLoading: isLoadingVehiculo, isError: isErrorVehiculo, execute: fetchVehiculo } = useFetchVehiculo(idVehiculo);
+  const { 
+    vehiculo: dataVehiculo, 
+    isLoading: isLoadingVehiculo, 
+    isError: isErrorVehiculo, 
+    execute: fetchVehiculo 
+  } = useFetchVehiculo(idVehiculo);
+
+  const {
+    isLoading: isLoadingVehiculoUpdate,
+    isError: isErrorVehiculoUpdate,
+    execute: updateVehiculo
+  } = useUpdateVehiculo();
+
   const [ formData, setFormData ] = useState<UpdateVehiculo>({
-    idVehiculo: idVehiculo,
+    idVehiculo: 0,
     anio: "",
     capacidadCarga: 0,
     marca: "",
@@ -29,23 +49,23 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
   });
 
   useEffect(() => {
-    if (!dataVehiculo) return;
-    setFormData({
-      idVehiculo: idVehiculo,
-      anio: dataVehiculo.anio || "",
-      capacidadCarga: Number(dataVehiculo.capacidadCarga) / 10 || 0,
-      marca: dataVehiculo.marca || "",
-      modelo: dataVehiculo.modelo || "",
-    });
-  }, [dataVehiculo]);
-
+    if (dataVehiculo){
+      setFormData({
+        idVehiculo: dataVehiculo.idvehempresa || 0,
+        anio: dataVehiculo.anio || "",
+        capacidadCarga: parseFloat(dataVehiculo.capacidadCarga) || 0,
+        marca: dataVehiculo.marca || "",
+        modelo: dataVehiculo.modelo || "",
+      });
+    }
+  }, [dataVehiculo, idVehiculo]);
 
   return (
     <ContentPage>
       {/* Header */}
       <HeaderFormPage 
-        description="Completa la información y guarda los cambios."
         title="Actualiza información del vehículo"
+        description="Completa la información y guarda los cambios."
         setShowForm={() => showFormUpdate(false)}
       />
 
@@ -65,7 +85,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <InputSelectTest
+              <InputSelect
                 label="Marca"
                 options={marcasVehiculos}
                 placeholder="Selecciona una marca"
@@ -76,10 +96,10 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   }))
                 }
                 valueSelected={
-                  dataVehiculo?.marca
+                  formData.marca
                 }
               />
-              <InputSelectTest
+              <InputSelect
                 label="Modelo"
                 options={modelosVehiculos}
                 placeholder="Selecciona un modelo"
@@ -88,7 +108,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   modelo: value as modelo 
                 }))}
                 valueSelected={
-                  dataVehiculo?.modelo
+                  formData.modelo
                 }
               />
             </div>
@@ -98,7 +118,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                 label="Capacidad máxima de carga (toneladas)"
                 placeholder="0.00"
                 simbol="TN"
-                defaultValue={dataVehiculo ? Number(dataVehiculo.capacidadCarga) : 0}
+                defaultValue={formData.capacidadCarga || 0}
                 onChange={(value) => {
                   setFormData((prev) => ({
                     ...prev,
@@ -108,7 +128,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
               />
               <InputText 
                 label="Año de fabricación"
-                value={dataVehiculo ? dataVehiculo.anio?.toString() : ""}
+                value={formData.anio || ""}
                 htmlForm={"anioFabricacion"}
                 onChange={(value) => {
                   setFormData((prev) => ({
@@ -127,16 +147,14 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                 handleCancel={() => showFormUpdate(false)}
                 isLoading={isLoadingVehiculo}
                 textButton="Cancelar"
+                color="red"
               />
               <ButtonSubmitForm
                 handleSubmit={async () => {
-                  // FALTA IMPLEMENTAR LA LLAMA 
-                  // EL ENDPOINT PARA ACTUALIZAR LA INFORMACIÓN 
-                  // DEL VEHÍCULO
-                  console.log("Datos a enviar:", formData);
+                  updateVehiculo(formData);
                 }}
-                isLoading={isLoadingVehiculo}
-                isError={isErrorVehiculo}
+                isLoading={isLoadingVehiculoUpdate}
+                isError={isErrorVehiculoUpdate}
                 textButton="Guardar"
                 textError="Error al actualizar el vehiculo"
               />

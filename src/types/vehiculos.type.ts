@@ -66,11 +66,11 @@ export type ResponseCreate = {
 };
 
 export type UpdateVehiculo = {
-  idVehiculo: number; //
-  anio: string; //
-  capacidadCarga: number; // kilogramos
-  marca: string; //
-  modelo: string; //
+  idVehiculo: number;
+  anio: string;
+  capacidadCarga: number;
+  marca: string;
+  modelo: string;
 };
 
 export type ResponseUpdate = {
