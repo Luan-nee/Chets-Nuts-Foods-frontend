@@ -14,43 +14,6 @@ export default function Seguimiento() {
     execute: realizarSeguimientoSalidaTransporte
   } = useFetchSeguimientoSalidaTransporte();
 
-  const trackingData = {
-    guideNumber: 'GR-2023-08942',
-    productos: 20,
-    peso_total: 2450,
-    unidad_peso: 'TN',
-    punto_de_partida: 'Puerto Maldonado',
-    punto_de_llegada: 'Cusco',
-    listo_para_recoger: true,
-    historial: [
-      {
-        evento: "SUNAT: Control tributario y legalidad. (Guías, Factura/Boleta)",
-        fecha: "14 Oct, 2023",
-        hora: "10:20 AM"
-      },
-      {
-        evento: "SUTRAN: Peso y estado técnico. (MTC, Brevete, SOAT, CITV)",
-        fecha: "15 Oct, 2023",
-        hora: "15:45 PM"
-      },
-      {
-        evento: "SENASA: Sanidad agraria y plagas. (Certificado Fito/Zoosanitario)",
-        fecha: "16 Oct, 2023",
-        hora: "09:15 AM"
-      },
-      {
-        evento: "DIGESA/SANIPES: Inocuidad y cadena de frío. (Registro Sanitario, Guía Pesquera)",
-        fecha: "25 oct 2024",
-        hora: "03:00"
-      },
-      {
-        evento: "PNP: Seguridad vial e identidad. (DNI, Documentos del vehículo)",
-        fecha: "25 oct 2024",
-        hora: "17:00"
-      }
-    ]
-  };
-
   const currentEventIndex = 0;
 
   return (
@@ -105,53 +68,58 @@ export default function Seguimiento() {
 
               {/* Events */}
               <div className="space-y-0">
-                {infoSeguimiento.map((event, index) => {
-                  const isCurrent = index === currentEventIndex;
-                  
-                  return (
-                    <div key={index} className="relative">
-                      {/* Event Item */}
-                      <div className={`flex gap-6 pb-8`}>
-                        {/* Icon */}
-                        <div className="relative flex-shrink-0">
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all bg-[#1f6feb] border-[#1f6feb]`}>
-                            <CheckCircle className="w-6 h-6 text-white" />
+                { infoSeguimiento.length === 0 && !isLoadingInfoSeguimiento ? (
+                  <div className="text-center text-gray-400 py-8">
+                    Aún no hay información de seguimiento disponible para la guía seleccionada.
+                  </div>
+                ) : (
+                  infoSeguimiento.map((event, index) => {
+                    const isCurrent = index === currentEventIndex;
+                    return (
+                      <div key={index} className="relative">
+                        {/* Event Item */}
+                        <div className={`flex gap-6 pb-8`}>
+                          {/* Icon */}
+                          <div className="relative flex-shrink-0">
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all bg-[#1f6feb] border-[#1f6feb]`}>
+                              <CheckCircle className="w-6 h-6 text-white" />
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Content */}
-                        <div className={`flex-1 ${
-                          isCurrent 
-                            ? 'bg-[#1f6feb]/10 border border-[#1f6feb]/30 rounded-lg p-5' 
-                            : 'pt-2'
-                        }`}>
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <h4 className={`font-bold mb-1 ${isCurrent ? 'text-[#1f6feb]' : 'text-white'}`}>
-                                <span className="flex items-center gap-2">
-                                  {isCurrent && (
-                                    <span className="px-2 py-1 bg-[#1f6feb] text-white text-xs font-bold rounded uppercase">
-                                      Actual
-                                    </span>
-                                  )}
-                                  {event.titulo}
-                                </span>
-                                <span className="block text-sm text-gray-400">
-                                  {event.comentario}
-                                </span>
-                              </h4>
-                              <div className="flex items-center gap-4 text-sm text-gray-400">
-                                <div className="flex items-center gap-1">
-                                  <Calendar className="w-4 h-4" />
+                          {/* Content */}
+                          <div className={`flex-1 ${
+                            isCurrent 
+                              ? 'bg-[#1f6feb]/10 border border-[#1f6feb]/30 rounded-lg p-5' 
+                              : 'pt-2'
+                          }`}>
+                            <div className="flex items-start justify-between">
+                              <div>
+                                <h4 className={`font-bold mb-1 ${isCurrent ? 'text-[#1f6feb]' : 'text-white'}`}>
+                                  <span className="flex items-center gap-2">
+                                    {isCurrent && (
+                                      <span className="px-2 py-1 bg-[#1f6feb] text-white text-xs font-bold rounded uppercase">
+                                        Actual
+                                      </span>
+                                    )}
+                                    {event.titulo}
+                                  </span>
+                                  <span className="block text-sm text-gray-400">
+                                    {event.comentario}
+                                  </span>
+                                </h4>
+                                <div className="flex items-center gap-4 text-sm text-gray-400">
+                                  <div className="flex items-center gap-1">
+                                    <Calendar className="w-4 h-4" />
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
