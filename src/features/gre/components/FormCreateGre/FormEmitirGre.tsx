@@ -8,7 +8,7 @@ import { useEmitirGre } from "../../hooks/useEmitirGre";
 import { useGreContext } from "../../../../context/GreContext";
 import type { EmitirGre } from "../../../../types/gre.type";
 
-const modalidadTransporte = [{ label: "01", value: "01" }];
+const modalidadTransporte = [{ label: "Transporte público", value: "01" }];
 
 const initialEmitirGre: EmitirGre = {
 	motivoTraslado: "01",

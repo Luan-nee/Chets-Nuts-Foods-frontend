@@ -51,7 +51,7 @@ export default function Seguimiento() {
     ]
   };
 
-  const currentEventIndex = infoSeguimiento.length - 1;
+  const currentEventIndex = 0;
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -106,26 +106,16 @@ export default function Seguimiento() {
               {/* Events */}
               <div className="space-y-0">
                 {infoSeguimiento.map((event, index) => {
-                  const isCompleted = index <= currentEventIndex;
                   const isCurrent = index === currentEventIndex;
-                  const isFuture = index > currentEventIndex;
-
+                  
                   return (
                     <div key={index} className="relative">
                       {/* Event Item */}
-                      <div className={`flex gap-6 pb-8 ${isFuture ? 'opacity-40' : ''}`}>
+                      <div className={`flex gap-6 pb-8`}>
                         {/* Icon */}
                         <div className="relative flex-shrink-0">
-                          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all ${
-                            isCompleted
-                              ? 'bg-[#1f6feb] border-[#1f6feb]'
-                              : 'bg-[#0d1117] border-[#30363d]'
-                          }`}>
-                            {isCompleted ? (
-                              <CheckCircle className="w-6 h-6 text-white" />
-                            ) : (
-                              <div className="w-3 h-3 rounded-full bg-[#30363d]"></div>
-                            )}
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all bg-[#1f6feb] border-[#1f6feb]`}>
+                            <CheckCircle className="w-6 h-6 text-white" />
                           </div>
                         </div>
 
@@ -138,24 +128,23 @@ export default function Seguimiento() {
                           <div className="flex items-start justify-between">
                             <div>
                               <h4 className={`font-bold mb-1 ${isCurrent ? 'text-[#1f6feb]' : 'text-white'}`}>
-                                {event.titulo} {event.comentario}
-                                {isCurrent && (
-                                  <span className="ml-3 px-2 py-1 bg-[#1f6feb] text-white text-xs font-bold rounded uppercase">
-                                    Actual
-                                  </span>
-                                )}
+                                <span className="flex items-center gap-2">
+                                  {isCurrent && (
+                                    <span className="px-2 py-1 bg-[#1f6feb] text-white text-xs font-bold rounded uppercase">
+                                      Actual
+                                    </span>
+                                  )}
+                                  {event.titulo}
+                                </span>
+                                <span className="block text-sm text-gray-400">
+                                  {event.comentario}
+                                </span>
                               </h4>
                               <div className="flex items-center gap-4 text-sm text-gray-400">
                                 <div className="flex items-center gap-1">
                                   <Calendar className="w-4 h-4" />
                                 </div>
                               </div>
-                              {isCurrent && (
-                                <div className="flex items-center gap-1 mt-2 text-sm">
-                                  <MapPin className="w-4 h-4 text-[#1f6feb]" />
-                                  <span className="text-white">Centro de Distribución Norte, Chiclayo</span>
-                                </div>
-                              )}
                             </div>
                           </div>
                         </div>
