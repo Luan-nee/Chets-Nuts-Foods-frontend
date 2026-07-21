@@ -5,7 +5,6 @@ import ContentSectionProcess from '../components/layouts/ContentSectionProcess';
 import { useFetchSeguimientoSalidaTransporte } from '../features/seguimiento/hooks/useSeguimientoSalidaTransporte';
 
 export default function Seguimiento() {
-  const [guideNumber, setGuideNumber] = useState('GR-2023-08942');
   const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<number | null>(null);
   const {
     infoSeguimiento, 
@@ -40,7 +39,6 @@ export default function Seguimiento() {
 
         <button
           onClick={() => {
-            console.log('Buscar guía:', guideNumber);
             realizarSeguimientoSalidaTransporte(selectedSalidaTransporte as number)
           }}
           className="px-8 py-4 my-4 bg-[#1f6feb] hover:bg-[#1a5cd9] rounded-lg transition-colors font-bold flex justify-center gap-2"
