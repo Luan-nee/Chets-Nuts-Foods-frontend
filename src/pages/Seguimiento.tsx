@@ -1,16 +1,18 @@
-import { useState } from 'react';
-import { MapPin, Calendar, CheckCircle } from 'lucide-react';
-import TableSelectSalidaTransporte from '../features/transporte/components/TableSelectSalidaTransporte';
-import ContentSectionProcess from '../components/layouts/ContentSectionProcess';
-import { useFetchSeguimientoSalidaTransporte } from '../features/seguimiento/hooks/useSeguimientoSalidaTransporte';
+import { useState } from "react";
+import { MapPin, Calendar, CheckCircle } from "lucide-react";
+import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
+import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
+import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useSeguimientoSalidaTransporte";
 
 export default function Seguimiento() {
-  const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<number | null>(null);
+  const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<
+    number | null
+  >(null);
   const {
-    infoSeguimiento, 
-    isLoading: isLoadingInfoSeguimiento, 
+    infoSeguimiento,
+    isLoading: isLoadingInfoSeguimiento,
     isError: isErrorInfoSeguimiento,
-    execute: realizarSeguimientoSalidaTransporte
+    execute: realizarSeguimientoSalidaTransporte,
   } = useFetchSeguimientoSalidaTransporte();
 
   const currentEventIndex = 0;
@@ -24,51 +26,59 @@ export default function Seguimiento() {
             Consulta de seguimiento
           </h2>
           <p className="text-sm text-gray-400 text-center">
-            Rastrea tu mercancía en tiempo real con el número de Guía de Remisión.
+            Rastrea tu mercancía en tiempo real con el número de Guía de
+            Remisión.
           </p>
         </div>
       </div>
 
       <div className="flex flex-col p-6">
-        <TableSelectSalidaTransporte 
+        <TableSelectSalidaTransporte
           onChange={(selectedId) => {
-            console.log('Selected Salida Transporte ID:', selectedId)
+            console.log("Selected Salida Transporte ID:", selectedId);
           }}
           selectIdSalidaTransporte={setSelectedSalidaTransporte}
         />
 
         <button
           onClick={() => {
-            realizarSeguimientoSalidaTransporte(selectedSalidaTransporte as number)
+            realizarSeguimientoSalidaTransporte(
+              selectedSalidaTransporte as number,
+            );
           }}
           className="px-8 py-4 my-4 bg-[#1f6feb] hover:bg-[#1a5cd9] rounded-lg transition-colors font-bold flex justify-center gap-2"
         >
           Consultar
         </button>
-        <ContentSectionProcess 
-          fetchData={() => realizarSeguimientoSalidaTransporte(selectedSalidaTransporte as number)}
+        <ContentSectionProcess
+          fetchData={() =>
+            realizarSeguimientoSalidaTransporte(
+              selectedSalidaTransporte as number,
+            )
+          }
           isError={isErrorInfoSeguimiento}
           isLoading={isLoadingInfoSeguimiento}
-          textButtonError='Reintentar'
-          textError='No se pudo obtener la información de seguimiento. Por favor, inténtalo de nuevo.'
+          textButtonError="Reintentar"
+          textError="No se pudo obtener la información de seguimiento. Por favor, inténtalo de nuevo."
         >
           {/* Timeline */}
           <div className="mb-6">
             <div className="relative">
               {/* Vertical Line */}
               <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-[#30363d]"></div>
-              
+
               {/* Active Progress Line */}
-              <div 
+              <div
                 className="absolute left-6 top-0 w-0.5 bg-[#1f6feb] transition-all duration-500"
                 style={{ height: `${100}%` }}
               ></div>
 
               {/* Events */}
               <div className="space-y-0">
-                { infoSeguimiento.length === 0 && !isLoadingInfoSeguimiento ? (
+                {infoSeguimiento.length === 0 && !isLoadingInfoSeguimiento ? (
                   <div className="text-center text-gray-400 py-8">
-                    Aún no hay información de seguimiento disponible para la guía seleccionada.
+                    Aún no hay información de seguimiento disponible para la
+                    guía seleccionada.
                   </div>
                 ) : (
                   infoSeguimiento.map((event, index) => {
@@ -79,20 +89,26 @@ export default function Seguimiento() {
                         <div className={`flex gap-6 pb-8`}>
                           {/* Icon */}
                           <div className="relative flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all bg-[#1f6feb] border-[#1f6feb]`}>
+                            <div
+                              className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all bg-[#1f6feb] border-[#1f6feb]`}
+                            >
                               <CheckCircle className="w-6 h-6 text-white" />
                             </div>
                           </div>
 
                           {/* Content */}
-                          <div className={`flex-1 ${
-                            isCurrent 
-                              ? 'bg-[#1f6feb]/10 border border-[#1f6feb]/30 rounded-lg p-5' 
-                              : 'pt-2'
-                          }`}>
+                          <div
+                            className={`flex-1 ${
+                              isCurrent
+                                ? "bg-[#1f6feb]/10 border border-[#1f6feb]/30 rounded-lg p-5"
+                                : "pt-2"
+                            }`}
+                          >
                             <div className="flex items-start justify-between">
                               <div>
-                                <h4 className={`font-bold mb-1 ${isCurrent ? 'text-[#1f6feb]' : 'text-white'}`}>
+                                <h4
+                                  className={`font-bold mb-1 ${isCurrent ? "text-[#1f6feb]" : "text-white"}`}
+                                >
                                   <span className="flex items-center gap-2">
                                     {isCurrent && (
                                       <span className="px-2 py-1 bg-[#1f6feb] text-white text-xs font-bold rounded uppercase">
@@ -135,15 +151,32 @@ export default function Seguimiento() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-[#1f6feb] mx-auto mb-3" />
-                <p className="text-lg font-bold">Panamericana Norte KM 780, Lambayeque</p>
-                <p className="text-sm text-gray-500 mt-1">Última actualización: hace 15 minutos</p>
+                <p className="text-lg font-bold">
+                  Panamericana Norte KM 780, Lambayeque
+                </p>
+                <p className="text-sm text-gray-500 mt-1">
+                  Última actualización: hace 15 minutos
+                </p>
               </div>
             </div>
             {/* Simple map grid pattern */}
-            <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              className="absolute inset-0 w-full h-full opacity-5"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1"/>
+                <pattern
+                  id="grid"
+                  width="40"
+                  height="40"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    d="M 40 0 L 0 0 0 40"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                  />
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#grid)" />

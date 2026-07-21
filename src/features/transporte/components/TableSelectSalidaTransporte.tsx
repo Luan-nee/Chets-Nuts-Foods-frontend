@@ -1,24 +1,22 @@
-import { useState } from 'react';
-import { CalendarDays, Hash, Plus } from 'lucide-react';
-import Table from '../../../components/ui/Table';
-import ButtonsPagination from '../../../components/ui/ButtonsPagination';
-import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
-import { useFetchSalidaTransportes } from '../hooks/useFechSalidasTransporte';
+import { useState } from "react";
+import { CalendarDays, Hash, Plus } from "lucide-react";
+import Table from "../../../components/ui/Table";
+import ButtonsPagination from "../../../components/ui/ButtonsPagination";
+import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
+import { useFetchSalidaTransportes } from "../hooks/useFechSalidasTransporte";
 
 interface TableSelectSalidaTransporteProps {
-  selectIdSalidaTransporte: (idSalidaTransporte: number | null) => void,
-  onChange: (idSalidaTransporte: number | null) => void
+  selectIdSalidaTransporte: (idSalidaTransporte: number | null) => void;
+  onChange: (idSalidaTransporte: number | null) => void;
 }
 
-export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, onChange }: TableSelectSalidaTransporteProps) {
+export default function TableSelectSalidaTransporte({
+  selectIdSalidaTransporte,
+  onChange,
+}: TableSelectSalidaTransporteProps) {
   const [idSelected, setIdSelected] = useState<number | null>(null);
-  const tableHeader = [
-    "ID Salida", 
-    "Estado", 
-    "Fecha de salida", 
-    ""
-  ];
-  const { 
+  const tableHeader = ["ID Salida", "Estado", "Fecha de salida", ""];
+  const {
     salidaTransportes,
     isLoading: isLoadingSalidaTransportes,
     isError: isErrorSalidaTransportes,
@@ -34,9 +32,9 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
       return fechaSalida;
     }
 
-    return new Intl.DateTimeFormat('es-PE', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
+    return new Intl.DateTimeFormat("es-PE", {
+      dateStyle: "medium",
+      timeStyle: "short",
     }).format(fecha);
   };
 
@@ -68,12 +66,12 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
             Recargar
           </button>
         </div>
-        <ButtonsPagination 
-          total_paginas={infoPaginacion.total_paginas} 
-          pivote={infoPaginacion.pagina_actual} 
-          fetchData={setPagina} 
-          datos_por_pagina={infoPaginacion.datos_por_pagina} 
-          total_data={infoPaginacion.total_data} 
+        <ButtonsPagination
+          total_paginas={infoPaginacion.total_paginas}
+          pivote={infoPaginacion.pagina_actual}
+          fetchData={setPagina}
+          datos_por_pagina={infoPaginacion.datos_por_pagina}
+          total_data={infoPaginacion.total_data}
         />
         <Table
           tableHeader={tableHeader}
@@ -121,11 +119,14 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
               {/* Actions */}
               <td className="px-6 py-4">
                 <div className="flex items-center justify-end gap-2">
-                  { idSelected === salidaTransporte.idsalidatransporte ? (
-                    <button onClick={() => {
-                      setIdSelected(null);
-                      selectIdSalidaTransporte(null);
-                    }} className="hover:text-red-400">
+                  {idSelected === salidaTransporte.idsalidatransporte ? (
+                    <button
+                      onClick={() => {
+                        setIdSelected(null);
+                        selectIdSalidaTransporte(null);
+                      }}
+                      className="hover:text-red-400"
+                    >
                       <span className="text-red-500 flex flex-row gap-2">
                         <span>Eliminar</span>
                       </span>
@@ -133,7 +134,9 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
                   ) : (
                     <button
                       onClick={() => {
-                        selectIdSalidaTransporte(salidaTransporte.idsalidatransporte);
+                        selectIdSalidaTransporte(
+                          salidaTransporte.idsalidatransporte,
+                        );
                         setIdSelected(salidaTransporte.idsalidatransporte);
                         onChange(salidaTransporte.idsalidatransporte);
                       }}
