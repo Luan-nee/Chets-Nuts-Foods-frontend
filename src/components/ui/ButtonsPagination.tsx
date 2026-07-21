@@ -34,12 +34,13 @@ export default function ButtonsPagination ({ total_paginas, pivote, fetchData, d
   */}
 
   return (
-    <div className="flex items-center justify-between mb-2">
-      <p className="text-sm text-gray-400">
+    <div className="flex items-center justify-between px-4">
+      <p className="text-sm text-gray-400 bg-gray-900 px-4 py-2 rounded-t-lg">
         Mostrando <span className="font-medium text-gray-300">{1}</span> a <span className="font-medium text-gray-300">{datos_por_pagina}</span> de <span className="font-medium text-gray-300">{total_data}</span> resultados
       </p>
-      <div className="flex items-center gap-2">
-        <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+
+      <div className="flex items-center gap-2 bg-gray-900 px-4 py-1 rounded-t-lg">
+        <button className="p-1 hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => clickArrows(pivote, total_paginas, 'left')}
           >
           <ChevronLeft className="w-5 h-5 text-gray-400" />
@@ -48,7 +49,7 @@ export default function ButtonsPagination ({ total_paginas, pivote, fetchData, d
         {Array.from({ length: total_paginas }, (_, i) => i + 1).map((pagina) => (
           <button
             key={pagina}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
+            className={`px-3 py-1 rounded-lg text-sm font-medium ${
               pagina === pivote ? "bg-blue-600 text-white" : "hover:bg-gray-800 text-gray-400 transition-colors"
             }`}
             onClick={() => clickPage(pagina)}
@@ -57,7 +58,7 @@ export default function ButtonsPagination ({ total_paginas, pivote, fetchData, d
           </button>
         ))}
 
-        <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+        <button className="p-1 hover:bg-gray-800 rounded-lg transition-colors"
           onClick={() => clickArrows(pivote, total_paginas, 'right')}
         >
           <ChevronRight className="w-5 h-5 text-gray-400" />

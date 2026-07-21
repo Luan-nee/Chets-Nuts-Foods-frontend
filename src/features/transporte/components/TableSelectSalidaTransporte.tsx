@@ -49,8 +49,16 @@ export default function TableSelectSalidaTransporte({ selectIdSalidaTransporte, 
       fetchData={() => obtenerSalidaTransportes(1)}
     >
       <div className="flex-1 overflow-auto px-8 py-6">
-        <div className="p-4 flex justify-between items-center">
-          <h2 className="text-lg font-medium text-white">
+        <div className="flex justify-between items-center mb-6">
+          <h2
+            className="inline-flex px-8 py-2 rounded-r-xl
+              backdrop-blur-sm
+              font-semibold
+              text-xl
+              text-blue-100
+              bg-gray-900
+            "
+          >
             Selecciona una salida de transporte
           </h2>
           <button
