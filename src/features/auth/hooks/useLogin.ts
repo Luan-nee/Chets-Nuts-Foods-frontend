@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Auth from "../../../api/Auth.api";
 import { useAuth } from "../../../context/AuthContext";
-import type { AuthResponse, Credenciales } from "../../../types/auth.type";
-import type { BodyResponse } from "../../../types/bodyResponse.type";
+import swalAlert from "../../../components/messages/swalAlert";
+import type { Credenciales } from "../../../types/auth.type";
+import { useNavigate } from "react-router-dom";
 
 interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (credenciales: Credenciales) => Promise<BodyResponse<AuthResponse>>
+  execute: (credenciales: Credenciales) => Promise<void>;
 }
 
 export const useLogin = (): FetchState => {
@@ -17,38 +18,53 @@ export const useLogin = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const { guardarInformacionLogin } = useAuth();
+  const navigate = useNavigate();
 
-  const login = async (body: Credenciales,): Promise<BodyResponse<AuthResponse>> => {
+  const login = async (
+    body: Credenciales,
+  ): Promise<void> => {
     try {
-        setIsLoading(true);
-        setIsError(false);
+      setIsLoading(true);
+      setIsError(false);
 
-        const response = await auth_api.login(body);
+      const response = await auth_api.login(body);
 
-        if (response.status === 'success') {
-          setMessage('Login exitoso');
-          guardarInformacionLogin({
-            user: response.data?.nombreUser || null,
-            token: response.data?.tokenZ || null,
-            rol: response.data?.rol || null
-          });
-          return response;
-        } else {
-          setIsError(true);
-          setMessage('error al intentar iniciar sesión');
-          return response;
-        }
-      } catch (err: any) {
+      if (response.status === "success") {
+        setMessage("Login exitoso");
+        swalAlert({
+          status: "success",
+          message: response.message || "Login exitoso",
+        });
+        guardarInformacionLogin({
+          user: response.data?.nombreUser || null,
+          token: response.data?.tokenZ || null,
+          rol: response.data?.rol || null,
+        });
+        navigate("/");
+      } else {
         setIsError(true);
-        setMessage('Se produjo un error al iniciar sesión en el frontend');
-        return {
+        setMessage("error al intentar iniciar sesión");
+        swalAlert({
           status: "error",
-          message: "Error al iniciar sesión en el frontend"
-        };
-      } finally {
-        setIsLoading(false);
+          message: response.message || "error al intentar iniciar sesión",
+        });
       }
+    } catch (err: any) {
+      setIsError(true);
+      setMessage("Se produjo un error al iniciar sesión en el frontend");
+      swalAlert({
+        status: "warning",
+        message: "Se produjo un error al iniciar sesión en el frontend",
+      });
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-  return { execute: login, isLoading, isError, message };
+  return {
+    execute: login,
+    isLoading,
+    isError,
+    message,
+  };
 };

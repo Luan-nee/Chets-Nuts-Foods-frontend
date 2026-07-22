@@ -30,7 +30,7 @@ export default function AppRoutes() {
                 element={
                   <PrivateRoute>
                     <MainLayout>
-                      <Trabajadores />
+                      <GuiasDeRemision />
                     </MainLayout>
                   </PrivateRoute>
                 }
