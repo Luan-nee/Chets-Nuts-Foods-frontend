@@ -1,8 +1,13 @@
 import type { TipoVehiculo, EstadoVehiculo, UserRole } from "./constantes.type";
 
-export type marca = "toyota" | "honda" | "ford" | "";
-export type modelo = "corolla" | "civic" | "mustang" | "";
-export type tipoVehiculo = "M3" | "M4" | "M5" | "";
+// "toyota" | "honda" | "ford" | ""
+export type marca = string; // no tiene restricciones específicas.
+
+// "corolla" | "civic" | "mustang" | ""
+export type modelo = string; // no tiene restricciones específicas.
+
+// "M3" | "M4" | "M5" | ""
+export type tipoVehiculo = string; // no tiene restricciones específicas.
 
 export type queryGetVehiculos = {
   page: number;

@@ -1,10 +1,5 @@
 import { useState } from "react";
 import { Info } from "lucide-react";
-import {
-  marcasVehiculos,
-  modelosVehiculos,
-  tiposVehiculos,
-} from "../../../config/constantes.ts";
 import type { CreateVehiculo } from "../../../types/vehiculos.type";
 import InputSelectTest from "../../../components/ui/InputSelect.tsx";
 import InputText from "../../../components/ui/InputText";
@@ -13,6 +8,10 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
+import {
+  marcas,
+  getModelsByMarca
+} from "../../../config/marcaModeloVehiculo.ts";
 import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
 
 interface FormCreateProps {
@@ -32,7 +31,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
     marca: "",
     modelo: "",
     placa: "",
-    tipoVehiculo: "",
+    tipoVehiculo: "pesado_multiuso",
   });
 
   return (
@@ -53,17 +52,6 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
 
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <InputSelectTest
-              label="Marca"
-              placeholder="Selecciona una marca"
-              options={marcasVehiculos}
-              onSelect={(value) => {
-                setFormData((prev) => ({
-                  ...prev,
-                  marca: value as string,
-                }));
-              }}
-            />
             <InputText
               label="Placa"
               value={formData.placa}
@@ -75,20 +63,20 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
                 }))
               }
             />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
             <InputSelectTest
-              label="Modelo"
-              options={modelosVehiculos}
-              placeholder="Selecciona un modelo"
+              label="Marca"
+              placeholder="Selecciona una marca"
+              options={marcas}
               onSelect={(value) => {
                 setFormData((prev) => ({
                   ...prev,
-                  modelo: value as string,
+                  marca: value as string,
                 }));
               }}
             />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
             <InputText
               label="Año de fabricación"
               value={formData.anio}
@@ -100,21 +88,20 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
                 }))
               }
             />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
             <InputSelectTest
-              label="Tipo de vehículo"
-              options={tiposVehiculos}
-              placeholder="Selecciona un tipo de vehículo"
+              label="Modelo"
+              options={getModelsByMarca(formData.marca)}
+              placeholder="Selecciona un modelo"
               onSelect={(value) => {
                 setFormData((prev) => ({
                   ...prev,
-                  tipoVehiculo: value as string,
+                  modelo: value as string,
                 }));
               }}
             />
+          </div>
 
+          <div className="grid grid-cols-2 gap-4">
             <InputNumber
               label="Capacidad máxima de carga (toneladas)"
               simbol="TN"

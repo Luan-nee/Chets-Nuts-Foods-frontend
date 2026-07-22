@@ -45,7 +45,26 @@ export const useFetchVehiculos = (): FetchState => {
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
         setMessage("Vehículos obtenidos exitosamente");
-        setVehiculos(response.data ?? []); // Aseguramos que vehiculos sea un array, incluso si data es undefined
+
+        // convertir el la capacidad de carga de string a numero 
+        const vehiculosConCapacidad = response.data?.map((vehiculo) => ({
+          ...vehiculo,
+          capacidadCarga: parseFloat(vehiculo.capacidadCarga),
+        })) || [];
+
+        // conversión de kilogramos a toneladas
+        const vehiculosConCapacidadEnToneladas = vehiculosConCapacidad.map((vehiculo) => ({
+          ...vehiculo,
+          capacidadCarga: vehiculo.capacidadCarga / 1000, // Convertir de kg a toneladas
+        }));
+
+        // convertimos la capacidad de carga de numero a string con 2 decimales
+        const vehiculosFinales = vehiculosConCapacidadEnToneladas.map((vehiculo) => ({
+          ...vehiculo,
+          capacidadCarga: vehiculo.capacidadCarga.toFixed(2), // Convertir a string con 2 decimales
+        }));
+
+        setVehiculos(vehiculosFinales); // Aseguramos que vehiculos sea un array, incluso si data es undefined
         setInfoPaginacion(response.pagination);
         return response;
       } else {

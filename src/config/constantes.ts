@@ -30,10 +30,28 @@ export const sexos: { label: string; value: string }[] = [
 ];
 
 export const marcasVehiculos: { label: string; value: marca }[] = [
-  { label: "Toyota", value: "toyota" }, // 1
-  { label: "Honda", value: "honda" },   // 2
-  { label: "Ford", value: "ford" }      // 3
-];
+  { label: "Volvo", value: "volvo" },
+  { label: "Scania", value: "scania" },
+  { label: "Mercedes-Benz", value: "mercedes-benz" }, 
+  { label: "MAN", value: "man" },
+  { label: "DAF", value: "daf" },
+  { label: "Iveco", value: "iveco" },
+  { label: "International", value: "international" },
+  { label: "Freightliner", value: "freightliner" },
+  { label: "Kenworth", value: "kenworth" },
+  { label: "Mack", value: "mack" },
+  { label: "Hino", value: "hino" },
+  { label: "Isuzu", value: "isuzu" },
+  { label: "Fuso", value: "fuso" },
+  { label: "Hyundai", value: "hyundai" },
+  { label: "Sinotruk", value: "sinotruk" },
+  { label: "Howo", value: "howo" },
+  { label: "Foton", value: "foton" },
+  { label: "Shacman", value: "shacman" },
+  { label: "JAC Motors", value: "jac-motors" },
+  { label: "Dongfeng", value: "dongfeng" },
+  { label: "FAW", value: "faw" }
+]
 
 export const modelosVehiculos: { label: string; value: modelo }[] = [
   { label: "Corolla", value: "corolla" },

@@ -23,6 +23,8 @@ export const useUpdateVehiculo = (): FetchState => {
       setIsError(false);
       setMessage("");
 
+      // Convertir capacidad de carga a kilogramos
+      body.capacidadCarga = body.capacidadCarga * 1000;
       const response = await vehiculos_api.editarVehiculo(body);
       
       // Manejo de respuestas basado en el estado

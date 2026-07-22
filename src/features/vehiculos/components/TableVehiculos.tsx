@@ -53,9 +53,9 @@ export default function TableVehiculos({
 
   const tableHeader: string[] = [
     "Placa",
-    "Marca/Modelo",
+    "Marca",
+    "Modelo",
     "Año",
-    "Tipo",
     "Capacidad (TN)",
     "estado",
     "Acciones",
@@ -94,19 +94,23 @@ export default function TableVehiculos({
             key={index}
             className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
           >
-            {/* Plate */}
+            {/* Placa */}
             <td className="px-6 py-4">
-              <div className="flex items-center gap-3">
-                <Truck className="w-5 h-5 text-[#1f6feb]" />
-                <span className="font-medium text-sm text-white">
+              <div className="inline-flex flex-col items-center justify-center bg-[#FACC15] text-[#1E1E1E] font-bold px-3 py-0.5 rounded-[3px] border-2 border-black border-double shadow-sm tracking-widest leading-none select-none">
+                <span className="text-base font-extrabold font-mono tracking-wider pt-0.5">
                   {vehiculo.placa}
                 </span>
               </div>
             </td>
 
-            {/* Marca/Modelo */}
+            {/* Marca */}
             <td className="px-6 py-4">
-              <span className="text-sm text-white">{vehiculo.marca} / {vehiculo.modelo}</span>
+              <span className="text-sm text-white uppercase">{vehiculo.marca}</span>
+            </td>
+
+            {/* Modelo */}
+            <td className="px-6 py-4">
+              <span className="text-sm text-white uppercase">{vehiculo.modelo}</span>
             </td>
 
             {/* Año */}
@@ -114,17 +118,8 @@ export default function TableVehiculos({
               <span className="text-sm text-gray-300">{vehiculo.anio}</span>
             </td>
 
-            {/* Tipo de vehiculo */}
-            <td className="px-6 py-4">
-              <span
-                className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border bg-blue-500/20 text-blue-400 border-blue-500/30`}
-              >
-                {vehiculo.tipoVehiculo}
-              </span>
-            </td>
-
             {/* Capacidad de carga */}
-            <td className="px-6 py-4">
+            <td className="px-8 py-4">
               <span className="text-sm text-white font-medium">
                 {vehiculo.capacidadCarga}
               </span>

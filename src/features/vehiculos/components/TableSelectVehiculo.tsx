@@ -14,7 +14,8 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: Tabl
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const tableHeader = [
     "Placa",
-    "Marca / Modelo",
+    "Marca",
+    "Modelo",
     "Año",
     "Estado",
     ""
@@ -75,25 +76,24 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: Tabl
             >
               {/* Placa */}
               <td className="px-6 py-4">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
-                    <Building2 className="w-5 h-5 text-[#1f6feb]" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="block font-medium text-sm text-white truncate">
-                      {vehiculo.placa}
-                    </span>
-                    <span className="block text-xs text-gray-400 truncate">
-                      {vehiculo.tipoVehiculo}
-                    </span>
-                  </div>
+                <div className="inline-flex flex-col items-center justify-center bg-[#FACC15] text-[#1E1E1E] font-bold px-3 py-0.5 rounded-[3px] border-2 border-black border-double shadow-sm tracking-widest leading-none select-none">
+                  <span className="text-base font-extrabold font-mono tracking-wider pt-0.5">
+                    {vehiculo.placa}
+                  </span>
                 </div>
               </td>
 
-              {/* Marca / Modelo */}
+              {/* Marca */}
               <td className="px-6 py-4">
-                <div className="text-sm text-gray-300">
-                  {vehiculo.marca} / {vehiculo.modelo}
+                <div className="text-sm text-gray-300 uppercase">
+                  {vehiculo.marca}
+                </div>
+              </td>
+
+              {/* Modelo */}
+              <td className="px-6 py-4">
+                <div className="text-sm text-gray-300 uppercase">
+                  {vehiculo.modelo}
                 </div>
               </td>
 
