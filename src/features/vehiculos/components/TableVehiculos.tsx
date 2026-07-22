@@ -1,5 +1,5 @@
 // importación de componentes UI
-import { Edit2, Truck } from "lucide-react";
+import { Edit2 } from "lucide-react";
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 // importación de custom hooks
