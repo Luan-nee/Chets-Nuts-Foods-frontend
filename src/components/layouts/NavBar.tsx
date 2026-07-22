@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Truck, Package, Users, LogOut, Settings, MapPin } from "lucide-react";
+import { Truck, Package, Users, LogOut, Settings, MapPin, CarIcon } from "lucide-react";
 import type { UserRole } from "../../types/constantes.type";
 import { useAuth } from "../../context/AuthContext";
 import UserInfo from "../ui/UserInfo";
@@ -14,6 +14,7 @@ type LabelType =
   | "/configuraciones"
   | "/seguimiento"
   | "/clientes"
+  | "/actualizar-seguimiento"
   | "/test";
 
 interface MenuItem {
@@ -39,6 +40,7 @@ export default function NavBarAdministrador() {
     { icon: Package, label: "Clientes", anchor: "/clientes", userRol: ["ADMIN", "COLABORADOR"] },
     { icon: MapPin, label: "Establecimientos", anchor: "/establecimientos", userRol: ["ADMIN"] },
     { icon: MapPin, label: "Test", anchor: "/test", userRol: ["ADMIN", "COLABORADOR"] },
+    { icon: CarIcon, label: "Transporte", anchor: "/actualizar-seguimiento", userRol: ["CHOFER"] },
   ];
 
   return (
