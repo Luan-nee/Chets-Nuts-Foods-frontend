@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Building2, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ButtonsPagination from '../../../components/ui/ButtonsPagination';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
