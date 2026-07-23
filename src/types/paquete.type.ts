@@ -4,7 +4,8 @@ export type CreatePaquete = {
   idSalidaTransporte: number,
   idUsuario: number,
   idUsuarioDestino: number,
-  montoCobrado: number
+  montoCobrado: number,
+  observacion?: string
 }
 
 export type ResponseCreatePaquete = {

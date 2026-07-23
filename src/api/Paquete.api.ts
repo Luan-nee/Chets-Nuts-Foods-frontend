@@ -60,4 +60,14 @@ export default class PaqueteApi extends BaseRequestApi {
       `${this.base_url_production}/data/${idPaquete}`,
     );
   }
+
+  public async actualizarPaquete(
+    idPaquete: number,
+    body: Partial<CreatePaquete> & { observacion?: string },
+  ): Promise<BodyResponse<any>> {
+    return this.PATCH<any>(
+      `${this.base_url_production}/${idPaquete}`,
+      body,
+    );
+  }
 }
