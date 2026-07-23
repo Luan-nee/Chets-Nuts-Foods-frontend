@@ -16,6 +16,7 @@ import { useFetchPaqueteData } from "../../../paquetes/hooks/useFetchPaqueteData
 import type { GetClienteSinCompras } from "../../../../types/clientes.type";
 import type { CreatePaquete } from '../../../../types/paquete.type';
 import { useGreContext } from '../../../../context/GreContext';
+import { useSocket } from "../../../../context/SocketContext";
 
 export default function FormPaquete() {
   const {
@@ -23,6 +24,8 @@ export default function FormPaquete() {
     setDataEmitirGre,
     setIdPaquete,
   } = useGreContext();
+
+  const socket = useSocket();
 
   const [showForm, setShowForm] = useState<boolean>(false);
   const [idSelected, setIdSelected] = useState<number | null>(dataEmitirGre.idPaquete || null);
@@ -88,6 +91,33 @@ export default function FormPaquete() {
       setShowForm(true);
     }
   }, [isLoadingFetch, paquetes]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewOrUpdatedPaquete = (data: any) => {
+      if (dataEmitirGre.idSalidaTransporte) {
+        refetchPaquetes(dataEmitirGre.idSalidaTransporte);
+      }
+    };
+
+    const handleUpdateEstadoPaquete = (data: { idpaquete: number, estado: string }) => {
+      if (dataEmitirGre.idSalidaTransporte) {
+        refetchPaquetes(dataEmitirGre.idSalidaTransporte);
+      }
+      if (data.idpaquete === idSelected && data.estado === "CANCELADO") {
+        handleDeselectPaquete();
+      }
+    };
+
+    socket.on("server::updatePaquete", handleNewOrUpdatedPaquete);
+    socket.on("server::updateEstadoPaquete", handleUpdateEstadoPaquete);
+
+    return () => {
+      socket.off("server::updatePaquete", handleNewOrUpdatedPaquete);
+      socket.off("server::updateEstadoPaquete", handleUpdateEstadoPaquete);
+    };
+  }, [socket, dataEmitirGre.idSalidaTransporte, idSelected]);
 
   const syncPaquete = (nextValues: Partial<CreatePaquete>) => {
     setFormData((prev) => ({
@@ -276,11 +306,10 @@ export default function FormPaquete() {
 
               {/* Estado */}
               <td className="px-6 py-4">
-                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                  paquete.estadopaquete === "CANCELADO"
+                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${paquete.estadopaquete === "CANCELADO"
                     ? "bg-red-500/10 text-red-400"
                     : "bg-blue-500/10 text-blue-400"
-                }`}>
+                  }`}>
                   {paquete.estadopaquete}
                 </span>
               </td>
@@ -296,11 +325,10 @@ export default function FormPaquete() {
                   <button
                     onClick={() => handleOpenEditModal(paquete)}
                     disabled={paquete.estadopaquete === "CANCELADO"}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
-                      paquete.estadopaquete === "CANCELADO"
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${paquete.estadopaquete === "CANCELADO"
                         ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
                         : "bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-400"
-                    }`}
+                      }`}
                   >
                     <Edit className="w-3.5 h-3.5" />
                     Editar
@@ -309,11 +337,10 @@ export default function FormPaquete() {
                   <button
                     onClick={() => handleToggleEstado(paquete.idpaquete, paquete.estadopaquete)}
                     disabled={isLoadingEstado}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
-                      paquete.estadopaquete === "CANCELADO"
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${paquete.estadopaquete === "CANCELADO"
                         ? "bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 text-emerald-400"
                         : "bg-red-500/10 hover:bg-red-500/20 border-red-500/30 text-red-400"
-                    }`}
+                      }`}
                   >
                     {paquete.estadopaquete === "CANCELADO" ? (
                       <>
@@ -340,11 +367,10 @@ export default function FormPaquete() {
                     <button
                       onClick={() => handleSelectPaquete(paquete.idpaquete)}
                       disabled={paquete.estadopaquete === "CANCELADO"}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                        paquete.estadopaquete === "CANCELADO"
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${paquete.estadopaquete === "CANCELADO"
                           ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
                           : "bg-blue-600 hover:bg-blue-500 text-white"
-                      }`}
+                        }`}
                     >
                       Seleccionar
                     </button>
