@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useGreContext } from '../../../../context/GreContext';
 import { useAuth } from '../../../../context/AuthContext';
+import { useSalidaTransporteContext } from '../../../../context/SalidaTransporteContext';
 import Loading from '../../../../components/ui/Loading';
-import { useFetchSalidasInicio } from '../../hooks/useFetchSalidasInicio';
-import SalidaTransporteApi from '../../../../api/SalidaTransporte.api';
 import { ArrowLeft } from 'lucide-react';
 
 import SalidaTransporteTable from './SalidaTransporteTable';
@@ -19,8 +18,9 @@ export default function FormSalidaTransporte() {
     salidaTransportes,
     isLoading: isLoadingFetch,
     isError: isErrorFetch,
-    execute: refetchSalidas
-  } = useFetchSalidasInicio();
+    refetchSalidas,
+    getSalidaDetails
+  } = useSalidaTransporteContext();
 
   const [showForm, setShowForm] = useState<boolean>(false);
   const [idSelected, setIdSelected] = useState<number | null>(dataEmitirGre.idSalidaTransporte || null);
@@ -74,40 +74,17 @@ export default function FormSalidaTransporte() {
     }));
   };
 
-  const fetchSalidaFullData = async (id: number) => {
-    const cacheKey = `salida_detalle_${id}`;
-    const cached = localStorage.getItem(cacheKey);
-    if (cached) {
-      try {
-        return JSON.parse(cached);
-      } catch (e) {
-        console.error("Error parsing cached details", e);
-      }
-    }
-    try {
-      const api = new SalidaTransporteApi();
-      const response = await api.getByID<any>(id);
-      if (response.status === "success" && response.data) {
-        localStorage.setItem(cacheKey, JSON.stringify(response.data));
-        return response.data;
-      }
-    } catch (error) {
-      console.error("Error fetching details", error);
-    }
-    return null;
-  };
-
   const handleOpenDetailModal = async (id: number) => {
     setShowDetailModal(true);
     setIsLoadingDetail(true);
-    const data = await fetchSalidaFullData(id);
+    const data = await getSalidaDetails(id);
     setDetailData(data);
     setIsLoadingDetail(false);
   };
 
   const handleEditSalida = async (salida: any) => {
     setIsLoadingEditData(true);
-    const data = await fetchSalidaFullData(salida.idsalidatransporte);
+    const data = await getSalidaDetails(salida.idsalidatransporte);
     if (data && data.salidaTransporte) {
       const t = data.salidaTransporte;
       const dateObj = new Date(t.fechasalida);
