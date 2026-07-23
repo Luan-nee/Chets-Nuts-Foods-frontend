@@ -70,4 +70,12 @@ export default class PaqueteApi extends BaseRequestApi {
       body,
     );
   }
+
+  public async obtenerProductosDelPaquete(
+    idPaquete: number,
+  ): Promise<BodyResponse<{ productos: any[], resumen: { totalPesoPaquete: number } }>> {
+    return this.GET<{ productos: any[], resumen: { totalPesoPaquete: number } }>(
+      `${this.base_url_production}/${idPaquete}/productos`,
+    );
+  }
 }

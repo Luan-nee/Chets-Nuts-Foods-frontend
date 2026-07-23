@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react';
-import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List} from 'lucide-react';
+import { Truck, Package, Check, ArrowLeft, ArrowRight, ChevronLeft, LocationEditIcon, List } from 'lucide-react';
 import ContentPage from '../../../components/layouts/ContentPage';
 // import TableSelectProductos from '../../productos/components/TableSelectProductos';
 import FormSalidaTransporte from './FormCreateGre/FormSalidaTransporte';
@@ -18,8 +18,8 @@ export interface FormCreateGreData {
 
 type TypeProcedimientoUi = {
   focus: boolean,
-  label: string, 
-  status: boolean, 
+  label: string,
+  status: boolean,
   icon: React.ReactNode
 }
 
@@ -30,19 +30,19 @@ interface FormCreateGreProps {
 import { InfoWarning } from '../../../components/messages/InfoWarning';
 
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
-  const { dataEmitirGre } = useGreContext();  
-  const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
+  const { dataEmitirGre } = useGreContext();
+  const [procedimiento, setProcedimiento] = useState<TypeProcedimientoUi[]>(
     [
-      { label: 'Salida transporte', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true},
-      { label: 'Paquete', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
-      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false},
-    ] 
+      { label: 'Salida transporte', status: false, icon: <Package className="w-4 h-4 text-white" />, focus: true },
+      { label: 'Paquete', status: false, icon: <LocationEditIcon className="w-4 h-4 text-white" />, focus: false },
+      { label: 'Productos', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false },
+      { label: 'Transporte', status: false, icon: <Truck className="w-4 h-4 text-white" />, focus: false },
+    ]
   );
-  
+
   const pushSiguiente = () => {
     const indexFocus = procedimiento.findIndex(p => p.focus);
-    
+
     // Validar que se haya seleccionado una Salida de Transporte antes de pasar al paso de Paquetes
     if (procedimiento[indexFocus].label === 'Salida transporte') {
       if (!dataEmitirGre.idSalidaTransporte || dataEmitirGre.idSalidaTransporte === 0) {
@@ -54,9 +54,19 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       }
     }
 
+    if (procedimiento[indexFocus].label === 'Paquete') {
+      if (!dataEmitirGre.idPaquete || dataEmitirGre.idPaquete === 0) {
+        InfoWarning(
+          "Paquete Requerido",
+          "Debe seleccionar o registrar un Paquete antes de continuar a registrar los productos."
+        );
+        return;
+      }
+    }
+
     setProcedimiento(prev => {
       const newProcedimiento = [...prev];
-      if(indexFocus !== procedimiento.length - 1) {
+      if (indexFocus !== procedimiento.length - 1) {
         newProcedimiento[indexFocus].focus = false;
         newProcedimiento[indexFocus].status = true;
         newProcedimiento[indexFocus + 1].focus = true;
@@ -68,14 +78,14 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
     const indexFocus = procedimiento.findIndex(p => p.focus);
     setProcedimiento(prev => {
       const newProcedimiento = [...prev];
-      if(indexFocus > 0) {
+      if (indexFocus > 0) {
         newProcedimiento[indexFocus].focus = false;
         newProcedimiento[indexFocus].status = false;
         newProcedimiento[indexFocus - 1].focus = true;
         newProcedimiento[indexFocus - 1].status = false;
       }
       return newProcedimiento;
-    }); 
+    });
   }
 
   return (
@@ -88,30 +98,30 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
         </div>
         {/* Botones */}
         <div className="flex gap-3 mt-8">
-          <button 
+          <button
             onClick={() => setShowFormCreateGre(false)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
           >
             <ChevronLeft className="w-5 h-5" />
             Cancelar
           </button>
-          <button 
+          <button
             onClick={pushAnterior}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors text-white"
           >
             <ArrowLeft className="w-5 h-5" />
             Anterior
           </button>
-          
-          <button 
+
+          <button
             onClick={pushSiguiente}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-white"
           >
             Siguiente
             <ArrowRight className="w-5 h-5" />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => {
               console.log('Datos registrados: ', dataEmitirGre)
             }}
@@ -130,29 +140,29 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
             <Fragment key={index}>
               <div className="flex items-center gap-2">
                 <div className={`w-8 h-8 ${p.status ? 'bg-green-500' : p.focus ? 'bg-blue-500' : 'bg-gray-700'} rounded-full flex items-center justify-center`}>
-                  { p.status ? <Check className="w-4 h-4 text-white" /> : p.icon }
+                  {p.status ? <Check className="w-4 h-4 text-white" /> : p.icon}
                 </div>
                 <span className={`text-sm font-medium ${p.status ? 'text-green-400' : p.focus ? 'text-blue-500' : 'text-gray-400'}`}>{p.label}</span>
               </div>
 
-              { p.label !== "Transporte" && (
+              {p.label !== "Transporte" && (
                 <div className={`flex-1 h-px ${p.status ? 'bg-green-400' : 'bg-gray-700'}`}></div>
               )}
             </Fragment>
           ))
         }
       </div>
-      
-      { procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
+
+      {procedimiento.find(p => p.focus)?.label === "Salida transporte" &&
         <FormSalidaTransporte />
       }
-      { procedimiento.find(p => p.focus)?.label === "Paquete" &&
+      {procedimiento.find(p => p.focus)?.label === "Paquete" &&
         <FormPaquete />
       }
-      { procedimiento.find(p => p.focus)?.label === "Productos" &&
+      {procedimiento.find(p => p.focus)?.label === "Productos" &&
         <FormProductos />
       }
-      { procedimiento.find(p => p.focus)?.label === "Transporte" &&
+      {procedimiento.find(p => p.focus)?.label === "Transporte" &&
         <FormEmitirGre />
       }
     </ContentPage>
