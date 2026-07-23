@@ -71,10 +71,7 @@ export type ResponseUpdateCliente = {
   tipo: UserType,
 }
 
-export type ResponseGetClienteByRUC = {
-  // Aún no se ha definido la estructura.
-  // La documentación en postman está vacía. 
-}
+export type ResponseGetClienteByRUC = Record<string, never>;
 
 export type ResponseGetAllClientes = {
   nombres: string,

@@ -25,7 +25,7 @@ export type UpdateSalidaTransporte = {
   idChoferAcceso?: number,
   idOrigenEstablecimiento?: number,
   idDestinoEstablecimiento?: number,
-  fechaSalida?: Date,
+  fechaSalida?: string,
   estadoTransporte?: EstadoTransporte
 }
 

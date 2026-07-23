@@ -3,7 +3,7 @@ import { useState } from "react";
 import InputText from "../../../components/ui/InputText";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
-import { registrarInfoEmpresarial } from "../hook/useRegistrarInfoEmpresarial";
+import { useRegistrarInfoEmpresarial } from "../hook/useRegistrarInfoEmpresarial";
 import type { UpdateDatosEmpresa } from "../../../types/datosEmpresa.type";
 
 interface FormRegistrarInfoEmpresarialProps {
@@ -11,7 +11,7 @@ interface FormRegistrarInfoEmpresarialProps {
 }
 
 export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistrarInfoEmpresarialProps) {
-  const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = registrarInfoEmpresarial();
+  const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = useRegistrarInfoEmpresarial();
 
   const [formDataEmpresa, setFormDataEmpresa] = useState<UpdateDatosEmpresa>({
     ruc: "",

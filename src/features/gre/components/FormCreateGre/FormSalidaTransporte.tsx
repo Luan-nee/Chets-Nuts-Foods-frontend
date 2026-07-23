@@ -1,125 +1,195 @@
 import { useEffect, useState } from 'react';
-import DateTimePicker from '../../../../components/ui/SelectDateTime';
-import TableSelectEstablecimiento from '../../../establecimientos/components/TableSelectEstablecimiento';
-import TableSelectChofer from '../../../chofer/components/TableSelectChofer';
-import TableSelectVehiculo from '../../../vehiculos/components/TableSelectVehiculo';
-import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
-import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
-import { useRegistrarSalidaTransporte } from '../../../gre/hooks/useRegistrarSalidaTransporte';
 import { useGreContext } from '../../../../context/GreContext';
+import { useAuth } from '../../../../context/AuthContext';
+import { useSalidaTransporteContext } from '../../../../context/SalidaTransporteContext';
+import Loading from '../../../../components/ui/Loading';
+import { ArrowLeft } from 'lucide-react';
 
-type SalidaTransporteFormData = {
-  idChoferAcceso: number,
-  idOrigenEstablecimiento: number,
-  idDestinoEstablecimiento: number,
-  idVehiculo: number,
-  fechaSalida: string,
-  horasalida: string
-}
+import SalidaTransporteTable from './SalidaTransporteTable';
+import SalidaTransporteForm from './SalidaTransporteForm';
+import SalidaTransporteDetailModal from './SalidaTransporteDetailModal';
 
 export default function FormSalidaTransporte() {
-  const { setDataEmitirGre } = useGreContext();
-  const [, setIdEstablecimiento] = useState<number | null>(null);
-  const [, setIdChofer] = useState<number | null>(null);
-  const [, setIdVehiculo] = useState<number | null>(null);
-  const [formData, setFormData] = useState<SalidaTransporteFormData>({
-    fechaSalida: '',
-    horasalida: '',
-    idChoferAcceso: 0,
-    idOrigenEstablecimiento: 1,
-    idDestinoEstablecimiento: 0,
-    idVehiculo: 0
-  }) 
-  const {
-    isLoading: isLoadingSalidaTransporte,
-    isError: isErrorSalidaTransporte,
-    execute: createSalidaTransporte
-  } = useRegistrarSalidaTransporte();
+  const { dataEmitirGre, setDataEmitirGre } = useGreContext();
+  const { auth } = useAuth();
+  const isAdmin = auth.rol === "ADMIN";
 
-  const syncSalidaTransporte = (nextValues: Partial<SalidaTransporteFormData>) => {
-    setFormData((prev) => ({
-      ...prev,
-      ...nextValues,
+  const {
+    salidaTransportes,
+    isLoading: isLoadingFetch,
+    isError: isErrorFetch,
+    refetchSalidas,
+    getSalidaDetails
+  } = useSalidaTransporteContext();
+
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [idSelected, setIdSelected] = useState<number | null>(dataEmitirGre.idSalidaTransporte || null);
+
+  // States for detailed view modal
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
+  const [detailData, setDetailData] = useState<any>(null);
+  const [isLoadingDetail, setIsLoadingDetail] = useState<boolean>(false);
+
+  // States for Edit Mode
+  const [editSalidaData, setEditSalidaData] = useState<any>(null);
+  const [isLoadingEditData, setIsLoadingEditData] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isLoadingFetch && salidaTransportes.length === 0) {
+      setShowForm(true);
+    }
+  }, [isLoadingFetch, salidaTransportes]);
+
+  const formatFechaSalida = (fechaSalida: string) => {
+    const fecha = new Date(fechaSalida);
+    if (Number.isNaN(fecha.getTime())) {
+      return fechaSalida;
+    }
+    return new Intl.DateTimeFormat("es-PE", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(fecha);
+  };
+
+  const formatDateMMDDYYYY = (date: Date) => {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
+
+  const handleSelectSalida = (id: number) => {
+    setIdSelected(id);
+    setDataEmitirGre((current) => ({
+      ...current,
+      idSalidaTransporte: id,
     }));
   };
 
-  useEffect(() => {
+  const handleDeselectSalida = () => {
+    setIdSelected(null);
     setDataEmitirGre((current) => ({
       ...current,
-      salidaTransporte: formData,
+      idSalidaTransporte: 0,
     }));
-  }, [formData, setDataEmitirGre]);
+  };
+
+  const handleOpenDetailModal = async (id: number) => {
+    setShowDetailModal(true);
+    setIsLoadingDetail(true);
+    const data = await getSalidaDetails(id);
+    setDetailData(data);
+    setIsLoadingDetail(false);
+  };
+
+  const handleEditSalida = async (salida: any) => {
+    setIsLoadingEditData(true);
+    const data = await getSalidaDetails(salida.idsalidatransporte);
+    if (data && data.salidaTransporte) {
+      const t = data.salidaTransporte;
+      const dateObj = new Date(t.fechasalida);
+      const dateStr = formatDateMMDDYYYY(dateObj);
+      const hourStr = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
+
+      setEditSalidaData({
+        idsalidatransporte: t.idsalidatransporte,
+        idVehiculo: t.idvehiculo,
+        idChoferAcceso: t.idchoferacceso,
+        idOrigenEstablecimiento: t.idorigenestablecimiento,
+        idDestinoEstablecimiento: t.iddestinoestablecimiento,
+        fechaSalida: dateStr,
+        horasalida: hourStr,
+        estadoTransporte: t.estadotransporte,
+      });
+      setShowForm(true);
+    }
+    setIsLoadingEditData(false);
+  };
+
+  const handleCancelForm = () => {
+    setEditSalidaData(null);
+    if (salidaTransportes.length > 0) {
+      setShowForm(false);
+    }
+  };
+
+  const handleSubmitSuccess = (idSalida: number) => {
+    setEditSalidaData(null);
+    setDataEmitirGre((current) => ({
+      ...current,
+      idSalidaTransporte: idSalida,
+    }));
+    refetchSalidas().then(() => {
+      setIdSelected(idSalida);
+      setShowForm(false);
+    });
+  };
+
+  if (isLoadingFetch || isLoadingEditData) {
+    return (
+      <div className="flex items-center justify-center p-12 bg-gray-900 mx-6 rounded-xl border border-gray-800">
+        <Loading w={8} h={8} color="blue" />
+      </div>
+    );
+  }
+
+  if (isErrorFetch) {
+    return (
+      <div className="p-8 bg-gray-900 mx-6 rounded-xl border border-gray-800 text-center">
+        <p className="text-red-400 mb-4">Error al cargar las salidas de transporte</p>
+        <button
+          onClick={() => refetchSalidas()}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors text-sm font-medium"
+        >
+          Reintentar
+        </button>
+      </div>
+    );
+  }
+
+  if (!showForm) {
+    return (
+      <>
+        <SalidaTransporteTable
+          salidaTransportes={salidaTransportes}
+          idSelected={idSelected}
+          isAdmin={isAdmin}
+          onSelect={handleSelectSalida}
+          onDeselect={handleDeselectSalida}
+          onCreateNew={() => setShowForm(true)}
+          onEdit={handleEditSalida}
+          onOpenDetails={handleOpenDetailModal}
+          formatFechaSalida={formatFechaSalida}
+        />
+
+        <SalidaTransporteDetailModal
+          isOpen={showDetailModal}
+          onClose={() => setShowDetailModal(false)}
+          isLoading={isLoadingDetail}
+          detailData={detailData}
+          formatFechaSalida={formatFechaSalida}
+        />
+      </>
+    );
+  }
 
   return (
-    <div className="px-6 py-4 bg-gray-900 mx-6">
-      <div>
-        <div className="text-lg font-medium text-white mb-4">
-          Calendario
-        </div>
-        <DateTimePicker
-          onChange={(value) => {
-            syncSalidaTransporte({
-              fechaSalida: value ? formatDateMMDDYYYY(value.date) : '',
-              horasalida: value ? `${value.hour}:${value.minute}` : '',
-            });
-          }}
-        />
-      </div>
-      <TableSelectEstablecimiento 
-        selectIdEstablecimiento={setIdEstablecimiento} 
-        onChange={(setIdEstablecimiento) => {
-        syncSalidaTransporte({
-          idDestinoEstablecimiento: setIdEstablecimiento || 0,
-        });
-      }} />
-      <TableSelectChofer 
-      selectIdChofer={setIdChofer} 
-      onChange={(setIdChofer) => {
-        syncSalidaTransporte({
-          idChoferAcceso: setIdChofer || 0,
-        });
-      }} />
-      <TableSelectVehiculo 
-      selectIdVehiculo={setIdVehiculo} 
-      onChange={(setIdVehiculo) => {
-        syncSalidaTransporte({
-          idVehiculo: setIdVehiculo || 0,
-        });
-      }} />
-      <div className="flex gap-2">
-        <ButtonCancelForm 
-          handleCancel={() => {}}
-          isLoading={false}
-          textButton='Cancelar'
-          color='red'
-        />
-        <ButtonSubmitForm 
-          handleSubmit={ async () => {
-            createSalidaTransporte(formData).then((response) => {
-              if (response !== 0) {
-                setDataEmitirGre((current) => ({
-                  ...current,
-                  salidaTransporte: formData,
-                  idSalidaTransporte: response,
-                }));
-              }
-            });
-          }}
-          isError={isErrorSalidaTransporte}
-          isLoading={isLoadingSalidaTransporte}
-          textButton='Registrar salida de transporte'
-          textError='Se produjo un error al registrar la salida de transporte'
-          color='blue'
-        />
-      </div>
+    <div className="px-6 py-4 bg-gray-900 mx-6 rounded-xl border border-gray-800">
+      {salidaTransportes.length > 0 && (
+        <button
+          onClick={handleCancelForm}
+          className="flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 mb-6 transition-colors font-medium"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Volver a la lista de salidas activas
+        </button>
+      )}
+
+      <SalidaTransporteForm
+        onCancel={handleCancelForm}
+        onSubmitSuccess={handleSubmitSuccess}
+        initialEditData={editSalidaData}
+      />
     </div>
   );
 }
-
-const formatDateMMDDYYYY = (date: Date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${month}/${day}/${year}`;
-};

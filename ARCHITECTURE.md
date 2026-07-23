@@ -37,7 +37,6 @@ Este proyecto es una aplicación frontend de React + TypeScript creada con Vite.
 
 - `/login` → `src/pages/Login.tsx`
 - `/` → `src/pages/ListaGre.tsx` dentro de `MainLayout`
-- `/test` → `src/pages/Test.tsx`
 - `/productos` → `src/pages/Productos.tsx`
 - `/seguimiento` → `src/pages/Seguimiento.tsx`
 - `/configuraciones` → `src/pages/Configuraciones.tsx`

@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 // ── Types ──────────────────────────────────────────────────────────────────
 
 interface InputSearchProps<T> {
+  titulo: string;
   atributes: string[];
   setObjetSelected: (object: T) => void;
   objets: T[];
@@ -25,6 +26,7 @@ function getValueByKey<T>(obj: T, key: string): string {
 
 export default function InputSearch<T>({
   atributes,
+  titulo,
   setObjetSelected,
   objets,
   placeholder = "Buscar...",
@@ -139,7 +141,7 @@ export default function InputSearch<T>({
   return (
     <div className="flex flex-col gap-1.5 w-full" ref={wrapRef}>
       {/* Label */}
-      <p className="text-sm font-medium text-slate-400">Buscar por campo</p>
+      <p className="text-sm font-medium text-slate-400">{titulo}</p>
 
       {/* Input row */}
       <div

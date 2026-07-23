@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ButtonsPagination from '../../../components/ui/ButtonsPagination';
@@ -8,10 +8,17 @@ import { useFetchVehiculos } from '../hooks/useFetchVehiculos';
 interface TableSelectVehiculoProps {
   selectIdVehiculo: (idVehiculo: number | null) => void;
   onChange: (idVehiculo: number) => void;
+  initialSelectedId?: number | null;
 }
 
-export default function TableSelectVehiculo({ selectIdVehiculo, onChange }: TableSelectVehiculoProps) {
-  const [idSelected, setIdSelected] = useState<number | null>(null);
+export default function TableSelectVehiculo({ selectIdVehiculo, onChange, initialSelectedId }: TableSelectVehiculoProps) {
+  const [idSelected, setIdSelected] = useState<number | null>(initialSelectedId || null);
+
+  useEffect(() => {
+    if (initialSelectedId !== undefined) {
+      setIdSelected(initialSelectedId);
+    }
+  }, [initialSelectedId]);
   const tableHeader = [
     "Placa",
     "Marca",

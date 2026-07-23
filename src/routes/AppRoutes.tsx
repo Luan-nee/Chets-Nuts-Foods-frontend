@@ -13,9 +13,9 @@ import Clientes from "../pages/Clientes";
 import Establecimientos from "../pages/Establecimientos";
 import GuiasDeRemision from "../pages/GuiasDeRemision";
 import Transporte from "../pages/Transporte";
-import Test from "../pages/Test";
 import { SocketProvider } from "../context/SocketContext";
 import { GreProvider } from "../context/GreContext";
+import { SalidaTransporteProvider } from "../context/SalidaTransporteContext";
 
 export default function AppRoutes() {
   return (
@@ -23,7 +23,8 @@ export default function AppRoutes() {
       <AuthProvider>
         <GreProvider>
           <SocketProvider>
-            <Routes>
+            <SalidaTransporteProvider>
+              <Routes>
               <Route path="/login" element={<Login />} />
 
               <Route
@@ -32,16 +33,6 @@ export default function AppRoutes() {
                   <PrivateRoute>
                     <MainLayout>
                       <GuiasDeRemision />
-                    </MainLayout>
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/test"
-                element={
-                  <PrivateRoute>
-                    <MainLayout>
-                      <Test />
                     </MainLayout>
                   </PrivateRoute>
                 }
@@ -147,9 +138,10 @@ export default function AppRoutes() {
                 }
               />
             </Routes>
-          </SocketProvider>
-        </GreProvider>
-      </AuthProvider>
-    </BrowserRouter>
+          </SalidaTransporteProvider>
+        </SocketProvider>
+      </GreProvider>
+    </AuthProvider>
+  </BrowserRouter>
   );
 }

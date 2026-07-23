@@ -212,7 +212,7 @@ export const marcasModelosVehiculos: marcaModeloVehiculo[] = [
   }
 ];
 
-export const marcas = marcasModelosVehiculos.map(({ models, ...marca }) => marca);
+export const marcas = marcasModelosVehiculos.map(({ models: _, ...marca }) => marca);
 
 export const getModelsByMarca = (marcaValue: string): model[] => {
   return marcasModelosVehiculos.find((marca) => marca.value === marcaValue)?.models ?? [];

@@ -35,8 +35,8 @@ export const useCreateEstablecimiento = (): FetchState => {
 				setMessage("Error al registrar el establecimiento");
 				InfoError("ESTABLECIMIENTO", `${response.message ?? "El error no está especificado por el backend"}`);
 			}
-		} catch (error: any) {
-			setIsError(true);0
+		} catch {
+			setIsError(true);
 			setMessage("Se produjo un error al registrar el establecimiento en el frontend");
 			InfoError("ESTABLECIMIENTO", "Se produjo un error al registrar el establecimiento en el frontend");
 		} finally {

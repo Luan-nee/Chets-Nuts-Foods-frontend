@@ -10,7 +10,7 @@ interface FetchState {
   execute: (body: UpdateDatosEmpresa) => void;
 }
 
-export const registrarInfoEmpresarial = (): FetchState => {
+export const useRegistrarInfoEmpresarial = (): FetchState => {
   const datosEmpresa_api = new DatosEmpresa();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);

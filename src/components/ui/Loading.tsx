@@ -18,7 +18,7 @@ const boderColor: PropBorderColor = {
 };
 
 export default function Loading({ w, h, color }: LoadingProps): React.ReactNode {
-  let borderColorClass = boderColor[color] || '';
+  const borderColorClass = boderColor[color] || '';
   // cambia por otro elemento similar 
   return (
     <span className={`
