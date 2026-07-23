@@ -7,3 +7,14 @@ export type ResponseGetAll = {
   direccion: string | null,
   comentario: string
 }
+
+export type RegistrarSeguimiento = {
+  titulo: string,
+  idcontrolestablecimiento: number,
+  latitud: string,
+  longitud: string,
+  direccion: string,
+  comentario: string
+}
+
+export type ResponseRegistrarSeguimiento = number;
