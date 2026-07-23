@@ -17,6 +17,7 @@ import type { GetClienteSinCompras } from "../../../../types/clientes.type";
 import type { CreatePaquete } from '../../../../types/paquete.type';
 import { useGreContext } from '../../../../context/GreContext';
 import { useSocket } from "../../../../context/SocketContext";
+import SalidaTransporteApi from "../../../../api/SalidaTransporte.api";
 
 export default function FormPaquete() {
   const {
@@ -29,6 +30,7 @@ export default function FormPaquete() {
 
   const [showForm, setShowForm] = useState<boolean>(false);
   const [idSelected, setIdSelected] = useState<number | null>(dataEmitirGre.idPaquete || null);
+  const [salidaEstado, setSalidaEstado] = useState<string>("INICIO");
 
   const [formData, setFormData] = useState<CreatePaquete>({
     clave: "",
@@ -93,9 +95,37 @@ export default function FormPaquete() {
   }, [isLoadingFetch, paquetes]);
 
   useEffect(() => {
+    const fetchSalidaEstado = async () => {
+      if (!dataEmitirGre.idSalidaTransporte) return;
+      const cacheKey = `salida_detalle_${dataEmitirGre.idSalidaTransporte}`;
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          setSalidaEstado(parsed.salidaTransporte?.estadotransporte || "INICIO");
+          return;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      try {
+        const api = new SalidaTransporteApi();
+        const response = await api.getByID<any>(dataEmitirGre.idSalidaTransporte);
+        if (response.status === "success" && response.data) {
+          setSalidaEstado(response.data.salidaTransporte?.estadotransporte || "INICIO");
+          localStorage.setItem(cacheKey, JSON.stringify(response.data));
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchSalidaEstado();
+  }, [dataEmitirGre.idSalidaTransporte]);
+
+  useEffect(() => {
     if (!socket) return;
 
-    const handleNewOrUpdatedPaquete = (data: any) => {
+    const handleNewOrUpdatedPaquete = () => {
       if (dataEmitirGre.idSalidaTransporte) {
         refetchPaquetes(dataEmitirGre.idSalidaTransporte);
       }
@@ -307,8 +337,8 @@ export default function FormPaquete() {
               {/* Estado */}
               <td className="px-6 py-4">
                 <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${paquete.estadopaquete === "CANCELADO"
-                    ? "bg-red-500/10 text-red-400"
-                    : "bg-blue-500/10 text-blue-400"
+                  ? "bg-red-500/10 text-red-400"
+                  : "bg-blue-500/10 text-blue-400"
                   }`}>
                   {paquete.estadopaquete}
                 </span>
@@ -324,11 +354,12 @@ export default function FormPaquete() {
                 <div className="flex items-center justify-end gap-2">
                   <button
                     onClick={() => handleOpenEditModal(paquete)}
-                    disabled={paquete.estadopaquete === "CANCELADO"}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${paquete.estadopaquete === "CANCELADO"
-                        ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
-                        : "bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-400"
+                    disabled={paquete.estadopaquete === "CANCELADO" || salidaEstado !== "INICIO"}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${paquete.estadopaquete === "CANCELADO" || salidaEstado !== "INICIO"
+                      ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
+                      : "bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-400"
                       }`}
+                    title={salidaEstado !== "INICIO" ? "No se puede editar paquetes de una salida que no esté en estado INICIO" : "Editar"}
                   >
                     <Edit className="w-3.5 h-3.5" />
                     Editar
@@ -336,11 +367,13 @@ export default function FormPaquete() {
 
                   <button
                     onClick={() => handleToggleEstado(paquete.idpaquete, paquete.estadopaquete)}
-                    disabled={isLoadingEstado}
+                    disabled={isLoadingEstado || salidaEstado !== "INICIO"}
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${paquete.estadopaquete === "CANCELADO"
-                        ? "bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 text-emerald-400"
-                        : "bg-red-500/10 hover:bg-red-500/20 border-red-500/30 text-red-400"
+                      ? "bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/30 text-emerald-400"
+                      : "bg-red-500/10 hover:bg-red-500/20 border-red-500/30 text-red-400"
+                      } ${salidaEstado !== "INICIO" ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed" : ""
                       }`}
+                    title={salidaEstado !== "INICIO" ? "No se puede eliminar/reactivar paquetes de una salida que no esté en estado INICIO" : "Eliminar/Reactivar"}
                   >
                     {paquete.estadopaquete === "CANCELADO" ? (
                       <>
@@ -368,8 +401,8 @@ export default function FormPaquete() {
                       onClick={() => handleSelectPaquete(paquete.idpaquete)}
                       disabled={paquete.estadopaquete === "CANCELADO"}
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${paquete.estadopaquete === "CANCELADO"
-                          ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
-                          : "bg-blue-600 hover:bg-blue-500 text-white"
+                        ? "bg-gray-800/50 border-gray-800 text-slate-500 cursor-not-allowed"
+                        : "bg-blue-600 hover:bg-blue-500 text-white"
                         }`}
                     >
                       Seleccionar

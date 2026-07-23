@@ -64,6 +64,16 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
       }
     }
 
+    if (procedimiento[indexFocus].label === 'Productos') {
+      if (!dataEmitirGre.productosEnPaquete || dataEmitirGre.productosEnPaquete.length === 0) {
+        InfoWarning(
+          "Productos Requeridos",
+          "Debe registrar como mínimo 1 producto en el paquete antes de continuar."
+        );
+        return;
+      }
+    }
+
     setProcedimiento(prev => {
       const newProcedimiento = [...prev];
       if (indexFocus !== procedimiento.length - 1) {
@@ -76,6 +86,10 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   }
   const pushAnterior = () => {
     const indexFocus = procedimiento.findIndex(p => p.focus);
+    if (procedimiento[indexFocus].label === 'Salida transporte') {
+      dataEmitirGre.idPaquete = 0;
+    }
+
     setProcedimiento(prev => {
       const newProcedimiento = [...prev];
       if (indexFocus > 0) {

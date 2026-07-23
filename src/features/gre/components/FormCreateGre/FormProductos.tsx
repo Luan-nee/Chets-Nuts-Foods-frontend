@@ -57,13 +57,30 @@ export default function FormProductos() {
     };
   }, []);
 
+  useEffect(() => {
+    const combined = [
+      ...productosExistentes.map(pe => ({
+        idproductdefect: pe.idproductdefect || Date.now(),
+        nombreproducto: pe.nombreproducto,
+        pesounitario: parseFloat(pe.pesounitario) || 0,
+        observacion: pe.observacion || "",
+        cantidad: pe.cantidad,
+      })),
+      ...formData
+    ];
+    setDataEmitirGre(current => {
+      if (JSON.stringify(current.productosEnPaquete) === JSON.stringify(combined)) {
+        return current;
+      }
+      return {
+        ...current,
+        productosEnPaquete: combined
+      };
+    });
+  }, [productosExistentes, formData, setDataEmitirGre]);
+
   const syncProductosEnContexto = (nextProductos: ProductoEnPaquete[]) => {
     setFormData(nextProductos);
-    setDataEmitirGre((current) => ({
-      ...current,
-      productosEnPaquete: nextProductos,
-      idPaquete: dataEmitirGre.idPaquete || 0,
-    }));
   };
 
   const handleAutocompleteSelect = (p: ResponseGetAllProductos) => {
