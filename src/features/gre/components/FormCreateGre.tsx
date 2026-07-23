@@ -27,6 +27,8 @@ interface FormCreateGreProps {
   setShowFormCreateGre: (p: boolean) => void;
 }
 
+import { InfoWarning } from '../../../components/messages/InfoWarning';
+
 export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGreProps) {
   const { dataEmitirGre } = useGreContext();  
   const [ procedimiento, setProcedimiento ] = useState<TypeProcedimientoUi[]>(
@@ -40,6 +42,18 @@ export default function FormCreateGre({ setShowFormCreateGre }: FormCreateGrePro
   
   const pushSiguiente = () => {
     const indexFocus = procedimiento.findIndex(p => p.focus);
+    
+    // Validar que se haya seleccionado una Salida de Transporte antes de pasar al paso de Paquetes
+    if (procedimiento[indexFocus].label === 'Salida transporte') {
+      if (!dataEmitirGre.idSalidaTransporte || dataEmitirGre.idSalidaTransporte === 0) {
+        InfoWarning(
+          "Salida de transporte requerida",
+          "Debe seleccionar o registrar una salida de transporte antes de continuar al paso de Paquetes."
+        );
+        return;
+      }
+    }
+
     setProcedimiento(prev => {
       const newProcedimiento = [...prev];
       if(indexFocus !== procedimiento.length - 1) {

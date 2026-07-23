@@ -1,6 +1,6 @@
 export type CreatePaquete = {
   clave: string,
-  destino: "sin definir",
+  destino: string,
   idSalidaTransporte: number,
   idUsuario: number,
   idUsuarioDestino: number,
@@ -19,4 +19,35 @@ export type ResponseGetAllPaquetes = {
   estadopaquete: string,
   fechacreado: string,
   cantidadProductos: number
+}
+
+export type ResponseGetPaqueteData = {
+  pesoTotalProductos: number | null;
+  totalProductos: string;
+  paquete: {
+    idpaquete: number;
+    clave: string;
+    montoPagado: string;
+    estadoPaquete: string;
+    observacion: string;
+    destino: string;
+    fechaCreado: string;
+  };
+  usuarioOrigen: {
+    nombre: string;
+    apellidoMaterno: string;
+    apellidoPaterno: string;
+    dni: string;
+    correo: string | null;
+    numero: string | null;
+  };
+  usuarioDestino: {
+    nombre: string;
+    apellidoMaterno: string;
+    apellidoPaterno: string;
+    dni: string;
+    correo: string | null;
+    numero: string | null;
+  };
+  destinoEstablecimiento: any;
 }

@@ -1,6 +1,6 @@
 import { url_base_endpoint } from "../config/url_base";
 import BaseRequestApi from "./BaseRequest.api";
-import type { CreatePaquete, ResponseGetAllPaquetes, ResponseCreatePaquete } from "../types/paquete.type";
+import type { CreatePaquete, ResponseGetAllPaquetes, ResponseCreatePaquete, ResponseGetPaqueteData } from "../types/paquete.type";
 import type { BodyResponse } from "../types/bodyResponse.type";
 import type { ProductoEnPaquete } from "../types/constantes.type";
 
@@ -50,6 +50,14 @@ export default class PaqueteApi extends BaseRequestApi {
   ): Promise<BodyResponse<ResponseGetAllPaquetes[]>> {
     return this.GET<ResponseGetAllPaquetes[]>(
       `${this.base_url_production}/${idSalidaTransporte}`,
+    );
+  }
+
+  public async obtenerDatosPaquete(
+    idPaquete: number,
+  ): Promise<BodyResponse<ResponseGetPaqueteData>> {
+    return this.GET<ResponseGetPaqueteData>(
+      `${this.base_url_production}/data/${idPaquete}`,
     );
   }
 }

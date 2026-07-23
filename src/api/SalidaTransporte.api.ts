@@ -42,6 +42,13 @@ export default class SalidaTransporte extends BaseRequestApi {
     ) as Promise<BodyResponseWithPagination<ResponseGetAll[]>>;
   }
 
+  /* getSalidasInicio */
+  public async getSalidasInicio(): Promise<BodyResponse<ResponseGetAll[]>> {
+    return this.GET<ResponseGetAll[]>(
+      `${this.base_url_production}?salida=INICIO`
+    ) as Promise<BodyResponse<ResponseGetAll[]>>;
+  }
+
   /* getByID */
   public async getByID<T>(id: number): Promise<BodyResponse<T>> {
     return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
