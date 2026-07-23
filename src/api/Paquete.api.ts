@@ -78,4 +78,14 @@ export default class PaqueteApi extends BaseRequestApi {
       `${this.base_url_production}/${idPaquete}/productos`,
     );
   }
+
+  public async actualizarEstadoPaquete(
+    idPaquete: number,
+    estado: "CANCELADO" | "HOME",
+  ): Promise<BodyResponse<any>> {
+    return this.PATCH<any>(
+      `${this.base_url_production}/estado/${idPaquete}`,
+      { estado: estado.toUpperCase() },
+    );
+  }
 }
