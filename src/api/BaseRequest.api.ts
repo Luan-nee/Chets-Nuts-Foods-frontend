@@ -37,11 +37,10 @@ export default class BaseRequestApi {
       this.redirectToLogin();
     }
     const response2 = await response.json()
-    console.log(response2);
     return response2;
   }
 
-  public async POST<T>(url: string, body: unknown ): Promise<BodyResponse<T>> {
+  public async POST<T>(url: string, body: unknown): Promise<BodyResponse<T>> {
     return this.request<BodyResponse<T>>(url, {
       method: 'POST',
       body,
