@@ -187,22 +187,28 @@ interface TimePanelProps {
   onChangeMinute: (dir: 1 | -1) => void;
 }
 
-function TimePanel({ hour, minute, onChangeHour, onChangeMinute }: TimePanelProps) {
-  const ChevronBtn = ({ onClick, up, label }: { onClick: () => void; up: boolean; label: string }) => (
-    <button
-      onClick={onClick}
-      aria-label={label}
-      className="flex items-center justify-center p-1 rounded-lg text-slate-400 hover:bg-[#252d3d] hover:text-slate-200 transition-colors"
-    >
-      <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3">
-        {up
-          ? <path d="M2 6.5L5 3.5L8 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          : <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        }
-      </svg>
-    </button>
-  );
+interface ChevronBtnProps {
+  onClick: () => void;
+  up: boolean;
+  label: string;
+}
 
+const ChevronBtn = ({ onClick, up, label }: ChevronBtnProps) => (
+  <button
+    onClick={onClick}
+    aria-label={label}
+    className="flex items-center justify-center p-1 rounded-lg text-slate-400 hover:bg-[#252d3d] hover:text-slate-200 transition-colors"
+  >
+    <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3">
+      {up
+        ? <path d="M2 6.5L5 3.5L8 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        : <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      }
+    </svg>
+  </button>
+);
+
+function TimePanel({ hour, minute, onChangeHour, onChangeMinute }: TimePanelProps) {
   return (
     <div className="p-3.5">
       <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider mb-3">Hora</p>

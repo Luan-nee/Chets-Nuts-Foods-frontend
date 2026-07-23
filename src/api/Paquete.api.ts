@@ -23,7 +23,7 @@ export default class PaqueteApi extends BaseRequestApi {
   ): Promise<BodyResponse<string>> {
     let todoBien = true;
     const productosFormateados: Omit<ProductoEnPaquete, "idproductdefect">[] =
-      productos.map(({ idproductdefect, ...producto }) => producto);
+      productos.map(({ idproductdefect: _, ...producto }) => producto);
 
     productosFormateados.map((producto) => {
       this.POST<string>(

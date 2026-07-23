@@ -42,8 +42,8 @@ export const useRegistrarSalidaTransporte = (): FetchState => {
         })
         return 0;
       }
-    } catch (error: any) {
-      setIsError(true);0
+    } catch {
+      setIsError(true);
       setMessage("Se produjo un error al registrar la salida de transporte en el frontend");
       swalAlert({
         status: "error",

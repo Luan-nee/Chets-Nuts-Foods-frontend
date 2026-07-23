@@ -138,10 +138,10 @@ export const ubicacionesPeru: DepartamentoUbicacion[] = [
 	},
 ];
 
-export const departamentos: UbicacionOption[] = ubicacionesPeru.map(({ provincias, ...departamento }) => departamento);
+export const departamentos: UbicacionOption[] = ubicacionesPeru.map(({ provincias: _, ...departamento }) => departamento);
 
 export const getProvinciasByDepartamento = (departamentoValue: string): UbicacionOption[] => {
-	return ubicacionesPeru.find((departamento) => departamento.value === departamentoValue)?.provincias.map(({ distritos, ...provincia }) => provincia) ?? [];
+	return ubicacionesPeru.find((departamento) => departamento.value === departamentoValue)?.provincias.map(({ distritos: _, ...provincia }) => provincia) ?? [];
 };
 
 export const getDistritosByProvincia = (departamentoValue: string, provinciaValue: string): UbicacionOption[] => {
