@@ -2,15 +2,22 @@ import Table from '../../../components/ui/Table';
 import ContentSectionProcess from '../../../components/layouts/ContentSectionProcess';
 import { Building2, MapPin, Plus } from 'lucide-react';
 import { useFetchEstablecimientos } from '../hooks/useFetchEstablecimientos'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface TableSelectEstablecimientoProps {
   selectIdEstablecimiento: (idEstablecimiento: number | null) => void;
   onChange: (idEstablecimiento: number) => void;
+  initialSelectedId?: number | null;
 }
 
-export default function TableSelectEstablecimiento({ selectIdEstablecimiento, onChange }: TableSelectEstablecimientoProps) {
-  const [idSelected, setIdSelected] = useState<number | null>(null);
+export default function TableSelectEstablecimiento({ selectIdEstablecimiento, onChange, initialSelectedId }: TableSelectEstablecimientoProps) {
+  const [idSelected, setIdSelected] = useState<number | null>(initialSelectedId || null);
+
+  useEffect(() => {
+    if (initialSelectedId !== undefined) {
+      setIdSelected(initialSelectedId);
+    }
+  }, [initialSelectedId]);
   const tableHeader = [
     "Nombre", 
     "Distrito / Provincia / Departamento", 

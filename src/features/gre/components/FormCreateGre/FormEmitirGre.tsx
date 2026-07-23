@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputSelect from "../../../../components/ui/InputSelect";
 import ButtonSubmitForm from "../../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../../components/ui/ButtonCancelForm";
 import swalAlert from "../../../../components/messages/swalAlert";
+import Loading from "../../../../components/ui/Loading";
 import { motivoTranslado, optionsTipoDocumento, numeroDeSerieGre } from "../../../../config/constantes";
 import { useEmitirGre } from "../../hooks/useEmitirGre";
 import { useGreContext } from "../../../../context/GreContext";
 import type { EmitirGre } from "../../../../types/gre.type";
+import SalidaTransporteApi from "../../../../api/SalidaTransporte.api";
+import PaqueteApi from "../../../../api/Paquete.api";
 
 const modalidadTransporte = [{ label: "Transporte público", value: "01" }];
 
@@ -21,6 +24,82 @@ export default function FormEmitirGre() {
 	const { idPaquete, dataEmitirGre, setDataEmitirGre } = useGreContext();
 	const { execute: emitirGre, isLoading, isError } = useEmitirGre();
 	const [formData, setFormData] = useState<EmitirGre>(initialEmitirGre);
+	const [isLoadingDetails, setIsLoadingDetails] = useState<boolean>(false);
+
+	useEffect(() => {
+		const loadMissingDetails = async () => {
+			setIsLoadingDetails(true);
+
+			// 1. Load Salida details if missing
+			if (dataEmitirGre.idSalidaTransporte && (!dataEmitirGre.salidaTransporte.idChoferAcceso || dataEmitirGre.salidaTransporte.idChoferAcceso === 0)) {
+				const cacheKey = `salida_detalle_${dataEmitirGre.idSalidaTransporte}`;
+				const cached = localStorage.getItem(cacheKey);
+				let salidaData: any = null;
+				if (cached) {
+					try {
+						salidaData = JSON.parse(cached);
+					} catch (e) {
+						console.error(e);
+					}
+				}
+				if (!salidaData) {
+					try {
+						const api = new SalidaTransporteApi();
+						const response = await api.getByID<any>(dataEmitirGre.idSalidaTransporte);
+						if (response.status === "success" && response.data) {
+							salidaData = response.data;
+							localStorage.setItem(cacheKey, JSON.stringify(salidaData));
+						}
+					} catch (err) {
+						console.error(err);
+					}
+				}
+				if (salidaData && salidaData.salidaTransporte) {
+					const t = salidaData.salidaTransporte;
+					setDataEmitirGre(current => ({
+						...current,
+						salidaTransporte: {
+							idChoferAcceso: t.idchoferacceso,
+							idOrigenEstablecimiento: t.idorigenestablecimiento,
+							idDestinoEstablecimiento: t.iddestinoestablecimiento,
+							idVehiculo: t.idvehiculo,
+							fechaSalida: t.fechasalida,
+							horasalida: "",
+						}
+					}));
+				}
+			}
+
+			// 2. Load Paquete details if missing
+			if (dataEmitirGre.idPaquete && (!dataEmitirGre.paquete.idUsuario || dataEmitirGre.paquete.idUsuario === 0)) {
+				try {
+					const paqueteApi = new PaqueteApi();
+					const response = await paqueteApi.obtenerDatosPaquete(dataEmitirGre.idPaquete);
+					if (response.status === "success" && response.data) {
+						const p = response.data;
+						setDataEmitirGre(current => ({
+							...current,
+							paquete: {
+								clave: p.paquete.clave || "",
+								destino: p.paquete.destino || "",
+								idSalidaTransporte: p.paquete.idSalidaTransporte || current.idSalidaTransporte || 0,
+								idUsuario: p.paquete.idUsuario || 0,
+								idUsuarioDestino: p.paquete.idUsuarioDestino || 0,
+								montoCobrado: parseFloat(p.paquete.montoPagado) || 0,
+								observacion: p.paquete.observacion || ""
+							}
+						}));
+					}
+				} catch (err) {
+					console.error(err);
+				}
+			}
+
+			setIsLoadingDetails(false);
+		};
+
+		loadMissingDetails();
+	}, [dataEmitirGre.idSalidaTransporte, dataEmitirGre.idPaquete, setDataEmitirGre]);
 
 	const syncEmitirGre = (nextValues: Partial<EmitirGre>) => {
 		setFormData((prev) => {
@@ -57,6 +136,15 @@ export default function FormEmitirGre() {
 
 		await emitirGre(formData, paqueteSeleccionado);
 	};
+
+	if (isLoadingDetails) {
+		return (
+			<div className="flex items-center justify-center p-12 bg-gray-900 mx-6 rounded-xl border border-gray-800">
+				<Loading w={8} h={8} color="blue" />
+				<span className="ml-3 text-slate-300">Cargando detalles de contexto...</span>
+			</div>
+		);
+	}
 
 	return (
 		<div className="px-6 py-4 bg-gray-900 mx-6">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Building2, Plus } from 'lucide-react';
 import Table from '../../../components/ui/Table';
 import ButtonsPagination from '../../../components/ui/ButtonsPagination';
@@ -8,10 +8,17 @@ import { useFetchChoferes } from '../hooks/useFetchChoferes';
 interface TableSelectChoferProps {
   selectIdChofer: (idChofer: number | null) => void;
   onChange: (idChofer: number) => void;
+  initialSelectedId?: number | null;
 }
 
-export default function TableSelectChofer({ selectIdChofer, onChange }: TableSelectChoferProps) {
-  const [idSelected, setIdSelected] = useState<number | null>(null);
+export default function TableSelectChofer({ selectIdChofer, onChange, initialSelectedId }: TableSelectChoferProps) {
+  const [idSelected, setIdSelected] = useState<number | null>(initialSelectedId || null);
+
+  useEffect(() => {
+    if (initialSelectedId !== undefined) {
+      setIdSelected(initialSelectedId);
+    }
+  }, [initialSelectedId]);
   const tableHeader = [
     "Nombre",
     "DNI",
