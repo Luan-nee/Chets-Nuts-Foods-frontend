@@ -6,7 +6,7 @@ import BaseRequestApi from "./BaseRequest.api";
 
 // importación de tipos
 import type { BodyResponse } from "../types/bodyResponse.type";
-import type { ResponseGetAll } from "../types/seguimiento.type";
+import type { ResponseGetAll, RegistrarSeguimiento, ResponseRegistrarSeguimiento} from "../types/seguimiento.type";
 
 export default class Seguimiento extends BaseRequestApi {
   // private base_url_postman = `${url_base_postman}`;
@@ -17,5 +17,15 @@ export default class Seguimiento extends BaseRequestApi {
     return this.GET<ResponseGetAll[]>(
       `${this.base_url_production}/${idSalidaTransporte}`,
     ) as Promise<BodyResponse<ResponseGetAll[]>>;
+  }
+
+  public async registrarSeguimientoSalidaTransporte(
+    body: RegistrarSeguimiento,
+    idSalidaTransporte: number
+  ) {
+    return this.POST<ResponseRegistrarSeguimiento>(
+      `${this.base_url_production}/${idSalidaTransporte}`,
+      body
+    ) as Promise<BodyResponse<ResponseRegistrarSeguimiento>>;
   }
 }

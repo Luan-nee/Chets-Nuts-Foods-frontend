@@ -59,5 +59,13 @@ export const useFetchGuiasRemision = (): FetchState => {
     ObtenerGuias(pagina);
   }, [pagina]);
 
-  return { guias, isLoading, isError, message, execute: ObtenerGuias, setPagina, infoPaginacion };
+  return { 
+    guias, 
+    isLoading, 
+    isError, 
+    message, 
+    execute: ObtenerGuias, 
+    setPagina, 
+    infoPaginacion 
+  };
 };

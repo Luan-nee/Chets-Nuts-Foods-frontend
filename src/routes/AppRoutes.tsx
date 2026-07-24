@@ -12,6 +12,7 @@ import Seguimiento from "../pages/Seguimiento";
 import Clientes from "../pages/Clientes";
 import Establecimientos from "../pages/Establecimientos";
 import GuiasDeRemision from "../pages/GuiasDeRemision";
+import Transporte from "../pages/Transporte";
 import { SocketProvider } from "../context/SocketContext";
 import { GreProvider } from "../context/GreContext";
 import { SalidaTransporteProvider } from "../context/SalidaTransporteContext";
@@ -32,6 +33,16 @@ export default function AppRoutes() {
                   <PrivateRoute>
                     <MainLayout>
                       <GuiasDeRemision />
+                    </MainLayout>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/transporte"
+                element={
+                  <PrivateRoute>
+                    <MainLayout>
+                      <Transporte />
                     </MainLayout>
                   </PrivateRoute>
                 }
