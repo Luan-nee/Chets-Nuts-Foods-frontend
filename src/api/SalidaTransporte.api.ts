@@ -51,9 +51,10 @@ export default class SalidaTransporte extends BaseRequestApi {
 
   /* getByID */
   public async getByID<T>(id: number): Promise<BodyResponse<T>> {
-    return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
-      method: "GET",
-    });
+    return this.GET<T>(`${this.base_url_production}/${id}`) as Promise<BodyResponse<T>>;
+    // return this.request<BodyResponse<T>>(`${this.base_url_production}/${id}`, {
+    //   method: "GET",
+    // });
   }
 
   /* update */
@@ -61,9 +62,10 @@ export default class SalidaTransporte extends BaseRequestApi {
   public async update(
     body: UpdateSalidaTransporte,
   ): Promise<BodyResponse<null>> {
-    return this.request<BodyResponse<null>>(`${this.base_url_production}`, {
-      method: "PATCH",
-      body,
-    });
+    return this.PATCH<null>(`${this.base_url_production}`, body);
+    // return this.request<BodyResponse<null>>(`${this.base_url_production}`, {
+    //   method: "PATCH",
+    //   body,
+    // });
   }
 }
