@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import SalidaTransporte from '../../../api/SalidaTransporte.api';
 import type { ResponseGetAll } from '../../../types/salidaTransporte.type';
+import { useAuth } from '../../../context/AuthContext';
 
 interface FetchState {
   salidaTransportes: ResponseGetAll[];
@@ -12,12 +13,17 @@ interface FetchState {
 
 export const useFetchSalidasInicio = (): FetchState => {
   const api = new SalidaTransporte();
+  const { isAuthenticated } = useAuth();
   const [salidaTransportes, setSalidaTransportes] = useState<ResponseGetAll[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
   const obtenerSalidasInicio = async () => {
+    if (!isAuthenticated) {
+      setIsLoading(false);
+      return;
+    }
     try {
       setIsLoading(true);
       setIsError(false);
@@ -41,9 +47,13 @@ export const useFetchSalidasInicio = (): FetchState => {
   };
 
   useEffect(() => {
-    obtenerSalidasInicio();
+    if (isAuthenticated) {
+      obtenerSalidasInicio();
+    } else {
+      setIsLoading(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isAuthenticated]);
 
   return { 
     salidaTransportes, 

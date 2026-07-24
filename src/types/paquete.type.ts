@@ -33,6 +33,9 @@ export type ResponseGetPaqueteData = {
     observacion: string;
     destino: string;
     fechaCreado: string;
+    idSalidaTransporte?: number;
+    idUsuario?: number;
+    idUsuarioDestino?: number;
   };
   usuarioOrigen: {
     nombre: string;
