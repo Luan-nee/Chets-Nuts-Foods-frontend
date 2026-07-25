@@ -9,12 +9,12 @@ export type ResponseGetAll = {
 }
 
 export type RegistrarSeguimiento = {
-  titulo: string,
-  idcontrolestablecimiento: number,
-  latitud: string,
-  longitud: string,
-  direccion: string,
-  comentario: string
+  titulo?: string,
+  latitud?: string,
+  longitud?: string,
+  direccion?: string,
+  comentario?: string,
+  idcontrolestablecimiento?: number
 }
 
 export type ResponseRegistrarSeguimiento = number;

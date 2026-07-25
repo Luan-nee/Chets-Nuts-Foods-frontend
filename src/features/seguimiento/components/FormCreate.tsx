@@ -20,9 +20,6 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
 
   const [ formData, setFormData ] = useState<RegistrarSeguimiento>({
     titulo: "",
-    idcontrolestablecimiento: 0,
-    latitud: "0",
-    longitud: "0",
     direccion: "",
     comentario: ""
   });
@@ -44,12 +41,12 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
             <InputText
               label="Titulo"
               htmlForm="titulo"
-              value={formData.titulo}
+              value={formData.titulo ?? ""}
               onChange={(value) => setFormData(prev => ({ ...prev, titulo: value }))}
             />
             <InputText
               label="Comentario"
-              value={formData.comentario}
+              value={formData.comentario ?? ""}
               htmlForm="comentario"
               onChange={(value) => setFormData(prev => ({ ...prev, comentario: value }))}
             />
@@ -59,7 +56,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
           <div className="grid grid-cols-2 gap-6">
             <InputText
               label="Dirección"
-              value={formData.direccion}
+              value={formData.direccion ?? ""}
               htmlForm="direccion"
               onChange={(value) => setFormData(prev => ({ ...prev, direccion: value }))}
             />
