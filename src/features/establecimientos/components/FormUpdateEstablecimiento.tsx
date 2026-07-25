@@ -74,7 +74,7 @@ export default function FormUpdateEstablecimiento({
 			setFormData({
 				idEstablecimiento: establecimiento.idEst,
 				idResponsable: establecimiento.iduser,
-				nombreEstablecimiento: establecimiento.nombres ?? "",
+				nombreEstablecimiento: establecimiento.nombreestablecimiento ?? "",
 				descripcion: establecimiento.descripcion ?? "",
 				latitud: establecimiento.latitud ?? "",
 				longitud: establecimiento.longitud ?? "",

@@ -59,7 +59,7 @@ export default function DetallesEstablecimiento({
 											Establecimiento #{establecimiento?.idEst}
 										</p>
 										<h2 className="text-2xl font-semibold text-white truncate">
-											{establecimiento?.nombres || "Sin nombre registrado"}
+											{establecimiento?.nombreestablecimiento || "Sin nombre registrado"}
 										</h2>
 										<p className="text-sm text-gray-400 mt-1">
 											{establecimiento?.descripcion || "Sin descripción registrada"}
@@ -69,11 +69,10 @@ export default function DetallesEstablecimiento({
 
 								<div className="flex flex-wrap gap-2">
 									<span
-										className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${
-											establecimiento?.activo
-												? "bg-emerald-500/15 text-emerald-300 border-emerald-500/25"
-												: "bg-rose-500/15 text-rose-300 border-rose-500/25"
-										}`}
+										className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${establecimiento?.activo
+											? "bg-emerald-500/15 text-emerald-300 border-emerald-500/25"
+											: "bg-rose-500/15 text-rose-300 border-rose-500/25"
+											}`}
 									>
 										{establecimiento?.activo ? "Activo" : "Inactivo"}
 									</span>
@@ -117,7 +116,7 @@ export default function DetallesEstablecimiento({
 								</div>
 								<div>
 									<p className="text-xs uppercase tracking-[0.2em] text-gray-500">Responsable</p>
-									<h3 className="text-lg font-semibold text-white">{establecimiento?.nombres}</h3>
+									<h3 className="text-lg font-semibold text-white">{establecimiento?.nombreusuario}</h3>
 								</div>
 							</div>
 

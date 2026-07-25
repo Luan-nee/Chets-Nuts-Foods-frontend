@@ -2,12 +2,12 @@ import type { TipoEstablecimiento } from "./constantes.type";
 
 export type ResponseGetAll = {
   nombreEst: string;
-  codigoSunat: string | null; 
+  codigoSunat: string | null;
   direccion: string;
   distrito: string;
   provincia: string;
   tipoestablecimiento: TipoEstablecimiento;
-  estado: boolean; 
+  estado: boolean;
   descripcion: string;
   idEst: number;
   nombres: string;
@@ -16,21 +16,22 @@ export type ResponseGetAll = {
 export type ResponseGetByID = {
   idEst: number;
   iduser: number;
-  nombres: string;
+  nombreusuario: string;
   apellidomaterno: string;
   apellidopaterno: string;
   dniuser: string;
   numero: string;
+  nombreestablecimiento: string,
   codigoSunat: string | null;
   departamento: string;
   descripcion: string;
   distrito: string;
   provincia: string;
-  latitud: string;  
-  longitud: string; 
+  latitud: string;
+  longitud: string;
   tipoestablecimiento: TipoEstablecimiento;
-  ubigeo: string;   
-  activo: boolean;  
+  ubigeo: string;
+  activo: boolean;
   fechaCreacion: string;
 }
 
