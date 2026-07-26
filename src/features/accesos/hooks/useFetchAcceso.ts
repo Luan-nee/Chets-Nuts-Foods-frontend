@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Accesos from "../../../api/Accesos.api";
+import { useAccesosContext } from "../../../context/AccesosContext";
 import type { ResponseGetByID } from "../../../types/accesos.type";
 import type {
   BodyResponse
@@ -17,9 +17,8 @@ interface FetchState {
 }
 
 export const useFetchAcceso = (idAccesoConsulta: number): FetchState => {
-  const accesos_api = new Accesos();
+  const { getByID, loading } = useAccesosContext();
   const [acceso, setAcceso] = useState<ResponseGetByID | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
@@ -27,31 +26,33 @@ export const useFetchAcceso = (idAccesoConsulta: number): FetchState => {
     BodyResponse<ResponseGetByID>
   > => {
     try {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await accesos_api.getByID(idAcceso);
+      const response = await getByID(idAcceso);
 
-      // Manejo de respuestas basado en el estado
-      if (response.status === "success") {
-        setMessage("Datos del acceso obtenidos exitosamente");
-        setAcceso(response.data ?? null); // Aseguramos que acceso sea un objeto, incluso si data es undefined
-        return response;
+      if (response.status && response.data) {
+        setMessage(response.message);
+        setAcceso(response.data);
+        return {
+          status: "success",
+          message: response.message,
+          data: response.data,
+        };
       } else {
         setIsError(true);
-        setMessage("Error al obtener los datos del acceso");
-        return response;
+        setMessage(response.message || "Error al obtener los datos del acceso");
+        return {
+          status: "error",
+          message: response.message || "Error al obtener los datos del acceso",
+        };
       }
     } catch (error: any) {
       setIsError(true);
-      setMessage("Se produjo un error al obtener los datos del acceso en el frontend");
       return {
         status: "error",
         message: "Error al obtener los datos del acceso",
       };
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -61,7 +62,7 @@ export const useFetchAcceso = (idAccesoConsulta: number): FetchState => {
 
   return {
     acceso,
-    isLoading,
+    isLoading: loading,
     isError,
     message,
     execute: getAcceso,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Accesos from "../../../api/Accesos.api";
+import { useAccesosContext } from "../../../context/AccesosContext";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 import type {
   BodyResponseWithPagination,
@@ -20,51 +20,47 @@ interface FetchState {
 }
 
 export const useFetchChoferes = (): FetchState => {
-  const accesos_api = new Accesos();
+  const { getAllAccesos, paginacion: contextPaginacion, loading } = useAccesosContext();
   const [choferes, setChoferes] = useState<ResponseGetAllColaboradores[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [pagina, setPagina] = useState<number>(1);
-  const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
-    total_data: 0,
-    total_paginas: 0,
-    pagina_actual: 1,
-    datos_por_pagina: 0,
-  });
 
-  const getChoferes = async (pagina: number): Promise<
+  const getChoferes = async (paginaNum: number): Promise<
     BodyResponseWithPagination<ResponseGetAllColaboradores[]>
   > => {
     try {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await accesos_api.getAllColaboradores(pagina);
-      const dataFiltered = response.data?.filter(item => item.tipos === "CHOFER") ?? [];
+      const response = await getAllAccesos(paginaNum);
+      const dataFiltered = (response.data?.filter(item => item.tipos === "CHOFER") ?? []) as ResponseGetAllColaboradores[];
 
-      // Manejo de respuestas basado en el estado
-      if (response.status === "success") {
+      if (response.status) {
         setMessage("Choferes obtenidos exitosamente");
-        setChoferes(dataFiltered ?? []); // Aseguramos que choferes sea un array, incluso si data es undefined
-        setInfoPaginacion(response.pagination);
-        return response;
+        setChoferes(dataFiltered);
+        return {
+          status: "success",
+          message: "Choferes obtenidos exitosamente",
+          data: dataFiltered,
+          pagination: response.pagination || contextPaginacion,
+        };
       } else {
         setIsError(true);
-        setMessage("Error al obtener los choferes");
-        return response;
+        setMessage(response.message || "Error al obtener los choferes");
+        return {
+          status: "error",
+          message: response.message || "Error al obtener los choferes",
+          pagination: contextPaginacion,
+        };
       }
     } catch (error: any) {
       setIsError(true);
-      setMessage("Se produjo un error al obtener los choferes en el frontend");
       return {
         status: "error",
         message: "Error al obtener los choferes",
-        pagination: infoPaginacion,
+        pagination: contextPaginacion,
       };
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -74,11 +70,11 @@ export const useFetchChoferes = (): FetchState => {
 
   return {
     choferes,
-    isLoading,
+    isLoading: loading,
     isError,
     message,
     execute: getChoferes,
     setPagina,
-    infoPaginacion,
+    infoPaginacion: contextPaginacion,
   };
 };

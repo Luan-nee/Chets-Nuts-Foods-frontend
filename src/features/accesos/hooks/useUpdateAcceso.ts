@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Accesos from '../../../api/Accesos.api';
+import { useAccesosContext } from '../../../context/AccesosContext';
 import type { UpdateAcceso } from '../../../types/accesos.type'
 import type { BodyResponse } from '../../../types/bodyResponse.type';
 
@@ -12,39 +12,40 @@ interface FetchState {
 }
 
 export const useUpdateAcceso = (): FetchState => {
-  const accesos_api = new Accesos();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { updateAcceso, loading } = useAccesosContext();
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const updateAcceso = async (body: UpdateAcceso): Promise<BodyResponse<string>> => {
+  const executeUpdate = async (body: UpdateAcceso): Promise<BodyResponse<string>> => {
     try {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await accesos_api.actualizarAcceso(body);
+      const response = await updateAcceso(body);
       
       // Manejo de respuestas basado en el estado
-      if (response.status === 'success') {
-        setMessage('Acceso actualizado exitosamente');
-        return response;
+      if (response.status) {
+        setMessage(response.message);
+        return {
+          status: 'success',
+          message: response.message,
+        };
       } else {
         setIsError(true);
-        setMessage('Error al actualizar el acceso');
-        return response;
+        setMessage(response.message || 'Error al actualizar el acceso');
+        return {
+          status: 'error',
+          message: response.message || 'Error al actualizar el acceso',
+        };
       }
     } catch (error: any) {
       setIsError(true);
-      setMessage('Se produjo un error al actualizar el acceso en el frontend');
       return {
         status: "error",
         message: "Error al actualizar el acceso"
       };
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  return { isLoading, isError, message, execute: updateAcceso };
+  return { isLoading: loading, isError, message, execute: executeUpdate };
 };

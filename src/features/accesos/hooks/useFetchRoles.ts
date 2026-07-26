@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Accesos from '../../../api/Accesos.api';
+import { useAccesosContext } from '../../../context/AccesosContext';
 import type { ResponseRoles } from '../../../types/accesos.type'
 import type { BodyResponse } from '../../../types/bodyResponse.type';
 
@@ -13,30 +13,27 @@ interface FetchState {
 }
 
 export const useFetchRoles = (): FetchState => {
-  const accesos_api = new Accesos();
-  const [roles, setRoles] = useState<ResponseRoles[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { roles: contextRoles, getRoles, loading } = useAccesosContext();
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const getRoles = async (): Promise<BodyResponse<ResponseRoles[]>> => {
+  const fetchRoles = async (): Promise<BodyResponse<ResponseRoles[]>> => {
     try {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await accesos_api.roles();
+      const rolesList = await getRoles();
+      const mapped: ResponseRoles[] = rolesList.map((r, i) => ({
+        id: i + 1,
+        rol: r
+      }));
 
-      // Manejo de respuestas basado en el estado
-      if (response.status === 'success') {
-        setMessage('Roles obtenidos exitosamente');
-        setRoles(response.data ?? []); // Aseguramos que roles sea un array, incluso si data es undefined
-        return response;
-      } else {
-        setIsError(true);
-        setMessage('Error al obtener los roles');
-        return response;
-      }
+      setMessage("Roles obtenidos exitosamente");
+      return {
+        status: 'success',
+        message: 'Roles obtenidos exitosamente',
+        data: mapped
+      };
     } catch (error: any) {
       setIsError(true);
       setMessage('Se produjo un error al obtener los roles en el frontend');
@@ -44,14 +41,17 @@ export const useFetchRoles = (): FetchState => {
         status: "error",
         message: "Error al obtener los roles"
       };
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  useEffect( () => {
-    getRoles();
-  }, [])
+  useEffect(() => {
+    fetchRoles();
+  }, []);
 
-  return { roles, isLoading, isError, message, execute: getRoles };
+  const mappedRoles: ResponseRoles[] = contextRoles.map((r, i) => ({
+    id: i + 1,
+    rol: r
+  }));
+
+  return { roles: mappedRoles, isLoading: loading, isError, message, execute: fetchRoles };
 };

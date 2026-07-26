@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-// importación de tipos
-import Accesos from '../../../api/Accesos.api';
+import { useAccesosContext } from '../../../context/AccesosContext';
 import type { ResponseRoles } from '../../../types/accesos.type';
 
 // Definimos el tipo de retorno de nuestro Hook
@@ -13,34 +12,35 @@ interface FetchState {
 }
 
 export const useFetchRoles = (): FetchState => {
-  const accesos_api = new Accesos();
-  const [roles, setRoles] = useState<ResponseRoles[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { roles: contextRoles, getRoles, loading } = useAccesosContext();
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+
   // Función asíncrona para obtener los datos
-  const getRoles = async () => {
+  const fetchRoles = async () => {
     try {
-      setIsLoading(true);
       setIsError(false);
 
-      const response = await accesos_api.roles();
-      setMessage(response.message || "");
-      if (response.status !== "success" || response.data === undefined) {
-        throw new Error(response.message);
+      const rolesList = await getRoles();
+      if (!rolesList || rolesList.length === 0) {
+        throw new Error("No se encontraron roles");
       }
-      setRoles(response.data);
-    } catch (error) {
+      setMessage("Roles obtenidos exitosamente");
+    } catch (error: any) {
       console.error("Fetch error: ", error);
       setIsError(true);
-    } finally {
-      setIsLoading(false);
+      setMessage(error.message || "Error al obtener los roles");
     }
   };
 
   useEffect(() => {
-    getRoles();
+    fetchRoles();
   }, []);
 
-  return { roles, isLoading, isError, message, execute: getRoles };
+  const mappedRoles: ResponseRoles[] = contextRoles.map((r, i) => ({
+    id: i + 1,
+    rol: r
+  }));
+
+  return { roles: mappedRoles, isLoading: loading, isError, message, execute: fetchRoles };
 };
