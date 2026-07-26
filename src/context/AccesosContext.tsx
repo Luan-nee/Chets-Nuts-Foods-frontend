@@ -3,9 +3,10 @@ import { useSocket } from "./SocketContext";
 import { useAuth } from "./AuthContext";
 import type { AccesosUser } from "./typesContext";
 import { DIRACCESOSLOCAL } from "../const";
-import type { CreateAcceso, ResponseGetByID, UpdateAcceso } from "../types/accesos.type";
+import type { CreateAcceso, ResponseGetByID, ResponseRoles, UpdateAcceso } from "../types/accesos.type";
 import Accesos from "../api/Accesos.api";
 import Swal from "sweetalert2";
+import type { UserRole } from "../types/constantes.type";
 
 
 
@@ -15,6 +16,7 @@ interface AccesosContextTypes {
   updateAcceso: (data: UpdateAcceso) => Promise<{ status: boolean; message: string }>;
   getByID: (id: number) => Promise<{ status: boolean; message: string; data?: ResponseGetByID }>;
   createAcceso: (acceso: CreateAcceso) => Promise<{ status: boolean; message: string }>;
+  getRoles: () => Promise<UserRole[]>;
 }
 
 const AccesosContext = createContext<AccesosContextTypes | undefined>(undefined);
@@ -26,6 +28,13 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const consultas = new Accesos();
 
   const [pageLoads, setPageLoads] = useState<number[]>([]);
+  const [roles, setRoles] = useState<UserRole[]>([
+    "ADMIN",
+    "CHOFER",
+    "CLIENTE",
+    "COLABORADOR",
+    "SIN ROL"
+  ]);
   const [accesos, setAccesos] = useState<AccesosUser[]>(() => {
     const stored = localStorage.getItem(DIRACCESOSLOCAL) || "[]";
     return JSON.parse(stored).map((p: AccesosUser) => ({
@@ -159,6 +168,18 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return { status: true, message: "Accesos obtenidos exitosamente", data: data.data };
   }
 
+  const getRoles = async () => {
+    if (roles.length > 0) {
+      return roles;
+    }
+    const data = await consultas.roles();
+    if (data.status !== "success" || !data.data) {
+      return [];
+    }
+    setRoles(data.data.map((r: ResponseRoles) => r.rol));
+    return roles;
+  };
+
 
   return (
     <AccesosContext.Provider value={{
@@ -166,7 +187,8 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
       getAllAccesos,
       updateAcceso,
       getByID,
-      createAcceso
+      createAcceso,
+      getRoles
     }}>
       {children}
     </AccesosContext.Provider>
