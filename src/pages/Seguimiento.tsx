@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MapPin, Calendar, CheckCircle } from "lucide-react";
 import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
 import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
-import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useSeguimientoSalidaTransporte";
+import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useFetchSeguimientoSalidaTransporte";
 
 export default function Seguimiento() {
   const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<

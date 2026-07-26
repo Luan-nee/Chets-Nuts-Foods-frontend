@@ -26,8 +26,10 @@ export default function Clientes() {
           </button>
         </div>
       </div>
-
-      <TableClientes setShowFormUpdate={setShowFormUpdate} setDniCliente={setDniCliente} />
+      
+      <div className="flex-1 overflow-auto px-8 py-6">
+        <TableClientes setShowFormUpdate={setShowFormUpdate} setDniCliente={setDniCliente} />
+      </div>
 
       { showFormCreate && (
         <FormCreateCliente setShowFormCreate={setShowFormCreate} setDniCliente={setDniCliente} />
