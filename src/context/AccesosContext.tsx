@@ -13,7 +13,7 @@ interface AccesosContextTypes {
   accesos: AccesosUser[];
   getAllAccesos: (page: number) => Promise<{ status: boolean; message: string; data?: AccesosUser[] }>;
   updateAcceso: (data: UpdateAcceso) => Promise<{ status: boolean; message: string }>;
-  getByID: (id: number) => Promise<{ status: boolean; message: string; data?: AccesosUser }>;
+  getByID: (id: number) => Promise<{ status: boolean; message: string; data?: ResponseGetByID }>;
   createAcceso: (acceso: CreateAcceso) => Promise<{ status: boolean; message: string }>;
 }
 
