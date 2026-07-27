@@ -244,9 +244,12 @@ function TimePanel({ hour, minute, onChangeHour, onChangeMinute }: TimePanelProp
 
 interface DateTimePickerProps {
   onChange: (value: SelectedDateTime | null) => void;
+  label?: string;
+  value?: string | Date | null;
+  className?: string;
 }
 
-export default function DateTimePicker({ onChange }: DateTimePickerProps) {
+export default function DateTimePicker({ onChange, label, value, className }: DateTimePickerProps) {
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("date");
   const [viewDate, setViewDate] = useState(new Date());
@@ -258,6 +261,35 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
+
+  const parseInitialValue = (val: string | Date | null | undefined): SelectedDateTime | null => {
+    if (!val) return null;
+    const d = typeof val === "string" ? new Date(val) : val;
+    if (isNaN(d.getTime())) return null;
+    return {
+      date: d,
+      hour: d.getHours(),
+      minute: d.getMinutes(),
+    };
+  };
+
+  useEffect(() => {
+    if (value) {
+      const parsed = parseInitialValue(value);
+      setApplied(parsed);
+      if (parsed) {
+        setSelectedDate(parsed.date);
+        setHour(parsed.hour);
+        setMinute(parsed.minute);
+        setViewDate(parsed.date);
+      }
+    } else {
+      setApplied(null);
+      setSelectedDate(null);
+      setHour(0);
+      setMinute(0);
+    }
+  }, [value]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -298,12 +330,13 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-80 p-4" ref={wrapRef}>
+    <div className={`flex flex-col gap-1.5 w-full relative ${className || ""}`} ref={wrapRef}>
       {/* Label */}
-      <p className="text-sm font-medium text-slate-400">Fecha y hora</p>
+      <p className="text-sm font-medium text-slate-400">{label || "Fecha y hora"}</p>
 
       {/* Trigger */}
       <button
+        type="button"
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2.5 px-3.5 py-2.5 bg-[#1e2535] border border-[#2d3748] rounded-lg hover:border-slate-500 transition-colors w-full text-left"
       >
@@ -325,7 +358,7 @@ export default function DateTimePicker({ onChange }: DateTimePickerProps) {
 
       {/* Popover */}
       {open && (
-        <div className="bg-[#1e2535] border border-[#2d3748] rounded-xl overflow-hidden -mt-2 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+        <div className="absolute top-[calc(100%+4px)] left-0 w-80 bg-[#1e2535] border border-[#2d3748] rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.4)] z-50">
           {/* Tabs */}
           <div className="flex border-b border-[#2d3748]">
             {(["date", "time"] as Tab[]).map((tab) => (

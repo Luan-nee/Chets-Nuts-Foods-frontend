@@ -21,4 +21,7 @@ export default class DatosEmpresa extends BaseRequestApi {
   public async obtenerInfoEmpresa(): Promise<BodyResponse<ResponseObtenerInfoEmpresa>> {
     return this.GET<ResponseObtenerInfoEmpresa>(`${url_base_endpoint}/api/empresa`)
   }
+  public async actualizarDatosEmpresarial(body: UpdateDatosEmpresa): Promise<BodyResponse<string>> {
+    return this.PATCH<string>(`${url_base_endpoint}/api/empresa`, body)
+  }
 }

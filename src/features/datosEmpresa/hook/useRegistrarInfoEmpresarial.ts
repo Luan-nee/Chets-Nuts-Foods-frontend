@@ -7,7 +7,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: UpdateDatosEmpresa) => void;
+  execute: (body: UpdateDatosEmpresa, normal: boolean) => void;
 }
 
 export const useRegistrarInfoEmpresarial = (): FetchState => {
@@ -18,13 +18,19 @@ export const useRegistrarInfoEmpresarial = (): FetchState => {
 
   const registrarDatosEmpresarial = async (
     body: UpdateDatosEmpresa,
+    normal: boolean
   ): Promise<void> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await datosEmpresa_api.registrarDatosEmpresarial(body);
+      let response: any;
+      if (normal) {
+        response = await datosEmpresa_api.registrarDatosEmpresarial(body);
+      } else {
+        response = await datosEmpresa_api.actualizarDatosEmpresarial(body);
+      }
 
       // Manejo de respuestas basado en el estado
       if (response.status === "success") {
@@ -53,10 +59,10 @@ export const useRegistrarInfoEmpresarial = (): FetchState => {
     }
   };
 
-  return { 
-    isLoading, 
-    isError, 
-    message, 
-    execute: registrarDatosEmpresarial 
+  return {
+    isLoading,
+    isError,
+    message,
+    execute: registrarDatosEmpresarial
   };
 };

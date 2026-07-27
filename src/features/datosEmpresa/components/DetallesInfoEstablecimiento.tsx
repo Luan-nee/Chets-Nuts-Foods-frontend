@@ -6,7 +6,7 @@ interface DetallesInfoEstablecimientoProps {
   setShowForm: (p: boolean) => void;
 }
 
-export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoEstablecimientoProps) {
+export default function DetallesInfoEstablecimiento({ setShowForm }: DetallesInfoEstablecimientoProps) {
   const {
     establecimiento,
     isLoading: isLoadingEstablecimiento,
@@ -31,9 +31,9 @@ export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoE
             </p>
           </div>
         </div>
-        <button 
+        <button
           onClick={() => setShowForm(true)}
-        className="flex text-nowrap items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+          className="flex text-nowrap items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
           Editar
         </button>
       </div>
@@ -50,7 +50,7 @@ export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoE
               Establecimiento
             </p>
             <p className="text-sm font-medium text-white break-words">
-              {establecimiento?.nombres || "Sin nombre registrado"}
+              {establecimiento?.nombreestablecimiento || "Sin nombre registrado"}
             </p>
           </div>
           <div className="space-y-1">
@@ -59,7 +59,7 @@ export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoE
             </p>
             <p className="text-sm font-medium text-white break-words">
               {establecimiento
-                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombres || ""}`.trim() || "No registrado"
+                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombreusuario || ""}`.trim() || "No registrado"
                 : "No registrado"}
             </p>
           </div>

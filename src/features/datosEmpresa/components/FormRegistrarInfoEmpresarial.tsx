@@ -1,17 +1,20 @@
 import { User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputText from "../../../components/ui/InputText";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import { useRegistrarInfoEmpresarial } from "../hook/useRegistrarInfoEmpresarial";
+import { useFetchInfoEmpresa } from "../hook/useFetchInfoEmpresa";
 import type { UpdateDatosEmpresa } from "../../../types/datosEmpresa.type";
+import DateTimePicker from "../../../components/ui/SelectDateTime";
 
 interface FormRegistrarInfoEmpresarialProps {
   setShowForm: (p: boolean) => void;
 }
 
-export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistrarInfoEmpresarialProps) {
+export default function FormRegistrarInfoEmpresarial({ setShowForm }: FormRegistrarInfoEmpresarialProps) {
   const { isLoading: isLoadingDatosEmpresa, isError: isErrorDatosEmpresa, execute: registrarDatosEmpresarial } = useRegistrarInfoEmpresarial();
+  const { infoEmpresa, isError } = useFetchInfoEmpresa();
 
   const [formDataEmpresa, setFormDataEmpresa] = useState<UpdateDatosEmpresa>({
     ruc: "",
@@ -20,9 +23,21 @@ export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistra
     correo: "",
     codigoMtc: "",
     fechaVigenciaRegistroMtc: "",
-    urlApi: "https://sandbox.apisunat.pe/api/v3/dispatches",
-    claveAcceso: "537.KqEU17Wl0lzO3jYjhVR2SNfqGnqtKFOvoJa7MRyzTrPHfvqeQFrA3xSAPnXaRRtaYdL0oyKVVagFOoIW2OOtKn735RGiH1sYIPR7Ixr5Dx9fIP54mp286t07"
   });
+
+  useEffect(() => {
+    if (infoEmpresa) {
+      setFormDataEmpresa({
+        ruc: infoEmpresa.ruc || "",
+        denominacion: infoEmpresa.denominacion || "",
+        numeroRegistroMtc: infoEmpresa.numeroRegistroMtc || "",
+        correo: infoEmpresa.correo || "",
+        codigoMtc: infoEmpresa.codigoMtc || "",
+        fechaVigenciaRegistroMtc: infoEmpresa.fechavigenciaregistro || "",
+        claveAcceso: infoEmpresa.claveAcceso || "",
+      });
+    }
+  }, [infoEmpresa]);
 
   return (
     <div className="sehylf-start bg-gray-900 border border-gray-700 rounded-lg p-6">
@@ -58,7 +73,7 @@ export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistra
             (value) => setFormDataEmpresa({ ...formDataEmpresa, correo: value })
           }
         />
-        
+
         {/* denominacion */}
         <InputText
           label="Denominación"
@@ -77,28 +92,39 @@ export default function FormRegistrarInfoEmpresarial({setShowForm}: FormRegistra
             (value) => setFormDataEmpresa({ ...formDataEmpresa, numeroRegistroMtc: value })
           }
         />
-        {/* fecha de vigencia registro MTC */}
+        {/* Código MTC */}
         <InputText
+          label="Código MTC"
+          value={formDataEmpresa.codigoMtc}
+          htmlForm="codigo-mtc"
+          onChange={
+            (value) => setFormDataEmpresa({ ...formDataEmpresa, codigoMtc: value })
+          }
+        />
+        {/* fecha de vigencia registro MTC */}
+        <DateTimePicker
           label="Fecha de Vigencia del Registro en la MTC"
           value={formDataEmpresa.fechaVigenciaRegistroMtc}
-          htmlForm="fecha-vigencia-registro-mtc"
-          onChange={
-            (value) => setFormDataEmpresa({ ...formDataEmpresa, fechaVigenciaRegistroMtc: value })
-          }
+          onChange={(val) => {
+            const formattedDate = val
+              ? `${val.date.getFullYear()}-${String(val.date.getMonth() + 1).padStart(2, '0')}-${String(val.date.getDate()).padStart(2, '0')}`
+              : "";
+            setFormDataEmpresa({ ...formDataEmpresa, fechaVigenciaRegistroMtc: formattedDate });
+          }}
         />
       </div>
       <div className="flex gap-3 pt-4">
-        <ButtonCancelForm 
-          handleCancel={ () => {
+        <ButtonCancelForm
+          handleCancel={() => {
             setShowForm(false)
           }}
           isLoading={isLoadingDatosEmpresa}
           textButton="Cancelar"
           color="red"
         />
-        <ButtonSubmitForm 
+        <ButtonSubmitForm
           handleSubmit={() => {
-            registrarDatosEmpresarial(formDataEmpresa)
+            registrarDatosEmpresarial(formDataEmpresa, isError)
             setShowForm(false)
           }}
           isLoading={isLoadingDatosEmpresa}
