@@ -12,7 +12,7 @@ export default function FormCreate() {
     isError: errorRegistrarSeguimiento,
     execute: registrarSeguimiento
   } = useRegistrarSeguimientoTransporte();
-  const [ , setSelectIdSalidaTransporte ] = useState<number | null>(null);
+  const [ selectIdSalidaTransporte, setSelectIdSalidaTransporte ] = useState<number | null>(null);
   const [ showTableSelectSalidaTransporte, ] = useState<boolean>(false);
   const [ formData, setFormData ] = useState<RegistrarSeguimiento>({
     titulo: "",
@@ -93,17 +93,17 @@ export default function FormCreate() {
         }}
         value={formData.comentario ?? ""}
       />
-      { showTableSelectSalidaTransporte && (
-        <TableSelectSalidaTransporte 
-          onChange={(idSalidaTransporte) => setSelectIdSalidaTransporte(idSalidaTransporte)}
-          selectIdSalidaTransporte={(selectIdSalidaTransporte) => setSelectIdSalidaTransporte(selectIdSalidaTransporte)}
-        />
-      )}
+      
+      <TableSelectSalidaTransporte 
+        onChange={(idSalidaTransporte) => setSelectIdSalidaTransporte(idSalidaTransporte)}
+        selectIdSalidaTransporte={(selectIdSalidaTransporte) => setSelectIdSalidaTransporte(selectIdSalidaTransporte)}
+      />
+      
       {/* Botón */}
       { !showTableSelectSalidaTransporte && (
         <ButtonSubmitForm 
           handleSubmit={async () => {
-            await registrarSeguimiento(formData, 1);
+            await registrarSeguimiento(formData, selectIdSalidaTransporte as number);
             console.log("Formulario enviado:", formData);
           }}
           isError={errorRegistrarSeguimiento}
