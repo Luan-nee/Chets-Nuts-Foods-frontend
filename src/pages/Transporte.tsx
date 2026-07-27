@@ -1,10 +1,11 @@
 import { useState } from "react";
-import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
+import { Navigation } from "lucide-react";
 import FormCreate from "../features/seguimiento/components/FormCreate";
+import Seguimiento from "../features/seguimiento/components/Seguimiento"
 
-export default function Seguimiento() {
-  const [, setShowFormCreate] = useState<boolean>(false);
-  const [, setSelectedSalidaTransporte] = useState<number | null>(null);
+export default function Transporte() {
+  const [showFormSeguimiento, setShowFormSeguimiento] = useState<boolean>(true);
+  const [showSeguimiento, setShowSeguimiento] = useState<boolean>(false);
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -20,15 +21,40 @@ export default function Seguimiento() {
         </div>
       </div>
 
-      <TableSelectSalidaTransporte
-        onChange={(selectedId) => {
-          console.log("Selected Salida Transporte ID:", selectedId);
-        }}
-        selectIdSalidaTransporte={setSelectedSalidaTransporte}
-      />
-      <FormCreate 
-        setShowFormCreateEmpleado={setShowFormCreate}
-      />
+      <div className="grid grid-cols-2 gap-4 p-2">
+        <button 
+          onClick={() => {
+            setShowFormSeguimiento(false)
+            setShowSeguimiento(true)
+          }}
+          className="flex items-center justify-center gap-2 
+          bg-yellow-600 hover:bg-yellow-700 
+          text-white px-5 py-4 rounded-lg font-medium transition-colors"
+        >
+          <Navigation className="w-4 h-4 text-white"/>
+          Realizar seguimiento
+        </button>
+        <button 
+          onClick={() => {
+            setShowFormSeguimiento(true)
+            setShowSeguimiento(false)
+          }}
+          className="flex items-center justify-center gap-2 
+          bg-green-600 hover:bg-green-700 
+          text-white px-5 py-2 rounded-lg font-medium transition-colors"
+        >
+          <Navigation className="w-4 h-4 text-white"/>
+          Registrar seguimiento
+        </button>
+      </div>
+
+
+      { showFormSeguimiento && (
+        <FormCreate />
+      )} 
+      { showSeguimiento && (
+        <Seguimiento />
+      )} 
     </div>
   );
 }

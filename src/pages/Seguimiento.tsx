@@ -138,51 +138,6 @@ export default function Seguimiento() {
             </div>
           </div>
         </ContentSectionProcess>
-        {/* Map Section */}
-        <div className="bg-[#161b22] border border-[#30363d] rounded-lg overflow-hidden">
-          <div className="bg-[#21262d] p-4">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[#1f6feb]" />
-              <h3 className="font-bold uppercase text-sm">Ubicación Actual</h3>
-            </div>
-          </div>
-          <div className="h-64 bg-[#0d1117] relative">
-            {/* Map Placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-[#1f6feb] mx-auto mb-3" />
-                <p className="text-lg font-bold">
-                  Panamericana Norte KM 780, Lambayeque
-                </p>
-                <p className="text-sm text-gray-500 mt-1">
-                  Última actualización: hace 15 minutos
-                </p>
-              </div>
-            </div>
-            {/* Simple map grid pattern */}
-            <svg
-              className="absolute inset-0 w-full h-full opacity-5"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <pattern
-                  id="grid"
-                  width="40"
-                  height="40"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <path
-                    d="M 40 0 L 0 0 0 40"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                  />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </div>
-        </div>
       </div>
     </div>
   );
