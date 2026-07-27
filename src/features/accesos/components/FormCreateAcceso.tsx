@@ -10,10 +10,10 @@ import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import { sexos, tiposPersona } from "../../../config/constantes";
 import { useFetchBasicDataByDni } from "../../../hooks/useFetchBasicDataByDni";
-import type { 
-  UserGender as sexoEmpleado, 
-  UserType as tipoPersona, 
-  UserRole as empleadoRol 
+import type {
+  UserGender as sexoEmpleado,
+  UserType as tipoPersona,
+  UserRole as empleadoRol
 } from "../../../types/constantes.type";
 import type { CreateAcceso } from "../../../types/accesos.type";
 import { useFetchRoles } from "../hooks/useFetchRoles";
@@ -25,20 +25,20 @@ interface FormCreateEmpleadoProps {
   setShowFormCreateEmpleado: (p: boolean) => void;
 }
 
-export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpleadoProps ) {
+export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpleadoProps) {
   const {
-    roles, 
-    isLoading: cargandoRoles, 
+    roles,
+    isLoading: cargandoRoles,
     isError: errorRoles,
-    execute: recargarRoles 
+    execute: recargarRoles
   } = useFetchRoles();
-  const { 
-    isLoading: cargandoCreateEmpleado, 
-    message: messageCreateAcceso, 
-    execute: crearAcceso 
+  const {
+    isLoading: cargandoCreateEmpleado,
+    message: messageCreateAcceso,
+    execute: crearAcceso
   } = useCreateAcceso();
 
-  const [ formData, setFormData ] = useState<CreateAcceso>({
+  const [formData, setFormData] = useState<CreateAcceso>({
     password: '',
     tipos: 'ADMIN',
     correo: '',
@@ -64,7 +64,9 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
         ...prev,
         nombre: basicData.nombres ?? '',
         apellidopaterno: basicData.apellido_paterno ?? '',
-        apellidomaterno: basicData.apellido_materno ?? ''
+        apellidomaterno: basicData.apellido_materno ?? '',
+        edad: basicData.edad ?? 0,
+        sexo: basicData.sexo ?? "MASCULINO"
       }));
       return;
     }
@@ -100,8 +102,8 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
 
   const handleSubmit = async () => {
     // Validar campos requeridos
-    if (!formData.nombre || !formData.apellidopaterno || !formData.apellidomaterno || 
-        !formData.dni || !formData.correo || !formData.numero || formData.edad === 0) {
+    if (!formData.nombre || !formData.apellidopaterno || !formData.apellidomaterno ||
+      !formData.dni || !formData.correo || !formData.numero || formData.edad === 0) {
       InfoError('Validación', 'Por favor completa todos los campos requeridos');
       return;
     }
@@ -126,7 +128,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
   return (
     <ContentPage>
       {/* Header */}
-      <HeaderFormPage 
+      <HeaderFormPage
         setShowForm={setShowFormCreateEmpleado}
         title="Registro de nuevo empleado"
         description="Ingresa los datos del nuevo empleado para agregarlo al sistema. Asegúrate de proporcionar información precisa y completa."
@@ -185,13 +187,13 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
 
           {/* Row 4: Edad, Sexo, Tipo */}
           <div className="grid grid-cols-3 gap-6">
-            <InputPhoneNumber 
+            <InputPhoneNumber
               label="Número de teléfono"
               defaultValue={0}
               placeholder="Ingrese el número de teléfono"
               onChange={(value) => setFormData(prev => ({ ...prev, numero: value.toString() }))}
             />
-            <InputSelect 
+            <InputSelect
               label="Sexo"
               options={sexos}
               placeholder="Seleccione el sexo del empleado"
@@ -226,7 +228,7 @@ export default function FormCreate({ setShowFormCreateEmpleado }: FormCreateEmpl
               label="Contraseña generada automáticamente"
               value={formData.password}
               htmlForm="password"
-              onChange={() => {}} // Solo lectura
+              onChange={() => { }} // Solo lectura
             />
           </div>
 

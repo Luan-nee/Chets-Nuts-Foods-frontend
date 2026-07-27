@@ -64,13 +64,13 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return prev.map(acceso =>
           acceso.idacceso === accesoVal.idacceso
             ? {
-                ...acceso,
-                correo: accesoVal.correo || acceso.correo,
-                estado: accesoVal.estado,
-                tipos: accesoVal.tipos,
-                nombres: accesoVal.nombres,
-                dniuser: accesoVal.dniuser
-              }
+              ...acceso,
+              correo: accesoVal.correo || acceso.correo,
+              estado: accesoVal.estado,
+              tipos: accesoVal.tipos,
+              nombres: accesoVal.nombres,
+              dniuser: accesoVal.dniuser
+            }
             : acceso
         );
       }
@@ -94,11 +94,11 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
       prev.map(acceso =>
         acceso.idacceso === accesoVal.idacceso
           ? {
-              ...acceso,
-              correo: accesoVal.correo ? accesoVal.correo : acceso.correo,
-              estado: accesoVal.estado !== undefined ? accesoVal.estado : acceso.estado,
-              tipos: accesoVal.tipos ? accesoVal.tipos : acceso.tipos
-            }
+            ...acceso,
+            correo: accesoVal.correo ? accesoVal.correo : acceso.correo,
+            estado: accesoVal.estado !== undefined ? accesoVal.estado : acceso.estado,
+            tipos: accesoVal.tipos ? accesoVal.tipos : acceso.tipos
+          }
           : acceso
       )
     );
@@ -191,7 +191,6 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return { status: false, message: updatedAcceso.message };
       }
 
-      // Actualizar caché de lista
       udpateAccesoType({
         correo: data.correo,
         estado: data.estado,
@@ -199,7 +198,6 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
         idacceso: data.idacceso
       });
 
-      // Actualizar caché de detalles si existe
       setDetailCache(prev => {
         if (!prev[data.idacceso]) return prev;
         return {
@@ -238,7 +236,7 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const getAllAccesos = async (page: number) => {
-    if (paginasCargadas.includes(page)) {
+    if (paginasCargadas.includes(page) && page !== 0) {
       const inicio = (page - 1) * 10;
       const final = inicio + 10;
       const dataPagina = accesos.slice(inicio, final);
