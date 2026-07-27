@@ -1,0 +1,91 @@
+/* CSS transitions and animations for paginated tables */
+
+.table-transition {
+  transition: opacity 180ms ease, transform 180ms ease, filter 180ms ease;
+}
+
+/* Exit transition: opacity 1 to 0, scale 1 to 0.97, translateY 0 to 8px, blur 0 to 4px over 150-200ms */
+.table-transition-exiting {
+  opacity: 0 !important;
+  transform: scale(0.97) translateY(8px) !important;
+  filter: blur(4px) !important;
+  transition: opacity 180ms ease-in, transform 180ms ease-in, filter 180ms ease-in !important;
+}
+
+/* Entry transition: opacity 0 to 1, scale 0.98 to 1, translateY -8px to 0, blur 4px to 0 over 220-280ms */
+.table-transition-entering {
+  animation: tableEnter 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+@keyframes tableEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-8px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Staggered row entry animation: opacity 0 to 1, translateY 10px to 0 */
+.table-transition-entering tbody tr,
+.table-transition tbody tr.row-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: rowFadeIn 350ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes rowFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Delays: 30ms progressive delay per row (between 25ms and 40ms) */
+.table-transition-entering tbody tr:nth-child(1), .table-transition tbody tr.row-enter:nth-child(1) { animation-delay: 0ms; }
+.table-transition-entering tbody tr:nth-child(2), .table-transition tbody tr.row-enter:nth-child(2) { animation-delay: 30ms; }
+.table-transition-entering tbody tr:nth-child(3), .table-transition tbody tr.row-enter:nth-child(3) { animation-delay: 60ms; }
+.table-transition-entering tbody tr:nth-child(4), .table-transition tbody tr.row-enter:nth-child(4) { animation-delay: 90ms; }
+.table-transition-entering tbody tr:nth-child(5), .table-transition tbody tr.row-enter:nth-child(5) { animation-delay: 120ms; }
+.table-transition-entering tbody tr:nth-child(6), .table-transition tbody tr.row-enter:nth-child(6) { animation-delay: 150ms; }
+.table-transition-entering tbody tr:nth-child(7), .table-transition tbody tr.row-enter:nth-child(7) { animation-delay: 180ms; }
+.table-transition-entering tbody tr:nth-child(8), .table-transition tbody tr.row-enter:nth-child(8) { animation-delay: 210ms; }
+.table-transition-entering tbody tr:nth-child(9), .table-transition tbody tr.row-enter:nth-child(9) { animation-delay: 240ms; }
+.table-transition-entering tbody tr:nth-child(10), .table-transition tbody tr.row-enter:nth-child(10) { animation-delay: 270ms; }
+
+/* Page transition container style */
+.page-transition {
+  transition: opacity 180ms ease, transform 180ms ease, filter 180ms ease;
+  width: 100%;
+  height: 100%;
+}
+
+/* Page Exit transition: opacity 1 to 0, scale 1 to 0.97, translateY 0 to 8px, blur 0 to 4px over 150-200ms */
+.page-transition-exiting {
+  opacity: 0 !important;
+  transform: scale(0.97) translateY(8px) !important;
+  filter: blur(4px) !important;
+  transition: opacity 180ms ease-in, transform 180ms ease-in, filter 180ms ease-in !important;
+}
+
+/* Page Entry transition: opacity 0 to 1, scale 0.98 to 1, translateY -8px to 0, blur 4px to 0 over 220-280ms */
+.page-transition-entering {
+  animation: pageEnter 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(-8px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}

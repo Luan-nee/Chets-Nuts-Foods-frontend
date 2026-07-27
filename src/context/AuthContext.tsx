@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import type { UserRole } from '../types/constantes.type';
+import { DIRACCESOSLOCAL } from '../const';
 
 type AuthState = {
   user: string | null;
@@ -40,7 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (rol) {
       localStorage.setItem('rol', rol);
-    } else {  
+    } else {
       localStorage.removeItem('rol');
     }
   };
@@ -56,6 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
+    localStorage.removeItem(DIRACCESOSLOCAL);
   };
 
   return (

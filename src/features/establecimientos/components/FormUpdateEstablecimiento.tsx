@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Building2 } from "lucide-react";
+import { Building2, UserCheck } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
@@ -16,6 +16,8 @@ import { useFetchEstablecimiento } from "../hooks/useFetchEstablecimiento";
 import { useUpdateEstablecimiento } from "../hooks/useUpdateEstablecimiento";
 import type { UpdateEstablecimiento } from "../../../types/establecimiento.type";
 import type { TipoEstablecimiento } from "../../../types/constantes.type";
+import ModalSelectResponsable from "./ModalSelectResponsable";
+import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 
 interface FormUpdateEstablecimientoProps {
 	idEstablecimiento: number | null;
@@ -66,6 +68,29 @@ export default function FormUpdateEstablecimiento({
 		codigoSunat: "",
 	});
 
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
+	const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
+
+	const openModal = () => {
+		setIsModalOpen(true);
+		setIsAnimatingClose(false);
+	};
+
+	const closeModal = () => {
+		setIsAnimatingClose(true);
+		setTimeout(() => {
+			setIsModalOpen(false);
+			setIsAnimatingClose(false);
+		}, 250);
+	};
+
+	const handleSelect = (acceso: ResponseGetAllColaboradores) => {
+		setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
+		setSelectedResponsableName(acceso.nombres);
+		closeModal();
+	};
+
 	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento ?? "");
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento ?? "", formData.provincia ?? "");
 
@@ -75,6 +100,7 @@ export default function FormUpdateEstablecimiento({
 				idEstablecimiento: establecimiento.idEst,
 				idResponsable: establecimiento.iduser,
 				nombreEstablecimiento: establecimiento.nombreestablecimiento ?? "",
+				direccion: "",
 				descripcion: establecimiento.descripcion ?? "",
 				latitud: establecimiento.latitud ?? "",
 				longitud: establecimiento.longitud ?? "",
@@ -85,6 +111,11 @@ export default function FormUpdateEstablecimiento({
 				tipoEstado: establecimiento.tipoestablecimiento ?? "no_registrado",
 				codigoSunat: establecimiento.codigoSunat ?? "",
 			});
+			setSelectedResponsableName(
+				establecimiento.nombreusuario
+					? `${establecimiento.nombreusuario} ${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""}`.trim()
+					: "Sin responsable asignado"
+			);
 			setFormReady(true);
 		}
 	}, [establecimiento]);
@@ -147,6 +178,31 @@ export default function FormUpdateEstablecimiento({
 								onSelect={(value) => setFormData((prev) => ({ ...prev, tipoEstado: value as TipoEstablecimiento }))}
 								valueSelected={formData.tipoEstado}
 							/>
+						</div>
+
+						<div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+							<div className="flex flex-col">
+								<label className="block text-sm font-medium text-gray-300 mb-1">
+									Responsable del área
+								</label>
+								<div className="flex gap-2">
+									<input
+										type="text"
+										readOnly
+										placeholder="Ninguno seleccionado"
+										value={selectedResponsableName}
+										className="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none"
+									/>
+									<button
+										type="button"
+										onClick={openModal}
+										className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 border border-blue-500/10 shadow-sm"
+									>
+										<UserCheck className="w-4 h-4" />
+										<span>Seleccionar responsable</span>
+									</button>
+								</div>
+							</div>
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -251,6 +307,15 @@ export default function FormUpdateEstablecimiento({
 					</div>
 				</div>
 			</ContentSectionProcess>
+
+			<ModalSelectResponsable
+				isOpen={isModalOpen}
+				isAnimatingClose={isAnimatingClose}
+				selectedId={formData.idResponsable ?? null}
+				onClose={closeModal}
+				onSelect={handleSelect}
+			/>
 		</ContentPage>
 	);
 }
+

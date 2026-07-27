@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Accesos from "../../../api/Accesos.api";
+import { useAccesosContext } from "../../../context/AccesosContext";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 import type {
   BodyResponseWithPagination,
@@ -20,50 +20,44 @@ interface FetchState {
 }
 
 export const useFetchAccesos = (): FetchState => {
-  const accesos_api = new Accesos();
-  const [accesos, setAccesos] = useState<ResponseGetAllColaboradores[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { accesos: contextAccesos, getAllAccesos, paginacion: contextPaginacion, loading } = useAccesosContext();
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [pagina, setPagina] = useState<number>(1);
-  const [infoPaginacion, setInfoPaginacion] = useState<PaginationInfo>({
-    total_data: 0,
-    total_paginas: 0,
-    pagina_actual: 1,
-    datos_por_pagina: 0,
-  });
 
-  const getAccesos = async (pagina: number): Promise<
+  const getAccesos = async (paginaNum: number): Promise<
     BodyResponseWithPagination<ResponseGetAllColaboradores[]>
   > => {
     try {
-      setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await accesos_api.getAllColaboradores(pagina);
+      const response = await getAllAccesos(paginaNum);
 
-      // Manejo de respuestas basado en el estado
-      if (response.status === "success") {
-        setMessage("Accesos obtenidos exitosamente");
-        setAccesos(response.data ?? []); // Aseguramos que accesos sea un array, incluso si data es undefined
-        setInfoPaginacion(response.pagination);
-        return response;
+      if (response.status) {
+        setMessage(response.message);
+        return {
+          status: "success",
+          message: response.message,
+          data: response.data as ResponseGetAllColaboradores[],
+          pagination: response.pagination || contextPaginacion,
+        };
       } else {
         setIsError(true);
-        setMessage("Error al obtener los accesos");
-        return response;
+        setMessage(response.message || "Error al obtener los accesos");
+        return {
+          status: "error",
+          message: response.message || "Error al obtener los accesos",
+          pagination: contextPaginacion,
+        };
       }
     } catch (error: any) {
       setIsError(true);
-      setMessage("Se produjo un error al obtener los accesos en el frontend");
       return {
         status: "error",
         message: "Error al obtener los accesos",
-        pagination: infoPaginacion,
+        pagination: contextPaginacion,
       };
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -71,13 +65,17 @@ export const useFetchAccesos = (): FetchState => {
     getAccesos(pagina);
   }, [pagina]);
 
+  const inicio = (pagina - 1) * 10;
+  const final = inicio + 10;
+  const pageAccesos = contextAccesos.slice(inicio, final);
+
   return {
-    accesos,
-    isLoading,
+    accesos: pageAccesos as ResponseGetAllColaboradores[],
+    isLoading: loading,
     isError,
     message,
     execute: getAccesos,
     setPagina,
-    infoPaginacion,
+    infoPaginacion: contextPaginacion,
   };
 };
