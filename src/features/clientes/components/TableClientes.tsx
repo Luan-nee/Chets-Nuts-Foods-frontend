@@ -22,7 +22,8 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
     "Apellido Paterno",
     "Apellido Materno",
     "DNI",
-    "cantidad de compras"
+    "RUC",
+    ""
   ];
 
   return (
@@ -48,7 +49,7 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
             <tr key={index} className="hover:bg-gray-800/50 transition-colors">
               {/* NUMERO */}
               <td className="px-6 py-4">
-                <span className="text-sm text-gray-400">{index}</span>
+                <span className="text-sm text-gray-400">{index + 1}</span>
               </td>
 
               {/* Nombres */}
@@ -82,7 +83,7 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
               {/* RUC */}
               <td className="px-6 py-4">
                 <span className="text-sm text-gray-300">
-                  {cliente.cantenvios}
+                  {cliente.rucuser || "N/A"}
                 </span>
               </td>
 

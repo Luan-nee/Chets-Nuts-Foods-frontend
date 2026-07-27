@@ -50,7 +50,7 @@ export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoE
               Establecimiento
             </p>
             <p className="text-sm font-medium text-white break-words">
-              {establecimiento?.nombres || "Sin nombre registrado"}
+              {establecimiento?.nombreestablecimiento || "Sin nombre registrado"}
             </p>
           </div>
           <div className="space-y-1">
@@ -59,7 +59,7 @@ export default function DetallesInfoEstablecimiento({setShowForm}: DetallesInfoE
             </p>
             <p className="text-sm font-medium text-white break-words">
               {establecimiento
-                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombres || ""}`.trim() || "No registrado"
+                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombreusuario || ""}`.trim() || "No registrado"
                 : "No registrado"}
             </p>
           </div>
