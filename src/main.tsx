@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Toaster } from "sonner";
 import AppRoutes from "./routes/AppRoutes";
 import "./index.css";
+import "./styleGlobal.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
