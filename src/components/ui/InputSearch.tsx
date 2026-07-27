@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Usuarios from "../../api/Usuarios.api";
-import type { CreateUsuario } from "../../types/usuarios.type";
-import swalAlert from "../messages/swalAlert";
+import SelectedUserForm from "./SelectedUserForm";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -46,14 +45,6 @@ export default function InputSearch<T>({
   // States for DNI Query (Reniec fallback)
   const [dniLoading, setDniLoading] = useState(false);
   const [dniResult, setDniResult] = useState<any | null>(null);
-
-  // States for selected user extra fields registration
-  const [extraCorreo, setExtraCorreo] = useState("");
-  const [extraEdad, setExtraEdad] = useState<number>(0);
-  const [extraNumero, setExtraNumero] = useState("");
-  const [extraSexo, setExtraSexo] = useState<"MASCULINO" | "FEMENINO">("MASCULINO");
-  const [extraRuc, setExtraRuc] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
 
   const wrapRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -135,23 +126,6 @@ export default function InputSearch<T>({
     [setObjetSelected, selectedAtribute]
   );
 
-  // Sync selected user details into editable extra inputs
-  useEffect(() => {
-    if (selected) {
-      const sel = selected as any;
-      setExtraCorreo(sel.correo || "");
-      setExtraEdad(Number(sel.edad) || 0);
-      setExtraNumero(sel.numero || sel.telefono || "");
-      setExtraSexo(sel.sexo === "FEMENINO" ? "FEMENINO" : "MASCULINO");
-      setExtraRuc(sel.ruc || sel.rucuser || "");
-    } else {
-      setExtraCorreo("");
-      setExtraEdad(0);
-      setExtraNumero("");
-      setExtraSexo("MASCULINO");
-      setExtraRuc("");
-    }
-  }, [selected]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!isOpen) return;
@@ -197,77 +171,25 @@ export default function InputSearch<T>({
   };
 
   const createMockUserFromDni = (dniData: any): T => {
+    const nombresFull = `${dniData.nombres || ""} ${dniData.apellido_paterno || dniData.apellidopaterno || ""} ${dniData.apellido_materno || dniData.apellidomaterno || ""}`.trim();
     return {
-      iduser: 0,
-      dni: dniData.dni,
-      dniuser: dniData.dni,
-      nombres: `${dniData.nombres} ${dniData.apellido_paterno} ${dniData.apellido_materno}`.trim(),
-      nombre: dniData.nombres,
-      apellidopaterno: dniData.apellido_paterno,
-      apellidomaterno: dniData.apellido_materno,
-      correo: "",
-      numero: "",
-      ruc: "",
-      rucuser: "",
-      edad: 0,
-      sexo: "MASCULINO",
-      tipo: "NATURAL",
+      iduser: dniData.iduser || 0,
+      dni: dniData.dni || dniData.dniuser || "",
+      dniuser: dniData.dni || dniData.dniuser || "",
+      nombres: nombresFull,
+      nombre: dniData.nombres || dniData.nombre || "",
+      apellidopaterno: dniData.apellido_paterno || dniData.apellidopaterno || "",
+      apellidomaterno: dniData.apellido_materno || dniData.apellidomaterno || "",
+      correo: dniData.correo || dniData.corre || "",
+      corre: dniData.correo || dniData.corre || "",
+      numero: dniData.numero || dniData.telefono || "",
+      telefono: dniData.numero || dniData.telefono || "",
+      ruc: dniData.ruc || dniData.rucuser || "",
+      rucuser: dniData.ruc || dniData.rucuser || "",
+      edad: dniData.edad || 0,
+      sexo: dniData.sexo === "FEMENINO" ? "FEMENINO" : "MASCULINO",
+      tipo: dniData.tipo || "NATURAL",
     } as unknown as T;
-  };
-
-  const handleRegister = async () => {
-    if (!selected) return;
-    const sel = selected as any;
-    
-    const body: CreateUsuario = {
-      nombre: sel.nombre || sel.nombres || "",
-      apellidomaterno: sel.apellidomaterno || "",
-      apellidopaterno: sel.apellidopaterno || "",
-      dni: sel.dni || sel.dniuser || "",
-      numero: extraNumero,
-      ruc: extraRuc.trim() ? extraRuc.trim() : undefined,
-      edad: Number(extraEdad),
-      sexo: extraSexo,
-      correo: extraCorreo,
-      tipo: sel.tipo || "NATURAL",
-    };
-
-    try {
-      setIsRegistering(true);
-      const api = new Usuarios();
-      const res = await api.create(body);
-      if (res.status === "success") {
-        swalAlert({
-          status: "success",
-          message: "Usuario registrado/actualizado exitosamente"
-        });
-        
-        if (res.data) {
-          const apiData = res.data as any;
-          const updatedUser = {
-            ...selected,
-            ...apiData,
-            iduser: apiData.iduser || sel.iduser || 0,
-            nombres: sel.nombres || apiData.nombre,
-          } as T;
-          
-          setSelected(updatedUser);
-          setObjetSelected(updatedUser);
-        }
-      } else {
-        swalAlert({
-          status: "error",
-          message: res.message || "Error al registrar el usuario"
-        });
-      }
-    } catch (e: any) {
-      swalAlert({
-        status: "warning",
-        message: e.message || "Error de red al registrar el usuario"
-      });
-    } finally {
-      setIsRegistering(false);
-    }
   };
 
   const highlightMatch = (text: string) => {
@@ -302,6 +224,7 @@ export default function InputSearch<T>({
         {/* Attribute selector */}
         <div className="relative flex-shrink-0">
           <button
+            type="button"
             onClick={() => {
               setAtributeDropdownOpen((o) => !o);
               setIsOpen(false);
@@ -329,6 +252,7 @@ export default function InputSearch<T>({
               {atributes.map((attr) => (
                 <button
                   key={attr}
+                  type="button"
                   onClick={() => handleAtributeSelect(attr)}
                   className={[
                     "w-full text-left px-3.5 py-2 text-sm transition-colors whitespace-nowrap flex items-center gap-2",
@@ -375,6 +299,7 @@ export default function InputSearch<T>({
         {/* Clear button */}
         {query && (
           <button
+            type="button"
             onClick={handleClear}
             className="pr-3 text-slate-500 hover:text-slate-300 transition-colors flex-shrink-0"
             aria-label="Limpiar búsqueda"
@@ -408,6 +333,7 @@ export default function InputSearch<T>({
               <ul>
                 <li>
                   <button
+                    type="button"
                     onClick={() => handleSelect(createMockUserFromDni(dniResult))}
                     className="w-full text-left px-3.5 py-3 flex items-start gap-3 transition-colors bg-indigo-500/10 hover:bg-indigo-500/20"
                   >
@@ -450,6 +376,7 @@ export default function InputSearch<T>({
                   return (
                     <li key={idx}>
                       <button
+                        type="button"
                         onClick={() => handleSelect(obj)}
                         onMouseEnter={() => setHighlightedIndex(idx)}
                         className={[
@@ -502,105 +429,15 @@ export default function InputSearch<T>({
 
       {/* Selected result card & extra registration form */}
       {selected && (
-        <div className="flex flex-col gap-4 bg-[#1a2030] border border-indigo-500/30 rounded-xl px-5 py-4 mt-2">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 12 12" fill="none" className="w-4 h-4 text-indigo-400">
-                <path d="M1.5 6.5L4.5 9.5L10.5 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs text-indigo-400 font-medium mb-1">Objeto seleccionado</p>
-              <div className="flex flex-wrap gap-x-4 gap-y-0.5">
-                {atributes.map((attr) => (
-                  <p key={attr} className="text-xs text-slate-400 truncate">
-                    <span className="text-slate-500">{attr}: </span>
-                    <span className="text-slate-300">{getValueByKey(selected, attr)}</span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-[#2d3748] pt-4">
-            <p className="text-xs font-semibold text-slate-300 mb-3 uppercase tracking-wider">Completar Datos de Registro / Modificar</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end">
-              {/* Correo */}
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] font-medium text-slate-400">Correo</label>
-                <input
-                  type="email"
-                  value={extraCorreo}
-                  onChange={(e) => setExtraCorreo(e.target.value)}
-                  placeholder="ejemplo@correo.com"
-                  className="bg-[#21283b] border border-[#2d3748] rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:border-indigo-500/60 transition-colors"
-                />
-              </div>
-
-              {/* Edad */}
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] font-medium text-slate-400">Edad</label>
-                <input
-                  type="number"
-                  value={extraEdad || ""}
-                  onChange={(e) => setExtraEdad(Number(e.target.value))}
-                  placeholder="Edad"
-                  className="bg-[#21283b] border border-[#2d3748] rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:border-indigo-500/60 transition-colors"
-                />
-              </div>
-
-              {/* Numero */}
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] font-medium text-slate-400">Número</label>
-                <input
-                  type="text"
-                  value={extraNumero}
-                  onChange={(e) => setExtraNumero(e.target.value)}
-                  placeholder="Número de celular"
-                  className="bg-[#21283b] border border-[#2d3748] rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:border-indigo-500/60 transition-colors"
-                />
-              </div>
-
-              {/* Sexo */}
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] font-medium text-slate-400">Sexo</label>
-                <select
-                  value={extraSexo}
-                  onChange={(e) => setExtraSexo(e.target.value as "MASCULINO" | "FEMENINO")}
-                  className="bg-[#21283b] border border-[#2d3748] rounded-lg px-3 py-2.5 text-sm text-slate-200 outline-none focus:border-indigo-500/60 transition-colors"
-                >
-                  <option value="MASCULINO">MASCULINO</option>
-                  <option value="FEMENINO">FEMENINO</option>
-                </select>
-              </div>
-
-              {/* Ruc */}
-              <div className="flex flex-col gap-1">
-                <label className="text-[11px] font-medium text-slate-400">RUC</label>
-                <input
-                  type="text"
-                  value={extraRuc}
-                  onChange={(e) => setExtraRuc(e.target.value)}
-                  placeholder="RUC (opcional)"
-                  className="bg-[#21283b] border border-[#2d3748] rounded-lg px-3 py-2 text-sm text-slate-200 outline-none focus:border-indigo-500/60 transition-colors"
-                />
-              </div>
-
-              {/* Button */}
-              <div>
-                <button
-                  type="button"
-                  onClick={handleRegister}
-                  disabled={isRegistering}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-md border border-indigo-500/20"
-                >
-                  {isRegistering ? "Registrando..." : "Registrar / Add"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SelectedUserForm
+          selected={selected}
+          atributes={atributes}
+          onRegisterSuccess={(updatedUser) => {
+            setSelected(updatedUser);
+            setObjetSelected(updatedUser);
+          }}
+        />
       )}
     </div>
   );
-}
+}
