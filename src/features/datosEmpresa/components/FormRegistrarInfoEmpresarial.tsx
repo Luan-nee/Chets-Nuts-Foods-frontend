@@ -23,6 +23,7 @@ export default function FormRegistrarInfoEmpresarial({ setShowForm }: FormRegist
     correo: "",
     codigoMtc: "",
     fechaVigenciaRegistroMtc: "",
+    claveAcceso: "",
   });
 
   useEffect(() => {
@@ -112,6 +113,15 @@ export default function FormRegistrarInfoEmpresarial({ setShowForm }: FormRegist
             setFormDataEmpresa({ ...formDataEmpresa, fechaVigenciaRegistroMtc: formattedDate });
           }}
         />
+        {/* Código de acceso */}
+        <InputText
+          label="Token de acceso"
+          value={formDataEmpresa.claveAcceso || ""}
+          htmlForm="token-acceso"
+          onChange={
+            (value) => setFormDataEmpresa({ ...formDataEmpresa, claveAcceso: value })
+          }
+        />
       </div>
       <div className="flex gap-3 pt-4">
         <ButtonCancelForm
@@ -123,8 +133,8 @@ export default function FormRegistrarInfoEmpresarial({ setShowForm }: FormRegist
           color="red"
         />
         <ButtonSubmitForm
-          handleSubmit={() => {
-            registrarDatosEmpresarial(formDataEmpresa, isError)
+          handleSubmit={async () => {
+            await registrarDatosEmpresarial(formDataEmpresa, isError)
             setShowForm(false)
           }}
           isLoading={isLoadingDatosEmpresa}
