@@ -42,4 +42,6 @@ export type ResponseGetDataBasicByDni = {
   nombres: string;
   apellido_paterno: string;
   apellido_materno: string;
+  edad?: number,
+  sexo?: "MASCULINO" | "FEMENINO"
 }
