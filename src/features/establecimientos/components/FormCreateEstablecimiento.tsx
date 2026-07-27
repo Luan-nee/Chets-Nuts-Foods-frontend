@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Building2 } from "lucide-react";
+import { Building2, UserCheck } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
@@ -13,6 +13,8 @@ import {
 } from "../../../config/infoUbicacion";
 import { useCreateEstablecimiento } from "../hooks/useCreateEstablecimiento";
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
+import ModalSelectResponsable from "./ModalSelectResponsable";
+import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 
 interface FormCreateEstablecimientoProps {
 	setShowFormCreateEstablecimiento: (value: boolean) => void;
@@ -42,6 +44,29 @@ export default function FormCreateEstablecimiento({
 		codigoSunat: "affe",
 	});
 
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
+	const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
+
+	const openModal = () => {
+		setIsModalOpen(true);
+		setIsAnimatingClose(false);
+	};
+
+	const closeModal = () => {
+		setIsAnimatingClose(true);
+		setTimeout(() => {
+			setIsModalOpen(false);
+			setIsAnimatingClose(false);
+		}, 250);
+	};
+
+	const handleSelect = (acceso: ResponseGetAllColaboradores) => {
+		setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
+		setSelectedResponsableName(acceso.nombres);
+		closeModal();
+	};
+
 	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento);
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento, formData.provincia);
 
@@ -65,13 +90,35 @@ export default function FormCreateEstablecimiento({
 				</div>
 
 				<div className="space-y-6">
-					<div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<InputText
 							label="Nombre del establecimiento"
 							value={formData.nombreEstablecimiento}
 							htmlForm="nombreEstablecimiento"
 							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
 						/>
+						<div className="flex flex-col">
+							<label className="block text-sm font-medium text-gray-300 mb-1">
+								Responsable del área
+							</label>
+							<div className="flex gap-2">
+								<input
+									type="text"
+									readOnly
+									placeholder="Ninguno seleccionado"
+									value={selectedResponsableName}
+									className="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none"
+								/>
+								<button
+									type="button"
+									onClick={openModal}
+									className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 border border-blue-500/10 shadow-sm"
+								>
+									<UserCheck className="w-4 h-4" />
+									<span>Seleccionar responsable</span>
+								</button>
+							</div>
+						</div>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -151,6 +198,16 @@ export default function FormCreateEstablecimiento({
 					</div>
 				</div>
 			</div>
+
+			<ModalSelectResponsable
+				isOpen={isModalOpen}
+				isAnimatingClose={isAnimatingClose}
+				selectedId={formData.idResponsable}
+				onClose={closeModal}
+				onSelect={handleSelect}
+			/>
 		</ContentPage>
 	);
 }
+
+
