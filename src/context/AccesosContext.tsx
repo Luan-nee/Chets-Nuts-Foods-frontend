@@ -53,73 +53,36 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
     datos_por_pagina: 10,
   });
 
-  // Caché de detalles por ID para conservar contra, fechaCreacion, etc.
-  const [detailCache, setDetailCache] = useState<Record<number, ResponseGetByID>>({});
-
-  function getByIDtype(accesoVal: ResponseGetByID) {
+  function getByIDtype(accesoVal: AccesosUser) {
     if (!accesoVal) return;
     setAccesos(prev => {
-      const existe = prev.some(s => s.idacceso === accesoVal.idacceso);
-      if (existe) {
-        return prev.map(acceso =>
-          acceso.idacceso === accesoVal.idacceso
-            ? {
-              ...acceso,
-              correo: accesoVal.correo || acceso.correo,
-              estado: accesoVal.estado,
-              tipos: accesoVal.tipos,
-              nombres: accesoVal.nombres,
-              dniuser: accesoVal.dniuser
-            }
-            : acceso
-        );
-      }
-      return [
-        {
-          correo: accesoVal.correo || "",
-          dniuser: accesoVal.dniuser,
-          estado: accesoVal.estado,
-          estadoacceso: "DISPONIBLE", // valor por defecto
-          idacceso: accesoVal.idacceso,
-          nombres: accesoVal.nombres,
-          tipos: accesoVal.tipos
-        },
-        ...prev
-      ];
-    });
-  }
+      let existe = false;
 
-  function udpateAccesoType(accesoVal: Partial<AccesosUser>) {
-    setAccesos(prev =>
-      prev.map(acceso =>
-        acceso.idacceso === accesoVal.idacceso
-          ? {
+      const nuevosDatos = prev.map(acceso => {
+        if (acceso.idacceso === accesoVal.idacceso) {
+          existe = true;
+          return {
             ...acceso,
-            correo: accesoVal.correo ? accesoVal.correo : acceso.correo,
+            ...accesoVal,
+            tipos: accesoVal.tipos || acceso.tipos,
             estado: accesoVal.estado !== undefined ? accesoVal.estado : acceso.estado,
-            tipos: accesoVal.tipos ? accesoVal.tipos : acceso.tipos
+            correo: accesoVal.correo || acceso.correo,
           }
-          : acceso
-      )
-    );
-  }
+        }
+        return acceso;
+      });
 
-  useEffect(() => {
-    localStorage.setItem(DIRACCESOSLOCAL, JSON.stringify(accesos));
-  }, [accesos]);
+      if (existe) return nuevosDatos;
+      return [accesoVal, ...prev];
+    });
+  };
 
   useEffect(() => {
     if (!socket) return;
 
     const onServerUserAcceso = (data: AccesosUser) => {
-      setAccesos(prev => {
-        if (prev.some(s => s.idacceso === data.idacceso)) return prev;
-        return [data, ...prev];
-      });
-      setPaginacion(prev => ({
-        ...prev,
-        total_data: prev.total_data + 1
-      }));
+      console.log(data);
+      getByIDtype(data)
     };
 
     const disconnet = (reason: any) => {
@@ -135,11 +98,11 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
       });
     };
 
-    socket.on("server:newAccess", onServerUserAcceso);
+    socket.on("server::newAcceso", onServerUserAcceso);
     socket.on("disconnect", disconnet);
 
     return () => {
-      socket.off("server:newAccess", onServerUserAcceso);
+      socket.off("server::newAcceso", onServerUserAcceso);
       socket.off("disconnect", disconnet);
     };
   }, [socket]);
@@ -160,11 +123,6 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const getByID = async (id: number) => {
-    // 1. Buscar en la caché de detalles
-    if (detailCache[id]) {
-      return { status: true, message: "Acceso obtenido de caché", data: detailCache[id] };
-    }
-
     try {
       setLoading(true);
       const data = await consultas.getByID(id);
@@ -172,9 +130,16 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return { status: false, message: data.message };
       }
       const accesoVal = data.data;
-      getByIDtype(accesoVal);
-      // Guardar en la caché de detalles
-      setDetailCache(prev => ({ ...prev, [id]: accesoVal }));
+      const dataNew: AccesosUser = {
+        idacceso: accesoVal.idacceso,
+        correo: accesoVal.correo || "",
+        dniuser: accesoVal.dniuser,
+        estado: accesoVal.estado,
+        nombres: accesoVal.nombres,
+        tipos: accesoVal.tipos,
+        estadoacceso: accesoVal.estado
+      }
+      getByIDtype(dataNew);
       return { status: true, message: "Acceso obtenido exitosamente", data: accesoVal };
     } catch (error: any) {
       return { status: false, message: error.message || "Error al obtener el acceso" };
@@ -191,26 +156,21 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return { status: false, message: updatedAcceso.message };
       }
 
-      udpateAccesoType({
-        correo: data.correo,
-        estado: data.estado,
-        tipos: data.tipos,
-        idacceso: data.idacceso
-      });
+      const dataUser = await consultas.getByID(data.idacceso);
+      if (dataUser.status !== "success" || !dataUser.data) {
+        return { status: false, message: dataUser.message };
+      }
 
-      setDetailCache(prev => {
-        if (!prev[data.idacceso]) return prev;
-        return {
-          ...prev,
-          [data.idacceso]: {
-            ...prev[data.idacceso],
-            correo: data.correo !== undefined ? data.correo : prev[data.idacceso].correo,
-            estado: data.estado !== undefined ? data.estado : prev[data.idacceso].estado,
-            tipos: data.tipos !== undefined ? data.tipos : prev[data.idacceso].tipos,
-            contra: data.password !== undefined ? data.password : prev[data.idacceso].contra,
-          }
-        };
-      });
+      const nuevo: AccesosUser = {
+        idacceso: dataUser.data.idacceso,
+        dniuser: dataUser.data.dniuser,
+        nombres: dataUser.data.nombres,
+        correo: dataUser.data.correo || "",
+        estado: dataUser.data.estado,
+        tipos: dataUser.data.tipos,
+      }
+
+      getByIDtype(nuevo);
 
       return { status: true, message: "Acceso actualizado exitosamente" };
     } catch (error: any) {
@@ -221,13 +181,9 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const deleteAcceso = async (id: number) => {
-    // Eliminar únicamente del estado de la caché
+
     setAccesos(prev => prev.filter(acceso => acceso.idacceso !== id));
-    setDetailCache(prev => {
-      const copy = { ...prev };
-      delete copy[id];
-      return copy;
-    });
+
     setPaginacion(prev => ({
       ...prev,
       total_data: Math.max(0, prev.total_data - 1)
@@ -236,10 +192,11 @@ export const AccesosProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const getAllAccesos = async (page: number) => {
-    if (paginasCargadas.includes(page) && page !== 0) {
-      const inicio = (page - 1) * 10;
-      const final = inicio + 10;
-      const dataPagina = accesos.slice(inicio, final);
+    const inicio = (page - 1) * 10;
+    const final = inicio + 10;
+    const dataPagina = accesos.slice(inicio, final);
+
+    if (paginasCargadas.includes(page) && page !== 0 && dataPagina.length === 10) {
       const nextPaginacion = { ...paginacion, pagina_actual: page };
       setPaginacion(nextPaginacion);
       return { status: true, message: "Accesos obtenidos exitosamente", data: dataPagina, pagination: nextPaginacion };

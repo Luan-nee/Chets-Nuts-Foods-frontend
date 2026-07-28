@@ -43,8 +43,8 @@ export default class Usuarios extends BaseRequestApi {
   }
 
   /* getAll */
-  public async getAll(): Promise<BodyResponse<ResponseGetAll>> {
-    return this.request<BodyResponse<ResponseGetAll>>(`${this.base_url_production}`, {
+  public async getAll(): Promise<BodyResponse<ResponseGetAll[]>> {
+    return this.request<BodyResponse<ResponseGetAll[]>>(`${this.base_url_production}`, {
       method: 'GET',
     });
   }

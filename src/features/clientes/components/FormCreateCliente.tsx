@@ -16,7 +16,7 @@ interface FormCreateClienteProps {
   setDniCliente?: (value: string) => void;
 }
 
-export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClienteProps) {
+export default function FormCreateCliente({ setShowFormCreate }: FormCreateClienteProps) {
   const {
     isLoading: cargandoCreateCliente,
     isError: errorCreateCliente,
@@ -47,7 +47,7 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
         ...prev,
         nombre: basicData.nombres ?? '',
         apellidopaterno: basicData.apellido_paterno ?? '',
-        apellidomaterno: basicData.apellido_materno ?? ''
+        apellidomaterno: basicData.apellido_materno ?? '',
       }));
       return;
     }
@@ -132,7 +132,7 @@ export default function FormCreateCliente ({ setShowFormCreate }: FormCreateClie
               defaultValue={formData.edad}
               label="Edad"
               simbol="años"
-              onChange={(value) => setFormData(prev => ({ ...prev, edad: value}))}
+              onChange={(value) => setFormData(prev => ({ ...prev, edad: value }))}
               placeholder="Ingrese la edad del cliente"
             />
             <InputNumber
