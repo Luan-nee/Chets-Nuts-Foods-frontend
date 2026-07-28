@@ -309,7 +309,7 @@ export default function FormProductos() {
               </td>
               <td className="px-6 py-4 text-sm text-gray-300">
                 <InputSelect 
-                  label='Calidad'
+                  label='Clasificación'
                   placeholder='Seleccionar...'
                   options={[
                     { label: "PRIMERA", value: "calidad: primera" },
@@ -319,6 +319,10 @@ export default function FormProductos() {
                     { label: "MEDIANO", value: "calibre: mediano" },
                     { label: "ENANO", value: "calibre: enano" },
                     { label: "TINY", value: "calibre: tiny" },
+                  ]}
+                  titles={[
+                    { label: "CALIDAD", position: 0 },
+                    { label: "CALIBRE", position: 3 },
                   ]}
                   onSelect={(value) => {
                     setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${value}` } : p));

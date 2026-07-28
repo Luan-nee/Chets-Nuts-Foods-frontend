@@ -6,12 +6,18 @@ type Option = {
   label: string;
 };
 
+type Titles = {
+  label: string;
+  position: number;
+}
+
 interface InputSelectTestProps {
   label: string;
   options: Option[];
   placeholder: string;
   onSelect: (value: string | number) => void;
   valueSelected?: string | number | null;
+  titles?: Titles[];
 }
 
 export default function InputSelect({
@@ -20,6 +26,7 @@ export default function InputSelect({
   onSelect,
   valueSelected,
   label,
+  titles,
 }: InputSelectTestProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [optionSelected, setOptionSelected] = useState<Option | null>(
@@ -70,30 +77,42 @@ export default function InputSelect({
             className="absolute z-10 w-full mt-1.5 bg-dark-deep border border-[#2D3340] rounded-lg shadow-lg max-h-[310px] overflow-auto focus:outline-none scrollbar-thin scrollbar-thumb-gray-600"
             role="listbox"
           >
-            {options.map((option) => (
-              <li
-                key={option.value}
-                onClick={() => {
-                  setOptionSelected(option);
-                  onSelect(option.value);
-                  setIsOpen(false);
-                }}
-                className={`group relative py-3 pl-11 pr-4 text-[15px] text-white cursor-pointer select-none 
-                  hover:bg-slate-700/50 transition-colors duration-150
-                  ${optionSelected && optionSelected.value === option.value ? "font-medium bg-slate-800/30" : "font-normal"}`}
-                role="option"
-                aria-selected={
-                  !!(optionSelected && optionSelected.value === option.value)
-                }
-              >
-                {/* Checkmark Icon */}
-                {optionSelected && optionSelected.value === option.value && (
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <Check className="w-5 h-5 text-indigo-400" />
-                  </span>
-                )}
-                <span className="block truncate">{option.label}</span>
-              </li>
+            {options.map((option, index) => (
+              <>
+                {titles?.map((title) => (
+                  title.position === index && (
+                    <li
+                      key={title.label}
+                      className="py-2 px-4 text-[15px] text-gray-400 font-medium"
+                    >
+                      {title.label}
+                    </li>
+                  )
+                ))}
+                <li
+                  key={option.value}
+                  onClick={() => {
+                    setOptionSelected(option);
+                    onSelect(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={`group relative py-3 pl-11 pr-4 text-[15px] text-white cursor-pointer select-none 
+                    hover:bg-slate-700/50 transition-colors duration-150
+                    ${optionSelected && optionSelected.value === option.value ? "font-medium bg-slate-800/30" : "font-normal"}`}
+                  role="option"
+                  aria-selected={
+                    !!(optionSelected && optionSelected.value === option.value)
+                  }
+                >
+                  {/* Checkmark Icon */}
+                  {optionSelected && optionSelected.value === option.value && (
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <Check className="w-5 h-5 text-indigo-400" />
+                    </span>
+                  )}
+                  <span className="block truncate">{option.label}</span>
+                </li>
+              </>
             ))}
           </ul>
         )}
