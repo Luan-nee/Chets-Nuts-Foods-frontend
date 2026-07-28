@@ -42,7 +42,7 @@ export const useRegistrarProductoEnPaquete = (): FetchState => {
         setMessage("Paquete registrado exitosamente");
         swalAlert({
           status: response.status,
-          message: "Paquete registrado exitosamente"
+          message: response.message ?? "Paquete registrado exitosamente"
         })
       } else {
         setIsError(true);
