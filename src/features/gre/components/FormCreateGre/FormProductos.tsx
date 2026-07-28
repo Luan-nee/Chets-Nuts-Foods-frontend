@@ -269,7 +269,7 @@ export default function FormProductos() {
         </div>
       </div>
 
-      <div className="mb-4 overflow-hidden rounded-lg border border-gray-800">
+      <div className="mb-4 rounded-lg border border-gray-800">
         <Table
           tableHeader={[
             "N°",
