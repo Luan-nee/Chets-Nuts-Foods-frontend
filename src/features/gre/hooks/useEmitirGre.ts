@@ -2,6 +2,7 @@ import { useState } from "react";
 import GreApi from "../../../api/gre.api";
 import type { EmitirGre } from "../../../types/gre.type";
 import swalAlert from "../../../components/messages/swalAlert";
+import { useNavigate } from "react-router-dom";
 
 interface FetchState {
 	isLoading: boolean;
@@ -15,6 +16,7 @@ export const useEmitirGre = (): FetchState => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
 	const [message, setMessage] = useState<string>("");
+	const navigate = useNavigate();
 
 	const emitirGre = async (body: EmitirGre, idPaquete: number): Promise<void> => {
 		try {
@@ -30,6 +32,8 @@ export const useEmitirGre = (): FetchState => {
 					status: "success",
 					message: `${response.message || "Guia de remision emitida exitosamente"}`,
 				});
+				window.open("https://www.google.com", "_blank");
+				navigate("/guias");
 			} else {
 				setIsError(true);
 				setMessage("Error al emitir la GRE");
