@@ -13,3 +13,8 @@ export type EmitirGre = {
   modalidadTransporte: string;
   codigoTransporte: number;
 }
+
+export type ResponseEmitirGre = {
+  idGuia: number[];
+  pdf: string
+}

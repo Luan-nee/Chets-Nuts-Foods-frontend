@@ -32,7 +32,7 @@ export const useEmitirGre = (): FetchState => {
 					status: "success",
 					message: `${response.message || "Guia de remision emitida exitosamente"}`,
 				});
-				window.open("https://www.google.com", "_blank");
+				window.open(response.data?.pdf || "https://www.google.com", "_blank");
 				navigate("/guias");
 			} else {
 				setIsError(true);

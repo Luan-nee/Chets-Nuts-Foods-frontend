@@ -275,7 +275,8 @@ export default function FormProductos() {
             "N°",
             "Producto",
             "Peso Unitario (kg)",
-            "Calidad y Calibre",
+            "Calidad",
+            "Calibre",
             "Cantidad",
             "Peso total",
             "Acción",
@@ -320,6 +321,8 @@ export default function FormProductos() {
                     setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `Calidad: ${value}, ${p.observacion}` } : p));
                   }}
                 />
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-300">
                 <InputSelect 
                   label='Calibre'
                   placeholder='Seleccionar...'
