@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Usuarios from "../../api/Usuarios.api";
+import { useUsuariosContext } from "../../context/usuariosContext";
 import type { CreateUsuario } from "../../types/usuarios.type";
 import swalAlert from "../messages/swalAlert";
 
@@ -14,6 +14,7 @@ export default function SelectedUserForm<T>({
   atributes,
   onRegisterSuccess,
 }: SelectedUserFormProps<T>) {
+  const { createNewUser } = useUsuariosContext();
   const [extraCorreo, setExtraCorreo] = useState("");
   const [extraEdad, setExtraEdad] = useState<number>(0);
   const [extraNumero, setExtraNumero] = useState("");
@@ -62,9 +63,8 @@ export default function SelectedUserForm<T>({
 
     try {
       setIsRegistering(true);
-      const api = new Usuarios();
-      const res = await api.create(body);
-      if (res.status === "success") {
+      const res = await createNewUser(body);
+      if (res.status) {
         swalAlert({
           status: "success",
           message: "Usuario registrado/actualizado exitosamente"
@@ -75,16 +75,16 @@ export default function SelectedUserForm<T>({
           const updatedUser = {
             ...selected,
             ...apiData,
-            iduser: apiData.iduser || sel.iduser || 0,
-            nombres: sel.nombres || apiData.nombre || `${apiData.nombre || ""} ${apiData.apellidopaterno || ""} ${apiData.apellidomaterno || ""}`.trim(),
-            correo: apiData.correo || apiData.corre || "",
-            corre: apiData.correo || apiData.corre || "",
-            numero: apiData.numero || apiData.telefono || "",
-            telefono: apiData.numero || apiData.telefono || "",
-            ruc: apiData.ruc || "",
-            edad: apiData.edad || 0,
-            sexo: apiData.sexo || "MASCULINO",
-            tipo: apiData.tipo || "NATURAL",
+            iduser: apiData.id || sel.iduser || 0,
+            nombres: apiData.nombres || sel.nombres || "",
+            correo: apiData.correo || extraCorreo,
+            corre: apiData.correo || extraCorreo,
+            numero: apiData.numero || extraNumero,
+            telefono: apiData.numero || extraNumero,
+            ruc: apiData.ruc || extraRuc,
+            edad: apiData.edad || Number(extraEdad),
+            sexo: apiData.sexo || extraSexo,
+            tipo: apiData.tipo || sel.tipo || "NATURAL",
           } as T;
 
           onRegisterSuccess(updatedUser);
