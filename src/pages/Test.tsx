@@ -5,20 +5,16 @@ import { useState } from "react";
 export default function Test() {
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
   const [objetSelected, setObjetSelected] = useState<any>(null);
-  const atributos = ["atributo1", "atributo2", "atributo3"];
+  const atributos = ["id", "nombre", "atributo"];
   const productos = [{
     id: 1,
     nombre: "Producto 1",
-    atributo1: "Valor 1",
-    atributo2: "Valor 2",
-    atributo3: "Valor 3"
+    atributo: "Valor 1",
   },
   {
     id: 2,
     nombre: "Producto 2",
-    atributo1: "Valor 1",
-    atributo2: "Valor 2",
-    atributo3: "Valor 3"
+    atributo: "Valor 2",
   }]
 
   return (
@@ -55,8 +51,8 @@ export default function Test() {
           setObjetSelected={(object) => {
             console.log("Objeto seleccionado:", object);
           }}
-          titulo=""
-          placeholder=""
+          titulo="Buscar producto y seleccionarlo"
+          placeholder="selecciona un producto"
         />
       </div>
     </div>
