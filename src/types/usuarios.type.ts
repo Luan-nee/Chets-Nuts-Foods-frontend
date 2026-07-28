@@ -1,6 +1,7 @@
 import type { UserGender, UserType } from "./constantes.type";
 
 export type CreateUsuario = {
+  iduser?: number,
   nombre: string,
   apellidomaterno: string,
   apellidopaterno: string,
@@ -25,6 +26,7 @@ export type ResponseGetDni = {
   edad: number;
   numeroLicenciaConducir: string | null;
   cantenvios: number;
+  sexo: UserGender;
 }
 
 export type ResponseGetAll = {
