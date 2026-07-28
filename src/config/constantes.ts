@@ -2,6 +2,21 @@ import type { marca, modelo, tipoVehiculo } from "../types/vehiculos.type";
 
 export const numeroDeSerieGre: number = parseInt(import.meta.env.VITE_NUMERO_SERIE_GUIA_REMISION);
 
+export const calidadCastania: { label: string; value: string }[] = [
+  { label: "SIN DEFINIR", value: "SIN DEFINIR" },
+  { label: "PRIMERA", value: "PRIMERA" },
+  { label: "SEGUNDA", value: "SEGUNDA" },
+  { label: "TERCERA", value: "TERCERA" },
+]
+
+export const calibreCastania: { label: string; value: string }[] = [
+  { label: "SIN DEFINIR", value: "SIN DEFINIR" },
+  { label: "GRANDE", value: "GRANDE" },
+  { label: "MEDIANO", value: "MEDIANO" },
+  { label: "ENANO", value: "ENANO" },
+  { label: "TINY", value: "TINY" },
+]
+
 export const motivoTranslado: { label: string; value: string }[] = [
   { label: "Venta", value: "01" },
   { label: "Traslado entre establecimientos", value: "03" }

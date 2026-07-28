@@ -244,7 +244,7 @@ export default function FormProductos() {
               className="w-full p-3 bg-dark-deep border border-gray-500 rounded-lg text-white focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition-all duration-200 text-sm animate-fade-in"
             />
             {showAutocomplete && matchingProducts.length > 0 && (
-              <div className="absolute left-0 right-0 mt-1 bg-gray-900 border border-gray-800 rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto">
+              <div className="absolute left-0 right-0 mt-1 bg-gray-900 border border-gray-500 rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto">
                 {matchingProducts.map((p) => (
                   <button
                     key={p.idproductdefect}
@@ -254,6 +254,17 @@ export default function FormProductos() {
                   >
                     <span className="font-medium text-sm">{p.nombre}</span>
                     <span className="text-xs text-slate-500">{p.descripcion}</span>
+                    { p.calibreproductdefect == "SIN DEFINIR" ? (
+                        <span className="text-xs text-slate-500">Calidad: {p.calidadproductodefect}</span>
+                      ) : p.calidadproductodefect == "SIN DEFINIR" ? (
+                        <span className="text-xs text-slate-500">Calibre: {p.calibreproductdefect}</span>
+                      ) : (
+                        <>
+                          <span className="text-xs text-slate-500">Calidad: {p.calidadproductodefect}</span>
+                          <span className="text-xs text-slate-500">Calibre: {p.calibreproductdefect}</span>
+                        </>
+                      )
+                    }
                   </button>
                 ))}
               </div>
@@ -274,8 +285,6 @@ export default function FormProductos() {
           tableHeader={[
             "N°",
             "Producto",
-            "Peso Unitario (kg)",
-            "Clasificación",
             "Cantidad",
             "Peso total",
             "Acción",
@@ -290,57 +299,10 @@ export default function FormProductos() {
               <td className="px-6 py-4 text-sm text-gray-300">
                 {index + 1}
               </td>
-              <td className="px-6 py-4 text-sm text-white font-medium">
-                {producto.nombreproducto}
-              </td>
               <td className="px-6 py-4 text-sm text-gray-300">
                 {producto.nombreproducto}
-                {/* <input
-                  type="number"
-                  step="0.001"
-                  min="0.001"
-                  value={producto.pesounitario}
-                  onChange={(e) => {
-                    const val = parseFloat(e.target.value) || 0;
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, pesounitario: val } : p));
-                  }}
-                  className="w-24 px-2 py-1.5 bg-gray-950 border border-gray-800 rounded-lg text-center text-white focus:outline-none focus:border-slate-500"
-                /> */}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-300">
-                <InputSelect 
-                  label='Clasificación'
-                  placeholder='Seleccionar...'
-                  options={[
-                    { label: "PRIMERA", value: "calidad: primera" },
-                    { label: "SEGUNDA", value: "calidad: segunda" },
-                    { label: "TERCERA", value: "calidad: tercera" },
-                    { label: "GRANDE", value: "calibre: grande" },
-                    { label: "MEDIANO", value: "calibre: mediano" },
-                    { label: "ENANO", value: "calibre: enano" },
-                    { label: "TINY", value: "calibre: tiny" },
-                  ]}
-                  titles={[
-                    { label: "CALIDAD", position: 0 },
-                    { label: "CALIBRE", position: 3 },
-                  ]}
-                  onSelect={(value) => {
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${value}` } : p));
-                  }}
-                />
-              </td>
-              {/* <td className="px-6 py-4 text-sm text-gray-300">
-                <input
-                  type="text"
-                  value={producto.observacion}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: val } : p));
-                  }}
-                  className="w-full min-w-[150px] px-3 py-1.5 bg-gray-950 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-slate-500"
-                />
-              </td> */}
-              <td className="px-4 py-4">
+              <td className="pxs-4 py-4">
                 <div className="inline-flex items-center gap-2">
                   {/* Botón Izquierdo - Decrementar */}
                   <button
@@ -370,7 +332,7 @@ export default function FormProductos() {
                     type="number"
                     value={producto.cantidad}
                     onChange={(e) => {
-                      const newValue = parseInt(e.target.value, 10);
+                      const newValue = parseFloat(e.target.value);
                       if (!isNaN(newValue) && newValue >= 0) {
                         setFormData((prev) => {
                           const updatedList = prev.map((p) => {
@@ -416,7 +378,7 @@ export default function FormProductos() {
                 </div>
               </td>
               <td className="px-4 py-4">
-                {producto.pesounitario * producto.cantidad} kg
+                {producto.pesounitario * producto.cantidad} kg = {producto.pesounitario * producto.cantidad / 1000} TN
               </td>
               <td className="px-6 py-4">
                 <button
@@ -434,6 +396,14 @@ export default function FormProductos() {
       </div>
 
       <div className='flex gap-2'>
+        <ButtonCancelForm
+          handleCancel={() => {
+            setShowAddForm(false);
+          }}
+          isLoading={isLoadingProductos}
+          textButton="Cancelar"
+          color='red'
+        />
         <ButtonSubmitForm
           isError={isErrorProductos}
           isLoading={isLoadingProductos}
@@ -449,14 +419,6 @@ export default function FormProductos() {
               });
             }
           }}
-        />
-        <ButtonCancelForm
-          handleCancel={() => {
-            setShowAddForm(false);
-          }}
-          isLoading={isLoadingProductos}
-          textButton="Cancelar"
-          color='red'
         />
       </div>
     </div>

@@ -55,6 +55,7 @@ export default function TableProductos({
     "Nº",
     "Nombre",
     "Descripción del producto",
+    "Clasificación",
     "Acciones"
   ];
 
@@ -101,6 +102,19 @@ export default function TableProductos({
                 <span className="text-white">
                   {producto.descripcion}
                 </span>
+              </td>
+              <td className="px-6 py-4">
+                { producto.calibreproductdefect == "SIN DEFINIR" ? (
+                    <div className="text-white">Calidad: {producto.calidadproductodefect}</div>
+                  ) : producto.calidadproductodefect == "SIN DEFINIR" ? (
+                    <div className="text-white">Calibre: {producto.calibreproductdefect}</div>
+                  ) : (
+                    <>
+                      <div className="text-white">Calidad: {producto.calidadproductodefect}</div>
+                      <div className="text-white">Calibre: {producto.calibreproductdefect}</div>
+                    </>
+                  )
+                }
               </td>
               <td className="px-6 py-4">
                 { tienePermiso('PUEDE_EDITAR_PRODUCTO') && (

@@ -1,6 +1,8 @@
 export type CreateProducto = {
   nombre: string;
   descripcion: string;
+  calidad?: string;
+  calibre?: string
 }
 
 export type ResponseGetAllProductos = {
@@ -8,6 +10,8 @@ export type ResponseGetAllProductos = {
   nombre: string;
   descripcion: string;
   fechacreacion: string;
+  calidadproductodefect: string;
+  calibreproductdefect: string;
 }
 
 export type ResponseCreateProducto = {
@@ -21,6 +25,8 @@ export type UpdateProducto = {
   idProductDefect: number;
   nombre?: string;
   descripcion?: string;
+  calidadproductodefect?: string;
+  calibreproductdefect?: string;
 }
 
 export type ResponseUpdateProducto = {
@@ -33,4 +39,6 @@ export type ResponseUpdateProducto = {
 export type ResponseGetProductoById = {
   nombre: string;
   descripcion: string;
+  calidadproductodefect: string;
+  calibreproductdefect: string;
 }
