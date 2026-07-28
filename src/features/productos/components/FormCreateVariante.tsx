@@ -10,6 +10,7 @@ import { useCreateProducto } from "../hooks/useCreateProducto";
 import { useFetchProducto } from "../hooks/useFetchProducto";
 import { calibreCastania, calidadCastania } from "../../../config/constantes";
 import type { CreateProducto } from "../../../types/producto.type";
+import Switch from "../../../components/ui/SwitchTest";
 
 interface FormUpdateEstProps {
   showFormEdit: (p: boolean) => void;
@@ -18,6 +19,7 @@ interface FormUpdateEstProps {
 }
 
 export default function FormCreateVariante({ showFormEdit, idProducto, pagina }: FormUpdateEstProps) {
+  const [switchState, setSwitchState] = useState<boolean>(true);
   const {
     producto,
     isLoading: getProductoByIdIsLoading,
@@ -87,57 +89,58 @@ export default function FormCreateVariante({ showFormEdit, idProducto, pagina }:
                   {" " + formData.descripcion || "No definido"}
                 </span>
               </div>
-              { formData.calibre == "SIN DEFINIR" ? (
-                  <InputSelect 
-                    label="Calidad"
-                    onSelect={(value) => setFormData(prev => ({ 
-                      ...prev, 
-                      calibre: "SIN DEFINIR",
-                      calidad: value as string 
-                    }))}
-                    options={calidadCastania}
-                    placeholder="Selecciona una calidad"
-                    valueSelected={formData.calidad || ""}
-                  />
-                ) : formData.calidad == "SIN DEFINIR" ? (
-                  <InputSelect 
-                    label="Calibre"
-                    onSelect={(value) => setFormData(prev => ({ 
-                      ...prev, 
+              <div>
+                { formData.calibre == "SIN DEFINIR" ? (
+                    <div className="text-white">Calidad: {formData.calidad}</div>
+                  ) : formData.calidad == "SIN DEFINIR" ? (
+                    <div className="text-white">Calibre: {formData.calibre}</div>
+                  ) : (
+                    <>
+                      <div className="text-white">Calidad: {formData.calidad}</div>
+                      <div className="text-white">Calibre: {formData.calibre}</div>
+                    </>
+                  )
+                }
+              </div>
+              <div className="flex items-center gap-2 my-4">
+                <span className={`${switchState ? "text-gray-500" : "text-blue-400 font-bold" }`}>
+                  Seleccionar Calidad
+                </span>
+                <Switch 
+                  estado={switchState}
+                  onClick={() => setSwitchState(!switchState)}
+                />
+                <span className={`${switchState ? "text-blue-400 font-bold" : "text-gray-500" }`}>
+                  Seleccionar Calibre
+                </span>
+              </div>
+              {switchState ? (
+                <InputSelect 
+                  label="Calibre"
+                  onSelect={(value) => setFormData((prev) => {
+                    const { calidad, ...rest } = prev;
+                    return {
+                      ...rest,
                       calibre: value as string,
-                      calidad: "SIN DEFINIR"
-                    }))}
-                    options={calibreCastania}
-                    placeholder="Selecciona un calibre"
-                    valueSelected={formData.calibre || ""}
-                  />
-                ) : (
-                  <>
-                    <InputSelect 
-                      label="Calibre"
-                      onSelect={(value) => setFormData(prev => ({ 
-                        ...prev, 
-                        calibre: value as string,
-                        calidad: "SIN DEFINIR"
-                      }))}
-                      options={calibreCastania}
-                      placeholder="Selecciona un calibre"
-                      valueSelected={formData.calibre || ""}
-                    />
-                    <InputSelect 
-                      label="Calidad"
-                      onSelect={(value) => setFormData(prev => ({ 
-                        ...prev, 
-                        calibre: "SIN DEFINIR",
-                        calidad: value as string 
-                      }))}
-                      options={calidadCastania}
-                      placeholder="Selecciona una calidad"
-                      valueSelected={formData.calidad || ""}
-                    />
-                  </>
-                )
-              }
+                    };
+                  })}
+                  options={calibreCastania}
+                  placeholder="Selecciona un calibre"
+                />
+              ) : (
+                <InputSelect 
+                  label="Calidad"
+                  onSelect={(value) => setFormData((prev) => {
+                    const { calibre, ...rest } = prev;
+                    return {
+                      ...rest,
+                      calidad: value as string,
+                    };
+                  })}
+                  options={calidadCastania}
+                  placeholder="Selecciona una calidad"
+                />
+              )}
           </ContentSectionProcess>
         </div>
 

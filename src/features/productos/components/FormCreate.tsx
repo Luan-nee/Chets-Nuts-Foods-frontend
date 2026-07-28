@@ -74,22 +74,26 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
         {switchState ? (
           <InputSelect 
             label="Calibre"
-            onSelect={(value) => setFormData(prev => ({ 
-              ...prev, 
-              calibre: value as string,
-              calidad: "SIN DEFINIR"
-            }))}
+            onSelect={(value) => setFormData((prev) => {
+              const { calidad, ...rest } = prev;
+              return {
+                ...rest,
+                calibre: value as string,
+              };
+            })}
             options={calibreCastania}
             placeholder="Selecciona un calibre"
           />
         ) : (
           <InputSelect 
             label="Calidad"
-            onSelect={(value) => setFormData(prev => ({ 
-              ...prev, 
-              calibre: "SIN DEFINIR",
-              calidad: value as string 
-            }))}
+            onSelect={(value) => setFormData((prev) => {
+              const { calibre, ...rest } = prev;
+              return {
+                ...rest,
+                calidad: value as string,
+              };
+            })}
             options={calidadCastania}
             placeholder="Selecciona una calidad"
           />
