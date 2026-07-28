@@ -12,12 +12,14 @@ import { NotificationProductDefect } from "../../../components/messages/Notifica
 interface PropTableProductos {
   setSelectProductoId: (p: number | null) => void;
   showFormEdit: (p: boolean) => void;
+  showFormCreateVariante: (p: boolean) => void;
   setPaginActual: (p: number) => void;
 }
 
 export default function TableProductos({
   setSelectProductoId,
   showFormEdit,
+  showFormCreateVariante,
   setPaginActual
 }: PropTableProductos) {
   const { tienePermiso } = useAutorizacion();
@@ -129,6 +131,23 @@ export default function TableProductos({
                     <Edit className="w-4 h-4 text-gray-400" />
                   </button>
                 )}
+                <button
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  title="Agregar variante"
+                  onClick={() => {
+                    setSelectProductoId(producto.idproductdefect);
+                    setPaginActual(infoPaginacion.pagina_actual);
+                    showFormCreateVariante(true);
+                  }}>
+                    <div className="flex items-center gap-1">
+                      <span>
+                        variante
+                      </span>
+                      <span>
+                        <Edit className="w-4 h-4 text-gray-400" />
+                      </span>
+                    </div>
+                </button>
               </td>
             </tr>
           ))}
