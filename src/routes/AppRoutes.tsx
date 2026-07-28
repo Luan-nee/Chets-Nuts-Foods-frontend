@@ -43,16 +43,6 @@ export default function AppRoutes() {
                       }
                     />
                     <Route
-                      path="/test"
-                      element={
-                        <PrivateRoute>
-                          <MainLayout>
-                            <Test />
-                          </MainLayout>
-                        </PrivateRoute>
-                      }
-                    />
-                    <Route
                       path="/transporte"
                       element={
                         <PrivateRoute>
