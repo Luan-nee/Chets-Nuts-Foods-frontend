@@ -106,7 +106,7 @@ export default function FormProductos() {
       const newProduct = {
         idproductdefect: matchedDbProduct ? matchedDbProduct.idproductdefect : Date.now(),
         nombreproducto: productSearchTerm.trim(),
-        pesounitario: 1,
+        pesounitario: 1000,
         observacion: "sin observación",
         shadow: true,
         cantidad: 1,
@@ -276,6 +276,7 @@ export default function FormProductos() {
             "Peso Unitario (kg)",
             "Observación",
             "Cantidad",
+            "Peso total",
             "Acción",
           ]}
           cantidadDatos={formData.length}
@@ -292,7 +293,8 @@ export default function FormProductos() {
                 {producto.nombreproducto}
               </td>
               <td className="px-6 py-4 text-sm text-gray-300">
-                <input
+                {producto.nombreproducto}
+                {/* <input
                   type="number"
                   step="0.001"
                   min="0.001"
@@ -302,7 +304,7 @@ export default function FormProductos() {
                     setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, pesounitario: val } : p));
                   }}
                   className="w-24 px-2 py-1.5 bg-gray-950 border border-gray-800 rounded-lg text-center text-white focus:outline-none focus:border-slate-500"
-                />
+                /> */}
               </td>
               <td className="px-6 py-4 text-sm text-gray-300">
                 <input
@@ -389,6 +391,9 @@ export default function FormProductos() {
                     <Plus size={16} />
                   </button>
                 </div>
+              </td>
+              <td className="px-4 py-4">
+                {producto.pesounitario * producto.cantidad} kg
               </td>
               <td className="px-6 py-4">
                 <button
