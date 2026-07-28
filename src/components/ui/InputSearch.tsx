@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import Usuarios from "../../api/Usuarios.api";
+import { useUsuariosContext } from "../../context/usuariosContext";
 import SelectedUserForm from "./SelectedUserForm";
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -34,6 +34,7 @@ export default function InputSearch<T>({
   objets,
   placeholder = "Buscar...",
 }: InputSearchProps<T>) {
+  const { getBasicDataByDNI } = useUsuariosContext();
   const [query, setQuery] = useState("");
   const [selectedAtribute, setSelectedAtribute] = useState<string>(atributes[0] ?? "");
   const [results, setResults] = useState<T[]>([]);
@@ -85,9 +86,8 @@ export default function InputSearch<T>({
       const fetchDni = async () => {
         try {
           setDniLoading(true);
-          const api = new Usuarios();
-          const res = await api.getBasicDataByDNI(trimmed);
-          if (res.status === "success" && res.data) {
+          const res = await getBasicDataByDNI(trimmed);
+          if (res.status && res.data) {
             setDniResult(res.data);
             setIsOpen(true);
           } else {

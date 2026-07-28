@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import UsuariosApi from "../api/Usuarios.api";
+import { useUsuariosContext } from "../context/usuariosContext";
 import swalAlert from '../components/messages/swalAlert';
 import type { ResponseGetDataBasicByDni } from "../types/usuarios.type";
 
@@ -13,7 +13,7 @@ interface FetchState {
 }
 
 export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
-	const usuarios_api = new UsuariosApi();
+	const { getBasicDataByDNI } = useUsuariosContext();
 	const [basicData, setBasicData] = useState<ResponseGetDataBasicByDni | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
@@ -33,13 +33,13 @@ export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
 			setMessage("");
 			setBasicData(null);
 
-			const response = await usuarios_api.getBasicDataByDNI(dniParam);
+			const response = await getBasicDataByDNI(dniParam);
 
-			if (response.status === "success") {
+			if (response.status) {
 				setMessage(response.message || "Datos básicos obtenidos exitosamente");
 				setBasicData(response.data ?? null);
 				swalAlert({
-					status: response.status,
+					status: "success",
 					message: response.message || "Datos básicos obtenidos exitosamente"
 				});
 				return response.data ?? null;
@@ -49,7 +49,7 @@ export const useFetchBasicDataByDni = (dni: string = ""): FetchState => {
 			setBasicData(null);
 			setMessage(response.message || "Error al obtener los datos básicos");
 			swalAlert({
-				status: response.status,
+				status: "error",
 				message: response.message || "Error al obtener los datos básicos"
 			});
 			return null;

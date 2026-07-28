@@ -18,6 +18,7 @@ import { SocketProvider } from "../context/SocketContext";
 import { GreProvider } from "../context/GreContext";
 import { SalidaTransporteProvider } from "../context/SalidaTransporteContext";
 import { AccesosProvider } from "../context/AccesosContext";
+import { UsuariosProvider } from "../context/usuariosContext";
 
 export default function AppRoutes() {
   return (
@@ -25,134 +26,136 @@ export default function AppRoutes() {
       <AuthProvider>
         <GreProvider>
           <SocketProvider>
-            <AccesosProvider>
-              <SalidaTransporteProvider>
-                <Routes>
-                  <Route path="/login" element={<Login />} />
+            <UsuariosProvider>
+              <AccesosProvider>
+                <SalidaTransporteProvider>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
 
-                  <Route
-                    path="/"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <GuiasDeRemision />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/test"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Test />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/transporte"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Transporte />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/guias"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <GuiasDeRemision />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/establecimientos"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Establecimientos />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/clientes"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Clientes />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/productos"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Productos />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/seguimiento"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Seguimiento />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/configuraciones"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Configuraciones />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/trabajadores"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Trabajadores />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="/vehiculos"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <Vehiculos />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                  <Route
-                    path="*"
-                    element={
-                      <PrivateRoute>
-                        <MainLayout>
-                          <NotFound />
-                        </MainLayout>
-                      </PrivateRoute>
-                    }
-                  />
-                </Routes>
-              </SalidaTransporteProvider>
-            </AccesosProvider>
+                    <Route
+                      path="/"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <GuiasDeRemision />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/test"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Test />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/transporte"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Transporte />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/guias"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <GuiasDeRemision />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/establecimientos"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Establecimientos />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/clientes"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Clientes />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/productos"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Productos />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/seguimiento"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Seguimiento />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/configuraciones"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Configuraciones />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/trabajadores"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Trabajadores />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="/vehiculos"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <Vehiculos />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route
+                      path="*"
+                      element={
+                        <PrivateRoute>
+                          <MainLayout>
+                            <NotFound />
+                          </MainLayout>
+                        </PrivateRoute>
+                      }
+                    />
+                  </Routes>
+                </SalidaTransporteProvider>
+              </AccesosProvider>
+            </UsuariosProvider>
           </SocketProvider>
         </GreProvider>
       </AuthProvider>

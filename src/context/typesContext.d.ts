@@ -34,4 +34,5 @@ export type UserContexts = {
     edad?: number,
     sexo?: "MASCULINO" | "FEMENINO";
     numero?: string;
+    correo?: string
 }
