@@ -275,8 +275,7 @@ export default function FormProductos() {
             "N°",
             "Producto",
             "Peso Unitario (kg)",
-            "Calidad",
-            "Calibre",
+            "Clasificación",
             "Cantidad",
             "Peso total",
             "Acción",
@@ -313,30 +312,21 @@ export default function FormProductos() {
                   label='Calidad'
                   placeholder='Seleccionar...'
                   options={[
-                    { label: "PRIMERA", value: "primera" },
-                    { label: "SEGUNDA", value: "segunda" },
-                    { label: "TERCERA", value: "tercera" },
+                    { label: "PRIMERA", value: "calidad: primera" },
+                    { label: "SEGUNDA", value: "calidad: segunda" },
+                    { label: "TERCERA", value: "calidad: tercera" },
+                    { label: "GRANDE", value: "calibre: grande" },
+                    { label: "MEDIANO", value: "calibre: mediano" },
+                    { label: "ENANO", value: "calibre: enano" },
+                    { label: "TINY", value: "calibre: tiny" },
                   ]}
                   onSelect={(value) => {
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `Calidad: ${value}, ${p.observacion}` } : p));
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${value}` } : p));
                   }}
                 />
               </td>
-              <td className="px-6 py-4 text-sm text-gray-300">
-                <InputSelect 
-                  label='Calibre'
-                  placeholder='Seleccionar...'
-                  options={[
-                    { label: "GRANDE", value: "grande" },
-                    { label: "MEDIANO", value: "mediano" },
-                    { label: "ENANO", value: "enano" },
-                    { label: "TINY", value: "tiny" },
-                  ]}
-                  onSelect={(value) => {
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion}, Calibre: ${value}` } : p));
-                  }}
-                />
-                {/* <input
+              {/* <td className="px-6 py-4 text-sm text-gray-300">
+                <input
                   type="text"
                   value={producto.observacion}
                   onChange={(e) => {
@@ -344,8 +334,8 @@ export default function FormProductos() {
                     setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: val } : p));
                   }}
                   className="w-full min-w-[150px] px-3 py-1.5 bg-gray-950 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-slate-500"
-                /> */}
-              </td>
+                />
+              </td> */}
               <td className="px-4 py-4">
                 <div className="inline-flex items-center gap-2">
                   {/* Botón Izquierdo - Decrementar */}
