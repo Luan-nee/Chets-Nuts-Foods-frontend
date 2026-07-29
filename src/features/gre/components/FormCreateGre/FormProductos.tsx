@@ -5,6 +5,7 @@ import ButtonSubmitForm from '../../../../components/ui/ButtonSubmitForm';
 import ButtonCancelForm from '../../../../components/ui/ButtonCancelForm';
 import Loading from '../../../../components/ui/Loading';
 import InputSelect from '../../../../components/ui/InputSelect';
+import { calibreCastania, calidadCastania } from "../../../../config/constantes"
 import { useRegistrarProductoEnPaquete } from '../../../paquetes/hooks/useRegistrarProductoEnPaquete';
 import { useFetchProductos } from '../../../productos/hooks/useFetchProductos';
 import { useFetchProductosDelPaquete } from '../../../paquetes/hooks/useFetchProductosDelPaquete';
@@ -274,6 +275,8 @@ export default function FormProductos() {
           tableHeader={[
             "N°",
             "Producto",
+            "Clasificado por:",
+            "Clasificación",
             "Cantidad",
             "Peso total",
             "Acción",
@@ -290,6 +293,58 @@ export default function FormProductos() {
               </td>
               <td className="px-6 py-4 text-sm text-gray-300">
                 {producto.nombreproducto}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-300">
+                <InputSelect 
+                  label='Clasificado por:'
+                  placeholder='Seleccionar...'
+                  options={[
+                    { label: "CALIDAD", value: "Calidad:" },
+                    { label: "CALIBRE", value: "Calibre:" }
+                  ]}
+                  onSelect={(value) => {
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${value}` } : p));
+                  }}
+                />
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-300">
+                {/* Necesito una condicional que decida si mostrar el select de calibre o de calidad */}
+                {producto.observacion.startsWith("Calidad:") && (
+                  <InputSelect 
+                  label='Calidad'
+                  placeholder='Seleccionar...'
+                  options={calidadCastania}
+                  onSelect={(value) => {
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
+                  }}
+                />
+                )}
+                {producto.observacion.startsWith("Calibre:") && (
+                  <InputSelect 
+                  label='Calibre'
+                  placeholder='Seleccionar...'
+                  options={calibreCastania}
+                  onSelect={(value) => {
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
+                  }}
+                />
+                )}
+                {/* <InputSelect 
+                  label='Calibre'
+                  placeholder='Seleccionar...'
+                  options={calibreCastania}
+                  onSelect={(value) => {
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
+                  }}
+                />
+                <InputSelect 
+                  label='Calidad'
+                  placeholder='Seleccionar...'
+                  options={calidadCastania}
+                  onSelect={(value) => {
+                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
+                  }}
+                /> */}
               </td>
               <td className="pxs-4 py-4">
                 <div className="inline-flex items-center gap-2">
@@ -400,13 +455,14 @@ export default function FormProductos() {
           textError='Error al registrar productos en paquete'
           color='blue'
           handleSubmit={async () => {
-            await registrarProductoEnPaquete(formData, dataEmitirGre.idPaquete || 0);
-            if (dataEmitirGre.idPaquete) {
-              refetchExistentes(dataEmitirGre.idPaquete).then(() => {
-                setShowAddForm(false);
-                setFormData([]);
-              });
-            }
+            console.log("Form data to submit:", formData);
+            // await registrarProductoEnPaquete(formData, dataEmitirGre.idPaquete || 0);
+            // if (dataEmitirGre.idPaquete) {
+            //   refetchExistentes(dataEmitirGre.idPaquete).then(() => {
+            //     setShowAddForm(false);
+            //     setFormData([]);
+            //   });
+            // }
           }}
         />
       </div>
