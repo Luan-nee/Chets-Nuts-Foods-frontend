@@ -4,13 +4,11 @@ import { Search, Filter, Plus } from "lucide-react";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
 import TableProductos from "../features/productos/components/TableProductos";
-import FormCreateVariente from "../features/productos/components/FormCreateVariante";
 
 export default function Productos() {
   const { tienePermiso } = useAutorizacion();
   const [showFormEditProduct, setShowFormEditProduct] = useState<boolean>(false);
   const [showFormCreateProduct, setShowFormCreateProduct] = useState<boolean>(false);
-  const [showFormCreateVariante, setShowFormCreateVariante] = useState<boolean>(false);
   const [selectProductoId, setSelectProductoId] = useState<number | null>(null);
   
   // Este estado se utiliza para compartir el estado actual de la pagina 
@@ -61,7 +59,6 @@ export default function Productos() {
 
       {/* Table */}
       <TableProductos 
-        showFormCreateVariante={setShowFormCreateVariante} 
         setSelectProductoId={setSelectProductoId}  
         showFormEdit={setShowFormEditProduct} 
         setPaginActual={setPaginaActual} 
@@ -72,14 +69,6 @@ export default function Productos() {
           showFormEdit={setShowFormEditProduct} 
           idProducto={selectProductoId? selectProductoId : 0} 
           pagina={paginaActual}  
-        />
-      }
-
-      { showFormCreateVariante && 
-        <FormCreateVariente 
-          showFormEdit={setShowFormCreateVariante} 
-          idProducto={selectProductoId? selectProductoId : 0} 
-          pagina={paginaActual} 
         />
       }
 

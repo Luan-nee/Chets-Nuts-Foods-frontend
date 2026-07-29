@@ -13,7 +13,6 @@ import Clientes from "../pages/Clientes";
 import Establecimientos from "../pages/Establecimientos";
 import GuiasDeRemision from "../pages/GuiasDeRemision";
 import Transporte from "../pages/Transporte";
-import Test from "../pages/Test";
 import { SocketProvider } from "../context/SocketContext";
 import { GreProvider } from "../context/GreContext";
 import { SalidaTransporteProvider } from "../context/SalidaTransporteContext";

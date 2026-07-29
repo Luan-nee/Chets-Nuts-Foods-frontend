@@ -18,6 +18,8 @@ export type ResponseCreateProducto = {
   idproductdefect: number;
   nombre: string;
   descripcion: string;
+  calidadproductodefect: string;
+  calibreproductdefect: string;
   fechacreacion: string;
 }
 

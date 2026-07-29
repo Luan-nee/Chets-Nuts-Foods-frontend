@@ -329,22 +329,6 @@ export default function FormProductos() {
                   }}
                 />
                 )}
-                {/* <InputSelect 
-                  label='Calibre'
-                  placeholder='Seleccionar...'
-                  options={calibreCastania}
-                  onSelect={(value) => {
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
-                  }}
-                />
-                <InputSelect 
-                  label='Calidad'
-                  placeholder='Seleccionar...'
-                  options={calidadCastania}
-                  onSelect={(value) => {
-                    setFormData(prev => prev.map(p => p.idproductdefect === producto.idproductdefect ? { ...p, observacion: `${p.observacion} ${value}` } : p));
-                  }}
-                /> */}
               </td>
               <td className="pxs-4 py-4">
                 <div className="inline-flex items-center gap-2">
@@ -455,14 +439,13 @@ export default function FormProductos() {
           textError='Error al registrar productos en paquete'
           color='blue'
           handleSubmit={async () => {
-            console.log("Form data to submit:", formData);
-            // await registrarProductoEnPaquete(formData, dataEmitirGre.idPaquete || 0);
-            // if (dataEmitirGre.idPaquete) {
-            //   refetchExistentes(dataEmitirGre.idPaquete).then(() => {
-            //     setShowAddForm(false);
-            //     setFormData([]);
-            //   });
-            // }
+            await registrarProductoEnPaquete(formData, dataEmitirGre.idPaquete || 0);
+            if (dataEmitirGre.idPaquete) {
+              refetchExistentes(dataEmitirGre.idPaquete).then(() => {
+                setShowAddForm(false);
+                setFormData([]);
+              });
+            }
           }}
         />
       </div>

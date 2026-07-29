@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Test() {
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
-  const [objetSelected, setObjetSelected] = useState<any>(null);
+  const [, setObjetSelected] = useState<any>(null);
   const atributos = ["id", "nombre", "atributo"];
   const productos = [{
     id: 1,

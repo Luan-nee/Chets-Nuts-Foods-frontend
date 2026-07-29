@@ -12,14 +12,12 @@ import { NotificationProductDefect } from "../../../components/messages/Notifica
 interface PropTableProductos {
   setSelectProductoId: (p: number | null) => void;
   showFormEdit: (p: boolean) => void;
-  showFormCreateVariante: (p: boolean) => void;
   setPaginActual: (p: number) => void;
 }
 
 export default function TableProductos({
   setSelectProductoId,
   showFormEdit,
-  showFormCreateVariante,
   setPaginActual
 }: PropTableProductos) {
   const { tienePermiso } = useAutorizacion();
