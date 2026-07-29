@@ -254,17 +254,6 @@ export default function FormProductos() {
                   >
                     <span className="font-medium text-sm">{p.nombre}</span>
                     <span className="text-xs text-slate-500">{p.descripcion}</span>
-                    { p.calibreproductdefect == "SIN DEFINIR" ? (
-                        <span className="text-xs text-slate-500">Calidad: {p.calidadproductodefect}</span>
-                      ) : p.calidadproductodefect == "SIN DEFINIR" ? (
-                        <span className="text-xs text-slate-500">Calibre: {p.calibreproductdefect}</span>
-                      ) : (
-                        <>
-                          <span className="text-xs text-slate-500">Calidad: {p.calidadproductodefect}</span>
-                          <span className="text-xs text-slate-500">Calibre: {p.calibreproductdefect}</span>
-                        </>
-                      )
-                    }
                   </button>
                 ))}
               </div>
