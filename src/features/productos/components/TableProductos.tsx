@@ -57,7 +57,6 @@ export default function TableProductos({
     "Nº",
     "Nombre",
     "Descripción del producto",
-    "Clasificación",
     "Acciones"
   ];
 
@@ -106,19 +105,6 @@ export default function TableProductos({
                 </span>
               </td>
               <td className="px-6 py-4">
-                { producto.calibreproductdefect == "SIN DEFINIR" ? (
-                    <div className="text-white">Calidad: {producto.calidadproductodefect}</div>
-                  ) : producto.calidadproductodefect == "SIN DEFINIR" ? (
-                    <div className="text-white">Calibre: {producto.calibreproductdefect}</div>
-                  ) : (
-                    <>
-                      <div className="text-white">Calidad: {producto.calidadproductodefect}</div>
-                      <div className="text-white">Calibre: {producto.calibreproductdefect}</div>
-                    </>
-                  )
-                }
-              </td>
-              <td className="px-6 py-4">
                 { tienePermiso('PUEDE_EDITAR_PRODUCTO') && (
                   <button
                     className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
@@ -131,23 +117,6 @@ export default function TableProductos({
                     <Edit className="w-4 h-4 text-gray-400" />
                   </button>
                 )}
-                <button
-                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-                  title="Agregar variante"
-                  onClick={() => {
-                    setSelectProductoId(producto.idproductdefect);
-                    setPaginActual(infoPaginacion.pagina_actual);
-                    showFormCreateVariante(true);
-                  }}>
-                    <div className="flex items-center gap-1">
-                      <span>
-                        variante
-                      </span>
-                      <span>
-                        <Edit className="w-4 h-4 text-gray-400" />
-                      </span>
-                    </div>
-                </button>
               </td>
             </tr>
           ))}

@@ -5,9 +5,6 @@ import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
-import Switch from "../../../components/ui/Switch";
-import InputSelect from "../../../components/ui/InputSelect";
-import { calibreCastania, calidadCastania } from "../../../config/constantes";
 import { useCreateProducto } from "../hooks/useCreateProducto";
 import type { CreateProducto } from "../../../types/producto.type";
 
@@ -16,7 +13,6 @@ interface FormCreateProps {
 }
 
 export default function FormCreate({ showFormCreate }: FormCreateProps) {
-  const [switchState, setSwitchState] = useState<boolean>(true);
   const { 
     isLoading, 
     isError, 
@@ -25,9 +21,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
 
   const [formData, setFormData] = useState<CreateProducto>({
     nombre: "",
-    descripcion: "",
-    calibre: "",
-    calidad: "",
+    descripcion: ""
   });
 
   return (
@@ -59,46 +53,6 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           htmlForm="descripcion"
           onChange={(value) => setFormData(prev => ({ ...prev, descripcion: value }))}
         />
-        <div className="flex items-center gap-2 my-4">
-          <span className={`${switchState ? "text-gray-500" : "text-blue-400 font-bold" }`}>
-            Seleccionar Calidad
-          </span>
-          <Switch 
-            estado={switchState}
-            handleInputChange={() => setSwitchState(!switchState)}
-          />
-          <span className={`${switchState ? "text-blue-400 font-bold" : "text-gray-500" }`}>
-            Seleccionar Calibre
-          </span>
-        </div>
-        {switchState ? (
-          <InputSelect 
-            label="Calibre"
-            onSelect={(value) => setFormData((prev) => {
-              const { calidad, ...rest } = prev;
-              return {
-                ...rest,
-                calibre: value as string,
-              };
-            })}
-            options={calibreCastania}
-            placeholder="Selecciona un calibre"
-          />
-        ) : (
-          <InputSelect 
-            label="Calidad"
-            onSelect={(value) => setFormData((prev) => {
-              const { calibre, ...rest } = prev;
-              return {
-                ...rest,
-                calidad: value as string,
-              };
-            })}
-            options={calidadCastania}
-            placeholder="Selecciona una calidad"
-          />
-        )}
-
         {/* Footer */}
         <div className="flex justify-end mt-6 gap-4">
           <ButtonCancelForm

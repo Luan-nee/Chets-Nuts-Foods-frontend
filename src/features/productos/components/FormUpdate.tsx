@@ -6,10 +6,8 @@ import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
-import InputSelect from "../../../components/ui/InputSelect";
 import { useFetchProducto } from "../hooks/useFetchProducto";
 import { useUpdateProducto } from "../hooks/useUpdateProducto";
-import { calibreCastania, calidadCastania } from "../../../config/constantes";
 import type { UpdateProducto } from "../../../types/producto.type";
 
 interface FormUpdateEstProps {
@@ -34,9 +32,7 @@ export default function FormUpdate({ showFormEdit, idProducto, pagina }: FormUpd
   const [formData, setFormData] = useState<UpdateProducto>({
     idProductDefect: idProducto,
     nombre: "",
-    descripcion: "",
-    calibreproductdefect: "SIN DEFINIR",
-    calidadproductodefect: "SIN DEFINIR"
+    descripcion: ""
   });
 
   useEffect(() => {
@@ -90,57 +86,6 @@ export default function FormUpdate({ showFormEdit, idProducto, pagina }: FormUpd
                   setFormData({ ...formData, descripcion: value })
                 }
               />
-              { formData.calibreproductdefect == "SIN DEFINIR" ? (
-                  <InputSelect 
-                    label="Calidad"
-                    onSelect={(value) => setFormData(prev => ({ 
-                      ...prev, 
-                      calibre: "SIN DEFINIR",
-                      calidad: value as string 
-                    }))}
-                    options={calidadCastania}
-                    placeholder="Selecciona una calidad"
-                    valueSelected={formData.calidadproductodefect || ""}
-                  />
-                ) : formData.calidadproductodefect == "SIN DEFINIR" ? (
-                  <InputSelect 
-                    label="Calibre"
-                    onSelect={(value) => setFormData(prev => ({ 
-                      ...prev, 
-                      calibre: value as string,
-                      calidad: "SIN DEFINIR"
-                    }))}
-                    options={calibreCastania}
-                    placeholder="Selecciona un calibre"
-                    valueSelected={formData.calibreproductdefect || ""}
-                  />
-                ) : (
-                  <>
-                    <InputSelect 
-                      label="Calibre"
-                      onSelect={(value) => setFormData(prev => ({ 
-                        ...prev, 
-                        calibre: value as string,
-                        calidad: "SIN DEFINIR"
-                      }))}
-                      options={calibreCastania}
-                      placeholder="Selecciona un calibre"
-                      valueSelected={formData.calibreproductdefect || ""}
-                    />
-                    <InputSelect 
-                      label="Calidad"
-                      onSelect={(value) => setFormData(prev => ({ 
-                        ...prev, 
-                        calibre: "SIN DEFINIR",
-                        calidad: value as string 
-                      }))}
-                      options={calidadCastania}
-                      placeholder="Selecciona una calidad"
-                      valueSelected={formData.calidadproductodefect || ""}
-                    />
-                  </>
-                )
-              }
           </ContentSectionProcess>
         </div>
 
