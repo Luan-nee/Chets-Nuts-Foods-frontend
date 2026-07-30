@@ -175,13 +175,23 @@ export default function FormProductos() {
             <h3 className="text-lg font-semibold text-slate-100">Productos en el Paquete #{dataEmitirGre.idPaquete}</h3>
             <p className="text-sm text-slate-400">Listado de productos cargados actualmente para este paquete.</p>
           </div>
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
-          >
-            <Plus className="w-4 h-4" />
-            Agregar más productos
-          </button>
+          <div className="flex gap-4">
+            <button
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+              onClick={() => {
+                dataEmitirGre.idPaquete && refetchExistentes(dataEmitirGre.idPaquete);
+              }}
+            >
+              Recargar
+            </button>
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+            >
+              <Plus className="w-4 h-4" />
+              Agregar más productos
+            </button>
+          </div>
         </div>
 
         <Table tableHeader={tableHeader} cantidadDatos={productosExistentes.length}>

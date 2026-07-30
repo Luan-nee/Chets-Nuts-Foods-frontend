@@ -21,28 +21,20 @@ export default class PaqueteApi extends BaseRequestApi {
     productos: ProductoEnPaquete[],
     idPaquete: number,
   ): Promise<BodyResponse<string>> {
-    let todoBien = true;
+
     const productosFormateados: Omit<ProductoEnPaquete, "idproductdefect">[] =
       productos.map(({ idproductdefect: _, ...producto }) => producto);
 
-    productosFormateados.map((producto) => {
-      this.POST<string>(
-        `${this.base_url_production}/${idPaquete}/producto`,
-        producto,
-      ).then((response) => {
-        if (response.status !== "success") {
-          todoBien = false;
-        }
-        return response;
-      });
-    });
+    let response!: BodyResponse<string>;
 
-    return {
-      status: "success",
-      message: todoBien
-        ? "Productos agregados exitosamente"
-        : "Error al agregar productos al paquete",
-    };
+    for (const producto of productosFormateados) {
+      response = await this.POST<string>(
+        `${this.base_url_production}/${idPaquete}/producto`,
+        producto
+      );
+    }
+
+    return response;
   }
 
   public async obtenerPaquetes(
