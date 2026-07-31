@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Truck } from "lucide-react";
 import ButtonSubmitForm from "../components/ui/ButtonSubmitForm";
 import InputText from "../components/ui/InputText";
+import InputPassword from "../components/ui/InputPassword";
 import { useLogin } from "../features/auth/hooks/useLogin";
 
 export default function Login() {
@@ -42,7 +43,7 @@ export default function Login() {
               onChange={(value) => setUsuario(value)}
               value={usuario}
             />
-            <InputText 
+            <InputPassword 
               htmlForm="contraseña"
               label="Contraseña"
               onChange={(value) => setContrasenia(value)}
