@@ -50,7 +50,7 @@ export default function DetallesInfoEstablecimiento({ setShowForm }: DetallesInf
               Establecimiento
             </p>
             <p className="text-sm font-medium text-white break-words">
-              {establecimiento?.nombreestablecimiento || "Sin nombre registrado"}
+              {establecimiento?.nombreEstablecimiento || "Sin nombre registrado"}
             </p>
           </div>
           <div className="space-y-1">

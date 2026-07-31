@@ -79,14 +79,6 @@ export default function DetallesInfoEmpresa({setShowForm}: DetallesInfoEmpresaPr
           </div>
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-wide text-gray-400">
-              Fecha vigencia de registro
-            </p>
-            <p className="text-sm font-medium text-white break-words">
-              {infoEmpresa?.fechavigenciaregistro || "No registrado"}
-            </p>
-          </div>
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-wide text-gray-400">
               Numero de registro MTC
             </p>
             <p className="text-sm font-medium text-white break-words">

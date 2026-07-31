@@ -25,11 +25,10 @@ export type InfoUbicacionState = {
 };
 
 export type ResponseObtenerInfoEmpresa = {
-  claveAcceso: string,
   codigoMtc: string,
   correo: string,
   denominacion: string,
-  fechavigenciaregistro: string,
   numeroRegistroMtc: string,
   ruc: string
+  claveAcceso: string
 }

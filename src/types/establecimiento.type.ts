@@ -21,7 +21,7 @@ export type ResponseGetByID = {
   apellidopaterno: string;
   dniuser: string;
   numero: string;
-  nombreestablecimiento: string,
+  nombreEstablecimiento: string,
   codigoSunat: string | null;
   departamento: string;
   descripcion: string;
