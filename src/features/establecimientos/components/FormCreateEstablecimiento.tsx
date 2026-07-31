@@ -30,18 +30,18 @@ export default function FormCreateEstablecimiento({
 	} = useCreateEstablecimiento();
 
 	const [formData, setFormData] = useState<CreateEstablecimiento>({
-		idResponsable: 1,
+		idResponsable: 0,
 		nombreEstablecimiento: "",
 		direccion: "",
 		descripcion: "",
-		latitud: "-12.589880",
-		longitud: "-69.210107",
+		latitud: "-00.000000",
+		longitud: "-00.000000",
 		distrito: "",
 		provincia: "",
 		departamento: "",
-		ubigeo: "211102",
+		ubigeo: "123456",
 		tipoEstado: "oficina",
-		codigoSunat: "affe",
+		codigoSunat: "sin definir",
 	});
 
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

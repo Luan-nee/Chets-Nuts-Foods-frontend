@@ -1,4 +1,8 @@
-import { Edit2, Eye, MapPin, Building2 } from "lucide-react";
+import { 
+  Edit2, 
+  Eye, 
+  Building2 
+} from "lucide-react";
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import { useFetchEstablecimientos } from "../hooks/useFetchEstablecimientos";
@@ -24,7 +28,6 @@ export default function TableEstablecimientos({
 
   const tableHeader: string[] = [
     "Establecimiento",
-    "Código SUNAT",
     "Ubicación",
     "Dirección",
     "Tipo",
@@ -71,18 +74,10 @@ export default function TableEstablecimientos({
               </div>
             </td>
 
-            {/* Código SUNAT */}
-            <td className="px-6 py-4">
-              <span className="text-sm text-white">
-                {establecimiento.codigoSunat ?? "No registrado"}
-              </span>
-            </td>
-
             {/* Ubicación */}
             <td className="px-6 py-4">
-              <div className="flex items-center gap-2 text-sm text-gray-300">
-                <MapPin className="w-4 h-4 text-gray-500" />
-                <span>{establecimiento.distrito}, {establecimiento.provincia}</span>
+              <div className="flex gap-2">
+                <span className="text-sm text-gray-300">{establecimiento.distrito}, {establecimiento.provincia}</span>
               </div>
             </td>
 

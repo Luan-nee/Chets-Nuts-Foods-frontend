@@ -59,7 +59,7 @@ export default function DetallesEstablecimiento({
 											Establecimiento #{establecimiento?.idEst}
 										</p>
 										<h2 className="text-2xl font-semibold text-white truncate">
-											{establecimiento?.nombreestablecimiento || "Sin nombre registrado"}
+											{establecimiento?.nombreEstablecimiento || "Sin nombre registrado"}
 										</h2>
 										<p className="text-sm text-gray-400 mt-1">
 											{establecimiento?.descripcion || "Sin descripción registrada"}
@@ -83,12 +83,6 @@ export default function DetallesEstablecimiento({
 							</div>
 
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div className="rounded-xl border border-gray-800 bg-gray-950/40 p-4">
-									<p className="text-xs uppercase tracking-widest text-gray-500 mb-2">Código SUNAT</p>
-									<p className="text-sm text-white">
-										{establecimiento?.codigoSunat ?? "No registrado"}
-									</p>
-								</div>
 
 								<div className="rounded-xl border border-gray-800 bg-gray-950/40 p-4">
 									<p className="text-xs uppercase tracking-widest text-gray-500 mb-2">Ubigeo</p>
@@ -98,7 +92,13 @@ export default function DetallesEstablecimiento({
 								<div className="rounded-xl border border-gray-800 bg-gray-950/40 p-4">
 									<p className="text-xs uppercase tracking-widest text-gray-500 mb-2">Ubicación</p>
 									<p className="text-sm text-white">
-										{establecimiento?.distrito}, {establecimiento?.provincia}, {establecimiento?.departamento}
+										{establecimiento?.distrito} /
+									</p>
+									<p className="text-sm text-white">
+										{establecimiento?.provincia} /
+									</p>
+									<p className="text-sm text-white">
+										{establecimiento?.departamento}
 									</p>
 								</div>
 

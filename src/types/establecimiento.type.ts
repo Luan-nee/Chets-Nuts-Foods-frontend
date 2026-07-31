@@ -16,7 +16,7 @@ export type ResponseGetAll = {
 export type ResponseGetByID = {
   idEst: number;
   iduser: number;
-  nombreusuario: string;
+  nombreUsuario: string;
   apellidomaterno: string;
   apellidopaterno: string;
   dniuser: string;
