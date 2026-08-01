@@ -96,6 +96,7 @@ export default function FormCreateEstablecimiento({
 							value={formData.nombreEstablecimiento}
 							htmlForm="nombreEstablecimiento"
 							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
+							isObligatory={true}
 						/>
 						<div className="flex flex-col">
 							<label className="block text-sm font-medium text-gray-300 mb-1">

@@ -99,7 +99,7 @@ export default function FormUpdateEstablecimiento({
 			setFormData({
 				idEstablecimiento: establecimiento.idEst,
 				idResponsable: establecimiento.iduser,
-				nombreEstablecimiento: establecimiento.nombreestablecimiento ?? "",
+				nombreEstablecimiento: establecimiento.nombreEstablecimiento ?? "",
 				direccion: "",
 				descripcion: establecimiento.descripcion ?? "",
 				latitud: establecimiento.latitud ?? "",
@@ -112,8 +112,8 @@ export default function FormUpdateEstablecimiento({
 				codigoSunat: establecimiento.codigoSunat ?? "",
 			});
 			setSelectedResponsableName(
-				establecimiento.nombreusuario
-					? `${establecimiento.nombreusuario} ${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""}`.trim()
+				establecimiento.nombreUsuario
+					? `${establecimiento.nombreUsuario} ${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""}`.trim()
 					: "Sin responsable asignado"
 			);
 			setFormReady(true);
@@ -149,19 +149,6 @@ export default function FormUpdateEstablecimiento({
 				fetchData={() => recargarDatos(establecimientoId)}
 			>
 				<div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mx-8 my-6 shadow-lg">
-					<div className="flex items-center gap-3 mb-6">
-						<div className="rounded-xl bg-blue-500/15 p-3 border border-blue-500/20">
-							<Building2 className="w-6 h-6 text-blue-400" />
-						</div>
-						<div>
-							<h2 className="text-xl font-semibold text-white">
-								{formData.nombreEstablecimiento || "Datos del establecimiento"}
-							</h2>
-							<p className="text-sm text-gray-400">
-								Actualiza responsable, ubicación, coordenadas y tipo de establecimiento.
-							</p>
-						</div>
-					</div>
 
 					<div className="space-y-6">
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
