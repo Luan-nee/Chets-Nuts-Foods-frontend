@@ -1,20 +1,22 @@
 import { useState } from "react";
-import { Building2, UserCheck } from "lucide-react";
+import { Building2, User } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import InputSelect from "../../../components/ui/InputSelect";
+import ModalSelectEmpleado from "./ModalSelectEmpleado";
 import {
 	departamentos,
 	getDistritosByProvincia,
 	getProvinciasByDepartamento,
 } from "../../../config/infoUbicacion";
 import { useCreateEstablecimiento } from "../hooks/useCreateEstablecimiento";
-import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
-import ModalSelectResponsable from "./ModalSelectResponsable";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
+import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
+// import ModalSelectResponsable from "./ModalSelectResponsable";
+// import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 
 interface FormCreateEstablecimientoProps {
 	setShowFormCreateEstablecimiento: (value: boolean) => void;
@@ -44,28 +46,38 @@ export default function FormCreateEstablecimiento({
 		codigoSunat: "sin definir",
 	});
 
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
-	const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [responsable, setResponsable] = useState<ResponseGetAllColaboradores>({
+		correo: "",
+		dniuser: "",
+		estado: false,
+		estadoacceso: "OCUPADO",
+		idacceso: 0,
+		nombres: "",
+		tipos: "SIN ROL",
+	});
+	// const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	// const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
+	// const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
 
-	const openModal = () => {
-		setIsModalOpen(true);
-		setIsAnimatingClose(false);
-	};
+	// const openModal = () => {
+	// 	setIsModalOpen(true);
+	// 	setIsAnimatingClose(false);
+	// };
 
-	const closeModal = () => {
-		setIsAnimatingClose(true);
-		setTimeout(() => {
-			setIsModalOpen(false);
-			setIsAnimatingClose(false);
-		}, 250);
-	};
+	// const closeModal = () => {
+	// 	setIsAnimatingClose(true);
+	// 	setTimeout(() => {
+	// 		setIsModalOpen(false);
+	// 		setIsAnimatingClose(false);
+	// 	}, 250);
+	// };
 
-	const handleSelect = (acceso: ResponseGetAllColaboradores) => {
-		setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
-		setSelectedResponsableName(acceso.nombres);
-		closeModal();
-	};
+	// const handleSelect = (acceso: ResponseGetAllColaboradores) => {
+	// 	setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
+	// 	setSelectedResponsableName(acceso.nombres);
+	// 	closeModal();
+	// };
 
 	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento);
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento, formData.provincia);
@@ -90,7 +102,41 @@ export default function FormCreateEstablecimiento({
 				</div>
 
 				<div className="space-y-6">
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div className="flex flex-row gap-4">
+						{/* Nombre del establecimiento */}
+						<InputText
+							label="Nombre del establecimiento"
+							value={formData.nombreEstablecimiento}
+							htmlForm="nombreEstablecimiento"
+							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
+							isObligatory={true}
+						/>
+						{/* Selector de responsable */}
+						<button 
+							onClick={() => setShowModal(true)}
+							className="flex items-center gap-2 p-4 rounded-lg bg-gray-950 transition-colors border border-gray-800 gap-3"
+						>
+							<User className="w-5 h-5 text-blue-400"/>
+							<div className="text-left">
+								{	responsable.idacceso === 0 ? (
+									<p className="text-sm font-medium text-white text-nowrap">Selecciona un responsable</p>
+								) : (
+									<>
+										<p className="text-sm font-medium text-white">{responsable.nombres}</p>
+										<div className="flex flex-row gap-2">
+											<p className="text-xs text-gray-500 text-nowrap">
+												DNI: {responsable.dniuser}
+											</p>
+											<p className="text-xs text-gray-500 text-nowrap">
+												ROL: {responsable.tipos}
+											</p>
+										</div>
+									</>
+								)}
+							</div>
+						</button>
+					</div>
+					{/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<InputText
 							label="Nombre del establecimiento"
 							value={formData.nombreEstablecimiento}
@@ -120,7 +166,7 @@ export default function FormCreateEstablecimiento({
 								</button>
 							</div>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 						<InputSelect
@@ -200,13 +246,22 @@ export default function FormCreateEstablecimiento({
 				</div>
 			</div>
 
-			<ModalSelectResponsable
+			{ showModal && (
+				<ModalSelectEmpleado 
+					onSelect={(idSelect) => setFormData((prev) => ({ ...prev, idResponsable: idSelect }))}
+					setShowModal={setShowModal}
+					objectSelected={setResponsable}
+					selectedId={formData.idResponsable}
+				/>
+			)}
+
+			{/* <ModalSelectResponsable
 				isOpen={isModalOpen}
 				isAnimatingClose={isAnimatingClose}
 				selectedId={formData.idResponsable}
 				onClose={closeModal}
 				onSelect={handleSelect}
-			/>
+			/> */}
 		</ContentPage>
 	);
 }
