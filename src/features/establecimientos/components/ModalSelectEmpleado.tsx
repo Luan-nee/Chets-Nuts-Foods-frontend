@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { User, X, Check } from "lucide-react";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
