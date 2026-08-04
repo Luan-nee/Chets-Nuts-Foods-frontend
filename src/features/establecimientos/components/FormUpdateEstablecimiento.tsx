@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Building2, UserCheck } from "lucide-react";
+import { User } from "lucide-react";
 import ContentPage from "../../../components/layouts/ContentPage";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
@@ -7,6 +7,7 @@ import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
+import ModalSelectEmpleado from "./ModalSelectEmpleado";
 import {
 	departamentos,
 	getDistritosByProvincia,
@@ -15,22 +16,12 @@ import {
 import { useFetchEstablecimiento } from "../hooks/useFetchEstablecimiento";
 import { useUpdateEstablecimiento } from "../hooks/useUpdateEstablecimiento";
 import type { UpdateEstablecimiento } from "../../../types/establecimiento.type";
-import type { TipoEstablecimiento } from "../../../types/constantes.type";
-import ModalSelectResponsable from "./ModalSelectResponsable";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 
 interface FormUpdateEstablecimientoProps {
 	idEstablecimiento: number | null;
 	setShowFormUpdateEstablecimiento: (value: boolean) => void;
 }
-
-const tipoEstablecimientoOptions: Array<{ value: TipoEstablecimiento; label: string }> = [
-	{ value: "fiscal", label: "Fiscal" },
-	{ value: "anexo", label: "Anexo" },
-	{ value: "almacen", label: "Almacén" },
-	{ value: "oficina", label: "Oficina" },
-	{ value: "no_registrado", label: "No registrado" },
-];
 
 export default function FormUpdateEstablecimiento({
 	idEstablecimiento,
@@ -65,34 +56,21 @@ export default function FormUpdateEstablecimiento({
 		departamento: "",
 		ubigeo: "",
 		tipoEstado: "no_registrado",
-		codigoSunat: "",
+		codigoSunat: "affe",
 	});
-
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
-	const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
-
-	const openModal = () => {
-		setIsModalOpen(true);
-		setIsAnimatingClose(false);
-	};
-
-	const closeModal = () => {
-		setIsAnimatingClose(true);
-		setTimeout(() => {
-			setIsModalOpen(false);
-			setIsAnimatingClose(false);
-		}, 250);
-	};
-
-	const handleSelect = (acceso: ResponseGetAllColaboradores) => {
-		setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
-		setSelectedResponsableName(acceso.nombres);
-		closeModal();
-	};
-
 	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento ?? "");
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento ?? "", formData.provincia ?? "");
+
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const [responsable, setResponsable] = useState<ResponseGetAllColaboradores>({
+		correo: "",
+		dniuser: "",
+		estado: false,
+		estadoacceso: "OCUPADO",
+		idacceso: 0,
+		nombres: "",
+		tipos: "SIN ROL",
+	});
 
 	useEffect(() => {
 		if (establecimiento) {
@@ -100,7 +78,7 @@ export default function FormUpdateEstablecimiento({
 				idEstablecimiento: establecimiento.idEst,
 				idResponsable: establecimiento.iduser,
 				nombreEstablecimiento: establecimiento.nombreEstablecimiento ?? "",
-				direccion: "",
+				direccion: establecimiento.descripcion ?? "",
 				descripcion: establecimiento.descripcion ?? "",
 				latitud: establecimiento.latitud ?? "",
 				longitud: establecimiento.longitud ?? "",
@@ -111,11 +89,15 @@ export default function FormUpdateEstablecimiento({
 				tipoEstado: establecimiento.tipoestablecimiento ?? "no_registrado",
 				codigoSunat: establecimiento.codigoSunat ?? "",
 			});
-			setSelectedResponsableName(
-				establecimiento.nombreUsuario
-					? `${establecimiento.nombreUsuario} ${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""}`.trim()
-					: "Sin responsable asignado"
-			);
+			setResponsable({
+				correo: "",
+				dniuser: establecimiento.dniuser ?? "",
+				estado: establecimiento.activo,
+				estadoacceso: establecimiento.activo ? "DISPONIBLE" : "OCUPADO",
+				idacceso: establecimiento.iduser,
+				nombres: establecimiento.nombreUsuario ?? "",
+				tipos: "SIN ROL",
+			});
 			setFormReady(true);
 		}
 	}, [establecimiento]);
@@ -149,47 +131,35 @@ export default function FormUpdateEstablecimiento({
 				fetchData={() => recargarDatos(establecimientoId)}
 			>
 				<div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mx-8 my-6 shadow-lg">
-
 					<div className="space-y-6">
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div className="flex flex-row gap-4">
 							<InputText
 								label="Nombre del establecimiento"
 								value={formData.nombreEstablecimiento ?? ""}
 								htmlForm="nombreEstablecimientoUpdate"
 								onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
 							/>
-							<InputSelect
-								label="Tipo de establecimiento"
-								options={tipoEstablecimientoOptions}
-								placeholder="Selecciona el tipo de establecimiento"
-								onSelect={(value) => setFormData((prev) => ({ ...prev, tipoEstado: value as TipoEstablecimiento }))}
-								valueSelected={formData.tipoEstado}
-							/>
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-							<div className="flex flex-col">
-								<label className="block text-sm font-medium text-gray-300 mb-1">
-									Responsable del área
-								</label>
-								<div className="flex gap-2">
-									<input
-										type="text"
-										readOnly
-										placeholder="Ninguno seleccionado"
-										value={selectedResponsableName}
-										className="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none"
-									/>
-									<button
-										type="button"
-										onClick={openModal}
-										className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 border border-blue-500/10 shadow-sm"
-									>
-										<UserCheck className="w-4 h-4" />
-										<span>Seleccionar responsable</span>
-									</button>
+							{/* Selector de responsable */}
+							<button 
+								onClick={() => setShowModal(true)}
+								className="flex items-center gap-2 p-4 rounded-lg bg-gray-950 transition-colors border border-gray-800 gap-3"
+							>
+								<User className="w-5 h-5 text-blue-400"/>
+								<div className="text-left">
+									{	(responsable.idacceso === 0) ? (
+										<p className="text-sm font-medium text-white text-nowrap">Selecciona un responsable</p>
+									) : (
+										<>
+											<p className="text-sm font-medium text-white text-nowrap">{responsable.nombres}</p>
+											<div className="flex flex-row gap-2">
+												<p className="text-xs text-gray-500 text-nowrap">
+													DNI: {responsable.dniuser}
+												</p>
+											</div>
+										</>
+									)}
 								</div>
-							</div>
+							</button>
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -236,32 +206,11 @@ export default function FormUpdateEstablecimiento({
 								htmlForm="descripcionUpdate"
 								onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
 							/>
-							<InputText
-								label="Código SUNAT (opcional)"
-								value={formData.codigoSunat ?? ""}
-								htmlForm="codigoSunatUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, codigoSunat: value }))}
-							/>
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-							<InputText
-								label="Ubigeo"
-								value={formData.ubigeo ?? ""}
-								htmlForm="ubigeoUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, ubigeo: value }))}
-							/>
-							<InputText
-								label="Latitud"
-								value={formData.latitud ?? ""}
-								htmlForm="latitudUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, latitud: value }))}
-							/>
-							<InputText
-								label="Longitud"
-								value={formData.longitud ?? ""}
-								htmlForm="longitudUpdate"
-								onChange={(value) => setFormData((prev) => ({ ...prev, longitud: value }))}
+							<InputText 
+								htmlForm="deferencia"
+								label="Referencia"
+								onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
+								value={formData.direccion ?? ""}
 							/>
 						</div>
 					</div>
@@ -295,13 +244,16 @@ export default function FormUpdateEstablecimiento({
 				</div>
 			</ContentSectionProcess>
 
-			<ModalSelectResponsable
-				isOpen={isModalOpen}
-				isAnimatingClose={isAnimatingClose}
-				selectedId={formData.idResponsable ?? null}
-				onClose={closeModal}
-				onSelect={handleSelect}
-			/>
+			{ showModal && (
+				<ModalSelectEmpleado
+					onSelect={() => {
+						setFormData((prev) => ({ ...prev, idResponsable: responsable.idacceso }));
+					}}
+					setShowModal={setShowModal}
+					objectSelected={(value) => setResponsable(value)}
+					selectedId={formData.idResponsable}
+				/>
+			)}
 		</ContentPage>
 	);
 }
