@@ -1,7 +1,6 @@
 import { useState } from "react";
 import EstablecimientosApi from "../../../api/Establecimientos.api";
-import { InfoSuccess } from '../../../components/messages/InfoSuccess';
-import { InfoError } from '../../../components/messages/InfoError';
+import swalAlert from "../../../components/messages/swalAlert";
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
 
 interface FetchState {
@@ -29,20 +28,34 @@ export const useCreateEstablecimiento = (): FetchState => {
 
 			if (response.status === "success") {
 				setMessage("Establecimiento registrado exitosamente");
-				InfoSuccess("ESTABLECIMIENTO", "Establecimiento registrado exitosamente");
+				swalAlert({
+					status: "success",
+					message: response.message || "Establecimiento registrado exitosamente",
+				});
 			} else {
 				setIsError(true);
 				setMessage("Error al registrar el establecimiento");
-				InfoError("ESTABLECIMIENTO", `${response.message ?? "El error no está especificado por el backend"}`);
+				swalAlert({
+					status: "error",
+					message: response.message || "Error al registrar el establecimiento",
+				});
 			}
 		} catch {
 			setIsError(true);
 			setMessage("Se produjo un error al registrar el establecimiento en el frontend");
-			InfoError("ESTABLECIMIENTO", "Se produjo un error al registrar el establecimiento en el frontend");
+			swalAlert({
+				status: "warning",
+				message: "Se produjo un error al registrar el establecimiento en el frontend",
+			});
 		} finally {
 			setIsLoading(false);
 		}
 	};
 
-	return { isLoading, isError, message, execute: createEstablecimiento };
+	return { 
+		isLoading, 
+		isError, 
+		message, 
+		execute: createEstablecimiento 
+	};
 };

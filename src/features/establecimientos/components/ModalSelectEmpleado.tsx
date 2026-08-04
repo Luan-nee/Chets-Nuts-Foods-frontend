@@ -67,6 +67,7 @@ export default function ModalSelectEmpleado({
                   onClick={() => {
                     onSelect(acceso.idacceso);
                     objectSelected && objectSelected(acceso);
+                    setShowModal(false);
                   }}
                   className="w-full flex justify-between items-center gap-2 p-4 rounded-lg bg-gray-950 hover:bg-gray-900 transition-colors border border-gray-800"
                 >

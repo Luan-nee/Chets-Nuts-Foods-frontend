@@ -43,7 +43,7 @@ export default function FormCreateEstablecimiento({
 		departamento: "",
 		ubigeo: "123456",
 		tipoEstado: "oficina",
-		codigoSunat: "sin definir",
+		codigoSunat: "vacio",
 	});
 
 	const [showModal, setShowModal] = useState<boolean>(false);
