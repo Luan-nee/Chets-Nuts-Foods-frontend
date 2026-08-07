@@ -55,7 +55,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
       setFormData({
         idVehiculo: dataVehiculo.idvehempresa || 0,
         anio: dataVehiculo.anio || "",
-        capacidadCarga: parseFloat(dataVehiculo.capacidadCarga) || 0,
+        capacidadCarga: parseFloat(dataVehiculo.capacidadCarga)/1000 || 0,
         marca: dataVehiculo.marca || "",
         modelo: dataVehiculo.modelo || "",
       });
@@ -188,6 +188,11 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                 />
                 <ButtonSubmitForm
                   handleSubmit={async () => {
+                    // hacer conversión de toneladas a kilogramos antes de enviar los datos al backend
+                    setFormData((prev) => ({
+                      ...prev,
+                      capacidadCarga: prev.capacidadCarga * 1000
+                    }));
                     await updateVehiculo(formData);
                     showFormUpdate(false);
                   }}
