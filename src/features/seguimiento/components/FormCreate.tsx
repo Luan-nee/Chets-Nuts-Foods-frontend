@@ -1,7 +1,4 @@
-import { 
-  useState,
-  useEffect
-} from "react";
+import { useState } from "react";
 import InputText from "../../../components/ui/InputText";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 // import Switch from "../../../components/ui/Switch";

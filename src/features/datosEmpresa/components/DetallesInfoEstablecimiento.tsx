@@ -59,7 +59,7 @@ export default function DetallesInfoEstablecimiento({ setShowForm }: DetallesInf
             </p>
             <p className="text-sm font-medium text-white break-words">
               {establecimiento
-                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombreusuario || ""}`.trim() || "No registrado"
+                ? `${establecimiento.apellidopaterno || ""} ${establecimiento.apellidomaterno || ""} ${establecimiento.nombreUsuario || ""}`.trim() || "No registrado"
                 : "No registrado"}
             </p>
           </div>

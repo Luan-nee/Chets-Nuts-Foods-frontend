@@ -34,7 +34,7 @@ export default function FormRegistrarInfoEmpresarial({ setShowForm }: FormRegist
         numeroRegistroMtc: infoEmpresa.numeroRegistroMtc || "",
         correo: infoEmpresa.correo || "",
         codigoMtc: infoEmpresa.codigoMtc || "",
-        fechaVigenciaRegistroMtc: infoEmpresa.fechavigenciaregistro || "",
+        fechaVigenciaRegistroMtc: "",
         claveAcceso: infoEmpresa.claveAcceso || "",
       });
     }

@@ -116,7 +116,7 @@ export default function DetallesEstablecimiento({
 								</div>
 								<div>
 									<p className="text-xs uppercase tracking-[0.2em] text-gray-500">Responsable</p>
-									<h3 className="text-lg font-semibold text-white">{establecimiento?.nombreusuario}</h3>
+									<h3 className="text-lg font-semibold text-white">{establecimiento?.nombreUsuario}</h3>
 								</div>
 							</div>
 
