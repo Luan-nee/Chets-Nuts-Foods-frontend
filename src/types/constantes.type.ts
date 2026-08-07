@@ -8,7 +8,7 @@ export type UserRole =
 
 export type UserGender = "MASCULINO" | "FEMENINO";
 
-export type UserType = "NATURAL" | "JURIDICO";
+export type UserType = "NATURAL" | "JURIDICO" | "SIN DEFINIR";
 
 export type TipoEstablecimiento =
   | "fiscal"

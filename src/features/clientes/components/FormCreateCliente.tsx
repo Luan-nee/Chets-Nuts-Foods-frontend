@@ -8,15 +8,17 @@ import InputSelect from "../../../components/ui/InputSelect";
 import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useCreateCliente } from "../hooks/useCreateCliente";
 import { useFetchBasicDataByDni } from "../../../hooks/useFetchBasicDataByDni";
+import { tiposPersona } from "../../../config/constantes";
 import type { CreateCliente } from "../../../types/clientes.type";
-import type { UserGender } from "../../../types/constantes.type";
+import type { UserGender, UserType } from "../../../types/constantes.type";
 
 interface FormCreateClienteProps {
   setShowFormCreate: (value: boolean) => void;
   setDniCliente?: (value: string) => void;
+  onClienteCreado: () => Promise<void> | void;
 }
 
-export default function FormCreateCliente({ setShowFormCreate }: FormCreateClienteProps) {
+export default function FormCreateCliente({ setShowFormCreate, onClienteCreado }: FormCreateClienteProps) {
   const {
     isLoading: cargandoCreateCliente,
     isError: errorCreateCliente,
@@ -30,8 +32,7 @@ export default function FormCreateCliente({ setShowFormCreate }: FormCreateClien
     dni: '',
     edad: 0,
     sexo: 'MASCULINO',
-    numero: null,
-    tipo: null,
+    numero: '',
     correo: '',
   });
 
@@ -129,18 +130,28 @@ export default function FormCreateCliente({ setShowFormCreate }: FormCreateClien
               onSelect={(value) => setFormData(prev => ({ ...prev, sexo: value as UserGender }))}
             />
             <InputNumber
-              defaultValue={formData.edad}
+              value={formData.edad}
               label="Edad"
               simbol="años"
               onChange={(value) => setFormData(prev => ({ ...prev, edad: value }))}
               placeholder="Ingrese la edad del cliente"
             />
             <InputNumber
-              defaultValue={parseInt(formData.numero ?? '000000000')}
+              value={parseInt(formData.numero ?? '000000000')}
               label="Número telefónico"
               simbol="celular"
               onChange={(value) => setFormData(prev => ({ ...prev, numero: value.toString() }))}
-              placeholder="Ingrese el número telefónico del cliente"
+              placeholder="Número telefónico del cliente"
+            />
+          </div>
+
+          <div className="grid grid-cols-3 gap-6">
+            <InputSelect
+              label="Tipo"
+              valueSelected={formData.tipo}
+              options={tiposPersona}
+              onSelect={(value) => setFormData(prev => ({ ...prev, tipo: value as UserType }))}
+              placeholder="seleccione el tipo de persona"
             />
           </div>
         </div>
@@ -156,27 +167,13 @@ export default function FormCreateCliente({ setShowFormCreate }: FormCreateClien
                 color="red"
               />
               <ButtonSubmitForm
-                handleSubmit={() => {
-                  // Formateando los datos del estado 
-                  // "formData" para que coinicidan 
-                  // con la estructura del objeto 
-                  // que el backend espera recibir para crear
-                  // un nuevo cliente.
-                  // esto es debido a que las propiedades
-                  // con valor "null" no permite registrar
-                  // un nuevo cliente, por lo que se omiten esas propiedades.
-                  const formateandoDatos = {
-                    nombre: formData.nombre,
-                    apellidomaterno: formData.apellidomaterno,
-                    apellidopaterno: formData.apellidopaterno,
-                    dni: formData.dni,
-                    numero: formData.numero,
-                    edad: formData.edad,
-                    sexo: formData.sexo,
-                    correo: formData.correo,
-                  };
-                  registrarCliente(formateandoDatos as CreateCliente)
-                  setShowFormCreate(false);
+                handleSubmit={async () => {
+                  console.log("Datos del cliente registrados:", formData);
+                  const wasCreated = await registrarCliente(formData);
+                  if (wasCreated) {
+                    await onClienteCreado();
+                    setShowFormCreate(false);
+                  }
                 }}
                 isLoading={cargandoCreateCliente}
                 isError={errorCreateCliente}

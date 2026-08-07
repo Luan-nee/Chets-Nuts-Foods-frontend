@@ -105,7 +105,7 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
             <InputNumber
               label="Capacidad máxima de carga (toneladas)"
               simbol="TN"
-              defaultValue={formData.capacidadCarga}
+              value={formData.capacidadCarga}
               placeholder="0"
               onChange={(value) =>
                 setFormData((prev) => ({

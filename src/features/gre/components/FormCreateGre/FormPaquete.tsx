@@ -480,7 +480,7 @@ export default function FormPaquete() {
                 />
 
                 <InputNumber
-                  defaultValue={editFormData.montoCobrado || 0}
+                  value={editFormData.montoCobrado || 0}
                   label="Monto Cobrado"
                   simbol="S/."
                   onChange={(value) => setEditFormData(prev => ({ ...prev, montoCobrado: value }))}
@@ -575,7 +575,7 @@ export default function FormPaquete() {
         value={formData.destino}
       />
       <InputNumber
-        defaultValue={formData.montoCobrado}
+        value={formData.montoCobrado}
         label='Monto Cobrado'
         simbol='S/.'
         onChange={(value) => syncPaquete({ montoCobrado: value })}

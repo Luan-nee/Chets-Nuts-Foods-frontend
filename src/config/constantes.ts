@@ -36,7 +36,7 @@ export const tipoEstablecimiento: { label: string; value: string }[] = [
 
 export const tiposPersona: { label: string; value: string }[] = [
   { label: "Natural", value: "NATURAL" },
-  { label: "Jurídica", value: "JURIDICA" }
+  { label: "Jurídico", value: "JURIDICO" }
 ];
 
 export const sexos: { label: string; value: string }[] = [

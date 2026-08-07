@@ -3,11 +3,18 @@ import { useState } from "react";
 import TableClientes from "../features/clientes/components/TableClientes";
 import FormCreateCliente from "../features/clientes/components/FormCreateCliente";
 import FormUpdateCliente from "../features/clientes/components/FormUpdateCliente";
+import { useFetchClientes } from "../features/clientes/hooks/useFetchClientes";
 
 export default function Clientes() {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
   const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
   const [dniCliente, setDniCliente] = useState<string>("");
+  const {
+    clientes,
+    isLoading,
+    isError,
+    execute: recargarClientes,
+  } = useFetchClientes();
 
   return (
     <div className="relative flex-1 flex flex-col">
@@ -35,14 +42,29 @@ export default function Clientes() {
 			</div>
       
       <div className="flex-1 overflow-auto px-8 py-6">
-        <TableClientes setShowFormUpdate={setShowFormUpdate} setDniCliente={setDniCliente} />
+        <TableClientes
+          clientes={clientes}
+          isLoading={isLoading}
+          isError={isError}
+          recargarClientes={recargarClientes}
+          setShowFormUpdate={setShowFormUpdate}
+          setDniCliente={setDniCliente}
+        />
       </div>
 
       { showFormCreate && (
-        <FormCreateCliente setShowFormCreate={setShowFormCreate} setDniCliente={setDniCliente} />
+        <FormCreateCliente
+          setShowFormCreate={setShowFormCreate}
+          setDniCliente={setDniCliente}
+          onClienteCreado={recargarClientes}
+        />
       )}
       { showFormUpdate && (
-        <FormUpdateCliente setShowFormUpdate={setShowFormUpdate} dniCliente={dniCliente} />
+        <FormUpdateCliente
+          setShowFormUpdate={setShowFormUpdate}
+          dniCliente={dniCliente}
+          onClienteActualizado={recargarClientes}
+        />
       )}
 
     </div>

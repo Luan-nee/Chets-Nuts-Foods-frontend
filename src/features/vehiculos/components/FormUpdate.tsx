@@ -155,7 +155,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                   label="Capacidad máxima de carga (toneladas)"
                   placeholder="0.00"
                   simbol="TN"
-                  defaultValue={formData.capacidadCarga || 0}
+                  value={formData.capacidadCarga || 0}
                   onChange={(value) => {
                     setFormData((prev) => ({
                       ...prev,

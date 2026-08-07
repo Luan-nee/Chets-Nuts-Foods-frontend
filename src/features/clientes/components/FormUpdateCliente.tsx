@@ -16,9 +16,10 @@ import type { UserType } from "../../../types/constantes.type";
 interface FormUpdateClienteProps {
   setShowFormUpdate: (value: boolean) => void;
   dniCliente: string;
+  onClienteActualizado: () => Promise<void> | void;
 }
 
-export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: FormUpdateClienteProps) {
+export default function FormCreateCliente ({ setShowFormUpdate, dniCliente, onClienteActualizado }: FormUpdateClienteProps) {
   const {
     cliente,
     isLoading: cargandoCliente,
@@ -41,7 +42,7 @@ export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: Fo
     numero: '',
     edad: 0,
     dni: '',
-    tipo: 'NATURAL',
+    tipo: 'SIN DEFINIR',
   });
 
   useEffect(() => {
@@ -120,14 +121,14 @@ export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: Fo
             {/* Row 4: */}
             <div className="grid grid-cols-3 gap-6">
               <InputNumber
-                defaultValue={formData.edad}
+                value={formData.edad}
                 label="Edad"
                 simbol="años"
                 onChange={(value) => setFormData(prev => ({ ...prev, edad: value}))}
                 placeholder="Ingrese la edad del cliente"
               />
               <InputNumber
-                defaultValue={parseInt(formData.numero ?? '0')}
+                value={parseInt(formData.numero ?? '0')}
                 label="Número telefónico"
                 simbol="celular"
                 onChange={(value) => setFormData(prev => ({ ...prev, numero: value.toString() }))}
@@ -135,7 +136,7 @@ export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: Fo
               />
               <InputSelect
                 label="Tipo"
-                valueSelected={formData.tipo}
+                valueSelected={formData.tipo as string}
                 options={tiposPersona}
                 onSelect={(value) => setFormData(prev => ({ ...prev, tipo: value as UserType }))}
                 placeholder="seleccione el tipo de persona"
@@ -154,9 +155,12 @@ export default function FormCreateCliente ({ setShowFormUpdate, dniCliente }: Fo
                   color="red"
                 />
                 <ButtonSubmitForm
-                  handleSubmit={() => {
-                    registrarCliente(formData)
-                    setShowFormUpdate(false);
+                  handleSubmit={async () => {
+                    const wasUpdated = await registrarCliente(formData);
+                    if (wasUpdated) {
+                      await onClienteActualizado();
+                      setShowFormUpdate(false);
+                    }
                   }}
                   isLoading={cargandoCreateCliente}
                   isError={errorCreateCliente}

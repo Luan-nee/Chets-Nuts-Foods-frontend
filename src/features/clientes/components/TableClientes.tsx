@@ -1,23 +1,28 @@
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import { useFetchClientes } from "../hooks/useFetchClientes";
 import { Edit2 } from "lucide-react";
+import type { GetClienteSinCompras } from "../../../types/clientes.type";
 
 interface TableClientesProps {
+  clientes: GetClienteSinCompras[];
+  isLoading: boolean;
+  isError: boolean;
+  recargarClientes: () => Promise<void>;
   setShowFormUpdate: (value: boolean) => void;
   setDniCliente: (value: string) => void;
 }
 
-export default function TableClientes({ setShowFormUpdate, setDniCliente }: TableClientesProps) {
-  const {
-    clientes,
-    isLoading: clientesLoading,
-    isError: clientesError,
-    execute: fetchClientes
-  } = useFetchClientes();
+export default function TableClientes({
+  clientes,
+  isLoading,
+  isError,
+  recargarClientes,
+  setShowFormUpdate,
+  setDniCliente,
+}: TableClientesProps) {
 
   const tableHeader: string[] = [
-    "Nr.",
+    "N°",
     "Nombres",
     "Apellido Paterno",
     "Apellido Materno",
@@ -28,17 +33,17 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
 
   return (
     <ContentSectionProcess
-      isLoading={clientesLoading}
-      isError={clientesError}
+      isLoading={isLoading}
+      isError={isError}
       textError="Error al cargar los clientes."
       textButtonError="Reintentar"
-      fetchData={() => fetchClientes}
+      fetchData={recargarClientes}
     >
       <div className="flex-1 overflow-auto p-2">
         <div className="p-4 flex justify-end">
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => fetchClientes()}
+            onClick={() => recargarClientes()}
           >
             Recargar
           </button>
@@ -75,15 +80,15 @@ export default function TableClientes({ setShowFormUpdate, setDniCliente }: Tabl
 
               {/* DNI */}
               <td className="px-6 py-4">
-                <span className="text-sm text-gray-300">
+                <span className="text-sm font-bold text-gray-300">
                   {cliente.dniuser}
                 </span>
               </td>
 
               {/* RUC */}
               <td className="px-6 py-4">
-                <span className="text-sm text-gray-300">
-                  {cliente.rucuser || "N/A"}
+                <span className="text-sm font-bold text-gray-300">
+                  {cliente.rucuser || "-"}
                 </span>
               </td>
 

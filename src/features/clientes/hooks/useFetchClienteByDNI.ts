@@ -35,7 +35,6 @@ export const useFetchClienteByDNI = (dniCliente: string): FetchState => {
           message: response.message ?? "Cliente obtenido exitosamente",
           status: response.status,
         })
-        console.log("Cliente obtenido: ", response.data);
       } else {
         setIsError(true);
         setMessage("Error al obtener el cliente");

@@ -18,8 +18,8 @@ export type CreateCliente = {
   edad: number, //
   sexo: UserGender, 
   ruc?: string, //
-  numero: string | null,
-  tipo: UserType | null,
+  numero: string,
+  tipo?: UserType,
   correo: string,
 }
 

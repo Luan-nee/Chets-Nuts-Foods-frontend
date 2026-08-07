@@ -1,5 +1,5 @@
 interface InputNumberProp {
-  defaultValue: number;
+  value: number;
   label: string;
   simbol: string;
   onChange: (value: number) => void;
@@ -8,7 +8,7 @@ interface InputNumberProp {
 }
 
 export default function InputNumber({
-  defaultValue,
+  value,
   label,
   simbol,
   onChange,
@@ -24,7 +24,7 @@ export default function InputNumber({
           type="number"
           autoComplete="off"
           min={0}
-          defaultValue={defaultValue}
+          value={value}
           disabled={disabled}
           placeholder={placeholder}
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
