@@ -40,7 +40,6 @@ export default function FormUpdateEstablecimiento({
 	const {
 		isLoading: cargandoUpdate,
 		isError: errorUpdate,
-		message: messageUpdate,
 		execute: actualizarEstablecimiento,
 	} = useUpdateEstablecimiento();
 
