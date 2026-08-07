@@ -44,7 +44,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
     : '';
 
   return (
-    <div className="flex h-screen bg-gray-950 text-gray-100">
+    <div className="flex max-md:flex-col h-screen bg-gray-950 text-gray-100">
       <NavBar /> 
       <div className="flex-1 overflow-auto">
         <div className={`page-transition ${transitionClass}`}>
