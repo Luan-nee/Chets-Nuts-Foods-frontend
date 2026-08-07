@@ -7,7 +7,7 @@ interface FetchState {
 	isLoading: boolean;
 	isError: boolean;
 	message: string;
-	execute: (body: CreateEstablecimiento) => void;
+	execute: (body: CreateEstablecimiento) => Promise<boolean>;
 }
 
 export const useCreateEstablecimiento = (): FetchState => {
@@ -18,7 +18,7 @@ export const useCreateEstablecimiento = (): FetchState => {
 
 	const createEstablecimiento = async (
 		body: CreateEstablecimiento,
-	): Promise<void> => {
+	): Promise<boolean> => {
 		try {
 			setIsLoading(true);
 			setIsError(false);
@@ -32,6 +32,7 @@ export const useCreateEstablecimiento = (): FetchState => {
 					status: "success",
 					message: response.message || "Establecimiento registrado exitosamente",
 				});
+				return true;
 			} else {
 				setIsError(true);
 				setMessage("Error al registrar el establecimiento");
@@ -39,6 +40,7 @@ export const useCreateEstablecimiento = (): FetchState => {
 					status: "error",
 					message: response.message || "Error al registrar el establecimiento",
 				});
+				return false;
 			}
 		} catch {
 			setIsError(true);
@@ -47,6 +49,7 @@ export const useCreateEstablecimiento = (): FetchState => {
 				status: "warning",
 				message: "Se produjo un error al registrar el establecimiento en el frontend",
 			});
+			return false;
 		} finally {
 			setIsLoading(false);
 		}

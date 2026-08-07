@@ -12,19 +12,21 @@ import {
 	getDistritosByProvincia,
 	getProvinciasByDepartamento,
 } from "../../../config/infoUbicacion";
+import { useGenerarCoordenadasUnicas } from "../../../hooks/useGenerarCoordenadasUnicas";
 import { useCreateEstablecimiento } from "../hooks/useCreateEstablecimiento";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 import type { CreateEstablecimiento } from "../../../types/establecimiento.type";
-// import ModalSelectResponsable from "./ModalSelectResponsable";
-// import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 
 interface FormCreateEstablecimientoProps {
 	setShowFormCreateEstablecimiento: (value: boolean) => void;
+	onEstablecimientoCreado: () => Promise<void> | void;
 }
 
 export default function FormCreateEstablecimiento({
 	setShowFormCreateEstablecimiento,
+	onEstablecimientoCreado,
 }: FormCreateEstablecimientoProps) {
+	const coordenadasIniciales = useGenerarCoordenadasUnicas();
 	const {
 		isLoading: cargandoCreate,
 		isError: errorCreate,
@@ -36,14 +38,14 @@ export default function FormCreateEstablecimiento({
 		nombreEstablecimiento: "",
 		direccion: "",
 		descripcion: "",
-		latitud: "-00.000000",
-		longitud: "-00.000000",
+		latitud: coordenadasIniciales.latitud,
+		longitud: coordenadasIniciales.longitud,
 		distrito: "",
 		provincia: "",
 		departamento: "",
-		ubigeo: "123456",
-		tipoEstado: "oficina",
-		codigoSunat: "vacio",
+		ubigeo: "123456", // esto puede repetirse.
+		tipoEstado: "oficina", // esto puede repetirse.
+		codigoSunat: "",
 	});
 
 	const [showModal, setShowModal] = useState<boolean>(false);
@@ -56,28 +58,6 @@ export default function FormCreateEstablecimiento({
 		nombres: "",
 		tipos: "SIN ROL",
 	});
-	// const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	// const [isAnimatingClose, setIsAnimatingClose] = useState<boolean>(false);
-	// const [selectedResponsableName, setSelectedResponsableName] = useState<string>("");
-
-	// const openModal = () => {
-	// 	setIsModalOpen(true);
-	// 	setIsAnimatingClose(false);
-	// };
-
-	// const closeModal = () => {
-	// 	setIsAnimatingClose(true);
-	// 	setTimeout(() => {
-	// 		setIsModalOpen(false);
-	// 		setIsAnimatingClose(false);
-	// 	}, 250);
-	// };
-
-	// const handleSelect = (acceso: ResponseGetAllColaboradores) => {
-	// 	setFormData((prev) => ({ ...prev, idResponsable: acceso.idacceso }));
-	// 	setSelectedResponsableName(acceso.nombres);
-	// 	closeModal();
-	// };
 
 	const provinciasDisponibles = getProvinciasByDepartamento(formData.departamento);
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento, formData.provincia);
@@ -109,7 +89,6 @@ export default function FormCreateEstablecimiento({
 							value={formData.nombreEstablecimiento}
 							htmlForm="nombreEstablecimiento"
 							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
-							isObligatory={true}
 						/>
 						{/* Selector de responsable */}
 						<button 
@@ -136,37 +115,6 @@ export default function FormCreateEstablecimiento({
 							</div>
 						</button>
 					</div>
-					{/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
-							label="Nombre del establecimiento"
-							value={formData.nombreEstablecimiento}
-							htmlForm="nombreEstablecimiento"
-							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
-							isObligatory={true}
-						/>
-						<div className="flex flex-col">
-							<label className="block text-sm font-medium text-gray-300 mb-1">
-								Responsable del área
-							</label>
-							<div className="flex gap-2">
-								<input
-									type="text"
-									readOnly
-									placeholder="Ninguno seleccionado"
-									value={selectedResponsableName}
-									className="flex-1 bg-gray-950 border border-gray-800 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none"
-								/>
-								<button
-									type="button"
-									onClick={openModal}
-									className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 border border-blue-500/10 shadow-sm"
-								>
-									<UserCheck className="w-4 h-4" />
-									<span>Seleccionar responsable</span>
-								</button>
-							</div>
-						</div>
-					</div> */}
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 						<InputSelect
@@ -232,8 +180,11 @@ export default function FormCreateEstablecimiento({
 							/>
 							<ButtonSubmitForm
 								handleSubmit={async () => {
-									await registrarEstablecimiento(formData);
-									setShowFormCreateEstablecimiento(false);
+									const wasCreated = await registrarEstablecimiento(formData);
+									if (wasCreated) {
+										await onEstablecimientoCreado();
+										setShowFormCreateEstablecimiento(false);
+									}
 								}}
 								isLoading={cargandoCreate}
 								isError={errorCreate}
@@ -254,14 +205,6 @@ export default function FormCreateEstablecimiento({
 					selectedId={formData.idResponsable}
 				/>
 			)}
-
-			{/* <ModalSelectResponsable
-				isOpen={isModalOpen}
-				isAnimatingClose={isAnimatingClose}
-				selectedId={formData.idResponsable}
-				onClose={closeModal}
-				onSelect={handleSelect}
-			/> */}
 		</ContentPage>
 	);
 }

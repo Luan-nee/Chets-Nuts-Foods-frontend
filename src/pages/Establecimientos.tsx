@@ -4,12 +4,19 @@ import TableEstablecimientos from "../features/establecimientos/components/Table
 import DetallesEstablecimiento from "../features/establecimientos/components/DetallesEstablecimiento";
 import FormCreateEstablecimiento from "../features/establecimientos/components/FormCreateEstablecimiento";
 import FormUpdateEstablecimiento from "../features/establecimientos/components/FormUpdateEstablecimiento";
+import { useFetchEstablecimientos } from "../features/establecimientos/hooks/useFetchEstablecimientos";
 
 export default function Establecimientos() {
 	const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
 	const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
 	const [showDetallesEstablecimiento, setShowDetallesEstablecimiento] = useState<boolean>(false);
 	const [selectEstablecimientoId, setSelectEstablecimientoId] = useState<number | null>(null);
+	const {
+		establecimientos,
+		isLoading,
+		isError,
+		execute: recargarEstablecimientos,
+	} = useFetchEstablecimientos();
 
 	return (
 		<div className="relative flex-1 flex flex-col">
@@ -37,6 +44,10 @@ export default function Establecimientos() {
 			</div>
 
 			<TableEstablecimientos
+				establecimientos={establecimientos}
+				isLoading={isLoading}
+				isError={isError}
+				recargarEstablecimientos={recargarEstablecimientos}
 				setShowFormUpdate={setShowFormUpdate}
 				setShowDetallesEstablecimiento={setShowDetallesEstablecimiento}
 				setSelectEstablecimientoId={setSelectEstablecimientoId}
@@ -45,12 +56,14 @@ export default function Establecimientos() {
 			{showFormCreate && (
 				<FormCreateEstablecimiento
 					setShowFormCreateEstablecimiento={setShowFormCreate}
+					onEstablecimientoCreado={recargarEstablecimientos}
 				/>
 			)}
 			{showFormUpdate && selectEstablecimientoId !== null && (
 				<FormUpdateEstablecimiento
 					idEstablecimiento={selectEstablecimientoId}
 					setShowFormUpdateEstablecimiento={setShowFormUpdate}
+					onEstablecimientoActualizado={recargarEstablecimientos}
 				/>
 			)}
 			{showDetallesEstablecimiento && selectEstablecimientoId !== null && (

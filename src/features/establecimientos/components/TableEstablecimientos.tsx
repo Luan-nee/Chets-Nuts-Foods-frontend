@@ -5,48 +5,46 @@ import {
 } from "lucide-react";
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import { useFetchEstablecimientos } from "../hooks/useFetchEstablecimientos";
+import type { ResponseGetAll } from "../../../types/establecimiento.type";
 
 interface PropTableEstablecimiento {
+  establecimientos: ResponseGetAll[];
+  isLoading: boolean;
+  isError: boolean;
+  recargarEstablecimientos: () => Promise<void>;
   setShowFormUpdate: (p: boolean) => void;
   setShowDetallesEstablecimiento: (p: boolean) => void;
   setSelectEstablecimientoId: (p: number| null) => void;
 }
 
 export default function TableEstablecimientos({
+  establecimientos,
+  isLoading,
+  isError,
+  recargarEstablecimientos,
   setShowFormUpdate,
   setShowDetallesEstablecimiento,
   setSelectEstablecimientoId,
 }: PropTableEstablecimiento) {
-  
-  const {
-    establecimientos,
-    isLoading: establecimientosIsLoading,
-    isError: establecimientosIsError,
-    execute: recargarEstablecimientos,
-  } = useFetchEstablecimientos();
-
   const tableHeader: string[] = [
     "Establecimiento",
     "Ubicación",
     "Dirección",
-    "Tipo",
-    "Estado",
     "Acciones",
   ];
 
   return (
     <ContentSectionProcess 
-      isLoading={establecimientosIsLoading}
-      isError={establecimientosIsError}
+      isLoading={isLoading}
+      isError={isError}
       textError="Error al cargar los establecimientos."
       textButtonError="Reintentar"
-      fetchData={() => recargarEstablecimientos()}
+      fetchData={recargarEstablecimientos}
     >
 
     <div className="flex-1 overflow-auto px-8 py-6">
       <div className="p-4 flex justify-end gap-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => recargarEstablecimientos()}>
+          <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => recargarEstablecimientos()}>
           Recargar
         </button>
       </div>
@@ -77,35 +75,13 @@ export default function TableEstablecimientos({
             {/* Ubicación */}
             <td className="px-6 py-4">
               <div className="flex gap-2">
-                <span className="text-sm text-gray-300">{establecimiento.distrito}, {establecimiento.provincia}</span>
+                <span className="text-sm text-gray-300">{establecimiento.distrito} / {establecimiento.provincia}</span>
               </div>
             </td>
 
             {/* Dirección */}
             <td className="px-6 py-4">
               <span className="text-sm text-gray-300">{establecimiento.direccion}</span>
-            </td>
-
-            {/* Tipo */}
-            <td className="px-6 py-4">
-              <span
-                className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border bg-blue-500/20 text-blue-300 border-blue-500/30`}
-              >
-                {establecimiento.tipoestablecimiento}
-              </span>
-            </td>
-
-            {/* Estado */}
-            <td className="px-6 py-4">
-              <span
-                className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${
-                  establecimiento.estado
-                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-                    : "bg-rose-500/20 text-rose-300 border-rose-500/30"
-                }`}
-              >
-                {establecimiento.estado ? "Activo" : "Inactivo"}
-              </span>
             </td>
 
             {/* Actions */}

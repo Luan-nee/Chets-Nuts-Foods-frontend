@@ -89,3 +89,24 @@
     filter: blur(0);
   }
 }
+
+/* Employee card reveal animation: keeps the space reserved, then fades the content in */
+.employee-card-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(4px);
+  animation: employeeReveal 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes employeeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}

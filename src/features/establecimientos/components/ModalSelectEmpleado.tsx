@@ -60,7 +60,7 @@ export default function ModalSelectEmpleado({
             total_data={infoPaginacion.total_data}
           />
           <div className="flex flex-col gap-2">
-            { accesos.map((acceso, index) => {
+            {accesos.map((acceso, index) => {
               return (
                 <button
                   key={index}
@@ -69,7 +69,8 @@ export default function ModalSelectEmpleado({
                     objectSelected && objectSelected(acceso);
                     setShowModal(false);
                   }}
-                  className="w-full flex justify-between items-center gap-2 p-4 rounded-lg bg-gray-950 hover:bg-gray-900 transition-colors border border-gray-800"
+                  style={{ animationDelay: `${index * 70}ms` }}
+                  className="employee-card-reveal w-full flex justify-between items-center gap-2 p-4 rounded-lg bg-gray-950 hover:bg-gray-900 transition-colors border border-gray-800"
                 >
                   <div className="flex items-center gap-3">
                     <User className="w-5 h-5 text-blue-400"/>

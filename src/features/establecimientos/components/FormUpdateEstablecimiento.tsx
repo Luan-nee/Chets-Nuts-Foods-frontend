@@ -21,11 +21,13 @@ import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 interface FormUpdateEstablecimientoProps {
 	idEstablecimiento: number | null;
 	setShowFormUpdateEstablecimiento: (value: boolean) => void;
+	onEstablecimientoActualizado: () => Promise<void> | void;
 }
 
 export default function FormUpdateEstablecimiento({
 	idEstablecimiento,
 	setShowFormUpdateEstablecimiento,
+	onEstablecimientoActualizado,
 }: FormUpdateEstablecimientoProps) {
 	const establecimientoId = idEstablecimiento ?? 0;
 	const {
@@ -111,6 +113,7 @@ export default function FormUpdateEstablecimiento({
 		});
 
 		if (response.status === "success") {
+			await onEstablecimientoActualizado();
 			setShowFormUpdateEstablecimiento(false);
 		}
 	};
@@ -215,30 +218,23 @@ export default function FormUpdateEstablecimiento({
 						</div>
 					</div>
 
-					{messageUpdate ? (
-						<p className={`mt-5 text-sm ${errorUpdate ? "text-rose-300" : "text-emerald-300"}`}>
-							{messageUpdate}
-						</p>
-					) : null}
-
-					<div className="flex gap-4 mt-8">
-						<div className="flex flex-row gap-4 w-full justify-end">
-							<div className="flex flex-row gap-4">
-								<ButtonCancelForm
-									handleCancel={() => setShowFormUpdateEstablecimiento(false)}
-									isLoading={cargandoUpdate}
-									textButton="Cancelar"
-									color="red"
-								/>
-								<ButtonSubmitForm
-									handleSubmit={handleSubmit}
-									isLoading={cargandoUpdate}
-									isError={errorUpdate}
-									textButton="Guardar cambios"
-									textError="Error al guardar"
-									color="blue"
-								/>
-							</div>
+					
+					<div className="flex mt-8 flex-row justify-end w-full">
+						<div className="flex flex-row gap-4">
+							<ButtonCancelForm
+								handleCancel={() => setShowFormUpdateEstablecimiento(false)}
+								isLoading={cargandoUpdate}
+								textButton="Cancelar"
+								color="red"
+							/>
+							<ButtonSubmitForm
+								handleSubmit={handleSubmit}
+								isLoading={cargandoUpdate}
+								isError={errorUpdate}
+								textButton="Guardar cambios"
+								textError="Error al guardar"
+								color="blue"
+							/>
 						</div>
 					</div>
 				</div>
