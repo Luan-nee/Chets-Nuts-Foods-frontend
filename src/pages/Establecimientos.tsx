@@ -15,12 +15,12 @@ export default function Establecimientos() {
 		<div className="relative flex-1 flex flex-col">
 			{/* Header */}
 			<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
-				<div className="min-w-0">
+				<div>
 					<div className="flex items-center gap-3 mb-2">
 						<div className="rounded-xl bg-blue-600/20 p-2 border border-blue-500/20">
 							<Building2 className="w-6 h-6 text-blue-300" />
 						</div>
-						<h2 className="text-3xl font-bold text-white">Establecimientos</h2>
+						<h2 className="text-3xl font-bold text-white">Gestión de establecimientos</h2>
 					</div>
 					<p className="text-sm text-gray-400 max-w-3xl">
 						Administra los establecimientos registrados en el sistema, revisa sus datos y realiza altas o actualizaciones cuando sea necesario.

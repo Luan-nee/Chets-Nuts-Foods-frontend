@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useAutorizacion } from "../config/useAutorizacion";
-import { Search, Filter, Plus } from "lucide-react";
+import { Search, Filter, Plus, Package } from "lucide-react";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
 import TableProductos from "../features/productos/components/TableProductos";
 
 export default function Productos() {
-  const { tienePermiso } = useAutorizacion();
   const [showFormEditProduct, setShowFormEditProduct] = useState<boolean>(false);
   const [showFormCreateProduct, setShowFormCreateProduct] = useState<boolean>(false);
   const [selectProductoId, setSelectProductoId] = useState<number | null>(null);
@@ -19,23 +17,27 @@ export default function Productos() {
   return (
     <div className="relative flex-1 flex flex-col">
       {/* Header */}
-      <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-2">Gestión de productos</h2>
-            <p className="text-sm text-gray-400">Administra los productos de la empresa.</p>
-          </div>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
+				<div>
+					<div className="flex items-center gap-3 mb-2">
+						<div className="rounded-xl bg-blue-600/20 p-2 border border-blue-500/20">
+              <Package className="w-6 h-6 text-blue-300" />
+						</div>
+						<h2 className="text-3xl font-bold text-white">Gestión de productos</h2>
+					</div>
+					<p className="text-sm text-gray-400 max-w-3xl">
+						Administra los productos registrados en el sistema, revisa sus datos y realiza actualizaciones cuando sea necesario.
+					</p>
+				</div>
 
-          { tienePermiso('PUEDE_REGISTRAR_NUEVO_PRODUCTO') && (
-            <button 
-              onClick={() => setShowFormCreateProduct(true)}
-              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
-              <Plus className="w-5 h-5" />
-              Nuevo Producto
-            </button>
-          )}
-        </div>
-      </div>
+				<button
+					onClick={() => setShowFormCreateProduct(true)}
+					className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors"
+				>
+					<Plus className="w-5 h-5" />
+					Nuevo producto
+				</button>
+			</div>
 
       {/* Filters and Search */}
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-4">
