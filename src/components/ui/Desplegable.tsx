@@ -4,14 +4,14 @@ import { useState } from "react";
 interface Props{
     valores:string[],
     setValores: (p:string)=>void,
-    setEstado:(p:boolean)=>void
+  setEstado:()=>void,
+  valorSeleccionado: string,
 }
 
 
-export default function Desplegable({setValores,valores,setEstado}:Props){
+export default function Desplegable({setValores,valores,setEstado,valorSeleccionado}:Props){
 
     const [open, setOpen] = useState(false);
-    const [valor,setValor] = useState<string>("");
 
     return (
       <div className="relative w-56">
@@ -26,8 +26,8 @@ export default function Desplegable({setValores,valores,setEstado}:Props){
       shadow-sm
     "
         >
-          <span className={valor ? "text-white" : "text-gray-500"}>
-            {valor || "Seleccionar estado"}
+          <span className={valorSeleccionado ? "text-white" : "text-gray-500"}>
+            {valorSeleccionado || "Seleccionar estado"}
           </span>
 
           <svg
@@ -58,9 +58,8 @@ export default function Desplegable({setValores,valores,setEstado}:Props){
                 key={e}
                 onClick={() => {
                   setValores(e);
-                  setValor(e)
                   setOpen(false);
-                  setEstado(true);
+                  setEstado();
                 }}
                 className="
             px-4 py-2 text-sm

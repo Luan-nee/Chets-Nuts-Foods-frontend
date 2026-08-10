@@ -26,9 +26,10 @@ import { useFetchVehiculo } from "../hooks/useFetchVehiculo";
 interface FormUpdateProps {
   showFormUpdate: (p: boolean) => void;
   idVehiculo: number;
+  onSuccess?: () => void;
 }
 
-export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdateProps) {
+export default function FormUpdate({ showFormUpdate, idVehiculo, onSuccess }: FormUpdateProps) {
   const { 
     vehiculo: dataVehiculo, 
     isLoading: isLoadingVehiculo, 
@@ -81,7 +82,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
             isError={isErrorVehiculo}
             textError="Error al cargar la información del vehículo"
             textButtonError="Reintentar"
-            fetchData={() => fetchVehiculo}
+            fetchData={fetchVehiculo}
           > 
             <div className="grid grid-cols-1 gap-4 p-4 text-center">
               <p className="text-gray-300">
@@ -113,7 +114,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
             isError={isErrorVehiculo}
             textError="Error al cargar la información del vehículo"
             textButtonError="Reintentar"
-            fetchData={() => fetchVehiculo}
+            fetchData={fetchVehiculo}
           >
             <div className="flex items-center gap-2 mb-6">
               <Info className="w-5 h-5 text-blue-500" />
@@ -188,13 +189,11 @@ export default function FormUpdate({ showFormUpdate, idVehiculo }: FormUpdatePro
                 />
                 <ButtonSubmitForm
                   handleSubmit={async () => {
-                    // hacer conversión de toneladas a kilogramos antes de enviar los datos al backend
-                    setFormData((prev) => ({
-                      ...prev,
-                      capacidadCarga: prev.capacidadCarga * 1000
-                    }));
-                    await updateVehiculo(formData);
-                    showFormUpdate(false);
+                    const updated = await updateVehiculo(formData);
+                    if (updated) {
+                      onSuccess?.();
+                      showFormUpdate(false);
+                    }
                   }}
                   isLoading={isLoadingVehiculoUpdate}
                   isError={isErrorVehiculoUpdate}

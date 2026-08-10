@@ -10,19 +10,34 @@ export default function Vehiculos() {
   const [selectVehiculoId, setSelectVehiculoId] = useState<number | null>(null);
   const [showFormUpdate, setShowFormUpdate] = useState(false);
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
+  const [refreshVehiculosKey, setRefreshVehiculosKey] = useState(0);
   const [searchPlaca, setSearchPlaca] = useState<string | null>(null);
-  const [busqueda, setBusqueda] = useState(false);
+  const [searchTrigger, setSearchTrigger] = useState(0);
   const [estado, setEstado] = useState<EstadoVehiculo | string>("");
 
   const estados = [
-    "RESERVADO",
     "INACTIVO",
     "OPERATIVO",
   ];
   const busquedaPlaca = (valor: React.KeyboardEvent<HTMLInputElement>) => {
     if (valor.key === "Enter") {
-      setBusqueda(true);
+      setSearchTrigger((valorActual) => valorActual + 1);
     }
+  };
+
+  const ejecutarBusquedaVehiculos = () => {
+    setSearchTrigger((valorActual) => valorActual + 1);
+  };
+
+  const limpiarFiltrosVehiculos = () => {
+    setSearchPlaca("");
+    setEstado("");
+    setRefreshVehiculosKey((valor) => valor + 1);
+    setSearchTrigger((valorActual) => valorActual + 1);
+  };
+
+  const refrescarTablaVehiculos = () => {
+    setRefreshVehiculosKey((valor) => valor + 1);
   };
 
   return (
@@ -60,16 +75,35 @@ export default function Vehiculos() {
               type="text"
               placeholder="Buscar un vehículo por placa ..."
               className="w-full bg-gray-950 border border-gray-800 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              value={searchPlaca ?? ""}
               onChange={(e) => setSearchPlaca(e.target.value)}
               onKeyDown={busquedaPlaca}
             />
           </div>
           
-          <Desplegable valores={estados} setValores={setEstado} setEstado={setBusqueda}/>      
+          <Desplegable
+            valores={estados}
+            setValores={setEstado}
+            setEstado={ejecutarBusquedaVehiculos}
+            valorSeleccionado={estado}
+          />      
           
           {/* Filter Button */}
-          <button className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+          <button
+            className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+            onClick={ejecutarBusquedaVehiculos}
+            aria-label="Buscar vehículo"
+            type="button"
+          >
             <Filter className="w-5 h-5 text-white" />
+          </button>
+
+          <button
+            className="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-lg transition-colors text-sm font-medium"
+            onClick={limpiarFiltrosVehiculos}
+            type="button"
+          >
+            Limpiar filtros
           </button>
         </div>
       </div>
@@ -80,18 +114,24 @@ export default function Vehiculos() {
           setShowFormUpdate={setShowFormUpdate}
           setSelectVehiculoId={setSelectVehiculoId}
           SearchPlaca={searchPlaca}
-          setBusqueda={setBusqueda}
-          busqueda={busqueda}
+          searchTrigger={searchTrigger}
           estado={estado}
+          refreshKey={refreshVehiculosKey}
         />
       </div>
 
-      {showFormCreate && <FormCreate showFormCreate={setShowFormCreate} />}
+      {showFormCreate && (
+        <FormCreate
+          showFormCreate={setShowFormCreate}
+          onSuccess={refrescarTablaVehiculos}
+        />
+      )}
 
       {showFormUpdate && selectVehiculoId !== null && (
         <FormUpdate
           showFormUpdate={setShowFormUpdate}
           idVehiculo={selectVehiculoId}
+          onSuccess={refrescarTablaVehiculos}
         />
       )}
     </div>

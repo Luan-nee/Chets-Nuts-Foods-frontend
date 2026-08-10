@@ -5,32 +5,32 @@ import ContentSectionProcess from "../../../components/layouts/ContentSectionPro
 // importación de custom hooks
 import { useFetchVehiculos } from "../hooks/useFetchVehiculos";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ESTADOS, type EstadoVehiculo } from "../../../types/constantes.type";
 
 interface PropTableVehiculo {
   setShowFormUpdate: (p: boolean) => void;
   setSelectVehiculoId: (p: number | null) => void;
   SearchPlaca: string | null;
-  setBusqueda: (p: boolean) => void;
   estado?:string;
-  busqueda: boolean;
+  searchTrigger: number;
+  refreshKey?: number;
 }
 
 export default function TableVehiculos({
   setShowFormUpdate,
   setSelectVehiculoId,
   SearchPlaca,
-  setBusqueda,
-  busqueda,
-  estado
+  estado,
+  searchTrigger,
+  refreshKey,
 }: PropTableVehiculo) {
   
   const {
     vehiculos,
     isLoading: vehiculosIsLoading,
     isError: vehiculosIsError,
-    execute: recargarVehiculos,
+    reload,
     setQueryVehiculo,
     infoPaginacion,
   } = useFetchVehiculos();
@@ -39,17 +39,32 @@ export default function TableVehiculos({
     ESTADOS.includes(value);
 
   const estado2 = isEstadoVehiculo(estado) ? estado : undefined;
+  const didMountRef = useRef(false);
 
   useEffect(() => {
-    if(!busqueda) return
+    const placaNormalizada = SearchPlaca || undefined;
 
     setQueryVehiculo({
       page: 1,
-      placa: SearchPlaca === null?undefined:SearchPlaca,
-      estado:estado2
+      placa: placaNormalizada,
+      estado: estado2,
     });
-    setBusqueda(false)
-  }, [busqueda]);
+  }, [searchTrigger, SearchPlaca, estado2, setQueryVehiculo]);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+
+    if (refreshKey === undefined) return;
+
+    setQueryVehiculo({
+      page: infoPaginacion.pagina_actual,
+      placa: SearchPlaca || undefined,
+      estado: estado2,
+    });
+  }, [refreshKey, SearchPlaca, estado2, infoPaginacion.pagina_actual, setQueryVehiculo]);
 
   const tableHeader: string[] = [
     "Placa",
@@ -70,12 +85,12 @@ export default function TableVehiculos({
       isError={vehiculosIsError}
       textError="Error al cargar los vehículos."
       textButtonError="Reintentar"
-      fetchData={() => recargarVehiculos({page:infoPaginacion.pagina_actual})}
+      fetchData={reload}
     >
 
     <div className="flex-1 overflow-auto">
       <div className="p-4 flex justify-end gap-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => setQueryVehiculo({page:infoPaginacion.pagina_actual})}>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => void reload()}>
           Recargar
         </button>
       </div>

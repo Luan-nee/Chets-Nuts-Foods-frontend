@@ -16,9 +16,10 @@ import { useCreateVehiculo } from "../hooks/useCreateVehiculo";
 
 interface FormCreateProps {
   showFormCreate: (p: boolean) => void;
+  onSuccess?: () => void;
 }
 
-export default function FormCreate({ showFormCreate }: FormCreateProps) {
+export default function FormCreate({ showFormCreate, onSuccess }: FormCreateProps) {
   const {
     isLoading,
     isError,
@@ -126,8 +127,11 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
           />
           <ButtonSubmitForm
             handleSubmit={async () => {
-              await registrarVehiculo(formData);
-              showFormCreate(false);
+              const created = await registrarVehiculo(formData);
+              if (created) {
+                onSuccess?.();
+                showFormCreate(false);
+              }
             }}
             isLoading={isLoading}
             isError={isError}

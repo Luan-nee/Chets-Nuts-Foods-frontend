@@ -8,7 +8,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: UpdateVehiculo) => void;
+  execute: (body: UpdateVehiculo) => Promise<boolean>;
 }
 
 export const useUpdateVehiculo = (): FetchState => {
@@ -17,15 +17,18 @@ export const useUpdateVehiculo = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const updateVehiculo = async (body: UpdateVehiculo) => {
+  const updateVehiculo = async (body: UpdateVehiculo): Promise<boolean> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
       // Convertir capacidad de carga a kilogramos
-      body.capacidadCarga = body.capacidadCarga * 1000;
-      const response = await vehiculos_api.editarVehiculo(body);
+      const payload = {
+        ...body,
+        capacidadCarga: body.capacidadCarga * 1000,
+      };
+      const response = await vehiculos_api.editarVehiculo(payload);
       
       // Manejo de respuestas basado en el estado
       if (response.status === 'success') {
@@ -41,6 +44,7 @@ export const useUpdateVehiculo = (): FetchState => {
           status: response.status,
           message: response.message ?? "Error al actualizar vehículo",
         })
+        return false;
       }
     } catch (error: any) {
       setIsError(true);
@@ -49,9 +53,12 @@ export const useUpdateVehiculo = (): FetchState => {
         status: "warning",
         message: "Se produjo un error al actualizar el vehículo en el frontend"
       })
+      return false;
     } finally {
       setIsLoading(false);
     }
+
+    return true;
   };
 
   return { 

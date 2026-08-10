@@ -8,7 +8,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (body: CreateVehiculo) => void;
+  execute: (body: CreateVehiculo) => Promise<boolean>;
 }
 
 export const useCreateVehiculo = (): FetchState => {
@@ -17,15 +17,18 @@ export const useCreateVehiculo = (): FetchState => {
   const [isError, setIsError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const createVehiculo = async (body: CreateVehiculo): Promise<void> => {
+  const createVehiculo = async (body: CreateVehiculo): Promise<boolean> => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
       // Convertir capacidad de carga a kilogramos
-      body.capacidadCarga = body.capacidadCarga * 1000;
-      const response = await vehiculos_api.createVehiculo(body);
+      const payload = {
+        ...body,
+        capacidadCarga: body.capacidadCarga * 1000,
+      };
+      const response = await vehiculos_api.createVehiculo(payload);
       
       // Manejo de respuestas basado en el estado
       if (response.status === 'success') {
@@ -41,6 +44,7 @@ export const useCreateVehiculo = (): FetchState => {
           status: response.status,
           message: response.message ?? "Error al registrar vehículo",
         })
+        return false;
       }
     } catch (error: any) {
       setIsError(true);
@@ -49,9 +53,12 @@ export const useCreateVehiculo = (): FetchState => {
         status: "warning",
         message: "Se produjo un error al crear el vehículo en el frontend",
       })
+      return false;
     } finally {
       setIsLoading(false);
     }
+
+    return true;
   };
 
   return { 

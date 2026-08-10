@@ -15,6 +15,7 @@ interface FetchState {
   execute: (
     pagina: queryGetVehiculos,
   ) => Promise<BodyResponseWithPagination<ResponseGetAll[]>>;
+  reload: () => Promise<BodyResponseWithPagination<ResponseGetAll[]>>;
   setQueryVehiculo: (pagina: queryGetVehiculos) => void;
   infoPaginacion: PaginationInfo;
 }
@@ -95,6 +96,7 @@ export const useFetchVehiculos = (): FetchState => {
     isError,
     message,
     execute: getVehiculos,
+    reload: () => getVehiculos(queryVehiculos),
     setQueryVehiculo,
     infoPaginacion,
   };
