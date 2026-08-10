@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
 import { useRegistrarUbicacionEmpresa } from "../hook/useRegistrarUbicacionEmpresa";
 import InputText from "../../../components/ui/InputText";
@@ -31,6 +31,36 @@ export default function FormRegistrarInfoEstablecimiento({setShowForm}: FormRegi
     idResponsable: 1,
     tipoEstado: "oficina"
   });
+
+  const [isLoadingUbicacionActual, setIsLoadingUbicacionActual] = useState(false);
+  const [errorUbicacionActual, setErrorUbicacionActual] = useState("");
+
+  useEffect(() => {
+    if (formDataUbicacion.latitud !== "" || formDataUbicacion.longitud !== "") return;
+
+    if (!navigator.geolocation) {
+      setErrorUbicacionActual("Tu navegador no soporta geolocalización");
+      return;
+    }
+
+    setIsLoadingUbicacionActual(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setFormDataUbicacion((prev) => ({
+          ...prev,
+          latitud: position.coords.latitude.toString(),
+          longitud: position.coords.longitude.toString(),
+        }));
+        setIsLoadingUbicacionActual(false);
+      },
+      () => {
+        setErrorUbicacionActual("No se pudo obtener tu ubicación actual. Ingrésala manualmente.");
+        setIsLoadingUbicacionActual(false);
+      }
+    );
+    // Solo se ejecuta una vez al montar, para completar la ubicación inicial si viene vacía.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const provinciasDisponibles = getProvinciasByDepartamento(formDataUbicacion.departamento);
   const distritosDisponibles = getDistritosByProvincia(formDataUbicacion.departamento, formDataUbicacion.provincia);
@@ -108,6 +138,12 @@ export default function FormRegistrarInfoEstablecimiento({setShowForm}: FormRegi
             (value) => setFormDataUbicacion({ ...formDataUbicacion, longitud: value })
           }
         />
+        {isLoadingUbicacionActual && (
+          <p className="text-xs text-gray-400">Obteniendo tu ubicación actual...</p>
+        )}
+        {errorUbicacionActual && (
+          <p className="text-xs text-red-400">{errorUbicacionActual}</p>
+        )}
         {/* Ubigeo */}
         <InputText
           label="Ubigeo"
