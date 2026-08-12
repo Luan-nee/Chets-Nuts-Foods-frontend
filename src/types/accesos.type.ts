@@ -39,6 +39,7 @@ export type ResponseGetByID = {
   edad: number;
   contra: string;
   fechaCreacion: string; // string si viene directo del JSON, Date si lo transformas
+  numeroLicenciaConducir: string | null; // Puede ser null si no tiene licencia
 }
 
 export type UpdateAcceso = {

@@ -12,7 +12,12 @@ interface DetallesAccesoProps {
 
 export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso, idAcceso }: DetallesAccesoProps) {
   // usa el hook personalizado para obtener los detalles de la guía de remisión
-  const { acceso, isLoading, isError, execute: ObtenerDetallesAccesoPorID } = useFetchAcceso(idAcceso);
+  const { 
+    acceso, 
+    isLoading, 
+    isError, 
+    execute: ObtenerDetallesAccesoPorID 
+  } = useFetchAcceso(idAcceso);
 
   const formatReadableDate = (isoString: string): string => {
   if (!isoString) return "";
@@ -122,6 +127,17 @@ export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso
                 <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Documento Nacional de Identidad (DNI)</p>
                 <p className="text-sm font-medium text-white">{acceso?.dniuser}</p>
               </div>
+
+              <div>
+                <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Numero telefónico</p>
+                <p className="text-sm font-medium text-white">{acceso?.numero}</p>
+              </div>
+              { acceso?.numeroLicenciaConducir && (
+                <div>
+                  <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Licencia de conducir</p>
+                  <p className="text-sm font-medium text-white">{acceso?.numeroLicenciaConducir}</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -137,6 +153,12 @@ export default function DetallesAcceso({showFormUpdateAcceso, showDetallesAcceso
                 <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Correo Electrónico</p>
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-medium text-white">{(acceso!=null) ? acceso.correo : 'Sin correo'}</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 mb-1 uppercase tracking-wide">Contraseña</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-medium text-white">{(acceso!=null) ? acceso.contra : 'Sin contraseña'}</p>
                 </div>
               </div>
             </div>
