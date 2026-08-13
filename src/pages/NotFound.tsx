@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import ContentPageMain from "../components/layouts/contentPageMain";
 
 export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#0f0f1e] flex flex-col items-center justify-center">
-      <div className="max-w-2xl w-full text-center">
+    <ContentPageMain>
+      <div className="w-full h-screen flex flex-col items-center justify-center text-center">
         {/* Title */}
         <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
           404 - Ruta no
@@ -41,6 +42,6 @@ export default function NotFound() {
           </button>
         </div>
       </div>
-    </div>
+    </ContentPageMain>
   );
 }

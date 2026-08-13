@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navigation } from "lucide-react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import FormCreate from "../features/seguimiento/components/FormCreate";
 import Seguimiento from "../features/seguimiento/components/Seguimiento"
 
@@ -8,7 +9,7 @@ export default function Transporte() {
   const [showSeguimiento, setShowSeguimiento] = useState<boolean>(false);
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
         <div className="flex flex-col items-center">
@@ -48,13 +49,12 @@ export default function Transporte() {
         </button>
       </div>
 
-
       { showFormSeguimiento && (
         <FormCreate />
       )} 
       { showSeguimiento && (
         <Seguimiento />
       )} 
-    </div>
+    </ContentPageMain>
   );
 }

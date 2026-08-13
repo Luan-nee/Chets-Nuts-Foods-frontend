@@ -1,5 +1,6 @@
 import { Plus, User2Icon } from "lucide-react";
 import { useState } from "react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import TableClientes from "../features/clientes/components/TableClientes";
 import FormCreateCliente from "../features/clientes/components/FormCreateCliente";
 import FormUpdateCliente from "../features/clientes/components/FormUpdateCliente";
@@ -17,7 +18,7 @@ export default function Clientes() {
   } = useFetchClientes();
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div>
@@ -41,16 +42,14 @@ export default function Clientes() {
 				</button>
 			</div>
       
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <TableClientes
-          clientes={clientes}
-          isLoading={isLoading}
-          isError={isError}
-          recargarClientes={recargarClientes}
-          setShowFormUpdate={setShowFormUpdate}
-          setDniCliente={setDniCliente}
-        />
-      </div>
+      <TableClientes
+        clientes={clientes}
+        isLoading={isLoading}
+        isError={isError}
+        recargarClientes={recargarClientes}
+        setShowFormUpdate={setShowFormUpdate}
+        setDniCliente={setDniCliente}
+      />
 
       { showFormCreate && (
         <FormCreateCliente
@@ -66,7 +65,6 @@ export default function Clientes() {
           onClienteActualizado={recargarClientes}
         />
       )}
-
-    </div>
+    </ContentPageMain>
   );
 }

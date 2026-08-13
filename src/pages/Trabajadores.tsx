@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Filter, Plus, Search, Users } from "lucide-react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import FormCreate from "../features/accesos/components/FormCreateAcceso";
 import TableAccesos from "../features/accesos/components/TableAccesos";
 import DetallesAcceso from "../features/accesos/components/DetallesAcceso";
@@ -12,7 +13,7 @@ export default function Trabajadores () {
   const [selectAccesoId, setSelectAccesoId] = useState<number | null>(null);
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div>
@@ -69,7 +70,7 @@ export default function Trabajadores () {
         setShowDetallesAcceso={setShowDetallesAcceso}
         setShowFormUpdate={setShowFormUpdate} 
         setSelectAccesoId={setSelectAccesoId} 
-        />
+      />
 
       { showDetallesAcceso && 
         <div className="absolute inset-0 z-50 bg-gray-950">
@@ -91,6 +92,6 @@ export default function Trabajadores () {
           setShowFormCreateEmpleado={setShowFormCreate}
         />
       }
-    </div>
+    </ContentPageMain>
   );
 }

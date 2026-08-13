@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Plus, Building2 } from "lucide-react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import TableEstablecimientos from "../features/establecimientos/components/TableEstablecimientos";
 import DetallesEstablecimiento from "../features/establecimientos/components/DetallesEstablecimiento";
 import FormCreateEstablecimiento from "../features/establecimientos/components/FormCreateEstablecimiento";
@@ -19,7 +20,7 @@ export default function Establecimientos() {
 	} = useFetchEstablecimientos();
 
 	return (
-		<div className="relative flex-1 flex flex-col">
+		<ContentPageMain>
 			{/* Header */}
 			<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div>
@@ -72,6 +73,6 @@ export default function Establecimientos() {
 					setShowDetallesEstablecimiento={setShowDetallesEstablecimiento}
 				/>
 			)}
-		</div>
+		</ContentPageMain>
 	);
 }

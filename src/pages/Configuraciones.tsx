@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ContentPageMain from '../components/layouts/contentPageMain'
 import DetallesInfoEstablecimiento from '../features/datosEmpresa/components/DetallesInfoEstablecimiento'
 import DetallesInfoEmpresa from '../features/datosEmpresa/components/DetallesInfoEmpresarial'
 import FormRegistrarInfoEmpresarial from '../features/datosEmpresa/components/FormRegistrarInfoEmpresarial'
@@ -9,7 +10,7 @@ export default function Configuraciones() {
   const [showFormInfoEstablecimiento, setShowFormInfoEstablecimiento] = useState<boolean>(false);
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
         <div className="flex items-center justify-between">
@@ -21,6 +22,8 @@ export default function Configuraciones() {
           </div>
         </div>
       </div>
+
+      {/* Contenido principal */}
       <div className="grid grid-cols-2 items-start gap-4 p-6">
         {
           showFormInfoEstablecimiento ? (
@@ -41,6 +44,6 @@ export default function Configuraciones() {
           )
         }
       </div>
-    </div>
+    </ContentPageMain>
   );
 }

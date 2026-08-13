@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calendar, CheckCircle } from "lucide-react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
 import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
 import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useFetchSeguimientoSalidaTransporte";
@@ -18,7 +19,7 @@ export default function Seguimiento() {
   const currentEventIndex = 0;
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
         <div className="flex flex-col items-center">
@@ -32,14 +33,14 @@ export default function Seguimiento() {
         </div>
       </div>
 
-      <div className="flex flex-col p-6">
-        <TableSelectSalidaTransporte
-          onChange={(selectedId) => {
-            console.log("Selected Salida Transporte ID:", selectedId);
-          }}
-          selectIdSalidaTransporte={setSelectedSalidaTransporte}
-        />
+      <TableSelectSalidaTransporte
+        onChange={(selectedId) => {
+          console.log("Selected Salida Transporte ID:", selectedId);
+        }}
+        selectIdSalidaTransporte={setSelectedSalidaTransporte}
+      />
 
+      <div className="flex flex-col p-6">
         <button
           onClick={() => {
             realizarSeguimientoSalidaTransporte(
@@ -139,6 +140,6 @@ export default function Seguimiento() {
           </div>
         </ContentSectionProcess>
       </div>
-    </div>
+    </ContentPageMain>
   );
 }

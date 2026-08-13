@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
+import ContentPageMain from '../components/layouts/contentPageMain';
 import FormCreateGre from '../features/gre/components/FormCreateGre';
 import TableGre from '../features/gre/components/TableGre';
 
@@ -7,7 +8,7 @@ export default function ListaGre() {
   const [showFormCreateGre, setShowFormCreateGre] = useState<boolean>(false);
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
 			{/* Header */}
 			<div className="bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -31,6 +32,6 @@ export default function ListaGre() {
       {showFormCreateGre && (
         <FormCreateGre setShowFormCreateGre={setShowFormCreateGre} />
       )}
-    </div>
+    </ContentPageMain>
   );
 }

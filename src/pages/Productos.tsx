@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, Filter, Plus, Package } from "lucide-react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
 import TableProductos from "../features/productos/components/TableProductos";
@@ -15,7 +16,7 @@ export default function Productos() {
   const [paginaActual, setPaginaActual] = useState<number>(1);
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div>
@@ -79,6 +80,6 @@ export default function Productos() {
           showFormCreate={setShowFormCreateProduct} 
         />
       }
-    </div>
+    </ContentPageMain>
   );
 }

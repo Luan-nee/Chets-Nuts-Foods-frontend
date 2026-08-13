@@ -9,8 +9,7 @@ export default function TableGre() {
     "Número",
     "QR",
     "Confirmado",
-    "Fecha Confirmación",
-    "ID Guía",
+    "Fecha Confirmación"
   ];
 
   const {
@@ -82,9 +81,6 @@ export default function TableGre() {
               </td>
               <td className="px-6 py-4 text-gray-300">
                 {guia.fechaConfirmacion ?? "Sin confirmar"}
-              </td>
-              <td className="px-6 py-4 text-gray-300">
-                {guia.idguia}
               </td>
             </tr>
           ))}

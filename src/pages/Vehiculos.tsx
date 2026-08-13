@@ -1,5 +1,6 @@
 import { Plus, Search, Filter, Truck } from "lucide-react";
 import { useState } from "react";
+import ContentPageMain from "../components/layouts/contentPageMain";
 import TableVehiculos from "../features/vehiculos/components/TableVehiculos";
 import FormCreate from "../features/vehiculos/components/FormCreate";
 import FormUpdate from "../features/vehiculos/components/FormUpdate";
@@ -41,7 +42,7 @@ export default function Vehiculos() {
   };
 
   return (
-    <div className="relative flex-1 flex flex-col">
+    <ContentPageMain>
       {/* Header */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between bg-gray-900 border-b border-gray-800 px-8 py-6">
 				<div>
@@ -109,16 +110,14 @@ export default function Vehiculos() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto px-8 py-6">
-        <TableVehiculos
-          setShowFormUpdate={setShowFormUpdate}
-          setSelectVehiculoId={setSelectVehiculoId}
-          SearchPlaca={searchPlaca}
-          searchTrigger={searchTrigger}
-          estado={estado}
-          refreshKey={refreshVehiculosKey}
-        />
-      </div>
+      <TableVehiculos
+        setShowFormUpdate={setShowFormUpdate}
+        setSelectVehiculoId={setSelectVehiculoId}
+        SearchPlaca={searchPlaca}
+        searchTrigger={searchTrigger}
+        estado={estado}
+        refreshKey={refreshVehiculosKey}
+      />
 
       {showFormCreate && (
         <FormCreate
@@ -126,7 +125,6 @@ export default function Vehiculos() {
           onSuccess={refrescarTablaVehiculos}
         />
       )}
-
       {showFormUpdate && selectVehiculoId !== null && (
         <FormUpdate
           showFormUpdate={setShowFormUpdate}
@@ -134,6 +132,6 @@ export default function Vehiculos() {
           onSuccess={refrescarTablaVehiculos}
         />
       )}
-    </div>
+    </ContentPageMain>
   );
 }
