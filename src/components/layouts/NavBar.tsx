@@ -40,7 +40,8 @@ export default function NavBarAdministrador() {
     { icon: MapPin, label: "Seguimiento", anchor: "/seguimiento", userRol: ["ADMIN", "CHOFER", "CLIENTE"] },
     { icon: Package, label: "Clientes", anchor: "/clientes", userRol: ["ADMIN", "COLABORADOR"] },
     { icon: MapPin, label: "Establecimientos", anchor: "/establecimientos", userRol: ["ADMIN"] },
-    { icon: CarIcon, label: "Transporte", anchor: "/transporte", userRol: ["CHOFER"] }
+    { icon: CarIcon, label: "Transporte", anchor: "/transporte", userRol: ["CHOFER"] },
+    { icon: Package, label: "Test", anchor: "/test", userRol: ["ADMIN"] },
   ];
 
   return (

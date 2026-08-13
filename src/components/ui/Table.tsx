@@ -11,7 +11,7 @@ export default function Table({ children, tableHeader, cantidadDatos }: TablePro
       <thead>
         <tr className="border-b border-gray-800">
           {tableHeader.map((header, index) => (
-            <th key={index} className="text-left px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">{header}</th>
+            <th key={index} className="text-left px-6 py-4 text-xs font-semibold text-gray-400 tracking-wider">{header}</th>
           ))}
         </tr>
       </thead>
