@@ -44,7 +44,8 @@ export default function Establecimientos() {
 					Nuevo establecimiento
 				</button>
 			</div>
-
+		
+			{/* Tabla */}
 			<div className="p-4">
 				<Table
 					tableHeader={[
@@ -54,8 +55,8 @@ export default function Establecimientos() {
 						"ACCIONES",
 					]}
 					cantidadDatos={establecimientos.length}
-					dataIsError={isLoadingEstablecimientos}
-					dataIsLoading={isErrorEstablecimientos}
+					dataIsError={isErrorEstablecimientos}
+					dataIsLoading={isLoadingEstablecimientos}
 					reload={recargarEstablecimientos}
 				>
 					{establecimientos?.map((establecimiento, index) => (
