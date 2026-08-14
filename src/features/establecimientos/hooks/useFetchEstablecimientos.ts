@@ -46,5 +46,11 @@ export const useFetchEstablecimientos = (): FetchState => {
     fetchData();
   }, []);
 
-  return { establecimientos, isLoading, isError, message, execute: fetchData};
+  return { 
+    establecimientos, 
+    isLoading, 
+    isError, 
+    message, 
+    execute: fetchData
+  };
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Plus, Building2 } from "lucide-react";
+import { Plus, Building2, Eye, Edit2 } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
-import TableEstablecimientos from "../features/establecimientos/components/TableEstablecimientos";
+import Table from "../components/ui/table/Table";
 import DetallesEstablecimiento from "../features/establecimientos/components/DetallesEstablecimiento";
 import FormCreateEstablecimiento from "../features/establecimientos/components/FormCreateEstablecimiento";
 import FormUpdateEstablecimiento from "../features/establecimientos/components/FormUpdateEstablecimiento";
@@ -12,10 +12,11 @@ export default function Establecimientos() {
 	const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
 	const [showDetallesEstablecimiento, setShowDetallesEstablecimiento] = useState<boolean>(false);
 	const [selectEstablecimientoId, setSelectEstablecimientoId] = useState<number | null>(null);
+
 	const {
 		establecimientos,
-		isLoading,
-		isError,
+		isLoading: isLoadingEstablecimientos,
+		isError: isErrorEstablecimientos,
 		execute: recargarEstablecimientos,
 	} = useFetchEstablecimientos();
 
@@ -44,15 +45,82 @@ export default function Establecimientos() {
 				</button>
 			</div>
 
-			<TableEstablecimientos
-				establecimientos={establecimientos}
-				isLoading={isLoading}
-				isError={isError}
-				recargarEstablecimientos={recargarEstablecimientos}
-				setShowFormUpdate={setShowFormUpdate}
-				setShowDetallesEstablecimiento={setShowDetallesEstablecimiento}
-				setSelectEstablecimientoId={setSelectEstablecimientoId}
-			/>
+			<div className="overflow-x-auto p-4">
+				<Table
+					tableHeader={[
+						"ESTABLECIMIENTO",
+						"UBICACIÓN",
+						"DIRECCIÓN",
+						"ACCIONES",
+					]}
+					cantidadDatos={establecimientos.length}
+					dataIsError={isLoadingEstablecimientos}
+					dataIsLoading={isErrorEstablecimientos}
+					reload={recargarEstablecimientos}
+				>
+					{establecimientos?.map((establecimiento, index) => (
+						<tr
+							key={index}
+							className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+						>
+							{/* Establecimiento */}
+							<td className="px-6 py-4">
+								<div className="flex items-start gap-3">
+									<div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
+										<Building2 className="w-5 h-5 text-[#1f6feb]" />
+									</div>
+									<div className="min-w-0">
+										<span className="block font-medium text-sm text-white truncate">
+											{establecimiento.nombreEst}
+										</span>
+										<span className="block text-xs text-gray-400 truncate">
+											{establecimiento.descripcion}
+										</span>
+									</div>
+								</div>
+							</td>
+
+							{/* Ubicación */}
+							<td className="px-6 py-4">
+								<div className="flex gap-2">
+									<span className="text-sm text-gray-300">{establecimiento.distrito} / {establecimiento.provincia}</span>
+								</div>
+							</td>
+
+							{/* Dirección */}
+							<td className="px-6 py-4">
+								<span className="text-sm text-gray-300">{establecimiento.direccion}</span>
+							</td>
+
+							{/* Actions */}
+							<td className="px-6 py-4">
+								<div className="flex items-center justify-end gap-2">
+									<button
+										className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+										aria-label="Ver establecimiento"
+										onClick={() => {
+											setSelectEstablecimientoId(establecimiento.idEst);
+											setShowDetallesEstablecimiento(true);
+										}}
+									>
+										<Eye className="w-4 h-4 text-gray-400" />
+									</button>
+									<button
+										className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+										aria-label="Editar establecimiento"
+										onClick={() => {
+											setSelectEstablecimientoId(establecimiento.idEst);
+											setShowFormUpdate(true);
+										}}
+									>
+										<Edit2 className="w-4 h-4 text-gray-400" />
+									</button>
+								</div>
+							</td>
+						</tr>
+					))}
+				</Table>
+			</div>
 
 			{showFormCreate && (
 				<FormCreateEstablecimiento
