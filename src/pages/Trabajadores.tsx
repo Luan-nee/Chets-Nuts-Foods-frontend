@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Filter, Plus, Search, Users } from "lucide-react";
+import { Edit2, Eye, Filter, Plus, Search, Users } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
+import Table from "../components/ui/table/Table";
 import FormCreate from "../features/accesos/components/FormCreateAcceso";
-import TableAccesos from "../features/accesos/components/TableAccesos";
 import DetallesAcceso from "../features/accesos/components/DetallesAcceso";
 import FormUpdate from "../features/accesos/components/FormUpdateAcceso";
+import { useFetchAccesos } from "../features/accesos/hooks/useFetchAccesos";
 
 export default function Trabajadores () {
   const [showDetallesAcceso, setShowDetallesAcceso] = useState<boolean>(false);
@@ -12,6 +13,15 @@ export default function Trabajadores () {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
   const [selectAccesoId, setSelectAccesoId] = useState<number | null>(null);
 
+  const {
+    accesos,
+    isLoading: isLoadingAccesos,
+    isError: isErrorAccesos,
+    execute: recargarAccesos,
+    setPagina,
+    infoPaginacion,
+  } = useFetchAccesos();
+  
   return (
     <ContentPageMain>
       {/* Header */}
@@ -37,40 +47,97 @@ export default function Trabajadores () {
 				</button>
 			</div>
 
-      {/* Search and Filters */}
-      <div className="bg-gray-900 border-b border-gray-800 px-8 py-4">
-        <div className="flex items-center gap-4">
-          {/* Search */}
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Buscar a un empleado..."
-              className="w-full bg-gray-950 border border-gray-800 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-
-          {/* Filter */}
-          <button className="flex items-center gap-2 bg-gray-950 border border-gray-800 hover:border-gray-700 text-gray-300 px-4 py-2.5 rounded-lg text-sm transition-colors">
-            <span>Filtra según...</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          {/* Filter Button */}
-          <button className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-            <Filter className="w-5 h-5 text-white" />
-          </button>
-        </div>
-      </div>
-
       {/* Table */}
-      <TableAccesos 
-        setShowDetallesAcceso={setShowDetallesAcceso}
-        setShowFormUpdate={setShowFormUpdate} 
-        setSelectAccesoId={setSelectAccesoId} 
-      />
+      <div className="p-4">
+        <Table
+          cantidadDatos={accesos.length}
+          dataIsError={isErrorAccesos}
+          dataIsLoading={isLoadingAccesos}
+          reload={recargarAccesos}
+          tableHeader={[
+            "Correo electrónico",
+            "Estado",
+            "Rol",
+            "Estado de disponibilidad",
+            "DNI",
+            "nombres",
+          ]}
+          changePage={setPagina}
+          dataPagination={infoPaginacion}
+        >
+          {accesos?.map((acceso, index) => (
+            <tr
+              key={index}
+              className="hover:bg-gray-800/50 transition-colors"
+            >
+
+              {/* Correo */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-medium text-sm text-white">
+                    {acceso.correo}
+                  </span>
+                </div>
+              </td>
+
+              {/* Estado */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">
+                  {(acceso.estado) ? "Activo" : "Inactivo"}
+                  </span>
+              </td>
+
+              {/* Rol (tipo de acceso) */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{acceso.tipos}</span>
+              </td>
+
+              {/* Estado de acceso */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{acceso.estadoacceso}</span>
+              </td>
+
+              {/* DNI del usuario */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{acceso.dniuser}</span>
+              </td>
+
+              {/* Nombres del usuario */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{acceso.nombres}</span>
+              </td>
+
+              {/* Actions */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      setSelectAccesoId(acceso.idacceso);
+                      setShowFormUpdate(true);
+                    }}
+                    className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+                    aria-label="Editar acceso"
+                  >
+                    <Edit2 className="w-4 h-4 text-gray-400" />
+                  </button>
+                  {
+                  <button
+                    onClick={() => {
+                      setShowDetallesAcceso(true);
+                      setSelectAccesoId(acceso.idacceso);
+                    }}
+                    className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+                    aria-label="Ver detalles"
+                  >
+                    <Eye className="w-4 h-4 text-gray-400" />
+                  </button>
+                  }
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
+      </div>
 
       { showDetallesAcceso && 
         <div className="absolute inset-0 z-50 bg-gray-950">

@@ -54,7 +54,7 @@ export default function TableAccesos({
         {/* agrega un botón para reintentar la carga */}
         <button
           className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
-          onClick={() => recargarAccesos(infoPaginacion.pagina_actual)}
+          onClick={() => recargarAccesos()}
         >
           Reintentar
         </button>
@@ -71,7 +71,7 @@ export default function TableAccesos({
       <div className="p-4 flex justify-end">
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded"
-          onClick={() => recargarAccesos(infoPaginacion.pagina_actual)}
+          onClick={() => recargarAccesos()}
         >
           Recargar
         </button>

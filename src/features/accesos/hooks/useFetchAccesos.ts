@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useAccesosContext } from "../../../context/AccesosContext";
 import type { ResponseGetAllColaboradores } from "../../../types/accesos.type";
 import type {
-  BodyResponseWithPagination,
   PaginationInfo,
 } from "../../../types/bodyResponse.type";
 
@@ -12,9 +11,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (pagina: number) => Promise<
-    BodyResponseWithPagination<ResponseGetAllColaboradores[]>
-  >;
+  execute: () => Promise<void>;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
@@ -25,44 +22,26 @@ export const useFetchAccesos = (): FetchState => {
   const [message, setMessage] = useState<string>("");
   const [pagina, setPagina] = useState<number>(1);
 
-  const getAccesos = async (paginaNum: number): Promise<
-    BodyResponseWithPagination<ResponseGetAllColaboradores[]>
-  > => {
+  const getAccesos = async (): Promise<void> => {
     try {
       setIsError(false);
       setMessage("");
 
-      const response = await getAllAccesos(paginaNum);
+      const response = await getAllAccesos(pagina);
 
       if (response.status) {
         setMessage(response.message);
-        return {
-          status: "success",
-          message: response.message,
-          data: response.data as ResponseGetAllColaboradores[],
-          pagination: response.pagination || contextPaginacion,
-        };
       } else {
         setIsError(true);
         setMessage(response.message || "Error al obtener los accesos");
-        return {
-          status: "error",
-          message: response.message || "Error al obtener los accesos",
-          pagination: contextPaginacion,
-        };
       }
     } catch (error: any) {
       setIsError(true);
-      return {
-        status: "error",
-        message: "Error al obtener los accesos",
-        pagination: contextPaginacion,
-      };
     }
   };
 
   useEffect(() => {
-    getAccesos(pagina);
+    getAccesos();
   }, [pagina]);
 
   const inicio = (pagina - 1) * 10;
