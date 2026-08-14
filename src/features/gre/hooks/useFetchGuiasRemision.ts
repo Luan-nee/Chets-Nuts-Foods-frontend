@@ -9,7 +9,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (pagina: number) => void;
+  execute: () => void;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
@@ -28,15 +28,14 @@ export const useFetchGuiasRemision = (): FetchState => {
     datos_por_pagina: 10,
   });
   
-
   // Función asíncrona para obtener los datos
-  const ObtenerGuias = async (nueva_pagina: number) => {
+  const ObtenerGuias = async () => {
     try {
       setIsLoading(true);
       setIsError(false);
       setMessage("");
 
-      const response = await Gre_api.ListarGuias(nueva_pagina);
+      const response = await Gre_api.ListarGuias(pagina);
       
       // Manejo de errores basado en el estado y el mensaje de la respuesta
       if (response.status == "success"){
@@ -56,7 +55,7 @@ export const useFetchGuiasRemision = (): FetchState => {
   };
 
   useEffect(() => {
-    ObtenerGuias(pagina);
+    ObtenerGuias();
   }, [pagina]);
 
   return { 
