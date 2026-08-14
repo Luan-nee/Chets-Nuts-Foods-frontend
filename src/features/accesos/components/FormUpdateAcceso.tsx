@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
+import { Users } from "lucide-react";
+import ContentForm from "../../../components/layouts/ContentForm";
 import InputPassword from "../../../components/ui/InputPassword";
 import InputText from "../../../components/ui/InputText";
-import ContentPage from "../../../components/layouts/ContentPage";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import InputSelect from "../../../components/ui/InputSelect";
 import Switch from "../../../components/ui/Switch";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
-import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import type { 
   UserRole as empleadoRol 
 } from "../../../types/constantes.type";
@@ -83,12 +83,17 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
   };
 
   return (
-    <ContentPage>
-      <HeaderFormPage 
-        title="Actualizar las credenciales de acceso del empleado"
-        description="Ingresa nuevos datos del empleado para actualizar sus credenciales de acceso. Asegúrate de proporcionar información precisa y completa."
-        setShowForm={() => setShowFormUpdateEmpleado(false)}
-      />
+    <ContentForm>
+      {/* Header */}
+      <div className="flex flex-row gap-2">
+        <div className="rounded-xl bg-blue-500/15 p-3 border border-blue-500/20">
+          <Users className="w-6 h-6 text-blue-400" />
+        </div>
+        <div className="flex flex-col">
+          <h2 className="text-xl font-semibold text-white">Actualizar las credenciales de acceso del empleado</h2>
+          <p className="text-sm text-gray-400">Ingresa nuevos datos del empleado para actualizar sus credenciales de acceso.</p>
+        </div>
+      </div>
 
       <ContentSectionProcess
         isLoading={cargandoAcceso}
@@ -97,89 +102,80 @@ export default function FormCreate({ idEmpleado, setShowFormUpdateEmpleado }: Fo
         textButtonError="Reintentar"
         fetchData={() => recargarAcceso(idEmpleado)}
       >
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
-          <div className="space-y-6">
-            {/* Row 1: Correo y contraseña */}
-            <div className="grid grid-cols-2 gap-6">
-              <InputText
-                label="Correo electrónico"
-                value={formData.correo ?? ''}
-                htmlForm="correo"
-                onChange={(value) => setFormData(prev => ({ ...prev, correo: value }))}
-              />
-              <InputPassword
-                label="Contraseña generada automáticamente"
-                value={formData.password ?? ''}
-                htmlForm="password"
-                onChange={(e) => {
-                  setFormData(prev => ({ ...prev, password: e }));
-                }} 
-              />
-            </div>
+        {/* Correo y contrasena */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <InputText
+            label="Correo electrónico"
+            value={formData.correo ?? ''}
+            htmlForm="correo"
+            onChange={(value) => setFormData((prev) => ({ ...prev, correo: value }))}
+          />
+          <InputPassword
+            label="Contrasena generada automáticamente"
+            value={formData.password ?? ''}
+            htmlForm="password"
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, password: e }));
+            }}
+          />
+        </div>
 
-            {/* Row 2: Rol asignado y estado de acceso */}
-            <div className="grid grid-cols-2 gap-6">
-
-              {
-                cargandoRoles ? (
-                  <div className="flex justify-center items-center py-2">
-                    <Loading w={6} h={6} color="blue" />
-                  </div>
-                ) : errorRoles ? (
-                  <div className="flex justify-center items-center py-2">
-                    <p className="text-red-500">Error al cargar los roles.</p>
-                    <button
-                      className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
-                      onClick={recargarRoles}
-                    >
-                      Reintentar
-                    </button>
-                  </div>
-                ) : roles === null || roles.length === 0 ? (
-                  <div>No hay roles registrados en el sistema.</div>
-                ) : (
-                  <InputSelect 
-                    label="Rol asignado"
-                    options={roles.map(te => ({ label: te.rol, value: te.rol }))}
-                    placeholder="Seleccione el tipo de empleado"
-                    onSelect={(value) => setFormData(prev => ({ ...prev, tipos: value as empleadoRol }))}
-                    valueSelected={formData.tipos}
-                  />
-                )
-              }
-              <div>
-                <label className="block text-sm font-medium mb-1">Estado del acceso</label>
-                <Switch
-                  estado={formData.estado ?? false}
-                  handleInputChange={(value) => setFormData(prev => ({ ...prev, estado: value }))}
-                />
+        {/* Rol y estado de acceso */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            cargandoRoles ? (
+              <div className="flex justify-center items-center py-2">
+                <Loading w={6} h={6} color="blue" />
               </div>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-4 mt-8">
-            <div className="flex flex-row gap-4 w-full justify-end">
-              <div className="flex flex-row gap-4">
-                <ButtonCancelForm
-                  handleCancel={() => setShowFormUpdateEmpleado(false)}
-                  isLoading={cargandoActualizarAcceso}
-                  textButton="Cancelar"
-                  color="red"
-                />
-                <ButtonSubmitForm
-                  handleSubmit={handleSubmit}
-                  isLoading={cargandoActualizarAcceso}
-                  isError={!!messageUpdateAcceso}
-                  textButton="Guardar Cambios"
-                  textError={messageUpdateAcceso || "Error al guardar los cambios"}
-                  color="blue"
-                />
+            ) : errorRoles ? (
+              <div className="flex justify-center items-center py-2">
+                <p className="text-red-500">Error al cargar los roles.</p>
+                <button
+                  className="ml-4 px-4 py-2 bg-red-600 text-white rounded"
+                  onClick={recargarRoles}
+                >
+                  Reintentar
+                </button>
               </div>
-            </div>
+            ) : roles === null || roles.length === 0 ? (
+              <div>No hay roles registrados en el sistema.</div>
+            ) : (
+              <InputSelect
+                label="Rol asignado"
+                options={roles.map((te) => ({ label: te.rol, value: te.rol }))}
+                placeholder="Seleccione el tipo de empleado"
+                onSelect={(value) => setFormData((prev) => ({ ...prev, tipos: value as empleadoRol }))}
+                valueSelected={formData.tipos}
+              />
+            )
+          }
+          <div>
+            <label className="block text-sm font-medium mb-1">Estado del acceso</label>
+            <Switch
+              estado={formData.estado ?? false}
+              handleInputChange={(value) => setFormData((prev) => ({ ...prev, estado: value }))}
+            />
           </div>
         </div>
       </ContentSectionProcess>
-    </ContentPage>
+
+      {/* Botones */}
+      <div className="flex gap-4 justify-end">
+        <ButtonCancelForm
+          handleCancel={() => setShowFormUpdateEmpleado(false)}
+          isLoading={cargandoActualizarAcceso}
+          textButton="Cancelar"
+          color="red"
+        />
+        <ButtonSubmitForm
+          handleSubmit={handleSubmit}
+          isLoading={cargandoActualizarAcceso}
+          isError={!!messageUpdateAcceso}
+          textButton="Guardar Cambios"
+          textError={messageUpdateAcceso || "Error al guardar los cambios"}
+          color="blue"
+        />
+      </div>
+    </ContentForm>
   )
 }
