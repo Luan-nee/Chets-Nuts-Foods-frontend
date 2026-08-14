@@ -1,4 +1,4 @@
-import { Plus, Search, Truck, Edit2 } from "lucide-react";
+import { Plus, Truck, Edit2 } from "lucide-react";
 import { useState } from "react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
 import Table from "../components/ui/table/Table"
