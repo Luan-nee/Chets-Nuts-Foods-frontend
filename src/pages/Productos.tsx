@@ -4,7 +4,6 @@ import ContentPageMain from "../components/layouts/ContentPageMain";
 import Table from "../components/ui/table/Table";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
-import TableProductos from "../features/productos/components/TableProductos";
 import { useFetchProductos } from "../features/productos/hooks/useFetchProductos";
 
 export default function Productos() {

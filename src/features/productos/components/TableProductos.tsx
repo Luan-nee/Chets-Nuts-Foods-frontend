@@ -64,13 +64,13 @@ export default function TableProductos({
       isError={isError}
       textError="Error al cargar los productos"
       textButtonError="Reintentar"
-      fetchData={() => recargarProductos(infoPaginacion.pagina_actual)}
+      fetchData={() => recargarProductos()}
     >
       <div className="flex-1 overflow-auto px-8 py-6">
         <div className="p-4 flex justify-end">
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => recargarProductos(infoPaginacion.pagina_actual)}
+            onClick={() => recargarProductos()}
           >
             Recargar
           </button>

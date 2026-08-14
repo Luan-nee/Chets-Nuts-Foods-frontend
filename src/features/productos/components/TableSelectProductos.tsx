@@ -36,7 +36,7 @@ export default function TableSelectProductos({
       isError={isErrorProductos}
       textError="Error al cargar los productos"
       textButtonError="Reintentar"
-      fetchData={() => listarProductos(1)}
+      fetchData={() => listarProductos()}
     >
       <div className="flex-1 overflow-auto">
         <div className="p-4 flex justify-between items-center">
@@ -45,7 +45,7 @@ export default function TableSelectProductos({
           </h2>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => listarProductos(infoPaginacion.pagina_actual)}
+            onClick={() => listarProductos()}
           >
             Recargar
           </button>

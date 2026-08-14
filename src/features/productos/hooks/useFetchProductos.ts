@@ -4,7 +4,6 @@ import ProductoApi from "../../../api/producto.api";
 // importación de tipos
 import type { ResponseGetAllProductos } from "../../../types/producto.type";
 import type {
-  BodyResponseWithPagination,
   PaginationInfo,
 } from "../../../types/bodyResponse.type";
 

@@ -22,7 +22,6 @@ export default function TableVehiculos({
   setSelectVehiculoId,
   SearchPlaca,
   estado,
-  searchTrigger,
   refreshKey,
 }: PropTableVehiculo) {
   
@@ -30,8 +29,8 @@ export default function TableVehiculos({
     vehiculos,
     isLoading: vehiculosIsLoading,
     isError: vehiculosIsError,
-    reload,
-    setQueryVehiculo,
+    execute: listarVehiculos,
+    setPage,
     infoPaginacion,
   } = useFetchVehiculos();
   
@@ -42,16 +41,6 @@ export default function TableVehiculos({
   const didMountRef = useRef(false);
 
   useEffect(() => {
-    const placaNormalizada = SearchPlaca || undefined;
-
-    setQueryVehiculo({
-      page: 1,
-      placa: placaNormalizada,
-      estado: estado2,
-    });
-  }, [searchTrigger, SearchPlaca, estado2, setQueryVehiculo]);
-
-  useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
       return;
@@ -59,12 +48,7 @@ export default function TableVehiculos({
 
     if (refreshKey === undefined) return;
 
-    setQueryVehiculo({
-      page: infoPaginacion.pagina_actual,
-      placa: SearchPlaca || undefined,
-      estado: estado2,
-    });
-  }, [refreshKey, SearchPlaca, estado2, infoPaginacion.pagina_actual, setQueryVehiculo]);
+  }, [refreshKey, SearchPlaca, estado2, infoPaginacion.pagina_actual]);
 
   const tableHeader: string[] = [
     "Placa",
@@ -76,21 +60,18 @@ export default function TableVehiculos({
     "Acciones",
   ];
 
-  const cambiarPagina = (pagina: number) => {
-    setQueryVehiculo({page:pagina});
-  };
   return (
     <ContentSectionProcess 
       isLoading={vehiculosIsLoading}
       isError={vehiculosIsError}
       textError="Error al cargar los vehículos."
       textButtonError="Reintentar"
-      fetchData={reload}
+      fetchData={listarVehiculos}
     >
 
     <div className="flex-1 overflow-auto">
       <div className="p-4 flex justify-end gap-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => void reload()}>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => listarVehiculos()}>
           Recargar
         </button>
       </div>
@@ -98,7 +79,7 @@ export default function TableVehiculos({
       <ButtonsPagination 
       total_paginas={infoPaginacion.total_paginas} 
       pivote={infoPaginacion.pagina_actual} 
-      fetchData={cambiarPagina}
+      fetchData={setPage}
       datos_por_pagina={infoPaginacion.datos_por_pagina} 
       total_data={infoPaginacion.total_data} 
       />

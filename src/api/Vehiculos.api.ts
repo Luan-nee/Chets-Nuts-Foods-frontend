@@ -16,8 +16,7 @@ import type {
   CreateVehiculo,
   ResponseCreate,
   UpdateVehiculo,
-  ResponseUpdate,
-  queryGetVehiculos
+  ResponseUpdate
 } from "../types/vehiculos.type";
 
 // importación de datos mock
