@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Info } from "lucide-react";
+import { Package } from "lucide-react";
+import ContentForm from "../../../components/layouts/ContentForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
-import ContentPage from "../../../components/layouts/ContentPage";
 import InputText from "../../../components/ui/InputText";
-import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import { useCreateProducto } from "../hooks/useCreateProducto";
 import type { CreateProducto } from "../../../types/producto.type";
 
@@ -25,53 +24,55 @@ export default function FormCreate({ showFormCreate }: FormCreateProps) {
   });
 
   return (
-    <ContentPage>
+    <ContentForm>
       {/* Header */}
-      <HeaderFormPage
-        setShowForm={showFormCreate}
-        title="Registro de nuevo producto"
-        description="Ingresa los datos del nuevo producto para agregarlo al sistema. Asegúrate de proporcionar información precisa y completa."
-      />
-
-      {/* Form */}
-      <section className="bg-gray-900 border border-gray-800 rounded-lg p-8 mx-8 my-6">
-        <div className="flex items-center gap-2 mb-6">
-          <Info className="w-5 h-5 text-blue-500" />
-          <h2 className="text-xl font-semibold">Información General</h2>
+      <div className="flex flex-row gap-2">
+        <div className="rounded-xl bg-blue-500/15 p-3 border border-blue-500/20">
+          <Package className="w-6 h-6 text-blue-400" />
         </div>
+        <div className="flex flex-col">
+          <h2 className="text-xl font-semibold text-white">Registro de nuevo producto</h2>
+          <p className="text-sm text-gray-400">Ingresa los datos del nuevo producto para agregarlo al sistema.</p>
+        </div>
+      </div>
 
+      {/* Nombre y descripción del producto */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <InputText 
           label="Nombre del producto"
           value={formData.nombre}
           htmlForm="nombre"
-          onChange={(value) => setFormData(prev => ({ ...prev, nombre: value }))}
+          onChange={(value) => setFormData((prev) => ({ ...prev, nombre: value }))}
         />
 
         <InputText 
-          label="Descripción del producto"
+          label="Descripcion del producto"
           value={formData.descripcion}
           htmlForm="descripcion"
-          onChange={(value) => setFormData(prev => ({ ...prev, descripcion: value }))}
+          onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
         />
-        {/* Footer */}
-        <div className="flex justify-end mt-6 gap-4">
-          <ButtonCancelForm
-            handleCancel={() => showFormCreate(false)}
-            isLoading={isLoading}
-            textButton="Cancelar"
-          />
-          <ButtonSubmitForm
-            handleSubmit={async () => {
-              await registrarProducto(formData);
-              showFormCreate(false);
-            }}
-            isLoading={isLoading}
-            isError={isError}
-            textButton="Guardar"
-            textError="Error al registrar el producto"
-          />
-        </div>
-      </section>
-    </ContentPage>
+      </div>
+
+      {/* Botones */}
+      <div className="flex gap-4 justify-end">
+        <ButtonCancelForm
+          handleCancel={() => showFormCreate(false)}
+          isLoading={isLoading}
+          textButton="Cancelar"
+          color="red"
+        />
+        <ButtonSubmitForm
+          handleSubmit={async () => {
+            await registrarProducto(formData);
+            showFormCreate(false);
+          }}
+          isLoading={isLoading}
+          isError={isError}
+          textButton="Guardar producto"
+          textError="Error al registrar el producto"
+          color="blue"
+        />
+      </div>
+    </ContentForm>
   );
 }
