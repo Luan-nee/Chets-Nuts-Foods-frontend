@@ -15,7 +15,7 @@ interface PropTable {
   reload: () => void;
   children: React.ReactNode;
   cantidadDatos: number;
-  changePage: (newPage: number) => void;
+  changePage?: (newPage: number) => void;
 }
 
 export default function TableVehiculos({
@@ -45,7 +45,7 @@ export default function TableVehiculos({
         </button>
       </div>
 
-      { dataPagination && (
+      { (dataPagination && changePage) && (
         <ButtonsPagination 
           total_paginas={dataPagination.total_paginas} 
           pivote={dataPagination.pagina_actual} 
