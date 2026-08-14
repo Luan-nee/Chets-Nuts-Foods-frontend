@@ -45,7 +45,7 @@ export default function Establecimientos() {
 				</button>
 			</div>
 
-			<div className="overflow-x-auto p-4">
+			<div className="p-4">
 				<Table
 					tableHeader={[
 						"ESTABLECIMIENTO",

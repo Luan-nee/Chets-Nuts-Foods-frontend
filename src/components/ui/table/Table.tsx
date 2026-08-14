@@ -1,6 +1,7 @@
 import Table from "../../../components/ui/Table";
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import ButtonsPagination from "../../../components/ui/ButtonsPagination";
+import { RefreshCw } from "lucide-react";
 
 interface PropTable {
   tableHeader: string[];
@@ -38,21 +39,30 @@ export default function TableVehiculos({
       fetchData={reload}
     >
 
-    <div className="flex-1 overflow-auto">
-      <div className="flex justify-end pb-4">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded" onClick={() => void reload()}>
-          Recargar
-        </button>
-      </div>
-
-      { (dataPagination && changePage) && (
+    <div className="flex flex-col">
+      { (dataPagination && changePage) ? (
         <ButtonsPagination 
           total_paginas={dataPagination.total_paginas} 
-          pivote={dataPagination.pagina_actual} 
+          pagina_actual={dataPagination.pagina_actual} 
           datos_por_pagina={dataPagination.datos_por_pagina} 
           total_data={dataPagination.total_data} 
           fetchData={changePage}
+          reload={reload}
         />
+      ) : (
+        <div className="flex justify-end px-4">
+          <div className="flex items-center gap-2 bg-gray-900 px-4 py-1 rounded-t-lg">
+            <button
+              className="
+                bg-blue-600 hover:bg-blue-700
+                flex flex-row items-center gap-2 p-2 rounded-lg transition-colors"
+              onClick={() => reload()}
+            >
+              <span className="max-md:text-sm">Recargar</span>
+              <RefreshCw className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       )}
 
       <Table tableHeader={tableHeader} cantidadDatos={cantidadDatos}>
