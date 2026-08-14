@@ -17,20 +17,27 @@ const boderColor: PropBorderColor = {
   'red': 'border-red-600',
 };
 
-export default function Loading({ w, h, color }: LoadingProps): React.ReactNode {
+export default function Loading({ 
+  w, 
+  h, 
+  color 
+}: LoadingProps) {
   const borderColorClass = boderColor[color] || '';
+  const sizeStyle = {
+    width: `${w / 4}rem`,
+    height: `${h / 4}rem`,
+  };
   // cambia por otro elemento similar 
   return (
-    <span className={`
+    <div className={`
       animate-spin 
-      h-${h} 
-      w-${w} 
       border-4 
       border-solid 
       ${borderColorClass}
       border-t-transparent 
       rounded-full
     `}
-    ></span>
+      style={sizeStyle}
+    ></div>
   );
 }

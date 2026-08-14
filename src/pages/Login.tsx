@@ -50,7 +50,7 @@ export default function Login() {
               value={contrasenia}
             />
 
-            <div className="flex">
+            <div className="flex items-center justify-center">
               <ButtonSubmitForm
                 handleSubmit={async () => {
                   await login({
