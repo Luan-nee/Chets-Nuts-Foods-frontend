@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Calendar, CalendarDays, CheckCircle, Hash, Plus } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
 import Table from "../components/ui/table/Table";
-import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
 import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
 import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useFetchSeguimientoSalidaTransporte";
 import { useFetchSalidaTransportes } from "../features/transporte/hooks/useFechSalidasTransporte";
@@ -19,10 +18,10 @@ const formatFechaSalida = (fechaSalida: string) => {
 };
 
 export default function Seguimiento() {
-  const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<
+  const [selectedSalidaTransporte, ] = useState<
     number | null
   >(null);
-  const [idSelected, setIdSelected] = useState<number | null>(null);
+  const [, setIdSelected] = useState<number | null>(null);
 
   const {
     infoSeguimiento,
