@@ -63,7 +63,7 @@ export default function TableSelectVehiculo({ selectIdVehiculo, onChange, initia
         
         <ButtonsPagination 
           total_paginas={infoPaginacion.total_paginas} 
-          pivote={infoPaginacion.pagina_actual} 
+          pagina_actual={infoPaginacion.pagina_actual} 
           fetchData={cambiarPagina}
           datos_por_pagina={infoPaginacion.datos_por_pagina} 
           total_data={infoPaginacion.total_data} 

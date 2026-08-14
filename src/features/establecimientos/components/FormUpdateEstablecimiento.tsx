@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { Building2, User } from "lucide-react";
-import ContentPage from "../../../components/layouts/ContentPage";
 import ContentForm from "../../../components/layouts/ContentForm"
 import ContentSectionProcess from "../../../components/layouts/ContentSectionProcess";
 import InputText from "../../../components/ui/InputText";
 import InputSelect from "../../../components/ui/InputSelect";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import ModalSelectEmpleado from "./ModalSelectEmpleado";
 import {
 	departamentos,

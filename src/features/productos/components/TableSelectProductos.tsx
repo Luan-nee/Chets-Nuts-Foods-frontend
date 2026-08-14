@@ -53,7 +53,7 @@ export default function TableSelectProductos({
 
         <ButtonsPagination 
           total_paginas={infoPaginacion.total_paginas}
-          pivote={infoPaginacion.pagina_actual}
+          pagina_actual={infoPaginacion.pagina_actual}
           datos_por_pagina={infoPaginacion.datos_por_pagina}
           total_data={infoPaginacion.total_data}
           fetchData={setPagina}

@@ -42,7 +42,7 @@ export default function TableSelectSalidaTransporte({
       isError={isErrorSalidaTransportes}
       textError="Error al cargar las salidas de transporte"
       textButtonError="Reintentar"
-      fetchData={() => obtenerSalidaTransportes(1)}
+      fetchData={() => obtenerSalidaTransportes()}
     >
       <div className="flex-1 overflow-auto px-8 py-6">
         <div className="flex justify-between items-center mb-6">
@@ -59,14 +59,14 @@ export default function TableSelectSalidaTransporte({
           </h2>
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => obtenerSalidaTransportes(1)}
+            onClick={() => obtenerSalidaTransportes()}
           >
             Recargar
           </button>
         </div>
         <ButtonsPagination
           total_paginas={infoPaginacion.total_paginas}
-          pivote={infoPaginacion.pagina_actual}
+          pagina_actual={infoPaginacion.pagina_actual}
           fetchData={setPagina}
           datos_por_pagina={infoPaginacion.datos_por_pagina}
           total_data={infoPaginacion.total_data}
