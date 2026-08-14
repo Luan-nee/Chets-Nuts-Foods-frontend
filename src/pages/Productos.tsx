@@ -1,15 +1,26 @@
 import { useState } from "react";
-import { Search, Filter, Plus, Package } from "lucide-react";
+import { Plus, Package, Edit } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
+import Table from "../components/ui/table/Table";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
 import TableProductos from "../features/productos/components/TableProductos";
+import { useFetchProductos } from "../features/productos/hooks/useFetchProductos";
 
 export default function Productos() {
   const [showFormEditProduct, setShowFormEditProduct] = useState<boolean>(false);
   const [showFormCreateProduct, setShowFormCreateProduct] = useState<boolean>(false);
   const [selectProductoId, setSelectProductoId] = useState<number | null>(null);
   
+  const {
+    productos,
+    isLoading: isLoadingProductos,
+    isError: isErrorProductos,
+    execute: recargarProductos,
+    setPagina,
+    infoPaginacion
+  } = useFetchProductos();
+
   // Este estado se utiliza para compartir el estado actual de la pagina 
   // al componente FormUpdate, porque no existe un endpoint en en backend
   // que me permita obtener los datos de un solo producto por su ID.
@@ -39,33 +50,55 @@ export default function Productos() {
 					Nuevo producto
 				</button>
 			</div>
-
-      {/* Filters and Search */}
-      <div className="bg-gray-900 border-b border-gray-800 px-8 py-4">
-        <div className="flex items-center gap-4">
-          {/* Search */}
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Buscar por nombre de producto..."
-              className="w-full bg-gray-950 border border-gray-800 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-
-          {/* Filter Button */}
-          <button className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-            <Filter className="w-5 h-5 text-white" />
-          </button>
-        </div>
+      
+      <div className="p-4">
+        <Table
+          cantidadDatos={productos.length}
+          dataIsError={isErrorProductos}
+          dataIsLoading={isLoadingProductos}
+          reload={recargarProductos}
+          changePage={setPagina}
+          tableHeader={[
+            "Nº",
+            "Nombre",
+            "Descripción del producto",
+            "Acciones"
+          ]}
+          dataPagination={infoPaginacion}
+        >
+          {productos?.map((producto, index) => (
+            <tr key={index} className="hover:bg-gray-800/50 transition-colors">
+              <td className="px-6 py-4">
+                <span className="text-blue-400">
+                  {index + 1}
+                </span>
+              </td>
+              <td className="px-6 py-4">
+                <span className="text-white">
+                  {producto.nombre}
+                </span>
+              </td>
+              <td className="px-6 py-4">
+                <span className="text-white">
+                  {producto.descripcion}
+                </span>
+              </td>
+              <td className="px-6 py-4">
+                <button
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                  title="Editar"
+                  onClick={() => {
+                    setSelectProductoId(producto.idproductdefect);
+                    setPaginaActual(infoPaginacion.pagina_actual);
+                    setShowFormEditProduct(true);
+                  }}>
+                  <Edit className="w-4 h-4 text-gray-400" />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </Table>
       </div>
-
-      {/* Table */}
-      <TableProductos 
-        setSelectProductoId={setSelectProductoId}  
-        showFormEdit={setShowFormEditProduct} 
-        setPaginActual={setPaginaActual} 
-      />
 
       { showFormEditProduct && 
         <FormUpdate 

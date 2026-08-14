@@ -14,9 +14,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (
-    pagina: number,
-  ) => Promise<BodyResponseWithPagination<ResponseGetAllProductos[]>>;
+  execute: () => Promise<void>;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
@@ -36,43 +34,30 @@ export const useFetchProductos = (): FetchState => {
   const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
 
   // Función asíncrona para obtener los datos
-  const obtenerProductos = async (nueva_pagina: number) => {
+  const obtenerProductos = async () => {
     try {
       setIsLoading(true);
       setIsError(false);
-      const response = await producto_api.get(nueva_pagina);
+      const response = await producto_api.get(pagina);
 
       if (response.status == "success") {
         setMessage("Productos obtenidos exitosamente");
         setProductos(response.data ?? []);
         setInfoPaginacion(response.pagination);
-        return response;
       } else {
         setIsError(true);
         setMessage("Error al obtener los productos");
-        return response;
       }
     } catch (error) {
       setIsError(true);
       setMessage("Se produjo un error al obtener los productos en el frontend");
-      return {
-        status: "error",
-        message: "Error al obtener los productos",
-        data: [],
-        pagination: {
-          total_data: 0,
-          total_paginas: 0,
-          pagina_actual: nueva_pagina,
-          datos_por_pagina: 0,
-        },
-      } as BodyResponseWithPagination<ResponseGetAllProductos[]>;
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    obtenerProductos(pagina);
+    obtenerProductos();
   }, [pagina]);
 
   return {
