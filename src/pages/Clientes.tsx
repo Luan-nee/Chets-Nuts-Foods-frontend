@@ -1,6 +1,6 @@
 import { Plus, User2Icon } from "lucide-react";
 import { useState } from "react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import TableClientes from "../features/clientes/components/TableClientes";
 import FormCreateCliente from "../features/clientes/components/FormCreateCliente";
 import FormUpdateCliente from "../features/clientes/components/FormUpdateCliente";

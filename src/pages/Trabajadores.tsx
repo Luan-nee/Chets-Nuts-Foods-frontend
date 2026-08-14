@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Filter, Plus, Search, Users } from "lucide-react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import FormCreate from "../features/accesos/components/FormCreateAcceso";
 import TableAccesos from "../features/accesos/components/TableAccesos";
 import DetallesAcceso from "../features/accesos/components/DetallesAcceso";

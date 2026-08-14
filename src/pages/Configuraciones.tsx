@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ContentPageMain from '../components/layouts/contentPageMain'
+import ContentPageMain from '../components/layouts/ContentPageMain'
 import DetallesInfoEstablecimiento from '../features/datosEmpresa/components/DetallesInfoEstablecimiento'
 import DetallesInfoEmpresa from '../features/datosEmpresa/components/DetallesInfoEmpresarial'
 import FormRegistrarInfoEmpresarial from '../features/datosEmpresa/components/FormRegistrarInfoEmpresarial'

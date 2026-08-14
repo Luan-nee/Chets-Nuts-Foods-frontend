@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
-import ContentPageMain from '../components/layouts/contentPageMain';
+import ContentPageMain from '../components/layouts/ContentPageMain';
 import FormCreateGre from '../features/gre/components/FormCreateGre';
 import TableGre from '../features/gre/components/TableGre';
 

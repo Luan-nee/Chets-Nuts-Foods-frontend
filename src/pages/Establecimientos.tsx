@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus, Building2 } from "lucide-react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import TableEstablecimientos from "../features/establecimientos/components/TableEstablecimientos";
 import DetallesEstablecimiento from "../features/establecimientos/components/DetallesEstablecimiento";
 import FormCreateEstablecimiento from "../features/establecimientos/components/FormCreateEstablecimiento";

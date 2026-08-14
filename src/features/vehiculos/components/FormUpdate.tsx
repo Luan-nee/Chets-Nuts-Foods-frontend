@@ -82,7 +82,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo, onSuccess }: Fo
             isError={isErrorVehiculo}
             textError="Error al cargar la información del vehículo"
             textButtonError="Reintentar"
-            fetchData={fetchVehiculo}
+            fetchData={() => fetchVehiculo}
           > 
             <div className="grid grid-cols-1 gap-4 p-4 text-center">
               <p className="text-gray-300">
@@ -114,7 +114,7 @@ export default function FormUpdate({ showFormUpdate, idVehiculo, onSuccess }: Fo
             isError={isErrorVehiculo}
             textError="Error al cargar la información del vehículo"
             textButtonError="Reintentar"
-            fetchData={fetchVehiculo}
+            fetchData={() => fetchVehiculo}
           >
             <div className="flex items-center gap-2 mb-6">
               <Info className="w-5 h-5 text-blue-500" />

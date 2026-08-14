@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search, Filter, Plus, Package } from "lucide-react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import FormUpdate from "../features/productos/components/FormUpdate";
 import FormCreate from "../features/productos/components/FormCreate";
 import TableProductos from "../features/productos/components/TableProductos";

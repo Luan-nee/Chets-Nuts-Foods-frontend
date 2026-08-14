@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigation } from "lucide-react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import FormCreate from "../features/seguimiento/components/FormCreate";
 import Seguimiento from "../features/seguimiento/components/Seguimiento"
 

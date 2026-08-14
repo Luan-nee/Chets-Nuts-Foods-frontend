@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 
 export default function NotFound() {
   const navigate = useNavigate();

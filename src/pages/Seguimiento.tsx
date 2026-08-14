@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Calendar, CheckCircle } from "lucide-react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
 import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
 import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useFetchSeguimientoSalidaTransporte";

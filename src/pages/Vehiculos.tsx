@@ -1,6 +1,6 @@
 import { Plus, Search, Filter, Truck } from "lucide-react";
 import { useState } from "react";
-import ContentPageMain from "../components/layouts/contentPageMain";
+import ContentPageMain from "../components/layouts/ContentPageMain";
 import TableVehiculos from "../features/vehiculos/components/TableVehiculos";
 import FormCreate from "../features/vehiculos/components/FormCreate";
 import FormUpdate from "../features/vehiculos/components/FormUpdate";
