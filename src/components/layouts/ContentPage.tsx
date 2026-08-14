@@ -4,10 +4,8 @@ interface ContentPageProps {
 
 export default function ContentPage({children}: ContentPageProps) {
   return (
-    <div className="absolute inset-0 z-50 bg-gray-950">
-      <div className="flex-1 bg-gray-950">
-        {children}
-      </div>
+    <div className="flex flex-col">
+      {children}
     </div>
   )
 }

@@ -19,7 +19,7 @@ export default function ButtonCancelForm({ handleCancel, isLoading, textButton, 
       disabled={isLoading} 
       onClick={handleCancel}
       className={`
-        flex-1 px-6 py-3 rounded-lg font-medium transition-colors border 
+        px-6 py-3 rounded-lg font-medium transition-colors border 
         ${isLoading 
           ? 'bg-slate-500 text-slate-300 border-slate-500 cursor-not-allowed opacity-70' // Estilos desactivado
           : color 

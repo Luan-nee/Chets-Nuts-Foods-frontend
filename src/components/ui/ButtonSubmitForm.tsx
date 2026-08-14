@@ -20,7 +20,7 @@ export default function ButtonSubmitForm({ handleSubmit, isLoading, isError, tex
     <button
       type="button"
       onClick={handleSubmit}
-      className={`flex-1 flex justify-center px-6 py-3 bg-gradient-to-r ${
+      className={`px-6 py-3 bg-gradient-to-r ${
         color ? ButtonColors[color] : ButtonColors['blue']
       } rounded-lg text-white font-medium transition-all shadow-lg`}
     >
