@@ -27,7 +27,12 @@ export default class Vehiculos extends BaseRequestApi {
   private base_url_production = `${url_base_endpoint}/api/vehiculos`;
 
   /* getAll */
-  public async getAllVehiculos({page,estado,placa,tipo}: queryGetVehiculos): Promise<
+  public async getAllVehiculos(
+    page: number,
+    estado?: string,
+    placa?: string,
+    tipo?: string
+  ): Promise<
     BodyResponseWithPagination<ResponseGetAll[]>
   > {
 

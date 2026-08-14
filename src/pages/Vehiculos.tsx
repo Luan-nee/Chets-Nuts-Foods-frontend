@@ -1,45 +1,24 @@
-import { Plus, Search, Filter, Truck } from "lucide-react";
+import { Plus, Search, Truck, Edit2 } from "lucide-react";
 import { useState } from "react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
-import TableVehiculos from "../features/vehiculos/components/TableVehiculos";
+import Table from "../components/ui/table/Table"
 import FormCreate from "../features/vehiculos/components/FormCreate";
 import FormUpdate from "../features/vehiculos/components/FormUpdate";
-import Desplegable from "../components/ui/Desplegable";
-import type { EstadoVehiculo } from "../types/constantes.type";
+import { useFetchVehiculos } from "../features/vehiculos/hooks/useFetchVehiculos";
 
 export default function Vehiculos() {
   const [selectVehiculoId, setSelectVehiculoId] = useState<number | null>(null);
   const [showFormUpdate, setShowFormUpdate] = useState(false);
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
-  const [refreshVehiculosKey, setRefreshVehiculosKey] = useState(0);
-  const [searchPlaca, setSearchPlaca] = useState<string | null>(null);
-  const [searchTrigger, setSearchTrigger] = useState(0);
-  const [estado, setEstado] = useState<EstadoVehiculo | string>("");
 
-  const estados = [
-    "INACTIVO",
-    "OPERATIVO",
-  ];
-  const busquedaPlaca = (valor: React.KeyboardEvent<HTMLInputElement>) => {
-    if (valor.key === "Enter") {
-      setSearchTrigger((valorActual) => valorActual + 1);
-    }
-  };
-
-  const ejecutarBusquedaVehiculos = () => {
-    setSearchTrigger((valorActual) => valorActual + 1);
-  };
-
-  const limpiarFiltrosVehiculos = () => {
-    setSearchPlaca("");
-    setEstado("");
-    setRefreshVehiculosKey((valor) => valor + 1);
-    setSearchTrigger((valorActual) => valorActual + 1);
-  };
-
-  const refrescarTablaVehiculos = () => {
-    setRefreshVehiculosKey((valor) => valor + 1);
-  };
+  const {
+    vehiculos,
+    isLoading: vehiculosIsLoading,
+    isError: vehiculosIsError,
+    execute: recargarVehiculos,
+    setPage,
+    infoPaginacion,
+  } = useFetchVehiculos();
 
   return (
     <ContentPageMain>
@@ -66,70 +45,98 @@ export default function Vehiculos() {
 				</button>
 			</div>
 
-      {/* Search and Filters */}
-      <div className="bg-gray-900 border-b border-gray-800 px-8 py-4">
-        <div className="flex items-center gap-4">
-          {/* Search */}
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Buscar un vehículo por placa ..."
-              className="w-full bg-gray-950 border border-gray-800 rounded-lg pl-10 pr-4 py-2.5 text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              value={searchPlaca ?? ""}
-              onChange={(e) => setSearchPlaca(e.target.value)}
-              onKeyDown={busquedaPlaca}
-            />
-          </div>
-          
-          <Desplegable
-            valores={estados}
-            setValores={setEstado}
-            setEstado={ejecutarBusquedaVehiculos}
-            valorSeleccionado={estado}
-          />      
-          
-          {/* Filter Button */}
-          <button
-            className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-            onClick={ejecutarBusquedaVehiculos}
-            aria-label="Buscar vehículo"
-            type="button"
-          >
-            <Filter className="w-5 h-5 text-white" />
-          </button>
+      <div className="p-4">
+        <Table
+          cantidadDatos={vehiculos.length}
+          dataIsError={vehiculosIsError}
+          dataIsLoading={vehiculosIsLoading}
+          reload={recargarVehiculos}
+          changePage={setPage}
+          dataPagination={infoPaginacion}
+          tableHeader={[
+            "Placa",
+            "Marca",
+            "Modelo",
+            "Año",
+            "Capacidad (TN)",
+            "estado",
+            "Acciones",
+          ]}
+        >
+          {vehiculos?.map((vehiculo, index) => (
+            <tr
+              key={index}
+              className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+            >
+              {/* Placa */}
+              <td className="px-6 py-4">
+                <div className="inline-flex flex-col items-center justify-center bg-[#FACC15] text-[#1E1E1E] font-bold px-3 py-0.5 rounded-[3px] border-2 border-black border-double shadow-sm tracking-widest leading-none select-none">
+                  <span className="text-base font-extrabold font-mono tracking-wider pt-0.5">
+                    {vehiculo.placa}
+                  </span>
+                </div>
+              </td>
 
-          <button
-            className="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 rounded-lg transition-colors text-sm font-medium"
-            onClick={limpiarFiltrosVehiculos}
-            type="button"
-          >
-            Limpiar filtros
-          </button>
-        </div>
+              {/* Marca */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-white uppercase">{vehiculo.marca}</span>
+              </td>
+
+              {/* Modelo */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-white uppercase">{vehiculo.modelo}</span>
+              </td>
+
+              {/* Año */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">{vehiculo.anio}</span>
+              </td>
+
+              {/* Capacidad de carga */}
+              <td className="px-8 py-4">
+                <span className="text-sm text-white font-medium">
+                  {vehiculo.capacidadCarga}
+                </span>
+              </td>
+
+              {/* Estado del vehiculo */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-white font-medium">
+                  {vehiculo.estadovehiculo}
+                </span>
+              </td>
+
+              {/* Actions */}
+              <td className="px-6 py-4">
+                <div className="flex items-center justify-end gap-2">
+                  <button
+                    className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+                    aria-label="Editar vehículo"
+                    onClick={() => {
+                      setShowFormUpdate(true);
+                      setSelectVehiculoId(vehiculo.idvehempresa);
+                    }}
+                  >
+                    <Edit2 className="w-4 h-4 text-gray-400" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
       </div>
-
-      {/* Table */}
-      <TableVehiculos
-        setShowFormUpdate={setShowFormUpdate}
-        setSelectVehiculoId={setSelectVehiculoId}
-        SearchPlaca={searchPlaca}
-        searchTrigger={searchTrigger}
-        estado={estado}
-        refreshKey={refreshVehiculosKey}
-      />
 
       {showFormCreate && (
         <FormCreate
           showFormCreate={setShowFormCreate}
-          onSuccess={refrescarTablaVehiculos}
+          onSuccess={recargarVehiculos}
         />
       )}
       {showFormUpdate && selectVehiculoId !== null && (
         <FormUpdate
           showFormUpdate={setShowFormUpdate}
           idVehiculo={selectVehiculoId}
-          onSuccess={refrescarTablaVehiculos}
+          onSuccess={recargarVehiculos}
         />
       )}
     </ContentPageMain>
