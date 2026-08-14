@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Building2, User } from "lucide-react";
-import ContentPage from "../../../components/layouts/ContentPage";
+import ContentForm from "../../../components/layouts/ContentForm";
 import InputText from "../../../components/ui/InputText";
 import ButtonCancelForm from "../../../components/ui/ButtonCancelForm";
 import ButtonSubmitForm from "../../../components/ui/ButtonSubmitForm";
-import HeaderFormPage from "../../../components/layouts/HeaderFormPage";
 import InputSelect from "../../../components/ui/InputSelect";
 import ModalSelectEmpleado from "./ModalSelectEmpleado";
 import {
@@ -63,138 +62,129 @@ export default function FormCreateEstablecimiento({
 	const distritosDisponibles = getDistritosByProvincia(formData.departamento, formData.provincia);
 
 	return (
-		<ContentPage>
-			<HeaderFormPage 
-				title="Registrar nuevo establecimiento"
-				description="Completa la información principal, ubicación y datos técnicos para crear el establecimiento."
-				setShowForm={() => setShowFormCreateEstablecimiento(false)}
-			/>
-
-			<div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 mx-8 my-6 shadow-lg">
-				<div className="flex items-center gap-3 mb-6">
-					<div className="rounded-xl bg-blue-500/15 p-3 border border-blue-500/20">
-						<Building2 className="w-6 h-6 text-blue-400" />
-					</div>
-					<div>
-						<h2 className="text-xl font-semibold text-white">Datos del establecimiento</h2>
-						<p className="text-sm text-gray-400">Usa nombres claros y una ubicación precisa para evitar inconsistencias.</p>
-					</div>
+		<ContentForm>
+			{/* Header */}
+			<div className="flex flex-row gap-2">
+				<div className="rounded-xl bg-blue-500/15 p-3 border border-blue-500/20">
+					<Building2 className="w-6 h-6 text-blue-400" />
 				</div>
-
-				<div className="space-y-6">
-					<div className="flex flex-row gap-4">
-						{/* Nombre del establecimiento */}
-						<InputText
-							label="Nombre del establecimiento"
-							value={formData.nombreEstablecimiento}
-							htmlForm="nombreEstablecimiento"
-							onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
-						/>
-						{/* Selector de responsable */}
-						<button 
-							onClick={() => setShowModal(true)}
-							className="flex items-center gap-2 p-4 rounded-lg bg-gray-950 transition-colors border border-gray-800 gap-3"
-						>
-							<User className="w-5 h-5 text-blue-400"/>
-							<div className="text-left">
-								{	responsable.idacceso === 0 ? (
-									<p className="text-sm font-medium text-white text-nowrap">Selecciona un responsable</p>
-								) : (
-									<>
-										<p className="text-sm font-medium text-white">{responsable.nombres}</p>
-										<div className="flex flex-row gap-2">
-											<p className="text-xs text-gray-500 text-nowrap">
-												DNI: {responsable.dniuser}
-											</p>
-											<p className="text-xs text-gray-500 text-nowrap">
-												ROL: {responsable.tipos}
-											</p>
-										</div>
-									</>
-								)}
-							</div>
-						</button>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-						<InputSelect
-							label="Departamento"
-							options={departamentos}
-							placeholder="Selecciona un departamento"
-							valueSelected={formData.departamento}
-							onSelect={(value) =>
-								setFormData((prev) => ({
-									...prev,
-									departamento: value as string,
-									provincia: "",
-									distrito: "",
-								}))
-							}
-						/>
-						<InputSelect
-							label="Provincia"
-							options={provinciasDisponibles}
-							placeholder="Selecciona una provincia"
-							valueSelected={formData.provincia}
-							onSelect={(value) =>
-								setFormData((prev) => ({
-									...prev,
-									provincia: value as string,
-									distrito: "",
-								}))
-							}
-						/>
-						<InputSelect
-							label="Distrito"
-							options={distritosDisponibles}
-							placeholder="Selecciona un distrito"
-							valueSelected={formData.distrito}
-							onSelect={(value) => setFormData((prev) => ({ ...prev, distrito: value as string }))}
-						/>
-					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<InputText
-							label="Dirección"
-							value={formData.direccion}
-							htmlForm="direccion"
-							onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
-						/>
-						<InputText
-							label="Referencias"
-							value={formData.descripcion}
-							htmlForm="descripcion"
-							onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
-						/>
-					</div>
+				<div className="flex flex-col">
+					<h2 className="text-xl font-semibold text-white">Datos del establecimiento</h2>
+					<p className="text-sm text-gray-400">Registra la información del nuevo establecimiento.</p>
 				</div>
-
-				<div className="flex gap-4 mt-8">
-					<div className="flex flex-row gap-4 w-full justify-end">
-						<div className="flex flex-row gap-4">
-							<ButtonCancelForm
-								handleCancel={() => setShowFormCreateEstablecimiento(false)}
-								isLoading={cargandoCreate}
-								textButton="Cancelar"
-								color="red"
-							/>
-							<ButtonSubmitForm
-								handleSubmit={async () => {
-									const wasCreated = await registrarEstablecimiento(formData);
-									if (wasCreated) {
-										await onEstablecimientoCreado();
-										setShowFormCreateEstablecimiento(false);
-									}
-								}}
-								isLoading={cargandoCreate}
-								isError={errorCreate}
-								textButton="Guardar establecimiento"
-								textError="Error al guardar"
-								color="blue"
-							/>
-						</div>
+			</div>
+			
+			{/* Nombre del establecimiento y responsable */}
+			<div className="flex flex-row gap-4">
+				{/* Nombre del establecimiento */}
+				<InputText 
+					value={formData.nombreEstablecimiento}
+					label="Nombre del establecimiento"
+					htmlForm="nombreEstablecimiento"
+					onChange={(value) => setFormData((prev) => ({ ...prev, nombreEstablecimiento: value }))}
+				/>
+				{/* Selector de responsable */}
+				<button 
+					onClick={() => setShowModal(true)}
+					className="flex items-center gap-2 p-4 rounded-lg bg-gray-950 transition-colors border border-gray-800 gap-3"
+				>
+					<User className="w-5 h-5 text-blue-400"/>
+					<div className="text-left">
+						{	responsable.idacceso === 0 ? (
+							<p className="text-sm font-medium text-white text-nowrap">Selecciona un responsable</p>
+						) : (
+							<>
+								<p className="text-sm font-medium text-white">{responsable.nombres}</p>
+								<div className="flex flex-row gap-2">
+									<p className="text-xs text-gray-500 text-nowrap">
+										DNI: {responsable.dniuser}
+									</p>
+									<p className="text-xs text-gray-500 text-nowrap">
+										ROL: {responsable.tipos}
+									</p>
+								</div>
+							</>
+						)}
 					</div>
-				</div>
+				</button>
+			</div>
+			
+			{/* Departamento, Provincia y Distrito */}
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<InputSelect
+					label="Departamento"
+					options={departamentos}
+					placeholder="Selecciona un departamento"
+					valueSelected={formData.departamento}
+					onSelect={(value) =>
+						setFormData((prev) => ({
+							...prev,
+							departamento: value as string,
+							provincia: "",
+							distrito: "",
+						}))
+					}
+				/>
+				<InputSelect
+					label="Provincia"
+					options={provinciasDisponibles}
+					placeholder="Selecciona una provincia"
+					valueSelected={formData.provincia}
+					onSelect={(value) =>
+						setFormData((prev) => ({
+							...prev,
+							provincia: value as string,
+							distrito: "",
+						}))
+					}
+				/>
+				<InputSelect
+					label="Distrito"
+					options={distritosDisponibles}
+					placeholder="Selecciona un distrito"
+					valueSelected={formData.distrito}
+					onSelect={(value) => setFormData((prev) => ({ ...prev, distrito: value as string }))}
+				/>
+			</div>
+
+			{/* Dirección y Referencias */}	
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<InputText
+					label="Dirección"
+					value={formData.direccion}
+					htmlForm="direccion"
+					onChange={(value) => setFormData((prev) => ({ ...prev, direccion: value }))}
+				/>
+				<InputText
+					label="Referencias"
+					value={formData.descripcion}
+					htmlForm="descripcion"
+					onChange={(value) => setFormData((prev) => ({ ...prev, descripcion: value }))}
+				/>
+			</div>
+
+			{/* Botones */}
+			<div className="flex gap-4 justify-end">
+				<ButtonCancelForm
+					handleCancel={() => setShowFormCreateEstablecimiento(false)}
+					isLoading={cargandoCreate}
+					textButton="Cancelar"
+					color="red"
+				/>
+				<ButtonSubmitForm
+					handleSubmit={async () => {
+						const wasCreated = await registrarEstablecimiento(formData);
+						if (wasCreated) {
+							await onEstablecimientoCreado();
+							setShowFormCreateEstablecimiento(false);
+						}
+					}}
+					isLoading={cargandoCreate}
+					isError={errorCreate}
+					textButton="Guardar establecimiento"
+					textError="Error al guardar"
+					color="blue"
+				/>
 			</div>
 
 			{ showModal && (
@@ -205,7 +195,7 @@ export default function FormCreateEstablecimiento({
 					selectedId={formData.idResponsable}
 				/>
 			)}
-		</ContentPage>
+		</ContentForm>
 	);
 }
 
