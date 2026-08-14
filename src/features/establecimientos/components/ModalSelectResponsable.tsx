@@ -185,7 +185,7 @@ export default function ModalSelectResponsable({
 				) : errorAccesos ? (
 					<div className="text-center py-6">
 						<p className="text-red-400 mb-2">Error al cargar los accesos</p>
-						<button onClick={() => recargarAccesos(infoPaginacion.pagina_actual)} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium">
+						<button onClick={() => recargarAccesos()} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium">
 							Reintentar
 						</button>
 					</div>

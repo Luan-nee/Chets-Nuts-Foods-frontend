@@ -27,13 +27,13 @@ export default function TableGre() {
       isError={isErrorGuias}
       textError="Error al cargar las guías de remisión."
       textButtonError="Reintentar"
-      fetchData={() => recargarGuiasRemision(1)}
+      fetchData={() => recargarGuiasRemision()}
     >
       <div className="flex-1 overflow-auto px-8 py-6">
         <div className="p-4 flex justify-end gap-4">
           <button
             className="px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => recargarGuiasRemision(infoPaginacion.pagina_actual)}
+            onClick={() => recargarGuiasRemision()}
           >
             Recargar
           </button>

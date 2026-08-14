@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Edit2, Eye, Filter, Plus, Search, Users } from "lucide-react";
+import { Edit2, Eye, Plus, Users } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
 import Table from "../components/ui/table/Table";
 import FormCreate from "../features/accesos/components/FormCreateAcceso";

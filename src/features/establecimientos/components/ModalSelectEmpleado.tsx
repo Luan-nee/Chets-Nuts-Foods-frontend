@@ -46,7 +46,7 @@ export default function ModalSelectEmpleado({
 
         {/* List of accesses (staggered items) */}
         <ContentSectionProcess 
-          fetchData={() => recargarAccesos(infoPaginacion.pagina_actual)}
+          fetchData={() => recargarAccesos()}
           isError={errorAccesos}
           isLoading={cargandoAccesos}
           textButtonError="Reintentar"
