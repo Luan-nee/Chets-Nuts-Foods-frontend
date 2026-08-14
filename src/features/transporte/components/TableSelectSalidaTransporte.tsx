@@ -27,11 +27,9 @@ export default function TableSelectSalidaTransporte({
 
   const formatFechaSalida = (fechaSalida: string) => {
     const fecha = new Date(fechaSalida);
-
     if (Number.isNaN(fecha.getTime())) {
       return fechaSalida;
     }
-
     return new Intl.DateTimeFormat("es-PE", {
       dateStyle: "medium",
       timeStyle: "short",

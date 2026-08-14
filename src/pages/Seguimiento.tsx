@@ -1,20 +1,44 @@
 import { useState } from "react";
-import { Calendar, CheckCircle } from "lucide-react";
+import { Calendar, CalendarDays, CheckCircle, Hash, Plus } from "lucide-react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
+import Table from "../components/ui/table/Table";
 import TableSelectSalidaTransporte from "../features/transporte/components/TableSelectSalidaTransporte";
 import ContentSectionProcess from "../components/layouts/ContentSectionProcess";
 import { useFetchSeguimientoSalidaTransporte } from "../features/seguimiento/hooks/useFetchSeguimientoSalidaTransporte";
+import { useFetchSalidaTransportes } from "../features/transporte/hooks/useFechSalidasTransporte";
+
+const formatFechaSalida = (fechaSalida: string) => {
+  const fecha = new Date(fechaSalida);
+  if (Number.isNaN(fecha.getTime())) {
+    return fechaSalida;
+  }
+  return new Intl.DateTimeFormat("es-PE", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(fecha);
+};
 
 export default function Seguimiento() {
   const [selectedSalidaTransporte, setSelectedSalidaTransporte] = useState<
     number | null
   >(null);
+  const [idSelected, setIdSelected] = useState<number | null>(null);
+
   const {
     infoSeguimiento,
     isLoading: isLoadingInfoSeguimiento,
     isError: isErrorInfoSeguimiento,
     execute: realizarSeguimientoSalidaTransporte,
   } = useFetchSeguimientoSalidaTransporte();
+
+  const {
+    salidaTransportes,
+    isLoading: isLoadingSalidaTransportes,
+    isError: isErrorSalidaTransportes,
+    execute: obtenerSalidaTransportes,
+    setPagina: setPaginaSalidaTransportes,
+    infoPaginacion: infoPaginacionSalidaTransportes,
+  } = useFetchSalidaTransportes();
 
   const currentEventIndex = 0;
 
@@ -32,14 +56,83 @@ export default function Seguimiento() {
           </p>
         </div>
       </div>
+      
+      {/* Tabla */}
+      <div className="p-4">
+        <Table
+          cantidadDatos={salidaTransportes.length}
+          dataIsError={isErrorSalidaTransportes}
+          dataIsLoading={isLoadingSalidaTransportes}
+          reload={obtenerSalidaTransportes}
+          tableHeader={[
+            "ID Salida", 
+            "Estado", 
+            "Fecha de salida",
+            ""
+          ]}
+          changePage={setPaginaSalidaTransportes}
+          dataPagination={infoPaginacionSalidaTransportes}
+        >
+          {salidaTransportes.map((salidaTransporte, index) => (
+            <tr
+              key={index}
+              className="border-b border-[#21262d] hover:bg-[#161b22] transition-colors"
+            >
+              {/* ID */}
+              <td className="px-6 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 rounded-lg bg-[#1f6feb]/15 p-2">
+                    <Hash className="w-5 h-5 text-[#1f6feb]" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block font-medium text-sm text-white truncate">
+                      Salida #{salidaTransporte.idsalidatransporte}
+                    </span>
+                    <span className="block text-xs text-gray-400 truncate">
+                      Registro de transporte
+                    </span>
+                  </div>
+                </div>
+              </td>
 
-      <TableSelectSalidaTransporte
-        onChange={(selectedId) => {
-          console.log("Selected Salida Transporte ID:", selectedId);
-        }}
-        selectIdSalidaTransporte={setSelectedSalidaTransporte}
-      />
+              {/* Estado */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <span className="inline-flex rounded-full bg-[#1f6feb]/15 px-3 py-1 text-xs font-medium text-[#58a6ff]">
+                    {salidaTransporte.estadotransporte}
+                  </span>
+                </div>
+              </td>
 
+              {/* Fecha */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <CalendarDays className="w-4 h-4 text-gray-500" />
+                  <span>{formatFechaSalida(salidaTransporte.fechasalida)}</span>
+                </div>
+              </td>
+
+              {/* Actions */}
+              <td className="px-6 py-4">
+                <div className="flex items-center justify-end gap-2">
+                  <button
+                    onClick={() => {
+                      setIdSelected(salidaTransporte.idsalidatransporte);
+                    }}
+                    className="text-green-500 hover:text-green-400 flex flex-row gap-2"
+                  >
+                    <span>Seleccionar</span>
+                    <Plus className="w-5 h-5" />
+                  </button>
+                  
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
+      </div>
+      
+      {/* Seguimiento */}
       <div className="flex flex-col p-6">
         <button
           onClick={() => {

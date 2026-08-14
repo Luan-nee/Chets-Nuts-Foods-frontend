@@ -11,9 +11,7 @@ interface FetchState {
   isLoading: boolean;
   isError: boolean;
   message: string;
-  execute: (
-    pagina: number,
-  ) => Promise<void>;
+  execute: () => Promise<void>;
   setPagina: (pagina: number) => void;
   infoPaginacion: PaginationInfo;
 }
@@ -33,12 +31,12 @@ export const useFetchSalidaTransportes = (): FetchState => {
   const [pagina, setPagina] = useState<number>(1); // Estado para la página actual
 
   // Función asíncrona para obtener los datos
-  const obtenerSalidaTransportes = async (nueva_pagina: number) => {
+  const obtenerSalidaTransportes = async () => {
     try {
       setIsLoading(true);
       setIsError(false);
       
-      const response = await salidaTransporte_api.getAll(nueva_pagina);
+      const response = await salidaTransporte_api.getAll(pagina);
       
       if (response.status == "success") {
         setMessage("Salida de transportes obtenidos exitosamente");
@@ -57,7 +55,7 @@ export const useFetchSalidaTransportes = (): FetchState => {
   };
 
   useEffect(() => {
-    obtenerSalidaTransportes(pagina);
+    obtenerSalidaTransportes();
   }, [pagina]);
 
   return {
