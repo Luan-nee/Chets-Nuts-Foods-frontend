@@ -1,7 +1,7 @@
-import { Plus, User2Icon } from "lucide-react";
+import { Edit2, Plus, User2Icon } from "lucide-react";
 import { useState } from "react";
 import ContentPageMain from "../components/layouts/ContentPageMain";
-import TableClientes from "../features/clientes/components/TableClientes";
+import Table from "../components/ui/table/Table"
 import FormCreateCliente from "../features/clientes/components/FormCreateCliente";
 import FormUpdateCliente from "../features/clientes/components/FormUpdateCliente";
 import { useFetchClientes } from "../features/clientes/hooks/useFetchClientes";
@@ -10,10 +10,11 @@ export default function Clientes() {
   const [showFormCreate, setShowFormCreate] = useState<boolean>(false);
   const [showFormUpdate, setShowFormUpdate] = useState<boolean>(false);
   const [dniCliente, setDniCliente] = useState<string>("");
+
   const {
     clientes,
-    isLoading,
-    isError,
+    isLoading: isLoadingClientes,
+    isError: isErrorClientes,
     execute: recargarClientes,
   } = useFetchClientes();
 
@@ -41,15 +42,83 @@ export default function Clientes() {
 					Nuevo cliente
 				</button>
 			</div>
-      
-      <TableClientes
-        clientes={clientes}
-        isLoading={isLoading}
-        isError={isError}
-        recargarClientes={recargarClientes}
-        setShowFormUpdate={setShowFormUpdate}
-        setDniCliente={setDniCliente}
-      />
+
+      <div className="p-4">
+        <Table
+          cantidadDatos={clientes.length}
+          dataIsError={isErrorClientes}
+          dataIsLoading={isLoadingClientes}
+          reload={recargarClientes}
+          tableHeader={[
+            "N°",
+            "Nombres",
+            "Apellido Paterno",
+            "Apellido Materno",
+            "DNI",
+            "RUC",
+            ""
+          ]}
+        >
+          {clientes?.map((cliente, index) => (
+            <tr key={index} className="hover:bg-gray-800/50 transition-colors">
+              {/* NUMERO */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-400">{index + 1}</span>
+              </td>
+
+              {/* Nombres */}
+              <td className="px-6 py-4">
+                <span className="font-medium text-sm text-white">
+                  {cliente.nombres}
+                </span>
+              </td>
+
+              {/* Apellido paterno */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">
+                  {cliente.apellidopaterno}
+                </span>
+              </td>
+
+              {/* Apellido materno */}
+              <td className="px-6 py-4">
+                <span className="text-sm text-gray-300">
+                  {cliente.apellidomaterno}
+                </span>
+              </td>
+
+              {/* DNI */}
+              <td className="px-6 py-4">
+                <span className="text-sm font-bold text-gray-300">
+                  {cliente.dniuser}
+                </span>
+              </td>
+
+              {/* RUC */}
+              <td className="px-6 py-4">
+                <span className="text-sm font-bold text-gray-300">
+                  {cliente.rucuser || "-"}
+                </span>
+              </td>
+
+              {/* Actions */}
+              <td className="px-6 py-4">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      setShowFormUpdate(true);
+                      setDniCliente(cliente.dniuser);
+                    }}
+                    className="p-2 hover:bg-[#21262d] rounded-lg transition-colors"
+                  >
+                    <Edit2 className="w-4 h-4 text-gray-400" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </Table>
+      </div>
 
       { showFormCreate && (
         <FormCreateCliente
