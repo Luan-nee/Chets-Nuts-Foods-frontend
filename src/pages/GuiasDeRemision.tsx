@@ -44,11 +44,11 @@ export default function ListaGre() {
 					reload={recargarGuiasRemision}
 					changePage={setPagina}
 					tableHeader={[
-						"Estado",
-						"Número",
-						"QR",
-						"Confirmado",
-						"Fecha Confirmación"
+						"ESTADO",
+						"NÚMERO DE GUÍA",
+						"ENLACE PDF",
+						"ESTADO DE CONFIRMACIÓN",
+						"FECHA DE CONFIRMACIÓN",
 					]}
 					dataPagination={infoPaginacion}
 				>

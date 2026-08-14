@@ -54,13 +54,13 @@ export default function Vehiculos() {
           changePage={setPage}
           dataPagination={infoPaginacion}
           tableHeader={[
-            "Placa",
-            "Marca",
-            "Modelo",
-            "Año",
-            "Capacidad (TN)",
-            "estado",
-            "Acciones",
+            "PLACA",
+            "MARCA",
+            "MODELO",
+            "AÑO",
+            "CAPACIDAD (TN)",
+            "ESTADO",
+            "ACCIONES",
           ]}
         >
           {vehiculos?.map((vehiculo, index) => (

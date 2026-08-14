@@ -51,9 +51,9 @@ export default function Clientes() {
           reload={recargarClientes}
           tableHeader={[
             "N°",
-            "Nombres",
-            "Apellido Paterno",
-            "Apellido Materno",
+            "NOMBRES",
+            "APELLIDO PATERNO",
+            "APELLIDO MATERNO",
             "DNI",
             "RUC",
             ""

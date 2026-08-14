@@ -55,12 +55,12 @@ export default function Trabajadores () {
           dataIsLoading={isLoadingAccesos}
           reload={recargarAccesos}
           tableHeader={[
-            "Correo electrónico",
-            "Estado",
-            "Rol",
-            "Estado de disponibilidad",
+            "CORREO ELECTRÓNICO",
+            "ESTADO",
+            "ROL",
+            "ESTADO DE DISPONIBILIDAD",
             "DNI",
-            "nombres",
+            "NOMBRES",
           ]}
           changePage={setPagina}
           dataPagination={infoPaginacion}

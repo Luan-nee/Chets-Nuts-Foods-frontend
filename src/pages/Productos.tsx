@@ -59,9 +59,9 @@ export default function Productos() {
           changePage={setPagina}
           tableHeader={[
             "Nº",
-            "Nombre",
-            "Descripción del producto",
-            "Acciones"
+            "NOMBRE DEL PRODUCTO  ",
+            "DESCRIPCIÓN",
+            "ACCIONES"
           ]}
           dataPagination={infoPaginacion}
         >
