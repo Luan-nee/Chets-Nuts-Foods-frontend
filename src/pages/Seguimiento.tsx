@@ -117,6 +117,9 @@ export default function Seguimiento() {
                   <button
                     onClick={() => {
                       setIdSelected(salidaTransporte.idsalidatransporte);
+                      realizarSeguimientoSalidaTransporte(
+                        salidaTransporte.idsalidatransporte
+                      );
                     }}
                     className="text-green-500 hover:text-green-400 flex flex-row gap-2"
                   >
@@ -133,16 +136,6 @@ export default function Seguimiento() {
       
       {/* Seguimiento */}
       <div className="flex flex-col p-6">
-        <button
-          onClick={() => {
-            realizarSeguimientoSalidaTransporte(
-              selectedSalidaTransporte as number,
-            );
-          }}
-          className="px-8 py-4 my-4 bg-[#1f6feb] hover:bg-[#1a5cd9] rounded-lg transition-colors font-bold flex justify-center gap-2"
-        >
-          Consultar
-        </button>
         <ContentSectionProcess
           fetchData={() =>
             realizarSeguimientoSalidaTransporte(
